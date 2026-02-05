@@ -1,0 +1,108 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:44:26.264288",
+  "document": "Anthrax.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anthrax.pdf",
+  "total_candidates": 32,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 2,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "viral infectious disease",
+      "matched_text": "viral disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "gastrointestinal anthrax",
+      "matched_text": "Gastrointestinal anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A22.2",
+      "orpha": null
+    },
+    {
+      "name": "inhalational anthrax",
+      "matched_text": "inhalational anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A22.1",
+      "orpha": "Orphanet:247257"
+    },
+    {
+      "name": "cutaneous anthrax",
+      "matched_text": "Cutaneous anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A22.0",
+      "orpha": null
+    },
+    {
+      "name": "common cold",
+      "matched_text": "common cold",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J00",
+      "orpha": null
+    },
+    {
+      "name": "runny nose",
+      "matched_text": "runny nose",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J30",
+      "orpha": null
+    },
+    {
+      "name": "influenza",
+      "matched_text": "Influenza",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "anthrax",
+      "matched_text": "anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A22",
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Cold",
+      "matched_text": "cold",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

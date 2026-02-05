@@ -1,0 +1,130 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:22:52.332735",
+  "document": "ALAD-Porphyria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ALAD-Porphyria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "late-onset",
+      "preferred_label": "Glycogen storage disease due to acid maltase deficiency, late-onset",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:420429",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:420429",
+          "display": null
+        }
+      ],
+      "context": "s probably males and females in equal numbers. Researchers suspect that some cases of ALAD porphyria go undiagnosed or misdiagnosed, making it difficult to estimate the true frequency of this disorder in the general population. The onset of ALAD porphyria is usually during infancy or childhood, but late-onset of the disorder (well into adult life) has also been reported.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "ALAD porphyria",
+      "preferred_label": "ALAD porphyria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013000",
+        "orpha": "Orphanet:100924",
+        "umls": "UMLS:C0268328",
+        "mesh": "MESH:C562618"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013000",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16937",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78659",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562618",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C133887",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:747",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612740",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:100924",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268328",
+          "display": null
+        }
+      ],
+      "context": "ALAD porphyria is an extremely rare disorder with few cases reported in the medical literature. Most cases have occurred in Europe. However, the disorder can potentially occur in any population. More males have been identified with ALAD porphyria than females in the medical literature, but the disorder affects pr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Porphyria Acute Hepatic",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

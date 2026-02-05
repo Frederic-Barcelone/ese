@@ -1,0 +1,35 @@
+{
+  "doc_id": "Castleman-Disease",
+  "doc_filename": "Castleman-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "urea cycle disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Castleman disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1732,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Castleman Disease: Epidemiology and Risk Factors",
+  "short_description": "Clinical document describing the epidemiological characteristics and risk factors for different types of Castleman disease, including UCD, iMCD, and HHV-8-associated MCD.",
+  "long_description": "This clinical research document provides epidemiological data on Castleman disease, a rare lymphoproliferative disorder. It details the demographic distribution across different subtypes: unicentric Castleman disease (UCD) and idiopathic multicentric Castleman disease (iMCD) affect males and females equally with no known risk factors, while HHV-8-associated multicentric Castleman disease shows a male predominance and increased risk in HIV-positive individuals. The document includes prevalence estimates, indicating approximately 5,000 new diagnoses annually and 30,000 total affected individuals in the United States across all forms of the disease.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T17:30:48.782299"
+}

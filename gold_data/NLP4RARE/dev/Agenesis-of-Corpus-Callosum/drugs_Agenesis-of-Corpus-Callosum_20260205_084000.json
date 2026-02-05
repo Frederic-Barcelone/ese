@@ -1,0 +1,67 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T08:40:00.569454",
+  "document": "Agenesis-of-Corpus-Callosum.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Agenesis-of-Corpus-Callosum.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "alcohol",
+      "preferred_name": "alcohol",
+      "brand_name": "DEHYDRATED ALCOHOL",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "SOLUTION",
+      "route": "INTRA-ARTERIAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000438",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA219400",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000438",
+          "display": "Alcohols"
+        }
+      ],
+      "context": "g the twelfth to the twenty-second week of pregnancy (intrauterine) leading to developmental disturbance of the fetal brain. Intrauterine exposure to alcohol (Fetal alcohol syndrome) can also result in ACC. In some cases mental retardation may result, but intelligence may be only mildly impaired and subtle",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ethanol",
+        "Methanol"
+      ],
+      "pubtator_normalized_name": "Alcohols",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

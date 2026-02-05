@@ -1,0 +1,45 @@
+{
+  "doc_id": "Familial-Adenomatous-Polyposis",
+  "doc_filename": "Familial-Adenomatous-Polyposis.pdf",
+  "top_entities": [
+    {
+      "name": "Familial Adenomatous Polyposis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Familial adenomatous polyposis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "APC",
+      "mention_count": 1,
+      "entity_type": "gene"
+    },
+    {
+      "name": "CBLIF",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 2307,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Familial Adenomatous Polyposis (FAP): Clinical Overview and Genetic Characteristics",
+  "short_description": "Clinical document describing familial adenomatous polyposis (FAP), a rare inherited cancer syndrome characterized by numerous colorectal polyps and caused by APC gene mutations.",
+  "long_description": "This clinical reference document provides a comprehensive overview of familial adenomatous polyposis (FAP), a rare autosomal dominant inherited cancer predisposition syndrome. The document details the clinical characteristics of FAP, including the development of hundreds to thousands of adenomatous colorectal polyps that inevitably progress to colorectal cancer if untreated. It covers the genetic basis involving APC gene mutations, related polyposis conditions (Gardner syndrome, Turcot syndrome, attenuated FAP), epidemiological data showing occurrence in 1 in 5,000-10,000 individuals, and diagnostic criteria including clinical presentation and genetic testing options. The document serves as an educational resource for understanding this hereditary cancer syndrome and its clinical management implications.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:29:29.195231"
+}

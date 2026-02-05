@@ -1,0 +1,105 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:14:52.932619",
+  "document": "Ectrodactyly-Ectodermal-Dysplasia-Cleft-Lip-Palate.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Ectrodactyly-Ectodermal-Dysplasia-Cleft-Lip-Palate.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "EEC syndrome",
+      "preferred_label": "EEC syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010004",
+        "orpha": "Orphanet:1896",
+        "umls": "UMLS:C0406704",
+        "mesh": "MESH:C536189"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010004",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060782",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2076",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98357",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536189",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C148261",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1079",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268650",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1896",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:39788007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0406704",
+          "display": null
+        }
+      ],
+      "context": "EEC syndrome affects males and females in equal numbers. The exact incidence and prevalence of the disorder in the general population is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ectrodactyly-cleft lip-palate syndrome",
+        "Ectrodactyly Ectodermal Dysplasia and Cleft Lip-Palate Syndrome 3"
+      ],
+      "pubtator_normalized_name": "Ectrodactyly Ectodermal Dysplasia And Cleft Lip-Palate Syndrome 1",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

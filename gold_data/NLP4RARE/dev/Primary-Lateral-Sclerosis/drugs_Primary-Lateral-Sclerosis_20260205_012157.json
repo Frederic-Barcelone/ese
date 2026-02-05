@@ -1,0 +1,225 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:21:57.327634",
+  "document": "Primary-Lateral-Sclerosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Primary-Lateral-Sclerosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "Baclofen",
+      "preferred_name": "baclofen",
+      "brand_name": "BACLOFEN",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "gamma-Aminobutyric Acid-ergic Agonist",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "INTRATHECAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001418",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA209592",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001418",
+          "display": "Baclofen"
+        }
+      ],
+      "context": "l sclerosis and motor neuron diseases is unknown. Treatment of primary lateral sclerosis involves the use of drugs to help control specific symptoms. Baclofen and tizanidine may be prescribed for spasticity, quinine for cramps, and diazepam, a drug that relaxes muscles, for muscular contractions. Additional",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Baclofen",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diazepam",
+      "preferred_name": "diazepam",
+      "brand_name": "DIAZEPAM",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Benzodiazepine",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "INJECTION",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003975",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA076815",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003975",
+          "display": "Diazepam"
+        }
+      ],
+      "context": "erosis involves the use of drugs to help control specific symptoms. Baclofen and tizanidine may be prescribed for spasticity, quinine for cramps, and diazepam, a drug that relaxes muscles, for muscular contractions. Additional treatments may include physical therapy to prevent stiffness of joints, and speec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diazepam Binding Inhibitor",
+        "pro-diazepam",
+        "diazepam binding inhibitor (39-75)"
+      ],
+      "pubtator_normalized_name": "Diazepam",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tizanidine",
+      "preferred_name": "Tizanidine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C023754",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "57258",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C023754",
+          "display": "tizanidine"
+        }
+      ],
+      "context": "nd motor neuron diseases is unknown. Treatment of primary lateral sclerosis involves the use of drugs to help control specific symptoms. Baclofen and tizanidine may be prescribed for spasticity, quinine for cramps, and diazepam, a drug that relaxes muscles, for muscular contractions. Additional treatments may",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "tizanidine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "quinine",
+      "preferred_name": "Quinine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D011803",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "9071",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011803",
+          "display": "Quinine"
+        }
+      ],
+      "context": "t of primary lateral sclerosis involves the use of drugs to help control specific symptoms. Baclofen and tizanidine may be prescribed for spasticity, quinine for cramps, and diazepam, a drug that relaxes muscles, for muscular contractions. Additional treatments may include physical therapy to prevent stiff",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "quinine-10 11-epoxide",
+        "quinine-10 11-dihydrodiol",
+        "9-O-(phenyloxycarbonyl)quinine"
+      ],
+      "pubtator_normalized_name": "Quinine",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:47:51.124252",
+  "document": "Chromosome-14-Ring.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Chromosome-14-Ring.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "tip",
+      "preferred_name": "TIP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Penile Cancer",
+        "Squamous Carcinoma"
+      ],
+      "nct_id": "NCT02817958",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000493",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT02817958",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000493",
+          "display": "Allopurinol"
+        }
+      ],
+      "context": "aly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than fem",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "tipifarnib",
+        "tipranavir",
+        "tipiracil"
+      ],
+      "pubtator_normalized_name": "Allopurinol",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

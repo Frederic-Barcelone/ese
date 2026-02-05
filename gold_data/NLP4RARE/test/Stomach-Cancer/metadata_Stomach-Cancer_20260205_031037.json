@@ -1,0 +1,35 @@
+{
+  "doc_id": "Stomach-Cancer",
+  "doc_filename": "Stomach-Cancer.pdf",
+  "top_entities": [
+    {
+      "name": "gastric carcinoma",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "indigestion",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2291,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Stomach Cancer: Overview and Epidemiology",
+  "short_description": "A comprehensive overview of stomach cancer, covering symptoms, causes, and demographic patterns of this malignancy affecting stomach lining cells.",
+  "long_description": "This document provides a detailed introduction to stomach cancer, explaining it as a malignancy arising from cells lining the stomach that exhibit abnormal and rapid growth. The text covers the progression from asymptomatic early stages to symptomatic advanced disease, including symptoms such as indigestion, nausea, vomiting, and early satiety. It discusses the multifactorial nature of stomach cancer causation, involving genetic, immunologic, infectious, and environmental factors. The document presents important epidemiological data, noting that approximately 28,000 Americans are diagnosed annually, with higher prevalence in men and individuals over 50 years of age. It also addresses global patterns, highlighting stomach cancer as potentially the second most common cancer worldwide, with particular prevalence in East Asia, Eastern Europe, and South America, and higher rates among certain ethnic groups including African Americans, Hispanic Americans, and Native Americans.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:10:37.872952"
+}

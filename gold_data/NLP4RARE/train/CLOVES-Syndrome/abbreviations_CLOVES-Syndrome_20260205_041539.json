@@ -1,0 +1,84 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:15:39.793736",
+  "document": "CLOVES-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/CLOVES-Syndrome.pdf",
+  "total_candidates": 16,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CLOVES",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "CLOVES syndrome is rare and evident at birth. It affects males and females equally regardless of their rac",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CS",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " affects males and females equally regardless of their race or ethnicity. Many of the patients with CS are misdiagnosed as having other syndromes such as Klippel-Trenaunay syndrome or Proteus syndrome.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Klippel-Trenaunay syndrome",
+      "matched_text": "Klippel-Trenaunay syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:90308"
+    },
+    {
+      "name": "Proteus syndrome",
+      "matched_text": "Proteus syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:744"
+    },
+    {
+      "name": "CLOVES syndrome",
+      "matched_text": "CLOVES syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:140944"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Cloves",
+      "matched_text": "CLOVES",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

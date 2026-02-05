@@ -1,0 +1,110 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:08:26.649267",
+  "document": "Dilatation-of-the-Pulmonary-Artery-Idiopathic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dilatation-of-the-Pulmonary-Artery-Idiopathic.pdf",
+  "total_candidates": 39,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "IDPA",
+      "long_form": "Idiopathic dilatation of the pulmonary artery",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Idiopathic dilatation of the pulmonary artery (IDPA) is a rare congenital defect characterized by a wider than normal main pulmonary artery in the absence of any apparent anatomical or physiological cause. Idiopathic dilatation of the pulmonary artery commonly does not produce symptoms because there is no circulatory abnormality. Clinical signs are minimal, and usually consist of a palpable pulmonary ejection sound that disappears when the patient",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "idiopathic dilatation of the pulmonary artery",
+      "matched_text": "Idiopathic dilatation of the pulmonary artery",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1676"
+    },
+    {
+      "name": "obsolete congenital abnormality",
+      "matched_text": "congenital defect",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "connective tissue disease",
+      "matched_text": "connective tissue disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pulmonary valve disease",
+      "matched_text": "pulmonary valve disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "bacterial endocarditis",
+      "matched_text": "bacterial endocarditis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Ehlers-Danlos syndrome",
+      "matched_text": "Ehlers-Danlos syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q79.6",
+      "orpha": "Orphanet:98249"
+    },
+    {
+      "name": "Marfan's syndrome",
+      "matched_text": "Marfan’s syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q87.4",
+      "orpha": "Orphanet:558"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "VALVE",
+      "matched_text": "valve",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

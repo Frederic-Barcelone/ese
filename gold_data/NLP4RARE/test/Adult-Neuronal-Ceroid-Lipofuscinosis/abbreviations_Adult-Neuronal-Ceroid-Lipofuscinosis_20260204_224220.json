@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_213605_6ff5dbf003fd",
+  "timestamp": "2026-02-04T22:42:20.484836",
+  "document": "Adult-Neuronal-Ceroid-Lipofuscinosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Adult-Neuronal-Ceroid-Lipofuscinosis.pdf",
+  "total_candidates": 13,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ANCL",
+      "long_form": "Adult neuronal ceroid lipofuscinosis",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "e is the total numbers of individuals with a disease at a given time. Studies into the incidence of ANCL have varied based on the country conducting the study. Estimates range from 1.5-7 infants per 100,0",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Adult neuronal ceroid lipofuscinosis",
+      "matched_text": "ANCL",
+      "abbreviation": "ANCL",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E75.4",
+      "orpha": "ORPHA:79262"
+    },
+    {
+      "name": "ceroid lipofuscinoses",
+      "matched_text": "ceroid lipofuscinoses",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E75.4",
+      "orpha": "Orphanet:216"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

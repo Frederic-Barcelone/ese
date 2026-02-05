@@ -1,0 +1,444 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:15:28.633316",
+  "document": "HTLV-Type-I-and-Type-II.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/HTLV-Type-I-and-Type-II.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "tropical spastic paraparesis",
+      "preferred_label": "tropical spastic paraparesis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G04.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008039",
+        "orpha": "Orphanet:289326",
+        "umls": "UMLS:C0030481",
+        "mesh": "MESH:D015493"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008039",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:321",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007527",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8208",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G04.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:323.01",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18298",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015493",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044696",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200206",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:159580",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:289326",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:714279000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0030481",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1043229589",
+          "display": null
+        }
+      ],
+      "context": "t was a distinct form of lymphoma, which was designated as acute T-cell leukemia/ lymphoma (ATL). Some years later, different groups in Martinique and Japan described an association between a chronic disease of the spinal cord and HTLV-I infection, which was later named HTLV-I associated myelopathy/tropical spastic paraparesis (HAM/TSP). Since then, several other conditions have been linked to HTLV infection.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Paraparesis Tropical Spastic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disease of the spinal cord",
+      "preferred_label": "disease of the spinal cord",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002545",
+        "orpha": null,
+        "umls": "UMLS:C0037928",
+        "mesh": "MESH:D013118"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002545",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:319",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009488",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:336.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11550",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013118",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97110",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:48522003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037928",
+          "display": null
+        }
+      ],
+      "context": "lated in 1980 from a patient originally thought to have a cutaneous lymphoma. It became clear that it was a distinct form of lymphoma, which was designated as acute T-cell leukemia/ lymphoma (ATL). Some years later, different groups in Martinique and Japan described an association between a chronic disease of the spinal cord and HTLV-I infection, which was later named HTLV-I associated myelopathy/tropical spastic paraparesis (HAM/TSP). Since then, several other conditions have been linked to HTLV infection.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "T-cell leukemia",
+      "preferred_label": "T-cell leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005525",
+        "orpha": null,
+        "umls": "UMLS:C0023492",
+        "mesh": "MESH:D015458"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005525",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:715",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005592",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6064",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015458",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C8694",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023492",
+          "display": null
+        }
+      ],
+      "context": "HTLV-I was first isolated in 1980 from a patient originally thought to have a cutaneous lymphoma. It became clear that it was a distinct form of lymphoma, which was designated as acute T-cell leukemia/ lymphoma (ATL). Some years later, different groups in Martinique and Japan described an association between a chronic disease of the spinal cord and HTLV-I infection, which was later named HTLV-I associated myelopathy/tropical spastic paraparesis (HAM/TSP). Since then, several other conditions hav",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukemia-Lymphoma Adult T-Cell",
+        "Leukemia Prolymphocytic T-Cell",
+        "Leukemia Biphenotypic Acute"
+      ],
+      "pubtator_normalized_name": "Leukemia T-Cell",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HTLV infection",
+      "preferred_label": "HTLV infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021184",
+        "orpha": null,
+        "umls": "UMLS:C0020091",
+        "mesh": "MESH:D006800"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021184",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001303",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9320",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006800",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020091",
+          "display": null
+        }
+      ],
+      "context": "Some years later, different groups in Martinique and Japan described an association between a chronic disease of the spinal cord and HTLV-I infection, which was later named HTLV-I associated myelopathy/tropical spastic paraparesis (HAM/TSP). Since then, several other conditions have been linked to HTLV infection.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "HTLV-I Infections",
+        "Deltaretrovirus Infections",
+        "HTLV-II Infections"
+      ],
+      "pubtator_normalized_name": "HIV Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphoma",
+      "preferred_label": "lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005062",
+        "orpha": "Orphanet:223735",
+        "umls": "UMLS:C0024299",
+        "mesh": "MESH:D008223"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005062",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060058",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000574",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.80",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9590/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44223",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008223",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025310",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100004",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3208",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MLYM",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:223735",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373168002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024299",
+          "display": null
+        }
+      ],
+      "context": "HTLV-I was first isolated in 1980 from a patient originally thought to have a cutaneous lymphoma. It became clear that it was a distinct form of lymphoma, which was designated as acute T-cell leukemia/ lymphoma (ATL). Some years later, different groups in Martinique and Japan described an association between a chronic disease of the spinal cord and HTLV-I infection, which was later named HTLV-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma Non-Hodgkin",
+        "Lymphoma B-Cell",
+        "Lymphoma Large B-Cell Diffuse"
+      ],
+      "pubtator_normalized_name": "Lymphoma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "doc_id": "Fructose-Intolerance-Hereditary",
+  "doc_filename": "Fructose-Intolerance-Hereditary.pdf",
+  "top_entities": [
+    {
+      "name": "Fructose-1,6-bisphosphatase deficiency",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "hereditary fructose intolerance",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Fructose",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "DNA",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2150,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Hereditary Fructose Intolerance: Clinical Overview and Diagnostic Approaches",
+  "short_description": "Clinical document describing three inherited fructose metabolism disorders, with focus on Hereditary Fructose Intolerance diagnosis and testing methods.",
+  "long_description": "This clinical reference document provides an overview of three recognized inherited disorders of fructose metabolism: essential fructosuria, Hereditary Fructose Intolerance (HFI), and Hereditary Fructose-1,6-biphosphatase deficiency (HFBP). The document emphasizes that while essential fructosuria is mild and requires no treatment, HFI and HFBP are serious conditions that require proper management. It details the epidemiology of HFI, noting its autosomal inheritance pattern, equal distribution between sexes, and variable incidence estimates. The document discusses diagnostic approaches including invasive methods like enzyme assays requiring liver biopsy and fructose tolerance tests, while highlighting the associated risks, particularly in newborns. It concludes by noting the increasing recommendation for non-invasive DNA testing as a safer diagnostic alternative.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:10:44.389441"
+}

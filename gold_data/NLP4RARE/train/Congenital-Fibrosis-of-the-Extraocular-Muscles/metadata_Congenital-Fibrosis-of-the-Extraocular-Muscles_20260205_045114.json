@@ -1,0 +1,35 @@
+{
+  "doc_id": "Congenital-Fibrosis-of-the-Extraocular-Muscles",
+  "doc_filename": "Congenital-Fibrosis-of-the-Extraocular-Muscles.pdf",
+  "top_entities": [
+    {
+      "name": "congenital fibrosis of the extraocular muscles",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "eye movement disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2387,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Congenital Fibrosis of the Extraocular Muscles (CFEOM)",
+  "short_description": "A comprehensive overview of CFEOM, a group of rare genetic eye movement disorders present at birth characterized by incomitant strabismus, ophthalmoplegia, and ptosis.",
+  "long_description": "This document provides a detailed clinical description of Congenital Fibrosis of the Extraocular Muscles (CFEOM), encompassing at least five rare genetic eye movement disorders that manifest at birth. The condition is characterized by the inability to move eyes in certain directions (ophthalmoplegia), droopy eyelids (ptosis), and abnormally positioned eyes due to dysfunction of cranial nerves III, IV, and/or VI and their associated muscles. The document outlines the classification system (CFEOM1, CFEOM2, and CFEOMS), describes associated conditions like Tukel syndrome, and provides epidemiological information including prevalence estimates of 1 in 230,000. The text emphasizes that these are non-progressive disorders affecting diverse ethnic populations equally across genders.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:51:14.609184"
+}

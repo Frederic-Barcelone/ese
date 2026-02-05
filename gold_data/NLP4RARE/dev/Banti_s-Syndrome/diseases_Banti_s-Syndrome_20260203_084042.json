@@ -1,0 +1,936 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:40:42.654964",
+  "document": "Banti_s-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Banti_s-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 15,
+  "total_validated": 15,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Banti syndrome",
+      "preferred_label": "Banti syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0037251",
+        "orpha": null,
+        "umls": "UMLS:C0154307",
+        "mesh": "MESH:C537903"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0037251",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5888",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56339",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537903",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:19058002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0154307",
+          "display": null
+        }
+      ],
+      "context": "Banti syndrome is a disorder of the spleen, the large, gland-like organ in the upper left side of the abdomen that produces red blood cells before birth and, in newborns, removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the spleen rapidly but premat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Idiopathic Noncirrhotic Portal Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Banti syndrome is a disorder of the spleen, the large, gland-like organ in the upper left side of the abdomen that produces red blood cells before birth and, in newborns, removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the spleen rapidly but prematurely destroys",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infection",
+      "preferred_label": "infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "Banti syndrome is a disorder of the spleen, the large, gland-like organ in the upper left side of the abdomen that produces red blood cells before birth and, in newborns, removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the spleen rapidly but prematurely destroys blood cells. Banti syndrome may occur due to a number of different factors causing obstruction of, and abnormally increased blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "HIV Infections",
+        "Virus Diseases"
+      ],
+      "pubtator_normalized_name": "Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "increased blood pressure",
+      "preferred_label": "hypertensive disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005044",
+        "orpha": null,
+        "umls": "UMLS:C0020538",
+        "mesh": "MESH:D006973"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10763",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000537",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000822",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I15",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:997.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38341003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020538",
+          "display": null
+        }
+      ],
+      "context": "ore birth and, in newborns, removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the spleen rapidly but prematurely destroys blood cells. Banti syndrome may occur due to a number of different factors causing obstruction of, and abnormally increased blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruct",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "congenital",
+      "preferred_label": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048408993",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "ood cells. Banti syndrome may occur due to a number of different factors causing obstruction of, and abnormally increased blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, pa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Congenital central hypoventilation syndrome",
+        "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "blood clots",
+      "preferred_label": "blood Clots",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000831",
+        "orpha": null,
+        "umls": "UMLS:C0040053",
+        "mesh": "MESH:D013927"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000831",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:453.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21160",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013927",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26891",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:439127006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040053",
+          "display": null
+        }
+      ],
+      "context": "ay occur due to a number of different factors causing obstruction of, and abnormally increased blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney tran",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Thrombosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cirrhosis",
+      "preferred_label": "cirrhosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005155",
+        "orpha": null,
+        "umls": "UMLS:C0023890",
+        "mesh": "MESH:D008103"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005155",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5082",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001422",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:571.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7368",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008103",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200937",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2951",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:19943007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023890",
+          "display": null
+        }
+      ],
+      "context": "tain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of India and Japan, but rare in Wester",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Liver Cirrhosis",
+        "Liver Cirrhosis Biliary",
+        "Cirrhosis Familial"
+      ],
+      "pubtator_normalized_name": "Fibrosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "ins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of India and Japan, but rare in Western countries. Increased arsenic",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "(vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of India and Japan, but rare in Western countries. Increased arsenic levels are present in drinking water in some countries and may contribute to regional differences in incidence. The diagnosis of Banti syndrome my be confirmed by a thorough clinical evaluation and a variety of specialize",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "h as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of India and Japan, but rare in Western countries. Increased arsenic levels are present in drinking water in some countries and may contribute to regional differences in incidence. The diagnosis of Banti syndrome my be confirmed by a thorough clinical evaluation and a variety of specialized tests, particularly advanced imaging",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Banti syndrome",
+      "preferred_label": "Idiopathic Noncirrhotic Portal Hypertension",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0154307",
+        "mesh": "D000094724"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0154307",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000094724",
+          "display": "Idiopathic Noncirrhotic Portal Hypertension"
+        }
+      ],
+      "context": "Banti syndrome is a disorder of the spleen, the large, gland-like organ in the upper left side of the abdomen that produces red blood cells before birth and, in newborns, removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the spleen rapidly but premat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Idiopathic Noncirrhotic Portal Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertension",
+      "preferred_label": "Hypertensive disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0020538",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0020538",
+          "display": null
+        }
+      ],
+      "context": ", removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the spleen rapidly but prematurely destroys blood cells. Banti syndrome may occur due to a number of different factors causing obstruction of, and abnormally increased blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the li",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "abnormalities",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "idly but prematurely destroys blood cells. Banti syndrome may occur due to a number of different factors causing obstruction of, and abnormally increased blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taki",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vascular obstruction",
+      "preferred_label": "Vascular occlusion",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1096458",
+        "mesh": "D002561"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1096458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002561",
+          "display": "Cerebrovascular Disorders"
+        }
+      ],
+      "context": "ed blood pressure (hypertension) within, certain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of In",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mesenteric Vascular Occlusion",
+        "Graft Occlusion Vascular"
+      ],
+      "pubtator_normalized_name": "Cerebrovascular Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cirrhosis",
+      "preferred_label": "Liver Cirrhosis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0023890",
+        "mesh": "D008103"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0023890",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008103",
+          "display": "Liver Cirrhosis"
+        }
+      ],
+      "context": "tain veins of the spleen (splenic veins) or the liver (e.g., hepatic or portal veins). These may include abnormalities present at birth (congenital) of such veins, blood clots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of India and Japan, but rare in Wester",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Liver Cirrhosis Biliary",
+        "Liver Cirrhosis Alcoholic",
+        "Diffuse Cerebral Sclerosis of Schilder"
+      ],
+      "pubtator_normalized_name": "Liver Cirrhosis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

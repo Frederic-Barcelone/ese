@@ -1,0 +1,500 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:41:22.973602",
+  "document": "Chromosome-9-Partial-Monosomy-9p.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chromosome-9-Partial-Monosomy-9p.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Monosomy 9p",
+      "preferred_label": "chromosome 9p deletion syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008013",
+        "orpha": "Orphanet:261112",
+        "umls": "UMLS:C0795830",
+        "mesh": "MESH:C538024"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008013",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060732",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3773",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.39",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:167073",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538024",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:158170",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:261112",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62599000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0795830",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 9, Partial Monosomy 9p is a rare chromosomal disorder in which there is deletion (monosomy) of a portion of the 9th chromosome. Characteristic symptoms and findings include mental retardation; distinctive malformations of the skull and facial (craniofacial) region, such as an abnormally shaped forehead (i.e., trigonoceph",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chromosome 9 partial monosomy 9p"
+      ],
+      "pubtator_normalized_name": "Chromosome 9p Deletion Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital heart defects",
+      "preferred_label": "congenital heart defects",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005453",
+        "orpha": null,
+        "umls": "UMLS:C0152021",
+        "mesh": "MESH:D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1682",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005207",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57501",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006330",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C95834",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:13213009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2004408087",
+          "display": null
+        }
+      ],
+      "context": "etardation; distinctive malformations of the skull and facial (craniofacial) region, such as an abnormally shaped forehead (i.e., trigonocephaly), upwardly slanting eyelid folds (palpebral fissures), and unusually flat midfacial regions (midfacial hypoplasia); structural malformations of the heart (congenital heart defects); genital defects in affected males and females; and/or additional physical abnormalities. In most cases, Chromosome 9, Partial Monosomy 9p appears to result from spontaneous (de novo) errors very early in embryonic development that occur for unknown reasons (sporadically). In observed cases, Chrom",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart defects limb shortening",
+        "Deafness Congenital Heart Defects and Posterior Embryotoxon",
+        "Noncompaction of Left Ventricular Myocardium with Congenital Heart Defects"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "chromosomal disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90-Q99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019040",
+        "orpha": "Orphanet:68335",
+        "umls": "UMLS:C0008626",
+        "mesh": "MESH:D025063"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019040",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080014",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90-Q99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3441",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D025063",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100280",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68335",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409709004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008626",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 9, Partial Monosomy 9p is a rare chromosomal disorder in which there is deletion (monosomy) of a portion of the 9th chromosome. Characteristic symptoms and findings include mental retardation; distinctive malformations of the skull and facial (craniofacial) region, such as an abnormally shaped forehead (i.e., trigonocephaly), upwardly slanting eyelid",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 9, Partial Monosomy 9p is a rare chromosomal disorder in which there is deletion (monosomy) of a portion of the 9th chromosome. Characteristic symptoms and findings include mental retardation; distinctive malformations of the skull and facial (craniofacial) region, such as an abnormally shaped forehead (i.e., trigonocephaly), upwardly slanting eyelid folds (palpebral fissures), and unusually flat midfacial regions (midfacial hypoplasia); structural malformations of the heart (congenital",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trigonocephaly",
+      "preferred_label": "trigonocephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000156",
+        "orpha": null,
+        "umls": "UMLS:C0265535",
+        "mesh": "D003398"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000156",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82713",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:28740008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265535",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:20816218",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003398",
+          "display": "Craniosynostoses"
+        }
+      ],
+      "context": "Monosomy 9p is a rare chromosomal disorder in which there is deletion (monosomy) of a portion of the 9th chromosome. Characteristic symptoms and findings include mental retardation; distinctive malformations of the skull and facial (craniofacial) region, such as an abnormally shaped forehead (i.e., trigonocephaly), upwardly slanting eyelid folds (palpebral fissures), and unusually flat midfacial regions (midfacial hypoplasia); structural malformations of the heart (congenital heart defects); genital defects in affected males and females; and/or additional physical abnormalities. In most cases, Chromosome 9,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bohring syndrome",
+        "Say Meyer syndrome",
+        "Trigonocephaly Nonsyndromic"
+      ],
+      "pubtator_normalized_name": "Craniosynostoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "monosomy",
+      "preferred_label": "monosomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020639",
+        "orpha": null,
+        "umls": "UMLS:C0026499",
+        "mesh": "MESH:D009006"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020639",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6432",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009006",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3239",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026499",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 9, Partial Monosomy 9p is a rare chromosomal disorder in which there is deletion (monosomy) of a portion of the 9th chromosome. Characteristic symptoms and findings include mental retardation; distinctive malformations of the skull and facial (craniofacial) region, such as an abnormally shaped forehead (i.e., trigonocephaly), upwardly slanting eyelid folds (palpebral fissures), and unusu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Turner Syndrome",
+        "Telomeric 22q13 Monosomy Syndrome",
+        "Wolf-Hirschhorn Syndrome"
+      ],
+      "pubtator_normalized_name": "Monosomy",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

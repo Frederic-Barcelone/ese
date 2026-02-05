@@ -1,0 +1,45 @@
+{
+  "doc_id": "Anemia-of-Chronic-Disease",
+  "doc_filename": "Anemia-of-Chronic-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "anemia of chronic disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "iron-deficiency anemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "oxygen",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "blood plasma",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2925,
+  "file_size_human": "2.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Anemia of Chronic Disease",
+  "short_description": "A clinical overview of anemia of chronic disease (anemia of inflammation), covering its association with chronic illnesses, symptoms, diagnosis, and prevalence.",
+  "long_description": "This document provides a comprehensive clinical overview of anemia of chronic disease, also known as anemia of inflammation. It details how this condition is associated with various underlying disorders including cancer, chronic infections, and autoimmune diseases like rheumatoid arthritis and lupus. The document explains the pathophysiology involving low circulating red blood cells or hemoglobin levels, describes the range of symptoms from mild fatigue and pallor to more severe complications, and discusses diagnostic approaches including specialized blood tests measuring hemoglobin, iron levels, ferritin, and transferrin saturation. It also addresses the epidemiology, noting that it affects all ages and genders equally and is considered the second most common cause of anemia in the United States after iron-deficiency anemia.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:42:14.828564"
+}

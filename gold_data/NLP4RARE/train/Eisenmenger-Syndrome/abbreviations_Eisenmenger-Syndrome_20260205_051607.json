@@ -1,0 +1,103 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:16:07.651172",
+  "document": "Eisenmenger-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Eisenmenger-Syndrome.pdf",
+  "total_candidates": 25,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CBC",
+      "long_form": "complete blood count",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ndrome represent between 25-50% of the adult Eisenmenger population. The diagnosis of Eisenmenger syndrome is not particularly complex but may require cardiac catheterization, an invasive procedure to measure pressures in the heart and lungs. Other tests include pulse oximetry, which checks oxygen levels in the blood, chest x-ray, EKG, pulmonary function test, iron levels and complete blood count (CBC). Echocardiography is fundamental in identifying the heart defect and raising the suspicion of high pressures in the lungs. Other imaging modalities (e.g. cardiac MRI) can provide valuable anatomic information.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EKG",
+      "long_form": "electrocardiogram",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "f the adult Eisenmenger population. The diagnosis of Eisenmenger syndrome is not particularly complex but may require cardiac catheterization, an invasive procedure to measure pressures in the heart and lungs. Other tests include pulse oximetry, which checks oxygen levels in the blood, chest x-ray, EKG, pulmonary function test, iron levels and complete blood count (CBC). Echocardiography is fundamental in identifying the heart defect and raising the suspicion of high pressures in the lungs. Other imaging modalities (e.g. cardiac MRI) can provide valuable anatomic information.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ct and raising the suspicion of high pressures in the lungs. Other imaging modalities (e.g. cardiac MRI) can provide valuable anatomic information.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Eisenmenger syndrome",
+      "matched_text": "Eisenmenger syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I27.83",
+      "orpha": "Orphanet:97214"
+    },
+    {
+      "name": "pulmonary function",
+      "matched_text": "pulmonary function",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Down syndrome",
+      "matched_text": "Down syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q90",
+      "orpha": "Orphanet:870"
+    },
+    {
+      "name": "heart defect",
+      "matched_text": "heart defect",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "oxygen",
+      "matched_text": "oxygen",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

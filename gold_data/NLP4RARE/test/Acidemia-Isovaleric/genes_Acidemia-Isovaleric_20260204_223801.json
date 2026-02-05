@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_213605_6ff5dbf003fd",
+  "timestamp": "2026-02-04T22:38:01.523711",
+  "document": "Acidemia-Isovaleric.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acidemia-Isovaleric.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "If",
+      "hgnc_symbol": "CBLIF",
+      "full_name": "cobalamin binding intrinsic factor",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4268",
+        "entrez": "2694",
+        "ensembl": "ENSG00000134812",
+        "uniprot": "P27352",
+        "omim": "609342"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4268",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2694",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134812",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "609342",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P27352",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "cluding the classic genetic diseases, are the product of the interaction of two genes for that condition, one received from the father and one from the mother. In recessive disorders, the condition does not appear unless a person inherits the same defective gene for the same trait from each parent. If an individual receives one normal gene and one gene for the disease, the person will be a carrier for the disease, but generally will not show symptoms of the disorder. The risk of transmitting the disease to the children of a couple, both of whom are carriers for a recessive disorder, is 25 percen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

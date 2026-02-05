@@ -1,0 +1,295 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:13:03.645686",
+  "document": "Dystonia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dystonia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "movement disorders",
+      "preferred_label": "movement disorders",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005395",
+        "orpha": null,
+        "umls": "UMLS:C0026650",
+        "mesh": "MESH:D009069"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005395",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:480",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004280",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.99",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10113",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009069",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116757",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60342002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026650",
+          "display": null
+        }
+      ],
+      "context": "Dystonia is a general term for a large group of movement disorders that vary in their symptoms, causes, progression, and treatments. This group of neurological conditions is generally characterized by involuntary muscle contractions that force the body into abnormal, sometimes painful, movements and positions (postures). The muscular contractions may be sustained",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Conversion Disorder",
+        "REM Sleep Behavior Disorder",
+        "Stereotypic Movement Disorder"
+      ],
+      "pubtator_normalized_name": "Movement Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "laryngeal dystonia",
+      "preferred_label": "laryngeal dystonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000485",
+        "orpha": "Orphanet:93961",
+        "umls": "UMLS:C1963946",
+        "mesh": "MESH:D055154"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000485",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050844",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:478.79",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:409603",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D055154",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93961",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:3331000119108",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1963946",
+          "display": null
+        }
+      ],
+      "context": "some cases, the exact, underlying cause is unknown (idiopathic). The most characteristic finding associated with most forms of dystonia is twisting, repetitive movements that affect the neck, torso, limbs, eyes, face, vocal chords, and/or a combination of these muscle groups. Certain forms such as laryngeal dystonia are not associated with abnormal postures. Dystonia causes varying degrees of pain and disability that ranges from mild symptoms that come and go to severe, debilitating symptoms that can significantly affect a person’s quality of life. In some cases dystonia can become progressively worse, while i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "non-genetic",
+      "preferred_label": "non-genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021151",
+        "orpha": null,
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021151",
+          "display": null
+        }
+      ],
+      "context": "ained or come and go (intermittent). Movements may be patterned and twisting, and/or in some cases shaking or quivering (tremulous) resembling a tremor. Dystonia may occur or be worsened when an individual attempts a voluntary action. There are many different causes for dystonia. Genetic as well as non-genetic factors can contribute to the development of these disorders. In some cases, the exact, underlying cause is unknown (idiopathic). The most characteristic finding associated with most forms of dystonia is twisting, repetitive movements that affect the neck, torso, limbs, eyes, face, vocal chords, an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Dystonia",
+      "preferred_label": "dystonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G24",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003441",
+        "orpha": null,
+        "umls": "UMLS:C0013421",
+        "mesh": "MESH:D020821"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003441",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:543",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001332",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G24",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3940",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020821",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34563",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15802004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013421",
+          "display": null
+        }
+      ],
+      "context": "Dystonia is a general term for a large group of movement disorders that vary in their symptoms, causes, progression, and treatments. This group of neurological conditions is generally characterized by involuntary muscle contractions that force the body into abnormal, sometimes painful, movements and positio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dystonia Focal Task-Specific",
+        "Dystonia 18",
+        "Dystonia 16"
+      ],
+      "pubtator_normalized_name": "Dystonia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,581 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:40:29.302763",
+  "document": "Chromosome-6-Ring.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chromosome-6-Ring.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Eye",
+      "preferred_label": "Kapur-Toriello syndrome",
+      "abbreviation": null,
+      "confidence": 0.39999999999999997,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2328",
+        "umls": null,
+        "mesh": "C537008"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2328",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537008",
+          "display": "Kapur Toriello syndrome"
+        }
+      ],
+      "context": "ng the coordination of mental and physical activities (psychomotor retardation); and/or various abnormalities of the skull and facial (craniofacial) region. Such craniofacial features often include an unusually small head (microcephaly), malformed or low-set ears, and/or a small jaw (micrognathia). Eye (ocular) defects are also relatively common, such as drooping of the upper eyelids (ptosis), unusually small eyes (microphthalmia), abnormal deviation of one eye in relation to the other (strabismus), and/or other findings. Chromosome 6 Ring usually appears to result from spontaneous (de novo) erro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kapur Toriello syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "on of lost chromosomal material and other factors. For example, there have been some reported cases in which children with Chromosome 6 Ring have few physical abnormalities and normal intelligence. However, many with the chromosomal abnormality are affected by growth retardation; varying degrees of mental retardation; mild to severe delays in the acquisition of skills requiring the coordination of mental and physical activities (psychomotor retardation); and/or various abnormalities of the skull and facial (craniofacial) region. Such craniofacial features often include an unusually small head (microcephaly), ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Chromosome 6 Ring",
+      "preferred_label": "Chromosome 6 Ring",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015440",
+        "orpha": "Orphanet:1448",
+        "umls": "UMLS:C0795814",
+        "mesh": "MESH:C537763"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015440",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6095",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:167069",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537763",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C121985",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:958",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1448",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:765488003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0795814",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 6 Ring is a rare disorder in which there is loss (deletion) of chromosomal material from both ends of the 6th chromosome and joining of the ends to form a ring. Associated symptoms and findings may vary greatly, depending upon the amount and location of lost chromosomal material and other factors. For exa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome 6 ring syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microphthalmia",
+      "preferred_label": "microphthalmia",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021129",
+        "orpha": null,
+        "umls": "UMLS:C0026010",
+        "mesh": "MESH:D008850"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021129",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10629",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005569",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000568",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:743.11",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10033",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008850",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98989",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:204108000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026010",
+          "display": null
+        }
+      ],
+      "context": "ull and facial (craniofacial) region. Such craniofacial features often include an unusually small head (microcephaly), malformed or low-set ears, and/or a small jaw (micrognathia). Eye (ocular) defects are also relatively common, such as drooping of the upper eyelids (ptosis), unusually small eyes (microphthalmia), abnormal deviation of one eye in relation to the other (strabismus), and/or other findings. Chromosome 6 Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically). Since Chromosome 6 Ring was original",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microphthalmia Isolated 1",
+        "Microphthalmia Syndromic 6",
+        "Cataract congenital with microcornea or slight microphthalmia"
+      ],
+      "pubtator_normalized_name": "Microphthalmia Syndromic 10",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microcephaly",
+      "preferred_label": "microcephaly",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001149",
+        "orpha": null,
+        "umls": "UMLS:C4551563",
+        "mesh": "MESH:D008831"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001149",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10907",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000252",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:742.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644158",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008831",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85874",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1829003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551563",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:179350437",
+          "display": null
+        }
+      ],
+      "context": "ental retardation; mild to severe delays in the acquisition of skills requiring the coordination of mental and physical activities (psychomotor retardation); and/or various abnormalities of the skull and facial (craniofacial) region. Such craniofacial features often include an unusually small head (microcephaly), malformed or low-set ears, and/or a small jaw (micrognathia). Eye (ocular) defects are also relatively common, such as drooping of the upper eyelids (ptosis), unusually small eyes (microphthalmia), abnormal deviation of one eye in relation to the other (strabismus), and/or other findings. Chromos",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microcephaly Primary Autosomal Recessive 1",
+        "Paine syndrome",
+        "Microcephaly cervical spine fusion anomalies"
+      ],
+      "pubtator_normalized_name": "Microcephaly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "strabismus",
+      "preferred_label": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003432",
+        "orpha": null,
+        "umls": "UMLS:C0038379",
+        "mesh": "MESH:D013285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003432",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:540",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21337",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013285",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35040",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22066006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038379",
+          "display": null
+        }
+      ],
+      "context": "clude an unusually small head (microcephaly), malformed or low-set ears, and/or a small jaw (micrognathia). Eye (ocular) defects are also relatively common, such as drooping of the upper eyelids (ptosis), unusually small eyes (microphthalmia), abnormal deviation of one eye in relation to the other (strabismus), and/or other findings. Chromosome 6 Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically). Since Chromosome 6 Ring was originally described, approximately 23 cases have been reported in the medica",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Esotropia",
+        "Exotropia",
+        "fourth cranial nerve palsy familial congenital"
+      ],
+      "pubtator_normalized_name": "Strabismus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ptosis",
+      "preferred_label": "ptosis",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000728",
+        "orpha": null,
+        "umls": "UMLS:C0005745",
+        "mesh": "MESH:D001763"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000728",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060260",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:374.30",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2287",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001763",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27298",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:11934000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005745",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1361674069",
+          "display": null
+        }
+      ],
+      "context": "various abnormalities of the skull and facial (craniofacial) region. Such craniofacial features often include an unusually small head (microcephaly), malformed or low-set ears, and/or a small jaw (micrognathia). Eye (ocular) defects are also relatively common, such as drooping of the upper eyelids (ptosis), unusually small eyes (microphthalmia), abnormal deviation of one eye in relation to the other (strabismus), and/or other findings. Chromosome 6 Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Horner Syndrome",
+        "Carnevale syndrome",
+        "Blepharoptosis"
+      ],
+      "pubtator_normalized_name": "Ptosis Hereditary Congenital 2",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

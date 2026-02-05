@@ -1,0 +1,79 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:13:19.375441",
+  "document": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "C3",
+      "hgnc_symbol": "C3",
+      "full_name": "complement C3",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "1318",
+        "entrez": "718",
+        "ensembl": "ENSG00000125730",
+        "uniprot": "P01024",
+        "omim": "120700"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "1318",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "718",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000125730",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "120700",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P01024",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "280133",
+          "disease_name": "Complement component 3 deficiency",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        },
+        {
+          "orphacode": "544472",
+          "disease_name": "Atypical hemolytic uremic syndrome with complement gene abnormality",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "he adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading — C3 Glomerulopathy, a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

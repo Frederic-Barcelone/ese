@@ -1,0 +1,774 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:20:01.025854",
+  "document": "Bloom-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Bloom-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Bloom syndrome is a rare genetic disorder characterized by short stature; increased skin sensitivity to ultraviolet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and mos",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "photosensitivity",
+      "preferred_label": "photosensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007559",
+        "orpha": null,
+        "umls": "UMLS:C1868677",
+        "mesh": "D010787"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007559",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:358382",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:132100",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1868677",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010787",
+          "display": "Photosensitivity Disorders"
+        }
+      ],
+      "context": "Bloom syndrome is a rare genetic disorder characterized by short stature; increased skin sensitivity to ultraviolet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly increased susceptibility to many types of cancer, especially leukemia, lymphoma and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Xeroderma pigmentosum variant type",
+        "Hair defect with photosensitivity and mental retardation",
+        "Cutaneous photosensitivity and colitis lethal"
+      ],
+      "pubtator_normalized_name": "Photosensitivity Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Bloom syndrome",
+      "preferred_label": "Bloom syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q82.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008876",
+        "orpha": "Orphanet:125",
+        "umls": "UMLS:C0005859",
+        "mesh": "MESH:D001816"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008876",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2717",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:915",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q82.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.39",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2685",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001816",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200707",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2903",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:863",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:210900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:125",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:4434006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005859",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1838213890",
+          "display": null
+        }
+      ],
+      "context": "Bloom syndrome is a rare genetic disorder characterized by short stature; increased skin sensitivity to ultraviolet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Bloom Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "telangiectasia",
+      "preferred_label": "telangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001576",
+        "orpha": null,
+        "umls": "UMLS:C0039446",
+        "mesh": "MESH:D013684"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001576",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1272",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21088",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013684",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28194",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:247479008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039446",
+          "display": null
+        }
+      ],
+      "context": "Bloom syndrome is a rare genetic disorder characterized by short stature; increased skin sensitivity to ultraviolet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly increased susceptibility to many types of cancer, especially leukemia, lymphoma and gastrointestinal tract tumors. Bloom syndrome is a prot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Telangiectasia Hereditary Hemorrhagic",
+        "Central Nervous System Vascular Malformations",
+        "Telangiectasis"
+      ],
+      "pubtator_normalized_name": "Ataxia Telangiectasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sensitivity",
+      "preferred_label": "sensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000605",
+        "orpha": null,
+        "umls": "UMLS:C3532523",
+        "mesh": "D007333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000605",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060056",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:759636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:473010000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3532523",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007333",
+          "display": "Insulin Resistance"
+        }
+      ],
+      "context": "Bloom syndrome is a rare genetic disorder characterized by short stature; increased skin sensitivity to ultraviolet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly increased susceptibility to many",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatitis Contact",
+        "Photophobia",
+        "Glutamate Monosodium Sensitivity"
+      ],
+      "pubtator_normalized_name": "Insulin Resistance",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "leukemia",
+      "preferred_label": "leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005059",
+        "orpha": null,
+        "umls": "UMLS:C0023418",
+        "mesh": "MESH:D007938"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005059",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1240",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000565",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001909",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:208.90",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9800/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9725",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007938",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3161",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:93143009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023418",
+          "display": null
+        }
+      ],
+      "context": "e sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly increased susceptibility to many types of cancer, especially leukemia, lymphoma and gastrointestinal tract tumors. Bloom syndrome is a prototype of a group of genetic conditions known as chromosome breakage syndromes. The genetic abnormality in Bloom syndrome causes problems with DNA repair, resulting in a high number of chromosome breaks and rearrangements. The abno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukemia Myeloid Acute",
+        "Leukemia Lymphocytic Chronic B-Cell",
+        "Leukemia Myelogenous Chronic BCR-ABL Positive"
+      ],
+      "pubtator_normalized_name": "Leukemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphoma",
+      "preferred_label": "lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005062",
+        "orpha": "Orphanet:223735",
+        "umls": "UMLS:C0024299",
+        "mesh": "MESH:D008223"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005062",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060058",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000574",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.80",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9590/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44223",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008223",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025310",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100004",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3208",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MLYM",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:223735",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373168002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024299",
+          "display": null
+        }
+      ],
+      "context": "tosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly increased susceptibility to many types of cancer, especially leukemia, lymphoma and gastrointestinal tract tumors. Bloom syndrome is a prototype of a group of genetic conditions known as chromosome breakage syndromes. The genetic abnormality in Bloom syndrome causes problems with DNA repair, resulting in a high number of chromosome breaks and rearrangements. The abnormal DNA r",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma Non-Hodgkin",
+        "Lymphoma B-Cell",
+        "Lymphoma Large B-Cell Diffuse"
+      ],
+      "pubtator_normalized_name": "Lymphoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "Bloom syndrome is a rare genetic disorder characterized by short stature; increased skin sensitivity to ultraviolet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly incre",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "violet rays from the sun (photosensitivity); multiple small dilated blood vessels (telangiectasia) over the nose and cheeks resembling a butterfly in shape; mild immune deficiency with increased susceptibility to infections; and most importantly, a markedly increased susceptibility to many types of cancer, especially leukemia, lymphoma and gastrointestinal tract tumors. Bloom syndrome is a prototype of a group of genetic conditions known as chromosome breakage syndromes. The genetic abnormality in Bloom syndrome causes problems with DNA repair, resulting in a high number of chromosome breaks and rea",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

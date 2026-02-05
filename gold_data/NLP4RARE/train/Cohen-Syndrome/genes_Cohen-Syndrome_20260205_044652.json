@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:46:52.087267",
+  "document": "Cohen-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cohen-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "VPS13B",
+      "hgnc_symbol": "VPS13B",
+      "full_name": "vacuolar protein sorting 13 homolog B",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2183",
+        "entrez": "157680",
+        "ensembl": "ENSG00000132549",
+        "uniprot": "Q7Z7G8",
+        "omim": "607817"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2183",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "157680",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000132549",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "607817",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q7Z7G8",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "193",
+          "disease_name": "Cohen syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "VPS13B/COH1 Cohen syndrome affects males and females in about equal numbers. It appears to occur more frequently in people of Finnish, Amish, Greek/Mediterranean and Irish ancestry. More than 150 cases have been reported in the medical literature and an estimated 500-1,000 individuals have been diagnosed",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

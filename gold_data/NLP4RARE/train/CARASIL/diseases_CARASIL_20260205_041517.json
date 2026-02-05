@@ -1,0 +1,407 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:15:17.401880",
+  "document": "CARASIL.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/CARASIL.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CARASIL",
+      "preferred_label": "Cerebral autosomal recessive arteriopathy-subcortical infarcts-leukoencephalopathy",
+      "abbreviation": "CARASIL",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": "I67.8",
+        "icd11": "8B22.C1",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:199354",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:199354",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I67.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8B22.C1",
+          "display": null
+        }
+      ],
+      "context": "CARASIL is an extremely rare genetic disorder that is characterized by damage to the small blood vessels in the brain. Individuals with CARASIL are at risk of developing multiple strokes, even if they do not have cardiovascular risk factors. The symptoms of CARASIL result from damage to various small blood",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "strokes",
+      "preferred_label": "cerebrovascular disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I60-I69",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011057",
+        "orpha": null,
+        "umls": "UMLS:C0007820",
+        "mesh": "MESH:D002561"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011057",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6713",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003763",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I60-I69",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:437.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:858",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002561",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2938",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62914000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007820",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:843843448",
+          "display": null
+        }
+      ],
+      "context": "CARASIL is an extremely rare genetic disorder that is characterized by damage to the small blood vessels in the brain. Individuals with CARASIL are at risk of developing multiple strokes, even if they do not have cardiovascular risk factors. The symptoms of CARASIL result from damage to various small blood vessels, especially those within the brain. Individuals with CARASIL may develop a variety of symptoms relating to white matter involvement or leukoaraiosis (changes in deep whit",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cerebrovascular Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pseudobulbar palsy",
+      "preferred_label": "pseudobulbar palsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006930",
+        "orpha": null,
+        "umls": "UMLS:C0033790",
+        "mesh": "MESH:D020828"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006930",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12680",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001131",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:335.23",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10989",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020828",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10037114",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C129934",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:7379000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0033790",
+          "display": null
+        }
+      ],
+      "context": "y those within the brain. Individuals with CARASIL may develop a variety of symptoms relating to white matter involvement or leukoaraiosis (changes in deep white matter in the brain, which are observed on MRI or CT). Such symptoms include an increasing muscle tone (spasticity), pyramidal signs, and pseudobulbar palsy. Pseudobulbar palsy is a group of neurologic symptoms including difficult chewing, swallowing and speech. Eventually, gait disturbance and dementia may result. About a third of patients have stroke-like episodes. The age of onset is between 20 to 50 years old. CARASIL is an acronym that stands for:",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "CARASIL is an extremely rare genetic disorder that is characterized by damage to the small blood vessels in the brain. Individuals with CARASIL are at risk of developing multiple strokes, even if they do not have cardiovascular risk factors. The symptoms of CARASIL result from damage to various small blood vessels, especially those within the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dementia",
+      "preferred_label": "dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:F02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001627",
+        "orpha": null,
+        "umls": "UMLS:C0497327",
+        "mesh": "MESH:D003704"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001627",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1307",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000726",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:294.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:99229",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003704",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4786",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:52448006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0497327",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:546689346",
+          "display": null
+        }
+      ],
+      "context": "ite matter in the brain, which are observed on MRI or CT). Such symptoms include an increasing muscle tone (spasticity), pyramidal signs, and pseudobulbar palsy. Pseudobulbar palsy is a group of neurologic symptoms including difficult chewing, swallowing and speech. Eventually, gait disturbance and dementia may result. About a third of patients have stroke-like episodes. The age of onset is between 20 to 50 years old. CARASIL is an acronym that stands for: CARASIL is an extremely rare disorder that has been mainly described in the Japanese medical literature, but also reported in Chinese and Caucasian",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alzheimer Disease",
+        "Schizophrenia",
+        "Dementia Vascular"
+      ],
+      "pubtator_normalized_name": "Dementia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "Turcot-Syndrome",
+  "doc_filename": "Turcot-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "polyp",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Familial Adenomatous Polyposis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1970,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Turcot Syndrome: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing Turcot syndrome, a rare inherited disorder combining gastrointestinal polyps with central nervous system tumors.",
+  "long_description": "This clinical document provides a comprehensive overview of Turcot syndrome, a rare inherited disorder affecting approximately 150 documented cases worldwide. The document details the characteristic presentation of adenomatous polyps in the gastrointestinal tract combined with central nervous system tumors. It covers the clinical manifestations including gastrointestinal symptoms such as diarrhea, rectal bleeding, fatigue, abdominal pain, and weight loss, as well as neurological symptoms that vary based on brain tumor characteristics. The document discusses the ongoing scientific debate regarding whether Turcot syndrome represents a variant of familial adenomatous polyposis or constitutes a distinct disorder, while noting that the exact etiology remains unknown and that the condition affects both sexes equally.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:16:36.455182"
+}

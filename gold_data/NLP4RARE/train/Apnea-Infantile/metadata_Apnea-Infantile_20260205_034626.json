@@ -1,0 +1,45 @@
+{
+  "doc_id": "Apnea-Infantile",
+  "doc_filename": "Apnea-Infantile.pdf",
+  "top_entities": [
+    {
+      "name": "sudden infant death syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "apnea of prematurity",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "air",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Sleep",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2150,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Infantile Apnea: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing infantile apnea, a condition involving temporary cessation of breathing in children under one year of age.",
+  "long_description": "This clinical reference document provides a comprehensive overview of infantile apnea, a medical condition characterized by the temporary absence of spontaneous breathing in infants under one year of age. The document covers the pathophysiology, including neurological impairment of respiratory rhythm and airway obstruction, clinical symptoms such as breathing cessation during sleep, cyanosis, and bradycardia, and its potential relationship to sudden infant death syndrome. It discusses the multifactorial etiology involving environmental and developmental factors, rare familial cases, and the higher prevalence in premature infants. The document serves as an educational resource for healthcare professionals treating pediatric respiratory conditions.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:46:26.212526"
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "Agammaglobulinemia",
+  "doc_filename": "Agammaglobulinemia.pdf",
+  "top_entities": [
+    {
+      "name": "agammaglobulinemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "CBLIF",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 1940,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Agammaglobulinemia: Inherited Immune Deficiency Disorder",
+  "short_description": "Clinical overview of agammaglobulinemia, a rare inherited immune deficiency characterized by low antibody concentrations due to B cell dysfunction.",
+  "long_description": "This document provides a comprehensive overview of agammaglobulinemia, a group of inherited immune deficiencies that primarily affect males. The condition is characterized by significantly reduced antibody concentrations in the blood, resulting from defective development or function of B lymphocytes. The document explains how the lack of essential immunoglobulins (IgM, IgG) compromises the immune system's ability to combat bacterial, viral, and other foreign threats. It details the underlying pathophysiology involving failed development of specialized precursor cells responsible for gammaglobulin production, leading to mature B cell deficiency. The text also notes the gender predisposition of this rare disorder while acknowledging that certain types can affect females.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:34:40.980141"
+}

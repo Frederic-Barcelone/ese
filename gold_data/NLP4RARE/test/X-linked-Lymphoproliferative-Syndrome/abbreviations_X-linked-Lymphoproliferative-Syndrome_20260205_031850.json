@@ -1,0 +1,130 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:18:50.900415",
+  "document": "X-linked-Lymphoproliferative-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/X-linked-Lymphoproliferative-Syndrome.pdf",
+  "total_candidates": 34,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "EBV",
+      "long_form": "Epstein-Barr virus",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "X-linked lymphoproliferative (XLP) syndrome is an extremely rare inherited (primary) immunodeficiency disorder characterized by a defective immune system that is powerfully responsive to infection with the Epstein-Barr virus (EBV). This virus is common among the general population and is relatively well-known because it is the cause of infectious mononucleosis (IM), usually with no long-lasting effects. However, in individuals with XLP, exposure to EBV may result in severe, life-threatening fulminant hepatitis; abnormally lo",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "XLP",
+      "long_form": "X-linked lymphoproliferative disease",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "X-linked lymphoproliferative (XLP) syndrome is an extremely rare inherited (primary) immunodeficiency disorder characterized by a defective immune system that is powerfully responsive to infection with the Epstein-Barr virus (EBV). This virus is common among the general population and is relatively well-known because it is the caus",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IM",
+      "long_form": "infectious mononucleosis",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "eneral population and is relatively well-known because it is the cause of infectious mononucleosis (IM), usually with no long-lasting effects. However, in individuals with XLP, exposure to EBV may resul",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "X-linked lymphoproliferative syndrome",
+      "matched_text": "X-linked lymphoproliferative syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2442"
+    },
+    {
+      "name": "X-linked lymphoproliferative disease",
+      "matched_text": "XLP",
+      "abbreviation": "XLP",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:2442"
+    },
+    {
+      "name": "immunodeficiency disorder",
+      "matched_text": "immunodeficiency disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "infectious mononucleosis",
+      "matched_text": "infectious mononucleosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hypogammaglobulinemia",
+      "matched_text": "hypogammaglobulinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:229720"
+    },
+    {
+      "name": "B-cell lymphoma",
+      "matched_text": "B-cell lymphomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:171915"
+    },
+    {
+      "name": "Hepatitis",
+      "matched_text": "hepatitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Epstein-Barr virus",
+      "matched_text": "Epstein-Barr virus",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

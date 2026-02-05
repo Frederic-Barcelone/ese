@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260204_213605_6ff5dbf003fd",
+  "timestamp": "2026-02-04T22:45:56.798934",
+  "document": "Antithrombin-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Antithrombin-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified - Antithrombin deficiency information",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "Antithrombin deficiency",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Antithrombin-Deficiency_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected antithrombin deficiency",
+          "condition": "suspected antithrombin deficiency",
+          "severity": "not specified",
+          "action": "repeat testing should be done when patient is not ill, not on heparin and does not have related medical problems",
+          "action_description": null,
+          "preferred": null,
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Antithrombin-Deficiency",
+          "source_text": "Repeat testing should be done at a time when the patient is not ill, is not on heparin and does not have related medical problems.",
+          "page_num": null
+        }
+      ],
+      "source_document": "Antithrombin-Deficiency",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

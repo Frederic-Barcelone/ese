@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:07:56.302394",
+  "document": "Argininie_-Glycine-Amidinotransferase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Argininie_-Glycine-Amidinotransferase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "AGAT",
+      "hgnc_symbol": "GATM",
+      "full_name": "glycine amidinotransferase",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4175",
+        "entrez": "2628",
+        "ensembl": "ENSG00000171766",
+        "uniprot": "P50440",
+        "omim": "602360"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4175",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2628",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000171766",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "602360",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P50440",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "The severity of AGAT varies from patient to patient. People with AGAT typically present with mild to moderate intellectual disabilities, delayed speech, and may have seizure activity. Some individuals may develop autistic like behaviors. Children with AGAT may not gain weight and grow at the expected rate (failure to t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

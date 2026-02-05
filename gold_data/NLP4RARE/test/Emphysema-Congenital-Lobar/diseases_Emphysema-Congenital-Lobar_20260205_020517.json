@@ -1,0 +1,196 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:05:17.348017",
+  "document": "Emphysema-Congenital-Lobar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Emphysema-Congenital-Lobar.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Congenital lobar emphysema",
+      "preferred_label": "congenital lobar emphysema",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007536",
+        "orpha": "Orphanet:1928",
+        "umls": "UMLS:C0265797",
+        "mesh": "MESH:C535735"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007536",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2104",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:120557",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535735",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010456",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98895",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1085",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:130710",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1928",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:66987001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265797",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:685349915",
+          "display": null
+        }
+      ],
+      "context": "Congenital lobar emphysema is a rare respiratory disorder in which air can enter the lungs but cannot escape, causing overinflation (hyperinflation) of the lobes of the lung. It is most often detected in newborns or young infants, but some cases do not become apparent until adulthood. This disorder may be severe enough to ca",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Congenital lobar emphysema",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "respiratory disorder",
+      "preferred_label": "respiratory disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J00-J99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005087",
+        "orpha": null,
+        "umls": "UMLS:C0035204",
+        "mesh": "MESH:D012140"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005087",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1579",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000684",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J00-J99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V47.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48421",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012140",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100010",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26871",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:50043002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035204",
+          "display": null
+        }
+      ],
+      "context": "Congenital lobar emphysema is a rare respiratory disorder in which air can enter the lungs but cannot escape, causing overinflation (hyperinflation) of the lobes of the lung. It is most often detected in newborns or young infants, but some cases do not become apparent until adulthood. This disorder may be severe enough to cause associated heart problems (",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mitochondrial Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

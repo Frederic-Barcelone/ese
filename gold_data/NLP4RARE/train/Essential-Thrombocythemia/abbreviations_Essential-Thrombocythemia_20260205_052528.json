@@ -1,0 +1,47 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:25:28.099707",
+  "document": "Essential-Thrombocythemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Essential-Thrombocythemia.pdf",
+  "total_candidates": 27,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ET",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "Fewer than 1 in 100,000 people are diagnosed with ET in any year (the most recent estimates range from 0.38 to 1.7 per 100,000). Women are more likely t",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "inherited genetic",
+      "matched_text": "inherited genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

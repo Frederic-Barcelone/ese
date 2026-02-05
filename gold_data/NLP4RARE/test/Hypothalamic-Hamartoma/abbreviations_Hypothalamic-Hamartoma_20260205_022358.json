@@ -1,0 +1,110 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:23:58.366327",
+  "document": "Hypothalamic-Hamartoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hypothalamic-Hamartoma.pdf",
+  "total_candidates": 37,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HH",
+      "long_form": "Hypothalamic hamartomas",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Hypothalamic hamartomas (HH) are rare, tumor-like malformations that occur during fetal development and are present at birth. They are non-progressive lesions and do not expand, spread or metastasize to other locations. They grow in proportion to normal brain growth, and consequently their relative size to the rest of the brai",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "central precocious puberty",
+      "matched_text": "central precocious puberty",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:759"
+    },
+    {
+      "name": "hypothalamic hamartomas",
+      "matched_text": "Hypothalamic hamartomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2113"
+    },
+    {
+      "name": "Hobnail hemangioma",
+      "matched_text": "HH",
+      "abbreviation": "HH",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:675362"
+    },
+    {
+      "name": "precocious puberty",
+      "matched_text": "precocious puberty",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E30.1",
+      "orpha": "Orphanet:95708"
+    },
+    {
+      "name": "optic nerve glioma",
+      "matched_text": "optic nerve gliomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "craniopharyngioma",
+      "matched_text": "craniopharyngiomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:54595"
+    },
+    {
+      "name": "astrocytoma",
+      "matched_text": "astrocytomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "epilepsy",
+      "matched_text": "epilepsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G40",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:23:50.102672",
+  "document": "Epitheliopathy-Acute-Posterior-Multifocal-Placoid-Pigment.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Epitheliopathy-Acute-Posterior-Multifocal-Placoid-Pigment.pdf",
+  "total_candidates": 27,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "APMPPE",
+      "long_form": "Acute posterior multifocal placoid pigment epitheliopathy",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Acute posterior multifocal placoid pigment epitheliopathy (APMPPE) is a rare eye disorder of unknown (idiopathic) cause. The disorder is characterized by the impairment of central vision in one eye (unilateral) but, within a few days, the second eye may also become affected (bilateral). In most cases, the disorder resolves within a few weeks without loss of clearness of vision (acuity). However, in some cases, visual acuity does not improve. This disorder occurs",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "acute posterior multifocal placoid pigment epitheliopathy",
+      "matched_text": "Acute posterior multifocal placoid pigment epitheliopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H30.14",
+      "orpha": null
+    },
+    {
+      "name": "Macrodactyly of toes, unilateral",
+      "matched_text": "unilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:295243"
+    },
+    {
+      "name": "Macrodactyly of toes, bilateral",
+      "matched_text": "bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:295245"
+    },
+    {
+      "name": "visual disorder",
+      "matched_text": "visual disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "eye disorder",
+      "matched_text": "eye disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "influenza",
+      "matched_text": "influenza",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

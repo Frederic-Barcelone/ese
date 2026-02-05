@@ -1,0 +1,67 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:08:46.634273",
+  "document": "Hereditary-Sensory-and-Autonomic-Neuropathy-Type-1E.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hereditary-Sensory-and-Autonomic-Neuropathy-Type-1E.pdf",
+  "total_candidates": 10,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 3,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "DNMT1",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "DNMT1 HSANT1E affects both genders equally. Due to the complexity of disease and relatively lack of aware",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HSANT1E",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "DNMT1 HSANT1E affects both genders equally. Due to the complexity of disease and relatively lack of awareness of ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HSAN1E",
+      "long_form": "Hereditary sensory neuropathy-deafness-dementia syndrome",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "genders equally. Due to the complexity of disease and relatively lack of awareness of this disease, HSAN1E is often misdiagnosed or undiagnosed, making it difficult to assess its prevalence and incidence in",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Hereditary sensory neuropathy-deafness-dementia syndrome",
+      "matched_text": "HSAN1E",
+      "abbreviation": "HSAN1E",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G60.8",
+      "orpha": "ORPHA:456318"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

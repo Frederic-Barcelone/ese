@@ -1,0 +1,67 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:13:27.711043",
+  "document": "Eales-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Eales-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "jelly",
+      "preferred_name": "Jelly",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010577",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "4718",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010577",
+          "display": "Petrolatum"
+        }
+      ],
+      "context": "in the retina. The disorder is most prevalent among young males and normally affects both eyes. Usually, vision is suddenly blurred because the clear jelly that fills the eyeball behind the lens of the eye seeps out (vitreous hemorrhaging). The exact case of Eales Disease is not known. This disorder seem",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "royal jelly",
+        "K-Y jelly"
+      ],
+      "pubtator_normalized_name": "Petrolatum",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:39:53.033732",
+  "document": "Mucopolysaccharidosis-Type-I.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mucopolysaccharidosis-Type-I.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Mucopolysaccharidosis",
+      "preferred_label": "mucopolysaccharidosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019249",
+        "orpha": "Orphanet:79213",
+        "umls": "UMLS:C0026703",
+        "mesh": "MESH:D009083"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019249",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12798",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7065",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7733",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009083",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10028093",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C61259",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1461",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:607014",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79213",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:11380006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026703",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1596128696",
+          "display": null
+        }
+      ],
+      "context": "Mucopolysaccharidosis type | affects males and females in equal numbers, with an incidence of about 1 in 100,000 live births for the severe type, and an incidence of about 1in 500,000 live births for the attenuated type. Incidence is the number of people who develop a disorder over a given period of time (e.g. one year)",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mucopolysaccharidosis I",
+        "Mucopolysaccharidosis II",
+        "Mucopolysaccharidosis IV"
+      ],
+      "pubtator_normalized_name": "Mucopolysaccharidosis III",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

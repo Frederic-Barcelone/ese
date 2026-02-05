@@ -1,0 +1,311 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:52:39.209564",
+  "document": "Potter-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Potter-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Potter syndrome",
+      "preferred_label": "Oligohydramnios sequence",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0178426",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0178426",
+          "display": null
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidenc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "condition",
+      "preferred_label": "condition",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidence or prevalence of Potter syndrome range from 1 in 4,000 to 10,000 births. A couple",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chronic Disease",
+        "Precancerous Conditions",
+        "Muscular Diseases"
+      ],
+      "pubtator_normalized_name": "Neurodegenerative Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bilateral renal agenesis",
+      "preferred_label": "Congenital absence of kidneys syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1609433",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1609433",
+          "display": null
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidence or prevalence of Potter syndrome range from 1 in 4,000 to 10,000 births. A couple studies have shown that ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "obstructive uropathy",
+      "preferred_label": "Urinary tract obstruction",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0178879",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0178879",
+          "display": null
+        }
+      ],
+      "context": "ter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidence or prevalence of Potter syndrome range from 1 in 4,000 to 10,000 births. A couple studies have shown that male newborns are affected more often than female newborns, probably due to the obstructive uropathy that is seen more often in males.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidenc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

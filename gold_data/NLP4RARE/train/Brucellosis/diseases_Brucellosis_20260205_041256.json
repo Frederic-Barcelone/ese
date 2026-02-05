@@ -1,0 +1,219 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:12:56.317865",
+  "document": "Brucellosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Brucellosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "infectious disease",
+      "preferred_label": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "Brucellosis is an infectious disease that affects livestock and may be transmitted to humans. is rare in the United States, but occurs more frequently in other parts of the world. The disorder is caused by one of four different species of bacteria that belong to the genus Brucella. Initial symptoms of infection may be nonspecific incl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysentery",
+        "Post-Infectious Disorders",
+        "Travel-Related Illness"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Brucellosis",
+      "preferred_label": "brucellosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A23",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005683",
+        "orpha": "Orphanet:1304",
+        "umls": "UMLS:C0006309",
+        "mesh": "MESH:D002006"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005683",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11077",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007185",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5966",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A23",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:A23",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:023.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:674",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002006",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10006500",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84602",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:877",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1304",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75702008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006309",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:730510331",
+          "display": null
+        }
+      ],
+      "context": "Brucellosis is an infectious disease that affects livestock and may be transmitted to humans. is rare in the United States, but occurs more frequently in other parts of the world. The disorder is caused by one of four different species of bacteria that belong to the genus Brucella. Initial symptoms of infectio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

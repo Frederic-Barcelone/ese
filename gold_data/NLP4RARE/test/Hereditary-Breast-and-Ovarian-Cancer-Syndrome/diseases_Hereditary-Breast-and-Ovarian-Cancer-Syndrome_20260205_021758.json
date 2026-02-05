@@ -1,0 +1,107 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:17:58.533224",
+  "document": "Hereditary-Breast-and-Ovarian-Cancer-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hereditary-Breast-and-Ovarian-Cancer-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "HBOC syndrome",
+      "preferred_label": "hereditary breast ovarian cancer syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C50",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003582",
+        "orpha": "Orphanet:145",
+        "umls": "UMLS:C0677776",
+        "mesh": "MESH:D061325"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003582",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5683",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15010",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C50",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:151793",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D061325",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C8493",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1936",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:145",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:718220008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0677776",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1258896144",
+          "display": null
+        }
+      ],
+      "context": "HBOC syndrome can affect both men and women and occurs in people from all ethnic and racial backgrounds. In fact, HBOC syndrome is the most common cause of hereditary breast and ovarian cancer in all ethnic and racial backgrounds. The prevalence, which is the number of people with a disorder at a given time, is",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary Breast and Ovarian Cancer Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

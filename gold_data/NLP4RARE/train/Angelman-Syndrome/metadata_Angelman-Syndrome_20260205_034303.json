@@ -1,0 +1,30 @@
+{
+  "doc_id": "Angelman-Syndrome",
+  "doc_filename": "Angelman-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Angelman syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1629,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Angelman Syndrome: Prevalence and Demographics",
+  "short_description": "Clinical document detailing the prevalence and demographic characteristics of Angelman syndrome in the general population.",
+  "long_description": "This clinical research document provides epidemiological information about Angelman syndrome, a rare genetic disorder. The document establishes that the condition affects both males and females equally, with an estimated prevalence of approximately 1 in 12,000-20,000 individuals in the general population. The document acknowledges diagnostic challenges, noting that many cases may remain undiagnosed, which complicates accurate prevalence determination. This information is valuable for healthcare professionals, researchers, and families seeking to understand the scope and distribution of this neurogenetic condition.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:43:03.759744"
+}

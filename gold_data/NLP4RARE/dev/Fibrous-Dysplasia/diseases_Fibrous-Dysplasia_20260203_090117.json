@@ -1,0 +1,308 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T09:01:17.604751",
+  "document": "Fibrous-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Fibrous-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Fibrous dysplasia",
+      "preferred_label": "fibrous dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000845",
+        "orpha": "Orphanet:249",
+        "umls": "UMLS:C0259779",
+        "mesh": "MESH:D005357"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000845",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080031",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6444",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:733.29",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:120444",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005357",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10016664",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34609",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1147",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:249",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:254145001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0259779",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1704766818",
+          "display": null
+        }
+      ],
+      "context": "Fibrous dysplasia affects males and females in equal numbers. The disorder is diagnosed earlier in children and young children. The exact incidence and prevalence of the disorder is unknown. Mild cases may go undiagnosed, making it difficult to determine the true frequency of FD in the general population. The monost",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Craniofacial Fibrous Dysplasia",
+        "Fibrous Dysplasia of Bone",
+        "Fibrous Dysplasia Monostotic"
+      ],
+      "pubtator_normalized_name": "Fibrous Dysplasia Polyostotic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Fibrous dysplasia affects males and females in equal numbers. The disorder is diagnosed earlier in children and young children. The exact incidence and prevalence of the disorder is unknown. Mild cases may go undiagnosed, making it difficult to determine the true frequency of FD in the general population. The monostotic form is more common than the polyostotic form; accor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FD",
+      "preferred_label": "Fabry disease",
+      "abbreviation": "FD",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E75.2",
+        "icd11": "5C56.01",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:324",
+        "umls": null,
+        "mesh": "D000795"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:324",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E75.2",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C56.01",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000795",
+          "display": "Fabry Disease"
+        }
+      ],
+      "context": "Fibrous dysplasia affects males and females in equal numbers. The disorder is diagnosed earlier in children and young children. The exact incidence and prevalence of the disorder is unknown. Mild cases may go undiagnosed, making it difficult to determine the true frequency of FD in the general population. The monostotic form is more common than the polyostotic form; according to some reports by a ratio of 4:1.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fabry Disease Cardiac Variant"
+      ],
+      "pubtator_normalized_name": "Fabry Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "females in equal numbers. The disorder is diagnosed earlier in children and young children. The exact incidence and prevalence of the disorder is unknown. Mild cases may go undiagnosed, making it difficult to determine the true frequency of FD in the general population. The monostotic form is more common than the polyostotic form; according to some reports by a ratio of 4:1.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

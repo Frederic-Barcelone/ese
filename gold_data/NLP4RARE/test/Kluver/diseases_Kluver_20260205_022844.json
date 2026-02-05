@@ -1,0 +1,501 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:28:44.987014",
+  "document": "Kluver.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Kluver.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "herpes simplex encephalitis",
+      "preferred_label": "herpes simplex encephalitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012521",
+        "orpha": "Orphanet:1930",
+        "umls": "UMLS:C0276226",
+        "mesh": "MESH:D020803"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012521",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6649",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75794",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020803",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200772",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84762",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1087",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1930",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0276226",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:320069644",
+          "display": null
+        }
+      ],
+      "context": "iated with dementia (loss of reason) as well. Klver-Bucy syndrome is the result of damage to the temporal lobes of the brain. This may be the result of trauma to the brain itself, or the result of other degenerative brain diseases, tumors, or it can be caused by some brain infections, most commonly herpes simplex encephalitis (a viral brain infection). Kluver-Bucy syndrome is a very rare disease that affects males and females equally. Treatment of Kliver-Bucy syndrome is supportive and psychotropics that may be effective for some of the associated symptoms.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Encephalitis Herpes Simplex",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Klver-Bucy syndrome",
+      "preferred_label": "Klver-Bucy syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005817",
+        "orpha": "Orphanet:157823",
+        "umls": "UMLS:C0270707",
+        "mesh": "MESH:D020232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005817",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2510",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007335",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6840",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:124361",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066431",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84802",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1338",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:157823",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:10651001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0270707",
+          "display": null
+        }
+      ],
+      "context": ", extreme sexual behavior, indifference, placidity, visual distractibility and visual agnosia (difficulty identifying and processing visual information). An almost uncontrollable appetite for food may also be noted. There may also be other symptoms associated with dementia (loss of reason) as well. Klver-Bucy syndrome is the result of damage to the temporal lobes of the brain. This may be the result of trauma to the brain itself, or the result of other degenerative brain diseases, tumors, or it can be caused by some brain infections, most commonly herpes simplex encephalitis (a viral brain infection). Kluver-Buc",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "visual agnosia",
+      "preferred_label": "visual agnosia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000685",
+        "orpha": null,
+        "umls": "UMLS:C0234502",
+        "mesh": "D000377"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000685",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060155",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0030222",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:115959",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35276",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:25762009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0234502",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000377",
+          "display": "Agnosia"
+        }
+      ],
+      "context": "Major symptoms may include excessive oral tendencies with an urge to put all kinds of objects into the mouth, hypermetamorophosis (a need to explore everything), memory loss, emotional changes, extreme sexual behavior, indifference, placidity, visual distractibility and visual agnosia (difficulty identifying and processing visual information). An almost uncontrollable appetite for food may also be noted. There may also be other symptoms associated with dementia (loss of reason) as well. Klver-Bucy syndrome is the result of damage to the temporal lobes of the brain. This may be t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Primary visual agnosia",
+        "Alexia Pure"
+      ],
+      "pubtator_normalized_name": "Agnosia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "brain diseases",
+      "preferred_label": "brain disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005560",
+        "orpha": null,
+        "umls": "UMLS:C0006111",
+        "mesh": "MESH:D001927"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005560",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:936",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005774",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:348.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14214",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001927",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C96413",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:81308009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006111",
+          "display": null
+        }
+      ],
+      "context": "rollable appetite for food may also be noted. There may also be other symptoms associated with dementia (loss of reason) as well. Klver-Bucy syndrome is the result of damage to the temporal lobes of the brain. This may be the result of trauma to the brain itself, or the result of other degenerative brain diseases, tumors, or it can be caused by some brain infections, most commonly herpes simplex encephalitis (a viral brain infection). Kluver-Bucy syndrome is a very rare disease that affects males and females equally. Treatment of Kliver-Bucy syndrome is supportive and psychotropics that may be effective for",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cerebrovascular Disorders",
+        "Intracranial Arterial Diseases",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Brain Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dementia",
+      "preferred_label": "dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:F02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001627",
+        "orpha": null,
+        "umls": "UMLS:C0497327",
+        "mesh": "MESH:D003704"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001627",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1307",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000726",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:294.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:99229",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003704",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4786",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:52448006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0497327",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:546689346",
+          "display": null
+        }
+      ],
+      "context": "ng), memory loss, emotional changes, extreme sexual behavior, indifference, placidity, visual distractibility and visual agnosia (difficulty identifying and processing visual information). An almost uncontrollable appetite for food may also be noted. There may also be other symptoms associated with dementia (loss of reason) as well. Klver-Bucy syndrome is the result of damage to the temporal lobes of the brain. This may be the result of trauma to the brain itself, or the result of other degenerative brain diseases, tumors, or it can be caused by some brain infections, most commonly herpes simplex ence",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alzheimer Disease",
+        "Schizophrenia",
+        "Dementia Vascular"
+      ],
+      "pubtator_normalized_name": "Dementia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trauma",
+      "preferred_label": "trauma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "identifying and processing visual information). An almost uncontrollable appetite for food may also be noted. There may also be other symptoms associated with dementia (loss of reason) as well. Klver-Bucy syndrome is the result of damage to the temporal lobes of the brain. This may be the result of trauma to the brain itself, or the result of other degenerative brain diseases, tumors, or it can be caused by some brain infections, most commonly herpes simplex encephalitis (a viral brain infection). Kluver-Bucy syndrome is a very rare disease that affects males and females equally. Treatment of Kliver",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trauma Nervous System",
+        "Osteoporosis",
+        "Stress Disorders Post-Traumatic"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

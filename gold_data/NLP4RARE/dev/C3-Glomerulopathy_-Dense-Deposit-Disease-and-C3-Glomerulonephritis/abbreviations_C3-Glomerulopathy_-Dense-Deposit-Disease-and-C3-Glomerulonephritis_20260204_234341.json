@@ -1,0 +1,150 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:43:41.587033",
+  "document": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "total_candidates": 52,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "DDD",
+      "long_form": "dense deposit disease",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "C3",
+      "long_form": "Complement Component 3",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "he adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading — C3 Glomerulopathy, a",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "C3G",
+      "long_form": "C3 Glomerulopathy",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "al glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading — C3 Glomerulopathy, abbreviated C3G. The adoption of this new term was driven by the recognition that there is another group of patients with glomerular disease whose kidney biopsy is reminiscent of DDD. On electron microscopy, the deposits in these patients are lighter in color and more widespread in location, but on immunofluoresce",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "GBM",
+      "long_form": "glomerular basement membrane",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended tha",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "C3GN",
+      "long_form": "C3 glomerulonephritis",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "an abundance of C3 in the renal glomeruli. These patients are said to have C3 glomerulonephritis or C3GN. In recognition of shared similarities, both DDD and C3GN are now classified as sub-types of C3G. C",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Dense deposit disease",
+      "matched_text": "dense deposit disease",
+      "abbreviation": "DDD",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": "N03.6",
+      "orpha": "ORPHA:93571"
+    },
+    {
+      "name": "C3 glomerulonephritis",
+      "matched_text": "C3 glomerulonephritis",
+      "abbreviation": "C3GN",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": "N03.6",
+      "orpha": "ORPHA:329903"
+    },
+    {
+      "name": "rare kidney disease",
+      "matched_text": "rare kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93626"
+    },
+    {
+      "name": "Glomerular disease",
+      "matched_text": "glomerular disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:93548"
+    },
+    {
+      "name": "C3 glomerulopathy",
+      "matched_text": "C3 Glomerulopathy",
+      "abbreviation": "C3G",
+      "confidence": 1.0,
+      "is_rare": true,
+      "icd10": "N03.6",
+      "orpha": "ORPHA:329918"
+    },
+    {
+      "name": "kidney disorder",
+      "matched_text": "renal diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Glioblastoma",
+      "matched_text": "GBM",
+      "abbreviation": "GBM",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C71.9",
+      "orpha": "ORPHA:360"
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,316 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:21:15.766122",
+  "document": "Catamenial-Pneumothorax.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Catamenial-Pneumothorax.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "VATS",
+      "preferred_label": "Virus-associated trichodysplasia spinulosa",
+      "abbreviation": "VATS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "L08.8",
+        "icd11": "ED5Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:228379",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:228379",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "L08.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "ED5Y",
+          "display": null
+        }
+      ],
+      "context": "s of pneumothorax in conjunction with the onset of menses). A variety of tests may be required to rule out other conditions and to identify associated conditions such as thoracic or pelvic endometriosis or damage to the diaphragm. A minimally invasive procedure known as video-assisted thoracoscopy (VATS) may be used as a diagnostic aid. During a VATS procedure, a 1-cm rigid tube (thoracoscope) with a tiny, fiber-optic camera at the end is passed through a small incision in the chest. This allows physicians to examine the lungs, chest cavity and diaphragm.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Catamenial pneumothorax",
+      "preferred_label": "catamenial pneumothorax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0022098",
+        "orpha": null,
+        "umls": "UMLS:C0340007",
+        "mesh": "MESH:C538279"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0022098",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:83298",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538279",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:233642001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0340007",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1744257132",
+          "display": null
+        }
+      ],
+      "context": "Catamenial pneumothorax is an extremely rare condition that affects women. Pneumothorax is the medical term for a collapsed lung, a condition in which air or gas is trapped in the space surrounding the lungs causing the lungs to collapse. Women with catamenial pneumothorax have recurrent episodes of pneumothorax that occu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Catamenial pneumothorax",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "endometriosis",
+      "preferred_label": "endometriosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:N80",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005133",
+        "orpha": null,
+        "umls": "UMLS:C0014175",
+        "mesh": "MESH:D004715"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005133",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:289",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001065",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0030127",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:N80",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:N80",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:617.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8620",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004715",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3014",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:129103003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014175",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1838213761",
+          "display": null
+        }
+      ],
+      "context": "ecurrent episodes of pneumothorax that occur within 72 hours before or after the start of menstruation. The exact cause of catamenial pneumothorax is unknown and several theories have been proposed. Some cases are associated with the abnormal development of endometrial tissue outside of the uterus (endometriosis), although the exact nature of this relationship in these cases is unknown. A diagnosis of catamenial pneumothorax is made based upon a detailed patient history, a thorough clinical evaluation and identification of characteristic symptoms (i.e., repeated episodes of pneumothorax in conjunction with",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Endometriosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Pneumothorax",
+      "preferred_label": "pneumothorax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002076",
+        "orpha": null,
+        "umls": "UMLS:C0032326",
+        "mesh": "MESH:D011030"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002076",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1673",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002107",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:J93",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:512.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19365",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011030",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38006",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36118008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032326",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1946559257",
+          "display": null
+        }
+      ],
+      "context": "Catamenial pneumothorax is an extremely rare condition that affects women. Pneumothorax is the medical term for a collapsed lung, a condition in which air or gas is trapped in the space surrounding the lungs causing the lungs to collapse. Women with catamenial pneumothorax have recurrent episodes of pneumothorax that occur within 72 hours before or after the start of menstruation. The",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Catamenial pneumothorax",
+        "Pulmonary Bullae Causing Pneumothorax"
+      ],
+      "pubtator_normalized_name": "Pneumothorax",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

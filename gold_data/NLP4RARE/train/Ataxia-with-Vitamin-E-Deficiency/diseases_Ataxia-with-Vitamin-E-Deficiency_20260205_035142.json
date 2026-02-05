@@ -1,0 +1,758 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:51:42.904098",
+  "document": "Ataxia-with-Vitamin-E-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Ataxia-with-Vitamin-E-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "inherited neurodegenerative disorder",
+      "preferred_label": "inherited neurodegenerative disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024237",
+        "orpha": "Orphanet:183500",
+        "umls": "UMLS:C5680568",
+        "mesh": "MESH:D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024237",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20280",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1825988",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020271",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97073",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:183500",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5680568",
+          "display": null
+        }
+      ],
+      "context": "Ataxia with vitamin E deficiency (AVED) is a rare inherited neurodegenerative disorder characterized by impaired ability to coordinate voluntary movements (ataxia) and disease of the peripheral nervous system (peripheral neuropathy). AVED is a progressive disorder that can affect many different systems of the body (multisystem disorder). Specific symptoms vary from case to case. In a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Ataxia with vitamin E deficiency",
+      "preferred_label": "Ataxia with Vitamin E Deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010188",
+        "orpha": "Orphanet:96",
+        "umls": "UMLS:C1848533",
+        "mesh": "MESH:C535393"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010188",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0090028",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8595",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:334.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:341248",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535393",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10047631",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200050",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:817",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:277460",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:96",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702442008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1848533",
+          "display": null
+        }
+      ],
+      "context": "Ataxia with vitamin E deficiency (AVED) is a rare inherited neurodegenerative disorder characterized by impaired ability to coordinate voluntary movements (ataxia) and disease of the peripheral nervous system (peripheral neuropathy). AVED is a progressive disorder that can affect many different systems of the body (multisystem dis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Ataxia with vitamin E deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "AVED",
+      "preferred_label": "Ataxia with vitamin E deficiency",
+      "abbreviation": "AVED",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G11.1",
+        "icd11": "8A03.10",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:96",
+        "umls": null,
+        "mesh": "C535393"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:96",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G11.1",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8A03.10",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535393",
+          "display": "Ataxia with vitamin E deficiency"
+        }
+      ],
+      "context": "Ataxia with vitamin E deficiency (AVED) is a rare inherited neurodegenerative disorder characterized by impaired ability to coordinate voluntary movements (ataxia) and disease of the peripheral nervous system (peripheral neuropathy). AVED is a progressive disorder that can affect many different systems of the body (multisystem disorder)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Ataxia with vitamin E deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "peripheral neuropathy",
+      "preferred_label": "peripheral neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005244",
+        "orpha": null,
+        "umls": "UMLS:C0031117",
+        "mesh": "D010523"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005244",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:870",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003100",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12192",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18386",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10034606",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386033004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031117",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010523",
+          "display": "Peripheral Nervous System Diseases"
+        }
+      ],
+      "context": "Ataxia with vitamin E deficiency (AVED) is a rare inherited neurodegenerative disorder characterized by impaired ability to coordinate voluntary movements (ataxia) and disease of the peripheral nervous system (peripheral neuropathy). AVED is a progressive disorder that can affect many different systems of the body (multisystem disorder). Specific symptoms vary from case to case. In addition to neurological symptoms, affected individuals may experience eye abnormalities, disorders affecting the heart muscles (cardiomyopathy),",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Motor neuropathy peripheral with dysautonomia",
+        "Inherited Peripheral Neuropathy",
+        "Alcoholic Neuropathy"
+      ],
+      "pubtator_normalized_name": "Peripheral Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Friedreich's ataxia",
+      "preferred_label": "Friedreich's ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G11.11",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100339",
+        "orpha": "Orphanet:95",
+        "umls": "UMLS:C0016719",
+        "mesh": "MESH:D005621"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100339",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12705",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6468",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G11.11",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:334.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5276",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005621",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10017374",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84718",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:818",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:95",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:10394003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0016719",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:980686666",
+          "display": null
+        }
+      ],
+      "context": "pecific symptoms vary from case to case. In addition to neurological symptoms, affected individuals may experience eye abnormalities, disorders affecting the heart muscles (cardiomyopathy), and abnormal curvature of the spine (scoliosis). AVED is extremely similar to a more common disorder known as Friedreich's ataxia. AVED is inherited as an autosomal recessive trait. AVED affects males and females in equal numbers. The disorder is estimated to occur in fewer than 1 in 1 million people. In Tunisia, the disorder is estimated to occur in 1 in 100,000 people. The onset of AVED may occur during childhood or adultho",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Friedreich Ataxia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cardiomyopathy",
+      "preferred_label": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I42",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004994",
+        "orpha": "Orphanet:167848",
+        "umls": "UMLS:C0878544",
+        "mesh": "MESH:D009202"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050700",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000318",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I42",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:I42",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:425.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:209232",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009202",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10007636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34830",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:167848",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85898001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0878544",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:282225286",
+          "display": null
+        }
+      ],
+      "context": "pheral neuropathy). AVED is a progressive disorder that can affect many different systems of the body (multisystem disorder). Specific symptoms vary from case to case. In addition to neurological symptoms, affected individuals may experience eye abnormalities, disorders affecting the heart muscles (cardiomyopathy), and abnormal curvature of the spine (scoliosis). AVED is extremely similar to a more common disorder known as Friedreich's ataxia. AVED is inherited as an autosomal recessive trait. AVED affects males and females in equal numbers. The disorder is estimated to occur in fewer than 1 in 1 million pe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiomyopathy Hypertrophic",
+        "Cardiomyopathy Restrictive",
+        "Cardiomyopathies"
+      ],
+      "pubtator_normalized_name": "Cardiomyopathy Dilated",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malabsorption",
+      "preferred_label": "malabsorption",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020598",
+        "orpha": null,
+        "umls": "UMLS:C0024523",
+        "mesh": "MESH:D008286"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020598",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009554",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44256",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008286",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3214",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32230006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024523",
+          "display": null
+        }
+      ],
+      "context": "first described in the medical literature in 1981. A diagnosis of AVED is made based upon a thorough clinical evaluation, a detailed patient history and a variety of tests and characteristic findings (e.g. low levels of vitamin E with normal levels of lipoproteins and lipids and no evidence of fat malabsorption).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lactose Intolerance",
+        "Fanconi Syndrome",
+        "Folate Malabsorption Hereditary"
+      ],
+      "pubtator_normalized_name": "Malabsorption Syndromes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "scoliosis",
+      "preferred_label": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005392",
+        "orpha": null,
+        "umls": "UMLS:C0036439",
+        "mesh": "MESH:D012600"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005392",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060249",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004273",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002650",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M41",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:M41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:737.43",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11348",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012600",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C78603",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:298382003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036439",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1925604007",
+          "display": null
+        }
+      ],
+      "context": "t can affect many different systems of the body (multisystem disorder). Specific symptoms vary from case to case. In addition to neurological symptoms, affected individuals may experience eye abnormalities, disorders affecting the heart muscles (cardiomyopathy), and abnormal curvature of the spine (scoliosis). AVED is extremely similar to a more common disorder known as Friedreich's ataxia. AVED is inherited as an autosomal recessive trait. AVED affects males and females in equal numbers. The disorder is estimated to occur in fewer than 1 in 1 million people. In Tunisia, the disorder is estimated to oc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spondylocarpotarsal synostosis",
+        "gaze palsy familial horizontal with progressive scoliosis",
+        "Macrocephaly Alopecia Cutis Laxa and Scoliosis"
+      ],
+      "pubtator_normalized_name": "Scoliosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "Ataxia with vitamin E deficiency (AVED) is a rare inherited neurodegenerative disorder characterized by impaired ability to coordinate voluntary movements (ataxia) and disease of the peripheral nervous system (peripheral neuropathy). AVED is a progressive disorder that can affect many different systems of the body (multisystem disorder). Specific symptoms vary from case to case. In addition to neurological symptoms, affected individuals may experience eye ab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:34:29.557260",
+  "document": "Meningitis-Tuberculous.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Meningitis-Tuberculous.pdf",
+  "total_candidates": 51,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 3,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "TBM",
+      "long_form": "Tuberculous Meningitis",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Tuberculous Meningitis (TBM) is a form of meningitis characterized by inflammation of the membranes (meninges) around the brain or spinal cord and caused by a specific bacterium known as Mycobacterium tuberculosis. In TBM, the disorder develops gradually. Treatment with antibiotics and other drugs is usually effective against",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TB",
+      "long_form": "tuberculin; tuberculosis; tubercle bacillus",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "by a specific bacterium known as Mycobacterium tuberculosis. In TBM, the disorder develops gradually. Treatment with antibiotics and other drugs is usually effective against the infection. Tuberculous Meningitis is a rare complication that occurs in some patients who have or have had tuberculosis (TB), especially miliary tuberculosis. It can also occur in people who have been exposed to the bacteria that causes TB. This form of meningitis is caused by a specific bacteria known as Mycobacterium Tuberculosis. (For more information on tuberculosis, choose “tuberculosis” as your search term in the",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "tuberculous meningitis",
+      "matched_text": "Tuberculous Meningitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A17.0",
+      "orpha": "Orphanet:499004"
+    },
+    {
+      "name": "miliary tuberculosis",
+      "matched_text": "miliary tuberculosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A19",
+      "orpha": null
+    },
+    {
+      "name": "tuberculosis",
+      "matched_text": "tuberculosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A15-A19",
+      "orpha": "Orphanet:3389"
+    },
+    {
+      "name": "meningitis",
+      "matched_text": "meningitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "prednisone",
+      "matched_text": "prednisone",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "isoniazid",
+      "matched_text": "isoniazid",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Ethambutol",
+      "matched_text": "ethambutol",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

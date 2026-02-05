@@ -1,0 +1,384 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:06:24.399544",
+  "document": "Hepatopulmonary-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hepatopulmonary-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "HPS",
+      "preferred_label": "Hermansky-Pudlak syndrome due to BLOC-3 deficiency",
+      "abbreviation": "HPS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E70.3",
+        "icd11": "EC23.20",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:231500",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:231500",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E70.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "EC23.20",
+          "display": null
+        }
+      ],
+      "context": "Portopulmonary hypertension is another vascular complication of liver disease, which is often confused with HPS. However, hepatopulmonary syndrome and portopulmonary hypertension are not the same disease. Although both are abnormalities of the pulmonary vasculature resulting from liver disease, HPS is characterized by vasodilatation and hypoxemia whereas portopulmonary hypertension is characterized by obstru",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Portopulmonary hypertension",
+      "preferred_label": "Portopulmonary hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017154",
+        "orpha": "Orphanet:275813",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017154",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:275813",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:445237003",
+          "display": null
+        }
+      ],
+      "context": "Portopulmonary hypertension is another vascular complication of liver disease, which is often confused with HPS. However, hepatopulmonary syndrome and portopulmonary hypertension are not the same disease. Although both are abnormalities of the pulmonary vasculature resulting from liver disease, HPS is characterized by vasodil",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "hepatopulmonary syndrome",
+      "preferred_label": "Hepatopulmonary Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:E70.331",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019312",
+        "orpha": "Orphanet:79430",
+        "umls": "UMLS:C0079504",
+        "mesh": "MESH:D022861"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019312",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3753",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6643",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E70.331",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:270.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:36313",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D022861",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10071775",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200638",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C37261",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1918",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:203300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79430",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:9311003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0079504",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2089801290",
+          "display": null
+        }
+      ],
+      "context": "Portopulmonary hypertension is another vascular complication of liver disease, which is often confused with HPS. However, hepatopulmonary syndrome and portopulmonary hypertension are not the same disease. Although both are abnormalities of the pulmonary vasculature resulting from liver disease, HPS is characterized by vasodilatation and hypoxemia whereas portopulmonary hypertension is characterized by obstruction or narrowing (vasoconstrictio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "pulmonary hypertension",
+      "preferred_label": "Pulmonary hypertension",
+      "abbreviation": "PH",
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "I27.0",
+        "icd11": "BB01",
+        "snomed": "70995007",
+        "mondo": null,
+        "orpha": "ORPHA:182090",
+        "umls": "C0020542",
+        "mesh": "D006976"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:182090",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I27.0",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "I27.20",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "BB01",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "70995007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C0020542",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006976",
+          "display": null
+        }
+      ],
+      "context": "Portopulmonary hypertension is another vascular complication of liver disease, which is often confused with HPS. However, hepatopulmonary syndrome and portopulmonary hypertension are not the same disease. Although both are abnormalities of the pulmonary vasculature resulting from liver disease, HPS is characterized by vasodil",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "disease_lexicon_pah.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pulmonary Arterial Hypertension",
+        "Familial Primary Pulmonary Hypertension",
+        "Pulmonary edema of mountaineers"
+      ],
+      "pubtator_normalized_name": "Hypertension Pulmonary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "liver disease",
+      "preferred_label": "liver disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": "ICD10CM:K70-K77",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005154",
+        "orpha": null,
+        "umls": "UMLS:C4021780",
+        "mesh": "MESH:D008107"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005154",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:409",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001421",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K70-K77",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:573.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:893061",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008107",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3196",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235856003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4021780",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1784240230",
+          "display": null
+        }
+      ],
+      "context": "Portopulmonary hypertension is another vascular complication of liver disease, which is often confused with HPS. However, hepatopulmonary syndrome and portopulmonary hypertension are not the same disease. Although both are abnormalities of the pulmonary vasculature resulting from liver disease, HPS is characterized by vasodilatation and hypoxemia whereas portopulmonary hyper",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "NGLY1 deficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

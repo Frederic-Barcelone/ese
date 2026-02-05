@@ -1,0 +1,590 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:27:58.014686",
+  "document": "Acrocallosal-Syndrome-Schinzel-Type.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acrocallosal-Syndrome-Schinzel-Type.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acrocallosal syndrome, Schinzel type",
+      "preferred_label": "acrocallosal syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008708",
+        "orpha": "Orphanet:36",
+        "umls": "UMLS:C0796147",
+        "mesh": "MESH:D055673"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008708",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9250",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5721",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:162915",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D055673",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84531",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:200990",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:36",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:715951007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0796147",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1286493807",
+          "display": null
+        }
+      ],
+      "context": "Acrocallosal syndrome, Schinzel type is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings may be variable, including among affected members of the same family (kindred). However, the disorder is typically characterized by underdevelopment (hypoplasia) or absence (agenesis) of the thick ba",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acrocallosal syndrome Schinzel type"
+      ],
+      "pubtator_normalized_name": "Acrocallosal Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "may be variable, including among affected members of the same family (kindred). However, the disorder is typically characterized by underdevelopment (hypoplasia) or absence (agenesis) of the thick band of nerve fibers joining the two hemispheres of the brain (corpus callosum) and moderate to severe mental retardation. In addition, many affected individuals have malformations of the skull and facial (craniofacial) region and/or distinctive abnormalities of the fingers and toes (digits). Characteristic craniofacial abnormalities may include an unusually large head (macrocephaly) with a prominent forehead, widely",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Acrocallosal syndrome, Schinzel type is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings may be variable, including among affected members of the same family (kindred). However, the disorder is typically characterized by underdevelopment (hypoplasia) or absence (agenesis) of the thick band of nerve fibers joining",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertelorism",
+      "preferred_label": "hypertelorism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007778",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D006972"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007778",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000316",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.41",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006972",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34715",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:145400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22006008",
+          "display": null
+        }
+      ],
+      "context": "affected individuals have malformations of the skull and facial (craniofacial) region and/or distinctive abnormalities of the fingers and toes (digits). Characteristic craniofacial abnormalities may include an unusually large head (macrocephaly) with a prominent forehead, widely spaced eyes (ocular hypertelorism), downslanting eyelid folds (palpebral fissures), a small nose with a broad nasal bridge; and malformed (dysplastic) ears. Most affected individuals also have distinctive digital malformations, such as the presence of extra (supernumerary) fingers and toes (polydactyly) and webbing or fusion (synda",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acrocephalosyndactylia",
+        "Hypertelorism with esophageal abnormality and hypospadias",
+        "Ascending aortic aneurysm hypertelorism bifid uvula cleft palate and arterial tortuosity"
+      ],
+      "pubtator_normalized_name": "Hypertelorism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polydactyly",
+      "preferred_label": "polydactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q69",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021003",
+        "orpha": null,
+        "umls": "UMLS:C0152427",
+        "mesh": "MESH:D017689"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021003",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1148",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0010442",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q69",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q69",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:755.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57774",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017689",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036063",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C87110",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:603596",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:367506006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152427",
+          "display": null
+        }
+      ],
+      "context": "widely spaced eyes (ocular hypertelorism), downslanting eyelid folds (palpebral fissures), a small nose with a broad nasal bridge; and malformed (dysplastic) ears. Most affected individuals also have distinctive digital malformations, such as the presence of extra (supernumerary) fingers and toes (polydactyly) and webbing or fusion (syndactyly) of certain digits. Additional physical abnormalities may also be present, including growth retardation, resulting in short stature. Although autosomal recessive inheritance has been suggested, acrocallosal syndrome often appears to occur randomly for unknown reas",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polydactyly",
+        "Polydactyly Postaxial",
+        "Orofaciodigital syndrome 6"
+      ],
+      "pubtator_normalized_name": "Polydactyly Preaxial III",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndactyly",
+      "preferred_label": "syndactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q70",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021002",
+        "orpha": null,
+        "umls": "UMLS:C0039075",
+        "mesh": "MESH:D013576"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021002",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11193",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001159",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q70",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:755.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52619",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013576",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10042778",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039075",
+          "display": null
+        }
+      ],
+      "context": "orism), downslanting eyelid folds (palpebral fissures), a small nose with a broad nasal bridge; and malformed (dysplastic) ears. Most affected individuals also have distinctive digital malformations, such as the presence of extra (supernumerary) fingers and toes (polydactyly) and webbing or fusion (syndactyly) of certain digits. Additional physical abnormalities may also be present, including growth retardation, resulting in short stature. Although autosomal recessive inheritance has been suggested, acrocallosal syndrome often appears to occur randomly for unknown reasons (sporadically). Acrocallosal sy",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Syndactyly",
+        "Syndactyly type 3",
+        "Syndactyly type v"
+      ],
+      "pubtator_normalized_name": "Acrocephalosyndactylia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "ffected individuals also have distinctive digital malformations, such as the presence of extra (supernumerary) fingers and toes (polydactyly) and webbing or fusion (syndactyly) of certain digits. Additional physical abnormalities may also be present, including growth retardation, resulting in short stature. Although autosomal recessive inheritance has been suggested, acrocallosal syndrome often appears to occur randomly for unknown reasons (sporadically). Acrocallosal syndrome, Schinzel type appears to affect males and females in relatively equal numbers. The disorder was originally reported in 1979",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

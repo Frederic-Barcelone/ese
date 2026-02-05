@@ -1,0 +1,102 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T18:25:41.913271",
+  "document": "Best-Vitelliform-Macular-Dystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Best-Vitelliform-Macular-Dystrophy.pdf",
+  "total_candidates": 15,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "BVMD",
+      "long_form": "vitelliform macular dystrophy 2",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "BVMD is fairly common form of macular degeneration affecting about 1 in 10,000 individuals. Typical age of onset is between the ages of 5 and 10 but can occur earlier or later. BVMD occurs equally often in men and women. This condition has been diagnosed in individuals of European, African and Hispanic",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0007931"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:182"
+        },
+        {
+          "source": "ICD10CM",
+          "id": "ICD10CM:H35.5"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:411553"
+        },
+        {
+          "source": "NORD",
+          "id": "NORD:853"
+        },
+        {
+          "source": "OMIM",
+          "id": "OMIM:153700"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:1243"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:763387005"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C2745945"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Best vitelliform macular dystrophy",
+      "matched_text": "BVMD",
+      "abbreviation": "BVMD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "H35.5",
+      "orpha": "ORPHA:1243"
+    },
+    {
+      "name": "retinitis pigmentosa 30",
+      "matched_text": "macular degeneration",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H35.5",
+      "orpha": null
+    },
+    {
+      "name": "condition",
+      "matched_text": "condition",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

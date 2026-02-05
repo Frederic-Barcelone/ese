@@ -1,0 +1,35 @@
+{
+  "doc_id": "Apraxia",
+  "doc_filename": "Apraxia.pdf",
+  "top_entities": [
+    {
+      "name": "cerebrovascular disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "nervous system disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1740,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Apraxia: Neurological Disorder Overview",
+  "short_description": "Clinical overview of apraxia, a neurological disorder affecting the ability to perform learned movements on command despite understanding and willingness.",
+  "long_description": "This document provides a clinical overview of apraxia, a neurological disorder that impairs an individual's ability to execute familiar, learned movements despite having the cognitive understanding of the command and the physical willingness to perform the action. The document explains that while patients retain both the desire and physical capacity for movement, they cannot successfully carry out the intended actions. It notes the limited epidemiological data available on apraxia incidence and highlights its frequent association with dementia and stroke, making it more commonly diagnosed in older adult populations.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:46:49.358605"
+}

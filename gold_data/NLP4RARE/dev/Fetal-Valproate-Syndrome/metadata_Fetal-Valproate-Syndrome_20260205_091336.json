@@ -1,0 +1,40 @@
+{
+  "doc_id": "Fetal-Valproate-Syndrome",
+  "doc_filename": "Fetal-Valproate-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "cleft lip and palate",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "neural tube defects",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "TUBE",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1680,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Fetal Valproate Syndrome: Clinical Overview and Risk Assessment",
+  "short_description": "Clinical document describing the increased risk of birth defects and developmental disorders associated with valproic acid exposure during pregnancy.",
+  "long_description": "This clinical research document provides an overview of Fetal Valproate Syndrome (FVS), detailing the significant teratogenic risks associated with valproic acid (VPA) use during pregnancy. The document highlights that FVS affects both sexes equally and presents compelling evidence of a 20-fold increase in various congenital abnormalities when VPA is used during the first trimester compared to pregnancies without antiepileptic drug exposure. The comprehensive risk profile includes neural tube defects, orofacial clefts, cardiovascular malformations, genitourinary defects, developmental delays, endocrine disorders, limb abnormalities, and autism spectrum disorders.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T08:13:36.342655"
+}

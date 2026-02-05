@@ -1,0 +1,441 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:10:06.373859",
+  "document": "Stiff-Person-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Stiff-Person-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "SPS",
+      "preferred_label": "Coxopodopatellar syndrome",
+      "abbreviation": "SPS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q74.1",
+        "icd11": "LD24.JY",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:1509",
+        "umls": null,
+        "mesh": "C535540"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:1509",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q74.1",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LD24.JY",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535540",
+          "display": "Ischiopatellar dysplasia"
+        }
+      ],
+      "context": "Stiff-person syndrome (SPS) is a rare acquired neurological disorder characterized by progressive muscle stiffness (rigidity) and repeated episodes of painful muscle spasms. Muscular rigidity often fluctuates (i.e., grows worse and then improves) and usually occurs along with the muscle spasms. Spasms may occur randomly or b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Ischiopatellar dysplasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "neurological disorder",
+      "preferred_label": "nervous system disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G00-G99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005071",
+        "orpha": null,
+        "umls": "UMLS:C0027765",
+        "mesh": "MESH:D009422"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:863",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000618",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G00-G99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:349.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14336",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009422",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26835",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:118940003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027765",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Nervous_system_disease",
+          "display": null
+        }
+      ],
+      "context": "Stiff-person syndrome (SPS) is a rare acquired neurological disorder characterized by progressive muscle stiffness (rigidity) and repeated episodes of painful muscle spasms. Muscular rigidity often fluctuates (i.e., grows worse and then improves) and usually occurs along with the muscle spasms. Spasms may occur randomly or be triggered by a variety of different even",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Diseases",
+        "Heredodegenerative Disorders Nervous System",
+        "Peripheral Nervous System Diseases"
+      ],
+      "pubtator_normalized_name": "Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Stiff-person syndrome",
+      "preferred_label": "stiff-person syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G25.82",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008491",
+        "orpha": "Orphanet:3198",
+        "umls": "UMLS:C0085292",
+        "mesh": "MESH:D016750"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008491",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13366",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007498",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5023",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G25.82",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39017",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016750",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10042044",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85170",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1740",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:184850",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3198",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:5217008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085292",
+          "display": null
+        }
+      ],
+      "context": "Stiff-person syndrome (SPS) is a rare acquired neurological disorder characterized by progressive muscle stiffness (rigidity) and repeated episodes of painful muscle spasms. Muscular rigidity often fluctuates (i.e., grows worse and then improves) and usually occurs along with the muscle spasms. Spasms may occur randomly",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hyperexplexia hereditary"
+      ],
+      "pubtator_normalized_name": "Stiff-Person Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autoimmune disorder",
+      "preferred_label": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007179",
+        "orpha": null,
+        "umls": "UMLS:C0004364",
+        "mesh": "MESH:D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007179",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:417",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005809",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:720",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2135",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001327",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2889",
+          "display": null
+        },
+        {
+          "system": "OBI",
+          "code": "OBI:1110054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85828009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004364",
+          "display": null
+        }
+      ],
+      "context": "occur. The severity and progression of SPS varies from one person to another. If left untreated, SPS can potentially progress to cause difficulty walking and significantly impact a person's ability to perform routine, daily tasks. Although the exact cause of SPS is unknown, it is believed to be an autoimmune disorder and sometimes occurs along with other autoimmune disorders. A diagnosis of SPS is made based upon identification of characteristic symptoms, a detailed patient history, and a thorough clinical evaluation. Additional tests can be used to support a diagnosis and to rule out other conditions. Such tes",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Demyelinating Autoimmune Diseases CNS",
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases of the Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "GAD",
+      "preferred_label": "GAD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F41.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001942",
+        "orpha": null,
+        "umls": "UMLS:C0270549",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001942",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14320",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001892",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F41.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:300.02",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:452363",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C92622",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:21897009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0270549",
+          "display": null
+        }
+      ],
+      "context": "of SPS is made based upon identification of characteristic symptoms, a detailed patient history, and a thorough clinical evaluation. Additional tests can be used to support a diagnosis and to rule out other conditions. Such tests include screening tests to detect the presence of antibodies against GAD-65, antibodies against amphiphysin (which are associated with paraneoplastic SPS) and an electromyography (EMG), a test that records electrical activity in skeletal (voluntary) muscles at rest and during muscle contraction. An EMG can demonstrate continuous muscle motor unit firing in stiff muscles",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

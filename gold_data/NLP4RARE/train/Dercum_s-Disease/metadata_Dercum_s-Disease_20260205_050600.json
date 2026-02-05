@@ -1,0 +1,35 @@
+{
+  "doc_id": "Dercum_s-Disease",
+  "doc_filename": "Dercum_s-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "Dercum's disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "lipoma",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2045,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Dercum's Disease: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing Dercum's disease, a rare disorder characterized by multiple fatty growths that predominantly affects postmenopausal women.",
+  "long_description": "This clinical document provides an overview of Dercum's disease, a rare medical condition first described by American neurologist Francis Xavier Dercum in 1882. The document details the epidemiological characteristics of the disease, noting its strong female predominance (up to 20 times more common in women) and typical presentation in overweight, postmenopausal women aged 45-60. It discusses the diagnostic challenges associated with this underdiagnosed condition, including the reliance on clinical evaluation, patient history, and histopathological confirmation through biopsy of characteristic lipomatous growths. The document emphasizes the rarity of the condition and the difficulty in determining its true prevalence due to underdiagnosis.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:06:00.558669"
+}

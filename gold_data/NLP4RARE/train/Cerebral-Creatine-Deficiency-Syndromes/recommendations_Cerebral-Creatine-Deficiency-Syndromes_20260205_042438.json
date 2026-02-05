@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:24:38.646554",
+  "document": "Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified",
+      "guideline_year": 2015,
+      "organization": "Not specified",
+      "target_condition": "Cerebral creatine deficiency syndromes (CCDS)",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Cerebral-Creatine-Deficiency-Syndromes_1",
+          "recommendation_type": "treatment",
+          "population": "patients suspected of CCDS",
+          "condition": "cerebral creatine deficiency syndromes",
+          "severity": "not specified",
+          "action": "CCDS screening testing in both urine and plasma",
+          "action_description": null,
+          "preferred": "measuring concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn)",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "not applicable",
+          "duration": "not specified",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "strong",
+          "references": [],
+          "source": "Cerebral-Creatine-Deficiency-Syndromes",
+          "source_text": "Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn)",
+          "page_num": null
+        }
+      ],
+      "source_document": "Cerebral-Creatine-Deficiency-Syndromes",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

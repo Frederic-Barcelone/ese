@@ -1,0 +1,645 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T09:44:55.592898",
+  "document": "Leukodystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Leukodystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 11,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is the protective covering of the n",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is the protective covering of the nerve and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Leukodystrophies",
+      "preferred_label": "Leukodystrophy",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0023520",
+        "mesh": "D056784"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0023520",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D056784",
+          "display": "Leukoencephalopathies"
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukodystrophy Metachromatic",
+        "Leukodystrophy Globoid Cell",
+        "Adrenoleukodystrophy"
+      ],
+      "pubtator_normalized_name": "Leukoencephalopathies",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "ffect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is the protective covering of the nerve and nerves can't function normally without it. Each type of leukodystrophy affects a different part of the myelin sheath, leading to a range of neurological problems. The leukodystrophies can affect either adults or children, but are more common in children. Some types of leukodystrophy affect males and females e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "n. The myelin sheath is the protective covering of the nerve and nerves can't function normally without it. Each type of leukodystrophy affects a different part of the myelin sheath, leading to a range of neurological problems. The leukodystrophies can affect either adults or children, but are more common in children. Some types of leukodystrophy affect males and females equally but other types predominantly affect males. Treatment of most leukodystrophies is symptomatic and supportive. Medications and physical therapy may be helpful for spasticity and motor difficulties. Anti-epileptic medications",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "peripheral neuropathy",
+      "preferred_label": "peripheral neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005244",
+        "orpha": null,
+        "umls": "UMLS:C0031117",
+        "mesh": "D010523"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005244",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:870",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003100",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12192",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18386",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10034606",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386033004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031117",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010523",
+          "display": "Peripheral Nervous System Diseases"
+        }
+      ],
+      "context": "emales equally but other types predominantly affect males. Treatment of most leukodystrophies is symptomatic and supportive. Medications and physical therapy may be helpful for spasticity and motor difficulties. Anti-epileptic medications should be provided for seizures and burning paresthesia from peripheral neuropathy may respond to medications for neuropathic pain. Please review the NORD report on the specific type of leukodystrophy for information about successful therapies. Genetic counseling is beneficial for affected individuals and their families.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Motor neuropathy peripheral with dysautonomia",
+        "Inherited Peripheral Neuropathy",
+        "Alcoholic Neuropathy"
+      ],
+      "pubtator_normalized_name": "Peripheral Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic diseases",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is the protective covering of the nerve and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "gene abnormality",
+      "preferred_label": "Gene Abnormality",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1517478",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1517478",
+          "display": null
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is the protective covering of the nerve and nerves can't function normally without it. Each type of leukodystrophy affects a different part of the myelin sheath, leading to a range",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "abnormal development",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Leukodystrophies are a group of rare, progressive, metabolic, genetic diseases that affect the brain, spinal cord and often the peripheral nerves. Each type of leukodystrophy is caused by a specific gene abnormality that leads to abnormal development or destruction of the white matter (myelin sheath) of the brain. The myelin sheath is the protective covering of the nerve and nerves can't function normally without it. Each type of leukodystrophy affects a different part of the myelin sheath, leading to a range of neurological problems. The leuko",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "burning paresthesia",
+      "preferred_label": "Paresthesia",
+      "abbreviation": null,
+      "confidence": 0.8702364921569824,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0030554",
+        "mesh": "D010292"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0030554",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010292",
+          "display": "Paresthesia"
+        }
+      ],
+      "context": "trophy affect males and females equally but other types predominantly affect males. Treatment of most leukodystrophies is symptomatic and supportive. Medications and physical therapy may be helpful for spasticity and motor difficulties. Anti-epileptic medications should be provided for seizures and burning paresthesia from peripheral neuropathy may respond to medications for neuropathic pain. Please review the NORD report on the specific type of leukodystrophy for information about successful therapies. Genetic counseling is beneficial for affected individuals and their families.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Paresthesia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

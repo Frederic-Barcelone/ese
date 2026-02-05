@@ -1,0 +1,351 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:06:45.329779",
+  "document": "Hepatorenal-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hepatorenal-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "fulminant hepatic failure",
+      "preferred_label": "fulminant hepatic failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019542",
+        "orpha": "Orphanet:90062",
+        "umls": "UMLS:C0162557",
+        "mesh": "MESH:D017114"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019542",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19112",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:58125",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017114",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10000804",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84396",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:90062",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:197270009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162557",
+          "display": null
+        }
+      ],
+      "context": "to occur in approximately 8-10 percent of individuals with the accumulation of fluid in the abdomen (ascites) and cirrhosis. Although it is most common in individuals with advanced cirrhosis and ascites, hepatorenal syndrome has also occurs in individuals with other forms of liver disease including fulminant hepatic failure.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Hepatorenal syndrome",
+      "preferred_label": "hepatorenal syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "ICD10CM:K76.7",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001382",
+        "orpha": null,
+        "umls": "UMLS:C0019212",
+        "mesh": "MESH:D006530"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001382",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11823",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K76.7",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:572.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9224",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006530",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C113400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:51292008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019212",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1015890899",
+          "display": null
+        }
+      ],
+      "context": "Hepatorenal syndrome affects males and females in equal numbers. The exact incidence of hepatorenal syndrome is unknown. It is estimated to occur in approximately 8-10 percent of individuals with the accumulation of fluid in the abdomen (ascites) and cirrhosis. Although it is most common in individuals with advanced ci",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "liver disease",
+      "preferred_label": "liver disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": "ICD10CM:K70-K77",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005154",
+        "orpha": null,
+        "umls": "UMLS:C4021780",
+        "mesh": "MESH:D008107"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005154",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:409",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001421",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K70-K77",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:573.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:893061",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008107",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3196",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235856003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4021780",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1784240230",
+          "display": null
+        }
+      ],
+      "context": "nknown. It is estimated to occur in approximately 8-10 percent of individuals with the accumulation of fluid in the abdomen (ascites) and cirrhosis. Although it is most common in individuals with advanced cirrhosis and ascites, hepatorenal syndrome has also occurs in individuals with other forms of liver disease including fulminant hepatic failure.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "NGLY1 deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cirrhosis",
+      "preferred_label": "cirrhosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005155",
+        "orpha": null,
+        "umls": "UMLS:C0023890",
+        "mesh": "MESH:D008103"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005155",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5082",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001422",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:571.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7368",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008103",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200937",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2951",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:19943007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023890",
+          "display": null
+        }
+      ],
+      "context": "Hepatorenal syndrome affects males and females in equal numbers. The exact incidence of hepatorenal syndrome is unknown. It is estimated to occur in approximately 8-10 percent of individuals with the accumulation of fluid in the abdomen (ascites) and cirrhosis. Although it is most common in individuals with advanced cirrhosis and ascites, hepatorenal syndrome has also occurs in individuals with other forms of liver disease including fulminant hepatic failure.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Liver Cirrhosis",
+        "Liver Cirrhosis Biliary",
+        "Cirrhosis Familial"
+      ],
+      "pubtator_normalized_name": "Fibrosis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

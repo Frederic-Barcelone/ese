@@ -1,0 +1,35 @@
+{
+  "doc_id": "VACTERL-Association",
+  "doc_filename": "VACTERL-Association.pdf",
+  "top_entities": [
+    {
+      "name": "VACTERL association",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Prenatal",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2120,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "VACTERL Association: Incidence, Diagnosis, and Clinical Features",
+  "short_description": "Clinical overview of VACTERL association covering incidence rates, diagnostic challenges, and recurrence risks.",
+  "long_description": "This document provides essential clinical information about VACTERL association, a rare congenital condition affecting approximately 1.6 per 10,000 live births. It discusses the diagnostic challenges faced by healthcare providers, including the difficulty in determining true frequency due to misdiagnosis or underdiagnosis, particularly in children with milder presentations. The document explains that while some features are apparent at birth, others may not manifest for weeks, months, or years. It addresses important aspects for genetic counseling, including a 2-3% recurrence risk for families with one affected child, and notes the limitations in prenatal diagnosis. The text emphasizes that VACTERL association is a clinical diagnosis based on observed features rather than laboratory tests, requiring comprehensive physical examination and specialized testing to identify the characteristic major and minor features of this complex condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T08:39:17.426483"
+}

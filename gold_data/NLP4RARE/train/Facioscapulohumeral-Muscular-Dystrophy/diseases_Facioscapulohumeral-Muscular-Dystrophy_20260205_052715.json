@@ -1,0 +1,764 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:27:15.005709",
+  "document": "Facioscapulohumeral-Muscular-Dystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Facioscapulohumeral-Muscular-Dystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "FSHD",
+      "preferred_label": "Facioscapulohumeral dystrophy",
+      "abbreviation": "FSHD",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G71.0",
+        "icd11": "8C70.3",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:269",
+        "umls": null,
+        "mesh": "D020391"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:269",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G71.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C70.3",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020391",
+          "display": "Muscular Dystrophy Facioscapulohumeral"
+        }
+      ],
+      "context": "FSHD appears to affect males and females in relatively equal numbers. The estimated prevalence is between four and ten per 100,000 people. There are a number of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Facioscapulohumeral muscular dystrophy 1a",
+        "Facioscapulohumeral Muscular Dystrophy 1B"
+      ],
+      "pubtator_normalized_name": "Muscular Dystrophy Facioscapulohumeral",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic neuromuscular diseases",
+      "preferred_label": "Genetic neuromuscular disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:183497",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:183497",
+          "display": null
+        }
+      ],
+      "context": "FSHD appears to affect males and females in relatively equal numbers. The estimated prevalence is between four and ten per 100,000 people. There are a number of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "inclusion body myositis",
+      "preferred_label": "inclusion body myositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G72.41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007827",
+        "orpha": "Orphanet:611",
+        "umls": "UMLS:C0238190",
+        "mesh": "MESH:D018979"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007827",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3429",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007323",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3896",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G72.41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:729.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:68659",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018979",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066407",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200218",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84786",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1734",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:147421",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:611",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:72315009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0238190",
+          "display": null
+        }
+      ],
+      "context": "ence is between four and ten per 100,000 people. There are a number of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your se",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Myositis Inclusion Body",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mitochondrial myopathies",
+      "preferred_label": "mitochondrial myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009637",
+        "orpha": "Orphanet:206966",
+        "umls": "UMLS:C0162670",
+        "mesh": "MESH:D017240"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009637",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:699",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20371",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56484",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017240",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10027710",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101328",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:206966",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162670",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:601991549",
+          "display": null
+        }
+      ],
+      "context": "f genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Visceral myopathy familial external ophthalmoplegia",
+        "Mitochondrial Myopathies",
+        "MELAS Syndrome"
+      ],
+      "pubtator_normalized_name": "Mitochondrial Myopathy with a Defect in Mitochondrial Protein Transport",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "myofibrillar myopathy",
+      "preferred_label": "myofibrillar myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018943",
+        "orpha": "Orphanet:593",
+        "umls": "UMLS:C2678065",
+        "mesh": "MESH:C580316"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018943",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080307",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10529",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0003715",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:359.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:395532",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C580316",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C83009",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:601419",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:593",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:699269005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2678065",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:125656853",
+          "display": null
+        }
+      ],
+      "context": "s. The estimated prevalence is between four and ten per 100,000 people. There are a number of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease na",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myopathy Myofibrillar Zasp-Related",
+        "Filaminopathy autosomal dominant",
+        "Myotilinopathy"
+      ],
+      "pubtator_normalized_name": "Myofibrillar Myopathy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital myopathies",
+      "preferred_label": "congenital myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019952",
+        "orpha": "Orphanet:97245",
+        "umls": "UMLS:C0270960",
+        "mesh": "D020914"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019952",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0081337",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5898",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:124381",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062547",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100234",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:117000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:97245",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0270960",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1185572073",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020914",
+          "display": "Myopathies Structural Congenital"
+        }
+      ],
+      "context": "seases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myotonic Dystrophy",
+        "Myopathy Congenital Compton-North",
+        "Intestinal Pseudo-Obstruction"
+      ],
+      "pubtator_normalized_name": "Myopathies Structural Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "IBM2",
+      "preferred_label": "GNE myopathy",
+      "abbreviation": "IBM2",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G71.8",
+        "icd11": "8C75",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:602",
+        "umls": null,
+        "mesh": "C536816"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:602",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G71.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C75",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536816",
+          "display": "Distal myopathy Nonaka type"
+        }
+      ],
+      "context": "umber of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Distal myopathy Nonaka type",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polymyositis",
+      "preferred_label": "polymyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M33.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019127",
+        "orpha": "Orphanet:732",
+        "umls": "UMLS:C0085655",
+        "mesh": "MESH:D017285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019127",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080745",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003063",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7425",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39086",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017285",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036102",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200276",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26925",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:732",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31384009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085655",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Polymyositis",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1157134196",
+          "display": null
+        }
+      ],
+      "context": "erized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Polymyositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "myopathy",
+      "preferred_label": "myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005336",
+        "orpha": null,
+        "umls": "UMLS:C0026848",
+        "mesh": "C564971"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005336",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:423",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004145",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:728.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10135",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101216",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75047002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026848",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1870184184",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564971",
+          "display": "Myopathy with Giant Abnormal Mitochondria"
+        }
+      ],
+      "context": "here are a number of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your search term in the Rare Disease Datab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Muscular Diseases",
+        "Myotonic Dystrophy",
+        "Myopathy with Lactic Acidosis Hereditary"
+      ],
+      "pubtator_normalized_name": "Myopathy with Giant Abnormal Mitochondria",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

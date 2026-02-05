@@ -1,0 +1,163 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:30:16.441785",
+  "document": "Acute-Cholecystitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acute-Cholecystitis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "pear",
+      "preferred_name": "Pear",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1367125",
+          "display": null
+        }
+      ],
+      "context": "The gallbladder is a small pear shaped organ that stores and concentrates bile used for digestion of fats. Bile is a compound composed mainly of cholesterol, bile salts and bilirubi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "cholesterol",
+      "preferred_name": "Cholesterol",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D002784",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2438",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002784",
+          "display": "Cholesterol"
+        }
+      ],
+      "context": "The gallbladder is a small pear shaped organ that stores and concentrates bile used for digestion of fats. Bile is a compound composed mainly of cholesterol, bile salts and bilirubin, produced by the liver and stored in the gallbladder during fasting states. When food is consumed, it is partially digested",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cholesterol Esters",
+        "Amphotericin B"
+      ],
+      "pubtator_normalized_name": "Cholesterol",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bile salts",
+      "preferred_name": "bile salts",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001647",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1540",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001647",
+          "display": "Bile Acids and Salts"
+        }
+      ],
+      "context": "bladder is a small pear shaped organ that stores and concentrates bile used for digestion of fats. Bile is a compound composed mainly of cholesterol, bile salts and bilirubin, produced by the liver and stored in the gallbladder during fasting states. When food is consumed, it is partially digested by the stom",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Bile Acids and Salts",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

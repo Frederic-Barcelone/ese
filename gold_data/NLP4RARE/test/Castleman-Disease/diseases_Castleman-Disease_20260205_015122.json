@@ -1,0 +1,310 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:51:22.515557",
+  "document": "Castleman-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Castleman-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "UCD",
+      "preferred_label": "urea cycle disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004739",
+        "orpha": "Orphanet:79167",
+        "umls": "UMLS:C0154246",
+        "mesh": "MESH:D056806"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004739",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9267",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7837",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:270.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D056806",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200802",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84785",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79167",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36444000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0154246",
+          "display": null
+        }
+      ],
+      "context": "UCD and iMCD affect males and females in equal numbers, and there are no known factors that increase the risk of UCD or iMCD. HHV-8-associated MCD affects males at an increased rate compared to females. All types of Castleman disease may affect individuals of any age. Persons with HIV are at increased",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Argininosuccinic Aciduria"
+      ],
+      "pubtator_normalized_name": "Urea Cycle Disorders Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Castleman disease",
+      "preferred_label": "Castleman disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D47.Z2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015564",
+        "orpha": "Orphanet:160",
+        "umls": "UMLS:C0017531",
+        "mesh": "MESH:D005871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015564",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111157",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12656",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D47.Z2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005871",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10050251",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3056",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:898",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:160",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:207036003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017531",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1940989685",
+          "display": null
+        }
+      ],
+      "context": "UCD and iMCD affect males and females in equal numbers, and there are no known factors that increase the risk of UCD or iMCD. HHV-8-associated MCD affects males at an increased rate compared to females. All types of Castleman disease may affect individuals of any age. Persons with HIV are at increased risk of developing HHV-8-associated MCD. It is estimated that there are approximately 5,000 individuals diagnosed each year and 30,000 individuals in the United States afflicted with one of the forms of Castleman disease.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Castleman Disease"
+      ],
+      "pubtator_normalized_name": "Multi-centric Castleman's Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HIV",
+      "preferred_label": "HIV infection",
+      "abbreviation": "HIV",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "B20",
+        "icd11": "1C62",
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": null,
+        "mesh": "D015658"
+      },
+      "all_identifiers": [
+        {
+          "system": "ICD-10",
+          "code": "B20",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "1C62",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015658",
+          "display": "HIV Infections"
+        }
+      ],
+      "context": "UCD and iMCD affect males and females in equal numbers, and there are no known factors that increase the risk of UCD or iMCD. HHV-8-associated MCD affects males at an increased rate compared to females. All types of Castleman disease may affect individuals of any age. Persons with HIV are at increased risk of developing HHV-8-associated MCD. It is estimated that there are approximately 5,000 individuals diagnosed each year and 30,000 individuals in the United States afflicted with one of the forms of Castleman disease.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "AIDS-Related Opportunistic Infections"
+      ],
+      "pubtator_normalized_name": "HIV Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MCD",
+      "preferred_label": "MCD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0800215",
+        "orpha": null,
+        "umls": "UMLS:C3541461",
+        "mesh": "C536801"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0800215",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:762089",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3541461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536801",
+          "display": "Telomeric 22q13 Monosomy Syndrome"
+        }
+      ],
+      "context": "UCD and iMCD affect males and females in equal numbers, and there are no known factors that increase the risk of UCD or iMCD. HHV-8-associated MCD affects males at an increased rate compared to females. All types of Castleman disease may affect individuals of any age. Persons with HIV are at increased risk of developing HHV-8-associated MCD. It is estimated that there are approximately 5,000 individuals diagnosed each year and 30,000 individu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Telomeric 22q13 Monosomy Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

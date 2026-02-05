@@ -1,0 +1,112 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:48:55.680326",
+  "document": "Pachydermoperiostosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pachydermoperiostosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Pachydermoperiostosis",
+      "preferred_label": "primary hypertrophic osteoarthropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016620",
+        "orpha": "Orphanet:2796",
+        "umls": "UMLS:C0029411",
+        "mesh": "MESH:D010004"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016620",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14283",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20667",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18210",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010004",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10051686",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201004",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85023",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:259100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2796",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:88220006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0029411",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:792225761",
+          "display": null
+        }
+      ],
+      "context": "Pachydermoperiostosis is a rare disorder characterized by clubbing of the fingers, thickening of the skin of the face (pachyderma), and excessive sweating (hyperhidrosis). It typically appears during childhood or adolescence, often around the time of puberty, and progresses slowly for about ten years. Pachydermoperiosto",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Osteoarthropathy Primary Hypertrophic",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

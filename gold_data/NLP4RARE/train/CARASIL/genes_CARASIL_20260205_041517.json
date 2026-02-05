@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:15:17.402611",
+  "document": "CARASIL.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/CARASIL.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "if",
+      "hgnc_symbol": "CBLIF",
+      "full_name": "cobalamin binding intrinsic factor",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4268",
+        "entrez": "2694",
+        "ensembl": "ENSG00000134812",
+        "uniprot": "P27352",
+        "omim": "609342"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4268",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2694",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134812",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "609342",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P27352",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "CARASIL is an extremely rare genetic disorder that is characterized by damage to the small blood vessels in the brain. Individuals with CARASIL are at risk of developing multiple strokes, even if they do not have cardiovascular risk factors. The symptoms of CARASIL result from damage to various small blood vessels, especially those within the brain. Individuals with CARASIL may develop a variety of symptoms relating to white matter involvement or leukoaraiosis (changes in deep white matter",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

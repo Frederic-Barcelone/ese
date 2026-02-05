@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:26:43.774654",
+  "document": "Cervical-Dystonia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cervical-Dystonia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "If",
+      "hgnc_symbol": "CBLIF",
+      "full_name": "cobalamin binding intrinsic factor",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4268",
+        "entrez": "2694",
+        "ensembl": "ENSG00000134812",
+        "uniprot": "P27352",
+        "omim": "609342"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4268",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2694",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134812",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "609342",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P27352",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "It can affect quality of life and activities of daily living including employment. Cervical dystonia typically begins in middle age, and rarely begins in adolescence and young adulthood. The cause of cervical dystonia is unknown, although a genetic susceptibility is thought to underlie some cases. If cervical dystonia begins in infancy or early childhood, secondary causes should be investigated. Cervical dystonia affects women approximately twice as often as men. It is the most common form of focal dystonia in an office setting. Cervical dystonia may affect individuals of any age, but typically",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

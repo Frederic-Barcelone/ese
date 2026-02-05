@@ -1,0 +1,329 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:08:24.722869",
+  "document": "Hereditary-Orotic-Aciduria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hereditary-Orotic-Aciduria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hereditary orotic aciduria",
+      "preferred_label": "Hereditary Orotic Aciduria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009797",
+        "orpha": "Orphanet:30",
+        "umls": "UMLS:C0220987",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009797",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050833",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5429",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:472940",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10052621",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200590",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98944",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1942",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:258900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:30",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:47641009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220987",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:449856959",
+          "display": null
+        }
+      ],
+      "context": "Hereditary orotic aciduria is an extremely rare genetic disorder. When untreated, affected infants can develop a blood (hematologic) disorder called megaloblastic anemia as well as failure to thrive, susceptibility to infection, and orotic acid crystals in the urine (crystalluria) resulting from excretion of orotic acid in t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "megaloblastic anemia",
+      "preferred_label": "megaloblastic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001700",
+        "orpha": null,
+        "umls": "UMLS:C0002888",
+        "mesh": "D000749"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001700",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13382",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001889",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:281.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1527",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200612",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34382",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:53165003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002888",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000749",
+          "display": "Anemia Megaloblastic"
+        }
+      ],
+      "context": "Hereditary orotic aciduria is an extremely rare genetic disorder. When untreated, affected infants can develop a blood (hematologic) disorder called megaloblastic anemia as well as failure to thrive, susceptibility to infection, and orotic acid crystals in the urine (crystalluria) resulting from excretion of orotic acid in the urine. Impaired neurological development has been observed, but invariably, especially since a treatment has become available. Hereditary or",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Methylcobalamin Deficiency CblG Type",
+        "Thiamine responsive megaloblastic anemia syndrome",
+        "Imerslund-Grasbeck syndrome"
+      ],
+      "pubtator_normalized_name": "Anemia Megaloblastic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Hereditary orotic aciduria is an extremely rare genetic disorder. When untreated, affected infants can develop a blood (hematologic) disorder called megaloblastic anemia as well as failure to thrive, susceptibility to infection, and orotic acid crystals in the urine (crystalluria) resulting from excretion of orotic acid in the urine. Impaired neurological develo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare diseases",
+      "preferred_label": "rare diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "fects both men and women. Only about 20 individuals with this disorder have been reported in the medical literature. The birth prevalence, which is the number of babies born with a disorder compared to the total number of live births, is estimated to be less than 1 in 1,000,000 live births. Because rare diseases often go misdiagnosed or undiagnosed, determining their true frequency in the general population is extremely difficult.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

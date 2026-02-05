@@ -1,0 +1,276 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:05:40.987012",
+  "document": "Blue-Diaper-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Blue-Diaper-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Blue diaper syndrome",
+      "preferred_label": "blue diaper syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008877",
+        "orpha": "Orphanet:94086",
+        "umls": "UMLS:C0268478",
+        "mesh": "MESH:C536239"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008877",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5939",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75685",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536239",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:864",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:211000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:94086",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:59531002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268478",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:292681007",
+          "display": null
+        }
+      ],
+      "context": "Blue diaper syndrome is a rare, genetic metabolic disorder characterized by the incomplete intestinal breakdown of tryptophan, a dietary nutrient. Symptoms typically include digestive disturbances, fever, irritability and visual difficulties. Some children with blue diaper syndrome may also develop kidney disease. Infa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "metabolic disorder",
+      "preferred_label": "metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E70-E88",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005066",
+        "orpha": null,
+        "umls": "UMLS:C0025517",
+        "mesh": "MESH:D008659"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005066",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0014667",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000589",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E70-E88",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E70-E90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44376",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008659",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3235",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75934005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025517",
+          "display": null
+        }
+      ],
+      "context": "Blue diaper syndrome is a rare, genetic metabolic disorder characterized by the incomplete intestinal breakdown of tryptophan, a dietary nutrient. Symptoms typically include digestive disturbances, fever, irritability and visual difficulties. Some children with blue diaper syndrome may also develop kidney disease. Infants with this disorder may have bluish",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Brain Diseases Metabolic",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Glucose Metabolism Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney disease",
+      "preferred_label": "kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005240",
+        "orpha": null,
+        "umls": "UMLS:C0022658",
+        "mesh": "MESH:D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005240",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:557",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003086",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:583.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9635",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007674",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3149",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:90708001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022658",
+          "display": null
+        }
+      ],
+      "context": "Blue diaper syndrome is a rare, genetic metabolic disorder characterized by the incomplete intestinal breakdown of tryptophan, a dietary nutrient. Symptoms typically include digestive disturbances, fever, irritability and visual difficulties. Some children with blue diaper syndrome may also develop kidney disease. Infants with this disorder may have bluish urine-stained diapers. Blue diaper syndrome is inherited as an autosomal or X-linked recessive trait. Blue diaper syndrome is an extremely rare metabolic disorder that affects males and females in equal numbers. The incidence of the disorder in the genera",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal Insufficiency Chronic",
+        "Kidney Failure Chronic",
+        "Glomerulonephritis"
+      ],
+      "pubtator_normalized_name": "Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

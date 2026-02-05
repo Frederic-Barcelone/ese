@@ -1,0 +1,107 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:08:56.024764",
+  "document": "Sprengel-Deformity.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Sprengel-Deformity.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Sprengel deformity",
+      "preferred_label": "Sprengel deformity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008482",
+        "orpha": "Orphanet:3181",
+        "umls": "UMLS:C0152438",
+        "mesh": "MESH:C535802"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008482",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7693",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000912",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56291",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535802",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010455",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1736",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:184400",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3181",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:79120002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152438",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2144522441",
+          "display": null
+        }
+      ],
+      "context": "Most reports in the medical literature state that Sprengel deformity affects females more often than males by a ratio of 3-1. However, other reports state that the disorder affects males and females in equal numbers.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sprengel deformity",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

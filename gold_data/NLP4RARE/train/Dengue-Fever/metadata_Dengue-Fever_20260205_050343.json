@@ -1,0 +1,35 @@
+{
+  "doc_id": "Dengue-Fever",
+  "doc_filename": "Dengue-Fever.pdf",
+  "top_entities": [
+    {
+      "name": "Dengue fever",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "viral infectious disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2149,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Dengue Fever: Clinical Overview and Prevention Guidelines",
+  "short_description": "Clinical document describing dengue fever as an acute viral infection transmitted by mosquitoes, including symptoms, geographic distribution, and prevention measures.",
+  "long_description": "This clinical reference document provides a comprehensive overview of dengue fever, an acute viral infection caused by the dengue virus transmitted through mosquito bites. The document details the characteristic symptoms including high fever, severe headache, muscle pain, skin rash, and potential complications such as prolonged exhaustion. It identifies dengue as a Flavivirus infection with no available vaccine, emphasizing the importance of prevention through protective measures against mosquito bites. The document outlines the geographic distribution of dengue fever in subtropical and tropical regions including southern Asia, South America, and the Caribbean, while noting the seasonal pattern (July to November) and the estimated 200 cases imported annually into the United States by travelers.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:03:43.760311"
+}

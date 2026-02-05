@@ -1,0 +1,35 @@
+{
+  "doc_id": "IRF6",
+  "doc_filename": "IRF6.pdf",
+  "top_entities": [
+    {
+      "name": "Van der Woude syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cleft lip and palate",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1546,
+  "file_size_human": "1.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "IRF6 Gene and Van der Woude Syndrome: Prevalence and Clinical Significance",
+  "short_description": "Clinical document discussing Van der Woude Syndrome (VWS) and Popliteal Pterygium Syndrome (PPS) prevalence rates and their association with cleft lip and palate.",
+  "long_description": "This clinical research document focuses on IRF6 gene-related disorders, specifically Van der Woude Syndrome (VWS) and Popliteal Pterygium Syndrome (PPS). The document establishes VWS as the most common single gene cause of cleft lip and palate, providing epidemiological data showing prevalence rates of 1/35,000-1/100,000 in European and Asian populations. It also reports the significantly lower prevalence of PPS at approximately 1/300,000. This information is crucial for understanding the genetic basis of orofacial clefts and their population-level impact.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:24:21.439762"
+}

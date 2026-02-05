@@ -1,0 +1,567 @@
+{
+  "run_id": "RUN_20260204_214817_1c86caae6465",
+  "timestamp": "2026-02-04T22:57:31.546392",
+  "document": "Angioimmunoblastic-T.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Angioimmunoblastic-T.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Angioimmunoblastic T-cell lymphoma",
+      "preferred_label": "angioimmunoblastic T-cell lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C86.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004977",
+        "orpha": "Orphanet:86886",
+        "umls": "UMLS:C0020981",
+        "mesh": "MESH:D007119"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004977",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111147",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000255",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:11973",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C86.5",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.70",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9767/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7025",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007119",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10002449",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200029",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C7528",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:784",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:AITL",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:86886",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:413537009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020981",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1254954229",
+          "display": null
+        }
+      ],
+      "context": "Angioimmunoblastic T-cell lymphoma (AITL) is a rare form of non-Hodgkin lymphoma, which is a group of related malignancies (cancers) that affect the lymphatic system (lymphomas). Lymphomas are cancer of white blood cells (lymphocytes) and can be divided depending on the type of cells, B-lymphocytes (B-cells) or T-lymphocytes (T-cell",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "AITL",
+      "preferred_label": "Angioimmunoblastic T-cell lymphoma",
+      "abbreviation": "AITL",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": "C86.5",
+        "icd11": "2A90.4",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:86868",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:86868",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C86.5",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2A90.4",
+          "display": null
+        }
+      ],
+      "context": "Angioimmunoblastic T-cell lymphoma (AITL) is a rare form of non-Hodgkin lymphoma, which is a group of related malignancies (cancers) that affect the lymphatic system (lymphomas). Lymphomas are cancer of white blood cells (lymphocytes) and can be divided depending on the type of cells, B-lymphocytes (B-cells) or T-lymphocytes (T-cells), AI",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "non-Hodgkin lymphoma",
+      "preferred_label": "non-Hodgkin lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018908",
+        "orpha": "Orphanet:547",
+        "umls": "UMLS:C0024305",
+        "mesh": "MESH:D008228"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018908",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060060",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005952",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9591/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6160",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008228",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10029547",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3211",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:NHL",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:547",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024305",
+          "display": null
+        }
+      ],
+      "context": "Angioimmunoblastic T-cell lymphoma (AITL) is a rare form of non-Hodgkin lymphoma, which is a group of related malignancies (cancers) that affect the lymphatic system (lymphomas). Lymphomas are cancer of white blood cells (lymphocytes) and can be divided depending on the type of cells, B-lymphocytes (B-cells) or T-lymphocytes (T-cells), AITL is a T-cell lymphoma. The lymphatic s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lymphoma Non-Hodgkin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "T-cell lymphoma",
+      "preferred_label": "T-cell lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015760",
+        "orpha": "Orphanet:171918",
+        "umls": "UMLS:C0079772",
+        "mesh": "MESH:D016399"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015760",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0081312",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20133",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.70",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:86957",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016399",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10042971",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3466",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:171918",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:109978004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0079772",
+          "display": null
+        }
+      ],
+      "context": "are form of non-Hodgkin lymphoma, which is a group of related malignancies (cancers) that affect the lymphatic system (lymphomas). Lymphomas are cancer of white blood cells (lymphocytes) and can be divided depending on the type of cells, B-lymphocytes (B-cells) or T-lymphocytes (T-cells), AITL is a T-cell lymphoma. The lymphatic system functions as part of the immune system and helps to protect the body against infection and disease. It consists of a network of tubular channels (lymph vessels) that drain a thin watery fluid known as lymph from different areas of the body into the bloodstream.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma T-Cell Cutaneous",
+        "Lymphoma T-Cell Peripheral",
+        "Precursor T-Cell Lymphoblastic Leukemia-Lymphoma"
+      ],
+      "pubtator_normalized_name": "Lymphoma T-Cell",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphomas",
+      "preferred_label": "lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005062",
+        "orpha": "Orphanet:223735",
+        "umls": "UMLS:C0024299",
+        "mesh": "MESH:D008223"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005062",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060058",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000574",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.80",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9590/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44223",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008223",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025310",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100004",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3208",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MLYM",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:223735",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373168002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024299",
+          "display": null
+        }
+      ],
+      "context": "Angioimmunoblastic T-cell lymphoma (AITL) is a rare form of non-Hodgkin lymphoma, which is a group of related malignancies (cancers) that affect the lymphatic system (lymphomas). Lymphomas are cancer of white blood cells (lymphocytes) and can be divided depending on the type of cells, B-lymphocytes (B-cells) or T-lymphocytes (T-cells), AITL is a T-cell lymphoma. The lymphatic system functions as part of the immune system and helps to protect the body against infection and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma Non-Hodgkin",
+        "Lymphoma B-Cell",
+        "Lymphoma Large B-Cell Diffuse"
+      ],
+      "pubtator_normalized_name": "Lymphoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancers",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "Angioimmunoblastic T-cell lymphoma (AITL) is a rare form of non-Hodgkin lymphoma, which is a group of related malignancies (cancers) that affect the lymphatic system (lymphomas). Lymphomas are cancer of white blood cells (lymphocytes) and can be divided depending on the type of cells, B-lymphocytes (B-cells) or T-lymphocytes (T-cells), AITL is a T-cell lymphoma. The lymphatic system functions as part of the immune system and he",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

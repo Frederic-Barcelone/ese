@@ -1,0 +1,290 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:23:06.160463",
+  "document": "Bladder-Exstrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Bladder-Exstrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "exstrophy-epispadias-cloacal exstrophy complex",
+      "preferred_label": "Bladder Exstrophy and Epispadias Complex",
+      "abbreviation": null,
+      "confidence": 0.989062762260437,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1838703",
+        "mesh": "C564009"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1838703",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564009",
+          "display": "Bladder Exstrophy and Epispadias Complex"
+        }
+      ],
+      "context": "are related to defects of the abdominal wall, bladder, genitalia, pelvic bones, rectum and anus. In normal development, the cloacal membrane temporarily separates the urogenital and anal structures and them breaks when tissue that will form abdominal muscles begins to grow in its place. The bladder exstrophy-epispadias-cloacal exstrophy complex is caused by a developmental abnormality that occurs 4-5 weeks after conception in which the cloacal membrane is not replaced by tissue that will form the abdominal muscles. The underlying cause of this error in development is not known. The birth prevalence of classic bladder exstrophy has been es",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Bladder Exstrophy and Epispadias Complex",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bladder exstrophy",
+      "preferred_label": "bladder exstrophy",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010805",
+        "orpha": "Orphanet:93930",
+        "umls": "UMLS:C0005689",
+        "mesh": "MESH:D001746"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010805",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080174",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6398",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002836",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:753.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2661",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001746",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C123207",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:860",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93930",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61758007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005689",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1927556258",
+          "display": null
+        }
+      ],
+      "context": "Bladder exstrophy-epispadias-cloacal exstrophy complex is a spectrum of anomalies involving the urinary tract, genital tract, musculoskeletal system and sometimes the intestinal tract. In classic bladder exstrophy, most anomalies are related to defects of the abdominal wall, bladder, genitalia, pelvic bones, rectum and anus. In normal development, the cloacal membrane temporarily separates the urogenital and anal structures and them breaks when tissue that will form abdominal muscles begins to grow in its pl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bladder Exstrophy and Epispadias Complex"
+      ],
+      "pubtator_normalized_name": "Bladder Exstrophy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "phy complex is caused by a developmental abnormality that occurs 4-5 weeks after conception in which the cloacal membrane is not replaced by tissue that will form the abdominal muscles. The underlying cause of this error in development is not known. The birth prevalence of classic bladder exstrophy has been estimated to be between 1 in 10,000 and 1 in 50,000 livebirths. Males are affected 2-3 times more often than females. Isolated epispadias occurs in approximately 1 in 112,000 live male births and 1 in 400,000 live female births. Cloacal exstrophy occurs in approximately 1 in 400,000 live birth",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Isolated epispadias",
+      "preferred_label": "Isolated epispadias",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:93928",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:93928",
+          "display": null
+        }
+      ],
+      "context": "t replaced by tissue that will form the abdominal muscles. The underlying cause of this error in development is not known. The birth prevalence of classic bladder exstrophy has been estimated to be between 1 in 10,000 and 1 in 50,000 livebirths. Males are affected 2-3 times more often than females. Isolated epispadias occurs in approximately 1 in 112,000 live male births and 1 in 400,000 live female births. Cloacal exstrophy occurs in approximately 1 in 400,000 live births. Prenatal ultrasound examination of a fetus with the complex may reveal absence of bladder filling, low-set umbilical cord, separation of pub",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Cloacal exstrophy",
+      "preferred_label": "Exstrophy of cloaca sequence",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0345217",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0345217",
+          "display": null
+        }
+      ],
+      "context": "not known. The birth prevalence of classic bladder exstrophy has been estimated to be between 1 in 10,000 and 1 in 50,000 livebirths. Males are affected 2-3 times more often than females. Isolated epispadias occurs in approximately 1 in 112,000 live male births and 1 in 400,000 live female births. Cloacal exstrophy occurs in approximately 1 in 400,000 live births. Prenatal ultrasound examination of a fetus with the complex may reveal absence of bladder filling, low-set umbilical cord, separation of pubic bones, small genitals and an abdominal mass that increases in size as the pregnancy progresses.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:12:43.030103",
+  "document": "Jejunal-Atresia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Jejunal-Atresia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Jejunal Atresia is a rare genetic disorder. Patients with this disorder are born with a partial absence of the fold of the stomach membrane that connects the small intestine to the back wall of the abdomen. As a result, one of the three portions of the small intestine (the jejunal) twists around one of the arteries of the colon called the m",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Jejunal Atresia",
+      "preferred_label": "Jejunal Atresia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009476",
+        "orpha": "Orphanet:1201",
+        "umls": "UMLS:C0266172",
+        "mesh": "MESH:C538260"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009476",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:140",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78590",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538260",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010626",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98828",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1309",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:243600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1201",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0266172",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1949256262",
+          "display": null
+        }
+      ],
+      "context": "Jejunal Atresia is a rare genetic disorder. Patients with this disorder are born with a partial absence of the fold of the stomach membrane that connects the small intestine to the back wall of the abdomen. As a result, one of the three portions of the small intestine (the jejunal) twists around one of the arterie",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Jejunal Atresia with Microcephaly and Ocular Anomalies",
+        "Pfeiffer Rockelein syndrome",
+        "Coronal synostosis syndactyly and jejunal atresia"
+      ],
+      "pubtator_normalized_name": "Intestinal Atresia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "constipation",
+      "preferred_label": "constipation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K59.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002203",
+        "orpha": null,
+        "umls": "UMLS:C0009806",
+        "mesh": "MESH:D003248"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002203",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2089",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002019",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K59.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:564.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1101",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003248",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C37930",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:14760008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009806",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:502284069",
+          "display": null
+        }
+      ],
+      "context": "to the back wall of the abdomen. As a result, one of the three portions of the small intestine (the jejunal) twists around one of the arteries of the colon called the marginal artery and causes a blockage (atresia). Symptoms in individuals with this disorder include vomiting, a swollen abdomen, and constipation. Jejunal Atresia may be inherited as an autosomal recessive trait, or it may occur sporadically with no known cause. Human traits, including the classic genetic diseases, are the product of the interaction of two genes, one received from the father and one from the mother. In recessive disorders, t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Opioid-Induced Constipation"
+      ],
+      "pubtator_normalized_name": "Constipation",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

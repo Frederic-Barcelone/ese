@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:07:00.719631",
+  "document": "Sheehan-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Sheehan-Syndrome.pdf",
+  "total_candidates": 28,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "SS",
+      "long_form": "Sheehan syndrome",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Excessive blood loss during or after delivery of a baby may affect the function of the pituitary gland, leading to a form of maternal hypopituitarism known as Sheehan syndrome (SS). Such extensive bleeding may reduce the blood flow to the pituitary gland causing the pituitary cells to be damaged or die (necrosis). Thus, the production of the usual pituitary hormones will be reduced, perhaps by a significant amount. During pregnancy the pituitary gland will enlarge and may double in size. At this time the gland is especially vulnerable to a severe drop in blood pressure (som",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Sheehan syndrome",
+      "matched_text": "Sheehan syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E23.0",
+      "orpha": "Orphanet:91355"
+    },
+    {
+      "name": "hypopituitarism",
+      "matched_text": "hypopituitarism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E23.0",
+      "orpha": null
+    },
+    {
+      "name": "hypophysitis",
+      "matched_text": "pituitary gland",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

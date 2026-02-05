@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:14:07.322777",
+  "document": "Tetralogy-of-Fallot.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Tetralogy-of-Fallot.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "oxygen",
+      "preferred_name": "oxygen",
+      "brand_name": "OXYGEN, USP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Radiographic Contrast Agent",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "GAS",
+      "route": "INHALATION",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010100",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA205817",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010100",
+          "display": "Oxygen"
+        }
+      ],
+      "context": "t, x-ray studies usually reveal a normal-sized heart that is characteristically boot-shaped (coeur en sabot). Periodic measurements of systemic blood oxygen saturation and hemoglobin are also advisable. Infants with this disorder usually have a relatively loud murmur over the upper left breastbone.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Reactive Oxygen Species",
+        "Singlet Oxygen",
+        "Oxygen-15"
+      ],
+      "pubtator_normalized_name": "Oxygen",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

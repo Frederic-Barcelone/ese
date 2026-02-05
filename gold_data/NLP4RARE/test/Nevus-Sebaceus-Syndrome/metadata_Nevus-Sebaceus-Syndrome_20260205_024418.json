@@ -1,0 +1,30 @@
+{
+  "doc_id": "Nevus-Sebaceus-Syndrome",
+  "doc_filename": "Nevus-Sebaceus-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Nevus sebaceus syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1645,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Nevus Sebaceus Syndrome: Clinical Overview and Epidemiology",
+  "short_description": "Clinical document providing epidemiological data on nevus sebaceus syndrome, including prevalence and demographic distribution.",
+  "long_description": "This clinical research document presents an introduction to nevus sebaceus syndrome, focusing on its epidemiological characteristics. The document discusses the equal gender distribution of the condition affecting both males and females, while noting that exact prevalence and incidence rates in the general population remain unknown. It provides context by referencing that epidermal nevi, whether occurring as isolated findings or as part of a syndrome, are reported in approximately 1 to 3 per 1,000 live births, establishing a baseline for understanding the rarity of this dermatological condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:44:18.212374"
+}

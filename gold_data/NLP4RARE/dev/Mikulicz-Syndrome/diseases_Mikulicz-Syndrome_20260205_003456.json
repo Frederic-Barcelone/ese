@@ -1,0 +1,904 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:34:56.693711",
+  "document": "Mikulicz-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Mikulicz-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "SLE",
+      "preferred_label": "Systemic lupus erythematosus",
+      "abbreviation": "SLE",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "immunology",
+      "codes": {
+        "icd10": "M32.0",
+        "icd11": "4A40.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:536",
+        "umls": null,
+        "mesh": "D008180"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:536",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "M32.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A40.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008180",
+          "display": "Lupus Erythematosus Systemic"
+        }
+      ],
+      "context": "r glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowing and tooth decay. Other symptoms include enlarged tear glands (lacrimal glan",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lupus Vasculitis Central Nervous System",
+        "Neonatal Systemic lupus erythematosus"
+      ],
+      "pubtator_normalized_name": "Lupus Erythematosus Systemic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Hodgkin's disease",
+      "preferred_label": "Hodgkin's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:C81",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004952",
+        "orpha": "Orphanet:98293",
+        "umls": null,
+        "mesh": "MESH:D006689"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004952",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8567",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000183",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2714",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C81",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:201.90",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9650/3",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006689",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200024",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9357",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1246",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:HL",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98293",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1528863768",
+          "display": null
+        }
+      ],
+      "context": "the eyes (lacrimal) and mouth (salivary). The tonsils and other glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowing and tooth decay. Other symp",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hodgkin Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Sjogren syndrome",
+      "preferred_label": "Sjogren syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M35.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010030",
+        "orpha": "Orphanet:378",
+        "umls": "UMLS:C1527336",
+        "mesh": "MESH:D012859"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010030",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12894",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000699",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10252",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M35.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:282890",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012859",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200420",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26883",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:270150",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:378",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:83901003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1527336",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:899463360",
+          "display": null
+        }
+      ],
+      "context": ") of the saliva glands (salivary glands) of the mouth and those near the ears (parotid). Glands near the jaw (submaxillary) may also become swollen. Symptoms may persist for long periods of time or come and go with frequent recurrences. The symptoms of Mikulicz syndrome are very similar to those of Sjogren syndrome and some researchers suspect that they may be the same disorder (see Related Disorders section of this report).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spinocerebellar Degenerations",
+        "Sjogren-Larsson Syndrome",
+        "Sjogren-Larsson-like syndrome"
+      ],
+      "pubtator_normalized_name": "Sjogren's Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphosarcoma",
+      "preferred_label": "lymphosarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004638",
+        "orpha": null,
+        "umls": "UMLS:C3714542",
+        "mesh": "D008228"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004638",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8675",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6946",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:200.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811370",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27824",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373168002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714542",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008228",
+          "display": "Lymphoma Non-Hodgkin"
+        }
+      ],
+      "context": "and mouth (salivary). The tonsils and other glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowing and tooth decay. Other symptoms include en",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Enzootic Bovine Leukosis",
+        "Lymphoma Large-Cell Immunoblastic"
+      ],
+      "pubtator_normalized_name": "Lymphoma Non-Hodgkin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tuberculosis",
+      "preferred_label": "tuberculosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A15-A19",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018076",
+        "orpha": "Orphanet:3389",
+        "umls": "UMLS:C0041296",
+        "mesh": "MESH:D014376"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018076",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:399",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7827",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A15-A19",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:A15-A19",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:017.96",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:22513",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014376",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044755",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3423",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1801",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3389",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56717001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041296",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2072728114",
+          "display": null
+        }
+      ],
+      "context": "ears (parotids) and those around the eyes (lacrimal) and mouth (salivary). The tonsils and other glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tuberculosis Meningeal",
+        "Tuberculosis Pulmonary",
+        "Tuberculosis Multidrug-Resistant"
+      ],
+      "pubtator_normalized_name": "Tuberculosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "leukemia",
+      "preferred_label": "leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005059",
+        "orpha": null,
+        "umls": "UMLS:C0023418",
+        "mesh": "MESH:D007938"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005059",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1240",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000565",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001909",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:208.90",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9800/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9725",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007938",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3161",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:93143009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023418",
+          "display": null
+        }
+      ],
+      "context": "s) and those around the eyes (lacrimal) and mouth (salivary). The tonsils and other glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukemia Myeloid Acute",
+        "Leukemia Lymphocytic Chronic B-Cell",
+        "Leukemia Myelogenous Chronic BCR-ABL Positive"
+      ],
+      "pubtator_normalized_name": "Leukemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syphilis",
+      "preferred_label": "syphilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005976",
+        "orpha": null,
+        "umls": "UMLS:C0039128",
+        "mesh": "MESH:D013587"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005976",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4166",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007504",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:097.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21447",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013587",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062120",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35055",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:76272004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039128",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:455894495",
+          "display": null
+        }
+      ],
+      "context": "se around the eyes (lacrimal) and mouth (salivary). The tonsils and other glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowing and toot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Syphilis Congenital",
+        "Syphilis secondary",
+        "Syphilis primary"
+      ],
+      "pubtator_normalized_name": "Syphilis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphomas",
+      "preferred_label": "lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005062",
+        "orpha": "Orphanet:223735",
+        "umls": "UMLS:C0024299",
+        "mesh": "MESH:D008223"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005062",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060058",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000574",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.80",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9590/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44223",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008223",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025310",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100004",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3208",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MLYM",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:223735",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373168002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024299",
+          "display": null
+        }
+      ],
+      "context": "h the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowing and tooth decay. Other symptoms include enlarged tear glands (lacrimal glands), leading to absent or decreased tears; enlarged glands in the neck (parotid glan",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma Non-Hodgkin",
+        "Lymphoma B-Cell",
+        "Lymphoma Large B-Cell Diffuse"
+      ],
+      "pubtator_normalized_name": "Lymphoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lupus",
+      "preferred_label": "Lupus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": "ICD10CM:M32",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007915",
+        "orpha": "Orphanet:536",
+        "umls": "UMLS:C0024141",
+        "mesh": "MESH:D008180"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007915",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9074",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18695",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002725",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M32",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:M32",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6146",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008180",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200416",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3201",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1380",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:152700",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:536",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:55464009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024141",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:749596428",
+          "display": null
+        }
+      ],
+      "context": "nd other glands in the soft tissue of the face and neck may also be involved. Although the disorder is almost always described as benign, it always occurs in association with another underlying disorder such as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndrome is characterized by the sudden onset of extreme dryness in the mouth (xerostomia) that may lead to difficulty swallowing and tooth decay. Other symptoms include enlarged tear glands (lacrimal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lupus Nephritis",
+        "Lupus Erythematosus Discoid",
+        "Lupus Erythematosus Cutaneous"
+      ],
+      "pubtator_normalized_name": "Lupus Erythematosus Systemic",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

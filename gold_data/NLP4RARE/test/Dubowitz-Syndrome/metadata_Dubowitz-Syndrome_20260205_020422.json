@@ -1,0 +1,30 @@
+{
+  "doc_id": "Dubowitz-Syndrome",
+  "doc_filename": "Dubowitz-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Dubowitz syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1627,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Dubowitz Syndrome: Clinical Overview and Epidemiology",
+  "short_description": "A clinical summary document describing the demographics and prevalence of Dubowitz syndrome, a rare genetic condition affecting both males and females equally across all ethnicities.",
+  "long_description": "This document provides an epidemiological overview of Dubowitz syndrome, a rare genetic disorder that affects individuals regardless of sex, ethnicity, or race. The content highlights that while only 150-200 cases have been documented in medical literature, researchers suspect the actual prevalence may be higher due to underdiagnosis. The document serves as a foundational reference for understanding the demographic distribution and potential scope of this uncommon syndrome in clinical practice.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:04:22.334087"
+}

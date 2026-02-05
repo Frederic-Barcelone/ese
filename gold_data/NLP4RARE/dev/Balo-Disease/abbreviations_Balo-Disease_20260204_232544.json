@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_221636_6f662baa7bb0",
+  "timestamp": "2026-02-04T23:25:44.843278",
+  "document": "Balo-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Balo-Disease.pdf",
+  "total_candidates": 29,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 2,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MS",
+      "long_form": "mitral stenosis; multiple sclerosis",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Most cases are characterized by the gradual onset of symptoms that might be found in the more common type of MS, including muscle spasms and paralysis. Other neurological symptoms develop depending on the areas of the brain that are affected and may include intellectual impairment and/or physiological abnormalities. However, in its most serious form, Balo Disease may also suggest the presence of an infectiou",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "autoimmune disorder",
+      "matched_text": "Autoimmune disorders",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "infectious disease",
+      "matched_text": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A00-B99",
+      "orpha": null
+    },
+    {
+      "name": "Balo disease",
+      "matched_text": "Balo Disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:228165"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "corticosteroids",
+      "matched_text": "Corticosteroids",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    }
+  ],
+  "pharma": []
+}

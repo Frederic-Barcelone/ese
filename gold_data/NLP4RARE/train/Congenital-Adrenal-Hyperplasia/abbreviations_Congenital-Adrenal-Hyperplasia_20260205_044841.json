@@ -1,0 +1,150 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:48:41.272579",
+  "document": "Congenital-Adrenal-Hyperplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Adrenal-Hyperplasia.pdf",
+  "total_candidates": 33,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CAH",
+      "long_form": "congenital adrenal hyperplasia",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Congenital adrenal hyperplasia (CAH) is a group of rare inherited autosomal recessive disorders characterized by a deficiency of one of the enzymes needed to make specific hormones. CAH effects the adrenal glands located at the top of each kidney. Normally, the adrenal glands are responsible for producing three different hormones: 1.",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0018479"
+        },
+        {
+          "source": "DOID",
+          "id": "DOID:0050811"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:1467"
+        },
+        {
+          "source": "ICD9",
+          "id": "ICD9:255.2"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:7900"
+        },
+        {
+          "source": "MESH",
+          "id": "MESH:D000312"
+        },
+        {
+          "source": "MedDRA",
+          "id": "MedDRA:10010323"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:1200396"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:1200397"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2100134"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2200370"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C34360"
+        },
+        {
+          "source": "NORD",
+          "id": "NORD:992"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:418"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:237751000"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C0001627"
+        },
+        {
+          "source": "icd11.foundation",
+          "id": "icd11.foundation:172733763"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "congenital adrenal hyperplasia",
+      "matched_text": "Congenital adrenal hyperplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:418"
+    },
+    {
+      "name": "21 hydroxylase deficiency",
+      "matched_text": "21 hydroxylase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:90794"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "corticosteroids",
+      "matched_text": "corticosteroids",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    },
+    {
+      "name": "androgens",
+      "matched_text": "androgens",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Hydroxylase",
+      "matched_text": "hydroxylase",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

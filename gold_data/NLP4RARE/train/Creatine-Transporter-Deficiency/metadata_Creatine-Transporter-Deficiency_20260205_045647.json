@@ -1,0 +1,40 @@
+{
+  "doc_id": "Creatine-Transporter-Deficiency",
+  "doc_filename": "Creatine-Transporter-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "cerebral creatine deficiency syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "X-linked intellectual disability",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Creatine",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1609,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Creatine Transporter Deficiency (CTD): Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing creatine transporter deficiency, an X-linked intellectual disability syndrome that accounts for 1-2% of unexplained cases and is often misdiagnosed as autism.",
+  "long_description": "This clinical research document provides an overview of Creatine Transporter Deficiency (CTD), a genetic disorder that represents the most common form of cerebral creatine deficiency syndromes. The document highlights that CTD accounts for 1-2% of all unexplained X-linked intellectual disabilities and discusses the diagnostic challenges associated with this condition. It emphasizes the frequent misdiagnosis of affected children with autism spectrum disorders or global developmental delays, underscoring the importance of proper recognition and differential diagnosis of this metabolic disorder in clinical practice.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:56:47.211365"
+}

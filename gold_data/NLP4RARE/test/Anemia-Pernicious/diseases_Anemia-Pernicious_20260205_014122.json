@@ -1,0 +1,114 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:41:22.492211",
+  "document": "Anemia-Pernicious.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Anemia-Pernicious.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Pernicious anemia",
+      "preferred_label": "pernicious anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": "ICD10CM:D51.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008228",
+        "orpha": "Orphanet:120",
+        "umls": "UMLS:C0002892",
+        "mesh": "MESH:D000752"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008228",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13381",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005576",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12671",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D51.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:281.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1531",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000752",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2871",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:170900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:120",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84027009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002892",
+          "display": null
+        }
+      ],
+      "context": "Pernicious anemia is a rare blood disorder characterized by the inability of the body to properly utilize vitamin B12, which is essential for the development of red blood cells. Most cases result from the lack of the gastric protein known as intrinsic factor, without which vitamin B12 cannot be absorbed. The diagnos",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Intrinsic Factor Deficiency"
+      ],
+      "pubtator_normalized_name": "Anemia Pernicious",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

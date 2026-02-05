@@ -1,0 +1,467 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:30:10.289117",
+  "document": "Leber-Hereditary-Optic-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Leber-Hereditary-Optic-Neuropathy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Leber hereditary optic neuropathy",
+      "preferred_label": "Leber hereditary optic neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010788",
+        "orpha": "Orphanet:104",
+        "umls": "UMLS:C0917796",
+        "mesh": "MESH:D029242"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010788",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:705",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6870",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:182973",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D029242",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200940",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84808",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1352",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:535000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:104",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:58610003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0917796",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1018428959",
+          "display": null
+        }
+      ],
+      "context": "Leber hereditary optic neuropathy (LHON) is mainly characterized by bilateral, painless subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Marsden syndrome"
+      ],
+      "pubtator_normalized_name": "Optic Atrophy Hereditary Leber",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "LHON",
+      "preferred_label": "Leber hereditary optic neuropathy",
+      "abbreviation": "LHON",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": "H47.2",
+        "icd11": "8C73.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:104",
+        "umls": null,
+        "mesh": "D029242"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:104",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "H47.2",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C73.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D029242",
+          "display": "Optic Atrophy Hereditary Leber"
+        }
+      ],
+      "context": "Leber hereditary optic neuropathy (LHON) is mainly characterized by bilateral, painless subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral neurop",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Marsden syndrome"
+      ],
+      "pubtator_normalized_name": "Optic Atrophy Hereditary Leber",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "Leber hereditary optic neuropathy (LHON) is mainly characterized by bilateral, painless subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral neuropathy, postural tremor, nonspecific myo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "peripheral neuropathy",
+      "preferred_label": "peripheral neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005244",
+        "orpha": null,
+        "umls": "UMLS:C0031117",
+        "mesh": "D010523"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005244",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:870",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003100",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12192",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18386",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10034606",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386033004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031117",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010523",
+          "display": "Peripheral Nervous System Diseases"
+        }
+      ],
+      "context": "neuropathy (LHON) is mainly characterized by bilateral, painless subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral neuropathy, postural tremor, nonspecific myopathy, and movement disorders. LHON is caused by mutations in mitochondrial DNA and it is transmitted by maternal inheritance. LHON affects approximately 1:50,000 people. Many carriers never suffer significant visual loss; males are about four to five times more lik",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Motor neuropathy peripheral with dysautonomia",
+        "Inherited Peripheral Neuropathy",
+        "Alcoholic Neuropathy"
+      ],
+      "pubtator_normalized_name": "Peripheral Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "movement disorders",
+      "preferred_label": "movement disorders",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005395",
+        "orpha": null,
+        "umls": "UMLS:C0026650",
+        "mesh": "MESH:D009069"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005395",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:480",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004280",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.99",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10113",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009069",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116757",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60342002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026650",
+          "display": null
+        }
+      ],
+      "context": "subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral neuropathy, postural tremor, nonspecific myopathy, and movement disorders. LHON is caused by mutations in mitochondrial DNA and it is transmitted by maternal inheritance. LHON affects approximately 1:50,000 people. Many carriers never suffer significant visual loss; males are about four to five times more likely than females to be affected. LHON affects both males and fe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Conversion Disorder",
+        "REM Sleep Behavior Disorder",
+        "Stereotypic Movement Disorder"
+      ],
+      "pubtator_normalized_name": "Movement Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "myopathy",
+      "preferred_label": "myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005336",
+        "orpha": null,
+        "umls": "UMLS:C0026848",
+        "mesh": "C564971"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005336",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:423",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004145",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:728.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10135",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101216",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75047002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026848",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1870184184",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564971",
+          "display": "Myopathy with Giant Abnormal Mitochondria"
+        }
+      ],
+      "context": "ral, painless subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral neuropathy, postural tremor, nonspecific myopathy, and movement disorders. LHON is caused by mutations in mitochondrial DNA and it is transmitted by maternal inheritance. LHON affects approximately 1:50,000 people. Many carriers never suffer significant visual loss; males are about four to five times more likely than females to be affected. LHON a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Muscular Diseases",
+        "Myotonic Dystrophy",
+        "Myopathy with Lactic Acidosis Hereditary"
+      ],
+      "pubtator_normalized_name": "Myopathy with Giant Abnormal Mitochondria",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

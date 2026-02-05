@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:20:30.509504",
+  "document": "Caroli-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Caroli-Disease.pdf",
+  "total_candidates": 38,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ntermittent stomach pain is present, the doctor may ask for imaging studies (such as ultrasound and CT scans) to be done. The results of these studies may lead to a diagnosis of Caroli disease.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "congenital hepatic fibrosis",
+      "matched_text": "congenital hepatic fibrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:485426"
+    },
+    {
+      "name": "polycystic kidney disease",
+      "matched_text": "polycystic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "high blood pressure",
+      "matched_text": "high blood pressure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I15",
+      "orpha": null
+    },
+    {
+      "name": "portal hypertension",
+      "matched_text": "portal hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K76.6",
+      "orpha": null
+    },
+    {
+      "name": "Caroli syndrome",
+      "matched_text": "Caroli syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:480520"
+    },
+    {
+      "name": "Caroli disease",
+      "matched_text": "Caroli disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:53035"
+    },
+    {
+      "name": "liver failure",
+      "matched_text": "liver failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

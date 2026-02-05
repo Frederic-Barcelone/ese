@@ -1,0 +1,90 @@
+{
+  "run_id": "RUN_20260204_220014_1050310d17db",
+  "timestamp": "2026-02-04T23:07:51.683427",
+  "document": "Arthritis-Infectious.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Arthritis-Infectious.pdf",
+  "total_candidates": 41,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "hepatitis B infection",
+      "matched_text": "hepatitis B infections",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "infectious arthritis",
+      "matched_text": "Infectious arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "rheumatoid arthritis",
+      "matched_text": "rheumatoid arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:284130"
+    },
+    {
+      "name": "gonococcal arthritis",
+      "matched_text": "gonococcal arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "tuberculosis",
+      "matched_text": "tuberculosis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:A15-A19",
+      "orpha": "Orphanet:3389"
+    },
+    {
+      "name": "rubella",
+      "matched_text": "rubella",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:B06",
+      "orpha": null
+    },
+    {
+      "name": "mumps",
+      "matched_text": "mumps",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:B26",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

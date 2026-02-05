@@ -1,0 +1,46 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:48:34.323014",
+  "document": "Asherman_s-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Asherman_s-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Clinical description of Asherman's syndrome",
+      "guideline_year": null,
+      "organization": "Unknown",
+      "target_condition": "Asherman's syndrome",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Asherman_s-Syndrome_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected Asherman's syndrome",
+          "condition": "suspected",
+          "severity": "not specified",
+          "action": "use hysteroscope for diagnosis",
+          "action_description": null,
+          "preferred": "hysteroscope that pictures the interior of the uterus directly",
+          "alternatives": [
+            "X-ray of the uterus with small tube placed in cervix",
+            "small balloon catheter placed in uterus"
+          ],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "strong",
+          "references": [],
+          "source": "Asherman_s-Syndrome",
+          "source_text": "The gold standard for diagnosis uses a hysteroscope that pictures the interior of the uterus directly",
+          "page_num": null
+        }
+      ],
+      "source_document": "Asherman_s-Syndrome",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

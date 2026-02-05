@@ -1,0 +1,1716 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:41:24.945338",
+  "document": "Barakat-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Barakat-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 26,
+  "total_validated": 26,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "hypocalcemia",
+      "preferred_label": "hypocalcemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018543",
+        "orpha": "Orphanet:428",
+        "umls": "UMLS:C4048195",
+        "mesh": "D006996"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018543",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0090109",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2877",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:884527",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:601198",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:428",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:711152006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4048195",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006996",
+          "display": "Hypocalcemia"
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the ki",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypocalcemia Autosomal Dominant with Bartter Syndrome",
+        "Hypomagnesemia 1 Intestinal",
+        "Hypercalciuric Hypocalcemia Familial"
+      ],
+      "pubtator_normalized_name": "Hypocalcemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney disease",
+      "preferred_label": "kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005240",
+        "orpha": null,
+        "umls": "UMLS:C0022658",
+        "mesh": "MESH:D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005240",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:557",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003086",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:583.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9635",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007674",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3149",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:90708001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022658",
+          "display": null
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, bu",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal Insufficiency Chronic",
+        "Kidney Failure Chronic",
+        "Glomerulonephritis"
+      ],
+      "pubtator_normalized_name": "Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "proteinuria",
+      "preferred_label": "proteinuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:R80",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003634",
+        "orpha": null,
+        "umls": "UMLS:C0033687",
+        "mesh": "MESH:D011507"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003634",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:576",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:R80",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:791.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10976",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011507",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0033687",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:930895737",
+          "display": null
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is con",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pre-Eclampsia",
+        "Donnai-Barrow syndrome",
+        "Low Molecular Weight Proteinuria with Hypercalciuria and Nephrocalcinosis"
+      ],
+      "pubtator_normalized_name": "Proteinuria",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "nephrotic syndrome",
+      "preferred_label": "nephrotic syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "ICD10CM:N04",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005377",
+        "orpha": null,
+        "umls": "UMLS:C0027726",
+        "mesh": "MESH:D009404"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005377",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1184",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004255",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:N04",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:N04",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:581.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009404",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100009",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34845",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:52254009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027726",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1184209951",
+          "display": null
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to be very rare. So far, ab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Nephrosis Lipoid",
+        "Nephrosis congenital",
+        "Mesangial sclerosis diffuse"
+      ],
+      "pubtator_normalized_name": "Nephrotic Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Deafness",
+      "preferred_label": "hearing loss disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005365",
+        "orpha": null,
+        "umls": "UMLS:C1384666",
+        "mesh": "MESH:D034381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005365",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004238",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:389.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034381",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1384666",
+          "display": null
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to be very rare. So far, about 180 pa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deaf-Blind Disorders"
+      ],
+      "pubtator_normalized_name": "Ermine phenotype",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital anomalies of the kidney and urinary tract",
+      "preferred_label": "congenital anomalies of the kidney and urinary tract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019719",
+        "orpha": "Orphanet:93545",
+        "umls": "UMLS:C1968949",
+        "mesh": "MESH:C566906"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019719",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080205",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19216",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:369894",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C566906",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:610805",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93545",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1968949",
+          "display": null
+        }
+      ],
+      "context": "ow blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to be very rare. So far, about 180 patients have been reported from various countries including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic g",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "disease",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to be very rare. So far, about 180 patients have been reported from various countries including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "phrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to be very rare. So far, about 180 patients have been reported from various countries including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndrome",
+      "preferred_label": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002254",
+        "orpha": null,
+        "umls": "UMLS:C0039082",
+        "mesh": "MESH:D013577"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002254",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:225",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11688",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013577",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28193",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000086",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039082",
+          "display": null
+        }
+      ],
+      "context": "but the disease is considered to be very rare. So far, about 180 patients have been reported from various countries including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and dele",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "the syndrome",
+      "preferred_label": "The syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024541",
+        "orpha": null,
+        "umls": "UMLS:C4551982",
+        "mesh": "C536223"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024541",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111415",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644087",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:222470",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551982",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536223",
+          "display": "Cushing's symphalangism"
+        }
+      ],
+      "context": "from various countries including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Adenomatous Polyposis Coli",
+        "Superior Vena Cava Syndrome",
+        "Hamartoma Syndrome Multiple"
+      ],
+      "pubtator_normalized_name": "Cushing's symphalangism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "familial",
+      "preferred_label": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000544"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000544",
+          "display": "Alzheimer Disease"
+        }
+      ],
+      "context": "es including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dementia",
+        "Stomach Neoplasms",
+        "Atrial Fibrillation"
+      ],
+      "pubtator_normalized_name": "Alzheimer Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "idiopathic",
+      "preferred_label": "idiopathic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700005",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D010300"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700005",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:894194405",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010300",
+          "display": "Parkinson Disease"
+        }
+      ],
+      "context": "ing the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic Noncirrhotic Portal Hypertension",
+        "Idiopathic Pulmonary Fibrosis",
+        "Calcinosis Cutis"
+      ],
+      "pubtator_normalized_name": "Parkinson Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypoparathyroidism",
+      "preferred_label": "hypoparathyroidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E20",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001220",
+        "orpha": null,
+        "umls": "UMLS:C0020626",
+        "mesh": "MESH:D007011"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001220",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11199",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009451",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6733",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E20",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E20",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:252.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6985",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007011",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200345",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C78350",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36976004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020626",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1708733050",
+          "display": null
+        }
+      ],
+      "context": "ted States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypoparathyroidism-retardation-dysmorphism syndrome",
+        "Autoimmune polyendocrinopathy syndrome type 1",
+        "Dahlberg Borer Newcomer syndrome"
+      ],
+      "pubtator_normalized_name": "Hypoparathyroidism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sensorineural deafness",
+      "preferred_label": "sensorineural deafness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020678",
+        "orpha": null,
+        "umls": "UMLS:C0018784",
+        "mesh": "D006319"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020678",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10003",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001176",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000407",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9164",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26739",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60700002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018784",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006319",
+          "display": "Hearing Loss Sensorineural"
+        }
+      ],
+      "context": "Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deafness Sensorineural And Male Infertility",
+        "Deafness oligodontia syndrome",
+        "Corneal dystrophy and perceptive deafness"
+      ],
+      "pubtator_normalized_name": "Hearing Loss Sensorineural",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "renal insufficiency",
+      "preferred_label": "renal insufficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001106",
+        "orpha": null,
+        "umls": "UMLS:C0035078",
+        "mesh": "MESH:D051437"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001106",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1074",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002048",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:586",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11177",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D051437",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4376",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42399005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035078",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:761526554",
+          "display": null
+        }
+      ],
+      "context": "ges of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal Insufficiency Chronic",
+        "Acute Kidney Injury",
+        "Lutz Richner Landolt syndrome"
+      ],
+      "pubtator_normalized_name": "Renal Insufficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Barakat syndrome",
+      "preferred_label": "Barakat syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007797",
+        "orpha": "Orphanet:2237",
+        "umls": "UMLS:C1840333",
+        "mesh": "MESH:C537907"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007797",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060878",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2911",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:374443",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537907",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C130983",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:837",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:146255",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2237",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:724282009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1840333",
+          "display": null
+        }
+      ],
+      "context": "se the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Barakat syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "muscle weakness",
+      "preferred_label": "Paresis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0030552",
+        "mesh": "D010291"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0030552",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010291",
+          "display": "Paresis"
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Worster Drought syndrome",
+        "Facial Paralysis",
+        "Vocal Cord Paralysis"
+      ],
+      "pubtator_normalized_name": "Paresis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney disease",
+      "preferred_label": "Kidney Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0022658",
+        "mesh": "D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0022658",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007674",
+          "display": "Kidney Diseases"
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, bu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal Insufficiency Chronic",
+        "Kidney Diseases Cystic",
+        "Diabetic Nephropathies"
+      ],
+      "pubtator_normalized_name": "Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hematuria",
+      "preferred_label": "Hematuria",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0018965",
+        "mesh": "D006417"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0018965",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006417",
+          "display": "Hematuria"
+        }
+      ],
+      "context": "Patients may present with symptoms associated with low blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hematuria Benign Familial",
+        "Nephritis Hereditary",
+        "Angiopathy Hereditary With Nephropathy Aneurysms And Muscle Cramps"
+      ],
+      "pubtator_normalized_name": "Hematuria",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital anomalies",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "ow blood calcium (hypocalcemia) such as muscle weakness, tetany, and convulsions, or findings related to kidney disease such as proteinuria, hematuria, and nephrotic syndrome. Deafness may be a presenting symptom or may be found on a routine hearing test. Since prenatal ultrasound is now a routine, congenital anomalies of the kidney and urinary tract may be the presenting finding. The exact prevalence is unknown, but the disease is considered to be very rare. So far, about 180 patients have been reported from various countries including the United States, Japan, India, China, Europe and the Middle East. There is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "familial idiopathic hypoparathyroidism",
+      "preferred_label": "Idiopathic Hypoparathyroidism",
+      "abbreviation": null,
+      "confidence": 0.9929705619812011,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0342342",
+        "mesh": "D007011"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0342342",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007011",
+          "display": "Hypoparathyroidism"
+        }
+      ],
+      "context": "es including the United States, Japan, India, China, Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypoparathyroidism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sensorineural deafness",
+      "preferred_label": "Sensorineural Hearing Loss (disorder)",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0018784",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0018784",
+          "display": null
+        }
+      ],
+      "context": "Europe and the Middle East. There is equal prevalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "autosomal recessive hypoparathyroidism",
+      "preferred_label": "Hypoparathyroidism, Autosomal Recessive",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1840334",
+        "mesh": "C564148"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1840334",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564148",
+          "display": "Hypoparathyroidism Autosomal Recessive"
+        }
+      ],
+      "context": "evalence across ethnic groups, genders and ages of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypoparathyroidism Autosomal Recessive",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "renal insufficiency",
+      "preferred_label": "Kidney Failure",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0035078",
+        "mesh": "D051437"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0035078",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D051437",
+          "display": "Renal Insufficiency"
+        }
+      ],
+      "context": "ges of diagnosis. Clinical awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acute Kidney Injury",
+        "Kidney Failure Chronic",
+        "Hyperuricemic Nephropathy Familial Juvenile 2"
+      ],
+      "pubtator_normalized_name": "Renal Insufficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "developmental delay",
+      "preferred_label": "Developmental delay",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0424605",
+        "mesh": "D002658"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0424605",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002658",
+          "display": "Developmental Disabilities"
+        }
+      ],
+      "context": "al awareness of this syndrome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Language Development Disorders",
+        "Achondroplasia",
+        "Growth Retardation Developmental Delay Coarse Facies And Early Death"
+      ],
+      "pubtator_normalized_name": "Developmental Disabilities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "deletion 22q11 syndrome",
+      "preferred_label": "22q11 Deletion Syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C2936346",
+        "mesh": "D058165"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C2936346",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D058165",
+          "display": "22q11 Deletion Syndrome"
+        }
+      ],
+      "context": "rome will probably increase the number of patients diagnosed. Differential diagnoses of the syndrome include familial idiopathic hypoparathyroidism, progressive sensorineural deafness without renal disease, autosomal recessive hypoparathyroidism with renal insufficiency and developmental delay, and deletion 22q11 syndrome. Barakat syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "22q11 Deletion Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

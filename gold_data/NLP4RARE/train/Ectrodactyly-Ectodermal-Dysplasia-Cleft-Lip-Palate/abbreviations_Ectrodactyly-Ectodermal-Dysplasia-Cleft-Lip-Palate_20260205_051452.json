@@ -1,0 +1,47 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:14:52.932193",
+  "document": "Ectrodactyly-Ectodermal-Dysplasia-Cleft-Lip-Palate.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Ectrodactyly-Ectodermal-Dysplasia-Cleft-Lip-Palate.pdf",
+  "total_candidates": 6,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "EEC",
+      "long_form": "Exstrophy-epispadias complex",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "EEC syndrome affects males and females in equal numbers. The exact incidence and prevalence of the diso",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "EEC syndrome",
+      "matched_text": "EEC syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1896"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

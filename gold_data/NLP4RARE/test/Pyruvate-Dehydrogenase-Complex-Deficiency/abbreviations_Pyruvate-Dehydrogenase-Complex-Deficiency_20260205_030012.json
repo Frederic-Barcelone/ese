@@ -1,0 +1,164 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:00:12.550677",
+  "document": "Pyruvate-Dehydrogenase-Complex-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pyruvate-Dehydrogenase-Complex-Deficiency.pdf",
+  "total_candidates": 48,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "normally high levels of lactic acid) appearing shortly after birth to a mildly elevated level which usually follows a meal high in carbohydrates. In some cases elevation of blood lactate levels is seen only during the acute episodes. Excretion of abnormally large amounts of the amino acid alanine (alaninuria) may occur only during acute episodes. Imaging studies such as magnetic resonance imaging (MRI) and magnetic resonance spectroscopy (MRS) may reveal structural brain abnormalities associated with severe disease. A definitive diagnosis can be made by demonstrating abnormal PDC enzyme levels or function in leukocytes, fibroblasts or from a tissue biopsy.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRS",
+      "long_form": "magnetic resonance spectroscopy",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ring shortly after birth to a mildly elevated level which usually follows a meal high in carbohydrates. In some cases elevation of blood lactate levels is seen only during the acute episodes. Excretion of abnormally large amounts of the amino acid alanine (alaninuria) may occur only during acute episodes. Imaging studies such as magnetic resonance imaging (MRI) and magnetic resonance spectroscopy (MRS) may reveal structural brain abnormalities associated with severe disease. A definitive diagnosis can be made by demonstrating abnormal PDC enzyme levels or function in leukocytes, fibroblasts or from a tissue biopsy.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PDCD",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "Common symptoms of PDCD may initially be poor feeding, lethargy and rapid breathing (tachypnea) in an infant. Neurologic sy",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PDC",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "Common symptoms of PDCD may initially be poor feeding, lethargy and rapid breathing (tachypnea) in an infant. Neurologic s",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "abnormal eye movements",
+      "matched_text": "abnormal eye movements",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98691"
+    },
+    {
+      "name": "brain malformation",
+      "matched_text": "brain malformations",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:199633"
+    },
+    {
+      "name": "mental retardation",
+      "matched_text": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "acidosis",
+      "matched_text": "acidosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E87.2",
+      "orpha": null
+    },
+    {
+      "name": "ataxia",
+      "matched_text": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "PDCD",
+      "matched_text": "PDCD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:293462"
+    },
+    {
+      "name": "MRS",
+      "matched_text": "MRS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Prenatal",
+      "matched_text": "prenatal",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Stress",
+      "matched_text": "stress",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Lactate",
+      "matched_text": "lactate",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "leukocytes",
+      "matched_text": "leukocytes",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

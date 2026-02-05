@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:25:34.564754",
+  "document": "Achalasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Achalasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "achalasia",
+      "preferred_label": "achalasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K22.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008698",
+        "orpha": null,
+        "umls": "UMLS:C0014848",
+        "mesh": "C536008"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008698",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9164",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002571",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K22.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:530.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5023",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235630008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014848",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:636464846",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536008",
+          "display": "Achalasia Addisonianism Alacrimia syndrome"
+        }
+      ],
+      "context": "The exact cause of achalasia is not known. Some clinical researchers suspect that the condition may be caused by the degeneration of a group of nerves located in the chest (Auerbach’s plexus). It is believed that there may be a rare, inherited form of achalasia, but this is not yet well understood at this time. Achalasia is a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Esophageal Achalasia",
+        "Achalasia familial esophageal",
+        "Achalasia microcephaly"
+      ],
+      "pubtator_normalized_name": "Achalasia Addisonianism Alacrimia syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

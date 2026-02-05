@@ -1,0 +1,331 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:02:58.780961",
+  "document": "Hallermann-Streiff-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hallermann-Streiff-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "dental",
+      "preferred_label": "Gorlin-Chaudhry-Moss syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2095",
+        "umls": null,
+        "mesh": "C567360"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2095",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567360",
+          "display": "Progeroid Syndrome Congenital Petty Type"
+        }
+      ],
+      "context": "me may be suspected shortly after birth or during the first year of life by the identification of characteristic physical findings and symptoms. The diagnosis may be confirmed by thorough clinical evaluation; a detailed patient history; and specialized tests (e.g., radiographic, ophthalmologic, and dental studies) that may help to detect and characterize the abnormalities associated with this disorder. Congenital cataracts with unusually small eyes (microphthalmia) are important findings for the initial diagnosis of Hallermann-Streiff syndrome, but other disorders must be considered as part of the d",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Progeroid Syndrome Congenital Petty Type",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Hallermann-Streiff syndrome",
+      "preferred_label": "Hallermann-Streiff syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009318",
+        "orpha": "Orphanet:2108",
+        "umls": "UMLS:C0018522",
+        "mesh": "MESH:D006210"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009318",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4534",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:288",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5414",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006210",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84746",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1888",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:234100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2108",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:7903009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018522",
+          "display": null
+        }
+      ],
+      "context": "Hallermann-Streiff syndrome appears to affect males and females in relatively equal numbers. More than 150 cases have been reported in the medical literature. Hallermann-Streiff syndrome may be suspected shortly after birth or during the first year of life by the identification of characteristic physical findings and symptoms",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "microphthalmia",
+      "preferred_label": "microphthalmia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021129",
+        "orpha": null,
+        "umls": "UMLS:C0026010",
+        "mesh": "MESH:D008850"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021129",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10629",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005569",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000568",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:743.11",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10033",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008850",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98989",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:204108000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026010",
+          "display": null
+        }
+      ],
+      "context": "osis may be confirmed by thorough clinical evaluation; a detailed patient history; and specialized tests (e.g., radiographic, ophthalmologic, and dental studies) that may help to detect and characterize the abnormalities associated with this disorder. Congenital cataracts with unusually small eyes (microphthalmia) are important findings for the initial diagnosis of Hallermann-Streiff syndrome, but other disorders must be considered as part of the differential diagnosis, and this is best accomplished through whole exome sequencing given the extensive differential diagnosis, which includes a number of autosom",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microphthalmia Isolated 1",
+        "Microphthalmia Syndromic 6",
+        "Cataract congenital with microcornea or slight microphthalmia"
+      ],
+      "pubtator_normalized_name": "Microphthalmia Syndromic 10",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cataracts",
+      "preferred_label": "cataract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005129",
+        "orpha": null,
+        "umls": "UMLS:C0086543",
+        "mesh": "MESH:D002386"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005129",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:83",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000518",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:366.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39462",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002386",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26713",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:116200",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:193570009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0086543",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:109841337",
+          "display": null
+        }
+      ],
+      "context": "ical findings and symptoms. The diagnosis may be confirmed by thorough clinical evaluation; a detailed patient history; and specialized tests (e.g., radiographic, ophthalmologic, and dental studies) that may help to detect and characterize the abnormalities associated with this disorder. Congenital cataracts with unusually small eyes (microphthalmia) are important findings for the initial diagnosis of Hallermann-Streiff syndrome, but other disorders must be considered as part of the differential diagnosis, and this is best accomplished through whole exome sequencing given the extensive differential dia",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cataract congenital with microcornea or slight microphthalmia",
+        "Cataract Nuclear Progressive",
+        "Cataract Age-Related Nuclear"
+      ],
+      "pubtator_normalized_name": "Cataract",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

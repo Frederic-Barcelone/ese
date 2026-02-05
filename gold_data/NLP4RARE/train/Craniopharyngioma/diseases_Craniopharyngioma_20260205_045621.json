@@ -1,0 +1,185 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:56:21.446542",
+  "document": "Craniopharyngioma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Craniopharyngioma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Adamantinomatous craniopharyngioma",
+      "preferred_label": "adamantinomatous craniopharyngioma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002787",
+        "orpha": null,
+        "umls": "UMLS:C0431129",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002787",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3846",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9351/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98126",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4726",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0431129",
+          "display": null
+        }
+      ],
+      "context": "pharyngiomas occur in around 0.5 to 2 people per million each year and represent around 1.2 to 4% of all intracranial tumors in children. They mostly develop in two age groups (bimodal incidence peaks): children aged 0 to 14 years and adults aged 50 to 74 years. They occur in men and women equally. Adamantinomatous craniopharyngioma are more common, representing 86 to 89% of all craniopharyngiomas.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Craniopharyngiomas",
+      "preferred_label": "craniopharyngioma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018907",
+        "orpha": "Orphanet:54595",
+        "umls": "UMLS:C0010276",
+        "mesh": "MESH:D003397"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018907",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3840",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000209",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10486",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:237.0",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9350/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41339",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003397",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10011318",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200091",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2964",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1996",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:54595",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:189179009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010276",
+          "display": null
+        }
+      ],
+      "context": "Craniopharyngiomas occur in around 0.5 to 2 people per million each year and represent around 1.2 to 4% of all intracranial tumors in children. They mostly develop in two age groups (bimodal incidence peaks): children aged 0 to 14 years and adults aged 50 to 74 years. They occur in men and women equally. Adamantinoma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Craniopharyngioma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:44:52.099760",
+  "document": "CADASIL.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/CADASIL.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CADASIL",
+      "preferred_label": "Cerebral autosomal dominant arteriopathy-subcortical infarcts-leukoencephalopathy",
+      "abbreviation": "CADASIL",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": "I67.8",
+        "icd11": "8B22.C0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:136",
+        "umls": null,
+        "mesh": "D046589"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:136",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I67.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8B22.C0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D046589",
+          "display": "CADASIL"
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that st",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "CADASIL",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that stands for:",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that stands for: CADASIL affects m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that stands for: CADASIL affects males and females in equal numbers. The disorder is found worldwide an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disease",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that stands for: CADASIL affects males and females in equal numbers. The disorder is found worldwide and affects all races. The disease affects approximately 2 to ,000 people. Researc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "ned in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that stands for: CADASIL affects males and females in equal numbers. The disorder is found worldwide and affects all races. The disease affects approximately 2 to ,000 people. Research suggests that the disorder often goes undiagnosed or misdiagnosed making it difficult to determine the true frequency of CADASIL in the general population.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CADASIL",
+      "preferred_label": "CADASIL Syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0751587",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0751587",
+          "display": null
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that st",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "CADASIL is a rare genetic disorder affecting the small blood vessels in the brain. The term CADASIL was first coined in 1993. The age of onset, severity, specific symptoms and disease progression varies greatly from one person to another, even among members of the same family. CADASIL is an acronym that stands for: CADASIL affects m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

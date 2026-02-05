@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:43:06.314875",
+  "document": "Friedreich_s-Ataxia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Friedreich_s-Ataxia.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 1,
+  "unique_authors": 1,
+  "authors": [
+    {
+      "full_name": "South Asia",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "South Asia",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:11:05.098857",
+  "document": "Enterobiasis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Enterobiasis.pdf",
+  "total_candidates": 9,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "parasitic infectious disease",
+      "matched_text": "infestation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "enterobiasis",
+      "matched_text": "Enterobiasis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B80",
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "RECTAL",
+      "matched_text": "rectal",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

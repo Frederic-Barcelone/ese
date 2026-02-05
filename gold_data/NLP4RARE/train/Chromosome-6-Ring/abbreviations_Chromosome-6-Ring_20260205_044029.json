@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:40:29.301396",
+  "document": "Chromosome-6-Ring.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chromosome-6-Ring.pdf",
+  "total_candidates": 31,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "Ring",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "Chromosome 6 Ring is a rare disorder in which there is loss (deletion) of chromosomal material from both ends of the ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Kapur-Toriello syndrome",
+      "matched_text": "Eye",
+      "abbreviation": null,
+      "confidence": 0.39999999999999997,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:2328"
+    },
+    {
+      "name": "mental retardation",
+      "matched_text": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "Chromosome 6 Ring",
+      "matched_text": "Chromosome 6 Ring",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1448"
+    },
+    {
+      "name": "microphthalmia",
+      "matched_text": "microphthalmia",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "microcephaly",
+      "matched_text": "microcephaly",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q02",
+      "orpha": null
+    },
+    {
+      "name": "strabismus",
+      "matched_text": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "ptosis",
+      "matched_text": "ptosis",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

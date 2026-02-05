@@ -1,0 +1,659 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:07:49.452774",
+  "document": "Very-Long-Chain-Acyl-CoA-Dehydrogenase-Deficiency-(LCAD).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Very-Long-Chain-Acyl-CoA-Dehydrogenase-Deficiency-(LCAD).pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 11,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Very long-chain acyl-CoA dehydrogenase deficiency",
+      "preferred_label": "very long chain acyl-CoA dehydrogenase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E71.310",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008723",
+        "orpha": "Orphanet:26793",
+        "umls": "UMLS:C3887523",
+        "mesh": "C536353"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008723",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080155",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5508",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E71.310",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:854382",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201139",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98647",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1827",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:201475",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:26793",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237997005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3887523",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:907810567",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536353",
+          "display": "VLCAD deficiency"
+        }
+      ],
+      "context": "Very long-chain acyl-CoA dehydrogenase deficiency (VLCADD) is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidati",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "VLCAD deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "VLCADD",
+      "preferred_label": "Very long chain acyl-CoA dehydrogenase deficiency",
+      "abbreviation": "VLCADD",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E71.3",
+        "icd11": "5C52.01",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:26793",
+        "umls": null,
+        "mesh": "C536353"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:26793",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E71.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C52.01",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536353",
+          "display": "VLCAD deficiency"
+        }
+      ],
+      "context": "Very long-chain acyl-CoA dehydrogenase deficiency (VLCADD) is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "VLCAD deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Very long-chain acyl-CoA dehydrogenase deficiency (VLCADD) is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "Very long-chain acyl-CoA dehydrogenase deficiency (VLCADD) is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases. In the past, the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7835971593856812,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases. In the past, the name long-chain acyl-CoA dehydrogenase deficiency (LCADD) was applied to one such disease, but today it is clear that all cases once thought to be LCADD are actually VLCADD. VLCADD was originally described in 1992 and is now recognized as having an incidence of 1:40,000 babies. Th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "long-chain acyl-CoA dehydrogenase deficiency",
+      "preferred_label": "Long chain acyl-CoA dehydrogenase deficiency",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0220711",
+        "mesh": "C535690"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0220711",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535690",
+          "display": "Long-chain acyl-CoA dehydrogenase deficiency"
+        }
+      ],
+      "context": "Very long-chain acyl-CoA dehydrogenase deficiency (VLCADD) is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidati",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "VLCAD deficiency",
+        "Trifunctional Protein Deficiency With Myopathy And Neuropathy"
+      ],
+      "pubtator_normalized_name": "Long-chain acyl-CoA dehydrogenase deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "mal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases. In the past, the name long-chain acyl-CoA dehydrogenase deficiency (LCADD) was applied to one such disease, but today it is clear that all cases once thought to be LCADD are actually VLCADD. VLCADD was originally described in 1992 and is now recognized as having an incidence of 1:40,000 babies. The introduction of heel-stick tandem mass spectrometry for the early diagnosis of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disease",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases. In the past, the name long-chain acyl-CoA dehydrogenase deficiency (LCADD) was applied to one such disease, but today it is clear that all cases once thought to be LCADD are actually VLCADD. VLCADD was originally described in 1992 and is now recognized as having an incidence of 1:40,000 babies. The introduction of heel-stick tandem mass spectrometry for the early diagnosis of VLCAD in newborns has marke",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "k down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases. In the past, the name long-chain acyl-CoA dehydrogenase deficiency (LCADD) was applied to one such disease, but today it is clear that all cases once thought to be LCADD are actually VLCADD. VLCADD was originally described in 1992 and is now recognized as having an incidence of 1:40,000 babies. The introduction of heel-stick tandem mass spectrometry for the early diagnosis of VLCAD in newborns has markedly increased the number of infa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "h disease, but today it is clear that all cases once thought to be LCADD are actually VLCADD. VLCADD was originally described in 1992 and is now recognized as having an incidence of 1:40,000 babies. The introduction of heel-stick tandem mass spectrometry for the early diagnosis of VLCAD in newborns has markedly increased the number of infants in which the disorder is detected.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "metabolic diseases",
+      "preferred_label": "Metabolic Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0025517",
+        "mesh": "D008659"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0025517",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008659",
+          "display": "Metabolic Diseases"
+        }
+      ],
+      "context": "y long-chain acyl-CoA dehydrogenase deficiency (VLCADD) is a rare genetic disorder of fatty acid metabolism that is transmitted as an autosomal recessive trait. It occurs when an enzyme needed to break down certain very long-chain fatty acids is missing or not working properly. VLCADD is one of the metabolic diseases known as fatty acid oxidation (FOD) diseases. In the past, the name long-chain acyl-CoA dehydrogenase deficiency (LCADD) was applied to one such disease, but today it is clear that all cases once thought to be LCADD are actually VLCADD. VLCADD was originally described in 1992 and is now recognized",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bone Diseases Metabolic",
+        "Brain Diseases Metabolic",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolic Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

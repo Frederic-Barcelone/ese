@@ -1,0 +1,35 @@
+{
+  "doc_id": "Hereditary-Lymphedema",
+  "doc_filename": "Hereditary-Lymphedema.pdf",
+  "top_entities": [
+    {
+      "name": "hereditary lymphedema type II",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "hereditary lymphedema",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2425,
+  "file_size_human": "2.4 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Hereditary Lymphedema: Clinical Overview and Diagnostic Methods",
+  "short_description": "Clinical document describing hereditary lymphedema prevalence, types, and diagnostic imaging techniques including lymphoscintigraphy, ultrasound, and MRI.",
+  "long_description": "This clinical document provides a comprehensive overview of hereditary lymphedema, a genetic disorder affecting the lymphatic system. It details the epidemiology showing higher prevalence in females with an estimated occurrence of 1 in 6,000 individuals. The document distinguishes between hereditary lymphedema type II (Meige syndrome), which accounts for 80% of cases, and the rarer type I (Milroy disease) with approximately 200 reported cases. The text extensively covers diagnostic approaches, including specialized imaging techniques such as lymphoscintigraphy using radioactive tracers, ultrasound for differential diagnosis and venous evaluation, and MRI for detecting characteristic findings like edema, lymphoceles, and fibrosis. This appears to be educational or reference material for healthcare professionals involved in diagnosing and managing hereditary lymphedema.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:07:15.695851"
+}

@@ -1,0 +1,389 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:46:26.175127",
+  "document": "Apnea-Infantile.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Apnea-Infantile.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "sudden infant death syndrome",
+      "preferred_label": "sudden infant death syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_1010116",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D013398"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_1010116",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013398",
+          "display": "Sudden Infant Death"
+        }
+      ],
+      "context": "hythm or obstruction of air flow through the air passages. The symptoms of infantile apnea include the stoppage of breathing during sleep, an abnormal bluish discoloration to the skin (cyanosis) and sometimes an unusually slow heartbeat (bradycardia). Infantile apnea may be related to some cases of sudden infant death syndrome. Episodes of apnea may decrease with age. However, several forms of adult sleep apnea also exist. The exact cause of infantile apnea is not known. It may occur as the result of a combination of environmental and developmental factors (multifactoral). In extremely rare cases, central infantile apnea",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sudden Infant Death with Dysgenesis of the Testes Syndrome"
+      ],
+      "pubtator_normalized_name": "Sudden Infant Death",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "apnea of prematurity",
+      "preferred_label": "apnea of prematurity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020567",
+        "orpha": "Orphanet:99981",
+        "umls": "UMLS:C0475715",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020567",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19722",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:473179",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98823",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99981",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:276544005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0475715",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:894774581",
+          "display": null
+        }
+      ],
+      "context": "tremely rare cases, central infantile apnea may be familial and affect more family members than would otherwise be expected. Infantile apnea affects males and females in equal numbers and occurs in children less than 1 year old. Infants who are born prematurely tend to experience episodes of apnea (apnea of prematurity).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Infantile apnea",
+      "preferred_label": "infantile apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019092",
+        "orpha": "Orphanet:70590",
+        "umls": "UMLS:C0745261",
+        "mesh": "C535759"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019092",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6779",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1378556",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:70590",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:724229002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0745261",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535759",
+          "display": "Congenital myasthenic syndrome with episodic apnea"
+        }
+      ],
+      "context": "Apnea is a term used to describe the temporary absence of spontaneous breathing. Infantile apnea occurs in children under the age of one year. Apnea may occur because of neurological impairment of the respiratory rhythm or obstruction of air flow through the air passages. The symptoms of infantile apnea include the stoppage of breathing during sleep, an abnormal bluish discoloration to the ski",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Congenital myasthenic syndrome with episodic apnea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sleep apnea",
+      "preferred_label": "sleep apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G47.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005296",
+        "orpha": null,
+        "umls": "UMLS:C0037315",
+        "mesh": "MESH:D012891"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005296",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050847",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003877",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0010535",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G47.3",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:780.57",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012891",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C148023",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:73430006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037315",
+          "display": null
+        }
+      ],
+      "context": "stoppage of breathing during sleep, an abnormal bluish discoloration to the skin (cyanosis) and sometimes an unusually slow heartbeat (bradycardia). Infantile apnea may be related to some cases of sudden infant death syndrome. Episodes of apnea may decrease with age. However, several forms of adult sleep apnea also exist. The exact cause of infantile apnea is not known. It may occur as the result of a combination of environmental and developmental factors (multifactoral). In extremely rare cases, central infantile apnea may be familial and affect more family members than would otherwise be expected. Infa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sleep Apnea Obstructive",
+        "Sleep Apnea Central"
+      ],
+      "pubtator_normalized_name": "Sleep Apnea Syndromes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "familial",
+      "preferred_label": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000544"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000544",
+          "display": "Alzheimer Disease"
+        }
+      ],
+      "context": "es of apnea may decrease with age. However, several forms of adult sleep apnea also exist. The exact cause of infantile apnea is not known. It may occur as the result of a combination of environmental and developmental factors (multifactoral). In extremely rare cases, central infantile apnea may be familial and affect more family members than would otherwise be expected. Infantile apnea affects males and females in equal numbers and occurs in children less than 1 year old. Infants who are born prematurely tend to experience episodes of apnea (apnea of prematurity).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dementia",
+        "Stomach Neoplasms",
+        "Atrial Fibrillation"
+      ],
+      "pubtator_normalized_name": "Alzheimer Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Apnea",
+      "preferred_label": "apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000106",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001049"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000106",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001049",
+          "display": "Apnea"
+        }
+      ],
+      "context": "Apnea is a term used to describe the temporary absence of spontaneous breathing. Infantile apnea occurs in children under the age of one year. Apnea may occur because of neurological impairment of the respiratory rhythm or obstruction of air flow through the air passages. The symptoms of infantile apnea",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sleep Apnea Obstructive",
+        "Sleep Apnea Syndromes",
+        "Sleep Apnea Central"
+      ],
+      "pubtator_normalized_name": "Apnea",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

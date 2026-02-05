@@ -1,0 +1,35 @@
+{
+  "doc_id": "Monilethrix",
+  "doc_filename": "Monilethrix.pdf",
+  "top_entities": [
+    {
+      "name": "hair loss",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "monilethrix",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2061,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Monilethrix: Rare Inherited Hair Disorder",
+  "short_description": "Clinical overview of monilethrix, a rare genetic disorder causing sparse, brittle hair with characteristic beaded appearance under microscopy.",
+  "long_description": "This document provides a comprehensive clinical description of monilethrix, a rare inherited disorder that affects hair structure and growth. The condition is characterized by sparse, dry, and brittle hair that frequently breaks before reaching significant length, often accompanied by patchy hair loss and perifollicular hyperkeratosis. The distinctive microscopic appearance of hair shafts resembling evenly-spaced beads is a key diagnostic feature. The document covers the autosomal dominant inheritance pattern, equal prevalence between males and females, typical age of onset from birth to two years, and variable symptom progression that may improve during puberty or pregnancy in some cases.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T23:35:45.244202"
+}

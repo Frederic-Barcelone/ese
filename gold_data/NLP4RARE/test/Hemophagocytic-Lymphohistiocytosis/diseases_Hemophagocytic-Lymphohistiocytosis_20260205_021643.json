@@ -1,0 +1,280 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:16:43.678079",
+  "document": "Hemophagocytic-Lymphohistiocytosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hemophagocytic-Lymphohistiocytosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hemophagocytic lymphohistiocytosis",
+      "preferred_label": "hemophagocytic lymphohistiocytosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D76.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015540",
+        "orpha": "Orphanet:158032",
+        "umls": "UMLS:C3887558",
+        "mesh": "D051359"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015540",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050120",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20024",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D76.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:288.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:854411",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10058125",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200032",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35439",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1938",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:158032",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234437005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3887558",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D051359",
+          "display": "Lymphohistiocytosis Hemophagocytic"
+        }
+      ],
+      "context": "Hemophagocytic lymphohistiocytosis (HLH) is a rare, life-threatening condition caused by an overactive, abnormal response of the immune system. The immune system is the body’s natural defense system against foreign or invading organisms or substances. The immune system is a complex network of cells, tissues, organs, and proteins tha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemophagocytic lymphohistiocytosis familial 2",
+        "Hemophagocytic lymphohistiocytosis familial 3",
+        "Hemophagocytic Lymphohistiocytosis Familial 5"
+      ],
+      "pubtator_normalized_name": "Lymphohistiocytosis Hemophagocytic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HLH",
+      "preferred_label": "Hemophagocytic syndrome",
+      "abbreviation": "HLH",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": "4A01.23",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:158032",
+        "umls": null,
+        "mesh": "D051359"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:158032",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A01.23",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D051359",
+          "display": "Lymphohistiocytosis Hemophagocytic"
+        }
+      ],
+      "context": "Hemophagocytic lymphohistiocytosis (HLH) is a rare, life-threatening condition caused by an overactive, abnormal response of the immune system. The immune system is the body’s natural defense system against foreign or invading organisms or substances. The immune system is a complex network of cells, tissues, organs, and proteins that wor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Griscelli syndrome type 1",
+        "Griscelli syndrome type 2"
+      ],
+      "pubtator_normalized_name": "Lymphohistiocytosis Hemophagocytic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic predisposition",
+      "preferred_label": "genetic predisposition",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Z15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020573",
+        "orpha": null,
+        "umls": "UMLS:C1455997",
+        "mesh": "MESH:D020022"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020573",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Z15",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1876499",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020022",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1455997",
+          "display": null
+        }
+      ],
+      "context": "the immune system responds to a stimulus or ‘trigger’, often an infection, but the response is ineffective and abnormal. This ineffective, abnormal response, causes a variety of signs and symptoms, which, if not treated, can potentially become life-threatening. Some affected individuals may have a genetic predisposition to developing hemophagocytic lymphohistiocytosis. This is known as the primary or familial form. In other individuals, the disorder occurs sporadically usually when there is an underlying predisposing condition or disorder. This is known as the secondary form. The secondary forms are more common th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Genetic Predisposition to Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "familial",
+      "preferred_label": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000544"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000544",
+          "display": "Alzheimer Disease"
+        }
+      ],
+      "context": "ve and abnormal. This ineffective, abnormal response, causes a variety of signs and symptoms, which, if not treated, can potentially become life-threatening. Some affected individuals may have a genetic predisposition to developing hemophagocytic lymphohistiocytosis. This is known as the primary or familial form. In other individuals, the disorder occurs sporadically usually when there is an underlying predisposing condition or disorder. This is known as the secondary form. The secondary forms are more common than the familial forms. Hemophagocytic lymphohistiocytosis most often affects infants from b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dementia",
+        "Stomach Neoplasms",
+        "Atrial Fibrillation"
+      ],
+      "pubtator_normalized_name": "Alzheimer Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "doc_id": "Alveolitis-Extrinsic-Allergic",
+  "doc_filename": "Alveolitis-Extrinsic-Allergic.pdf",
+  "top_entities": [
+    {
+      "name": "hypersensitivity pneumonitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "allergic reaction",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Allergen",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "air",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2661,
+  "file_size_human": "2.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Extrinsic Allergic Alveolitis: Clinical Overview and Management",
+  "short_description": "A comprehensive clinical document describing extrinsic allergic alveolitis, a lung disorder caused by repeated inhalation of organic dust in occupational settings.",
+  "long_description": "This clinical reference document provides a detailed overview of extrinsic allergic alveolitis, a respiratory condition resulting from repeated exposure to organic dust particles, typically in occupational environments. The document covers both acute and chronic forms of the disease, detailing symptomatology ranging from breathing difficulties and dry coughs to more severe manifestations including fever, cyanosis, and hemoptysis. It discusses the equal gender distribution of the condition while emphasizing its prevalence in occupations involving animal or vegetable dust exposure. The document outlines comprehensive treatment approaches, emphasizing the critical importance of allergen identification and avoidance, workplace modifications, and the use of corticosteroids in severe cases. It highlights the significance of early diagnosis and intervention to prevent permanent lung damage and optimize treatment outcomes.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:38:17.942068"
+}

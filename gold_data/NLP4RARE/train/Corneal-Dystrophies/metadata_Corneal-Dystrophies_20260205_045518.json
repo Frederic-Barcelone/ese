@@ -1,0 +1,35 @@
+{
+  "doc_id": "Corneal-Dystrophies",
+  "doc_filename": "Corneal-Dystrophies.pdf",
+  "top_entities": [
+    {
+      "name": "corneal dystrophy",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Macrodactyly of toes, bilateral",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2382,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Corneal Dystrophies: Genetic Eye Disorders Overview",
+  "short_description": "Clinical overview of corneal dystrophies, a group of genetic eye disorders characterized by abnormal material accumulation in the cornea.",
+  "long_description": "This document provides a comprehensive overview of corneal dystrophies, which are genetic, often progressive eye disorders affecting the transparent outer layer of the eye. The content covers the clinical characteristics of these conditions, including their bilateral nature, slow progression, and familial tendency. It discusses the variable presentation from asymptomatic cases to significant vision impairment, inheritance patterns (primarily autosomal dominant), and demographic considerations. The document also addresses diagnostic challenges due to asymptomatic cases, diagnostic methods including slit lamp examination and molecular genetic testing, and notes the particular prevalence of Fuchs corneal dystrophy in women.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:55:18.925849"
+}

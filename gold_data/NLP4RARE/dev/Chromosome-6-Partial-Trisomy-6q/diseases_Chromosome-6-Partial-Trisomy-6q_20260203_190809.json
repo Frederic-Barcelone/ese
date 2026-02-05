@@ -1,0 +1,828 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:08:09.004623",
+  "document": "Chromosome-6-Partial-Trisomy-6q.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Chromosome-6-Partial-Trisomy-6q.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 15,
+  "total_validated": 15,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Chromosome 6, Partial Trisomy 6q",
+      "preferred_label": "Chromosome 6, Partial Trisomy 6q",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019881",
+        "orpha": "Orphanet:96098",
+        "umls": "UMLS:C0795817",
+        "mesh": "MESH:C537810"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019881",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19314",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:162773",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537810",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:959",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:96098",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:763275001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0795817",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder in which a portion of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "6q+ Syndrome Partial",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder in which a portion of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow physical development (",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "Congenital chromosomal disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008626",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008626",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder in which a portion of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow physical development (growth retardation);",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "trisomy",
+      "preferred_label": "trisomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700065",
+        "orpha": null,
+        "umls": "UMLS:C0041107",
+        "mesh": "MESH:D014314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21702",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014314",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3421",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041107",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder in which a portion of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow physical development (growth retardation); mental retardation; malformations of the skull and facial (craniofacial) regio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Trisomy"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "in which a portion of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow physical development (growth retardation); mental retardation; malformations of the skull and facial (craniofacial) region; an unusually short, webbed neck; abnormal bending (flexion) or extension of certain joints in fixed postures (joint contractures); and/or other physical abnormalities. In most cases, Chromosome 6, Partial Trisomy 6q has been the result o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.65,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "); mental retardation; malformations of the skull and facial (craniofacial) region; an unusually short, webbed neck; abnormal bending (flexion) or extension of certain joints in fixed postures (joint contractures); and/or other physical abnormalities. In most cases, Chromosome 6, Partial Trisomy 6q has been the result of a balanced translocation in one of the parents. Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder that appears to affect males and females equally. Approximately 30 cases have been reported in the medical literature. Additional chromosomal disorders may h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorders",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "have been reported in the medical literature. Additional chromosomal disorders may have features similar to those potentially associated with Chromosome 6, Partial Trisomy 6q. Chromosomal testing is necessary to confirm the specific chromosomal abnormality present. (For further information on such disorders, choose the name of the specific chromosomal disorder in question or use “chromosome” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease",
+      "preferred_label": "rare disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "lly associated with Chromosome 6, Partial Trisomy 6q. Chromosomal testing is necessary to confirm the specific chromosomal abnormality present. (For further information on such disorders, choose the name of the specific chromosomal disorder in question or use “chromosome” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Partial Trisomy 6q",
+      "preferred_label": "chromosome 6q duplication syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0795817",
+        "mesh": "C537810"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0795817",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537810",
+          "display": "6q+ Syndrome Partial"
+        }
+      ],
+      "context": "Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder in which a portion of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "6q+ Syndrome Partial",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malformations",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "of the 6th chromosome (6q) is present three times (trisomy) rather than twice in cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow physical development (growth retardation); mental retardation; malformations of the skull and facial (craniofacial) region; an unusually short, webbed neck; abnormal bending (flexion) or extension of certain joints in fixed postures (joint contractures); and/or other physical abnormalities. In most cases, Chromosome 6, Partial Trisomy 6q has been the result of a balanced tr",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "webbed neck",
+      "preferred_label": "Neck webbing",
+      "abbreviation": null,
+      "confidence": 0.7614974260330201,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0221217",
+        "mesh": "C000719407"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0221217",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C000719407",
+          "display": "Midline brainstem cleft"
+        }
+      ],
+      "context": "cells of the body. Associated symptoms and findings may vary in range and severity from case to case. However, many affected infants and children have slow physical development (growth retardation); mental retardation; malformations of the skull and facial (craniofacial) region; an unusually short, webbed neck; abnormal bending (flexion) or extension of certain joints in fixed postures (joint contractures); and/or other physical abnormalities. In most cases, Chromosome 6, Partial Trisomy 6q has been the result of a balanced translocation in one of the parents. Chromosome 6, Partial Trisomy 6q is an extre",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Midline brainstem cleft",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "joint contractures",
+      "preferred_label": "Contracture of joint",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0009918",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0009918",
+          "display": null
+        }
+      ],
+      "context": "se to case. However, many affected infants and children have slow physical development (growth retardation); mental retardation; malformations of the skull and facial (craniofacial) region; an unusually short, webbed neck; abnormal bending (flexion) or extension of certain joints in fixed postures (joint contractures); and/or other physical abnormalities. In most cases, Chromosome 6, Partial Trisomy 6q has been the result of a balanced translocation in one of the parents. Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder that appears to affect males and females equally. Approximately 30",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "translocation",
+      "preferred_label": "Chromosomal translocation",
+      "abbreviation": null,
+      "confidence": 0.7518948197364808,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0040715",
+        "mesh": "D014178"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0040715",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014178",
+          "display": "Translocation Genetic"
+        }
+      ],
+      "context": "ns of the skull and facial (craniofacial) region; an unusually short, webbed neck; abnormal bending (flexion) or extension of certain joints in fixed postures (joint contractures); and/or other physical abnormalities. In most cases, Chromosome 6, Partial Trisomy 6q has been the result of a balanced translocation in one of the parents. Chromosome 6, Partial Trisomy 6q is an extremely rare chromosomal disorder that appears to affect males and females equally. Approximately 30 cases have been reported in the medical literature. Additional chromosomal disorders may have features similar to those potentially as",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Translocation Genetic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal abnormality",
+      "preferred_label": "Chromosome Aberrations",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008625",
+        "mesh": "D002869"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008625",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002869",
+          "display": "Chromosome Aberrations"
+        }
+      ],
+      "context": "ppears to affect males and females equally. Approximately 30 cases have been reported in the medical literature. Additional chromosomal disorders may have features similar to those potentially associated with Chromosome 6, Partial Trisomy 6q. Chromosomal testing is necessary to confirm the specific chromosomal abnormality present. (For further information on such disorders, choose the name of the specific chromosomal disorder in question or use “chromosome” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sex Chromosome Aberrations"
+      ],
+      "pubtator_normalized_name": "Chromosome Aberrations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease Database",
+      "preferred_label": "Rare Diseases",
+      "abbreviation": null,
+      "confidence": 0.8803369760513305,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0678236",
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0678236",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "lly associated with Chromosome 6, Partial Trisomy 6q. Chromosomal testing is necessary to confirm the specific chromosomal abnormality present. (For further information on such disorders, choose the name of the specific chromosomal disorder in question or use “chromosome” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:50:52.519915",
+  "document": "Addison_s-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Addison_s-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "disease",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Addison’s disease affects males and females in equal numbers. Approximately 1 in 100,000 people in United States have Addison’s disease. The overall prevalence is estimated to be between 40 and 60 people per million of the general population. Because cases of Addison’s disease may go undiagnosed, it is difficult to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "ople in United States have Addison’s disease. The overall prevalence is estimated to be between 40 and 60 people per million of the general population. Because cases of Addison’s disease may go undiagnosed, it is difficult to determine its true frequency in the general population. Addison’s disease can potentially affect individuals of any age, but usually occurs in individuals between 30-50 years of age. Addison’s disease was first identified in the medical literature in 1855 by a physician named Thomas Addison.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "the general population. Because cases of Addison’s disease may go undiagnosed, it is difficult to determine its true frequency in the general population. Addison’s disease can potentially affect individuals of any age, but usually occurs in individuals between 30-50 years of age. Addison’s disease was first identified in the medical literature in 1855 by a physician named Thomas Addison.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Addison’s disease",
+      "preferred_label": "Addison Disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0001403",
+        "mesh": "D000224"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0001403",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000224",
+          "display": "Addison Disease"
+        }
+      ],
+      "context": "Addison’s disease affects males and females in equal numbers. Approximately 1 in 100,000 people in United States have Addison’s disease. The overall prevalence is estimated to be between 40 and 60 people per million of the general population. Because cases of Addison’s disease may go undiagnosed, it is difficult to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Adrenoleukodystrophy",
+        "Hypoadrenocorticism Familial",
+        "Polyendocrinopathies Autoimmune"
+      ],
+      "pubtator_normalized_name": "Addison Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

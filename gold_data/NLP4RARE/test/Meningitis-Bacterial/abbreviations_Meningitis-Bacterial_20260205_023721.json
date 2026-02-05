@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:37:21.092810",
+  "document": "Meningitis-Bacterial.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Meningitis-Bacterial.pdf",
+  "total_candidates": 54,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 2,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ng children under age five. Testing for Bacterial Meningitis may include imaging techniques such as CT scans or MR imaging. Other testing may include examination of the patient's blood and/or skin. Diag",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MR",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "under age five. Testing for Bacterial Meningitis may include imaging techniques such as CT scans or MR imaging. Other testing may include examination of the patient's blood and/or skin. Diagnosis is mad",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "central nervous system disease",
+      "matched_text": "central nervous system disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pneumococcal meningitis",
+      "matched_text": "pneumococcal meningitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G00.1",
+      "orpha": "Orphanet:55655"
+    },
+    {
+      "name": "pneumococcal infection",
+      "matched_text": "pneumococcal infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "bacterial meningitis",
+      "matched_text": "Bacterial Meningitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "meningitis",
+      "matched_text": "Meningitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "influenza",
+      "matched_text": "influenza",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Streptococcus",
+      "matched_text": "streptococcus",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

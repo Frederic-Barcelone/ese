@@ -1,0 +1,185 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:04:33.588362",
+  "document": "Dentin-Dysplasia-Type-I.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dentin-Dysplasia-Type-I.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "radicular dentin dysplasia",
+      "preferred_label": "radicular dentin dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007436",
+        "orpha": "Orphanet:99789",
+        "umls": "UMLS:C0399379",
+        "mesh": "MESH:C538215"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007436",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1807",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:520.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:97996",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538215",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1041",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:125400",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99789",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:109493006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0399379",
+          "display": null
+        }
+      ],
+      "context": "ed by atypical development of the \"dentin\" of a person's teeth. Dentin makes up most of the tooth and is the bone-like material under the enamel. It serves to contain the pulp of the tooth. The pulp is a soft tissue that is well supplied with blood vessels and nerves. This disorder is also Known as radicular dentin dysplasia because the underdeveloped, abnormal pulp tissue is predominately in the roots of the teeth. The teeth lack pulp chambers or have half-moon shaped pulp chambers in short or abnormally shaped roots. The condition may affect juvenile as well as adult teeth and, since the roots are abnormally short, u",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dentin dysplasia type 1",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Dentin dysplasia",
+      "preferred_label": "dentin dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015613",
+        "orpha": "Orphanet:1653",
+        "umls": "UMLS:C0011430",
+        "mesh": "MESH:D003805"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015613",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:701",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16575",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:520.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8310",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003805",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1653",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:109492001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011430",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1262020657",
+          "display": null
+        }
+      ],
+      "context": "\"Dentin dysplasia type | is an inherited disorder characterized by atypical development of the \"dentin\" of a person's teeth. Dentin makes up most of the tooth and is the bone-like material under the enamel. It serves to contain the pulp of the tooth. The pulp is a soft tissue that is well supplied with blood vessels",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dentin dysplasia sclerotic bones",
+        "Dental Pulp Calcification",
+        "Dentin dysplasia type 1"
+      ],
+      "pubtator_normalized_name": "Dentin Dysplasia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

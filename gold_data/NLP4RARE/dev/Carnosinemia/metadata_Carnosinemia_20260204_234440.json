@@ -1,0 +1,45 @@
+{
+  "doc_id": "Carnosinemia",
+  "doc_filename": "Carnosinemia.pdf",
+  "top_entities": [
+    {
+      "name": "inborn errors of metabolism",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "intellectual disability",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Carnosine",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "KIDINS220",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 2382,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Carnosinemia: Clinical Overview and Diagnostic Criteria",
+  "short_description": "Clinical document describing carnosinemia, a rare inherited metabolic disorder characterized by developmental delays, seizures, and intellectual disability in infants and children.",
+  "long_description": "This clinical reference document provides a comprehensive overview of carnosinemia, an extremely rare inherited metabolic disorder affecting approximately 30 individuals worldwide. The document details the clinical presentation including early-onset symptoms such as extreme drowsiness, myoclonic seizures, and developmental delays that typically manifest in infancy. It describes the progressive nature of the condition, including intellectual disabilities, motor delays, low muscle tone, and potential muscle weakness. The document outlines diagnostic approaches including amino acid analysis of blood and urine samples, which reveal elevated levels of carnosine and anserine, as well as specialized testing for reduced carnosinase enzyme activity. The text emphasizes the variable symptom severity and provides essential clinical information for healthcare professionals managing this rare metabolic condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T22:44:40.918811"
+}

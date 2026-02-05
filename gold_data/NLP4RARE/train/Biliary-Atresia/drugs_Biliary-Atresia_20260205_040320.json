@@ -1,0 +1,113 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:03:20.559055",
+  "document": "Biliary-Atresia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Biliary-Atresia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "tube",
+      "preferred_name": "TUBE",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "733745",
+          "display": null
+        }
+      ],
+      "context": "characterized by destruction or absence of all or a portion of the bile duct that lies outside the liver (extrahepatic bile duct). The bile duct is a tube that allows the passage of bile from the liver into the gall bladder and, eventually, the small intestine. Bile is a liquid secreted by the liver tha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "dye",
+      "preferred_name": "dye",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C085321",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3707",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C085321",
+          "display": "cyanine dye 5"
+        }
+      ],
+      "context": "re taken to outline how the dye fills the major bile ducts (intraoperative cholangiogram). These films show the movement (or lack of movement) of the dye through bile ducts and into the small intestine. The physician/surgeon is then able to evaluate the structure of the bile ducts and to determine the ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "CY5.5 cyanine dye",
+        "thioflavin T",
+        "Azo Compounds"
+      ],
+      "pubtator_normalized_name": "cyanine dye 5",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

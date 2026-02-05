@@ -1,0 +1,134 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:43:14.518691",
+  "document": "Buerger_s-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Buerger_s-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "rest",
+      "hgnc_symbol": "REST",
+      "full_name": "RE1 silencing transcription factor",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "9966",
+        "entrez": "5978",
+        "ensembl": "ENSG00000084093",
+        "uniprot": "Q13127",
+        "omim": "600571"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "9966",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "5978",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000084093",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "600571",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q13127",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "654",
+          "disease_name": "Nephroblastoma",
+          "association_type": "Major susceptibility factor in"
+        },
+        {
+          "orphacode": "2024",
+          "disease_name": "Hereditary gingival fibromatosis",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "rized by narrowing or blockage (occlusion) of the veins and arteries of the extremities, resulting in reduced blood flow to these areas (peripheral vascular disease). The legs are affected more often than the arms. In most cases, the first symptom is extreme pain of the lower arms and legs while at rest. Affected individuals may also experience cramping in the legs when they walk that, in rare cases, may cause limping (claudication). In addition, affected individuals may have sores (ulcers) on the extremities, numbness and tingling and a lack of normal blood flow to the fingers and/or toes when ex",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "er that, in most cases, affects young or middle-aged male cigarette smokers. It is characterized by narrowing or blockage (occlusion) of the veins and arteries of the extremities, resulting in reduced blood flow to these areas (peripheral vascular disease). The legs are affected more often than the arms. In most cases, the first symptom is extreme pain of the lower arms and legs while at rest. Affected individuals may also experience cramping in the legs when they walk that, in rare cases, may cause limping (claudication). In addition, affected individuals may have sores (ulcers) on the extremitie",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

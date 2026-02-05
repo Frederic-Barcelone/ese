@@ -1,0 +1,174 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T00:49:20.950661",
+  "document": "Anemia-Hereditary-Nonspherocytic-Hemolytic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Anemia-Hereditary-Nonspherocytic-Hemolytic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hereditary nonspherocytic hemolytic anemia",
+      "preferred_label": "hereditary nonspherocytic hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006506",
+        "orpha": null,
+        "umls": "UMLS:C0002882",
+        "mesh": "MESH:D000746"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006506",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2861",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000641",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:282.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:284",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000746",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:300908",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:301317008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002882",
+          "display": null
+        }
+      ],
+      "context": "Hereditary nonspherocytic hemolytic anemia is a term used to describe a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic he",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "Hereditary nonspherocytic hemolytic anemia is a term used to describe a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic hemolytic anemia is a rare blood disorder that affects more males than females. Males are more likely to have severe symptoms of this disorder, whereas females have milder symptoms or no symptoms.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

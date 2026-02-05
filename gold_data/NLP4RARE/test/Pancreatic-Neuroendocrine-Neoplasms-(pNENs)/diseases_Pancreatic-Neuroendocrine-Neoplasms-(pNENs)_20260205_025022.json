@@ -1,0 +1,220 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:50:22.823792",
+  "document": "Pancreatic-Neuroendocrine-Neoplasms-(pNENs).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pancreatic-Neuroendocrine-Neoplasms-(pNENs).pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "pNEN",
+      "preferred_label": "Neuroendocrine neoplasm of pancreas",
+      "abbreviation": "PNEN",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": "2C10.1",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:506052",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:506052",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2C10.1",
+          "display": null
+        }
+      ],
+      "context": "PNENSs seem to affect women slightly more often than men. Individuals of any ethnic or racial group may develop a pNEN. Affected individuals usually develop sporadic pNENs between the ages of 30-60. When pNENs occur as part of a genetic syndrome, they tend to occur during childhood or young adulthood. PNENs affect approximately ~1 in 100,000 individuals in the general population per year. They account for approxima",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "pancreatic neuroendocrine neoplasms",
+      "preferred_label": "pancreatic neuroendocrine neoplasm",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005815",
+        "orpha": "Orphanet:506052",
+        "umls": "UMLS:C5848399",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005815",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1799",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007331",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22052",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8150/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1848937",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:506052",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:254611009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5848399",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1421495979",
+          "display": null
+        }
+      ],
+      "context": "he ages of 30-60. When pNENs occur as part of a genetic syndrome, they tend to occur during childhood or young adulthood. PNENs affect approximately ~1 in 100,000 individuals in the general population per year. They account for approximately 2-4 percent of all pancreatic neoplasms. A diagnosis of a pancreatic neuroendocrine neoplasms is made based upon identification of characteristic symptoms (if present), a detailed patient history, a thorough clinical evaluation and a variety of specialized tests including advanced imaging techniques (octrotide-scintigraphy, CT, MRI, PET-CT, PET-MRI), blood tests (Chromogranin A, NETest), bi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "pancreatic neoplasms",
+      "preferred_label": "pancreatic neoplasm",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021040",
+        "orpha": null,
+        "umls": "UMLS:C0030297",
+        "mesh": "MESH:D010190"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021040",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003860",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18279",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010190",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:PANCREAS",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:126859007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0030297",
+          "display": null
+        }
+      ],
+      "context": "sually develop sporadic pNENs between the ages of 30-60. When pNENs occur as part of a genetic syndrome, they tend to occur during childhood or young adulthood. PNENs affect approximately ~1 in 100,000 individuals in the general population per year. They account for approximately 2-4 percent of all pancreatic neoplasms. A diagnosis of a pancreatic neuroendocrine neoplasms is made based upon identification of characteristic symptoms (if present), a detailed patient history, a thorough clinical evaluation and a variety of specialized tests including advanced imaging techniques (octrotide-scintigraphy, CT, MRI, PET-",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pancreatic Intraductal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Pancreatic Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

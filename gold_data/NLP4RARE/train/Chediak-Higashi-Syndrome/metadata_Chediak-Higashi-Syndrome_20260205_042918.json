@@ -1,0 +1,30 @@
+{
+  "doc_id": "Chediak-Higashi-Syndrome",
+  "doc_filename": "Chediak-Higashi-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Chediak-Higashi syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1695,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Chediak-Higashi Syndrome: Clinical Overview and Epidemiology",
+  "short_description": "Clinical document describing the epidemiological characteristics and progression patterns of Chediak-Higashi syndrome, a rare genetic disorder.",
+  "long_description": "This clinical document provides essential epidemiological information about Chediak-Higashi syndrome, a very rare genetic disorder with fewer than 500 documented cases worldwide. The document outlines key demographic characteristics, noting equal prevalence between males and females, early onset typically evident at birth or shortly after, and absence of ethnic or racial predisposition. Importantly, it highlights that 85% of affected individuals progress to the accelerated phase of the disease, which represents a critical clinical milestone in disease management and prognosis.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:29:18.010969"
+}

@@ -1,0 +1,45 @@
+{
+  "doc_id": "Fitz-Hugh-Curtis-Syndrome",
+  "doc_filename": "Fitz-Hugh-Curtis-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "pelvic inflammatory disease",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "chlamydia trachomatis infectious disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "DIAPHRAGM",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Chlamydia trachomatis",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2387,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MED",
+  "document_type_name": "Patient Education & Advocacy",
+  "document_type_group": "Patient-Centric Documentation",
+  "classification_confidence": 0.15,
+  "title": "Fitz-Hugh-Curtis Syndrome: Clinical Overview and Diagnostic Approaches",
+  "short_description": "Clinical document describing Fitz-Hugh-Curtis syndrome, a rare complication of pelvic inflammatory disease characterized by peritonitis and perihepatitis in women.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Fitz-Hugh-Curtis syndrome, a rare disorder occurring almost exclusively in women as a complication of pelvic inflammatory disease (PID). The document details the pathophysiology involving inflammation of the peritoneum and perihepatitis, commonly caused by Neisseria gonorrhoeae and Chlamydia trachomatis infections. It outlines characteristic symptoms including severe upper right abdominal pain, fever, chills, headaches, and malaise. The document emphasizes diagnostic approaches through exclusion of other conditions and describes various confirmatory tests including imaging studies (ultrasound, radiographs, CT scanning), diagnostic laparoscopy, and laboratory examinations for pathogen identification.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:37:59.576856"
+}

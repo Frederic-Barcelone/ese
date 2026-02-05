@@ -1,0 +1,123 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:31:40.225873",
+  "document": "Familial-Isolated-Hypoparathyroidism.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Familial-Isolated-Hypoparathyroidism.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "Parathyroid hormone",
+      "preferred_name": "parathyroid hormone",
+      "brand_name": "NATPARA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Parathyroid Hormone",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "INJECTION",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010281",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "BLA125511",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010281",
+          "display": "Parathyroid Hormone"
+        }
+      ],
+      "context": "mineral balance. The parathyroid glands are part of the endocrine system, the network of glands that regulate the chemical processes within the body. Parathyroid hormone plays a vital role in regulating the levels of calcium and phosphorus in the blood. Parathyroid hormone deficiency causes low levels of calcium in th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Teriparatide",
+        "parathyroid hormone (1-34) bovine",
+        "parathyroid hormone (3-34)"
+      ],
+      "pubtator_normalized_name": "Parathyroid Hormone",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "phosphorous",
+      "preferred_name": "Phosphorous",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010757",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "8263",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010757",
+          "display": "Phosphorous Acids"
+        }
+      ],
+      "context": "ls of calcium and phosphorus in the blood. Parathyroid hormone deficiency causes low levels of calcium in the blood (hypocalcemia) and high levels of phosphorous. Familial isolated hypoparathyroidism, with the exception of the X-linked form, affects males and females in equal numbers. The X-linked form affects",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "phosphonic acid",
+        "phosphorus chloride",
+        "triisopropyl phosphite"
+      ],
+      "pubtator_normalized_name": "Phosphorous Acids",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

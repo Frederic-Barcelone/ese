@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T07:59:21.997910",
+  "document": "Graft-versus-Host-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Graft-versus-Host-Disease.pdf",
+  "total_candidates": 38,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "GVHD",
+      "long_form": "Graft versus Host Disease",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Graft versus Host Disease (GVHD) is a rare disorder that can strike persons whose immune system is deficient or suppressed and who have received a bone marrow transplant or a nonirradiated blood transfusion. Symptoms may include skin rash, intestinal problems and liver dysfunction. GVHD is caused by donor T cells recognizing foreign antigens (histocompatibility or human leucocyte antigens) on the recipient’s cells and reacting t",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HLA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "eic lymphocytes. The risk of GVHD usually increases with the recipient’s age and with the degree of HLA differences between donor and recipient unless fully T-cell depleted.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "graft versus host disease",
+      "matched_text": "Graft versus Host Disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D89.81",
+      "orpha": "Orphanet:39812"
+    },
+    {
+      "name": "skin rash",
+      "matched_text": "skin rash",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

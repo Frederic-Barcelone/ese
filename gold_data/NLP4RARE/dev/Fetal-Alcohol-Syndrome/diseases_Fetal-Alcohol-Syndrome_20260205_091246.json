@@ -1,0 +1,254 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:12:46.629996",
+  "document": "Fetal-Alcohol-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Fetal-Alcohol-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Fetal alcohol syndrome",
+      "preferred_label": "fetal alcohol syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q86.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016011",
+        "orpha": "Orphanet:1915",
+        "umls": "UMLS:C0015923",
+        "mesh": "D063647"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016011",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050667",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:599",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q86.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8820",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10016845",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84713",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1915",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:205788004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015923",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:362980699",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D063647",
+          "display": "Fetal Alcohol Spectrum Disorders"
+        }
+      ],
+      "context": "Fetal alcohol syndrome (FAS) is a characteristic pattern of mental and physical birth defects that results due to maternal use of alcohol during pregnancy. The range and severity of associated abnormalities may vary greatly from case to case. However, characteristic features may include growth delays before and after bir",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fetal Alcohol Spectrum Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FAS",
+      "preferred_label": "Fetal alcohol syndrome",
+      "abbreviation": "FAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q86.0",
+        "icd11": "LD2F.00",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:1915",
+        "umls": null,
+        "mesh": "D063647"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:1915",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q86.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LD2F.00",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D063647",
+          "display": "Fetal Alcohol Spectrum Disorders"
+        }
+      ],
+      "context": "Fetal alcohol syndrome (FAS) is a characteristic pattern of mental and physical birth defects that results due to maternal use of alcohol during pregnancy. The range and severity of associated abnormalities may vary greatly from case to case. However, characteristic features may include growth delays before and after birth (p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fetal Alcohol Spectrum Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "e. However, characteristic features may include growth delays before and after birth (prenatal and postnatal growth retardation); malformations of the skull and facial (craniofacial) region; brain abnormalities; and/or additional physical findings. FAS may also be associated with varying degrees of mental retardation, learning abnormalities, and/or behavioral problems that, in some cases, may occur in the absence of obvious physical abnormalities. Researchers estimate that fetal alcohol syndrome (FAS) occurs in approximately one to two in 1,000 live births in the United States. According to reports in the medic",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,565 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:41:11.112164",
+  "document": "Fragile-X-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fragile-X-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "dental",
+      "preferred_label": "Gorlin-Chaudhry-Moss syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2095",
+        "umls": null,
+        "mesh": "C567360"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2095",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567360",
+          "display": "Progeroid Syndrome Congenital Petty Type"
+        }
+      ],
+      "context": "are variable and may not be obvious until puberty. These symptoms can include a large head, long face, prominent forehead and chin, protruding ears, loose joints and large testes. Other symptoms can include flat feet, frequent ear infections, low muscle tone, a long narrow face, high arched palate, dental problems, crossed eyes (strabismus) and heart problems including mitral valve prolapse. Delayed motor development, hyperactivity, behavior problems, toe walking, and/or occasional seizures can also occur in some patients. Autistic behaviors such as poor eye contact, hand flapping, and/or self-stimu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Progeroid Syndrome Congenital Petty Type",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Fragile X syndrome is characterized by moderate intellectual disability in affected males and mild intellectual disability in affected females. Distinctive physical features are sometimes present in affected males including a large head, long face, prominent forehead and chin, protruding ears, loose joints and large testes, but these features develop over time and may",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mitral valve prolapse",
+      "preferred_label": "mitral valve prolapse",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004910",
+        "orpha": null,
+        "umls": "UMLS:C0026267",
+        "mesh": "MESH:D008945"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004910",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:988",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001634",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7671",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008945",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C50655",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:8074002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026267",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1085590500",
+          "display": null
+        }
+      ],
+      "context": "clude a large head, long face, prominent forehead and chin, protruding ears, loose joints and large testes. Other symptoms can include flat feet, frequent ear infections, low muscle tone, a long narrow face, high arched palate, dental problems, crossed eyes (strabismus) and heart problems including mitral valve prolapse. Delayed motor development, hyperactivity, behavior problems, toe walking, and/or occasional seizures can also occur in some patients. Autistic behaviors such as poor eye contact, hand flapping, and/or self-stimulating behaviors are also common. Motor and language delays are usually present but bec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mitral Valve Prolapse Myxomatous 2",
+        "Mitral Valve Prolapse Myxomatous 1",
+        "Mitral Valve Prolapse Myxomatous 3"
+      ],
+      "pubtator_normalized_name": "Mitral Valve Prolapse",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Fragile X syndrome",
+      "preferred_label": "fragile X syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010383",
+        "orpha": "Orphanet:908",
+        "umls": "UMLS:C0016667",
+        "mesh": "MESH:D005600"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010383",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14261",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6464",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.83",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8912",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005600",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10017324",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200840",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84717",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1159",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:300624",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:908",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:613003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0016667",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1524287677",
+          "display": null
+        }
+      ],
+      "context": "Fragile X syndrome is characterized by moderate intellectual disability in affected males and mild intellectual disability in affected females. Distinctive physical features are sometimes present in affected males including a large head, long face, prominent forehead and chin, protruding ears, loose joints and large",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Primary Ovarian Insufficiency",
+        "Fragile X Tremor Ataxia Syndrome"
+      ],
+      "pubtator_normalized_name": "Fragile X Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ear infections",
+      "preferred_label": "Ear infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021666",
+        "orpha": null,
+        "umls": "UMLS:C0699744",
+        "mesh": "MESH:D010031"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021666",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:147064",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010031",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27193",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0699744",
+          "display": null
+        }
+      ],
+      "context": "disability in affected females. The physical features in affected males are variable and may not be obvious until puberty. These symptoms can include a large head, long face, prominent forehead and chin, protruding ears, loose joints and large testes. Other symptoms can include flat feet, frequent ear infections, low muscle tone, a long narrow face, high arched palate, dental problems, crossed eyes (strabismus) and heart problems including mitral valve prolapse. Delayed motor development, hyperactivity, behavior problems, toe walking, and/or occasional seizures can also occur in some patients. Autistic beh",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Otitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "crossed eyes",
+      "preferred_label": "crossed eyes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": "ICD10CM:H50.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004896",
+        "orpha": null,
+        "umls": "UMLS:C0014877",
+        "mesh": "MESH:D004948"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004896",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9840",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H50.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4550",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004948",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34596",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:16596007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014877",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:459766644",
+          "display": null
+        }
+      ],
+      "context": "may not be obvious until puberty. These symptoms can include a large head, long face, prominent forehead and chin, protruding ears, loose joints and large testes. Other symptoms can include flat feet, frequent ear infections, low muscle tone, a long narrow face, high arched palate, dental problems, crossed eyes (strabismus) and heart problems including mitral valve prolapse. Delayed motor development, hyperactivity, behavior problems, toe walking, and/or occasional seizures can also occur in some patients. Autistic behaviors such as poor eye contact, hand flapping, and/or self-stimulating behaviors are al",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "strabismus",
+      "preferred_label": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003432",
+        "orpha": null,
+        "umls": "UMLS:C0038379",
+        "mesh": "MESH:D013285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003432",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:540",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21337",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013285",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35040",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22066006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038379",
+          "display": null
+        }
+      ],
+      "context": "ious until puberty. These symptoms can include a large head, long face, prominent forehead and chin, protruding ears, loose joints and large testes. Other symptoms can include flat feet, frequent ear infections, low muscle tone, a long narrow face, high arched palate, dental problems, crossed eyes (strabismus) and heart problems including mitral valve prolapse. Delayed motor development, hyperactivity, behavior problems, toe walking, and/or occasional seizures can also occur in some patients. Autistic behaviors such as poor eye contact, hand flapping, and/or self-stimulating behaviors are also common. M",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Esotropia",
+        "Exotropia",
+        "fourth cranial nerve palsy familial congenital"
+      ],
+      "pubtator_normalized_name": "Strabismus",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

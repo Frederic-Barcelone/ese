@@ -1,0 +1,300 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:00:34.436230",
+  "document": "Granuloma-Annulare.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Granuloma-Annulare.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Granuloma annulare",
+      "preferred_label": "granuloma annulare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:L92.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006554",
+        "orpha": null,
+        "umls": "UMLS:C0085074",
+        "mesh": "MESH:D016460"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006554",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3777",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000704",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L92.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:88319",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016460",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3470",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:65508009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085074",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Granuloma_annulare",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1925637202",
+          "display": null
+        }
+      ],
+      "context": "Granuloma annulare is a chronic degenerative skin disorder. The most common form is localized granuloma annulare, which is characterized by the presence of small, firm red or yellow colored bumps (nodules or papules) that appear arranged in a ring on the skin. In most cases, the sizes of the lesions range from one to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Granuloma Annulare",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin disorder",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "Granuloma annulare is a chronic degenerative skin disorder. The most common form is localized granuloma annulare, which is characterized by the presence of small, firm red or yellow colored bumps (nodules or papules) that appear arranged in a ring on the skin. In most cases, the sizes of the lesions range from one to five centimeters. The most commonly aff",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disseminated",
+      "preferred_label": "disseminated",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0022202",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D004211"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0022202",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004211",
+          "display": "Disseminated Intravascular Coagulation"
+        }
+      ],
+      "context": "mps (nodules or papules) that appear arranged in a ring on the skin. In most cases, the sizes of the lesions range from one to five centimeters. The most commonly affected sites include the feet, hands, and fingers. In addition to the localized form, there are four less common forms: generalized or disseminated, linear, perforating, and subcutaneous. The lesions associated with granuloma annulare usually disappear without treatment (spontaneous remission). However, the lesions often reappear. The exact cause of granuloma annulare is unknown. Granuloma annulare occurs more often in females than males. The",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Multiple Sclerosis",
+        "Dermatitis Atopic",
+        "Mycobacterium Infections Nontuberculous"
+      ],
+      "pubtator_normalized_name": "Disseminated Intravascular Coagulation",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "localized",
+      "preferred_label": "localized",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0045042",
+        "orpha": null,
+        "umls": "UMLS:C0392752",
+        "mesh": "D016110"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0045042",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98236",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0392752",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016110",
+          "display": "Epidermolysis Bullosa Simplex"
+        }
+      ],
+      "context": "Granuloma annulare is a chronic degenerative skin disorder. The most common form is localized granuloma annulare, which is characterized by the presence of small, firm red or yellow colored bumps (nodules or papules) that appear arranged in a ring on the skin. In most cases, the sizes of the lesions range from one to five centimeters. The most commonly affected sites include the feet, hands",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Solitary Fibrous Tumor Pleural",
+        "Scleroderma Localized",
+        "Acute Generalized Exanthematous Pustulosis"
+      ],
+      "pubtator_normalized_name": "Epidermolysis Bullosa Simplex",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

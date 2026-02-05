@@ -1,0 +1,846 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:27:19.793203",
+  "document": "Kearns-Sayre-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Kearns-Sayre-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "chronic progressive external ophthalmoplegia",
+      "preferred_label": "chronic progressive external ophthalmoplegia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": "ICD10CM:H49.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005181",
+        "orpha": "Orphanet:520820",
+        "umls": "UMLS:C0162674",
+        "mesh": "MESH:D017246"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005181",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12558",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0002509",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4503",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000590",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H49.4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.72",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:102439",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017246",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200174",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:520820",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:46252003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162674",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1698427219",
+          "display": null
+        }
+      ],
+      "context": "Kearns-Sayre syndrome (KSS) is a rare neuromuscular disorder. An important clinical symptomatic feature is the presence of a mono-or bilateral ptosis (partial closure of the eyelids). This disease is mostly characterized by three primary findings: progressive paralysis of certain eye muscles (chronic progressive external ophthalmoplegia [CPEO]); abnormal accumulation of colored (pigmented) material on the nerve-rich membrane lining the eyes (atypical retinitis pigmentosa), leading to chronic inflammation, progressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Kearns-Sayre Syndrome"
+      ],
+      "pubtator_normalized_name": "Ophthalmoplegia Chronic Progressive External",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "Kearns-Sayre syndrome (KSS) is a rare neuromuscular disorder. An important clinical symptomatic feature is the presence of a mono-or bilateral ptosis (partial closure of the eyelids). This disease is mostly characterized by three primary findings: progressive paralysis of certain eye muscles (chronic progressive external ophthalmoplegia [CPEO]); abnormal accumulation of colored (pigmented) material on the nerve-rich membrane lining the ey",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Kearns-Sayre syndrome",
+      "preferred_label": "Kearns-Sayre syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H49.81",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010787",
+        "orpha": "Orphanet:480",
+        "umls": "UMLS:C0022541",
+        "mesh": "MESH:D007625"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010787",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12934",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6817",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H49.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9618",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007625",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048804",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200529",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84798",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1323",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:530000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:480",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:25792000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022541",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:399100745",
+          "display": null
+        }
+      ],
+      "context": "Kearns-Sayre syndrome (KSS) is a rare neuromuscular disorder. An important clinical symptomatic feature is the presence of a mono-or bilateral ptosis (partial closure of the eyelids). This disease is mostly characterized by three primary findings: progressive paralysis of certain eye muscles (chronic progressive externa",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kearns-Sayre Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "retinitis pigmentosa",
+      "preferred_label": "retinitis pigmentosa",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H35.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019200",
+        "orpha": "Orphanet:791",
+        "umls": "UMLS:C0035334",
+        "mesh": "MESH:D012174"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019200",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10584",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5694",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H35.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20551",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012174",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10038914",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200431",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85045",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1661",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268000",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:268000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:791",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:28835009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035334",
+          "display": null
+        }
+      ],
+      "context": "ial closure of the eyelids). This disease is mostly characterized by three primary findings: progressive paralysis of certain eye muscles (chronic progressive external ophthalmoplegia [CPEO]); abnormal accumulation of colored (pigmented) material on the nerve-rich membrane lining the eyes (atypical retinitis pigmentosa), leading to chronic inflammation, progressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease (cardiomyopathy) such as heart block. Other findings may include muscle weakness, short stature, hearing loss, and/or the loss of abilit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Retinitis Pigmentosa",
+        "Deafness Cataract Retinitis Pigmentosa And Sperm Abnormalities",
+        "Retinitis Pigmentosa 2"
+      ],
+      "pubtator_normalized_name": "Retinitis Pigmentosa Concentric",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heart disease",
+      "preferred_label": "heart disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005267",
+        "orpha": null,
+        "umls": "UMLS:C0018799",
+        "mesh": "MESH:D006331"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005267",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:114",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003777",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V47.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006331",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3079",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56265001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018799",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1512587470",
+          "display": null
+        }
+      ],
+      "context": "hthalmoplegia [CPEO]); abnormal accumulation of colored (pigmented) material on the nerve-rich membrane lining the eyes (atypical retinitis pigmentosa), leading to chronic inflammation, progressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease (cardiomyopathy) such as heart block. Other findings may include muscle weakness, short stature, hearing loss, and/or the loss of ability to coordinate voluntary movements (ataxia) due to problems affecting part of the brain (cerebellum). In some cases, KSS may be associated with other disorders an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Aortic Valve Disease",
+        "Microcephaly seizures mental retardation heart disorders"
+      ],
+      "pubtator_normalized_name": "Heart Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cardiomyopathy",
+      "preferred_label": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I42",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004994",
+        "orpha": "Orphanet:167848",
+        "umls": "UMLS:C0878544",
+        "mesh": "MESH:D009202"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050700",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000318",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I42",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:I42",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:425.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:209232",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009202",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10007636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34830",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:167848",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85898001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0878544",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:282225286",
+          "display": null
+        }
+      ],
+      "context": "CPEO]); abnormal accumulation of colored (pigmented) material on the nerve-rich membrane lining the eyes (atypical retinitis pigmentosa), leading to chronic inflammation, progressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease (cardiomyopathy) such as heart block. Other findings may include muscle weakness, short stature, hearing loss, and/or the loss of ability to coordinate voluntary movements (ataxia) due to problems affecting part of the brain (cerebellum). In some cases, KSS may be associated with other disorders and/or conditions.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiomyopathy Hypertrophic",
+        "Cardiomyopathy Restrictive",
+        "Cardiomyopathies"
+      ],
+      "pubtator_normalized_name": "Cardiomyopathy Dilated",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hearing loss",
+      "preferred_label": "hearing loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005365",
+        "orpha": null,
+        "umls": "UMLS:C1384666",
+        "mesh": "MESH:D034381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005365",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004238",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:389.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034381",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1384666",
+          "display": null
+        }
+      ],
+      "context": "the eyes (atypical retinitis pigmentosa), leading to chronic inflammation, progressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease (cardiomyopathy) such as heart block. Other findings may include muscle weakness, short stature, hearing loss, and/or the loss of ability to coordinate voluntary movements (ataxia) due to problems affecting part of the brain (cerebellum). In some cases, KSS may be associated with other disorders and/or conditions.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deafness",
+        "Hearing Loss Functional",
+        "Hearing Loss Sensorineural"
+      ],
+      "pubtator_normalized_name": "Hearing Loss",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "e lining the eyes (atypical retinitis pigmentosa), leading to chronic inflammation, progressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease (cardiomyopathy) such as heart block. Other findings may include muscle weakness, short stature, hearing loss, and/or the loss of ability to coordinate voluntary movements (ataxia) due to problems affecting part of the brain (cerebellum). In some cases, KSS may be associated with other disorders and/or conditions.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ptosis",
+      "preferred_label": "ptosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000728",
+        "orpha": null,
+        "umls": "UMLS:C0005745",
+        "mesh": "MESH:D001763"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000728",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060260",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:374.30",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2287",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001763",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27298",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:11934000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005745",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1361674069",
+          "display": null
+        }
+      ],
+      "context": "Kearns-Sayre syndrome (KSS) is a rare neuromuscular disorder. An important clinical symptomatic feature is the presence of a mono-or bilateral ptosis (partial closure of the eyelids). This disease is mostly characterized by three primary findings: progressive paralysis of certain eye muscles (chronic progressive external ophthalmoplegia [CPEO]); abnormal accumulation of colored (pigmented) material on the nerve-rich membrane lining the eyes (aty",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Horner Syndrome",
+        "Carnevale syndrome",
+        "Blepharoptosis"
+      ],
+      "pubtator_normalized_name": "Ptosis Hereditary Congenital 2",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "rogressive degeneration, and wearing-away of certain eye structures (pigmentary degeneration of the retina); and heart disease (cardiomyopathy) such as heart block. Other findings may include muscle weakness, short stature, hearing loss, and/or the loss of ability to coordinate voluntary movements (ataxia) due to problems affecting part of the brain (cerebellum). In some cases, KSS may be associated with other disorders and/or conditions.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

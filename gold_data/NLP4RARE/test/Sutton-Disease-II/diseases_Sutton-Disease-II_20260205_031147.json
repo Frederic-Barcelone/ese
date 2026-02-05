@@ -1,0 +1,411 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:11:47.545968",
+  "document": "Sutton-Disease-II.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Sutton-Disease-II.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "acquired immune deficiency syndrome",
+      "preferred_label": "acquired immune deficiency syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012268",
+        "orpha": null,
+        "umls": "UMLS:C0001175",
+        "mesh": "MESH:D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012268",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:635",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000765",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:99",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000163",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200809",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2851",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62479008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001175",
+          "display": null
+        }
+      ],
+      "context": "of common canker sores. Sutton disease Il affects more adult females than males. However, before puberty, males and females are equally affected. This disease occurs most frequently in malnourished children or adults whose immune systems are suppressed (i.e., by chemotherapy) or compromised (i.e., acquired immune deficiency syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Simian Acquired Immunodeficiency Syndrome",
+        "Feline Acquired Immunodeficiency Syndrome",
+        "Murine Acquired Immunodeficiency Syndrome"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malnourished",
+      "preferred_label": "malnourished",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E40-E46",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006873",
+        "orpha": null,
+        "umls": "UMLS:C4761312",
+        "mesh": "MESH:D003677"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006873",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5113",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001067",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E40-E46",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:269.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1677627",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003677",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10046058",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3669",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:70241007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4761312",
+          "display": null
+        }
+      ],
+      "context": "isease II and menstruation, pregnancy, and/or menopause, nor is it caused by herpes virus, which is the main cause of common canker sores. Sutton disease Il affects more adult females than males. However, before puberty, males and females are equally affected. This disease occurs most frequently in malnourished children or adults whose immune systems are suppressed (i.e., by chemotherapy) or compromised (i.e., acquired immune deficiency syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "canker sores",
+      "preferred_label": "canker sore",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005318",
+        "orpha": null,
+        "umls": "UMLS:C2937365",
+        "mesh": "MESH:D013281"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005318",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003938",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0032154",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:445425",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C62546",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:427617000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2937365",
+          "display": null
+        }
+      ],
+      "context": "Sutton disease II is characterized by the recurring eruption of painful inflamed ulcers in the mouth (stomatitis). There may be multiple ulcers of varying sizes. These ulcers in the mouth are commonly called canker sores. Sutton disease II is also known as recurrent aphthous stomatitis. The exact cause of this disease is not fully understood, although it may be due to an abnormal immune response to the bacteria that are normally in the mouth. The exact cause of Sutton disease II is not known. Several studies sugges",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sutton disease 2"
+      ],
+      "pubtator_normalized_name": "Stomatitis Aphthous",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stomatitis",
+      "preferred_label": "stomatitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004842",
+        "orpha": null,
+        "umls": "UMLS:C0038362",
+        "mesh": "MESH:D013280"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004842",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9637",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009688",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:528.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52511",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013280",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26887",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61170000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038362",
+          "display": null
+        }
+      ],
+      "context": "Sutton disease II is characterized by the recurring eruption of painful inflamed ulcers in the mouth (stomatitis). There may be multiple ulcers of varying sizes. These ulcers in the mouth are commonly called canker sores. Sutton disease II is also known as recurrent aphthous stomatitis. The exact cause of this disease is not fully understood, although it may be due to an abnormal immune response to the bacter",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Stomatitis Aphthous",
+        "Stomatitis Denture",
+        "Stomatitis Herpetic"
+      ],
+      "pubtator_normalized_name": "Stomatitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ulcers",
+      "preferred_label": "ulcers",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043839",
+        "orpha": null,
+        "umls": "UMLS:C0041582",
+        "mesh": "MESH:D014456"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043839",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:22541",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014456",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3426",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:429040005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041582",
+          "display": null
+        }
+      ],
+      "context": "Sutton disease II is characterized by the recurring eruption of painful inflamed ulcers in the mouth (stomatitis). There may be multiple ulcers of varying sizes. These ulcers in the mouth are commonly called canker sores. Sutton disease II is also known as recurrent aphthous stomatitis. The exact cause of this disease is not fully understood, although it may be due to an abnormal immu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pressure Ulcer",
+        "Peptic Ulcer",
+        "Carcinoma Basal Cell"
+      ],
+      "pubtator_normalized_name": "Ulcer",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,403 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:46:17.589195",
+  "document": "Bernard.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Bernard.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Bernard-Soulier syndrome",
+      "preferred_label": "Bernard-Soulier syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009276",
+        "orpha": "Orphanet:274",
+        "umls": "UMLS:C0005129",
+        "mesh": "MESH:D001606"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009276",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2217",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2470",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2212",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001606",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10057473",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200656",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84595",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:851",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:231200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:274",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234478007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005129",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:507309898",
+          "display": null
+        }
+      ],
+      "context": "The symptoms of Bernard-Soulier syndrome, which are typically apparent at birth and continue throughout life, may include the tendency to bleed excessively from cuts and other injuries, nosebleeds (epistaxis), and/or an unusually heavy menstrual flow in women. Some babies and children with BSS have no symptoms and the disorder does not pr",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bernard-Soulier Syndrome Type C",
+        "Bernard-Soulier Syndrome Type B",
+        "Bernard-Soulier Syndrome Type A"
+      ],
+      "pubtator_normalized_name": "Bernard-Soulier Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare bleeding disorder",
+      "preferred_label": "rare bleeding disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016627",
+        "orpha": "Orphanet:248308",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016627",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:248308",
+          "display": null
+        }
+      ],
+      "context": "t present until adult life. People with this disease also bruise easily and the bruises tend to linger. Bleeding from very small blood vessels under the skin (subcutaneous) may cause small or widespread areas of small red or purple colored spots (purpura or petechiae). Bernard-Soulier syndrome is a rare bleeding disorder that affects males and females in equal numbers. Recent estimates suggest that Bernard Soulier syndrome affects 1 in a million people. More than 200 cases have been reported worldwide. The diagnosis of Bernard-Soulier syndrome is made by a combination of blood testing to reveal whether platelets ar",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "thrombocytopenia",
+      "preferred_label": "thrombocytopenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002049",
+        "orpha": null,
+        "umls": "UMLS:C0040034",
+        "mesh": "MESH:D013921"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002049",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1588",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:287.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52737",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013921",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3408",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:302215000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040034",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:683583694",
+          "display": null
+        }
+      ],
+      "context": "les in equal numbers. Recent estimates suggest that Bernard Soulier syndrome affects 1 in a million people. More than 200 cases have been reported worldwide. The diagnosis of Bernard-Soulier syndrome is made by a combination of blood testing to reveal whether platelets are at abnormally low levels (thrombocytopenia), microscopic examination to determine the presence of abnormally large platelets and irregularly shaped platelets, and a test called ‘flow cytometry, which is able to measure the level of expression of the missing protein ion the outside of platelets affected by Bernard-Soulier syndrome. In recent",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Purpura Thrombocytopenic Idiopathic",
+        "Thrombocytopenia Neonatal Alloimmune",
+        "Thrombocytopenia cyclic"
+      ],
+      "pubtator_normalized_name": "Thrombocytopenia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "purpura",
+      "preferred_label": "purpura",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002610",
+        "orpha": null,
+        "umls": "UMLS:C0034150",
+        "mesh": "MESH:D011693"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002610",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3326",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000979",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19584",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011693",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:387778001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0034150",
+          "display": null
+        }
+      ],
+      "context": "en with BSS have no symptoms and the disorder does not present until adult life. People with this disease also bruise easily and the bruises tend to linger. Bleeding from very small blood vessels under the skin (subcutaneous) may cause small or widespread areas of small red or purple colored spots (purpura or petechiae). Bernard-Soulier syndrome is a rare bleeding disorder that affects males and females in equal numbers. Recent estimates suggest that Bernard Soulier syndrome affects 1 in a million people. More than 200 cases have been reported worldwide. The diagnosis of Bernard-Soulier syndrome is m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Purpura",
+        "Purpura Thrombotic Thrombocytopenic",
+        "Purpura Thrombocytopenic"
+      ],
+      "pubtator_normalized_name": "Purpura Thrombocytopenic Idiopathic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "BSS",
+      "preferred_label": "Bss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011512",
+        "orpha": "Orphanet:79493",
+        "umls": "UMLS:C1857941",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011512",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050693",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10179",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:239.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:346703",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C205541",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:605041",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79493",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:703531009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1857941",
+          "display": null
+        }
+      ],
+      "context": "The symptoms of Bernard-Soulier syndrome, which are typically apparent at birth and continue throughout life, may include the tendency to bleed excessively from cuts and other injuries, nosebleeds (epistaxis), and/or an unusually heavy menstrual flow in women. Some babies and children with BSS have no symptoms and the disorder does not present until adult life. People with this disease also bruise easily and the bruises tend to linger. Bleeding from very small blood vessels under the skin (subcutaneous) may cause small or widespread areas of small red or purple colored spots (purpura or",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

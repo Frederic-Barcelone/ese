@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:10:55.950376",
+  "document": "Duodenal-Atresia-or-Stenosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Duodenal-Atresia-or-Stenosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Duodenal atresia or stenosis",
+      "preferred_label": "Duodenal Atresia or Stenosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009126",
+        "orpha": "Orphanet:1203",
+        "umls": "UMLS:C0266174",
+        "mesh": "MESH:C535720"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009126",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080216",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:54",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002247",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:751.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75602",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535720",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10013812",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101025",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1066",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:223400",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1203",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:51118003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0266174",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:295550633",
+          "display": null
+        }
+      ],
+      "context": "Duodenal atresia or stenosis is a rare congenital digestive disorder that usually occurs for no apparent reason (sporadically). However, a few cases of duodenal atresia have been inherited as an autosomal recessive genetic trait. Duodenal atresia or stenosis is a rare disorder that occurs in approximately ,500 live births to ,",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "doc_id": "Argininie_-Glycine-Amidinotransferase-Deficiency",
+  "doc_filename": "Argininie_-Glycine-Amidinotransferase-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "Creatine deficiency syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cerebral palsy",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Thrive",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "GATM",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 1886,
+  "file_size_human": "1.8 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Arginine-Glycine Amidinotransferase Deficiency Clinical Overview",
+  "short_description": "Clinical document describing AGAT deficiency symptoms, patient presentation, and diagnostic challenges in fewer than 20 reported cases worldwide.",
+  "long_description": "This clinical document provides a comprehensive overview of Arginine-Glycine Amidinotransferase (AGAT) deficiency, a rare metabolic disorder affecting creatine synthesis. The document details the variable severity of symptoms across patients, including mild to moderate intellectual disabilities, delayed speech development, seizure activity, and potential autistic-like behaviors. It describes common clinical presentations such as failure to thrive, delayed motor development, muscle weakness, and easy fatigue. The document emphasizes the rarity of this condition with fewer than 20 cases reported globally and highlights frequent misdiagnoses, particularly cerebral palsy in infants and autism or global developmental delays in children, which can complicate proper diagnosis and treatment.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T23:07:56.336098"
+}

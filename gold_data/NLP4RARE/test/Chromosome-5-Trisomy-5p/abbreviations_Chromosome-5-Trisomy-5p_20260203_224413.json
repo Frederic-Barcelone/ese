@@ -1,0 +1,171 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:44:13.707308",
+  "document": "Chromosome-5-Trisomy-5p.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Chromosome-5-Trisomy-5p.pdf",
+  "total_candidates": 35,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "5p partial trisomy",
+      "matched_text": "Trisomy 5p",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "rare",
+      "matched_text": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital chromosomal disease",
+      "matched_text": "chromosomal disorder",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "matched_text": "all",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Anorectal malformation",
+      "matched_text": "arm",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:96346"
+    },
+    {
+      "name": "trisomy",
+      "matched_text": "trisomy",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hinman syndrome",
+      "matched_text": "has",
+      "abbreviation": "HAS",
+      "confidence": 0.65,
+      "is_rare": true,
+      "icd10": "N32.8",
+      "orpha": "ORPHA:84085"
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "disease",
+      "matched_text": "disorders",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "rare disease",
+      "matched_text": "Rare Disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Gene Duplication Abnormality",
+      "matched_text": "duplication",
+      "abbreviation": null,
+      "confidence": 0.6431762099266052,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Cri-du-Chat Syndrome",
+      "matched_text": "Lejeune",
+      "abbreviation": null,
+      "confidence": 0.8797315716743469,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hereditary Diseases",
+      "matched_text": "genetic conditions",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Chromosome Aberrations",
+      "matched_text": "chromosomal abnormalities",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Rare Diseases",
+      "matched_text": "Rare Disease Database",
+      "abbreviation": null,
+      "confidence": 0.8803369760513305,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

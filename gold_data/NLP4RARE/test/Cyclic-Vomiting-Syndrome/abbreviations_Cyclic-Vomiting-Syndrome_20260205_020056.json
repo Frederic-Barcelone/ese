@@ -1,0 +1,85 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:00:56.137889",
+  "document": "Cyclic-Vomiting-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Cyclic-Vomiting-Syndrome.pdf",
+  "total_candidates": 43,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CVS",
+      "long_form": "cyclic vomiting syndrome",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "es (55:45). It most commonly occurs in children between the ages of three and seven, although it can begin at any age, from early infancy through to old age (73 is the oldest). Because it is not recognized or misdiagnoses as stomach flu, a correct diagnosis is often delayed for many years. Although CVS is found more often in children, it is being recognized with greater frequency in adults. The incidence of CVS is unknown, although it is not rare. Two studies in Scotland and Australia have suggested that as many as 2% of all Caucasian school-aged children suffer from CVS. However, researchers bel",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0010778"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:57509"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2100258"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2200919"
+        },
+        {
+          "source": "OMIM",
+          "id": "OMIM:500007"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C0152164"
+        },
+        {
+          "source": "icd11.foundation",
+          "id": "icd11.foundation:1434288855"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "cyclic vomiting syndrome",
+      "matched_text": "Cyclic vomiting syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "not rare",
+      "matched_text": "not rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,216 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:51:56.237664",
+  "document": "Gilbert-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gilbert-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "hyperbilirubinemia",
+      "preferred_label": "hyperbilirubinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024288",
+        "orpha": null,
+        "umls": "UMLS:C0311468",
+        "mesh": "MESH:D006932"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024288",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:86321",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006932",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:14783006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0311468",
+          "display": null
+        }
+      ],
+      "context": "ade when blood, drawn for routine health check up or another illness, such as an infection, detects mildly elevated bilirubin levels. Because the levels of bilirubin fluctuate, blood tests may not always show elevated bilirubin. Individuals are determined to have Gilbert syndrome by the presence of hyperbilirubinemia in the absence of hemolysis (premature breakdown of red blood cells) or structural liver damage.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hyperbilirubinemia Neonatal",
+        "Hyperbilirubinemia Shunt",
+        "Gilbert Disease"
+      ],
+      "pubtator_normalized_name": "Hyperbilirubinemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Gilbert syndrome",
+      "preferred_label": "Gilbert syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E80.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007745",
+        "orpha": "Orphanet:357",
+        "umls": "UMLS:C0017551",
+        "mesh": "MESH:D005878"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007745",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2739",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005556",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E80.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4891",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005878",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84729",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:143500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:357",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:27503000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017551",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1947520963",
+          "display": null
+        }
+      ],
+      "context": "Gilbert syndrome is diagnosed more often in males than females. The disorder affects approximately 3-7 percent of individuals in the general population. Gilbert syndrome affects individuals of all races. It is present at birth, but may remain undiagnosed until the late teens or early twenties. Gilbert syndrome was",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fitzsimmons-McLachlan-Gilbert syndrome"
+      ],
+      "pubtator_normalized_name": "Gilbert Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hemolysis",
+      "preferred_label": "HELLP syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:244242",
+        "umls": null,
+        "mesh": "D017359"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:244242",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017359",
+          "display": "HELLP Syndrome"
+        }
+      ],
+      "context": "lth check up or another illness, such as an infection, detects mildly elevated bilirubin levels. Because the levels of bilirubin fluctuate, blood tests may not always show elevated bilirubin. Individuals are determined to have Gilbert syndrome by the presence of hyperbilirubinemia in the absence of hemolysis (premature breakdown of red blood cells) or structural liver damage.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "HELLP Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

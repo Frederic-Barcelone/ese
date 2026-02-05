@@ -1,0 +1,184 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:15:39.349275",
+  "document": "Arthrogryposis-Multiplex-Congenita.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Arthrogryposis-Multiplex-Congenita.pdf",
+  "total_candidates": 53,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AMC",
+      "long_form": "as arthrogryposis multiplex congenita",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "fected joint. When congenital contractures occur only in one body area, it is not referred to as arthrogryposis but rather an isolated congenital contracture. The most common form of an isolated congenital contracture is clubfoot. When arthrogryposis affects two or more different areas of the body, it may be referred to as arthrogryposis multiplex congenita (AMC). The most common form of AMC is amyoplasia. Arthrogryposis and arthrogryposis multiplex congenita are sometimes used interchangeably. The number of males and females affected by AMC is approximately equal. The condition has been reported in individuals of Asian, African and European descent. Isolat",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CNS",
+      "long_form": "Central nervous system",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "cles at rest and during muscle contraction. A biopsy is a procedure in which a small amount of affected tissue (e.g., muscle) is removed and studied under a microscopic to detect characteristic changes or findings that can aid in obtaining a diagnosis. Imaging studies of the central nervous system (CNS) and comparative genomic hybridization (CGH) array, microarray, and exome studies may also be useful studies in making diagnoses. Because of the many mutations that can lead to arthrogryposis, whole genome sequencing is often required",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CGH",
+      "long_form": "comparative genomic hybridization",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "agnosis. Imaging studies of the central nervous system (CNS) and comparative genomic hybridization (CGH) array, microarray, and exome studies may also be useful studies in making diagnoses. Because of th",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "condition",
+      "matched_text": "condition",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "Congenital contracture",
+      "matched_text": "congenital contractures",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "arthrogryposis",
+      "matched_text": "arthrogryposis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "congenital",
+      "matched_text": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "common",
+      "matched_text": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital clubfoot",
+      "matched_text": "clubfoot",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Arthrogryposis",
+      "matched_text": "arthrogryposis multiplex congenita",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Arthrogryposis multiplex congenita",
+      "matched_text": "AMC",
+      "abbreviation": "AMC",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q74.3",
+      "orpha": "ORPHA:1037"
+    },
+    {
+      "name": "Hinman syndrome",
+      "matched_text": "has",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "N32.8",
+      "orpha": "ORPHA:84085"
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "Cgh",
+      "matched_text": "CGH",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79495"
+    },
+    {
+      "name": "Contracture",
+      "matched_text": "contractures",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Aplasia of muscle",
+      "matched_text": "amyoplasia",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Disease",
+      "matched_text": "myopathic disorders",
+      "abbreviation": null,
+      "confidence": 0.8027093172073364,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

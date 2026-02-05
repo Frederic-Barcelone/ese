@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:25:34.565193",
+  "document": "Achalasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Achalasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "barium",
+      "preferred_name": "barium",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001464",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1311067",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001464",
+          "display": "Barium"
+        }
+      ],
+      "context": "this disorder. X-ray examination (radiology) is frequently useful in the diagnosis of achalasia. Radiological examination, especially with the use of barium, may show enlargement (dilation) of the esophagus and the retention of food and secretions within the esophagus. Devices that measure fluid pressure ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alginates",
+        "barium chloride",
+        "barium titanate(IV)"
+      ],
+      "pubtator_normalized_name": "Barium",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

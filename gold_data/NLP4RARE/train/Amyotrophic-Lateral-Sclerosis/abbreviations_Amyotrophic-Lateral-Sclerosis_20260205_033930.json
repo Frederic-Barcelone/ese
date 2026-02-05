@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:39:30.452979",
+  "document": "Amyotrophic-Lateral-Sclerosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Amyotrophic-Lateral-Sclerosis.pdf",
+  "total_candidates": 30,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ALS",
+      "long_form": "amyotrophic lateral sclerosis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Amyotrophic lateral sclerosis (ALS) is one of a group of disorders known as motor neuron diseases. It is characterized by the progressive degeneration and eventual death of nerve cells (motor neurons) in the brain, brainstem and spinal cord that facilitate communication between the nervous system and voluntary muscles of the body. O",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "amyotrophic lateral sclerosis",
+      "matched_text": "Amyotrophic lateral sclerosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G12.21",
+      "orpha": "Orphanet:803"
+    },
+    {
+      "name": "motor neuron disease",
+      "matched_text": "motor neuron diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G12.2",
+      "orpha": "Orphanet:98503"
+    },
+    {
+      "name": "respiratory failure",
+      "matched_text": "respiratory failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "DIAPHRAGM",
+      "matched_text": "diaphragm",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

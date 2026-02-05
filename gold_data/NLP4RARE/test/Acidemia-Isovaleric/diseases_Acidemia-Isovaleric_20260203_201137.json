@@ -1,0 +1,520 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:11:37.102261",
+  "document": "Acidemia-Isovaleric.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acidemia-Isovaleric.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Isovaleric Acidemia",
+      "preferred_label": "Isovaleryl-CoA dehydrogenase deficiency",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0268575",
+        "mesh": "C538167"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0268575",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538167",
+          "display": "Acidemia isovaleric"
+        }
+      ],
+      "context": "Isovaleric Acidemia is a hereditary metabolic disorder. It is characterized by a deficiency of the enzyme isovaleryl CoA dehydrogenase. The disorder occurs in both an acute and a chronic intermittent form. In the acute form of Isovaleric Acidemia, vomiting, refusal to eat, and listlessness usually occur. With treatmen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Acidemia isovaleric",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hereditary",
+      "preferred_label": "hereditary",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D061325"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D061325",
+          "display": "Hereditary Breast and Ovarian Cancer Syndrome"
+        }
+      ],
+      "context": "Isovaleric Acidemia is a hereditary metabolic disorder. It is characterized by a deficiency of the enzyme isovaleryl CoA dehydrogenase. The disorder occurs in both an acute and a chronic intermittent form. In the acute form of Isovaleric Acidemia, vomiting, refusal to eat, and listlessness usually occur. With treatment and low protei",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Hereditary Angioedema Type III",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities"
+      ],
+      "pubtator_normalized_name": "Hereditary Breast and Ovarian Cancer Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "metabolic disorder",
+      "preferred_label": "metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E70-E88",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005066",
+        "orpha": null,
+        "umls": "UMLS:C0025517",
+        "mesh": "MESH:D008659"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005066",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0014667",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000589",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E70-E88",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E70-E90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44376",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008659",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3235",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75934005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025517",
+          "display": null
+        }
+      ],
+      "context": "Isovaleric Acidemia is a hereditary metabolic disorder. It is characterized by a deficiency of the enzyme isovaleryl CoA dehydrogenase. The disorder occurs in both an acute and a chronic intermittent form. In the acute form of Isovaleric Acidemia, vomiting, refusal to eat, and listlessness usually occur. With treatment and low protein diet, the disorde",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Brain Diseases Metabolic",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Glucose Metabolism Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Isovaleric Acidemia is a hereditary metabolic disorder. It is characterized by a deficiency of the enzyme isovaleryl CoA dehydrogenase. The disorder occurs in both an acute and a chronic intermittent form. In the acute form of Isovaleric Acidemia, vomiting, refusal to eat, and listlessness usually occur. With treatment and low protein diet, the disorder becomes chronically intermittent, and a nearly normal life is possible. Isovaleric Acidemia",
+      "page": 1,
+      "mention_count": 5,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "rs in both an acute and a chronic intermittent form. In the acute form of Isovaleric Acidemia, vomiting, refusal to eat, and listlessness usually occur. With treatment and low protein diet, the disorder becomes chronically intermittent, and a nearly normal life is possible. Isovaleric Acidemia is a genetic disorder inherited through autosomal recessive genes. Symptoms are the result of a deficiency of the enzyme isovaleric co-enzyme A (CoA) dehydrogenase, which is needed for the breakdown of the amino acid leucine. Human traits, including the classic genetic diseases, are the product of the interaction of two",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "oth of whom are carriers for a recessive disorder, is 25 percent. On average, fifty percent of their children will be carriers of the disease, while 25 percent will receive a normal copy of the gene from each parent for that trait. The risks are the same for each pregnancy. Isovaleric Acidemia is a rare disorder affecting males and females in equal numbers, usually beginning during infancy.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "listlessness",
+      "preferred_label": "Apathy",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0085632",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0085632",
+          "display": null
+        }
+      ],
+      "context": "Isovaleric Acidemia is a hereditary metabolic disorder. It is characterized by a deficiency of the enzyme isovaleryl CoA dehydrogenase. The disorder occurs in both an acute and a chronic intermittent form. In the acute form of Isovaleric Acidemia, vomiting, refusal to eat, and listlessness usually occur. With treatment and low protein diet, the disorder becomes chronically intermittent, and a nearly normal life is possible. Isovaleric Acidemia is a genetic disorder inherited through autosomal recessive genes. Symptoms are the result of a deficiency of the enzyme isovaleric co-enzyme",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "recessive disorders",
+      "preferred_label": "Depressive disorder",
+      "abbreviation": null,
+      "confidence": 0.8327327728271484,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0011581",
+        "mesh": "D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0011581",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003866",
+          "display": "Depressive Disorder"
+        }
+      ],
+      "context": "y of the enzyme isovaleric co-enzyme A (CoA) dehydrogenase, which is needed for the breakdown of the amino acid leucine. Human traits, including the classic genetic diseases, are the product of the interaction of two genes for that condition, one received from the father and one from the mother. In recessive disorders, the condition does not appear unless a person inherits the same defective gene for the same trait from each parent. If an individual receives one normal gene and one gene for the disease, the person will be a carrier for the disease, but generally will not show symptoms of the disorder. The risk o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Depressive Disorder Major",
+        "Bipolar Disorder",
+        "Major Affective Disorder 2"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "recessive disorder",
+      "preferred_label": "Autosomal Recessive Disorder",
+      "abbreviation": null,
+      "confidence": 0.8758833765983581,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C3899988",
+        "mesh": "D020734"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C3899988",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020734",
+          "display": "Parkinsonian Disorders"
+        }
+      ],
+      "context": "same trait from each parent. If an individual receives one normal gene and one gene for the disease, the person will be a carrier for the disease, but generally will not show symptoms of the disorder. The risk of transmitting the disease to the children of a couple, both of whom are carriers for a recessive disorder, is 25 percent. On average, fifty percent of their children will be carriers of the disease, while 25 percent will receive a normal copy of the gene from each parent for that trait. The risks are the same for each pregnancy. Isovaleric Acidemia is a rare disorder affecting males and females in equa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Night blindness congenital stationary",
+        "Spinocerebellar Ataxia Autosomal Recessive 2",
+        "Dystonic Disorders"
+      ],
+      "pubtator_normalized_name": "Parkinsonian Disorders",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

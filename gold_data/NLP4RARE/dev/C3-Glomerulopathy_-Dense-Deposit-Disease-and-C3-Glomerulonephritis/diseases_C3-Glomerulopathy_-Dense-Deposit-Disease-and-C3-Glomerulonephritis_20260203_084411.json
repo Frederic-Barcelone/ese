@@ -1,0 +1,917 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:44:11.549520",
+  "document": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 16,
+  "total_validated": 16,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "dense deposit disease",
+      "preferred_label": "Dense deposit disease",
+      "abbreviation": "DDD",
+      "confidence": 1.0,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N03.6",
+        "icd11": null,
+        "snomed": "236392004",
+        "mondo": null,
+        "orpha": "ORPHA:93571",
+        "umls": null,
+        "mesh": "D015432"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:93571",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N03.6",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "N03.6",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "236392004",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015432",
+          "display": null
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microsco",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "disease_lexicon_c3g.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Glomerulonephritis Membranoproliferative",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "C3 Glomerulopathy",
+      "preferred_label": "C3 glomerulopathy",
+      "abbreviation": "C3G",
+      "confidence": 1.0,
+      "is_rare_disease": true,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "N03.6",
+        "icd11": null,
+        "snomed": "722156009",
+        "mondo": null,
+        "orpha": "ORPHA:329918",
+        "umls": null,
+        "mesh": "D000094263"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:329918",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N03.6",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "N03.6",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "722156009",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000094263",
+          "display": null
+        }
+      ],
+      "context": "a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading – C3 Glomerulopathy, abbreviated C3G. The adoption of this new term was driven by the recognition that there is another group of patients with glomerular disease whose kidney biopsy is reminiscent of DDD. On electron microscopy, the deposits in these patients are lighter in color and more widespread in location, but o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "disease_lexicon_c3g.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Complement Factor H Deficiency"
+      ],
+      "pubtator_normalized_name": "Complement Factor I Deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "C3 glomerulonephritis",
+      "preferred_label": "C3 glomerulonephritis",
+      "abbreviation": "C3GN",
+      "confidence": 1.0,
+      "is_rare_disease": true,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "N03.6",
+        "icd11": null,
+        "snomed": "722157000",
+        "mondo": null,
+        "orpha": "ORPHA:329903",
+        "umls": null,
+        "mesh": "C567033"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:329903",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N03.6",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "N03.6",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "722157000",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567033",
+          "display": "Glomerulonephritis With Isolated C3 Deposits And Factor I Deficiency"
+        }
+      ],
+      "context": "with glomerular disease whose kidney biopsy is reminiscent of DDD. On electron microscopy, the deposits in these patients are lighter in color and more widespread in location, but on immunofluorescence, as with DDD there is an abundance of C3 in the renal glomeruli. These patients are said to have C3 glomerulonephritis or C3GN. In recognition of shared similarities, both DDD and C3GN are now classified as sub-types of C3G. C3G affects persons of all ages, although the mean age appears to be lower in DDD patients as compared to C3GN patients. The prevalence of C3G is estimated at 2-3 per 1,000,000 people. C3G can",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "disease_lexicon_c3g.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Complement Factor H Deficiency"
+      ],
+      "pubtator_normalized_name": "Glomerulonephritis With Isolated C3 Deposits And Factor I Deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "group diseases",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.871597146987915,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ depos",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "DDD",
+      "preferred_label": "DDD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024534",
+        "orpha": null,
+        "umls": "UMLS:C4552092",
+        "mesh": "D015432"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024534",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1645697",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:179850",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4552092",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015432",
+          "display": "Glomerulonephritis Membranoproliferative"
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. I",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dowling-Degos Disease"
+      ],
+      "pubtator_normalized_name": "Glomerulonephritis Membranoproliferative",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare kidney disease",
+      "preferred_label": "rare kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019750",
+        "orpha": "Orphanet:93626",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019750",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93626",
+          "display": null
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a cons",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "GBM",
+      "preferred_label": "Glioblastoma",
+      "abbreviation": "GBM",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "C71.9",
+        "icd11": "2A00.00",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:360",
+        "umls": null,
+        "mesh": "D005909"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:360",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C71.9",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2A00.00",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005909",
+          "display": "Glioblastoma"
+        }
+      ],
+      "context": "ample, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading – C3 Glomerulopathy, abbreviated C3G. The adoption of this new term was driven by the recognition that there is another group of patients with glomerular disea",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Retinoblastoma",
+        "Gliosarcoma"
+      ],
+      "pubtator_normalized_name": "Glioblastoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "remely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading – C3 Glomerulopathy, abbreviated C3G. The adoption of this new term was driven by the recognition that there is another group of patients with glomerular disease whose kidney biopsy is reminiscent of DDD. On electron microscopy, the deposits in these patients are lighter in color and more widespread in location, but on immunofluorescence, as with DDD there is an abunda",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "glomerular disease",
+      "preferred_label": "Glomerular disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:93548",
+        "umls": null,
+        "mesh": "D019867"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:93548",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019867",
+          "display": "Anti-Glomerular Basement Membrane Disease"
+        }
+      ],
+      "context": "nt membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading – C3 Glomerulopathy, abbreviated C3G. The adoption of this new term was driven by the recognition that there is another group of patients with glomerular disease whose kidney biopsy is reminiscent of DDD. On electron microscopy, the deposits in these patients are lighter in color and more widespread in location, but on immunofluorescence, as with DDD there is an abundance of C3 in the renal glomeruli. These patients are said to have C3 glomerulonephritis or",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Rapidly progressive glomerulonephritis with pulmonary hemorrhage",
+        "Salcedo syndrome"
+      ],
+      "pubtator_normalized_name": "Anti-Glomerular Basement Membrane Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "e widespread in location, but on immunofluorescence, as with DDD there is an abundance of C3 in the renal glomeruli. These patients are said to have C3 glomerulonephritis or C3GN. In recognition of shared similarities, both DDD and C3GN are now classified as sub-types of C3G. C3G affects persons of all ages, although the mean age appears to be lower in DDD patients as compared to C3GN patients. The prevalence of C3G is estimated at 2-3 per 1,000,000 people. C3G can ONLY be diagnosed by a kidney biopsy. The kidney deposits stain for the complement protein C3 and when examined under an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "itis or C3GN. In recognition of shared similarities, both DDD and C3GN are now classified as sub-types of C3G. C3G affects persons of all ages, although the mean age appears to be lower in DDD patients as compared to C3GN patients. The prevalence of C3G is estimated at 2-3 per 1,000,000 people. C3G can ONLY be diagnosed by a kidney biopsy. The kidney deposits stain for the complement protein C3 and when examined under an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dense deposit disease",
+      "preferred_label": "Membranoproliferative Glomerulonephritis, Type II",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0268743",
+        "mesh": "D015432"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0268743",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015432",
+          "display": "Glomerulonephritis Membranoproliferative"
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microsco",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Complement Factor H Deficiency"
+      ],
+      "pubtator_normalized_name": "Glomerulonephritis Membranoproliferative",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney disease",
+      "preferred_label": "Kidney Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0022658",
+        "mesh": "D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0022658",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007674",
+          "display": "Kidney Diseases"
+        }
+      ],
+      "context": "Over the past decade, important advances in our understanding of complement-mediated renal diseases have led to the adoption of new names or ‘disease categories’ to more precisely group diseases that appear to share a similar cause. Consider, for example, dense deposit disease (DDD), a very rare kidney disease characterized on a renal biopsy test called ‘immunofluorescence’ by an abundance of a protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a cons",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal Insufficiency Chronic",
+        "Kidney Diseases Cystic",
+        "Diabetic Nephropathies"
+      ],
+      "pubtator_normalized_name": "Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Glomerulopathy",
+      "preferred_label": "Renal glomerular disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0268731",
+        "mesh": "C538458"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0268731",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538458",
+          "display": "Rapidly progressive glomerulonephritis with pulmonary hemorrhage"
+        }
+      ],
+      "context": "protein called C3 in the renal glomeruli, and named for the extremely dense ‘sausage-like’ deposits that are seen in the glomerular basement membrane (GBM) using electron microscopy. In 2013, as a result of a consensus meeting, scientists recommended that DDD be sub-grouped under a new heading – C3 Glomerulopathy, abbreviated C3G. The adoption of this new term was driven by the recognition that there is another group of patients with glomerular disease whose kidney biopsy is reminiscent of DDD. On electron microscopy, the deposits in these patients are lighter in color and more widespread in location, but o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Salcedo syndrome"
+      ],
+      "pubtator_normalized_name": "Rapidly progressive glomerulonephritis with pulmonary hemorrhage",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dense deposits",
+      "preferred_label": "Dental Deposits",
+      "abbreviation": null,
+      "confidence": 0.8003665208816528,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0011346",
+        "mesh": "D003741"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0011346",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003741",
+          "display": "Dental Deposits"
+        }
+      ],
+      "context": "electron microscope, dense deposits are present.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dental Deposits",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

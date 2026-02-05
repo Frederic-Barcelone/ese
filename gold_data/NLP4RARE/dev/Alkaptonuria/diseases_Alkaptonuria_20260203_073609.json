@@ -1,0 +1,382 @@
+{
+  "run_id": "RUN_20260203_062811_cb5e3758076f",
+  "timestamp": "2026-02-03T07:36:09.846182",
+  "document": "Alkaptonuria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alkaptonuria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Alkaptonuria",
+      "preferred_label": "Alkaptonuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:56",
+        "umls": null,
+        "mesh": "D000474"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:56",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000474",
+          "display": "Alkaptonuria"
+        }
+      ],
+      "context": "Alkaptonuria is a rare genetic metabolic disorder characterized by the accumulation of homogentisic acid in the body. Affected individuals lack enough functional levels of an enzyme required to breakdown homogentisic acid. Affected individuals may have dark urine or urine that turns black when exposed to air. H",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Alkaptonuria",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "Genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Alkaptonuria is a rare genetic metabolic disorder characterized by the accumulation of homogentisic acid in the body. Affected individuals lack enough functional levels of an enzyme required to breakdown homogentisic acid. Affected individuals may have dark urine or urine that turns black when exposed to air. However, this chang",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ochronosis",
+      "preferred_label": "Ochronosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001910",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D009794"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001910",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009794",
+          "display": "Ochronosis"
+        }
+      ],
+      "context": "hours after urination and often goes unnoticed. Aside from dark urine that is present from infancy, affected individuals generally do not develop symptoms (asymptomatic) during infancy or childhood and often remain unaware of their condition until adulthood. Affected individuals eventually develop ochronosis, which is the bluish-black discoloration of connective and other tissue within the body. Affected individuals may develop discoloration of the skin overlying cartilage within the body such as over part of the outer ear. In some cases, the whites of the eyes (sclera) may also become discolored. In a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alkaptonuric ochronosis",
+        "Ochronosis hereditary"
+      ],
+      "pubtator_normalized_name": "Ochronosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arthritis",
+      "preferred_label": "Arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005578",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001172"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005578",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001172",
+          "display": "Arthritis Rheumatoid"
+        }
+      ],
+      "context": "and other tissue within the body. Affected individuals may develop discoloration of the skin overlying cartilage within the body such as over part of the outer ear. In some cases, the whites of the eyes (sclera) may also become discolored. In adulthood, affected individuals also develop progressive arthritis of the spine and large joints. The HGD gene codes for the enzyme required for the breakdown of homogentisic acid. Mutations in the HGD gene cause alkaptonuria. Alkaptonuria affects males and females in equal numbers, although symptoms tend to develop sooner and become more severe in males. More tha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arthritis",
+        "Arthritis Psoriatic",
+        "Arthritis Infectious"
+      ],
+      "pubtator_normalized_name": "Arthritis Rheumatoid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        }
+      ],
+      "context": "hough symptoms tend to develop sooner and become more severe in males. More than 1,000 affected individuals have been reported in the medical literature. The exact incidence of alkaptonuria is unknown. In the United States it is estimated to occur in 1 in 250,000-1,000,000 live births. Alkaptonuria has been reported in all ethnic groups. Areas with increased frequencies of the disorder have been identified in Slovakia, the Dominican Republic and Germany.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "Acute lymphoblastic leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:513",
+        "umls": null,
+        "mesh": "D054198"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:513",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D054198",
+          "display": "Precursor Cell Lymphoblastic Leukemia-Lymphoma"
+        }
+      ],
+      "context": "o develop sooner and become more severe in males. More than 1,000 affected individuals have been reported in the medical literature. The exact incidence of alkaptonuria is unknown. In the United States it is estimated to occur in 1 in 250,000-1,000,000 live births. Alkaptonuria has been reported in all ethnic groups. Areas with increased frequencies of the disorder have been identified in Slovakia, the Dominican Republic and Germany.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Precursor T-Cell Lymphoblastic Leukemia-Lymphoma",
+        "Leukemia Biphenotypic Acute",
+        "Lymphoblastic Leukemia Acute with Lymphomatous Features"
+      ],
+      "pubtator_normalized_name": "Precursor Cell Lymphoblastic Leukemia-Lymphoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "metabolic disorder",
+      "preferred_label": "Metabolic Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0025517",
+        "mesh": "D008659"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0025517",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008659",
+          "display": "Metabolic Diseases"
+        }
+      ],
+      "context": "Alkaptonuria is a rare genetic metabolic disorder characterized by the accumulation of homogentisic acid in the body. Affected individuals lack enough functional levels of an enzyme required to breakdown homogentisic acid. Affected individuals may have dark urine or urine that turns black when exposed to air. However, this change may not occur for",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bone Diseases Metabolic",
+        "Brain Diseases Metabolic",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolic Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "1,000 affected individuals have been reported in the medical literature. The exact incidence of alkaptonuria is unknown. In the United States it is estimated to occur in 1 in 250,000-1,000,000 live births. Alkaptonuria has been reported in all ethnic groups. Areas with increased frequencies of the disorder have been identified in Slovakia, the Dominican Republic and Germany.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

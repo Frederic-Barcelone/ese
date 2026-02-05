@@ -1,0 +1,45 @@
+{
+  "doc_id": "Anemia-Megaloblastic",
+  "doc_filename": "Anemia-Megaloblastic.pdf",
+  "top_entities": [
+    {
+      "name": "megaloblastic anemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cobalamin deficiency",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Red blood cells",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Cobalamin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2446,
+  "file_size_human": "2.4 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Megaloblastic Anemia: Clinical Overview and Diagnostic Approach",
+  "short_description": "Clinical document describing megaloblastic anemia, a condition characterized by abnormally large red blood cells due to vitamin B12 or folate deficiency.",
+  "long_description": "This clinical reference document provides a comprehensive overview of megaloblastic anemia, a hematological condition where the bone marrow produces unusually large, structurally abnormal, and immature red blood cells called megaloblasts. The document explains the pathophysiology of the condition, emphasizing how deficiencies in cobalamin (vitamin B12) or folate (vitamin B9) lead to impaired red blood cell production. It covers the clinical presentation including symptoms such as fatigue, pallor, and lightheadedness, notes the equal prevalence across genders and ethnic groups, and outlines the diagnostic approach using blood tests and specialized procedures like the Schilling test to identify underlying vitamin deficiencies and absorption issues.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:41:40.945883"
+}

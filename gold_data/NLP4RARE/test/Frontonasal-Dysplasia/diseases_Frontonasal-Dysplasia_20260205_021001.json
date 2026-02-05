@@ -1,0 +1,106 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:10:01.916364",
+  "document": "Frontonasal-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Frontonasal-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Frontonasal dysplasia",
+      "preferred_label": "frontonasal dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016643",
+        "orpha": "Orphanet:250",
+        "umls": "UMLS:C1876203",
+        "mesh": "MESH:C538065"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016643",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0081044",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2392",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:406292",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538065",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1165",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:136760",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:250",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86610004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1876203",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:782645776",
+          "display": null
+        }
+      ],
+      "context": "Frontonasal dysplasia is a very rare disorder that affects males and females in equal numbers. The number of people affected by this disorder is not known. There are at least 100 cases reported in the scientific literature. Frontonasal dysplasia is usually diagnosed shortly after birth (neonatal period). Confirmation of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acromelic frontonasal dysplasia",
+        "Sener syndrome",
+        "Coloboma of Alar-nasal cartilages with telecanthus"
+      ],
+      "pubtator_normalized_name": "Frontonasal dysplasia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

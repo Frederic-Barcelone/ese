@@ -1,0 +1,64 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:12:07.118863",
+  "document": "Dyggve-Melchior-Clausen-syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dyggve-Melchior-Clausen-syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "crest",
+      "preferred_name": "Crest",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000068718",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1044552",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000068718",
+          "display": "Rosuvastatin Calcium"
+        }
+      ],
+      "context": "specific skeletal abnormalities and findings consistent with DMC syndrome and includes notching of the vertebral bodies, lacy appearance of the iliac crest, and small and malformed carpal bones. Alternatively, gene testing for mutations in DYM can be done.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rosuvastatin Calcium",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

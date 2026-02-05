@@ -1,0 +1,657 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:55:25.017732",
+  "document": "Pseudo-Hurler-Polydystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pseudo-Hurler-Polydystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 11,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Pseudo-Hurler polydystrophy",
+      "preferred_label": "Pseudo-Hurler Polydystrophy",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0033788",
+        "mesh": "D009081"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0033788",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009081",
+          "display": "Mucolipidoses"
+        }
+      ],
+      "context": "Pseudo-Hurler polydystrophy (mucolipidosis type III) is a rare genetic metabolic disorder characterized by a defective enzyme known as",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mucolipidoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Pseudo-Hurler polydystrophy (mucolipidosis type III) is a rare genetic metabolic disorder characterized by a defective enzyme known as",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Pseudo-Hurler polydystrophy (mucolipidosis type III) is a rare genetic metabolic disorder characterized by a defective enzyme known as",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "metabolic disorder",
+      "preferred_label": "Metabolic Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0025517",
+        "mesh": "D008659"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0025517",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008659",
+          "display": "Metabolic Diseases"
+        }
+      ],
+      "context": "Pseudo-Hurler polydystrophy (mucolipidosis type III) is a rare genetic metabolic disorder characterized by a defective enzyme known as",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bone Diseases Metabolic",
+        "Brain Diseases Metabolic",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolic Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "UPD-N-acetylglucosamine-1-phosphotransferase. This defective enzyme ultimately results in the accumulation of certain complex carbohydrates (mucopolysaccharides) and fatty substances (mucolipids) in various tissues of the body. The symptoms of this disorder are similar, but less severe than those of I-cell disease (mucolipidosis type II) and may include progressive joint stiffness, curvature of the spine (scoliosis), and/or skeletal deformities of the hands (e.g., claw-hands). Growth delays accompanied by deterioration of the hip joints typically deve",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "I-cell disease",
+      "preferred_label": "Type II Mucolipidosis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0020725",
+        "mesh": "D009081"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0020725",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009081",
+          "display": "Mucolipidoses"
+        }
+      ],
+      "context": "PD-N-acetylglucosamine-1-phosphotransferase. This defective enzyme ultimately results in the accumulation of certain complex carbohydrates (mucopolysaccharides) and fatty substances (mucolipids) in various tissues of the body. The symptoms of this disorder are similar, but less severe than those of I-cell disease (mucolipidosis type II) and may include progressive joint stiffness, curvature of the spine (scoliosis), and/or skeletal deformities of the hands (e.g., claw-hands). Growth delays accompanied by deterioration of the hip joints typically develop in children with pseudo-Hurler polydystrophy. Addition",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mucolipidoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "scoliosis",
+      "preferred_label": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005392",
+        "orpha": null,
+        "umls": "UMLS:C0036439",
+        "mesh": "MESH:D012600"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005392",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060249",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004273",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002650",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M41",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:M41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:737.43",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11348",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012600",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C78603",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:298382003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036439",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1925604007",
+          "display": null
+        }
+      ],
+      "context": "certain complex carbohydrates (mucopolysaccharides) and fatty substances (mucolipids) in various tissues of the body. The symptoms of this disorder are similar, but less severe than those of I-cell disease (mucolipidosis type II) and may include progressive joint stiffness, curvature of the spine (scoliosis), and/or skeletal deformities of the hands (e.g., claw-hands). Growth delays accompanied by deterioration of the hip joints typically develop in children with pseudo-Hurler polydystrophy. Additional symptoms may include clouding of the corneas of the eyes, mild to moderate coarseness of facial feat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spondylocarpotarsal synostosis",
+        "gaze palsy familial horizontal with progressive scoliosis",
+        "Macrocephaly Alopecia Cutis Laxa and Scoliosis"
+      ],
+      "pubtator_normalized_name": "Scoliosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "keletal deformities of the hands (e.g., claw-hands). Growth delays accompanied by deterioration of the hip joints typically develop in children with pseudo-Hurler polydystrophy. Additional symptoms may include clouding of the corneas of the eyes, mild to moderate coarseness of facial features, mild mental retardation, easy fatigability, and/or heart disease. Pseudo-Hurler polydystrophy is inherited as an autosomal recessive trait. A diagnosis of pseudo-Hurler polydystrophy may be suspected based upon a thorough clinical evaluation, a detailed patient history and identification of characteristic findings. A vari",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heart disease",
+      "preferred_label": "Heart Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0018799",
+        "mesh": "D006331"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0018799",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006331",
+          "display": "Heart Diseases"
+        }
+      ],
+      "context": "ands). Growth delays accompanied by deterioration of the hip joints typically develop in children with pseudo-Hurler polydystrophy. Additional symptoms may include clouding of the corneas of the eyes, mild to moderate coarseness of facial features, mild mental retardation, easy fatigability, and/or heart disease. Pseudo-Hurler polydystrophy is inherited as an autosomal recessive trait. A diagnosis of pseudo-Hurler polydystrophy may be suspected based upon a thorough clinical evaluation, a detailed patient history and identification of characteristic findings. A variety of specialized tests may confirm a di",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myocardial Ischemia",
+        "Coronary Disease",
+        "Heart Defects Congenital"
+      ],
+      "pubtator_normalized_name": "Heart Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mucolipids",
+      "preferred_label": "Mucolipidoses",
+      "abbreviation": null,
+      "confidence": 0.8536981701850891,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0026697",
+        "mesh": "D009081"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0026697",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009081",
+          "display": "Mucolipidoses"
+        }
+      ],
+      "context": "UPD-N-acetylglucosamine-1-phosphotransferase. This defective enzyme ultimately results in the accumulation of certain complex carbohydrates (mucopolysaccharides) and fatty substances (mucolipids) in various tissues of the body. The symptoms of this disorder are similar, but less severe than those of I-cell disease (mucolipidosis type II) and may include progressive joint stiffness, curvature of the spine (scoliosis), and/or skeletal deformities of the hands (e.g., claw-hands). Growth delay",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mucolipidoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mild mental retardation",
+      "preferred_label": "Mild intellectual disability",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0026106",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0026106",
+          "display": null
+        }
+      ],
+      "context": "/or skeletal deformities of the hands (e.g., claw-hands). Growth delays accompanied by deterioration of the hip joints typically develop in children with pseudo-Hurler polydystrophy. Additional symptoms may include clouding of the corneas of the eyes, mild to moderate coarseness of facial features, mild mental retardation, easy fatigability, and/or heart disease. Pseudo-Hurler polydystrophy is inherited as an autosomal recessive trait. A diagnosis of pseudo-Hurler polydystrophy may be suspected based upon a thorough clinical evaluation, a detailed patient history and identification of characteristic findings. A vari",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

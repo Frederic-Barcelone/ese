@@ -1,0 +1,486 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:44:16.545122",
+  "document": "Churg-Strauss-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Churg-Strauss-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Churg-Strauss syndrome",
+      "preferred_label": "Churg-Strauss syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M30.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015943",
+        "orpha": "Orphanet:183",
+        "umls": "UMLS:C0008728",
+        "mesh": "MESH:D015267"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015943",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3049",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007208",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6111",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M30.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3088",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015267",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048594",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200427",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34481",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:973",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:183",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:82275008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008728",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:835880885",
+          "display": null
+        }
+      ],
+      "context": "Churg-Strauss syndrome is a rare disorder that may affect multiple organ systems, especially the lungs. The disorder is characterized by the abnormal clustering of certain white blood cells (hypereosinophilia) in the blood and tissues, inflammation of blood vessels (vasculitis), and the development of inflammatory nodula",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Churg-Strauss Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "respiratory disorder",
+      "preferred_label": "respiratory disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J00-J99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005087",
+        "orpha": null,
+        "umls": "UMLS:C0035204",
+        "mesh": "MESH:D012140"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005087",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1579",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000684",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J00-J99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V47.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48421",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012140",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100010",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26871",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:50043002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035204",
+          "display": null
+        }
+      ],
+      "context": "of allergy. In addition, asthma and other associated lung (pulmonary) abnormalities (i.e., pulmonary infiltrates) often precede the development of the generalized (systemic) symptoms and findings seen in Churg-Strauss syndrome by as little as six months or as much as two decades. Asthma, a chronic respiratory disorder, is characterized by inflammation and narrowing of the lungs' airways, causing difficulties breathing (dyspnea), coughing, the production of a high-pitched whistling sound while breathing (wheezing), and/or other symptoms and findings. Churg-Strauss syndrome affects males and females in equal numbe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mitochondrial Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "allergy",
+      "preferred_label": "allergic disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005271",
+        "orpha": null,
+        "umls": "UMLS:C0020517",
+        "mesh": "MESH:D006967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005271",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1205",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V15.09",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9370",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C114476",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:609328004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020517",
+          "display": null
+        }
+      ],
+      "context": "rder is characterized by the abnormal clustering of certain white blood cells (hypereosinophilia) in the blood and tissues, inflammation of blood vessels (vasculitis), and the development of inflammatory nodular lesions called granulomas (granulomatosis). Most affected individuals have a history of allergy. In addition, asthma and other associated lung (pulmonary) abnormalities (i.e., pulmonary infiltrates) often precede the development of the generalized (systemic) symptoms and findings seen in Churg-Strauss syndrome by as little as six months or as much as two decades. Asthma, a chronic respiratory",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Transfusion Reaction",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vasculitis",
+      "preferred_label": "vasculitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018882",
+        "orpha": "Orphanet:52759",
+        "umls": "UMLS:C0042384",
+        "mesh": "MESH:D014657"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018882",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:865",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0006803",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18844",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:12054",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014657",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10047115",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26912",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:52759",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31996006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0042384",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Vasculitis",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:572581721",
+          "display": null
+        }
+      ],
+      "context": "Churg-Strauss syndrome is a rare disorder that may affect multiple organ systems, especially the lungs. The disorder is characterized by the abnormal clustering of certain white blood cells (hypereosinophilia) in the blood and tissues, inflammation of blood vessels (vasculitis), and the development of inflammatory nodular lesions called granulomas (granulomatosis). Most affected individuals have a history of allergy. In addition, asthma and other associated lung (pulmonary) abnormalities (i.e., pulmonary infiltrates) often precede the development of the generalized (syst",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Vasculitis Leukocytoclastic Cutaneous",
+        "Vasculitis Central Nervous System",
+        "Vasculitis Lymphocytic Cutaneous Small Vessel"
+      ],
+      "pubtator_normalized_name": "Vasculitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "asthma",
+      "preferred_label": "asthma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J45",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004979",
+        "orpha": null,
+        "umls": "UMLS:C0004096",
+        "mesh": "MESH:D001249"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004979",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2841",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002099",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J45",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:J45",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:493.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2109",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001249",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28397",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31387002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004096",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1656445230",
+          "display": null
+        }
+      ],
+      "context": "by the abnormal clustering of certain white blood cells (hypereosinophilia) in the blood and tissues, inflammation of blood vessels (vasculitis), and the development of inflammatory nodular lesions called granulomas (granulomatosis). Most affected individuals have a history of allergy. In addition, asthma and other associated lung (pulmonary) abnormalities (i.e., pulmonary infiltrates) often precede the development of the generalized (systemic) symptoms and findings seen in Churg-Strauss syndrome by as little as six months or as much as two decades. Asthma, a chronic respiratory disorder, is charact",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Status Asthmaticus",
+        "Asthma-Chronic Obstructive Pulmonary Disease Overlap Syndrome",
+        "Ige Responsiveness Atopic"
+      ],
+      "pubtator_normalized_name": "Asthma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

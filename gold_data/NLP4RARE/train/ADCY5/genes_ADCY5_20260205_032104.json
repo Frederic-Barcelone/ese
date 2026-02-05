@@ -1,0 +1,79 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:21:04.094525",
+  "document": "ADCY5.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ADCY5.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ADCY5",
+      "hgnc_symbol": "ADCY5",
+      "full_name": "adenylate cyclase 5",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "236",
+        "entrez": "111",
+        "ensembl": "ENSG00000173175",
+        "uniprot": "O95622",
+        "omim": "600293"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "236",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "111",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000173175",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "600293",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "O95622",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "1429",
+          "disease_name": "Benign hereditary chorea",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "324588",
+          "disease_name": "Familial dyskinesia and facial myokymia",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ADCY5-related dyskinesia affects males and females in equal numbers. The exact number of people who have this disorder is unknown. Rare disorders like ADCY5-dyskinesia often go misdiagnosed or undiagnosed, making it difficult to determine their true frequency in the general population. The disorder is al",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

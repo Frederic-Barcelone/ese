@@ -1,0 +1,405 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:21:19.671829",
+  "document": "Hydrocephalus.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hydrocephalus.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CSF",
+      "preferred_label": "Isolated femoral agenesis/hypoplasia",
+      "abbreviation": "CSF",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q72.4",
+        "icd11": "LB9A.8",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:1987",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:1987",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q72.4",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LB9A.8",
+          "display": null
+        }
+      ],
+      "context": "Hydrocephalus is a condition in which abnormally widened (dilated) cerebral spaces in the brain (ventricles) inhibit the normal flow of cerebrospinal fluid (CSF). The cerebrospinal fluid accumulates in the skull and puts pressure on the brain tissue. An enlarged head in infants and increased cerebrospinal fluid pressure are frequent findings but are not necessary for the diagnosis of Hydrocephalus. There are several different forms of Hydrocephalus: commun",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "normal pressure hydrocephalus",
+      "preferred_label": "normal pressure hydrocephalus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009366",
+        "orpha": "Orphanet:314928",
+        "umls": "UMLS:C0020258",
+        "mesh": "MESH:D006850"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009366",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1572",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001065",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:331.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006850",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10029773",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:236690",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:314928",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:30753002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020258",
+          "display": null
+        }
+      ],
+      "context": "n infants and increased cerebrospinal fluid pressure are frequent findings but are not necessary for the diagnosis of Hydrocephalus. There are several different forms of Hydrocephalus: communicating hydrocephalus, non-communicating hydrocephalus or obstructive hydrocephalus, internal hydrocephalus, normal pressure hydrocephalus, and benign hydrocephalus. Most cases of Hydrocephalus are diagnosed in the first 2 years of life, but onset may occur at any age, depending on the cause. Most types of Hydrocephalus (with the exception of those caused by an X-linked genetic trait) seem to affect males and females equally.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tremor Hereditary Essential And Idiopathic Normal Pressure Hydrocephalus"
+      ],
+      "pubtator_normalized_name": "Hydrocephalus Normal Pressure",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "communicating hydrocephalus",
+      "preferred_label": "communicating hydrocephalus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G91.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002045",
+        "orpha": null,
+        "umls": "UMLS:C0009451",
+        "mesh": "D006849"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002045",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1573",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G91.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:331.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1058",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34501",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271569006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009451",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:186577228",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006849",
+          "display": "Hydrocephalus"
+        }
+      ],
+      "context": "d (CSF). The cerebrospinal fluid accumulates in the skull and puts pressure on the brain tissue. An enlarged head in infants and increased cerebrospinal fluid pressure are frequent findings but are not necessary for the diagnosis of Hydrocephalus. There are several different forms of Hydrocephalus: communicating hydrocephalus, non-communicating hydrocephalus or obstructive hydrocephalus, internal hydrocephalus, normal pressure hydrocephalus, and benign hydrocephalus. Most cases of Hydrocephalus are diagnosed in the first 2 years of life, but onset may occur at any age, depending on the cause. Most types of Hydrocephalus",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hydrocephalus endocardial fibroelastosis and cataracts"
+      ],
+      "pubtator_normalized_name": "Hydrocephalus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "obstructive hydrocephalus",
+      "preferred_label": "obstructive hydrocephalus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G91.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001896",
+        "orpha": null,
+        "umls": "UMLS:C0549423",
+        "mesh": "D006849"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001896",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14159",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G91.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:331.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:108198",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116347",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230746009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0549423",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006849",
+          "display": "Hydrocephalus"
+        }
+      ],
+      "context": "ts pressure on the brain tissue. An enlarged head in infants and increased cerebrospinal fluid pressure are frequent findings but are not necessary for the diagnosis of Hydrocephalus. There are several different forms of Hydrocephalus: communicating hydrocephalus, non-communicating hydrocephalus or obstructive hydrocephalus, internal hydrocephalus, normal pressure hydrocephalus, and benign hydrocephalus. Most cases of Hydrocephalus are diagnosed in the first 2 years of life, but onset may occur at any age, depending on the cause. Most types of Hydrocephalus (with the exception of those caused by an X-linked genetic tr",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hydrocephalus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Hydrocephalus",
+      "preferred_label": "hydrocephalus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G91",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001150",
+        "orpha": null,
+        "umls": "UMLS:C0020255",
+        "mesh": "MESH:D006849"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001150",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10908",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G91",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9335",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006849",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3111",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230745008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020255",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:574533444",
+          "display": null
+        }
+      ],
+      "context": "Hydrocephalus is a condition in which abnormally widened (dilated) cerebral spaces in the brain (ventricles) inhibit the normal flow of cerebrospinal fluid (CSF). The cerebrospinal fluid accumulates in the skull and puts pressure on the brain tissue. An enlarged head in infants and increased cerebrospinal fluid",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hydrocephalus Normal Pressure",
+        "MASA (Mental Retardation Aphasia Shuffling Gait Adducted Thumbs) Syndrome",
+        "Walker-Warburg Syndrome"
+      ],
+      "pubtator_normalized_name": "Hydrocephalus",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

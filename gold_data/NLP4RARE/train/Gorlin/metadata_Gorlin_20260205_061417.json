@@ -1,0 +1,40 @@
+{
+  "doc_id": "Gorlin",
+  "doc_filename": "Gorlin.pdf",
+  "top_entities": [
+    {
+      "name": "Gorlin-Chaudhry-Moss Syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "patent ductus arteriosus",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "SUTURES",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2736,
+  "file_size_human": "2.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Gorlin-Chaudhry-Moss Syndrome: Clinical Overview and Diagnostic Characteristics",
+  "short_description": "Clinical documentation of Gorlin-Chaudhry-Moss syndrome, an extremely rare inherited disorder characterized by craniosynostosis, microphthalmia, hypodontia, and hypertrichosis.",
+  "long_description": "This clinical document provides a comprehensive overview of Gorlin-Chaudhry-Moss syndrome, an extremely rare autosomal recessive inherited disorder with only approximately four cases reported in medical literature since 1960. The document details the characteristic clinical features including premature closure of skull sutures (craniosynostosis), unusually small eyes (microphthalmia), absence of some teeth (hypodontia), and excessive body hair (hypertrichosis). Additional manifestations may include growth retardation, short digits, genital hypoplasia in females, patent ductus arteriosus, and potential mild mental retardation. The document outlines diagnostic approaches including clinical evaluation, cardiac assessments through ECG and echocardiography, and hearing function tests for associated conductive hearing loss.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T05:14:17.653283"
+}

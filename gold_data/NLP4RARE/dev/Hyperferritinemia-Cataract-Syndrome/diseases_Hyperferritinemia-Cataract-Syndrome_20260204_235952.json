@@ -1,0 +1,167 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:59:52.855739",
+  "document": "Hyperferritinemia-Cataract-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Hyperferritinemia-Cataract-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hyperferritinemia",
+      "preferred_label": "hyperferritinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0958237",
+        "orpha": null,
+        "umls": "UMLS:C3854388",
+        "mesh": "D000085583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0958237",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:892475",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:620729",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3854388",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000085583",
+          "display": "Hyperferritinemia"
+        }
+      ],
+      "context": "Hyperferritinemia-cataract syndrome is an extremely rare disorder that affects males and females in equal numbers. More than 100 families with the disorder have been described in the medical literature. The prevalence of hyperferritinemia-cataract syndrome has been estimated at 1 in 200,000 people in the general pop",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hyperferritinemia hereditary with congenital cataracts"
+      ],
+      "pubtator_normalized_name": "Hyperferritinemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cataract",
+      "preferred_label": "cataract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005129",
+        "orpha": null,
+        "umls": "UMLS:C0086543",
+        "mesh": "MESH:D002386"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005129",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:83",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000518",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:366.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39462",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002386",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26713",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:116200",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:193570009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0086543",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:109841337",
+          "display": null
+        }
+      ],
+      "context": "Hyperferritinemia-cataract syndrome is an extremely rare disorder that affects males and females in equal numbers. More than 100 families with the disorder have been described in the medical literature. The prevalence of hyperferritinemia-cataract syndrome has been estimated at 1 in 200,000 people in the general population.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cataract congenital with microcornea or slight microphthalmia",
+        "Cataract Nuclear Progressive",
+        "Cataract Age-Related Nuclear"
+      ],
+      "pubtator_normalized_name": "Cataract",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

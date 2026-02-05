@@ -1,0 +1,198 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:29:43.140742",
+  "document": "Ichthyosis-Lamellar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Ichthyosis-Lamellar.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Lamellar ichthyosis",
+      "preferred_label": "lamellar ichthyosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q80.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017778",
+        "orpha": "Orphanet:313",
+        "umls": "UMLS:C5848247",
+        "mesh": "D017490"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017778",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10803",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q80.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1852191",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10023686",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200617",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84805",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1289",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:313",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5848247",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:600146417",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017490",
+          "display": "Ichthyosis Lamellar"
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of sc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lamellar ichthyosis type 3",
+        "Ichthyosis Lamellar 5",
+        "Lamellar ichthyosis type 2"
+      ],
+      "pubtator_normalized_name": "Ichthyosis Lamellar",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin disorder",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar ichthyosis is a ve",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

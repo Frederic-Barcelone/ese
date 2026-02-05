@@ -1,0 +1,789 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:20:22.935801",
+  "document": "Autoimmune-Hepatitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Autoimmune-Hepatitis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 12,
+  "total_validated": 12,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Autoimmune hepatitis",
+      "preferred_label": "Autoimmune Chronic Hepatitis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0241910",
+        "mesh": "D019693"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0241910",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019693",
+          "display": "Hepatitis Autoimmune"
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the oth",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hepatitis Autoimmune",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disease",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher ris",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "AIH",
+      "preferred_label": "AIH",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K75.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016264",
+        "orpha": "Orphanet:2137",
+        "umls": "UMLS:C4721555",
+        "mesh": "MESH:D019693"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016264",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2048",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005676",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5871",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K75.4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:571.42",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1666753",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D019693",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10003827",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100264",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27029",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1897",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2137",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:408335007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4721555",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1235727122",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for developing AIH. The new cases per year",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "primary sclerosing cholangitis",
+      "preferred_label": "Primary sclerosing cholangitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018646",
+        "orpha": "Orphanet:447771",
+        "umls": "UMLS:C0008313",
+        "mesh": "D015209"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018646",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14268",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004268",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21868",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0030991",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3036",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100265",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4828",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:447771",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235917005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008313",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015209",
+          "display": "Cholangitis Sclerosing"
+        }
+      ],
+      "context": "ts females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for developing AIH. The new cases per year (incidence) are estimated at 1-2 per 100,000 and total cases (prevalence) are approximately 24 per 100,000. Studies",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cholangitis Sclerosing",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "primary biliary cholangitis",
+      "preferred_label": "primary biliary cholangitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K74.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005388",
+        "orpha": "Orphanet:186",
+        "umls": "UMLS:C0008312",
+        "mesh": "MESH:D008105"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005388",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12236",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001486",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7459",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K74.3",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:571.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3035",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008105",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10019137",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200439",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27167",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1604",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:109720",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:186",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31712002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008312",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:649193479",
+          "display": null
+        }
+      ],
+      "context": "es. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for developing AIH. The new cases per year (incidence) are estimated at 1-2 per 100,000 and total cases (prevalence) are approximately 24 per 100,000. Studies suggest that the incidence of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Liver Cirrhosis Biliary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disease process",
+      "preferred_label": "Lipoid nephrosis",
+      "abbreviation": null,
+      "confidence": 0.9188063502311706,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0027721",
+        "mesh": "D009402"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0027721",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009402",
+          "display": "Nephrosis Lipoid"
+        }
+      ],
+      "context": "Autoimmune hepatitis is a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for de",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Nephrosis Lipoid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autoimmune liver diseases",
+      "preferred_label": "Autoimmune liver disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0400936",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0400936",
+          "display": null
+        }
+      ],
+      "context": "a rare disorder that affects females 4 times as often as males. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for developing AIH. The new cases per year (incidence) are estimated at 1-2 per 100,000 and total cases (prevalence) are appro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "primary biliary cholangitis).Those",
+      "preferred_label": "Primary Biliary Cholangitis",
+      "abbreviation": null,
+      "confidence": 0.9640645146369934,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008312",
+        "mesh": "D008105"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008312",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008105",
+          "display": "Liver Cirrhosis Biliary"
+        }
+      ],
+      "context": "es. Type 1 is more common and is usually diagnosed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for developing AIH. The new cases per year (incidence) are estimated at 1-2 per 100,000 and total cases (prevalence) are approximately 24 per 100,000. Studies suggest that the incidence of AIH is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Liver Cirrhosis Biliary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autoimmune conditions",
+      "preferred_label": "Autoimmune Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0004364",
+        "mesh": "D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0004364",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001327",
+          "display": "Autoimmune Diseases"
+        }
+      ],
+      "context": "osed in adults. Type 2 is more common in children and often involves a more severe disease process. There are also variant types of AIH; these include individuals with AIH and one of the other autoimmune liver diseases (primary sclerosing cholangitis or primary biliary cholangitis).Those with other autoimmune conditions have a 25-50% chance of developing another one and thus a higher risk for developing AIH. The new cases per year (incidence) are estimated at 1-2 per 100,000 and total cases (prevalence) are approximately 24 per 100,000. Studies suggest that the incidence of AIH is increasing and the reason is unkn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autoimmune Diseases of the Nervous System",
+        "Demyelinating Autoimmune Diseases CNS",
+        "Anemia Hemolytic Autoimmune"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

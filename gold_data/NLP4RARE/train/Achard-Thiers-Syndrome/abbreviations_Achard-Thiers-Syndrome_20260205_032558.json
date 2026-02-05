@@ -1,0 +1,82 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:25:58.088791",
+  "document": "Achard-Thiers-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Achard-Thiers-Syndrome.pdf",
+  "total_candidates": 23,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "PCOS",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " syndromes appear to be transmitted within families. Approximately 50% of the sisters of women with PCOS have some form of the syndrome. The exact mechanism of genetic transmission is unknown. Achard-Thie",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Achard-Thiers syndrome",
+      "matched_text": "Achard-Thiers syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diabetes mellitus",
+      "matched_text": "diabetes mellitus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E08-E13",
+      "orpha": null
+    },
+    {
+      "name": "PCOS",
+      "matched_text": "PCOS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E28.2",
+      "orpha": "Orphanet:3185"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Insulin",
+      "matched_text": "insulin",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "name": "Androgen",
+      "matched_text": "androgen",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

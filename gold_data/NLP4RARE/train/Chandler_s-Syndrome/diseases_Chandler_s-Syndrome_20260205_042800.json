@@ -1,0 +1,574 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:28:00.608996",
+  "document": "Chandler_s-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chandler_s-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "iridocorneal endothelial syndrome",
+      "preferred_label": "iridocorneal endothelial syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018988",
+        "orpha": "Orphanet:64734",
+        "umls": "UMLS:C1096100",
+        "mesh": "MESH:D057129"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018988",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:60",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:242751",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D057129",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10053678",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84792",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:64734",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:129623003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1096100",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:265074385",
+          "display": null
+        }
+      ],
+      "context": "gle layer of cells lining the interior of the cornea, proliferates causing corneal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy and Cogan-Reese syndrome are the other two) that make up the iridocorneal endothelial syndrome (ICE syndrome). The spectrum is an acquired, unilateral disorder, which typically occurs in early to middle adulthood and predominantly affects women. Chandler's syndrome is the most commonly encountered clinical variant of this spectrum. Chandler’s syndrome is a very rare disorder that affects fem",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Iridocorneal Endothelial Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "unilateral",
+      "preferred_label": "Macrodactyly of toes, unilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295243",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295243",
+          "display": null
+        }
+      ],
+      "context": "eal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy and Cogan-Reese syndrome are the other two) that make up the iridocorneal endothelial syndrome (ICE syndrome). The spectrum is an acquired, unilateral disorder, which typically occurs in early to middle adulthood and predominantly affects women. Chandler's syndrome is the most commonly encountered clinical variant of this spectrum. Chandler’s syndrome is a very rare disorder that affects females more often than it does males. The disorder usually",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Cogan-Reese syndrome",
+      "preferred_label": "Cogan-Reese syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020370",
+        "orpha": "Orphanet:98980",
+        "umls": "UMLS:C1168173",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020370",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060217",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6125",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:218910",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10059200",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84644",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98980",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404633004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1168173",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1968906450",
+          "display": null
+        }
+      ],
+      "context": "is a rare eye disorder in which the endothelium, the single layer of cells lining the interior of the cornea, proliferates causing corneal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy and Cogan-Reese syndrome are the other two) that make up the iridocorneal endothelial syndrome (ICE syndrome). The spectrum is an acquired, unilateral disorder, which typically occurs in early to middle adulthood and predominantly affects women. Chandler's syndrome is the most commonly encountered clinical variant of this",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Chandler's syndrome",
+      "preferred_label": "Chandler's syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020369",
+        "orpha": "Orphanet:98979",
+        "umls": "UMLS:C0544008",
+        "mesh": "D057129"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020369",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11554",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6033",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:371.57",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:107777",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10057487",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:918",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98979",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:416960004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0544008",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:806443940",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D057129",
+          "display": "Iridocorneal Endothelial Syndrome"
+        }
+      ],
+      "context": "Chandler's syndrome (CS) is a rare eye disorder in which the endothelium, the single layer of cells lining the interior of the cornea, proliferates causing corneal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Iridocorneal Endothelial Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "corneal edema",
+      "preferred_label": "corneal edema",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006712",
+        "orpha": null,
+        "umls": "UMLS:C0010037",
+        "mesh": "MESH:D015715"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006712",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11030",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000879",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:371.20",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3242",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015715",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10011007",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:27194006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010037",
+          "display": null
+        }
+      ],
+      "context": "Chandler's syndrome (CS) is a rare eye disorder in which the endothelium, the single layer of cells lining the interior of the cornea, proliferates causing corneal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy and Cogan-Reese syndrome are the other two) that make up the iridocorneal endothelial syndrome (ICE syndrome). The spectrum is an acquired, unilatera",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Iridocorneal Endothelial Syndrome"
+      ],
+      "pubtator_normalized_name": "Corneal Edema",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eye disorder",
+      "preferred_label": "eye disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005328",
+        "orpha": null,
+        "umls": "UMLS:C0015397",
+        "mesh": "MESH:D005128"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005328",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5614",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003966",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:379.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5092",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005128",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26767",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:371405004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015397",
+          "display": null
+        }
+      ],
+      "context": "Chandler's syndrome (CS) is a rare eye disorder in which the endothelium, the single layer of cells lining the interior of the cornea, proliferates causing corneal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy and Cogan-Reese syndrome ar",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "REM Sleep Behavior Disorder",
+        "Ocular Motility Disorders",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Eye Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "glaucoma",
+      "preferred_label": "glaucoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": "ICD10CM:H40-H42",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005041",
+        "orpha": null,
+        "umls": "UMLS:C0017601",
+        "mesh": "MESH:D005901"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005041",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1686",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000501",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H40-H42",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:H40-H42",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:365.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42224",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005901",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26782",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:23986001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017601",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:499924848",
+          "display": null
+        }
+      ],
+      "context": "Chandler's syndrome (CS) is a rare eye disorder in which the endothelium, the single layer of cells lining the interior of the cornea, proliferates causing corneal edema, distortion of the iris, and unusually high pressure in the eye (glaucoma). CS is one of three syndromes affecting the eyes (progressive iris atrophy and Cogan-Reese syndrome are the other two) that make up the iridocorneal endothelial syndrome (ICE syndrome). The spectrum is an acquired, unilateral disorder, which typically occurs in early to middle adulthood and predom",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Glaucoma Open-Angle",
+        "Glaucoma Angle-Closure",
+        "Glaucoma-Related Pigment Dispersion Syndrome"
+      ],
+      "pubtator_normalized_name": "Glaucoma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

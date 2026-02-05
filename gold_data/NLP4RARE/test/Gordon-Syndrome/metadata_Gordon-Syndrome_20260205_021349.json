@@ -1,0 +1,35 @@
+{
+  "doc_id": "Gordon-Syndrome",
+  "doc_filename": "Gordon-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Gordon syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cleft palate",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1759,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Gordon Syndrome: Clinical Features and Diagnosis",
+  "short_description": "Clinical overview of Gordon syndrome, a congenital condition affecting males and females equally with characteristic physical features identifiable at birth.",
+  "long_description": "This document provides clinical information about Gordon syndrome, a rare genetic condition that affects both males and females equally. The syndrome is characterized by distinctive physical features that are typically present and recognizable at birth, including camptodactyly (permanent flexion of fingers), clubfoot, and cleft palate. The document discusses the diagnostic approach, which relies on thorough clinical evaluation and identification of characteristic physical findings. With more than 40 documented cases across five families reported in medical literature, this resource serves as a reference for understanding the congenital nature and clinical presentation of Gordon syndrome.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:13:49.633752"
+}

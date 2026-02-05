@@ -1,0 +1,96 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:05:45.138108",
+  "document": "Erdheim-Chester-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Erdheim-Chester-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ECD",
+      "preferred_label": "ECD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q21.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020290",
+        "orpha": "Orphanet:98722",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020290",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050651",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:802",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q21.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:745.69",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101029",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:821",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:606215",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98722",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15459006",
+          "display": null
+        }
+      ],
+      "context": "ECD is a rare disorder of adulthood that most frequently becomes apparent in middle age, with an average age of onset in the mid-50s. More than 100 cases have been reported in the medical literature with a slight male preponderance. ECD is named for the two investigators who originally described the di",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

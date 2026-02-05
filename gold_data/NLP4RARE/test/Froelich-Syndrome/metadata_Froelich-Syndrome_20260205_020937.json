@@ -1,0 +1,40 @@
+{
+  "doc_id": "Froelich-Syndrome",
+  "doc_filename": "Froelich-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Prader-Willi syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Froehlich syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Sleep",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2428,
+  "file_size_human": "2.4 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Froehlich Syndrome (Adiposogenital Dystrophy): Clinical Overview",
+  "short_description": "A comprehensive clinical overview of Froehlich syndrome, a rare acquired endocrine disorder caused by hypothalamic damage resulting in obesity, delayed puberty, and growth abnormalities.",
+  "long_description": "This clinical document provides a detailed examination of Froehlich syndrome, also known as adiposogenital dystrophy, a rare acquired endocrine disorder primarily affecting males. The document explains how hypothalamic damage, typically from tumors or surgical treatment, disrupts the hypothalamic-pituitary axis, leading to characteristic symptoms including excessive appetite and obesity, delayed puberty with small testes, growth retardation, and short stature. The text distinguishes this acquired condition from inherited disorders like Prader-Willi syndrome and describes additional complications such as intellectual difficulties, vision problems due to optic nerve damage, somnolence, diabetes insipidus (forming Infundibulo-tuberal syndrome), hypothermia, and delicate skin. This resource serves as an educational reference for healthcare professionals treating patients with hypothalamic dysfunction and related endocrine abnormalities.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:09:37.318548"
+}

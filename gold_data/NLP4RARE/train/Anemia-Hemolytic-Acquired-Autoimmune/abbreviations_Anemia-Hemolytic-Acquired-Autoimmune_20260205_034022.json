@@ -1,0 +1,141 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:40:22.020321",
+  "document": "Anemia-Hemolytic-Acquired-Autoimmune.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anemia-Hemolytic-Acquired-Autoimmune.pdf",
+  "total_candidates": 35,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "autoimmune hemolytic anemia, warm type",
+      "matched_text": "warm antibody hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:D59.11",
+      "orpha": "Orphanet:90033"
+    },
+    {
+      "name": "autoimmune hemolytic anemia",
+      "matched_text": "autoimmune hemolytic anemias",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98375"
+    },
+    {
+      "name": "Acquired hemolytic Anemia",
+      "matched_text": "Acquired hemolytic anemias",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D59.3",
+      "orpha": "Orphanet:182047"
+    },
+    {
+      "name": "cold agglutinin disease",
+      "matched_text": "Cold antibody hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:D59.12",
+      "orpha": "Orphanet:56425"
+    },
+    {
+      "name": "autoimmune disease",
+      "matched_text": "autoimmune diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hemolytic anemia",
+      "matched_text": "hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D55-D59",
+      "orpha": null
+    },
+    {
+      "name": "HELLP syndrome",
+      "matched_text": "hemolysis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:244242"
+    },
+    {
+      "name": "non-genetic",
+      "matched_text": "non-genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "anemia",
+      "matched_text": "anemia",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Red blood cells",
+      "matched_text": "red blood cells",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "erythrocytes",
+      "matched_text": "erythrocytes",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Cold antibody",
+      "matched_text": "Cold antibody",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "BLOOD TEST",
+      "matched_text": "blood test",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

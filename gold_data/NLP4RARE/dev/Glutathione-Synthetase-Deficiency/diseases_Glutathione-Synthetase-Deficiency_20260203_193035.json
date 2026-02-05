@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:30:35.575095",
+  "document": "Glutathione-Synthetase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Glutathione-Synthetase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Glutathione synthetase deficiency",
+      "preferred_label": "glutathione synthetase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017909",
+        "orpha": "Orphanet:32",
+        "umls": "UMLS:C5979912",
+        "mesh": "MESH:C536835"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017909",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080699",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10047",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1876682",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536835",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128193",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:32",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234589002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5979912",
+          "display": null
+        }
+      ],
+      "context": "Glutathione synthetase deficiency affects males and females in equal numbers. More than 70 individuals from 50 families have been described in the medical literature. The exact incidence and prevalence are unknown. Because individuals may be misdiagnosed or go undiagnosed, determining the true frequency in the general population is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Glutathione synthetase deficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

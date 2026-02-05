@@ -1,0 +1,215 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:19:56.614668",
+  "document": "Yellow-Nail-syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Yellow-Nail-syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Yellow nail syndrome",
+      "preferred_label": "yellow nail syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:L60.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007921",
+        "orpha": "Orphanet:662",
+        "umls": "UMLS:C0221348",
+        "mesh": "MESH:D056684"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007921",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050468",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001452",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:184",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L60.5",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:113164",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D056684",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048244",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85238",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1874",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:153300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:662",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:400211001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0221348",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:47812081",
+          "display": null
+        }
+      ],
+      "context": "Yellow nail syndrome is an extremely rare disorder characterized by malformations affecting the fingernails and toenails, abnormalities affecting the lungs and the airways (respiratory tract), and swelling or puffiness in different parts of the body because of the accumulation of protein-rich fluid (lymph) in the soft",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Yellow Nail Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphedema",
+      "preferred_label": "lymphedema",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019297",
+        "orpha": "Orphanet:79383",
+        "umls": "UMLS:C0024236",
+        "mesh": "MESH:D008209"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019297",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4977",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:457.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6155",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008209",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025282",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3207",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79383",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234097001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024236",
+          "display": null
+        }
+      ],
+      "context": "aracterized by malformations affecting the fingernails and toenails, abnormalities affecting the lungs and the airways (respiratory tract), and swelling or puffiness in different parts of the body because of the accumulation of protein-rich fluid (lymph) in the soft layers of tissue under the skin (lymphedema). Yellow nail syndrome usually affects older adults. The exact cause of yellow nail syndrome is not known. Occasionally, yellow nail syndrome has been reported to run in families suggesting that genetic factors may play a role in the development of the disorder in some patients. A diagnosis of yell",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphedema Hereditary IB",
+        "Lymphedema Congenital Recessive",
+        "GATA2 Deficiency"
+      ],
+      "pubtator_normalized_name": "Lymphedema",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

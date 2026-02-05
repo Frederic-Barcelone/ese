@@ -1,0 +1,40 @@
+{
+  "doc_id": "Cholangiocarcinoma",
+  "doc_filename": "Cholangiocarcinoma.pdf",
+  "top_entities": [
+    {
+      "name": "intrahepatic cholangiocarcinoma",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "perihilar cholangiocarcinoma",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "BLOOD TEST",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 3403,
+  "file_size_human": "3.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Cholangiocarcinoma and Biliary Tract Cancers: Clinical Overview",
+  "short_description": "Clinical document covering symptoms, risk factors, epidemiology, and diagnostic approaches for cholangiocarcinoma and biliary tract cancers.",
+  "long_description": "This clinical reference document provides a comprehensive overview of cholangiocarcinoma and biliary tract cancers, including gallbladder cancer. It details the often asymptomatic early presentation of these cancers, common symptoms such as jaundice, weight loss, and abdominal pain, and various risk factors including liver cirrhosis, hepatitis infections, and industrial chemical exposure. The document presents epidemiological data showing approximately 12,000 new cases annually in the USA, with geographic and demographic variations in incidence rates. It concludes with diagnostic approaches including imaging studies (CT/MRI), endoscopic procedures (ERCP), and biopsy techniques for pathologic confirmation.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:31:29.919402"
+}

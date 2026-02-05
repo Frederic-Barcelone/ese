@@ -1,0 +1,30 @@
+{
+  "doc_id": "WHIM-Syndrome",
+  "doc_filename": "WHIM-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "WHIM Syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1680,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "WHIM Syndrome: Epidemiology and Demographics",
+  "short_description": "Clinical overview of WHIM syndrome, an extremely rare disorder with estimated prevalence of 0.2 per million live births.",
+  "long_description": "This document provides epidemiological information about WHIM syndrome, a rare immunodeficiency disorder. It details the estimated prevalence of approximately 0.2 cases per million live births, notes that only about 60 cases have been documented in medical literature, and describes the typical onset occurring in infancy or early childhood. The document emphasizes the rarity of the condition and indicates equal distribution between males and females, providing essential demographic context for understanding this uncommon genetic disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T08:40:48.561682"
+}

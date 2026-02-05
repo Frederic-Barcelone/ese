@@ -1,0 +1,271 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:19:27.942393",
+  "document": "X.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/X.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "X-linked myopathy with excessive autophagy",
+      "preferred_label": "X-linked myopathy with excessive autophagy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010684",
+        "orpha": "Orphanet:25980",
+        "umls": "UMLS:C1839615",
+        "mesh": "MESH:C536522"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010684",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050760",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3892",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:374264",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536522",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200223",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1866",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:310440",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:25980",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:719815005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1839615",
+          "display": null
+        }
+      ],
+      "context": "X-linked myopathy with excessive autophagy (XMEA) is an extremely rare genetic disorder characterized by muscle disease (myopathy). The disorder is fully expressed in males only and is characterized by slowly progressive muscle weakness, especially in the legs. Onset is usually during childhood often between 5-10 years of age. XMEA occurs d",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Myopathy X-Linked with Excessive Autophagy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "X-linked myopathy with excessive autophagy (XMEA) is an extremely rare genetic disorder characterized by muscle disease (myopathy). The disorder is fully expressed in males only and is characterized by slowly progressive muscle weakness, especially in the legs. Onset is usually during childhood often between 5-10 years of age. XMEA occurs due to mutations of an unidentified gene on th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "myopathy",
+      "preferred_label": "myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005336",
+        "orpha": null,
+        "umls": "UMLS:C0026848",
+        "mesh": "C564971"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005336",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:423",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004145",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:728.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10135",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101216",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75047002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026848",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1870184184",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564971",
+          "display": "Myopathy with Giant Abnormal Mitochondria"
+        }
+      ],
+      "context": "X-linked myopathy with excessive autophagy (XMEA) is an extremely rare genetic disorder characterized by muscle disease (myopathy). The disorder is fully expressed in males only and is characterized by slowly progressive muscle weakness, especially in the legs. Onset is usually during childhood often between 5-10 years of age. XMEA occurs due to mutations of an unidentified gene on the X chromosome. The disorder is inherited",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Muscular Diseases",
+        "Myotonic Dystrophy",
+        "Myopathy with Lactic Acidosis Hereditary"
+      ],
+      "pubtator_normalized_name": "Myopathy with Giant Abnormal Mitochondria",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

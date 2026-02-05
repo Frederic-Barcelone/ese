@@ -1,0 +1,40 @@
+{
+  "doc_id": "Fetal-Hydantoin-Syndrome",
+  "doc_filename": "Fetal-Hydantoin-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "fetal hydantoin syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "phenytoin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "hydantoin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1836,
+  "file_size_human": "1.8 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Fetal Hydantoin Syndrome: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing the incidence, prevalence, and diagnostic approach for fetal hydantoin syndrome resulting from phenytoin exposure during pregnancy.",
+  "long_description": "This clinical research document provides essential information about fetal hydantoin syndrome, a condition that affects approximately 5-10% of infants exposed to phenytoin (hydantoin) during pregnancy. The document outlines key epidemiological data, noting that the syndrome affects males and females equally, though exact incidence and prevalence remain unknown. It emphasizes that diagnosis is made clinically through identification of characteristic symptoms combined with documented phenytoin exposure history, as no specific diagnostic testing exists. The document also provides reassurance that the majority of infants born to mothers taking phenytoin during pregnancy will not develop this syndrome.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T08:13:11.363598"
+}

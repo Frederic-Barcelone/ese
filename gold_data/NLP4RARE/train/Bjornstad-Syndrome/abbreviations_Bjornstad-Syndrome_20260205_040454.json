@@ -1,0 +1,81 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:04:54.343866",
+  "document": "Bjornstad-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Bjornstad-Syndrome.pdf",
+  "total_candidates": 35,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "Macrodactyly of toes, bilateral",
+      "matched_text": "bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:295245"
+    },
+    {
+      "name": "sensorineural deafness",
+      "matched_text": "Sensorineural deafness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hearing loss disorder",
+      "matched_text": "deafness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H90",
+      "orpha": null
+    },
+    {
+      "name": "Bjornstad syndrome",
+      "matched_text": "Bjornstad syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:123"
+    },
+    {
+      "name": "twisted hair",
+      "matched_text": "twisted hair",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2889"
+    },
+    {
+      "name": "hair loss",
+      "matched_text": "hair loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79364"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

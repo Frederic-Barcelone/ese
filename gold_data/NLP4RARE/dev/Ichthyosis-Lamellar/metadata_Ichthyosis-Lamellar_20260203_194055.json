@@ -1,0 +1,23 @@
+{
+  "doc_id": "Ichthyosis-Lamellar",
+  "doc_filename": "Ichthyosis-Lamellar.pdf",
+  "file_size_bytes": 1999,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Lamellar Ichthyosis: Clinical Overview and Treatment Guidelines",
+  "short_description": "Clinical document describing lamellar ichthyosis, a rare genetic skin disorder characterized by abnormal skin cell shedding and scale formation.",
+  "long_description": "This clinical reference document provides a comprehensive overview of lamellar ichthyosis, a rare genetic skin disorder affecting less than one in 200,000 people across all populations regardless of gender, race, or ethnicity. The document explains the pathophysiology of the condition, where skin cells are produced at normal rates but fail to separate properly at the stratum corneum surface, leading to retention and scale formation. It outlines current treatment approaches including topical therapies with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and mild keratolytics with alpha-hydroxy acids. For severe cases, the document discusses systemic treatment with oral synthetic retinoids, while noting their potential complications including bone toxicity.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-03T18:40:55.849562"
+}

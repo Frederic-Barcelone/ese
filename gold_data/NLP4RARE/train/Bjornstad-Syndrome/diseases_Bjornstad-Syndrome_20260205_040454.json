@@ -1,0 +1,462 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:04:54.344175",
+  "document": "Bjornstad-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Bjornstad-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "Bjornstad syndrome is an extremely rare inherited disorder characterized by the presence of abnormally flattened, twisted hair shafts (pili torti) and, in most cases, deafness (sensorineural hearing loss). Hearing loss typically affects both ears (bilateral). Individuals with this disorder usually have dry, fragile, lusterless, and/or coarse scalp hair as well as areas of patchy hair loss (alopecia). Both autosomal dominant and recessive inheritance have been reported in the medical literature. Bjornstad syndrome is an extremely rare disorder that was",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Sensorineural deafness",
+      "preferred_label": "sensorineural deafness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020678",
+        "orpha": null,
+        "umls": "UMLS:C0018784",
+        "mesh": "D006319"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020678",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10003",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001176",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000407",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9164",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26739",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60700002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018784",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006319",
+          "display": "Hearing Loss Sensorineural"
+        }
+      ],
+      "context": "afts from affected individuals under an electron microscope, demonstrating characteristic twisting of the hair shafts at regular intervals. Since the presence of this hair abnormality is suggestive of Bjornstad Syndrome, all infants with this finding should be evaluated for possible nerve deafness. Sensorineural deafness may be confirmed through a variety of specialized hearing (auditory) tests.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deafness Sensorineural And Male Infertility",
+        "Deafness oligodontia syndrome",
+        "Corneal dystrophy and perceptive deafness"
+      ],
+      "pubtator_normalized_name": "Hearing Loss Sensorineural",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "deafness",
+      "preferred_label": "hearing loss disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005365",
+        "orpha": null,
+        "umls": "UMLS:C1384666",
+        "mesh": "MESH:D034381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005365",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004238",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:389.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034381",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1384666",
+          "display": null
+        }
+      ],
+      "context": "Bjornstad syndrome is an extremely rare inherited disorder characterized by the presence of abnormally flattened, twisted hair shafts (pili torti) and, in most cases, deafness (sensorineural hearing loss). Hearing loss typically affects both ears (bilateral). Individuals with this disorder usually have dry, fragile, lusterless, and/or coarse scalp hair as well as areas of patchy hair loss (alopecia). Both autosomal dominant and recessive inheritance have been reported in",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deaf-Blind Disorders"
+      ],
+      "pubtator_normalized_name": "Ermine phenotype",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Bjornstad syndrome",
+      "preferred_label": "Bjornstad syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009872",
+        "orpha": "Orphanet:123",
+        "umls": "UMLS:C0266006",
+        "mesh": "MESH:C537633"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009872",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050677",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82728",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537633",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:859",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:262000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:123",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0266006",
+          "display": null
+        }
+      ],
+      "context": "Bjornstad syndrome is an extremely rare inherited disorder characterized by the presence of abnormally flattened, twisted hair shafts (pili torti) and, in most cases, deafness (sensorineural hearing loss). Hearing loss typically affects both ears (bilateral). Individuals with this disorder usually have dry, fragile,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "twisted hair",
+      "preferred_label": "twisted hair",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009870",
+        "orpha": "Orphanet:2889",
+        "umls": "UMLS:C0263491",
+        "mesh": "MESH:C562485"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009870",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4361",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0003777",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82670",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562485",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:261900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2889",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:17170005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0263491",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:813238041",
+          "display": null
+        }
+      ],
+      "context": "Bjornstad syndrome is an extremely rare inherited disorder characterized by the presence of abnormally flattened, twisted hair shafts (pili torti) and, in most cases, deafness (sensorineural hearing loss). Hearing loss typically affects both ears (bilateral). Individuals with this disorder usually have dry, fragile, lusterless, and/or coarse scalp hair as well as areas of patchy hair loss (alopecia). Both autosomal dominan",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "hair loss",
+      "preferred_label": "hair loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004907",
+        "orpha": "Orphanet:79364",
+        "umls": "UMLS:C0002170",
+        "mesh": "MESH:D000505"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004907",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:987",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:704.09",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7982",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000505",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C50575",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79364",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56317004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002170",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1313926062",
+          "display": null
+        }
+      ],
+      "context": "esence of abnormally flattened, twisted hair shafts (pili torti) and, in most cases, deafness (sensorineural hearing loss). Hearing loss typically affects both ears (bilateral). Individuals with this disorder usually have dry, fragile, lusterless, and/or coarse scalp hair as well as areas of patchy hair loss (alopecia). Both autosomal dominant and recessive inheritance have been reported in the medical literature. Bjornstad syndrome is an extremely rare disorder that was first described in 1965. In theory, it affects males and females in equal numbers. However, in observed cases, more females than male",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Davenport Donlan syndrome"
+      ],
+      "pubtator_normalized_name": "Alopecia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

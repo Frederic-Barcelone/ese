@@ -1,0 +1,109 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T18:29:42.490763",
+  "document": "Carney-Complex.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Carney-Complex.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Carney complex",
+      "preferred_label": "Carney complex",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D44.8",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015285",
+        "orpha": "Orphanet:1359",
+        "umls": "UMLS:C0406810",
+        "mesh": "MESH:D056733"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015285",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050471",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1119",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D44.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:140810",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D056733",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200756",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4705",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1359",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:733491005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0406810",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1051158630",
+          "display": null
+        }
+      ],
+      "context": "Carney complex affects males and females in equal numbers. Approximately 600 affected individuals have been reported since the disorder was first described in the medical literature in 1985. The disorder can present at any age, but the mean age at diagnosis is 20.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carney Complex Variant"
+      ],
+      "pubtator_normalized_name": "Carney Complex",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

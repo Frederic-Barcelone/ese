@@ -1,0 +1,45 @@
+{
+  "doc_id": "Pseudocholinesterase-Deficiency",
+  "doc_filename": "Pseudocholinesterase-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "butyrylcholinesterase deficiency",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "genetic disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Pseudocholinesterase",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Choline",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2600,
+  "file_size_human": "2.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DSC",
+  "document_type_name": "Disease Landscape & Epidemiology",
+  "document_type_group": "Disease Landscape",
+  "classification_confidence": 0.25,
+  "title": "Pseudocholinesterase Deficiency: Genetic Disorder and Anesthetic Sensitivity",
+  "short_description": "Clinical overview of pseudocholinesterase deficiency, a genetic disorder causing dangerous sensitivity to certain anesthetic agents like succinylcholine.",
+  "long_description": "This clinical document provides a comprehensive overview of pseudocholinesterase deficiency, an uncommon genetic disorder affecting approximately 1 in 1,500-2,500 people in the United States. The document explains how individuals with this condition have a shortage or absence of the pseudocholinesterase enzyme in their blood serum, making them extremely sensitive to choline-derived anesthetic agents such as succinylcholine and mivacurium. When exposed to these drugs during surgery, patients experience respiratory muscle paralysis and apnea, requiring mechanical ventilation until the anesthetic is metabolized. The document also covers epidemiological data, noting higher prevalence in Caucasian American males, and includes supplementary information about different types of apnea conditions.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T00:23:32.936511"
+}

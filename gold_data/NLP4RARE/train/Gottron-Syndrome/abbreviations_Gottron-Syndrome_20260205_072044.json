@@ -1,0 +1,83 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T07:20:44.801917",
+  "document": "Gottron-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gottron-Syndrome.pdf",
+  "total_candidates": 38,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "GS",
+      "long_form": "Gottron syndrome",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Gottron syndrome (GS) is an extremely rare inherited disorder characterized by the appearance of premature aging (progeria), especially in the form of unusually fragile, thin skin on the hands and feet (distal extremities). GS is described as a mild, nonprogressive, congenital form of skin atrophy due to the loss of the fatty tissue directly under the skin (subcutaneous atrophy). Other findings may include abnormally",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Gottron syndrome",
+      "matched_text": "Gottron syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2500"
+    },
+    {
+      "name": "premature aging",
+      "matched_text": "premature aging",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79389"
+    },
+    {
+      "name": "skin atrophy",
+      "matched_text": "skin atrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "progeria",
+      "matched_text": "progeria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:139033"
+    },
+    {
+      "name": "stature",
+      "matched_text": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

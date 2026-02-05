@@ -1,0 +1,94 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:45:31.292093",
+  "document": "OSMED-Heterozygous.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/OSMED-Heterozygous.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "COL11A2",
+      "hgnc_symbol": "COL11A2",
+      "full_name": "collagen type XI alpha 2 chain",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2187",
+        "entrez": "1302",
+        "ensembl": "ENSG00000204248",
+        "uniprot": "P13942",
+        "omim": "120290"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2187",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "1302",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000204248",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "120290",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P13942",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "166100",
+          "disease_name": "Autosomal dominant otospondylomegaepiphyseal dysplasia",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "1427",
+          "disease_name": "Autosomal recessive otospondylomegaepiphyseal dysplasia",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        },
+        {
+          "orphacode": "2021",
+          "disease_name": "Fibrochondrogenesis",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "90635",
+          "disease_name": "Rare autosomal dominant non-syndromic sensorineural deafness type DFNA",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "90636",
+          "disease_name": "Rare autosomal recessive non-syndromic sensorineural deafness type DFNB",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "e gradual improvement in bone growth that leads to normal physical development by early childhood. Mental and motor development is also normal by early childhood. In some cases, affected individuals develop hearing loss. Heterozygous OSMED occurs because of disruptions or changes (mutations) to the COL11A2 gene. A diagnosis of heterozygous OSMED is made based upon a thorough clinical evaluation, a detailed patient history, identification of characteristic symptoms, and a variety of specialized tests including x-rays. X-ray studies reveal characteristic skeletal malformations associated with heterozyg",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

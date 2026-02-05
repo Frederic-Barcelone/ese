@@ -1,0 +1,216 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:47:30.993745",
+  "document": "Opsoclonus.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Opsoclonus.pdf",
+  "total_candidates": 92,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 6,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CSF",
+      "long_form": "Cerebrospinal fluid",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "th oral and IV contrast or MRI with gadolinium of the neck, chest, abdomen, and pelvis need to be done. PET scanning is often done in adults with OMS looking for other occult tumors. In addition, a spinal tap to detect neuroinflammation is necessary. Besides routine tests for infection, recommended CSF studies include so-called “MS panel’, to include oligoclonal bands (with paired serum sample), looking for antibodies secreted by B cells in the CSF. Also, lymphocyte subset analysis (flow cytometry) using immunophenotyping reveals an increased frequency of CSF CD 19+ B cells, which is an invaluabl",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "OMS",
+      "long_form": "opsoclonus myoclonus syndrome",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "le crying, reduced and fragmented sleep (insomnia) and rage attacks are common. Difficulty articulating speech (dysarthria), sometimes with complete loss of speech and language may occur. Additional symptoms such as decreased muscle tone (hypotonia) and vomiting are common. The most common cause of OMS in young children is paraneoplastic. A small, often hidden tumor presumably provokes the immune system into attacking the nervous system, which may also control the tumor or even cause it to regress. Tumors are NOT in the brain, but are in other areas of the body, usually in chest or abdomen. In 50",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "itability, are highly reliable indicators of this syndrome. To detect a tumor in children, either a CT scan with oral and IV contrast or MRI with gadolinium of the neck, chest, abdomen, and pelvis need ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IV",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "reliable indicators of this syndrome. To detect a tumor in children, either a CT scan with oral and IV contrast or MRI with gadolinium of the neck, chest, abdomen, and pelvis need to be done. PET scanni",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "tors of this syndrome. To detect a tumor in children, either a CT scan with oral and IV contrast or MRI with gadolinium of the neck, chest, abdomen, and pelvis need to be done. PET scanning is often done",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PET",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ral and IV contrast or MRI with gadolinium of the neck, chest, abdomen, and pelvis need to be done. PET scanning is often done in adults with OMS looking for other occult tumors. In addition, a spinal ta",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MS",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "mptoms such as decreased muscle tone (hypotonia) and vomiting are common. The most common cause of OMS in young children is paraneoplastic. A small, often hidden tumor presumably provokes the immune sys",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CD",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "cyte subset analysis (flow cytometry) using immunophenotyping reveals an increased frequency of CSF CD 19+ B cells, which is an invaluable biomarker of OMS disease activity. Autoantibodies in some child",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Isolated femoral agenesis/hypoplasia",
+      "matched_text": "CSF",
+      "abbreviation": "CSF",
+      "confidence": 0.39999999999999997,
+      "is_rare": true,
+      "icd10": "Q72.4",
+      "orpha": "ORPHA:1987"
+    },
+    {
+      "name": "Opsoclonus-myoclonus syndrome",
+      "matched_text": "OMS",
+      "abbreviation": "OMS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G25.3",
+      "orpha": "ORPHA:1183"
+    },
+    {
+      "name": "viral infectious disease",
+      "matched_text": "viral infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "ganglioneuroblastoma",
+      "matched_text": "ganglioneuroblastoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:251877"
+    },
+    {
+      "name": "sleep disturbances",
+      "matched_text": "sleep disturbances",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "neuroinflammation",
+      "matched_text": "neuroinflammation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "neuroblastoma",
+      "matched_text": "neuroblastoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:635"
+    },
+    {
+      "name": "breast cancer",
+      "matched_text": "breast cancers",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:C50",
+      "orpha": null
+    },
+    {
+      "name": "disseminated",
+      "matched_text": "disseminated",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "insomnia",
+      "matched_text": "insomnia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G47.0",
+      "orpha": null
+    },
+    {
+      "name": "ataxia",
+      "matched_text": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Sleep",
+      "matched_text": "sleep",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

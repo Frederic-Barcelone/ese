@@ -1,0 +1,40 @@
+{
+  "doc_id": "Cryptococcosis",
+  "doc_filename": "Cryptococcosis.pdf",
+  "top_entities": [
+    {
+      "name": "fungal infectious disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cryptococcosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "raw fruit",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2338,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Cryptococcosis: Fungal Infection Overview",
+  "short_description": "Clinical overview of cryptococcosis, a fungal infection caused by Cryptococcus neoformans that primarily affects immunocompromised individuals.",
+  "long_description": "This document provides a comprehensive overview of cryptococcosis, a fungal infection caused by Cryptococcus neoformans. It covers transmission routes including contact with pigeon droppings, unwashed raw fruit, and infected individuals. The document emphasizes the heightened risk for immunocompromised patients, including those with HIV/AIDS, cancer patients undergoing chemotherapy, and organ transplant recipients. It discusses the epidemiological patterns in the United States, particularly in Southeastern states among adults aged 40-60 years with a male predominance. The document also outlines diagnostic approaches including microscopic examination, culture methods, and immunological antigen detection tests.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:58:39.765380"
+}

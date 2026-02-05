@@ -1,0 +1,40 @@
+{
+  "doc_id": "CLOVES-Syndrome",
+  "doc_filename": "CLOVES-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Klippel-Trenaunay syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Proteus syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Cloves",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1595,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "CLOVES Syndrome Clinical Overview",
+  "short_description": "Clinical document describing CLOVES syndrome, a rare congenital condition affecting males and females equally across all ethnicities.",
+  "long_description": "This clinical document provides an overview of CLOVES syndrome, a rare congenital disorder that is present from birth and affects individuals regardless of gender, race, or ethnicity. The document highlights the diagnostic challenges associated with this condition, noting that many patients are frequently misdiagnosed with similar syndromes such as Klippel-Trenaunay syndrome or Proteus syndrome. This information appears to be part of a larger clinical reference or educational material aimed at improving recognition and proper diagnosis of CLOVES syndrome in medical practice.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:15:39.855369"
+}

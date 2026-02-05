@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:58:53.397062",
+  "document": "Prune-Belly-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Prune-Belly-Syndrome.pdf",
+  "total_candidates": 33,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "IVP",
+      "long_form": "intravenous pyelogram",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "but a few female cases have been described in the medical literature. The diagnosis is usually obvious from birth, but care and time are required to determine the location and number of abnormalities. A full understanding of the complications will involve imaging tests such as ultrasound, X-ray, and, in order to determine the extent of involvement of the genitourinary tract, intravenous pyelogram (IVP). An IVP makes use of a dye to map the degree of involvement of the kidneys and their ducts.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "X-ray",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "rmalities. A full understanding of the complications will involve imaging tests such as ultrasound, X-ray, and, in order to determine the extent of involvement of the genitourinary tract, intravenous pyelo",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Macrodactyly of toes, bilateral",
+      "matched_text": "bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:295245"
+    },
+    {
+      "name": "Vesicoureteral reflux",
+      "matched_text": "vesicoureteral reflux",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "chronic renal failure",
+      "matched_text": "chronic renal failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "prune belly syndrome",
+      "matched_text": "Eagle-Barrett syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q79.4",
+      "orpha": "Orphanet:2970"
+    },
+    {
+      "name": "pulmonary hypoplasia",
+      "matched_text": "pulmonary hypoplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cryptorchidism",
+      "matched_text": "cryptorchidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hydronephrosis",
+      "matched_text": "hydronephrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

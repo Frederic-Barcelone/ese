@@ -1,0 +1,496 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:24:48.963458",
+  "document": "Acanthocheilonemiasis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acanthocheilonemiasis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "rare infectious disease",
+      "preferred_label": "rare infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019062",
+        "orpha": "Orphanet:68416",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019062",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68416",
+          "display": null
+        }
+      ],
+      "context": "n, the liver and spleen may become abnormally enlarged (hepatosplenomegaly). Laboratory testing may also reveal abnormally elevated levels of certain specialized white blood cells (eosinophilia). The parasite is transmitted through the bite of small flies (A. coliroides). Acanthocheilonemiasis is a rare infectious disease caused by long “thread-like” worms, Acanthocheilonema perstans, also known as Dipetalonema perstans. The disease is transmitted by a small black insect (midge), called A. Cailicoides. Acanthocheilonema perstans, the parasite that causes Acanthocheilonemiasis is common in central Africa and in some",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "infectious disease",
+      "preferred_label": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "Acanthocheilonemiasis is a rare tropical infectious disease caused by a parasite known as Acanthocheilonema perstans, which belongs to a group of parasitic diseases known as filarial diseases (nematode). This parasite is found, for the most part, in Africa. Symptoms of infection may include red, itchy skin (pruritis), abdominal and chest pain, muscular pain",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysentery",
+        "Post-Infectious Disorders",
+        "Travel-Related Illness"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "parasitic diseases",
+      "preferred_label": "parasitic disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005135",
+        "orpha": null,
+        "umls": "UMLS:C0030499",
+        "mesh": "MESH:D010272"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005135",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1398",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001067",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.13",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:45325",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010272",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27864",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:17322007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0030499",
+          "display": null
+        }
+      ],
+      "context": "Acanthocheilonemiasis is a rare tropical infectious disease caused by a parasite known as Acanthocheilonema perstans, which belongs to a group of parasitic diseases known as filarial diseases (nematode). This parasite is found, for the most part, in Africa. Symptoms of infection may include red, itchy skin (pruritis), abdominal and chest pain, muscular pain (myalgia), and areas of localized swelling (edema). In addition, the liver and spleen may become abnorma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Intestinal Diseases Parasitic",
+        "Liver Diseases Parasitic",
+        "Parasitic Diseases Animal"
+      ],
+      "pubtator_normalized_name": "Parasitic Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eosinophilia",
+      "preferred_label": "eosinophilia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D72.11",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015691",
+        "orpha": "Orphanet:168956",
+        "umls": "UMLS:C1540912",
+        "mesh": "MESH:D017681"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015691",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:999",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001467",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2804",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D72.11",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:288.3",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9964/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:280990",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017681",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048643",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200806",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27038",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:168956",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:419455006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1540912",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:110429919",
+          "display": null
+        }
+      ],
+      "context": "skin (pruritis), abdominal and chest pain, muscular pain (myalgia), and areas of localized swelling (edema). In addition, the liver and spleen may become abnormally enlarged (hepatosplenomegaly). Laboratory testing may also reveal abnormally elevated levels of certain specialized white blood cells (eosinophilia). The parasite is transmitted through the bite of small flies (A. coliroides). Acanthocheilonemiasis is a rare infectious disease caused by long “thread-like” worms, Acanthocheilonema perstans, also known as Dipetalonema perstans. The disease is transmitted by a small black insect (midge), called A",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Drug Hypersensitivity Syndrome",
+        "Eosinophilia-Myalgia Syndrome",
+        "Wells syndrome"
+      ],
+      "pubtator_normalized_name": "Eosinophilia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "localized",
+      "preferred_label": "localized",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0045042",
+        "orpha": null,
+        "umls": "UMLS:C0392752",
+        "mesh": "D016110"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0045042",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98236",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0392752",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016110",
+          "display": "Epidermolysis Bullosa Simplex"
+        }
+      ],
+      "context": "wn as Acanthocheilonema perstans, which belongs to a group of parasitic diseases known as filarial diseases (nematode). This parasite is found, for the most part, in Africa. Symptoms of infection may include red, itchy skin (pruritis), abdominal and chest pain, muscular pain (myalgia), and areas of localized swelling (edema). In addition, the liver and spleen may become abnormally enlarged (hepatosplenomegaly). Laboratory testing may also reveal abnormally elevated levels of certain specialized white blood cells (eosinophilia). The parasite is transmitted through the bite of small flies (A. coliroides)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Solitary Fibrous Tumor Pleural",
+        "Scleroderma Localized",
+        "Acute Generalized Exanthematous Pustulosis"
+      ],
+      "pubtator_normalized_name": "Epidermolysis Bullosa Simplex",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Acanthocheilonemiasis is a rare tropical infectious disease caused by a parasite known as Acanthocheilonema perstans, which belongs to a group of parasitic diseases known as filarial diseases (nematode). This parasite is found, for the most part, in Africa. Symptoms of infection may include red, itchy skin (pruritis), abdominal and chest pain, muscular pain (myalgia), and areas of localized swelling (edema). In addition, the liver and spleen may become abnormally enlarged (hepatosplenom",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

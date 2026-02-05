@@ -1,0 +1,35 @@
+{
+  "doc_id": "Cone-Dystrophy",
+  "doc_filename": "Cone-Dystrophy.pdf",
+  "top_entities": [
+    {
+      "name": "cone dystrophy",
+      "mention_count": 3,
+      "entity_type": "disease"
+    },
+    {
+      "name": "eye disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2400,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Cone Dystrophy: Clinical Overview and Characteristics",
+  "short_description": "A comprehensive overview of cone dystrophy, a group of rare eye disorders affecting retinal cone cells that cause vision problems including reduced acuity, color vision defects, and light sensitivity.",
+  "long_description": "This clinical document provides a detailed examination of cone dystrophy, a collection of rare inherited and sporadic eye disorders that specifically affect the cone cells in the retina. The document covers the classification of cone dystrophy into stationary and progressive forms, describes the variable symptoms including central vision loss, color vision deficiency, and photophobia, and discusses the genetic inheritance patterns including autosomal dominant, autosomal recessive, and X-linked recessive forms. It addresses the epidemiology with an estimated incidence of 1 in 30,000 individuals, the variable age of onset from infancy to adulthood, and the significant variability in progression and severity between affected individuals, even within the same genetic subtype.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T17:29:02.868608"
+}

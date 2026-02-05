@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T08:42:36.061052",
+  "document": "Alveolar-Soft-Part-Sarcoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alveolar-Soft-Part-Sarcoma.pdf",
+  "total_candidates": 30,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ASPS",
+      "long_form": "Alveolar soft part sarcoma",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Alveolar soft part sarcoma (ASPS) is a rare, slow growing soft tissue tumor of an unclear cause.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Alveolar soft tissue sarcoma",
+      "matched_text": "ASPS",
+      "abbreviation": "ASPS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C49.9",
+      "orpha": "ORPHA:163699"
+    },
+    {
+      "name": "alveolar soft Part sarcoma",
+      "matched_text": "Alveolar soft part sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:163699"
+    },
+    {
+      "name": "soft tissue sarcoma",
+      "matched_text": "soft tissue sarcomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:3394"
+    },
+    {
+      "name": "soft tissue tumor",
+      "matched_text": "soft tissue tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "sarcoma",
+      "matched_text": "sarcomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancers",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

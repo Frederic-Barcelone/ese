@@ -1,0 +1,224 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:01:24.275970",
+  "document": "Cystinuria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cystinuria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "inherited metabolic disorder",
+      "preferred_label": "inborn errors of metabolism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019052",
+        "orpha": "Orphanet:68367",
+        "umls": "UMLS:C0025521",
+        "mesh": "MESH:D008661"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019052",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:655",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22508",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008661",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062018",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100159",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34816",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68367",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86095007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025521",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733825440",
+          "display": null
+        }
+      ],
+      "context": "Cystinuria is an inherited metabolic disorder that affects males and females in equal numbers. Symptoms of this disorder typically begin between 10 and 30 years of age, although elevated cystine excretion may be found in infancy. The disorder occurs in approximately 1 in 7,000 to 1 in 10,000 people in the United States. The prevalence of cysti",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amino Acid Metabolism Inborn Errors",
+        "Steroid Metabolism Inborn Errors",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolism Inborn Errors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Cystinuria",
+      "preferred_label": "cystinuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E72.01",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009067",
+        "orpha": "Orphanet:214",
+        "umls": "UMLS:C0010691",
+        "mesh": "MESH:D003555"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009067",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9266",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6237",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0003131",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E72.01",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8226",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003555",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10011778",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200489",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84664",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:220100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:214",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85020001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010691",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1237620397",
+          "display": null
+        }
+      ],
+      "context": "Cystinuria is an inherited metabolic disorder that affects males and females in equal numbers. Symptoms of this disorder typically begin between 10 and 30 years of age, although elevated cystine excretion may be found in infancy. The disorder occurs in approximately 1 in 7,000 to 1 in 10,000 people in the Uni",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cystinuria Type A",
+        "Hypotonia-Cystinuria Syndrome",
+        "Cystinuria type 1"
+      ],
+      "pubtator_normalized_name": "Cystinuria",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,603 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:09:37.283207",
+  "document": "Froelich-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Froelich-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Prader-Willi syndrome",
+      "preferred_label": "Prader-Willi syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q87.11",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008300",
+        "orpha": "Orphanet:739",
+        "umls": "UMLS:C0032897",
+        "mesh": "MESH:D011218"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008300",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11983",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5575",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q87.11",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:46057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011218",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036476",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200411",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75463",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1602",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:176270",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:739",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:89392001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032897",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:393773440",
+          "display": null
+        }
+      ],
+      "context": "les and body temperature and composition while stimulating the pituitary gland to release a variety of hormones that control growth, metabolism, and body development. Thus, numerous pituitary gland hormones could be indirectly disrupted by damage to the hypothalamus. Unlike similar diseases such as Prader-Willi syndrome, Froehlich syndrome is acquired, not inherited, and is associated with tumors of the hypothalamus area or their surgical treatment, causing increased appetite and depressed secretion of gonadotropin. This syndrome affects males more often than females. Froehlich syndrome is characterized by increas",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Prader-Willi habitus osteopenia and camptodactyly",
+        "Schaaf-Yang syndrome",
+        "Prader-Willi-Like Syndrome Associated With Chromosome 6"
+      ],
+      "pubtator_normalized_name": "Prader-Willi Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Froehlich syndrome",
+      "preferred_label": "Froehlich syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003962",
+        "orpha": null,
+        "umls": "UMLS:C0016724",
+        "mesh": "D007027"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003962",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6676",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:253.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4795",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34625",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62999006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0016724",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007027",
+          "display": "Hypothalamic Diseases"
+        }
+      ],
+      "context": "Froehlich syndrome, also known as adiposogenital dystrophy, is a constellation of endocrine abnormalities believed to result from damage to the hypothalamus, a part of the brain that links the nervous system to the endocrine system via the pituitary gland. The hypothalamus regulates sleep cycles and body temperature",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypothalamic Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diabetes insipidus",
+      "preferred_label": "diabetes insipidus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E23.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004782",
+        "orpha": null,
+        "umls": "UMLS:C0011848",
+        "mesh": "MESH:D003919"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004782",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9409",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E23.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:253.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8349",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003919",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100117",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C43263",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15771004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011848",
+          "display": null
+        }
+      ],
+      "context": "secondary sexual characteristics. In addition to delayed growth and puberty, children with this syndrome tend to be short in stature. As a result of tumor growth, some children with Froehlich syndrome may also develop intellectual difficulties, poor vision — due optic nerve damage-, somnolence, and diabetes insipidus — known as Infundibulo-tuberal syndrome (Froehlich+somnolence+diabetes insipidus), lower than normal body temperature (hypothermia) and very delicate skin. Froehlich syndrome is a very rare condition that affects more males than females.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diabetes Insipidus Neurogenic",
+        "Diabetes Insipidus Nephrogenic",
+        "Wolfram Syndrome"
+      ],
+      "pubtator_normalized_name": "Diabetes Insipidus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pituitary gland",
+      "preferred_label": "hypophysitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021156",
+        "orpha": null,
+        "umls": "UMLS:C0342409",
+        "mesh": "MESH:D000072659"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021156",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:575012",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000072659",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C12399",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237705001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0342409",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1589682285",
+          "display": null
+        }
+      ],
+      "context": "Froehlich syndrome, also known as adiposogenital dystrophy, is a constellation of endocrine abnormalities believed to result from damage to the hypothalamus, a part of the brain that links the nervous system to the endocrine system via the pituitary gland. The hypothalamus regulates sleep cycles and body temperature and composition while stimulating the pituitary gland to release a variety of hormones that control growth, metabolism, and body development. Thus, numerous pituitary gland hormones could be indirectly disrupted by damage to the hypothal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autoimmune Hypophysitis"
+      ],
+      "pubtator_normalized_name": "Hypophysitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "gulates sleep cycles and body temperature and composition while stimulating the pituitary gland to release a variety of hormones that control growth, metabolism, and body development. Thus, numerous pituitary gland hormones could be indirectly disrupted by damage to the hypothalamus. Unlike similar diseases such as Prader-Willi syndrome, Froehlich syndrome is acquired, not inherited, and is associated with tumors of the hypothalamus area or their surgical treatment, causing increased appetite and depressed secretion of gonadotropin. This syndrome affects males more often than females. Froehlich syndro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "obesity",
+      "preferred_label": "obesity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011122",
+        "orpha": "Orphanet:521399",
+        "umls": "UMLS:C0028754",
+        "mesh": "D009765"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011122",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9970",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001073",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001513",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:278.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18127",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3283",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:521399",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:414916001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0028754",
+          "display": null
+        },
+        {
+          "system": "nlxdys",
+          "code": "nlxdys:20090302",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009765",
+          "display": "Obesity"
+        }
+      ],
+      "context": "inherited, and is associated with tumors of the hypothalamus area or their surgical treatment, causing increased appetite and depressed secretion of gonadotropin. This syndrome affects males more often than females. Froehlich syndrome is characterized by increased or excessive eating that leads to obesity, small testes, and a delay in the onset of puberty. It is also common for children with Froehlich syndrome to experience the delay in physical growth and the development of secondary sexual characteristics. In addition to delayed growth and puberty, children with this syndrome tend to be short in s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Obesity Maternal",
+        "Obesity Abdominal",
+        "Obesity Metabolically Benign"
+      ],
+      "pubtator_normalized_name": "Obesity",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "y, small testes, and a delay in the onset of puberty. It is also common for children with Froehlich syndrome to experience the delay in physical growth and the development of secondary sexual characteristics. In addition to delayed growth and puberty, children with this syndrome tend to be short in stature. As a result of tumor growth, some children with Froehlich syndrome may also develop intellectual difficulties, poor vision — due optic nerve damage-, somnolence, and diabetes insipidus — known as Infundibulo-tuberal syndrome (Froehlich+somnolence+diabetes insipidus), lower than normal body tempera",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

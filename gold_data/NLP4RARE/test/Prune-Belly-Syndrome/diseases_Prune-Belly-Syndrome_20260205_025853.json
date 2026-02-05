@@ -1,0 +1,551 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:58:53.397890",
+  "document": "Prune-Belly-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Prune-Belly-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "Prune-Belly syndrome, also known as Eagle-Barrett syndrome, is a rare disorder characterized by partial or complete absence of the stomach (abdominal) muscles, failure of both testes to descend into the scrotum (bilateral cryptorchidism), and/or urinary tract malformations. The urinary malformations may include abnormal widening (dilation) of the tubes that bring urine to the bladder (ureters), accumulation of urine in the ureters (hydroureter) and the kidneys (hydronephrosis), and/or backflow of urine from the blad",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "vesicoureteral reflux",
+      "preferred_label": "Vesicoureteral reflux",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008653",
+        "orpha": null,
+        "umls": "UMLS:C4551858",
+        "mesh": "D014718"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008653",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18418",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644868",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:193000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551858",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014718",
+          "display": "Vesico-Ureteral Reflux"
+        }
+      ],
+      "context": "or urinary tract malformations. The urinary malformations may include abnormal widening (dilation) of the tubes that bring urine to the bladder (ureters), accumulation of urine in the ureters (hydroureter) and the kidneys (hydronephrosis), and/or backflow of urine from the bladder into the ureters (vesicoureteral reflux). Complications associated with Prune-Belly syndrome may include underdevelopment of the lungs (pulmonary hypoplasia) and/or chronic renal failure. The exact cause of Prune-Belly syndrome is not known. Prune Belly syndrome is a very rare disorder that is present at birth. The disorder affects mostl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Papillorenal syndrome",
+        "Vesicoureteral Reflux 2",
+        "Vesicoureteral Reflux X-Linked"
+      ],
+      "pubtator_normalized_name": "Vesico-Ureteral Reflux",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chronic renal failure",
+      "preferred_label": "chronic renal failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024327",
+        "orpha": null,
+        "umls": "UMLS:C0022661",
+        "mesh": "MESH:D051436"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024327",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:585.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9637",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D051436",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100023",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9438",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:90688005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022661",
+          "display": null
+        }
+      ],
+      "context": "eters), accumulation of urine in the ureters (hydroureter) and the kidneys (hydronephrosis), and/or backflow of urine from the bladder into the ureters (vesicoureteral reflux). Complications associated with Prune-Belly syndrome may include underdevelopment of the lungs (pulmonary hypoplasia) and/or chronic renal failure. The exact cause of Prune-Belly syndrome is not known. Prune Belly syndrome is a very rare disorder that is present at birth. The disorder affects mostly males but a few female cases have been described in the medical literature. The diagnosis is usually obvious from birth, but care and time are re",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kidney Failure Chronic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Eagle-Barrett syndrome",
+      "preferred_label": "prune belly syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q79.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007032",
+        "orpha": "Orphanet:2970",
+        "umls": "UMLS:C0033770",
+        "mesh": "MESH:D011535"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007032",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060889",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7479",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q79.4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.71",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18718",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011535",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10051025",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200185",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85033",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1623",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:100100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2970",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:5187006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0033770",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1393408621",
+          "display": null
+        }
+      ],
+      "context": "Prune-Belly syndrome, also known as Eagle-Barrett syndrome, is a rare disorder characterized by partial or complete absence of the stomach (abdominal) muscles, failure of both testes to descend into the scrotum (bilateral cryptorchidism), and/or urinary tract malformations. The urinary malformations may include abnormal widening (dilation) of the tubes tha",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Prune Belly Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pulmonary hypoplasia",
+      "preferred_label": "pulmonary hypoplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0800133",
+        "orpha": null,
+        "umls": "UMLS:C0265783",
+        "mesh": "C562992"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0800133",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78574",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C99035",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265783",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C562992",
+          "display": "Lung agenesis"
+        }
+      ],
+      "context": "ring urine to the bladder (ureters), accumulation of urine in the ureters (hydroureter) and the kidneys (hydronephrosis), and/or backflow of urine from the bladder into the ureters (vesicoureteral reflux). Complications associated with Prune-Belly syndrome may include underdevelopment of the lungs (pulmonary hypoplasia) and/or chronic renal failure. The exact cause of Prune-Belly syndrome is not known. Prune Belly syndrome is a very rare disorder that is present at birth. The disorder affects mostly males but a few female cases have been described in the medical literature. The diagnosis is usually obvious from b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anophthalmia with pulmonary hypoplasia",
+        "Pena Shokeir syndrome type 1",
+        "Alagille Syndrome"
+      ],
+      "pubtator_normalized_name": "Lung agenesis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cryptorchidism",
+      "preferred_label": "cryptorchidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009047",
+        "orpha": null,
+        "umls": "UMLS:C0010417",
+        "mesh": "MESH:D003456"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009047",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11383",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004562",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000028",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:752.51",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8192",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003456",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C12326",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:219050",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:204878001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010417",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1134950387",
+          "display": null
+        }
+      ],
+      "context": "Prune-Belly syndrome, also known as Eagle-Barrett syndrome, is a rare disorder characterized by partial or complete absence of the stomach (abdominal) muscles, failure of both testes to descend into the scrotum (bilateral cryptorchidism), and/or urinary tract malformations. The urinary malformations may include abnormal widening (dilation) of the tubes that bring urine to the bladder (ureters), accumulation of urine in the ureters (hydroureter) and the kidneys (hydronephrosis), and/or backflow of urine from the bladder into the ur",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pena Shokeir syndrome type 1",
+        "Torticollis keloids cryptorchidism renal dysplasia",
+        "Ichthyosis and male hypogonadism"
+      ],
+      "pubtator_normalized_name": "Cryptorchidism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hydronephrosis",
+      "preferred_label": "hydronephrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005510",
+        "orpha": null,
+        "umls": "UMLS:C0020295",
+        "mesh": "MESH:D006869"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005510",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11111",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005562",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:591",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42531",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006869",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26796",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:43064006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020295",
+          "display": null
+        }
+      ],
+      "context": "e of both testes to descend into the scrotum (bilateral cryptorchidism), and/or urinary tract malformations. The urinary malformations may include abnormal widening (dilation) of the tubes that bring urine to the bladder (ureters), accumulation of urine in the ureters (hydroureter) and the kidneys (hydronephrosis), and/or backflow of urine from the bladder into the ureters (vesicoureteral reflux). Complications associated with Prune-Belly syndrome may include underdevelopment of the lungs (pulmonary hypoplasia) and/or chronic renal failure. The exact cause of Prune-Belly syndrome is not known. Prune Belly s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Multicystic renal dysplasia bilateral",
+        "Urofacial syndrome",
+        "Pyonephrosis"
+      ],
+      "pubtator_normalized_name": "Hydronephrosis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

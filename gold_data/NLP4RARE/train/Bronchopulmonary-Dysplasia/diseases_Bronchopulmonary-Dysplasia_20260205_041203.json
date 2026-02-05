@@ -1,0 +1,195 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:12:03.067208",
+  "document": "Bronchopulmonary-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Bronchopulmonary-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Bronchopulmonary dysplasia",
+      "preferred_label": "bronchopulmonary dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019091",
+        "orpha": "Orphanet:70589",
+        "umls": "UMLS:C0495402",
+        "mesh": "MESH:D001997"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019091",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11650",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5962",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1864458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001997",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10006475",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C90599",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:874",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:70589",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:67569000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0495402",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1462855296",
+          "display": null
+        }
+      ],
+      "context": "Bronchopulmonary dysplasia can affect both males and females. The exact incidence of BPD is unknown. The National Institutes of Health estimates that 10,000-15,000 babies born in the United States develop BPD each year. The risk of developing BPD increases the earlier a baby is born and the lower the birth weight. Infants bo",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Bronchopulmonary Dysplasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital heart defects",
+      "preferred_label": "congenital heart defects",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005453",
+        "orpha": null,
+        "umls": "UMLS:C0152021",
+        "mesh": "MESH:D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1682",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005207",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57501",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006330",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C95834",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:13213009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2004408087",
+          "display": null
+        }
+      ],
+      "context": "st x-rays, and echocardiograms. Blood tests may show low levels of oxygen in the blood. Chest x-rays may show distinctive changes in the lungs including abnormal development of the lungs. An echocardiogram is used to rule out other conditions that can cause breathing difficulties in infants such as congenital heart defects. During an echocardiogram, sound waves are directed toward the heart, enabling physicians to study cardiac function and motion.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart defects limb shortening",
+        "Deafness Congenital Heart Defects and Posterior Embryotoxon",
+        "Noncompaction of Left Ventricular Myocardium with Congenital Heart Defects"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

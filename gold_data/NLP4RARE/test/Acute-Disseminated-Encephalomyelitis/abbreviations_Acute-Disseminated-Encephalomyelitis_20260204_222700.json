@@ -1,0 +1,57 @@
+{
+  "run_id": "RUN_20260204_212243_67ab17d4784c",
+  "timestamp": "2026-02-04T22:27:00.619064",
+  "document": "Acute-Disseminated-Encephalomyelitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acute-Disseminated-Encephalomyelitis.pdf",
+  "total_candidates": 40,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ADEM",
+      "long_form": "Acute Disseminated Encephalomyelitis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ADEM can develop at any age, but is much more frequent in children than adults. Males and females are affected in equal numbers, although a slight male preponderance was seen ina couple pediatric studies. In children, the mean at presentation is between 5-8 years old. The exact incidence of ADEM in the",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "d spring months in studies conducted in the United States. A diagnosis of ADEM is made based upon identification of characteristic symptoms, a detailed patient history, a thorough clinical evaluation and a variety of specialized tests including imaging techniques such as magnetic resonance imaging (MRI). An MRI uses a magnetic field and radio waves to produce cross-sectional images of particular organs and bodily tissues and can demonstrate characteristic brain lesions in individuals with ADEM. Additional tests to exclude other conditions may also be performed. Such tests may include infectious,",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Acute disseminated encephalomyelitis",
+      "matched_text": "ADEM",
+      "abbreviation": "ADEM",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G04.0",
+      "orpha": "ORPHA:83597"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

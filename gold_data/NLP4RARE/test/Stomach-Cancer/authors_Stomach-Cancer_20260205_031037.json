@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:10:37.816142",
+  "document": "Stomach-Cancer.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Stomach-Cancer.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 1,
+  "unique_authors": 1,
+  "authors": [
+    {
+      "full_name": "Eastern Europe",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Eastern Europe",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

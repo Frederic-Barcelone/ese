@@ -1,0 +1,158 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:14:13.968430",
+  "document": "Grover_s-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Grover_s-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "skin disorder",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "Grover's disease is a rare, transient skin disorder that consists of small, firm, raised red lesions, most often on the skin of the chest and back. Diagnosis of this disorder becomes apparent under microscopic examination when the loss of the \"cement\" that holds the skin cells together is observed. Over time, as the skin loses the \"cement\", the cell",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trauma",
+      "preferred_label": "trauma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "loses the \"cement\", the cells separate (lysis). Small blisters containing a watery liquid are present. These blisters tend to group and have a swollen red border around them. Grover's disease is mainly seen in males older than forty or fifty. Its cause is unknown but it is thought to be related to trauma to sun damaged skin. The exact cause of Grover’s disease is not known. It may be related to fragility of old sun-damaged skin. Some doctors feel that this skin disorder may be related to heat and sweating. There have been multiple cases of this disorder associated with such things as hot tubs, hot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trauma Nervous System",
+        "Osteoporosis",
+        "Stress Disorders Post-Traumatic"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

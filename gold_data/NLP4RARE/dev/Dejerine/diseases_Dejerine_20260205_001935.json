@@ -1,0 +1,394 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:19:35.597450",
+  "document": "Dejerine.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Dejerine.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Dejerine-Sottas syndrome",
+      "preferred_label": "Dejerine-Sottas syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007790",
+        "orpha": "Orphanet:64748",
+        "umls": "UMLS:C0011195",
+        "mesh": "D015417"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007790",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050540",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9204",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3710",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C133087",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1037",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:145900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:64748",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:111499002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011195",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015417",
+          "display": "Hereditary Sensory and Motor Neuropathy"
+        }
+      ],
+      "context": "ioxide. Mild vision difficulties may also occur. Other symptoms include pain, loss of heat sensitivity, absence of reflexes, muscle loss (atrophy) of leg muscles, scoliosis (curving of the spine), and ataxia (loss of coordination and balance). Symptoms can vary among individuals diagnosed with DSS. Dejerine-Sottas syndrome often begins by age two. This disorder is thought to affect males and females equally. It can affect people from all races and ethnicities.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary Sensory and Motor Neuropathy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sensitivity",
+      "preferred_label": "sensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000605",
+        "orpha": null,
+        "umls": "UMLS:C3532523",
+        "mesh": "D007333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000605",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060056",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:759636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:473010000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3532523",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007333",
+          "display": "Insulin Resistance"
+        }
+      ],
+      "context": "e years. The hand and forearm muscles may become weak as the condition worsens. Individuals with DSS may have respiratory insufficiency, meaning they do not take in enough oxygen or breathe out enough carbon dioxide. Mild vision difficulties may also occur. Other symptoms include pain, loss of heat sensitivity, absence of reflexes, muscle loss (atrophy) of leg muscles, scoliosis (curving of the spine), and ataxia (loss of coordination and balance). Symptoms can vary among individuals diagnosed with DSS. Dejerine-Sottas syndrome often begins by age two. This disorder is thought to affect males and females",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatitis Contact",
+        "Photophobia",
+        "Glutamate Monosodium Sensitivity"
+      ],
+      "pubtator_normalized_name": "Insulin Resistance",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "scoliosis",
+      "preferred_label": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005392",
+        "orpha": null,
+        "umls": "UMLS:C0036439",
+        "mesh": "MESH:D012600"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005392",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060249",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004273",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002650",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M41",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:M41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:737.43",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11348",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012600",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C78603",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:298382003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036439",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1925604007",
+          "display": null
+        }
+      ],
+      "context": "orsens. Individuals with DSS may have respiratory insufficiency, meaning they do not take in enough oxygen or breathe out enough carbon dioxide. Mild vision difficulties may also occur. Other symptoms include pain, loss of heat sensitivity, absence of reflexes, muscle loss (atrophy) of leg muscles, scoliosis (curving of the spine), and ataxia (loss of coordination and balance). Symptoms can vary among individuals diagnosed with DSS. Dejerine-Sottas syndrome often begins by age two. This disorder is thought to affect males and females equally. It can affect people from all races and ethnicities.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spondylocarpotarsal synostosis",
+        "gaze palsy familial horizontal with progressive scoliosis",
+        "Macrocephaly Alopecia Cutis Laxa and Scoliosis"
+      ],
+      "pubtator_normalized_name": "Scoliosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "respiratory insufficiency, meaning they do not take in enough oxygen or breathe out enough carbon dioxide. Mild vision difficulties may also occur. Other symptoms include pain, loss of heat sensitivity, absence of reflexes, muscle loss (atrophy) of leg muscles, scoliosis (curving of the spine), and ataxia (loss of coordination and balance). Symptoms can vary among individuals diagnosed with DSS. Dejerine-Sottas syndrome often begins by age two. This disorder is thought to affect males and females equally. It can affect people from all races and ethnicities.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "DSS",
+      "preferred_label": "DSS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000248",
+        "orpha": null,
+        "umls": "UMLS:C0376300",
+        "mesh": "MESH:D019595"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000248",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050125",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:83958",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D019595",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409671005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0376300",
+          "display": null
+        }
+      ],
+      "context": "DSS often begins suddenly by age two. Tingling, prickling or burning sensations are usually the first symptoms. Muscle weakness is usually first noticed in the back of the leg. This then spreads to the front leg muscles. Children may have delayed motor milestones, including walking at preschool age or",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

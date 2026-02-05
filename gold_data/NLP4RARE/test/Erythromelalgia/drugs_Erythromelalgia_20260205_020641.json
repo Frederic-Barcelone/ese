@@ -1,0 +1,117 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:06:41.114442",
+  "document": "Erythromelalgia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Erythromelalgia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "erythro",
+      "preferred_name": "Erythro",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004917",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "202611",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004917",
+          "display": "Erythromycin"
+        }
+      ],
+      "context": " of affected extremities, severe redness (erythema), and increased skin temperature that may be episodic or almost continuous in nature. (The prefix \"erythro-\" denotes redness, \"mel-\" is a combining form meaning limb or limbs, and the suffix \"-algia\" indicates pain.) Although erythromelalgia typically affe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "erythrose 4-phosphate"
+      ],
+      "pubtator_normalized_name": "Erythromycin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mel",
+      "preferred_name": "Mel",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D008550",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "285279",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008550",
+          "display": "Melatonin"
+        }
+      ],
+      "context": "vere redness (erythema), and increased skin temperature that may be episodic or almost continuous in nature. (The prefix \"erythro-\" denotes redness, \"mel-\" is a combining form meaning limb or limbs, and the suffix \"-algia\" indicates pain.) Although erythromelalgia typically affects both sides of the bo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Melatonin",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

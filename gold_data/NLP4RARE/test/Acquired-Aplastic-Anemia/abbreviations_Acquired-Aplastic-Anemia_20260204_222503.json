@@ -1,0 +1,63 @@
+{
+  "run_id": "RUN_20260204_212243_67ab17d4784c",
+  "timestamp": "2026-02-04T22:25:03.272277",
+  "document": "Acquired-Aplastic-Anemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acquired-Aplastic-Anemia.pdf",
+  "total_candidates": 36,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "acquired aplastic anemia",
+      "matched_text": "Acquired aplastic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:164823"
+    },
+    {
+      "name": "aplastic anemia",
+      "matched_text": "aplastic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:182040"
+    },
+    {
+      "name": "pancytopenia",
+      "matched_text": "pancytopenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D61.81",
+      "orpha": null
+    },
+    {
+      "name": "leukemia",
+      "matched_text": "leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

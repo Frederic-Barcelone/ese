@@ -1,0 +1,130 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:19:59.587353",
+  "document": "Carnitine-Palmitoyltransferase-1A-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Carnitine-Palmitoyltransferase-1A-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "CPT1A",
+      "hgnc_symbol": "CPT1A",
+      "full_name": "carnitine palmitoyltransferase 1A",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2328",
+        "entrez": "1374",
+        "ensembl": "ENSG00000110090",
+        "uniprot": "P50416",
+        "omim": "600528"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2328",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "1374",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000110090",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "600528",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P50416",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "156",
+          "disease_name": "Carnitine palmitoyl transferase 1A deficiency",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "liver failure and damage to the nervous system resulting from liver failure (hepatic encephalopathy), usually associated with fasting or illness. CPT1A deficiency is caused by an abnormality (mutation) in the CPT1A gene that results in the production of an abnormally functioning carnitine palmitoyltransferase 1 enzyme and decreased metabolism of long-chain fatty acids. CPT1A deficiency is inherited as an autosomal recessive genetic disorder. Three",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "if",
+      "hgnc_symbol": "CBLIF",
+      "full_name": "cobalamin binding intrinsic factor",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4268",
+        "entrez": "2694",
+        "ensembl": "ENSG00000134812",
+        "uniprot": "P27352",
+        "omim": "609342"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4268",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2694",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134812",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "609342",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P27352",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "typical laboratory findings include low levels of ketones, elevated liver transaminases, elevated ammonia and elevated total serum carnitine. CPT1A enzyme activity on the cultured skin cells from affected individuals is 1-5% of normal. Molecular genetic testing is available to confirm the diagnosis if the enzyme test is abnormal. Some state newborn screening programs perform screening for CPT1A deficiency by measuring the ratio of free to total carnitine in blood plasma or serum. Carrier testing for relatives is available using CPT1A enzyme testing or molecular genetic testing.\n\nCarnitine palmit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

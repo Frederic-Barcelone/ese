@@ -1,0 +1,63 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:44:39.395241",
+  "document": "Fukuyama-Type-Congenital-Muscular-Dystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fukuyama-Type-Congenital-Muscular-Dystrophy.pdf",
+  "total_candidates": 17,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "Fukuyama Type Congenital Muscular Dystrophy",
+      "matched_text": "Fukuyama type congenital muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:272"
+    },
+    {
+      "name": "Duchenne muscular dystrophy",
+      "matched_text": "Duchenne muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98896"
+    },
+    {
+      "name": "muscular dystrophy",
+      "matched_text": "muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G71.0",
+      "orpha": "Orphanet:98473"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Creatine",
+      "matched_text": "creatine",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

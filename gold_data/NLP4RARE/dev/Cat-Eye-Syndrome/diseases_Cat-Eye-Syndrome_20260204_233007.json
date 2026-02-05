@@ -1,0 +1,453 @@
+{
+  "run_id": "RUN_20260204_221636_6f662baa7bb0",
+  "timestamp": "2026-02-04T23:30:07.104378",
+  "document": "Cat-Eye-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Cat-Eye-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CES",
+      "preferred_label": "Congenital esophageal stenosis",
+      "abbreviation": "CES",
+      "confidence": 0.65,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q39.3",
+        "icd11": "LB12.3",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:645749",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:645749",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q39.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LB12.3",
+          "display": null
+        }
+      ],
+      "context": "Individuals with a normal chromosomal make-up have two 22nd chromosomes, both of which have a short arm, known as 22p, and a long arm, known as 22q. However, in individuals with CES, the short arm and a small region of the long arm of chromosome 22 (i.e., 22pter-22q11) are present four times (partial tetrasomy) rather than twice in cells of the body. In a small number of people with CES, the 22q11 region is present in 3 copies (partial trisomy). The name “cat eye syndrome” is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "chromosomal disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90-Q99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019040",
+        "orpha": "Orphanet:68335",
+        "umls": "UMLS:C0008626",
+        "mesh": "MESH:D025063"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019040",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080014",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90-Q99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3441",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D025063",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100280",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68335",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409709004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008626",
+          "display": null
+        }
+      ],
+      "context": "Cat eye syndrome (CES) is a rare chromosomal disorder that may be evident at birth.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cat eye syndrome",
+      "preferred_label": "Cat Eye Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007276",
+        "orpha": "Orphanet:195",
+        "umls": "UMLS:C0265493",
+        "mesh": "MESH:C535918"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007276",
+          "display": null
+        },
+        {
+          "system": "DECIPHER",
+          "code": "DECIPHER:42",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:26",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:120543",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535918",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75477",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:899",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:115470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:195",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:26445008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265493",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1813923633",
+          "display": null
+        }
+      ],
+      "context": "individuals with CES, the short arm and a small region of the long arm of chromosome 22 (i.e., 22pter-22q11) are present four times (partial tetrasomy) rather than twice in cells of the body. In a small number of people with CES, the 22q11 region is present in 3 copies (partial trisomy). The name “cat eye syndrome” is derived from a distinctive eye (ocular) abnormality that is present in a little over half affected individuals. This defect, known as a coloboma, usually appears as a cleft or gap in the iris below the pupil, and the elongated pupil therefore resembles the appearance of a cat’s eye. There are,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Schmid-Fraccaro syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tetrasomy",
+      "preferred_label": "tetrasomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0030502",
+        "orpha": null,
+        "umls": "UMLS:C0333689",
+        "mesh": "MESH:D058670"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0030502",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:90710",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D058670",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C36601",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0333689",
+          "display": null
+        }
+      ],
+      "context": "dividuals with a normal chromosomal make-up have two 22nd chromosomes, both of which have a short arm, known as 22p, and a long arm, known as 22q. However, in individuals with CES, the short arm and a small region of the long arm of chromosome 22 (i.e., 22pter-22q11) are present four times (partial tetrasomy) rather than twice in cells of the body. In a small number of people with CES, the 22q11 region is present in 3 copies (partial trisomy). The name “cat eye syndrome” is derived from a distinctive eye (ocular) abnormality that is present in a little over half affected individuals. This defect, known",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Schmid-Fraccaro syndrome",
+        "Isodicentric Chromosome 15 Syndrome",
+        "Pallister Killian syndrome"
+      ],
+      "pubtator_normalized_name": "Tetrasomy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "coloboma",
+      "preferred_label": "coloboma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001476",
+        "orpha": "Orphanet:194",
+        "umls": "UMLS:C0009363",
+        "mesh": "MESH:D003103"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001476",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12270",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:743.49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1046",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003103",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98877",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:194",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:93390002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009363",
+          "display": null
+        }
+      ],
+      "context": "er than twice in cells of the body. In a small number of people with CES, the 22q11 region is present in 3 copies (partial trisomy). The name “cat eye syndrome” is derived from a distinctive eye (ocular) abnormality that is present in a little over half affected individuals. This defect, known as a coloboma, usually appears as a cleft or gap in the iris below the pupil, and the elongated pupil therefore resembles the appearance of a cat’s eye. There are, however, many other features associated with CES involving many organs and systems. These symptoms result from abnormal development during embryo and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypomagnesemia 5 Renal with Ocular Involvement",
+        "Coloboma of optic nerve",
+        "CHARGE Syndrome"
+      ],
+      "pubtator_normalized_name": "Coloboma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy",
+      "preferred_label": "trisomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700065",
+        "orpha": null,
+        "umls": "UMLS:C0041107",
+        "mesh": "MESH:D014314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21702",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014314",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3421",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041107",
+          "display": null
+        }
+      ],
+      "context": "as 22q. However, in individuals with CES, the short arm and a small region of the long arm of chromosome 22 (i.e., 22pter-22q11) are present four times (partial tetrasomy) rather than twice in cells of the body. In a small number of people with CES, the 22q11 region is present in 3 copies (partial trisomy). The name “cat eye syndrome” is derived from a distinctive eye (ocular) abnormality that is present in a little over half affected individuals. This defect, known as a coloboma, usually appears as a cleft or gap in the iris below the pupil, and the elongated pupil therefore resembles the appearanc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Trisomy"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

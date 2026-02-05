@@ -1,0 +1,776 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:56:47.530157",
+  "document": "Pseudocholinesterase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pseudocholinesterase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 14,
+  "total_validated": 14,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "sensitive",
+      "preferred_label": "sensitive",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000605",
+        "orpha": null,
+        "umls": "UMLS:C3532523",
+        "mesh": "D009404"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000605",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060056",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:759636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:473010000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3532523",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009404",
+          "display": "Nephrotic Syndrome"
+        }
+      ],
+      "context": "person very sensitive to any of several anesthetic agents, especially those derived from the drug known as choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the lungs may become paralyzed. Mechanical ventilation is essential until the exc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Celiac Disease",
+        "Hereditary Angioedema Type III",
+        "Tomaculous neuropathy"
+      ],
+      "pubtator_normalized_name": "Nephrotic Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pseudocholinesterase deficiency",
+      "preferred_label": "Pseudocholinesterase deficiency",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0268379",
+        "mesh": "C537417"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0268379",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537417",
+          "display": "Butyrylcholinesterase deficiency"
+        }
+      ],
+      "context": "choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the lungs may become paralyzed. Mechanical ventilation is essential until the excess anesthetic agent is metabolized and normal breathing is resumed. Individuals with pseudocholinesterase deficiency have a shortage or absence of the enzyme pseudocholinesterase in their blood serum. If the drug succinylcholine (or another anesthetic derivative of choline) is given during surgery, the respiratory muscles become paralyzed and the patient stops breathing (apnea). Artificial respiration (mechanical",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Butyrylcholinesterase deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "apnea",
+      "preferred_label": "apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000106",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001049"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000106",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001049",
+          "display": "Apnea"
+        }
+      ],
+      "context": "duals with pseudocholinesterase deficiency have a shortage or absence of the enzyme pseudocholinesterase in their blood serum. If the drug succinylcholine (or another anesthetic derivative of choline) is given during surgery, the respiratory muscles become paralyzed and the patient stops breathing (apnea). Artificial respiration (mechanical ventilation) may be necessary until the drug is eliminated from the body and the affected individual is able to resume breathing. If the person with pseudocholinesterase deficiency is not exposed to a choline-derived anesthetic, he or she may never be aware of h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sleep Apnea Obstructive",
+        "Sleep Apnea Syndromes",
+        "Sleep Apnea Central"
+      ],
+      "pubtator_normalized_name": "Apnea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "she",
+      "preferred_label": "SHE",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100631",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D015835"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100631",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015835",
+          "display": "Ocular Motility Disorders"
+        }
+      ],
+      "context": "ient stops breathing (apnea). Artificial respiration (mechanical ventilation) may be necessary until the drug is eliminated from the body and the affected individual is able to resume breathing. If the person with pseudocholinesterase deficiency is not exposed to a choline-derived anesthetic, he or she may never be aware of having a deficiency of the enzyme pseudocholinesterase. Pseudocholinesterase deficiency is present at birth and occurs in approximately 1 out of every 1,500 to 2,500 people in the United States. Among Caucasian Americans, it seems to affect males almost twice as often as femal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Shellfish Poisoning",
+        "Hypopituitarism"
+      ],
+      "pubtator_normalized_name": "Ocular Motility Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Infantile apnea",
+      "preferred_label": "infantile apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019092",
+        "orpha": "Orphanet:70590",
+        "umls": "UMLS:C0745261",
+        "mesh": "C535759"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019092",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6779",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1378556",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:70590",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:724229002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0745261",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535759",
+          "display": "Congenital myasthenic syndrome with episodic apnea"
+        }
+      ],
+      "context": "holinesterase. Pseudocholinesterase deficiency is present at birth and occurs in approximately 1 out of every 1,500 to 2,500 people in the United States. Among Caucasian Americans, it seems to affect males almost twice as often as females. Apnea is the temporary cessation of breathing during sleep. Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Congenital myasthenic syndrome with episodic apnea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "air",
+      "preferred_label": "AIR",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100014",
+        "orpha": null,
+        "umls": "UMLS:C3203657",
+        "mesh": "D000402"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100014",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1388012",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:724809006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3203657",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1969888129",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000402",
+          "display": "Airway Obstruction"
+        }
+      ],
+      "context": "Apnea is the temporary cessation of breathing during sleep. Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apnea or upper airway apnea. Central apnea followed by or intermixed with an obstructive apnea is called mixed apnea. (For more",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pulmonary Disease Chronic Obstructive",
+        "Sleep Apnea Obstructive",
+        "Motion Sickness"
+      ],
+      "pubtator_normalized_name": "Airway Obstruction",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "athing during sleep. Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apnea or upper airway apnea. Central apnea followed by or intermixed with an obstructive apnea is called mixed apnea. (For more",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "excess",
+      "preferred_label": "Hypernatremia",
+      "abbreviation": null,
+      "confidence": 0.8756760954856873,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0020488",
+        "mesh": "D006955"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0020488",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006955",
+          "display": "Hypernatremia"
+        }
+      ],
+      "context": "ive to any of several anesthetic agents, especially those derived from the drug known as choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the lungs may become paralyzed. Mechanical ventilation is essential until the excess anesthetic agent is metabolized and normal breathing is resumed. Individuals with pseudocholinesterase deficiency have a shortage or absence of the enzyme pseudocholinesterase in their blood serum. If the drug succinylcholine (or another anesthetic derivative of choline) is given during surgery, th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypernatremia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "central apnea",
+      "preferred_label": "Sleep Apnea, Central",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0520680",
+        "mesh": "D012891"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0520680",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012891",
+          "display": "Sleep Apnea Syndromes"
+        }
+      ],
+      "context": "mately 1 out of every 1,500 to 2,500 people in the United States. Among Caucasian Americans, it seems to affect males almost twice as often as females. Apnea is the temporary cessation of breathing during sleep. Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apnea or upper airway apnea. Central apnea followed by or intermixed with an obstructive",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sleep Apnea Central"
+      ],
+      "pubtator_normalized_name": "Sleep Apnea Syndromes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "obstructive apnea",
+      "preferred_label": "Sleep Apnea, Obstructive",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0520679",
+        "mesh": "D020181"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0520679",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020181",
+          "display": "Sleep Apnea Obstructive"
+        }
+      ],
+      "context": "Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apnea or upper airway apnea. Central apnea followed by or intermixed with an obstructive apnea is called mixed apnea. (For more",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sleep Apnea Syndromes"
+      ],
+      "pubtator_normalized_name": "Sleep Apnea Obstructive",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mixed apnea",
+      "preferred_label": "Mixed apnea",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C4739157",
+        "mesh": "D012891"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C4739157",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012891",
+          "display": "Sleep Apnea Syndromes"
+        }
+      ],
+      "context": "c apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apnea or upper airway apnea. Central apnea followed by or intermixed with an obstructive apnea is called mixed apnea. (For more",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sleep Apnea Syndromes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "Pseudocholinesterase deficiency is an uncommon genetic disorder that makes an affected",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease",
+      "preferred_label": "rare disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "information choose “apnea” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease Database",
+      "preferred_label": "Rare Diseases",
+      "abbreviation": null,
+      "confidence": 0.8803369760513305,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0678236",
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0678236",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "information choose “apnea” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

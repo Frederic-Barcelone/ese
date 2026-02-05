@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:09:45.586490",
+  "document": "Branchiootorenal-Spectrum-Disorders.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Branchiootorenal-Spectrum-Disorders.pdf",
+  "total_candidates": 7,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "BOR",
+      "long_form": "branchiootorenal",
+      "confidence": 0.7,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "BOR/BOS syndrome affects males and females in equal numbers. It is estimated that 1 in 40,000 people have this disorder. BOR/BOS syndrome is found in approximately 2 to 3 percent of children with profound deafness.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "BOS",
+      "long_form": "Transplant-related bronchiolitis obliterans",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "BOR/BOS syndrome affects males and females in equal numbers. It is estimated that 1 in 40,000 people have t",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "hearing loss disorder",
+      "matched_text": "deafness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H90",
+      "orpha": null
+    },
+    {
+      "name": "Bos syndrome",
+      "matched_text": "BOS syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:97297"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

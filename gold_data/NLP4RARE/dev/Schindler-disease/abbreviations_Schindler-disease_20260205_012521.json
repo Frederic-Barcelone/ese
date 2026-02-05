@@ -1,0 +1,118 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:25:21.001774",
+  "document": "Schindler-disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Schindler-disease.pdf",
+  "total_candidates": 37,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "alpha-NAGA",
+      "long_form": "alpha-N-acetylgalactosaminidase",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "er characterized by the deficient activity of the lysosomal enzyme alpha-N-acetylgalactosaminidase (alpha-NAGA or alpha-galactosidase B). The enzyme defect leads to the abnormal accumulation of certain complex ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "NAGA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "racterized by the deficient activity of the lysosomal enzyme alpha-N-acetylgalactosaminidase (alpha-NAGA or alpha-galactosidase B). The enzyme defect leads to the abnormal accumulation of certain complex ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Mucopolysaccharidosis type 2, severe form",
+      "matched_text": "severe form",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:217085"
+    },
+    {
+      "name": "inborn errors of metabolism",
+      "matched_text": "inherited metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68367"
+    },
+    {
+      "name": "lysosomal storage disease",
+      "matched_text": "lysosomal storage diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68366"
+    },
+    {
+      "name": "Schindler disease",
+      "matched_text": "Schindler disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:3137"
+    },
+    {
+      "name": "Fabry disease",
+      "matched_text": "Fabry diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:324"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "ALPHA-GALACTOSIDASE",
+      "matched_text": "alpha-galactosidase",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Glycosphingolipids",
+      "matched_text": "glycosphingolipids",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "oligosaccharides",
+      "matched_text": "oligosaccharides",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

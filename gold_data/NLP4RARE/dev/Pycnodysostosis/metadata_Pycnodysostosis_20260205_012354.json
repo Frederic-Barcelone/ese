@@ -1,0 +1,30 @@
+{
+  "doc_id": "Pycnodysostosis",
+  "doc_filename": "Pycnodysostosis.pdf",
+  "top_entities": [
+    {
+      "name": "pycnodysostosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1685,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Pycnodysostosis: Rare Genetic Disorder Overview",
+  "short_description": "Clinical overview of pycnodysostosis, an extremely rare genetic disorder affecting approximately 1 in 1.7 million people worldwide.",
+  "long_description": "This document provides essential information about pycnodysostosis, a rare genetic disorder that affects both males and females equally. With only about 200 cases reported in medical literature, this condition has an estimated prevalence of 1 in 1.7 million people in the general population. The document highlights the challenges in accurate diagnosis, noting that pycnodysostosis may frequently go undiagnosed or be misdiagnosed, which complicates efforts to determine its true frequency and prevalence in the general population. This information serves as a foundational reference for understanding the epidemiological aspects of this rare skeletal dysplasia.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T00:23:54.198964"
+}

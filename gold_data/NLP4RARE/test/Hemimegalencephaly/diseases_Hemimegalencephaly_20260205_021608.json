@@ -1,0 +1,304 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:16:08.964287",
+  "document": "Hemimegalencephaly.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hemimegalencephaly.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hemimegalencephaly",
+      "preferred_label": "hemimegalencephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020492",
+        "orpha": "Orphanet:99802",
+        "umls": "UMLS:C0431391",
+        "mesh": "MESH:D065705"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020492",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2637",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:742.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:140910",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D065705",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200563",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C177779",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1220",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99802",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:253170008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0431391",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:961229160",
+          "display": null
+        }
+      ],
+      "context": "Hemimegalencephaly (HME) is a rare neurological condition in which one-half of the brain, or one side of the brain, is abnormally larger than the other. The structure of the brain on the affected side may be markedly abnormal or show only subtle changes. In either case, as a consequence of this size and structural di",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sebaceous Nevus Syndrome and Hemimegalencephaly"
+      ],
+      "pubtator_normalized_name": "Hemimegalencephaly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "brain malformation",
+      "preferred_label": "brain malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016054",
+        "orpha": "Orphanet:199633",
+        "umls": null,
+        "mesh": "D020785"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016054",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100217",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:199633",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020785",
+          "display": "Central Nervous System Vascular Malformations"
+        }
+      ],
+      "context": "ural differences, the enlarged brain tissue causes frequent seizures, often associated with cognitive or behavioral disabilities. Seizures in association with HME often begin in early infant life including an association with infantile spasms. Hemimegalencephaly may occur as an isolated or sporadic brain malformation or it may be associated with other neurodevelopmental syndromes. Thus, when detected, HME should prompt a search for other syndromic diagnoses. Hemimegalencephaly is a very rare disorder for which prevalence estimates are not available. Examination by MRI is usually sufficient to confirm a suspecte",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemangioma Cavernous Central Nervous System",
+        "Fetal akinesia syndrome X-linked",
+        "Brain Anomalies Retardation Ectodermal Dysplasia Skeletal Malformations Hirschsprung Disease Ear-Eye Anomalies Cleft Palate-Cryptorchidism And Kidney Dysplasia-Hypoplasia"
+      ],
+      "pubtator_normalized_name": "Central Nervous System Vascular Malformations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infantile spasms",
+      "preferred_label": "infantile spasm",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100620",
+        "orpha": null,
+        "umls": "UMLS:C5779964",
+        "mesh": "D013036"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100620",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1830477",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5779964",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013036",
+          "display": "Spasms Infantile"
+        }
+      ],
+      "context": "y subtle changes. In either case, as a consequence of this size and structural differences, the enlarged brain tissue causes frequent seizures, often associated with cognitive or behavioral disabilities. Seizures in association with HME often begin in early infant life including an association with infantile spasms. Hemimegalencephaly may occur as an isolated or sporadic brain malformation or it may be associated with other neurodevelopmental syndromes. Thus, when detected, HME should prompt a search for other syndromic diagnoses. Hemimegalencephaly is a very rare disorder for which prevalence estimates are n",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Infantile Epileptic-Dyskinetic Encephalopathy",
+        "Aicardi Syndrome",
+        "CDKL5 deficiency disorder"
+      ],
+      "pubtator_normalized_name": "Spasms Infantile",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HME",
+      "preferred_label": "HME",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000225",
+        "orpha": null,
+        "umls": "UMLS:C3844799",
+        "mesh": "C566343"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000225",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050026",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:72",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:082.41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1826179",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1254",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:359747000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3844799",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C566343",
+          "display": "Hereditary Myopathy with Early Respiratory Failure"
+        }
+      ],
+      "context": "Hemimegalencephaly (HME) is a rare neurological condition in which one-half of the brain, or one side of the brain, is abnormally larger than the other. The structure of the brain on the affected side may be markedly abnormal or show only subtle changes. In either case, as a consequence of this size and structural differe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary Myopathy with Early Respiratory Failure",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

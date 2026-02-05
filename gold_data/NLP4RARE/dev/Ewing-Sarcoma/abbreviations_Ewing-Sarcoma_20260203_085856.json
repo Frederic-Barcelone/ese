@@ -1,0 +1,255 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:58:56.604106",
+  "document": "Ewing-Sarcoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Ewing-Sarcoma.pdf",
+  "total_candidates": 35,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "PNET",
+      "long_form": "primitive neuroectodermal tumor",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EFT",
+      "long_form": "Ewing family of tumors",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "xtraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Ewing sarcoma",
+      "matched_text": "Ewing sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:C40.3",
+      "orpha": "Orphanet:319"
+    },
+    {
+      "name": "Rare bone tumor",
+      "matched_text": "rare bone tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:68411"
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "soft",
+      "matched_text": "soft",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:314394"
+    },
+    {
+      "name": "extraosseous Ewing sarcoma",
+      "matched_text": "extraosseous Ewing sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:370334"
+    },
+    {
+      "name": "neoplasm",
+      "matched_text": "tumor",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": "ICD10CM:C7B-C7B",
+      "orpha": null
+    },
+    {
+      "name": "primitive neuroectodermal tumor",
+      "matched_text": "primitive neuroectodermal tumor (PNET)",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Ewing family of tumors",
+      "matched_text": "Ewing family of tumors",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Ewing sarcoma of bone",
+      "matched_text": "Ewing sarcoma of bone",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "neoplasm of chest wall",
+      "matched_text": "tumor of the chest wall",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancer",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Ewings sarcoma",
+      "matched_text": "Ewing sarcoma",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Bone neoplasms",
+      "matched_text": "bone tumor",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Neoplasms",
+      "matched_text": "tumors",
+      "abbreviation": null,
+      "confidence": 0.7982830286026001,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Neuroectodermal Tumor, Primitive",
+      "matched_text": "PNET",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Chromosome Aberrations",
+      "matched_text": "chromosomal abnormality",
+      "abbreviation": null,
+      "confidence": 0.6868285655975341,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Chromosomal translocation",
+      "matched_text": "translocation",
+      "abbreviation": null,
+      "confidence": 0.6518948197364807,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Ewing Sarcoma/Peripheral Primitive Neuroectodermal Tumor",
+      "matched_text": "Ewing family of tumors",
+      "abbreviation": null,
+      "confidence": 0.661164116859436,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Extra-osseous Ewing's sarcoma",
+      "matched_text": "extraosseous Ewing sarcoma",
+      "abbreviation": null,
+      "confidence": 0.6536139369010925,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Neuroectodermal Tumors",
+      "matched_text": "neuroectodermal tumor",
+      "abbreviation": null,
+      "confidence": 0.6767462611198425,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Askin's tumor",
+      "matched_text": "Askin’s tumor",
+      "abbreviation": null,
+      "confidence": 0.6626125693321228,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "aggressive cancer",
+      "matched_text": "aggressive cancer",
+      "abbreviation": null,
+      "confidence": 0.967451274394989,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Neoplasm Metastasis",
+      "matched_text": "metastasize",
+      "abbreviation": null,
+      "confidence": 0.9698439836502075,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

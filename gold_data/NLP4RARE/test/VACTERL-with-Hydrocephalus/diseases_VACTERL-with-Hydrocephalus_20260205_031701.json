@@ -1,0 +1,367 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:17:01.084450",
+  "document": "VACTERL-with-Hydrocephalus.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/VACTERL-with-Hydrocephalus.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "VACTERL with hydrocephalus",
+      "preferred_label": "VACTERL with hydrocephalus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010172",
+        "orpha": "Orphanet:3412",
+        "umls": "UMLS:C1848599",
+        "mesh": "C564751"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010172",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:272",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:376400",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:276950",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3412",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1848599",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1646268729",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564751",
+          "display": "VACTERL Association With Hydrocephalus"
+        }
+      ],
+      "context": "VACTERL with hydrocephalus is an extremely rare genetic disorder in which the multisystem features of VACTERL association occur in addition to hydrocephalus. The term VACTERL is an acronym with each letter representing the first letter of the more common findings seen in affected children: VACTERL with hydrocephalus is an ex",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "VACTERL Association With Hydrocephalus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "VACTERL association",
+      "preferred_label": "VACTERL association",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008642",
+        "orpha": "Orphanet:887",
+        "umls": "UMLS:C4225671",
+        "mesh": "C536495"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008642",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14679",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5443",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:902479",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066022",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200983",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C99105",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1818",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:192350",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:887",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:27742002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4225671",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1452617987",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536495",
+          "display": "VACTERL association"
+        }
+      ],
+      "context": "VACTERL with hydrocephalus is an extremely rare genetic disorder in which the multisystem features of VACTERL association occur in addition to hydrocephalus. The term VACTERL is an acronym with each letter representing the first letter of the more common findings seen in affected children: VACTERL with hydrocephalus is an extremely rare disorder that affects males and females in equal numbers. The exact prevalence of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "VACTERL Association With Hydrocephalus"
+      ],
+      "pubtator_normalized_name": "VACTERL association",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "VACTERL with hydrocephalus is an extremely rare genetic disorder in which the multisystem features of VACTERL association occur in addition to hydrocephalus. The term VACTERL is an acronym with each letter representing the first letter of the more common findings seen in affected children: VACTERL with hydrocephalus is an extremely rare disorder that affects mal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hydrocephalus",
+      "preferred_label": "hydrocephalus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G91",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001150",
+        "orpha": null,
+        "umls": "UMLS:C0020255",
+        "mesh": "MESH:D006849"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001150",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10908",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G91",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9335",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006849",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3111",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230745008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020255",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:574533444",
+          "display": null
+        }
+      ],
+      "context": "VACTERL with hydrocephalus is an extremely rare genetic disorder in which the multisystem features of VACTERL association occur in addition to hydrocephalus. The term VACTERL is an acronym with each letter representing the first letter of the more common findings seen in affected children: VACTERL with hydrocephalus is an extremely rare disorder that affects males and females in equal numbers. The exact prevalence of the disorder in the general populat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hydrocephalus Normal Pressure",
+        "MASA (Mental Retardation Aphasia Shuffling Gait Adducted Thumbs) Syndrome",
+        "Walker-Warburg Syndrome"
+      ],
+      "pubtator_normalized_name": "Hydrocephalus",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

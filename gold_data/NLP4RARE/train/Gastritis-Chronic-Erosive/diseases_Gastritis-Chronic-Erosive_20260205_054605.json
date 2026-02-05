@@ -1,0 +1,554 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:46:05.825136",
+  "document": "Gastritis-Chronic-Erosive.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gastritis-Chronic-Erosive.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Erosive Gastritis",
+      "preferred_label": "erosive gastritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004966",
+        "orpha": null,
+        "umls": "UMLS:C0017152",
+        "mesh": "MESH:D005756"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004966",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4029",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000217",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0005263",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:535.41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4843",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005756",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26780",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:4556007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017152",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1871672644",
+          "display": null
+        }
+      ],
+      "context": "Chronic, Erosive Gastritis is characterized by many inflamed lesions in the mucous lining of the stomach. It may be a transitory or a chronic condition lasting for years. Chronic, Erosive Gastritis is an inflammation of the stomach characterized by multiple lesions in the mucous lining causing ulcer-like symptoms. These symp",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Crohn’s disease",
+      "preferred_label": "Crohn's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": "ICD10CM:K50",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005011",
+        "orpha": "Orphanet:206",
+        "umls": "UMLS:C0010346",
+        "mesh": "MESH:D003424"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005011",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8778",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000384",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K50",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:555.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3664",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003424",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200921",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2965",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:206",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:7620006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010346",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1267652425",
+          "display": null
+        }
+      ],
+      "context": "pection of the stomach using a gastroscope. The exact cause of Chronic, Erosive Gastritis is unknown. It may be the result of an infection, over indulgence of alcohol, or persistent use of aspirin or non-steroidal anti-inflammatory medications such as ibuprofen. Stress tends to make symptoms worse. Crohn’s disease and Sarcoidosis have been known to be factors in some cases of Chronic, Erosive Gastritis, while some cases have no apparent cause at all. Chronic, Erosive Gastritis usually occurs during middle age and is more common in males than females. Alcoholics and chronic aspirin or ibuprofen users (e.g. pe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pediatric Crohn's disease"
+      ],
+      "pubtator_normalized_name": "Crohn Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Sarcoidosis",
+      "preferred_label": "sarcoidosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D86",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019338",
+        "orpha": "Orphanet:797",
+        "umls": "UMLS:C0036202",
+        "mesh": "MESH:D012507"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019338",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11335",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7607",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D86",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:D86",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:135",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48554",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012507",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10039486",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200415",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34995",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1690",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:797",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31541009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036202",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:330792642",
+          "display": null
+        }
+      ],
+      "context": "ch using a gastroscope. The exact cause of Chronic, Erosive Gastritis is unknown. It may be the result of an infection, over indulgence of alcohol, or persistent use of aspirin or non-steroidal anti-inflammatory medications such as ibuprofen. Stress tends to make symptoms worse. Crohn’s disease and Sarcoidosis have been known to be factors in some cases of Chronic, Erosive Gastritis, while some cases have no apparent cause at all. Chronic, Erosive Gastritis usually occurs during middle age and is more common in males than females. Alcoholics and chronic aspirin or ibuprofen users (e.g. people with arthri",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sarcoidosis Pulmonary",
+        "Neurosarcoidosis",
+        "Blau syndrome"
+      ],
+      "pubtator_normalized_name": "Sarcoidosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arthritis",
+      "preferred_label": "arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005578",
+        "orpha": null,
+        "umls": "UMLS:C0003864",
+        "mesh": "MESH:D001168"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005578",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:848",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005856",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2043",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001168",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2883",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:3723001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003864",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Arthritis",
+          "display": null
+        }
+      ],
+      "context": "idosis have been known to be factors in some cases of Chronic, Erosive Gastritis, while some cases have no apparent cause at all. Chronic, Erosive Gastritis usually occurs during middle age and is more common in males than females. Alcoholics and chronic aspirin or ibuprofen users (e.g. people with arthritis) are more susceptible to this disorder.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arthritis",
+        "Arthritis Psoriatic",
+        "Arthritis Infectious"
+      ],
+      "pubtator_normalized_name": "Arthritis Rheumatoid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "tomach characterized by multiple lesions in the mucous lining causing ulcer-like symptoms. These symptoms may include a burning and heavy feeling in the pit of the stomach, mild nausea, vomiting, loss of appetite and weakness. In severe cases there can be bleeding of the stomach which may result in anemia. Some people with this disorder, especially chronic aspirin users, may show no apparent symptoms until the disease has advanced. An accurate diagnosis can be made by physician’s visual inspection of the stomach using a gastroscope. The exact cause of Chronic, Erosive Gastritis is unknown. It may be",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ulcer",
+      "preferred_label": "ulcer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043839",
+        "orpha": null,
+        "umls": "UMLS:C0041582",
+        "mesh": "MESH:D014456"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043839",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:22541",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014456",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3426",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:429040005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041582",
+          "display": null
+        }
+      ],
+      "context": "Chronic, Erosive Gastritis is characterized by many inflamed lesions in the mucous lining of the stomach. It may be a transitory or a chronic condition lasting for years. Chronic, Erosive Gastritis is an inflammation of the stomach characterized by multiple lesions in the mucous lining causing ulcer-like symptoms. These symptoms may include a burning and heavy feeling in the pit of the stomach, mild nausea, vomiting, loss of appetite and weakness. In severe cases there can be bleeding of the stomach which may result in anemia. Some people with this disorder, especially chronic aspirin users, m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Colitis Ulcerative",
+        "Pressure Ulcer",
+        "Peptic Ulcer"
+      ],
+      "pubtator_normalized_name": "Ulcer",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

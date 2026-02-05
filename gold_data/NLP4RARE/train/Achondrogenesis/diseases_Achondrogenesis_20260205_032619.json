@@ -1,0 +1,284 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:26:19.284868",
+  "document": "Achondrogenesis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Achondrogenesis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Achondrogenesis type IA",
+      "preferred_label": "achondrogenesis type IA",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008701",
+        "orpha": "Orphanet:93299",
+        "umls": "UMLS:C0265273",
+        "mesh": "MESH:C536015"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008701",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080054",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:459",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536015",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:200600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93299",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42725006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265273",
+          "display": null
+        }
+      ],
+      "context": "Achondrogenesis affect males and females in equal numbers. Achondrogenesis type IA and type IB are very rare disorders and prevalence for them is unknown. Achondrogenesis type II occurs in approximately 1/40,000-1/60,000 newborns.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Achondrogenesis type 1A",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Achondrogenesis type II",
+      "preferred_label": "achondrogenesis type II",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008702",
+        "orpha": "Orphanet:93296",
+        "umls": "UMLS:C0220685",
+        "mesh": "MESH:C536017"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008702",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080056",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8713",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:66315",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536017",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201345",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:200610",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93296",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220685",
+          "display": null
+        }
+      ],
+      "context": "Achondrogenesis affect males and females in equal numbers. Achondrogenesis type IA and type IB are very rare disorders and prevalence for them is unknown. Achondrogenesis type II occurs in approximately 1/40,000-1/60,000 newborns.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Achondrogenesis type 2",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Achondrogenesis",
+      "preferred_label": "achondrogenesis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q77.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019648",
+        "orpha": "Orphanet:932",
+        "umls": "UMLS:C0001079",
+        "mesh": "MESH:C579878"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019648",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080043",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2882",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q77.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:84",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C579878",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066122",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84527",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:710",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:200600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:932",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:2391001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001079",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:103965243",
+          "display": null
+        }
+      ],
+      "context": "Achondrogenesis affect males and females in equal numbers. Achondrogenesis type IA and type IB are very rare disorders and prevalence for them is unknown. Achondrogenesis type II occurs in approximately 1/40,000-1/60,000 newborns.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Kozlowski Tsuruta Taki syndrome",
+        "Achondrogenesis",
+        "Achondrogenesis type 1A"
+      ],
+      "pubtator_normalized_name": "Achondrogenesis type 2",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

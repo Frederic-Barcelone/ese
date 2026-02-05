@@ -1,0 +1,75 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:12:51.434590",
+  "document": "Glycogen-Storage-Disease-Type-IX.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Glycogen-Storage-Disease-Type-IX.pdf",
+  "total_candidates": 25,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "GSD-IX",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "nlargement of the liver and, more rarely, females can have symptoms similar to those seen in males. GSD-IX types A, B and C are estimated to affect 1 in 100,000 individuals in the general population. These ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "GSD-IXd",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " misdiagnosed, it is difficult to determine the true frequency of GSD-IX in the general population. GSD-IXd is extremely rare and its prevalence is unknown.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "glycogen storage disease",
+      "matched_text": "glycogen storage disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E74.0",
+      "orpha": "Orphanet:79201"
+    },
+    {
+      "name": "Danon disease",
+      "matched_text": "GSD",
+      "abbreviation": "GSD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E74.0",
+      "orpha": "ORPHA:34587"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "glycogen",
+      "matched_text": "glycogen",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,83 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:06:24.399045",
+  "document": "Hepatopulmonary-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hepatopulmonary-Syndrome.pdf",
+  "total_candidates": 13,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HPS",
+      "long_form": "hepatopulmonary syndrome",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "monary hypertension is another vascular complication of liver disease, which is often confused with HPS. However, hepatopulmonary syndrome and portopulmonary hypertension are not the same disease. Althou",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Hermansky-Pudlak syndrome due to BLOC-3 deficiency",
+      "matched_text": "HPS",
+      "abbreviation": "HPS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E70.3",
+      "orpha": "ORPHA:231500"
+    },
+    {
+      "name": "Portopulmonary hypertension",
+      "matched_text": "Portopulmonary hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:275813"
+    },
+    {
+      "name": "Hepatopulmonary Syndrome",
+      "matched_text": "hepatopulmonary syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E70.331",
+      "orpha": "Orphanet:79430"
+    },
+    {
+      "name": "Pulmonary hypertension",
+      "matched_text": "pulmonary hypertension",
+      "abbreviation": "PH",
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": "I27.0",
+      "orpha": "ORPHA:182090"
+    },
+    {
+      "name": "liver disorder",
+      "matched_text": "liver disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K70-K77",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

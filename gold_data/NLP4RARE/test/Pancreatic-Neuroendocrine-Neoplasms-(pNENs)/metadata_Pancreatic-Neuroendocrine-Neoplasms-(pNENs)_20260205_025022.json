@@ -1,0 +1,40 @@
+{
+  "doc_id": "Pancreatic-Neuroendocrine-Neoplasms-(pNENs)",
+  "doc_filename": "Pancreatic-Neuroendocrine-Neoplasms-(pNENs).pdf",
+  "top_entities": [
+    {
+      "name": "Neuroendocrine neoplasm of pancreas",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "pancreatic neuroendocrine neoplasm",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Octrotide",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2046,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Pancreatic Neuroendocrine Neoplasms (pNENs) - Clinical Overview",
+  "short_description": "Clinical document describing the epidemiology, demographics, and diagnostic approaches for pancreatic neuroendocrine neoplasms.",
+  "long_description": "This clinical reference document provides comprehensive information about pancreatic neuroendocrine neoplasms (pNENs), covering their epidemiological characteristics including gender distribution, age of onset, and population prevalence. The document details that pNENs affect approximately 1 in 100,000 individuals annually and represent 2-4% of all pancreatic neoplasms. It outlines the diagnostic methodology, which includes clinical evaluation, advanced imaging techniques such as octreotide-scintigraphy, CT, MRI, and PET scans, along with specialized blood tests including Chromogranin A and NETest, biochemical assessments, and tissue biopsies. The document also distinguishes between sporadic cases occurring in adults aged 30-60 and genetic syndrome-associated cases that typically present in childhood or young adulthood.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:50:22.866522"
+}

@@ -1,0 +1,185 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:04:16.367982",
+  "document": "Renal-Glycosuria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Renal-Glycosuria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "low blood glucose",
+      "preferred_label": "low blood glucose",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004946",
+        "orpha": null,
+        "umls": "UMLS:C0020615",
+        "mesh": "MESH:D007003"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004946",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9993",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:251.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6979",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007003",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3126",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:302866003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020615",
+          "display": null
+        }
+      ],
+      "context": "Renal glycosuria, also known as renal glucosuria, is a rare condition in which the simple sugar glucose is eliminated (excreted) in the urine despite normal or low blood glucose levels. With normal kidney (renal) function, glucose is excreted in the urine only when there are abnormally elevated levels of glucose in the blood. However, in those with renal glycosuria, glucose is abnormally eliminated in the urine due to improper functioning of the renal tubules, which are pr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Renal glycosuria",
+      "preferred_label": "Renal Glycosuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009297",
+        "orpha": "Orphanet:69076",
+        "umls": "UMLS:C3245525",
+        "mesh": "MESH:D006030"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009297",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9432",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7548",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:271.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:757652",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006030",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10038457",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1658",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:233100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:69076",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:267430007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3245525",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:381783069",
+          "display": null
+        }
+      ],
+      "context": "Renal glycosuria, also known as renal glucosuria, is a rare condition in which the simple sugar glucose is eliminated (excreted) in the urine despite normal or low blood glucose levels. With normal kidney (renal) function, glucose is excreted in the urine only when there are abnormally elevated levels of glucose in",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Glycosuria Renal",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

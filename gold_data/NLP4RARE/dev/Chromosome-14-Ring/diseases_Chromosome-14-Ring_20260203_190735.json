@@ -1,0 +1,1004 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:07:35.001891",
+  "document": "Chromosome-14-Ring.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Chromosome-14-Ring.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 16,
+  "total_validated": 16,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Chromosome 14 Ring",
+      "preferred_label": "Ring Chromosome 14 Syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C2930916",
+        "mesh": "C535487"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C2930916",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535487",
+          "display": "Ring Chromosome 14 Syndrome"
+        }
+      ],
+      "context": "Chromosome 14 Ring is a rare disorder that is characterized by abnormalities of the 14th chromosome. Affected infants and children typically have delays in the acquisition of skills that require the coordination of physical and mental activities (psychomotor delays), mental retardation, growth delays, and episodes of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Ring Chromosome 14 Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 14 Ring is a rare disorder that is characterized by abnormalities of the 14th chromosome. Affected infants and children typically have delays in the acquisition of skills that require the coordination of physical and mental activities (psychomotor delays), mental retardation, growth delays, and episodes of uncontrolled elect",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 14 Ring is a rare disorder that is characterized by abnormalities of the 14th chromosome. Affected infants and children typically have delays in the acquisition of skills that require the coordination of physical and mental activities (psychomotor delays), mental retardation, growth delays, and episodes of uncontrolled electrical activity in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elonga",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "he 14th chromosome. Affected infants and children typically have delays in the acquisition of skills that require the coordination of physical and mental activities (psychomotor delays), mental retardation, growth delays, and episodes of uncontrolled electrical activity in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a promi",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microcephaly",
+      "preferred_label": "microcephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001149",
+        "orpha": null,
+        "umls": "UMLS:C4551563",
+        "mesh": "MESH:D008831"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001149",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10907",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000252",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:742.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644158",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008831",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85874",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1829003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551563",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:179350437",
+          "display": null
+        }
+      ],
+      "context": "ties (psychomotor delays), mental retardation, growth delays, and episodes of uncontrolled electrical activity in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than fem",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microcephaly Primary Autosomal Recessive 1",
+        "Paine syndrome",
+        "Microcephaly cervical spine fusion anomalies"
+      ],
+      "pubtator_normalized_name": "Microcephaly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "face",
+      "preferred_label": "FACE",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010953",
+        "orpha": null,
+        "umls": "UMLS:C3160739",
+        "mesh": "C536384"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010953",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111084",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15324",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:463628",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C125709",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:600901",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3160739",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536384",
+          "display": "FACES syndrome"
+        }
+      ],
+      "context": "owth delays, and episodes of uncontrolled electrical activity in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases repor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Supraumbilical midabdominal raphe and facial cavernous hemangiomas",
+        "Facial Pain",
+        "DiGeorge Syndrome"
+      ],
+      "pubtator_normalized_name": "FACES syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertelorism",
+      "preferred_label": "hypertelorism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007778",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D006972"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007778",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000316",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.41",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006972",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34715",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:145400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22006008",
+          "display": null
+        }
+      ],
+      "context": "ntrolled electrical activity in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acrocephalosyndactylia",
+        "Hypertelorism with esophageal abnormality and hypospadias",
+        "Ascending aortic aneurysm hypertelorism bifid uvula cleft palate and arterial tortuosity"
+      ],
+      "pubtator_normalized_name": "Hypertelorism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lip",
+      "preferred_label": "LIP",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:J84.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009537",
+        "orpha": "Orphanet:79128",
+        "umls": "UMLS:C0264511",
+        "mesh": "MESH:C562489"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009537",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050159",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16700",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J84.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:516.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82682",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562489",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062997",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200424",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27558",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:247610",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79128",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:44274007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0264511",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1140418798",
+          "display": null
+        }
+      ],
+      "context": "in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional chromosomal disorde",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lipoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional chromosomal disorders may have features similar to those associated with Chromosome 14 Ring. Chromosomal testing is necessary to conf",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "Congenital chromosomal disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008626",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008626",
+          "display": null
+        }
+      ],
+      "context": "ofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional chromosomal disorders may have features similar to those associated with Chromosome 14 Ring. Chromosomal testing is necessary to confirm the specific chro",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "alities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional chromosomal disorders may have features similar to those associated with Chromosome 14 Ring. Chromosomal testing is necessary to confirm the specific chromosomal a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "abnormalities",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Chromosome 14 Ring is a rare disorder that is characterized by abnormalities of the 14th chromosome. Affected infants and children typically have delays in the acquisition of skills that require the coordination of physical and mental activities (psychomotor delays), mental retardation, growth delays, and episodes of uncontrolled electrical activity in the brain (seizures).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "psychomotor delays",
+      "preferred_label": "Global developmental delay",
+      "abbreviation": null,
+      "confidence": 0.9927416801452636,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0557874",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0557874",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 14 Ring is a rare disorder that is characterized by abnormalities of the 14th chromosome. Affected infants and children typically have delays in the acquisition of skills that require the coordination of physical and mental activities (psychomotor delays), mental retardation, growth delays, and episodes of uncontrolled electrical activity in the brain (seizures). The disorder is also characterized by distinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a hig",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "low-set ears",
+      "preferred_label": "Low set ears",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0239234",
+        "mesh": "C537239"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0239234",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537239",
+          "display": "Mengel Konigsmark syndrome"
+        }
+      ],
+      "context": "istinctive abnormalities of the head and facial (craniofacial) area. Such abnormalities may include an unusually small head (microcephaly) with a high forehead; an elongated face; widely spaced eyes (ocular hypertelorism); a thin upper lip; a flat nasal bridge with a prominent nasal tip; and large, low-set ears. Chromosome 14 Ring is an extremely rare chromosomal disorder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional chromosomal disorders may have features similar to those associated with Chromosome 14 Ring.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mengel Konigsmark syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal abnormality",
+      "preferred_label": "Chromosome Aberrations",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008625",
+        "mesh": "D002869"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008625",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002869",
+          "display": "Chromosome Aberrations"
+        }
+      ],
+      "context": "rder that has appeared to affect males slightly more often than females. There have been over 40 cases reported in the medical literature. Additional chromosomal disorders may have features similar to those associated with Chromosome 14 Ring. Chromosomal testing is necessary to confirm the specific chromosomal abnormality present. (For further information on such disorders, choose the name of the specific chromosomal disorder in question or use “chromosome” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sex Chromosome Aberrations"
+      ],
+      "pubtator_normalized_name": "Chromosome Aberrations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease Database",
+      "preferred_label": "Rare Diseases",
+      "abbreviation": null,
+      "confidence": 0.8803369760513305,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0678236",
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0678236",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "similar to those associated with Chromosome 14 Ring. Chromosomal testing is necessary to confirm the specific chromosomal abnormality present. (For further information on such disorders, choose the name of the specific chromosomal disorder in question or use “chromosome” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

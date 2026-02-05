@@ -1,0 +1,486 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:38:11.812731",
+  "document": "Trisomy-9p-(Multiple-Variants).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Trisomy-9p-(Multiple-Variants).pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "trisomy 21 (Down syndrome)",
+      "preferred_label": "Down syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008608",
+        "orpha": "Orphanet:870",
+        "umls": "UMLS:C0013080",
+        "mesh": "MESH:D004314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008608",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14250",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001064",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4385",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004314",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044688",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200965",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2993",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:190685",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:870",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:41040004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013080",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1624623908",
+          "display": null
+        },
+        {
+          "system": "nlxdys",
+          "code": "nlxdys:20090502",
+          "display": null
+        }
+      ],
+      "context": "1 to 9q34. In observed cases, trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy Qp is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Down Syndrome Critical Region",
+        "Transient Myeloproliferative Disorder of Down Syndrome",
+        "Cataracts Congenital with Sensorineural Deafness Down Syndrome-Like Facial Appearance Short Stature and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Trisomy 9p",
+      "preferred_label": "trisomy 9p",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016526",
+        "orpha": "Orphanet:262767",
+        "umls": "UMLS:C0265428",
+        "mesh": "C538026"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016526",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18683",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:120539",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:262767",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265428",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1126301219",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538026",
+          "display": "Chromosome 9 partial trisomy 9p"
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered fr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chromosome 9 trisomy 9p"
+      ],
+      "pubtator_normalized_name": "Chromosome 9 partial trisomy 9p",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy 18",
+      "preferred_label": "trisomy 18",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018071",
+        "orpha": "Orphanet:3380",
+        "umls": "UMLS:C4317091",
+        "mesh": "MESH:C580500"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1085",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6321",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1384417",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C580500",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10053884",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200963",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C36626",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1797",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3380",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:51500006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4317091",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1505179968",
+          "display": null
+        }
+      ],
+      "context": ", trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy Qp is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chromosome 18 trisomy 18p",
+        "Chromosome 18 trisomy 18q",
+        "Trisomy 18-Like Syndrome"
+      ],
+      "pubtator_normalized_name": "Trisomy 18 Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy 13",
+      "preferred_label": "trisomy 13",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018068",
+        "orpha": "Orphanet:3378",
+        "umls": "UMLS:C0152095",
+        "mesh": "MESH:C536305"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018068",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11665",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7341",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56261",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536305",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044686",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200964",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C36529",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1796",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3378",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:21111006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152095",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1435958084",
+          "display": null
+        }
+      ],
+      "context": "females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy Qp is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chromosome 13q trisomy",
+        "Pseudotrisomy 13 syndrome",
+        "Chromosome 13p duplication"
+      ],
+      "pubtator_normalized_name": "Trisomy 13 Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy",
+      "preferred_label": "trisomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700065",
+        "orpha": null,
+        "umls": "UMLS:C0041107",
+        "mesh": "MESH:D014314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21702",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014314",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3421",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041107",
+          "display": null
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Trisomy"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

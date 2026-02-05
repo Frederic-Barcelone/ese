@@ -1,0 +1,70 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:04:25.685237",
+  "document": "Biotinidase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Biotinidase-Deficiency.pdf",
+  "total_candidates": 23,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "BTD",
+      "long_form": "BTD protein, human",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "screening test, a positive result does not mean that an infant definitely has the disease. Often, a repeat test must be done to confirm the diagnosis. A clinical diagnosis is possible after birth by testing for biotinidase activity in the blood. Usually, this is performed when signs and symptoms of BTD become clearer. In some infants, a genetic test may be ordered to identify the specific gene changes (mutation) that are causing BTD. Prenatal testing of sample fluid from the womb for biotinidase activity is available as early as 12 weeks of pregnancy (this includes chorionic villi sampling and am",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "BTD"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "biotinidase deficiency",
+      "matched_text": "Biotinidase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D81.810",
+      "orpha": "Orphanet:79241"
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Prenatal",
+      "matched_text": "Prenatal",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

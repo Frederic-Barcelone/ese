@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:09:14.967762",
+  "document": "Branchio-Oculo-Facial-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Branchio-Oculo-Facial-Syndrome.pdf",
+  "total_candidates": 16,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "BOFS",
+      "long_form": "Branchio oculo facial syndrome",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Branchio-oculo-facial syndrome (BOFS) is a rare genetic disorder with defects of the head and neck that are apparent at birth (congenital) and usually diagnosed in childhood. As of 2018, fewer than 100 cases have been reported in the medical literature, although additional patients are probably followed world-wide. BOFS is a very rare disorder that apparently affects males and females in equal numbers. Fertility does not appear to be",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "branchiooculofacial syndrome",
+      "matched_text": "Branchio-oculo-facial syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1297"
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

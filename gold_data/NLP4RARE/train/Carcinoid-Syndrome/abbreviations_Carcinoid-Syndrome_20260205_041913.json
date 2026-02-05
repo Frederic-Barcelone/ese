@@ -1,0 +1,136 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:19:13.607043",
+  "document": "Carcinoid-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Carcinoid-Syndrome.pdf",
+  "total_candidates": 70,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 3,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "5-HIAA",
+      "long_form": "5-hydroxyindoleacetic acid",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "confirmation where possible. The occurrence of episodic facial flushing and/or chronic diarrhea not diagnosed by standard tests as being a result of more common causes should lead to suspicion of carcinoid syndrome. In the past, measurement of 24-hour urinary excretion of 5-hydroxyendolacetic acid (5-HIAA), a product of the breakdown (metabolism) of serotonin, in a patient on a low serotonin diet was the main lab test used. It is still useful and the level of 5-HIAA will be clearly elevated in 50% of the cases. However, there are also blood tests available, the most useful being chromogranin-A, ofte",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HIAA",
+      "long_form": "Hydroxyindoleacetic Acid",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "nfirmation where possible. The occurrence of episodic facial flushing and/or chronic diarrhea not diagnosed by standard tests as being a result of more common causes should lead to suspicion of carcinoid syndrome. In the past, measurement of 24-hour urinary excretion of 5-hydroxyendolacetic acid (5-HIAA), a product of the breakdown (metabolism) of serotonin, in a patient on a low serotonin diet was the main lab test used. It is still useful and the level of 5-HIAA will be clearly elevated in 50% of the cases. However, there are also blood tests available, the most useful being chromogranin-A, ofte",
+      "lexicon_source": "2025_08_umls_clinical_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "HIAA"
+        }
+      ]
+    },
+    {
+      "short_form": "CT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": ". Other investigations that may be helpful, depending on the location of the primary tumor, include CT scan, ultrasound, MRI and endoscopy. Sometimes the diagnosis is established incidentally at the tim",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "s that may be helpful, depending on the location of the primary tumor, include CT scan, ultrasound, MRI and endoscopy. Sometimes the diagnosis is established incidentally at the time of surgery for anoth",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "intestinal obstruction",
+      "matched_text": "intestinal obstruction",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "carcinoid syndrome",
+      "matched_text": "carcinoid syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E34.0",
+      "orpha": "Orphanet:100093"
+    },
+    {
+      "name": "chronic diarrhea",
+      "matched_text": "chronic diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "appendicitis",
+      "matched_text": "appendicitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "carcinoid",
+      "matched_text": "carcinoid",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diarrhea",
+      "matched_text": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "indium in-111 pentetreotide kit",
+      "matched_text": "octreoscan",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

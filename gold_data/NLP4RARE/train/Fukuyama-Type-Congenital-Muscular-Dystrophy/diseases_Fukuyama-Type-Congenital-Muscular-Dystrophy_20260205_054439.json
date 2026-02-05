@@ -1,0 +1,322 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:44:39.395695",
+  "document": "Fukuyama-Type-Congenital-Muscular-Dystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fukuyama-Type-Congenital-Muscular-Dystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Fukuyama type congenital muscular dystrophy",
+      "preferred_label": "Fukuyama Type Congenital Muscular Dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009678",
+        "orpha": "Orphanet:272",
+        "umls": "UMLS:C0410174",
+        "mesh": "D058494"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009678",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050559",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6475",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:140820",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200860",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C126741",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1169",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:253800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:272",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:111502003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0410174",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D058494",
+          "display": "Walker-Warburg Syndrome"
+        }
+      ],
+      "context": "Fukuyama type congenital muscular dystrophy is almost nonexistent in the United States, but in Japan is second only to Duchenne muscular dystrophy in frequency. The incidence in Japan is reported as about 0.7-1.2 cases per 100,000 children. The diagnosis depends on a thorough physical examination and medical history. In addition, the physici",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Walker-Warburg Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Duchenne muscular dystrophy",
+      "preferred_label": "Duchenne muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010679",
+        "orpha": "Orphanet:98896",
+        "umls": "UMLS:C0013264",
+        "mesh": "MESH:D020388"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010679",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11723",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6291",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3925",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020388",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10013801",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200856",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75482",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1065",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:310200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98896",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:76670001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013264",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1479561744",
+          "display": null
+        }
+      ],
+      "context": "Fukuyama type congenital muscular dystrophy is almost nonexistent in the United States, but in Japan is second only to Duchenne muscular dystrophy in frequency. The incidence in Japan is reported as about 0.7-1.2 cases per 100,000 children. The diagnosis depends on a thorough physical examination and medical history. In addition, the physician will look for information to assist in the diagnosis from several tests such as blood tests to detec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Limb-girdle muscular dystrophy type 2C",
+        "Sarcoglycanopathies"
+      ],
+      "pubtator_normalized_name": "Muscular Dystrophy Duchenne",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "muscular dystrophy",
+      "preferred_label": "muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G71.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020121",
+        "orpha": "Orphanet:98473",
+        "umls": "UMLS:C0026850",
+        "mesh": "MESH:D009136"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020121",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9884",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7922",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G71.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:359.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009136",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10028356",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100233",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84910",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98473",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:73297009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026850",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1464662404",
+          "display": null
+        }
+      ],
+      "context": "from several tests such as blood tests to detect abnormally high levels of a particular enzyme (creatine kinase) released form the cells of damaged muscles, and blood fukutin gene mutations, electromyographic studies to determine the area of muscle that is damaged, and muscle biopsy to distinguish muscular dystrophy from other neuromuscular disorders.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Muscular Dystrophy Duchenne",
+        "Muscular Dystrophy Congenital Megaconial Type",
+        "Muscular dystrophy congenital with central nervous system involvement"
+      ],
+      "pubtator_normalized_name": "Muscular Dystrophies",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

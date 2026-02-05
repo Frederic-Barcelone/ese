@@ -1,0 +1,151 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:34:05.251959",
+  "document": "Dandy-Walker-Malformation.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Dandy-Walker-Malformation.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ZIC1",
+      "hgnc_symbol": "ZIC1",
+      "full_name": "Zic family zinc finger 1",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "12872",
+        "entrez": "7545",
+        "ensembl": "ENSG00000152977",
+        "uniprot": "Q15915",
+        "omim": "600470"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "12872",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "7545",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000152977",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "600470",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q15915",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "269215",
+          "disease_name": "Isolated Dandy-Walker malformation without hydrocephalus",
+          "association_type": "Role in the phenotype of"
+        },
+        {
+          "orphacode": "269212",
+          "disease_name": "Isolated Dandy-Walker malformation with hydrocephalus",
+          "association_type": "Role in the phenotype of"
+        },
+        {
+          "orphacode": "35099",
+          "disease_name": "Non-syndromic bicoronal craniosynostosis",
+          "association_type": "Disease-causing germline mutation(s) (gain of function) in"
+        }
+      ],
+      "context": "nd swelling of the head, and can lead to neurological impairment. DWM results from defects in early embryonic development of the cerebellum and surrounding structures. A few patients have chromosome abnormalities including deletion of chromosome 3q24.3 (the location of the first DWM genes, known as ZIC1 and ZIC4), 6p25 or 13q32.2-q33.2, or duplication of 9p. In the remainder, it is probably due to other more complex genetic and perhaps environmental factors (teratogens) as the recurrence risk in siblings less than 5%. A few examples of affected siblings with isolated Dandy-Walker malformation have",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "ZIC4",
+      "hgnc_symbol": "ZIC4",
+      "full_name": "Zic family zinc finger 4",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "20393",
+        "entrez": "84107",
+        "ensembl": "ENSG00000174963",
+        "uniprot": "Q8N9L1",
+        "omim": "608948"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "20393",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "84107",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000174963",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "608948",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q8N9L1",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "269215",
+          "disease_name": "Isolated Dandy-Walker malformation without hydrocephalus",
+          "association_type": "Role in the phenotype of"
+        },
+        {
+          "orphacode": "269212",
+          "disease_name": "Isolated Dandy-Walker malformation with hydrocephalus",
+          "association_type": "Role in the phenotype of"
+        }
+      ],
+      "context": "ng of the head, and can lead to neurological impairment. DWM results from defects in early embryonic development of the cerebellum and surrounding structures. A few patients have chromosome abnormalities including deletion of chromosome 3q24.3 (the location of the first DWM genes, known as ZIC1 and ZIC4), 6p25 or 13q32.2-q33.2, or duplication of 9p. In the remainder, it is probably due to other more complex genetic and perhaps environmental factors (teratogens) as the recurrence risk in siblings less than 5%. A few examples of affected siblings with isolated Dandy-Walker malformation have been rep",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

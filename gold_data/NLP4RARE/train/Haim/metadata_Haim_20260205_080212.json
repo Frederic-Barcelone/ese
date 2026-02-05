@@ -1,0 +1,35 @@
+{
+  "doc_id": "Haim",
+  "doc_filename": "Haim.pdf",
+  "top_entities": [
+    {
+      "name": "HAIM-Munk syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Palmoplantar keratoderma, Nagashima type",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2249,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Haim-Munk Syndrome: Clinical Overview and Genetic Characteristics",
+  "short_description": "Clinical description of Haim-Munk syndrome, a rare autosomal recessive genetic disorder characterized by palmoplantar hyperkeratosis, skin infections, nail abnormalities, and periodontosis.",
+  "long_description": "This document provides a comprehensive clinical overview of Haim-Munk syndrome, a rare genetic disorder first described in 1965 among Jewish families from Cochin, India. The syndrome is characterized by distinctive features including red, scaly thickened skin patches on palms and soles (palmoplantar hyperkeratosis), frequent pyogenic skin infections, nail overgrowth (onychogryposis), and severe periodontal disease leading to premature tooth loss. Additional manifestations may include flat feet, arachnodactyly, acroosteolysis, and other physical abnormalities. The document details the autosomal recessive inheritance pattern and epidemiological aspects of this condition, which affects both sexes equally and has been documented in over 50 individuals across multiple generations of Cochin Jewish families.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:02:12.540243"
+}

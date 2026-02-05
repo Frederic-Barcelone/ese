@@ -1,0 +1,309 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:24:38.596567",
+  "document": "Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "GAMT",
+      "hgnc_symbol": "GAMT",
+      "full_name": "guanidinoacetate N-methyltransferase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4136",
+        "entrez": "2593",
+        "ensembl": "ENSG00000130005",
+        "uniprot": "Q14353",
+        "omim": "601240"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4136",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2593",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000130005",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "601240",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q14353",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "382",
+          "disease_name": "Guanidinoacetate methyltransferase deficiency",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "essary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain development. CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabilities. In regards to GAMT deficiency, there have been estimations from 1 out of 2,640,000 to 1 out of 550,000 patients being diagnosed to a conflicting report of 1 out of 115,000 patients being diagnosed. As of 2015, there have only been 110 individuals with GAMT deficiency diagnosed worldwide. The prevalence of AGAT is not",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "GAA",
+      "hgnc_symbol": "GAA",
+      "full_name": "alpha glucosidase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4065",
+        "entrez": "2548",
+        "ensembl": "ENSG00000171298",
+        "uniprot": "P10253",
+        "omim": "606800"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4065",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2548",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000171298",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "606800",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P10253",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "308552",
+          "disease_name": "Glycogen storage disease due to acid maltase deficiency, infantile onset",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "420429",
+          "disease_name": "Glycogen storage disease due to acid maltase deficiency, late-onset",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "sed with cerebral palsy as infants and toddlers. Children are often misdiagnosed with autism or global developmental delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn). Follow up genomic testing for specific genes and brain MRI with spectroscopy may be ordered to confirm a CCDS diagnosis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "AGAT",
+      "hgnc_symbol": "GATM",
+      "full_name": "glycine amidinotransferase",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4175",
+        "entrez": "2628",
+        "ensembl": "ENSG00000171766",
+        "uniprot": "P50440",
+        "omim": "602360"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4175",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2628",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000171766",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "602360",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P50440",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "rds to GAMT deficiency, there have been estimations from 1 out of 2,640,000 to 1 out of 550,000 patients being diagnosed to a conflicting report of 1 out of 115,000 patients being diagnosed. As of 2015, there have only been 110 individuals with GAMT deficiency diagnosed worldwide. The prevalence of AGAT is not known because there have been no studies on record. CCDS patients are frequently misdiagnosed with cerebral palsy as infants and toddlers. Children are often misdiagnosed with autism or global developmental delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommend",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "Cr",
+      "hgnc_symbol": "EDARADD",
+      "full_name": "EDAR associated via death domain",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "14341",
+        "entrez": "128178",
+        "ensembl": "ENSG00000186197",
+        "uniprot": "Q8WWZ3",
+        "omim": "606603"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "14341",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "128178",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000186197",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "606603",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q8WWZ3",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "re frequently misdiagnosed with cerebral palsy as infants and toddlers. Children are often misdiagnosed with autism or global developmental delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn). Follow up genomic testing for specific genes and brain MRI with spectroscopy may be ordered to confirm a CCDS diagnosis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "Crn",
+      "hgnc_symbol": "CORIN",
+      "full_name": "corin, serine peptidase",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "19012",
+        "entrez": "10699",
+        "ensembl": "ENSG00000145244",
+        "uniprot": "Q9Y5Q5",
+        "omim": "605236"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "19012",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "10699",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000145244",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "605236",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9Y5Q5",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "y as infants and toddlers. Children are often misdiagnosed with autism or global developmental delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn). Follow up genomic testing for specific genes and brain MRI with spectroscopy may be ordered to confirm a CCDS diagnosis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

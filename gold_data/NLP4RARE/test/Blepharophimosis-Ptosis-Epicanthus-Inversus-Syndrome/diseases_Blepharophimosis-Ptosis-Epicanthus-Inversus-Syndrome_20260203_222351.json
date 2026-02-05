@@ -1,0 +1,857 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:23:51.115241",
+  "document": "Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 14,
+  "total_validated": 14,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "BPES",
+      "preferred_label": "BLEPHAROPHIMOSIS, PTOSIS, AND EPICANTHUS INVERSUS (disorder)",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0220663",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0220663",
+          "display": null
+        }
+      ],
+      "context": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both cha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "eye",
+      "preferred_label": "Kapur-Toriello syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2328",
+        "umls": null,
+        "mesh": "C537008"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2328",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537008",
+          "display": "Kapur Toriello syndrome"
+        }
+      ],
+      "context": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both characterized by the typical eyelid malformati",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kapur Toriello syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "blepharophimosis",
+      "preferred_label": "blepharophimosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H02.52",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001008",
+        "orpha": null,
+        "umls": "UMLS:C0005744",
+        "mesh": "MESH:D016569"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001008",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10348",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000581",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H02.52",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:374.46",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2670",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016569",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005744",
+          "display": null
+        }
+      ],
+      "context": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both characterized by the typical eyelid malformation. However, BPES type I i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Blepharophimosis Ptosis and Epicanthus Inversus",
+        "Marden-Walker syndrome",
+        "Blepharophimosis syndrome Ohdo type"
+      ],
+      "pubtator_normalized_name": "Blepharophimosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ptosis",
+      "preferred_label": "Blepharoptosis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0005745",
+        "mesh": "D001763"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0005745",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001763",
+          "display": "Blepharoptosis"
+        }
+      ],
+      "context": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both characterized by the typical eyelid malformation. However, BPES type I is also associated with lo",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fibrosis of Extraocular Muscles Congenital 3B",
+        "Vertebral fusion posterior lumbosacral blepharoptosis",
+        "Blepharophimosis syndrome Ohdo type"
+      ],
+      "pubtator_normalized_name": "Blepharoptosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "telecanthus",
+      "preferred_label": "telecanthus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008537",
+        "orpha": "Orphanet:98575",
+        "umls": "UMLS:C0423113",
+        "mesh": "MESH:C562941"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008537",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19505",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:140836",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562941",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:187350",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98575",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0423113",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:210416501",
+          "display": null
+        }
+      ],
+      "context": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both characterized by the typical eyelid malformation. However, BPES type I is also associated with loss of ovarian function or premature ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypertelorism with esophageal abnormality and hypospadias",
+        "Toe Syndactyly Telecanthus and Anogenital and Renal Malformations",
+        "Coloboma of Alar-nasal cartilages with telecanthus"
+      ],
+      "pubtator_normalized_name": "Telecanthus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eyelid malformation",
+      "preferred_label": "eyelid malformation",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020152",
+        "orpha": "Orphanet:98561",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020152",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98561",
+          "display": null
+        }
+      ],
+      "context": "rowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both characterized by the typical eyelid malformation. However, BPES type I is also associated with loss of ovarian function or premature ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "premature ovarian insufficiency",
+      "preferred_label": "Premature Menopause",
+      "abbreviation": null,
+      "confidence": 0.9755769371986389,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0025322",
+        "mesh": "D008594"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0025322",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008594",
+          "display": "Menopause Premature"
+        }
+      ],
+      "context": "fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type I and type II, which are both characterized by the typical eyelid malformation. However, BPES type I is also associated with loss of ovarian function or premature ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Menopause Premature",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infertility",
+      "preferred_label": "infertility disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005047",
+        "orpha": null,
+        "umls": "UMLS:C0021359",
+        "mesh": "MESH:D007246"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005047",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5223",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000545",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:43876",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007246",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3836",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021359",
+          "display": null
+        }
+      ],
+      "context": "d malformation. However, BPES type I is also associated with loss of ovarian function or premature ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "amblyopia",
+      "preferred_label": "amblyopia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001020",
+        "orpha": null,
+        "umls": "UMLS:C0002418",
+        "mesh": "MESH:D000550"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001020",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:1114-9655",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10376",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000646",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:368.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8009",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000550",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C118764",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:387742006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002418",
+          "display": null
+        }
+      ],
+      "context": "re ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on ethnicity, sex, race or age.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Amblyopia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "crossed eyes",
+      "preferred_label": "Esotropia",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0014877",
+        "mesh": "D004948"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0014877",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004948",
+          "display": "Esotropia"
+        }
+      ],
+      "context": "nsufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on ethnicity, sex, race or age.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Esotropia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "strabismus",
+      "preferred_label": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003432",
+        "orpha": null,
+        "umls": "UMLS:C0038379",
+        "mesh": "MESH:D013285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003432",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:540",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21337",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013285",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35040",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22066006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038379",
+          "display": null
+        }
+      ],
+      "context": "POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on ethnicity, sex, race or age.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Esotropia",
+        "Exotropia",
+        "fourth cranial nerve palsy familial congenital"
+      ],
+      "pubtator_normalized_name": "Strabismus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lip",
+      "preferred_label": "LIP",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:J84.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009537",
+        "orpha": "Orphanet:79128",
+        "umls": "UMLS:C0264511",
+        "mesh": "MESH:C562489"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009537",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050159",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16700",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J84.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:516.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82682",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562489",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062997",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200424",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27558",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:247610",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79128",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:44274007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0264511",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1140418798",
+          "display": null
+        }
+      ],
+      "context": "over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on ethnicity, sex, race or age.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lipoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lazy” eye",
+      "preferred_label": "Amblyopia",
+      "abbreviation": null,
+      "confidence": 0.933864152431488,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0002418",
+        "mesh": "D000550"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0002418",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000550",
+          "display": "Amblyopia"
+        }
+      ],
+      "context": "or premature ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on ethnicity, sex, race or age.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Amblyopia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "low-set ears",
+      "preferred_label": "Low set ears",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0239234",
+        "mesh": "C537239"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0239234",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537239",
+          "display": "Mengel Konigsmark syndrome"
+        }
+      ],
+      "context": "al periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (strabismus), low-set ears, a short distance between the upper lip and nose, and a broad nasal bridge. The prevalence of BPES is unknown, but there are no differences in prevalence based on ethnicity, sex, race or age.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mengel Konigsmark syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

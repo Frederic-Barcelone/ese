@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:38:59.704904",
+  "document": "Mixed-Connective-Tissue-Disease-(MCTD).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mixed-Connective-Tissue-Disease-(MCTD).pdf",
+  "total_candidates": 10,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "anti-RNP",
+      "long_form": "antibodies to the U1 small nuclear ribonucleoprotein",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Mixed connective tissue disease may be diagnosed based upon a thorough clinical evaluation, a detailed patient history, identification of characteristic findings, and specialized tests such as blood tests that reveal abnormally high levels of antibodies to the U1 small nuclear ribonucleoprotein (anti-RNP).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "U1",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": ", and specialized tests such as blood tests that reveal abnormally high levels of antibodies to the U1 small nuclear ribonucleoprotein (anti-RNP).",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "mixed connective tissue disease",
+      "matched_text": "Mixed connective tissue disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:809"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Anti-RNP",
+      "matched_text": "anti-RNP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

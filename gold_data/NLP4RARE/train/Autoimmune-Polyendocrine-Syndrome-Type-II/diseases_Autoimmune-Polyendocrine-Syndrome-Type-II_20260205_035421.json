@@ -1,0 +1,766 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:54:21.521401",
+  "document": "Autoimmune-Polyendocrine-Syndrome-Type-II.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Autoimmune-Polyendocrine-Syndrome-Type-II.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Autoimmune polyendocrine syndrome type II",
+      "preferred_label": "Autoimmune Polyendocrine Syndrome Type II",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010012",
+        "orpha": "Orphanet:3143",
+        "umls": "UMLS:C0085860",
+        "mesh": "D016884"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010012",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050168",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7611",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:258.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39126",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200347",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C129728",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:824",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:269200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3143",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:83728000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085860",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1065249344",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016884",
+          "display": "Polyendocrinopathies Autoimmune"
+        }
+      ],
+      "context": "Autoimmune polyendocrine syndrome type II, also known as Schmidt syndrome, is a rare autoimmune disorder in which there is a steep drop in production of several essential hormones by the glands that secrete these hormones. When first described, this disorder was thought to involve only adrenal insufficiency (Addison's disease) and thyroid",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Polyendocrinopathies Autoimmune",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "adrenal insufficiency",
+      "preferred_label": "adrenal insufficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000004",
+        "orpha": null,
+        "umls": "UMLS:C0405580",
+        "mesh": "MESH:D000309"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000004",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10493",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009491",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:255.41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:589758",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000309",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26691",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386584007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0405580",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733056203",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune polyendocrine syndrome type II, also known as Schmidt syndrome, is a rare autoimmune disorder in which there is a steep drop in production of several essential hormones by the glands that secrete these hormones. When first described, this disorder was thought to involve only adrenal insufficiency (Addison's disease) and thyroid insufficiency (Hashimoto's thyroiditis). However, over time, as more patients were studied, the scope of the disorder was expanded to include disorders of other underperforming endocrine glands. These include the gonads, which secrete sex hormones; the pancreas which",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Achalasia Addisonianism Alacrimia syndrome",
+        "Addison Disease",
+        "Adrenal Insufficiency Congenital"
+      ],
+      "pubtator_normalized_name": "Adrenal Insufficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "thyroid insufficiency",
+      "preferred_label": "thyroid insufficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005420",
+        "orpha": null,
+        "umls": "UMLS:C0020676",
+        "mesh": "MESH:D007037"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005420",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1459",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004705",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:244.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6991",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007037",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100120",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26800",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40930008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020676",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1722092627",
+          "display": null
+        }
+      ],
+      "context": "type II, also known as Schmidt syndrome, is a rare autoimmune disorder in which there is a steep drop in production of several essential hormones by the glands that secrete these hormones. When first described, this disorder was thought to involve only adrenal insufficiency (Addison's disease) and thyroid insufficiency (Hashimoto's thyroiditis). However, over time, as more patients were studied, the scope of the disorder was expanded to include disorders of other underperforming endocrine glands. These include the gonads, which secrete sex hormones; the pancreas which secretes insulin and is intimately tied up wi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Hashimoto's thyroiditis",
+      "preferred_label": "Hashimoto thyroiditis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E06.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007699",
+        "orpha": "Orphanet:855",
+        "umls": "UMLS:C0677607",
+        "mesh": "MESH:D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007699",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:7188",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003779",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E06.3",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:245.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:151769",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D050031",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200335",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27191",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:140300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:855",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0677607",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Hashimoto's_thyroiditis",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:972507934",
+          "display": null
+        }
+      ],
+      "context": "Schmidt syndrome, is a rare autoimmune disorder in which there is a steep drop in production of several essential hormones by the glands that secrete these hormones. When first described, this disorder was thought to involve only adrenal insufficiency (Addison's disease) and thyroid insufficiency (Hashimoto's thyroiditis). However, over time, as more patients were studied, the scope of the disorder was expanded to include disorders of other underperforming endocrine glands. These include the gonads, which secrete sex hormones; the pancreas which secretes insulin and is intimately tied up with diabetes mellitus; and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autoimmune disorder",
+      "preferred_label": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007179",
+        "orpha": null,
+        "umls": "UMLS:C0004364",
+        "mesh": "MESH:D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007179",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:417",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005809",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:720",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2135",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001327",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2889",
+          "display": null
+        },
+        {
+          "system": "OBI",
+          "code": "OBI:1110054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85828009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004364",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune polyendocrine syndrome type II, also known as Schmidt syndrome, is a rare autoimmune disorder in which there is a steep drop in production of several essential hormones by the glands that secrete these hormones. When first described, this disorder was thought to involve only adrenal insufficiency (Addison's disease) and thyroid insufficiency (Hashimoto's thyroiditis). However, over time, as",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Demyelinating Autoimmune Diseases CNS",
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases of the Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Addison's disease",
+      "preferred_label": "Addison's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100480",
+        "orpha": "Orphanet:85138",
+        "umls": "UMLS:C0271737",
+        "mesh": "D000224"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100480",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5740",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:543526",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C113814",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:85138",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0271737",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1920929898",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000224",
+          "display": "Addison Disease"
+        }
+      ],
+      "context": "polyendocrine syndrome type II, also known as Schmidt syndrome, is a rare autoimmune disorder in which there is a steep drop in production of several essential hormones by the glands that secrete these hormones. When first described, this disorder was thought to involve only adrenal insufficiency (Addison's disease) and thyroid insufficiency (Hashimoto's thyroiditis). However, over time, as more patients were studied, the scope of the disorder was expanded to include disorders of other underperforming endocrine glands. These include the gonads, which secrete sex hormones; the pancreas which secretes insulin a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polyendocrinopathies Autoimmune"
+      ],
+      "pubtator_normalized_name": "Addison Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diabetes mellitus",
+      "preferred_label": "diabetes mellitus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E08-E13",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005015",
+        "orpha": null,
+        "umls": "UMLS:C0011849",
+        "mesh": "MESH:D003920"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005015",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9351",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000400",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000819",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E08-E13",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E10-E14",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:250",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8350",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003920",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100158",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2985",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:73211009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011849",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:465177735",
+          "display": null
+        }
+      ],
+      "context": "ashimoto's thyroiditis). However, over time, as more patients were studied, the scope of the disorder was expanded to include disorders of other underperforming endocrine glands. These include the gonads, which secrete sex hormones; the pancreas which secretes insulin and is intimately tied up with diabetes mellitus; and sometimes the parathyroid glands. Failure of the endocrine glands to function is usually accompanied by signs of malnutrition because the ability of the intestinal tract to absorb nutrients is reduced dramatically. Since the combination of affected glands differs from patient to patient, the s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diabetes Mellitus Type 2",
+        "Diabetes Mellitus Type 1",
+        "Diabetes Gestational"
+      ],
+      "pubtator_normalized_name": "Diabetes Mellitus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malnutrition",
+      "preferred_label": "malnutrition",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E40-E46",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006873",
+        "orpha": null,
+        "umls": "UMLS:C4761312",
+        "mesh": "MESH:D003677"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006873",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5113",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001067",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E40-E46",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:269.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1677627",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003677",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10046058",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3669",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:70241007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4761312",
+          "display": null
+        }
+      ],
+      "context": "of other underperforming endocrine glands. These include the gonads, which secrete sex hormones; the pancreas which secretes insulin and is intimately tied up with diabetes mellitus; and sometimes the parathyroid glands. Failure of the endocrine glands to function is usually accompanied by signs of malnutrition because the ability of the intestinal tract to absorb nutrients is reduced dramatically. Since the combination of affected glands differs from patient to patient, the signs of this disorder are diverse. The exact cause of AIPS-II is not known, but it is thought to result from one or more abnormal i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Protein-Energy Malnutrition",
+        "Child Nutrition Disorders",
+        "Severe Acute Malnutrition"
+      ],
+      "pubtator_normalized_name": "Malnutrition",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

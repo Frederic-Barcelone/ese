@@ -1,0 +1,35 @@
+{
+  "doc_id": "Macroglossia",
+  "doc_filename": "Macroglossia.pdf",
+  "top_entities": [
+    {
+      "name": "Beckwith-Wiedemann syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Down syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2412,
+  "file_size_human": "2.4 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Macroglossia: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing macroglossia, the abnormal enlargement of the tongue, including its causes, symptoms, and diagnostic considerations.",
+  "long_description": "This clinical reference document provides a comprehensive overview of macroglossia, a medical condition characterized by abnormal tongue enlargement. The document covers both congenital and acquired forms of the condition, detailing associated symptoms such as breathing difficulties, feeding problems, and speech impairment. It discusses the relationship between macroglossia and underlying genetic syndromes like Down syndrome and Beckwith-Wiedemann syndrome, as well as acquired causes including trauma and malignancy. The document also addresses the inheritance pattern of isolated macroglossia as an autosomal dominant trait, prevalence data, and diagnostic approaches including family history assessment and physical examination.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:34:11.584809"
+}

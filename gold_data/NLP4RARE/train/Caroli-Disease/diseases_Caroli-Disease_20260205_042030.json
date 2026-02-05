@@ -1,0 +1,628 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:20:30.510657",
+  "document": "Caroli-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Caroli-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "congenital hepatic fibrosis",
+      "preferred_label": "congenital hepatic fibrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018840",
+        "orpha": "Orphanet:485426",
+        "umls": "UMLS:C0009714",
+        "mesh": "MESH:C562378"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018840",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21995",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:777.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:40449",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562378",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200936",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97071",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1225",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:485426",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:79607001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009714",
+          "display": null
+        }
+      ],
+      "context": "ms of Caroli disease. In most cases, the isolated or simple form is characterized by widening of the bile ducts (dilatation or ectasia). A second, more complex form is often called Caroli syndrome. The complex form or syndrome is associated with the presence of bands of fibrous tissue in the liver (congenital hepatic fibrosis) and high blood pressure in the portal artery (portal hypertension. This form of Caroli disease is also often associated, in ways that are not well understood, with polycystic kidney disease, and, in severe cases, liver failure. The simple form, Caroli disease, is apparently much less common than i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COACH syndrome",
+        "Congenital disorder of glycosylation type 1B"
+      ],
+      "pubtator_normalized_name": "Hepatic Fibrosis Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polycystic kidney disease",
+      "preferred_label": "polycystic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020642",
+        "orpha": null,
+        "umls": "UMLS:C0022680",
+        "mesh": "MESH:D007690"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020642",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080322",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0008620",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7419",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9639",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007690",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200152",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75464",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:173900",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:82525005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022680",
+          "display": null
+        }
+      ],
+      "context": "ome. The complex form or syndrome is associated with the presence of bands of fibrous tissue in the liver (congenital hepatic fibrosis) and high blood pressure in the portal artery (portal hypertension. This form of Caroli disease is also often associated, in ways that are not well understood, with polycystic kidney disease, and, in severe cases, liver failure. The simple form, Caroli disease, is apparently much less common than is the more complex form. Both forms are more common in females than among males. Most often the disorder presents in adults, although cases of neonatal and childhood presentation of symptoms",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polycystic Kidney Autosomal Dominant",
+        "Polycystic Kidney Autosomal Recessive",
+        "Medullary cystic kidney disease 1"
+      ],
+      "pubtator_normalized_name": "Polycystic Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "high blood pressure",
+      "preferred_label": "high blood pressure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": "ICD10CM:I15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005044",
+        "orpha": null,
+        "umls": "UMLS:C0020538",
+        "mesh": "MESH:D006973"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10763",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000537",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000822",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I15",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:997.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38341003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020538",
+          "display": null
+        }
+      ],
+      "context": "es, the isolated or simple form is characterized by widening of the bile ducts (dilatation or ectasia). A second, more complex form is often called Caroli syndrome. The complex form or syndrome is associated with the presence of bands of fibrous tissue in the liver (congenital hepatic fibrosis) and high blood pressure in the portal artery (portal hypertension. This form of Caroli disease is also often associated, in ways that are not well understood, with polycystic kidney disease, and, in severe cases, liver failure. The simple form, Caroli disease, is apparently much less common than is the more complex form.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "portal hypertension",
+      "preferred_label": "portal hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K76.6",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005080",
+        "orpha": null,
+        "umls": "UMLS:C0020541",
+        "mesh": "MESH:D006975"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005080",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10762",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000666",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K76.6",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:572.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9375",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006975",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3119",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:34742003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020541",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1506184775",
+          "display": null
+        }
+      ],
+      "context": "erized by widening of the bile ducts (dilatation or ectasia). A second, more complex form is often called Caroli syndrome. The complex form or syndrome is associated with the presence of bands of fibrous tissue in the liver (congenital hepatic fibrosis) and high blood pressure in the portal artery (portal hypertension. This form of Caroli disease is also often associated, in ways that are not well understood, with polycystic kidney disease, and, in severe cases, liver failure. The simple form, Caroli disease, is apparently much less common than is the more complex form. Both forms are more common in females than",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic Noncirrhotic Portal Hypertension",
+        "Sinistral Portal Hypertension",
+        "Colonic Varices without Portal Hypertension"
+      ],
+      "pubtator_normalized_name": "Hypertension Portal",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Caroli syndrome",
+      "preferred_label": "Caroli syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018808",
+        "orpha": "Orphanet:480520",
+        "umls": "UMLS:C5700203",
+        "mesh": "D016767"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018808",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0081394",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21976",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1814547",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200934",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:480520",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5700203",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016767",
+          "display": "Caroli Disease"
+        }
+      ],
+      "context": "ducts that carry bile from the liver (intrahepatic bile ducts). According to the medical literature, there are two forms of Caroli disease. In most cases, the isolated or simple form is characterized by widening of the bile ducts (dilatation or ectasia). A second, more complex form is often called Caroli syndrome. The complex form or syndrome is associated with the presence of bands of fibrous tissue in the liver (congenital hepatic fibrosis) and high blood pressure in the portal artery (portal hypertension. This form of Caroli disease is also often associated, in ways that are not well understood, with pol",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Caroli Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Caroli disease",
+      "preferred_label": "Caroli disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010913",
+        "orpha": "Orphanet:53035",
+        "umls": "UMLS:C0162510",
+        "mesh": "MESH:D016767"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010913",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050876",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001286",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6002",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57924",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016767",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10013003",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200934",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84619",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:896",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:600643",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:53035",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:717232005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162510",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1757434239",
+          "display": null
+        }
+      ],
+      "context": "Caroli disease is a rare inherited disorder characterized by abnormal widening (dilatation) of the ducts that carry bile from the liver (intrahepatic bile ducts). According to the medical literature, there are two forms of Caroli disease. In most cases, the isolated or simple form is characterized by widening of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Caroli disease isolated"
+      ],
+      "pubtator_normalized_name": "Caroli Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "liver failure",
+      "preferred_label": "liver failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100192",
+        "orpha": null,
+        "umls": "UMLS:C0085605",
+        "mesh": "MESH:D017093"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100192",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:88444",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017093",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26922",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085605",
+          "display": null
+        }
+      ],
+      "context": "ith the presence of bands of fibrous tissue in the liver (congenital hepatic fibrosis) and high blood pressure in the portal artery (portal hypertension. This form of Caroli disease is also often associated, in ways that are not well understood, with polycystic kidney disease, and, in severe cases, liver failure. The simple form, Caroli disease, is apparently much less common than is the more complex form. Both forms are more common in females than among males. Most often the disorder presents in adults, although cases of neonatal and childhood presentation of symptoms are recorded. When the liver and sple",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "End Stage Liver Disease",
+        "Liver Failure Acute",
+        "Acute-On-Chronic Liver Failure"
+      ],
+      "pubtator_normalized_name": "Liver Failure",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

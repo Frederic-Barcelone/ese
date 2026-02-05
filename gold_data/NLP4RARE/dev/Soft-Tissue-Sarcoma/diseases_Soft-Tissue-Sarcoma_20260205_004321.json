@@ -1,0 +1,241 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:43:21.480498",
+  "document": "Soft-Tissue-Sarcoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Soft-Tissue-Sarcoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Soft tissue sarcomas",
+      "preferred_label": "soft tissue sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018078",
+        "orpha": "Orphanet:3394",
+        "umls": "UMLS:C4551687",
+        "mesh": "D012509"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018078",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001968",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4898",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1642116",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9306",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1953",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3394",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:424952003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551687",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012509",
+          "display": "Sarcoma"
+        }
+      ],
+      "context": "Soft tissue sarcomas affect men and women and individuals of any age and every racial and ethnic group. This is a large group of tumors, but overall, they are still classified as rare disorders. Estimates to their frequency varies. The American Cancer Society estimates that soft tissue sarcomas account for about 2% of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sarcoma Clear Cell"
+      ],
+      "pubtator_normalized_name": "Sarcoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare diseases",
+      "preferred_label": "rare diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "d every racial and ethnic group. This is a large group of tumors, but overall, they are still classified as rare disorders. Estimates to their frequency varies. The American Cancer Society estimates that soft tissue sarcomas account for about 2% of all cancers in the United States. However, because rare diseases often go misdiagnosed or undiagnosed, determining their true frequency in the general population is difficult.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "Soft tissue sarcomas affect men and women and individuals of any age and every racial and ethnic group. This is a large group of tumors, but overall, they are still classified as rare disorders. Estimates to their frequency varies. The American Cancer Society estimates that soft tissue sarcomas account for about 2% of all cancers in the United States. However, because rare diseases often go misdiagnosed or undiagnosed, determining their true frequency in the general population is difficult.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

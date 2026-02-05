@@ -1,0 +1,91 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:43:57.079732",
+  "document": "Neurotrophic-Keratitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Neurotrophic-Keratitis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Neurotrophic keratitis",
+      "preferred_label": "neurotrophic keratitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:H16.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015290",
+        "orpha": "Orphanet:137596",
+        "umls": "UMLS:C0339296",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015290",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19878",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H16.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:87384",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10069732",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:137596",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128080005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0339296",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1257534118",
+          "display": null
+        }
+      ],
+      "context": "Neurotrophic keratitis is a rare disorder. One estimate places the prevalence at below 5 people per every 10,000 in the general population. Prevalence is the number of people who have a disorder in a specific population at a given time; such as how many people have neurotrophic keratitis in the United States in a given y",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

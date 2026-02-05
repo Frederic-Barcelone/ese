@@ -1,0 +1,108 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T16:27:59.191180",
+  "document": "Potter-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Potter-Syndrome.pdf",
+  "total_candidates": 15,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "Potter syndrome",
+      "matched_text": "Potter syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q60.6",
+      "orpha": null
+    },
+    {
+      "name": "rare disorder",
+      "matched_text": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "condition",
+      "matched_text": "condition",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "bilateral renal agenesis",
+      "matched_text": "bilateral renal agenesis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q60.1",
+      "orpha": "Orphanet:1848"
+    },
+    {
+      "name": "obstructive uropathy",
+      "matched_text": "obstructive uropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Oligohydramnios sequence",
+      "matched_text": "Potter syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Disease",
+      "matched_text": "disorder",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital absence of kidneys syndrome",
+      "matched_text": "bilateral renal agenesis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Urinary tract obstruction",
+      "matched_text": "obstructive uropathy",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

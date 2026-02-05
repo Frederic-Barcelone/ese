@@ -1,0 +1,35 @@
+{
+  "doc_id": "Eosinophilic-Gastroenteritis",
+  "doc_filename": "Eosinophilic-Gastroenteritis.pdf",
+  "top_entities": [
+    {
+      "name": "allergic disease",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "eosinophilic gastroenteritis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2570,
+  "file_size_human": "2.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Eosinophilic Gastroenteritis: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing eosinophilic gastroenteritis, a rare inflammatory gastrointestinal condition characterized by eosinophilic infiltration of the GI tract wall.",
+  "long_description": "This clinical reference document provides a comprehensive overview of eosinophilic gastroenteritis, a rare inflammatory disorder affecting the gastrointestinal tract from esophagus to rectum. The document details the variable clinical presentation depending on the anatomical location and layer of eosinophilic infiltration, including symptoms ranging from dysphagia and heartburn to abdominal pain, malabsorption, and ascites. It discusses the chronic, relapsing nature of the condition, its unknown etiology with suspected hypersensitivity mechanisms, and epidemiological characteristics including its prevalence of 10/100,000 with peak incidence in children and adults aged 20-50 years. The document emphasizes the association with allergic conditions and the importance of histopathological diagnosis through endoscopic or surgical biopsy.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:21:46.648493"
+}

@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:56:00.117227",
+  "document": "Craniofrontonasal-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Craniofrontonasal-Dysplasia.pdf",
+  "total_candidates": 9,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CFND",
+      "long_form": "Craniofrontonasal dysplasia",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "CFND is a very rare genetic disorder that affects females more often than males. Females have a more sev",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Mucopolysaccharidosis type 2, severe form",
+      "matched_text": "severe form",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:217085"
+    },
+    {
+      "name": "Craniofrontonasal dysplasia",
+      "matched_text": "CFND",
+      "abbreviation": "CFND",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q87.1",
+      "orpha": "ORPHA:1520"
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

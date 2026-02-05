@@ -1,0 +1,96 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:26:10.360196",
+  "document": "Spinocerebellar-Ataxia-with-Axonal-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Spinocerebellar-Ataxia-with-Axonal-Neuropathy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "SCAN1",
+      "preferred_label": "SCAN1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011801",
+        "orpha": "Orphanet:94124",
+        "umls": "UMLS:C4759870",
+        "mesh": "MESH:C537313"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011801",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0090115",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10000",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1683470",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537313",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1730",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:607250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:94124",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:765091006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4759870",
+          "display": null
+        }
+      ],
+      "context": "SCAN1 has been identified in a single Saudi Arabian family. It has not been identified in other ataxic individuals. The diagnosis of SCAN1 is made on history and clinical signs as listed above. DNA testing for mutations in TDP1 is only available on a research basis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

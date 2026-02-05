@@ -1,0 +1,35 @@
+{
+  "doc_id": "Meige-Syndrome",
+  "doc_filename": "Meige-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "oromandibular dystonia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "movement disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1957,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Meige Syndrome: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing Meige syndrome, a rare neurological movement disorder characterized by involuntary muscle contractions affecting the jaw, tongue, and eye muscles.",
+  "long_description": "This clinical document provides a comprehensive overview of Meige syndrome, a rare neurological movement disorder first described by French neurologist Henry Meige in 1910. The document details the characteristic symptoms including oromandibular dystonia (involuntary contractions of jaw and tongue muscles) and blepharospasm (involuntary muscle spasms around the eyes). It covers the epidemiological aspects, noting that the condition predominantly affects women and typically manifests in middle age between 40-70 years, though younger cases have been reported. The document emphasizes that symptom severity varies significantly between cases and highlights the diagnostic challenges, as no specific tests exist for Meige syndrome, requiring diagnosis through clinical evaluation, patient history, and symptom identification.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T00:15:52.245256"
+}

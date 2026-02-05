@@ -1,0 +1,256 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:13:04.251375",
+  "document": "Apert-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Apert-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Apert syndrome",
+      "preferred_label": "Apert syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007041",
+        "orpha": "Orphanet:87",
+        "umls": "UMLS:C0001193",
+        "mesh": "MESH:D000168"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007041",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5833",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7858",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000168",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10002943",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200844",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C99099",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:793",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:101200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:87",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:205258009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001193",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1962779847",
+          "display": null
+        }
+      ],
+      "context": "Apert syndrome is estimated to occur in about one in 65,000 births. Males and females seem to have Apert syndrome in relatively equal numbers. Over 300 cases have been reported since the disorder was originally described in 1894 and 1906. Asian individuals have been reported to have the highest incidence of Apert",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Maroteaux Fonfria syndrome"
+      ],
+      "pubtator_normalized_name": "Acrocephalosyndactylia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Apert syndrome is estimated to occur in about one in 65,000 births. Males and females seem to have Apert syndrome in relatively equal numbers. Over 300 cases have been reported since the disorder was originally described in 1894 and 1906. Asian individuals have been reported to have the highest incidence of Apert syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "Apert syndrome is estimated to occur in about one in 65,000 births. Males and females seem to have Apert syndrome in relatively equal numbers. Over 300 cases have been reported since the disorder was originally described in 1894 and 1906. Asian individuals have been reported to have the highest incidence of Apert syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

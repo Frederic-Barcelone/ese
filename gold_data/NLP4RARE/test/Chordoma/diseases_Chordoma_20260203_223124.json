@@ -1,0 +1,1098 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:31:24.956573",
+  "document": "Chordoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Chordoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 16,
+  "total_validated": 16,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "Chordomas can affect individuals of any age, including young children, but most often are diagnosed in individuals between 40-75 years of age (the average age at diagnosis is 55 years). Collectively, chordomas affect males more often than females by a ratio of approximately 2:1. However, skull base tumors have a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "he average age at diagnosis is 55 years). Collectively, chordomas affect males more often than females by a ratio of approximately 2:1. However, skull base tumors have an equal (1:1) gender distribution. Children are more likely to have skull base tumors. Chordomas account for approximately 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in indiv",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "bone tumors",
+      "preferred_label": "bone neoplasm",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C40-C41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019060",
+        "orpha": "Orphanet:68411",
+        "umls": "UMLS:C2732838",
+        "mesh": "D018213"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019060",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003820",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18892",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C40-C41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:488993",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9343",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:BONE",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68411",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2732838",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D018213",
+          "display": "Neoplasms Bone Tissue"
+        }
+      ],
+      "context": "at diagnosis is 55 years). Collectively, chordomas affect males more often than females by a ratio of approximately 2:1. However, skull base tumors have an equal (1:1) gender distribution. Children are more likely to have skull base tumors. Chordomas account for approximately 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European anc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bone Neoplasms",
+        "Bone Marrow Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms Bone Tissue",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chordoma",
+      "preferred_label": "chordoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008978",
+        "orpha": "Orphanet:178",
+        "umls": "UMLS:C0008487",
+        "mesh": "MESH:D002817"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008978",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3302",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1303",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0010762",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9370/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:40277",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002817",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10008747",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200098",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2947",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:931",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:215400",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:CHDM",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:178",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008487",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:898231522",
+          "display": null
+        }
+      ],
+      "context": "ales by a ratio of approximately 2:1. However, skull base tumors have an equal (1:1) gender distribution. Children are more likely to have skull base tumors. Chordomas account for approximately 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European ancestry. Chondrosarcoma is a general term for a type of bone cancer that arises fro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chordoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "ely 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European ancestry. Chondrosarcoma is a general term for a type of bone cancer that arises from cartilage cells. Cartilage is the specialized tissue that serves as a buffer or cushion at joints. Most of the skeleton of an embryo consists of cartilage, which is slowly converted into",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Chondrosarcoma",
+      "preferred_label": "chondrosarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008977",
+        "orpha": "Orphanet:55880",
+        "umls": "UMLS:C0008479",
+        "mesh": "MESH:D002813"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008977",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3371",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000333",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6055",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006765",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:170.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9220/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3054",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002813",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10008734",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200050",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2946",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:215300",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:CHS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:55880",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:443520009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008479",
+          "display": null
+        }
+      ],
+      "context": "ound 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European ancestry. Chondrosarcoma is a general term for a type of bone cancer that arises from cartilage cells. Cartilage is the specialized tissue that serves as a buffer or cushion at joints. Most of the skeleton of an embryo consists of cartilage, which is slowly converted into bone. Chondrosarcomas typically affect the arms, le",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chondrosarcoma Extraskeletal Myxoid",
+        "Chondrosarcoma Mesenchymal",
+        "Chondrosarcoma Clear Cell"
+      ],
+      "pubtator_normalized_name": "Chondrosarcoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bone cancer",
+      "preferred_label": "Malignant Bone Neoplasm",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0279530",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0279530",
+          "display": null
+        }
+      ],
+      "context": ". The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European ancestry. Chondrosarcoma is a general term for a type of bone cancer that arises from cartilage cells. Cartilage is the specialized tissue that serves as a buffer or cushion at joints. Most of the skeleton of an embryo consists of cartilage, which is slowly converted into bone. Chondrosarcomas typically affect the arms, legs, and pelvis, but can affect any area that",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "arms",
+      "preferred_label": "arms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009994",
+        "orpha": "Orphanet:99756",
+        "umls": "UMLS:C0206655",
+        "mesh": "MESH:D018232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4051",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000248",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4701",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006779",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8920/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065867",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3749",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268220",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ARMS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99756",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404053004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206655",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1742058067",
+          "display": null
+        }
+      ],
+      "context": "osarcoma is a general term for a type of bone cancer that arises from cartilage cells. Cartilage is the specialized tissue that serves as a buffer or cushion at joints. Most of the skeleton of an embryo consists of cartilage, which is slowly converted into bone. Chondrosarcomas typically affect the arms, legs, and pelvis, but can affect any area that contains cartilage including the skull base and spinal column. Most cases are diagnosed in adults between the ages of 20 and 60. Chondrosarcomas are malignant and may spread to other areas of the body. (For more information on this disorder, choose “c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphocytic Choriomeningitis"
+      ],
+      "pubtator_normalized_name": "Arms Malformation of",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "lly affect the arms, legs, and pelvis, but can affect any area that contains cartilage including the skull base and spinal column. Most cases are diagnosed in adults between the ages of 20 and 60. Chondrosarcomas are malignant and may spread to other areas of the body. (For more information on this disorder, choose “chondrosarcoma” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease",
+      "preferred_label": "rare disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "a that contains cartilage including the skull base and spinal column. Most cases are diagnosed in adults between the ages of 20 and 60. Chondrosarcomas are malignant and may spread to other areas of the body. (For more information on this disorder, choose “chondrosarcoma” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Chordomas",
+      "preferred_label": "Chordoma",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008487",
+        "mesh": "D002817"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008487",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002817",
+          "display": "Chordoma"
+        }
+      ],
+      "context": "Chordomas can affect individuals of any age, including young children, but most often are diagnosed in individuals between 40-75 years of age (the average age at diagnosis is 55 years). Collectively, chordomas affect males more often than females by a ratio of approximately 2:1. However, skull base tumors ha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chordoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skull base tumors",
+      "preferred_label": "Skull Base Neoplasms",
+      "abbreviation": null,
+      "confidence": 0.9942757248878479,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0376527",
+        "mesh": "D019292"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0376527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019292",
+          "display": "Skull Base Neoplasms"
+        }
+      ],
+      "context": "Chordomas can affect individuals of any age, including young children, but most often are diagnosed in individuals between 40-75 years of age (the average age at diagnosis is 55 years). Collectively, chordomas affect males more often than females by a ratio of approximately 2:1. However, skull base tumors have an equal (1:1) gender distribution. Children are more likely to have skull base tumors. Chordomas account for approximately 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Skull Base Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "primary tumors",
+      "preferred_label": "Primary Neoplasm",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0677930",
+        "mesh": "D016609"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0677930",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016609",
+          "display": "Neoplasms Second Primary"
+        }
+      ],
+      "context": "llectively, chordomas affect males more often than females by a ratio of approximately 2:1. However, skull base tumors have an equal (1:1) gender distribution. Children are more likely to have skull base tumors. Chordomas account for approximately 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European ancestry. Chondrosarcoma is a genera",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Brain Neoplasms",
+        "Neoplasms Unknown Primary",
+        "Neoplasms Multiple Primary"
+      ],
+      "pubtator_normalized_name": "Neoplasms Second Primary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tumors",
+      "preferred_label": "Neoplasms",
+      "abbreviation": null,
+      "confidence": 0.7982830286026001,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0027651",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0027651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "t for approximately 1-4% of all malignant bone tumors and around 20% of primary tumors of the spinal column. The incidence of chordoma is estimated to be approximately 1 per 1,000,000 people. About 300 new cases of chordoma are diagnosed in the United States each year. Some reports state that these tumors are more common in individuals of European ancestry. Chondrosarcoma is a general term for a type of bone cancer that arises from cartilage cells. Cartilage is the specialized tissue that serves as a buffer or cushion at joints. Most of the skeleton of an embryo consists of cartilage, which is slowl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Neoplasms Adipose Tissue",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Chondrosarcomas",
+      "preferred_label": "Chondrosarcoma",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008479",
+        "mesh": "D002813"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008479",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002813",
+          "display": "Chondrosarcoma"
+        }
+      ],
+      "context": "ividuals of European ancestry. Chondrosarcoma is a general term for a type of bone cancer that arises from cartilage cells. Cartilage is the specialized tissue that serves as a buffer or cushion at joints. Most of the skeleton of an embryo consists of cartilage, which is slowly converted into bone. Chondrosarcomas typically affect the arms, legs, and pelvis, but can affect any area that contains cartilage including the skull base and spinal column. Most cases are diagnosed in adults between the ages of 20 and 60. Chondrosarcomas are malignant and may spread to other areas of the body. (For more information o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chondrosarcoma Extraskeletal Myxoid",
+        "Chondrosarcoma Mesenchymal",
+        "Chondrosarcoma Clear Cell"
+      ],
+      "pubtator_normalized_name": "Chondrosarcoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare Disease Database",
+      "preferred_label": "Rare Diseases",
+      "abbreviation": null,
+      "confidence": 0.8803369760513305,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0678236",
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0678236",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "a that contains cartilage including the skull base and spinal column. Most cases are diagnosed in adults between the ages of 20 and 60. Chondrosarcomas are malignant and may spread to other areas of the body. (For more information on this disorder, choose “chondrosarcoma” as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

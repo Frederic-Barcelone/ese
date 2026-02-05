@@ -1,0 +1,40 @@
+{
+  "doc_id": "Hyperprolinemia-Type-I",
+  "doc_filename": "Hyperprolinemia-Type-I.pdf",
+  "top_entities": [
+    {
+      "name": "hyperprolinemia",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "inborn error of metabolism",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Hydroxyproline",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2181,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Hyperprolinemia Type I: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing Hyperprolinemia Type I, a rare inherited metabolic disorder characterized by proline oxidase deficiency and elevated blood proline levels.",
+  "long_description": "This clinical research document provides a comprehensive overview of Hyperprolinemia Type I (HP-I), one of two recognized types of hyperprolinemia. The document details this inherited inborn error of metabolism caused by proline oxidase deficiency, which results in abnormally elevated levels of proline, hydroxyproline, and glycine in the blood. The text discusses the disorder's characteristics, including its equal prevalence in males and females, its presence from birth, and the diagnostic challenges associated with its often vague symptomatology. The document addresses the controversial association with kidney abnormalities and describes the diagnostic process, which frequently relies on exclusion of other conditions before blood proline level testing confirms the diagnosis. Normal proline levels are approximately 450 units, while HP-I patients may present with levels ranging from 1900 to 2000 units.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:22:43.749552"
+}

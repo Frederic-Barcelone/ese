@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:52:43.317422",
+  "document": "Phosphoglycerate-Kinase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Phosphoglycerate-Kinase-Deficiency.pdf",
+  "total_candidates": 23,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "PGK",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "emia). The disorder can be diagnosed at birth when enzymatic testing is done. More than 30 cases of PGK deficiency have been written up in the medical literature. It is thought that there are people with",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Phosphoglycerate Kinase Deficiency",
+      "matched_text": "Phosphoglycerate kinase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:713"
+    },
+    {
+      "name": "hemolytic anemia",
+      "matched_text": "hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D55-D59",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

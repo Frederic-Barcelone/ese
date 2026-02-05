@@ -1,0 +1,23 @@
+{
+  "doc_id": "Alport-Syndrome",
+  "doc_filename": "Alport-Syndrome.pdf",
+  "file_size_bytes": 1726,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Alport Syndrome: Epidemiology and Clinical Impact",
+  "short_description": "Document presenting epidemiological data on Alport syndrome prevalence and its impact on kidney disease in the United States population.",
+  "long_description": "This clinical research document provides comprehensive epidemiological information about Alport syndrome, a genetic kidney disorder affecting approximately 30,000-60,000 people in the United States. The document details prevalence rates, demographic distribution, and the syndrome's contribution to chronic kidney disease in both pediatric and adult populations. It distinguishes between X-linked Alport syndrome (XLAS), which shows sex-linked severity differences with males more severely affected than females, and autosomal forms where both sexes are equally affected. The document serves as a reference for understanding the population burden and clinical significance of this hereditary nephritis condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-03T06:37:33.357817"
+}

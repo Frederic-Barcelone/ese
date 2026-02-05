@@ -1,0 +1,474 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:03:46.720771",
+  "document": "Renal-Cell-Carcinoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Renal-Cell-Carcinoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Renal cell carcinoma",
+      "preferred_label": "renal cell carcinoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007763",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D002292"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007763",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050387",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:144700",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002292",
+          "display": "Carcinoma Renal Cell"
+        }
+      ],
+      "context": "Renal cell carcinoma is a form of kidney cancer. Some patients with renal cell carcinoma do not have symptoms (asymptomatic). When symptoms are present, they may include blood in the urine; urine that is brown or rusty-colored; abdominal pain; weight loss; enlargement of one testicle or varicose veins of the testis (va",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal cell carcinoma 1",
+        "Clear-cell metastatic renal cell carcinoma",
+        "Papillary renal cell carcinoma sporadic"
+      ],
+      "pubtator_normalized_name": "Carcinoma Renal Cell",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney disorders",
+      "preferred_label": "kidney disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005240",
+        "orpha": null,
+        "umls": "UMLS:C0022658",
+        "mesh": "MESH:D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005240",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:557",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003086",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:583.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9635",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007674",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3149",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:90708001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022658",
+          "display": null
+        }
+      ],
+      "context": "and elevated blood pressure. The most common feature of the syndrome is the passing of blood in the urine (hematuria). Renal cell carcinoma is more common in males than in females (ratio of 2 or 3 to 1) and in persons with a history of smoking. It is also more common in persons with other types of kidney disorders and tends to run in some families. Renal cell carcinoma accounts for approximately 30,000 new cases of kidney malignancies per year in the United States. Imaging studies, typically computerized tomography (CT) and abdominal ultrasonography (USG), are used in the diagnosis of renal cell carcinoma. B",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Kidney disorder involving deposition of calcium and oxalate or phosphate in the renal tubules"
+      ],
+      "pubtator_normalized_name": "Chronic Kidney Disease-Mineral and Bone Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "varicose veins",
+      "preferred_label": "varicose veins",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008638",
+        "orpha": null,
+        "umls": "UMLS:C0042345",
+        "mesh": "MESH:D014648"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008638",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:799",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:456.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21827",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014648",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35114",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:192200",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128060009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0042345",
+          "display": null
+        }
+      ],
+      "context": "Renal cell carcinoma is a form of kidney cancer. Some patients with renal cell carcinoma do not have symptoms (asymptomatic). When symptoms are present, they may include blood in the urine; urine that is brown or rusty-colored; abdominal pain; weight loss; enlargement of one testicle or varicose veins of the testis (varicocele) in a male patient; fever; a thin, malnourished appearance; vision abnormalities; and elevated blood pressure. The most common feature of the syndrome is the passing of blood in the urine (hematuria). Renal cell carcinoma is more common in males than in females (ratio of 2",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Varicose Veins",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney cancer",
+      "preferred_label": "kidney cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005206",
+        "orpha": null,
+        "umls": "UMLS:C1378703",
+        "mesh": "D007680"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005206",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4451",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0002890",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235133",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9384",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1378703",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1075394530",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007680",
+          "display": "Kidney Neoplasms"
+        }
+      ],
+      "context": "Renal cell carcinoma is a form of kidney cancer. Some patients with renal cell carcinoma do not have symptoms (asymptomatic). When symptoms are present, they may include blood in the urine; urine that is brown or rusty-colored; abdominal pain; weight loss; enlargement of one testicle or varicose veins of the testis (varicocele) in a male patient",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carcinoma Renal Cell"
+      ],
+      "pubtator_normalized_name": "Kidney Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malnourished",
+      "preferred_label": "malnourished",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E40-E46",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006873",
+        "orpha": null,
+        "umls": "UMLS:C4761312",
+        "mesh": "MESH:D003677"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006873",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5113",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001067",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E40-E46",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:269.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1677627",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003677",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10046058",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3669",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:70241007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4761312",
+          "display": null
+        }
+      ],
+      "context": "ith renal cell carcinoma do not have symptoms (asymptomatic). When symptoms are present, they may include blood in the urine; urine that is brown or rusty-colored; abdominal pain; weight loss; enlargement of one testicle or varicose veins of the testis (varicocele) in a male patient; fever; a thin, malnourished appearance; vision abnormalities; and elevated blood pressure. The most common feature of the syndrome is the passing of blood in the urine (hematuria). Renal cell carcinoma is more common in males than in females (ratio of 2 or 3 to 1) and in persons with a history of smoking. It is also more comm",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "varicocele",
+      "preferred_label": "varicocele",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I86.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001498",
+        "orpha": null,
+        "umls": "UMLS:C0042341",
+        "mesh": "MESH:D014646"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001498",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12337",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I86.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:456.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:22619",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014646",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:46871008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0042341",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:315302008",
+          "display": null
+        }
+      ],
+      "context": "ma is a form of kidney cancer. Some patients with renal cell carcinoma do not have symptoms (asymptomatic). When symptoms are present, they may include blood in the urine; urine that is brown or rusty-colored; abdominal pain; weight loss; enlargement of one testicle or varicose veins of the testis (varicocele) in a male patient; fever; a thin, malnourished appearance; vision abnormalities; and elevated blood pressure. The most common feature of the syndrome is the passing of blood in the urine (hematuria). Renal cell carcinoma is more common in males than in females (ratio of 2 or 3 to 1) and in persons",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Varicocele",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

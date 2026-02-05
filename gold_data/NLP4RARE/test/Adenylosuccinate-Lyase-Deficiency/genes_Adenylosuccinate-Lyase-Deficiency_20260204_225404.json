@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_214817_1c86caae6465",
+  "timestamp": "2026-02-04T22:54:04.997238",
+  "document": "Adenylosuccinate-Lyase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Adenylosuccinate-Lyase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ASL",
+      "hgnc_symbol": "ASL",
+      "full_name": "argininosuccinate lyase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "746",
+        "entrez": "435",
+        "ensembl": "ENSG00000126522",
+        "uniprot": "P04424",
+        "omim": "608310"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "746",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "435",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000126522",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "608310",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P04424",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "23",
+          "disease_name": "Argininosuccinic aciduria",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "Adenylosuccinate lyase deficiency (ASLD) is a rare, inherited metabolic disorder due to a lack of the enzyme adenylosuccinate lyase (ASL). The defect is characterized by the appearance of two unusual chemicals, succinylaminoimidazole carboxamide riboside (SAICA riboside) and succinyladenosine, in cerebrospinal fluid, in urine and, to a much smaller extent, in plasma. These compounds, which are never found in healthy individuals, are",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

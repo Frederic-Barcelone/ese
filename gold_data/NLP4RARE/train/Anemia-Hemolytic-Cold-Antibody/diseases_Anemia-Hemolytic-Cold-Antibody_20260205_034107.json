@@ -1,0 +1,688 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:41:07.715946",
+  "document": "Anemia-Hemolytic-Cold-Antibody.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anemia-Hemolytic-Cold-Antibody.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "infectious mononucleosis",
+      "preferred_label": "infectious mononucleosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005810",
+        "orpha": null,
+        "umls": "UMLS:C0021345",
+        "mesh": "MESH:D007244"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005810",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8568",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007326",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:B27",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:075",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7069",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007244",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200976",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:186668002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021345",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:760139952",
+          "display": null
+        }
+      ],
+      "context": "for unknown reasons. Cold antibody hemolytic anemia most commonly affects older people. The incidence of CAHA in the general population is about 1 in 80,000. There appears to be a slight bias in favor of females in the incidence of CAHA, with a male to female ratio of 2 to 3. Those individuals with infectious mononucleosis, lymphoproliferative diseases, or mycoplasma pneumonia are more susceptible to this disorder. In order to differentiate hemolytic anemia from the other anemias, doctors examine the patient's blood to determine the proportion of immature red blood cells, since the number of young cells is increased",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fatigue Syndrome Chronic"
+      ],
+      "pubtator_normalized_name": "Infectious Mononucleosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cold antibody hemolytic anemia",
+      "preferred_label": "cold agglutinin disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D59.12",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018922",
+        "orpha": "Orphanet:56425",
+        "umls": "UMLS:C1264008",
+        "mesh": "D000744"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018922",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6130",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D59.12",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:688249",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200618",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:775",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:56425",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:127055007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1264008",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000744",
+          "display": "Anemia Hemolytic Autoimmune"
+        }
+      ],
+      "context": "ly and the rate of production of new cells in the bone marrow can no longer compensate for their loss. The severity of the anemia is determined by the length of time that the red blood cells survive and by the rate at which the bone marrow continues to create new red blood cell production. Although cold antibody hemolytic anemia is known to be an autoimmune disorder, neither its exact underlying cause nor the process by which the disorder becomes apparent is fully understood. Autoimmune disorders occur when the body’s natural defenses (antibodies, lymphocytes, etc.) against invading organisms suddenly begin to attack perfe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Anemia Hemolytic Autoimmune",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mycoplasma pneumonia",
+      "preferred_label": "Mycoplasma pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J15.7",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005867",
+        "orpha": null,
+        "umls": "UMLS:C0032302",
+        "mesh": "MESH:D011019"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005867",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13276",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007387",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J15.7",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:483.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19363",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011019",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C122526",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:46970008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032302",
+          "display": null
+        }
+      ],
+      "context": "mmonly affects older people. The incidence of CAHA in the general population is about 1 in 80,000. There appears to be a slight bias in favor of females in the incidence of CAHA, with a male to female ratio of 2 to 3. Those individuals with infectious mononucleosis, lymphoproliferative diseases, or mycoplasma pneumonia are more susceptible to this disorder. In order to differentiate hemolytic anemia from the other anemias, doctors examine the patient's blood to determine the proportion of immature red blood cells, since the number of young cells is increased in hemolytic anemia. The patient is also examined to ch",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pneumonia of Swine Mycoplasmal"
+      ],
+      "pubtator_normalized_name": "Pneumonia Mycoplasma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autoimmune disorder",
+      "preferred_label": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007179",
+        "orpha": null,
+        "umls": "UMLS:C0004364",
+        "mesh": "MESH:D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007179",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:417",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005809",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:720",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2135",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001327",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2889",
+          "display": null
+        },
+        {
+          "system": "OBI",
+          "code": "OBI:1110054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85828009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004364",
+          "display": null
+        }
+      ],
+      "context": "bone marrow can no longer compensate for their loss. The severity of the anemia is determined by the length of time that the red blood cells survive and by the rate at which the bone marrow continues to create new red blood cell production. Although cold antibody hemolytic anemia is known to be an autoimmune disorder, neither its exact underlying cause nor the process by which the disorder becomes apparent is fully understood. Autoimmune disorders occur when the body’s natural defenses (antibodies, lymphocytes, etc.) against invading organisms suddenly begin to attack perfectly healthy tissue for unknown reason",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Demyelinating Autoimmune Diseases CNS",
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases of the Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hemolytic anemia",
+      "preferred_label": "hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": "ICD10CM:D55-D59",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003664",
+        "orpha": null,
+        "umls": "UMLS:C0002878",
+        "mesh": "MESH:D000743"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003664",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:583",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D55-D59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1916",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000743",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34376",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61261009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002878",
+          "display": null
+        }
+      ],
+      "context": "1 in 80,000. There appears to be a slight bias in favor of females in the incidence of CAHA, with a male to female ratio of 2 to 3. Those individuals with infectious mononucleosis, lymphoproliferative diseases, or mycoplasma pneumonia are more susceptible to this disorder. In order to differentiate hemolytic anemia from the other anemias, doctors examine the patient's blood to determine the proportion of immature red blood cells, since the number of young cells is increased in hemolytic anemia. The patient is also examined to check for spleen or liver enlargement. An antiglobulin test (Coomb's reaction) may b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic Autoimmune",
+        "Anemia Hemolytic Congenital",
+        "Immuno-hemolytic anemia"
+      ],
+      "pubtator_normalized_name": "Anemia Hemolytic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "nemia most commonly affects older people. The incidence of CAHA in the general population is about 1 in 80,000. There appears to be a slight bias in favor of females in the incidence of CAHA, with a male to female ratio of 2 to 3. Those individuals with infectious mononucleosis, lymphoproliferative diseases, or mycoplasma pneumonia are more susceptible to this disorder. In order to differentiate hemolytic anemia from the other anemias, doctors examine the patient's blood to determine the proportion of immature red blood cells, since the number of young cells is increased in hemolytic anemia. The patie",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "ly, the red blood cells have a life span of approximately 120 days before they are destroyed by the spleen. In individuals with CAHA, the red blood cells are destroyed prematurely and the rate of production of new cells in the bone marrow can no longer compensate for their loss. The severity of the anemia is determined by the length of time that the red blood cells survive and by the rate at which the bone marrow continues to create new red blood cell production. Although cold antibody hemolytic anemia is known to be an autoimmune disorder, neither its exact underlying cause nor the process by which",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CAHA",
+      "preferred_label": "cAHA",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016450",
+        "orpha": "Orphanet:228312",
+        "umls": "UMLS:C0175816",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016450",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20590",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:104501",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:228312",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0175816",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1836938544",
+          "display": null
+        }
+      ],
+      "context": "premature destruction of red blood cells (rbcs) by the body's natural defenses against invading organisms (antibodies). Normally, the red blood cells have a life span of approximately 120 days before they are destroyed by the spleen. In individuals with CAHA, the red blood cells are destroyed prematurely and the rate of production of new cells in the bone marrow can no longer compensate for their loss. The severity of the anemia is determined by the length of time that the red blood cells survive and by the rate at which the bone marrow continues to cr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:57:19.802640",
+  "document": "Progressive-Osseous-Heteroplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Progressive-Osseous-Heteroplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "progressive osseous heteroplasia",
+      "preferred_label": "progressive osseous heteroplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008153",
+        "orpha": "Orphanet:2762",
+        "umls": "UMLS:C0334041",
+        "mesh": "MESH:C562735"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008153",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111535",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:109",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:137714",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562735",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048902",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1618",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:166350",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2762",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:719271000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0334041",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1107209347",
+          "display": null
+        }
+      ],
+      "context": "The diagnosis of progressive osseous heteroplasia may be confirmed by a thorough clinical evaluation, characteristic physical findings, and tests that demonstrate the presence of heterotopic ossification (e.g., x-ray and roentgenograms) with characteristic appearance for POH. An additional test may include the removal and testing of tissues (biops",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Osseous Heteroplasia Progressive",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "POH",
+      "preferred_label": "Progressive osseous heteroplasia",
+      "abbreviation": "POH",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "M61.5",
+        "icd11": "FB31.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2762",
+        "umls": null,
+        "mesh": "C562735"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2762",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "M61.5",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "FB31.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C562735",
+          "display": "Osseous Heteroplasia Progressive"
+        }
+      ],
+      "context": "The diagnosis of progressive osseous heteroplasia may be confirmed by a thorough clinical evaluation, characteristic physical findings, and tests that demonstrate the presence of heterotopic ossification (e.g., x-ray and roentgenograms) with characteristic appearance for POH. An additional test may include the removal and testing of tissues (biopsy). In some cases, there may be temporarily (transient) increased levels of alkaline phosphatase in the blood serum.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Osseous Heteroplasia Progressive",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

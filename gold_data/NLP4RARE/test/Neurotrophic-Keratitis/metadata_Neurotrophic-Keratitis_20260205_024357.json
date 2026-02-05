@@ -1,0 +1,30 @@
+{
+  "doc_id": "Neurotrophic-Keratitis",
+  "doc_filename": "Neurotrophic-Keratitis.pdf",
+  "top_entities": [
+    {
+      "name": "neurotrophic keratitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1629,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Neurotrophic Keratitis: Prevalence and Epidemiology",
+  "short_description": "A clinical document describing the rare prevalence of neurotrophic keratitis, affecting fewer than 5 per 10,000 people in the general population.",
+  "long_description": "This clinical research document provides epidemiological information about neurotrophic keratitis, a rare ocular disorder. The document establishes the prevalence rate of this condition at below 5 cases per 10,000 individuals in the general population and includes a clear definition of prevalence as an epidemiological measure. The content appears to be part of a larger clinical or educational resource aimed at understanding the frequency and distribution of this uncommon corneal condition in healthcare populations.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:43:57.139481"
+}

@@ -1,0 +1,132 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:49:13.186348",
+  "document": "Brown-Sequard-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Brown-Sequard-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "spinal cord injuries",
+      "preferred_label": "spinal cord injury",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043797",
+        "orpha": "Orphanet:90058",
+        "umls": null,
+        "mesh": "MESH:D013119"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043797",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19109",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013119",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:90058",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:90584004",
+          "display": null
+        }
+      ],
+      "context": "e neck or in the back that damages the spine and causes symptoms to appear. Brown-Séquard syndrome is a rare disorder that affects males and females in equal numbers. More than 500 cases have been reported to date. The incidence of Brown-Séquard syndrome has been estimated to be 2% of all traumatic spinal cord injuries. The annual incidence of all forms of spinal cord injury is estimated to be 30-40 per 1,000,000 people.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Cord Syndrome"
+      ],
+      "pubtator_normalized_name": "Spinal Cord Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "wound",
+      "preferred_label": "wound",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "are spinal disorder that results from an injury to one side of the spinal cord in which the spinal cord is damaged but is not severed completely. It is usually caused by an injury to the spine in the region of the neck or back. In many cases, affected individuals have received some type of puncture wound in the neck or in the back that damages the spine and causes symptoms to appear. Brown-Séquard syndrome is a rare disorder that affects males and females in equal numbers. More than 500 cases have been reported to date. The incidence of Brown-Séquard syndrome has been estimated to be 2% of all trau",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Wound Infection",
+        "Wounds Nonpenetrating",
+        "Wounds Gunshot"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

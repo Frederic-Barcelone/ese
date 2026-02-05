@@ -1,0 +1,35 @@
+{
+  "doc_id": "Bowen-Disease",
+  "doc_filename": "Bowen-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "Bowen disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "skin disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2017,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Bowen Disease: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing Bowen disease, a rare precancerous skin condition characterized by slow-growing, scaly patches primarily affecting sun-exposed areas in older adults.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Bowen disease, a rare dermatological condition that manifests as slow-growing, reddish scaly patches or plaques on the skin's outermost layer (epidermis). The document details the condition's characteristics, including its predilection for sun-exposed areas, typically asymptomatic presentation, and classification as a precancerous condition with less than 10% risk of malignant transformation. It covers epidemiological aspects, noting higher prevalence in Caucasian males over 60 years of age, discusses risk factors such as chronic sun exposure, and emphasizes the generally successful treatment outcomes for this condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:07:43.748316"
+}

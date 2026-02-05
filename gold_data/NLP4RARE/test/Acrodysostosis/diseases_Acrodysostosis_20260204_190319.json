@@ -1,0 +1,160 @@
+{
+  "run_id": "RUN_20260204_175932_a13c97c28f9f",
+  "timestamp": "2026-02-04T19:03:19.928595",
+  "document": "Acrodysostosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acrodysostosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acrodysostosis",
+      "preferred_label": "acrodysostosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019797",
+        "orpha": "Orphanet:950",
+        "umls": "UMLS:C0220659",
+        "mesh": "MESH:C538179"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019797",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14669",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5724",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:113097",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538179",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:722",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:101800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:950",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:66758006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220659",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:477546932",
+          "display": null
+        }
+      ],
+      "context": "Acrodysostosis affects males and females in equal numbers. The disorder is present at birth (congenital) but may not be apparent until years after birth. The exact incidence and prevalence of the disorder is unknown. Because many cases can go misdiagnosed or undiagnosed, determining the true frequency of acrodyso",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Acrodysostosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital",
+      "preferred_label": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048408993",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Acrodysostosis affects males and females in equal numbers. The disorder is present at birth (congenital) but may not be apparent until years after birth. The exact incidence and prevalence of the disorder is unknown. Because many cases can go misdiagnosed or undiagnosed, determining the true frequency of acrodysostosis in the general population is difficult.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Congenital central hypoventilation syndrome",
+        "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

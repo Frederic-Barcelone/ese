@@ -1,0 +1,128 @@
+{
+  "run_id": "RUN_20260203_062811_cb5e3758076f",
+  "timestamp": "2026-02-03T07:36:55.108346",
+  "document": "Alpers-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alpers-Disease.pdf",
+  "total_candidates": 40,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "The child is unable to achieve normal muscle tone (hypotonia), yet the limbs appear to be stiff. On MRI examination an increased density of the grey matter in the brain is noted. Usually, but not always,",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Disease",
+      "matched_text": "disorder",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Liver Disease",
+      "matched_text": "liver disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Dementia",
+      "matched_text": "dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Mental Retardation",
+      "matched_text": "Mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Spastic Quadriplegia",
+      "matched_text": "spastic quadriplegia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Optic Atrophy",
+      "matched_text": "optic atrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Alpers Syndrome (disorder)",
+      "matched_text": "Alpers disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "nervous system disorder",
+      "matched_text": "neurologic disorder",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Liver diseases",
+      "matched_text": "liver disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Presenile dementia",
+      "matched_text": "dementia",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

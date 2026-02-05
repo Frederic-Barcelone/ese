@@ -1,0 +1,113 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:26:48.558433",
+  "document": "Kasabach.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Kasabach.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "fibrinogen",
+      "preferred_name": "fibrinogen",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "4385",
+          "display": null
+        }
+      ],
+      "context": "is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "DIC",
+      "preferred_name": "DIC",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004492",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3098",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004492",
+          "display": "Edetic Acid"
+        }
+      ],
+      "context": "rs: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on the skin which can be firm, indurated and purpuric. Areas of petec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "dichlorodifluoromethane",
+        "Diclofenac",
+        "Cisplatin"
+      ],
+      "pubtator_normalized_name": "Edetic Acid",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

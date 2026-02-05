@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_154258_53fad6008e2b",
+  "timestamp": "2026-02-04T16:46:14.631929",
+  "document": "Alkaptonuria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alkaptonuria.pdf",
+  "total_candidates": 31,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HGD",
+      "long_form": "high grade dysplasia",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "dividuals may develop discoloration of the skin overlying cartilage within the body such as over part of the outer ear. In some cases, the whites of the eyes (sclera) may also become discolored. In adulthood, affected individuals also develop progressive arthritis of the spine and large joints. The HGD gene codes for the enzyme required for the breakdown of homogentisic acid. Mutations in the HGD gene cause alkaptonuria. Alkaptonuria affects males and females in equal numbers, although symptoms tend to develop sooner and become more severe in males. More than 1,000 affected individuals have been",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "metabolic disorder",
+      "matched_text": "metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E70-E88",
+      "orpha": null
+    },
+    {
+      "name": "alkaptonuria",
+      "matched_text": "Alkaptonuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:56"
+    },
+    {
+      "name": "ochronosis",
+      "matched_text": "ochronosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "condition",
+      "matched_text": "condition",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "arthritis",
+      "matched_text": "arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "air",
+      "matched_text": "air",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

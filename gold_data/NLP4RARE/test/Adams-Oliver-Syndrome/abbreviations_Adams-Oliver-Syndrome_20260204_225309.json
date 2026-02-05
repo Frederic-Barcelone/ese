@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_214817_1c86caae6465",
+  "timestamp": "2026-02-04T22:53:09.601612",
+  "document": "Adams-Oliver-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Adams-Oliver-Syndrome.pdf",
+  "total_candidates": 33,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AOS",
+      "long_form": "Adams Oliver syndrome",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ging techniques such as ultrasound. During fetal ultrasonography, reflected sound waves are used to create an image of the developing fetus. Adams-Oliver syndrome (AOS) is an extremely rare inherited disorder characterized by",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Adams-Oliver syndrome",
+      "matched_text": "Adams-Oliver syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:974"
+    },
+    {
+      "name": "Adams-Oliver syndrome",
+      "matched_text": "AOS",
+      "abbreviation": "AOS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q87.2",
+      "orpha": "ORPHA:974"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

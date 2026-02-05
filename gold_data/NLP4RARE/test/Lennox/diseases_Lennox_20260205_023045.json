@@ -1,0 +1,345 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:30:45.001475",
+  "document": "Lennox.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Lennox.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "severe form",
+      "preferred_label": "Mucopolysaccharidosis type 2, severe form",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:217085",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:217085",
+          "display": null
+        }
+      ],
+      "context": "Lennox-Gastaut syndrome (LGS) is a severe form of epilepsy that typically becomes apparent during infancy or early childhood. Affected children experience several different types of seizures most commonly atonic, tonic and atypical absence seizures. Children with Lennox-Gastaut syndrome may also develop cognitive dysfunction, delays in reaching",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Lennox-Gastaut syndrome",
+      "preferred_label": "Lennox-Gastaut syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G40.81",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016532",
+        "orpha": "Orphanet:2382",
+        "umls": "UMLS:C0238111",
+        "mesh": "MESH:D065768"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016532",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050561",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9912",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G40.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:116044",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D065768",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048816",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200879",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84816",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1358",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:606369",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2382",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230418006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0238111",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:651135242",
+          "display": null
+        }
+      ],
+      "context": "Lennox-Gastaut syndrome (LGS) is a severe form of epilepsy that typically becomes apparent during infancy or early childhood. Affected children experience several different types of seizures most commonly atonic, tonic and atypical absence seizures. Children with Lennox-Gastaut syndrome may also develop cognitive dysfunct",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lennox Gastaut Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "absence seizures",
+      "preferred_label": "absence seizure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010826",
+        "orpha": "Orphanet:64280",
+        "umls": "UMLS:C4281785",
+        "mesh": "D012640"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010826",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1825",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16667",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:924120",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:600131",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:64280",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:50866000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4281785",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:726403046",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012640",
+          "display": "Seizures"
+        }
+      ],
+      "context": "Lennox-Gastaut syndrome (LGS) is a severe form of epilepsy that typically becomes apparent during infancy or early childhood. Affected children experience several different types of seizures most commonly atonic, tonic and atypical absence seizures. Children with Lennox-Gastaut syndrome may also develop cognitive dysfunction, delays in reaching developmental milestones and behavioral problems. Lennox-Gastaut syndrome can be caused by a variety of underlying conditions, but in some cases no cause can be identified. Lennox-Gastaut syndrome can",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epilepsy Absence",
+        "Epilepsies Myoclonic"
+      ],
+      "pubtator_normalized_name": "Seizures",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "epilepsy",
+      "preferred_label": "epilepsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G40",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005027",
+        "orpha": null,
+        "umls": "UMLS:C0014544",
+        "mesh": "MESH:D004827"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005027",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1826",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000474",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G40",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G40",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:345.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4506",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004827",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3020",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84757009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014544",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:12718",
+          "display": null
+        }
+      ],
+      "context": "Lennox-Gastaut syndrome (LGS) is a severe form of epilepsy that typically becomes apparent during infancy or early childhood. Affected children experience several different types of seizures most commonly atonic, tonic and atypical absence seizures. Children with Lennox-Gastaut syndrome may also develop cognitive dysfunction, delays in reaching development",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epilepsy Post-Traumatic",
+        "Epilepsy Tonic-Clonic",
+        "Epilepsy Temporal Lobe"
+      ],
+      "pubtator_normalized_name": "Epilepsy",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:47:37.733106",
+  "document": "Arteritis-Takayasu.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Arteritis-Takayasu.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "polyarteritis",
+      "preferred_label": "polyarteritis nodosa",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M30.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019170",
+        "orpha": "Orphanet:767",
+        "umls": "UMLS:C0031036",
+        "mesh": "MESH:D010488"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019170",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9810",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7360",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M30.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:446.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14681",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010488",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036024",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200425",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26847",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1588",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:767",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:155441006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031036",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1419332129",
+          "display": null
+        }
+      ],
+      "context": "sorder characterized by the progressive inflammation of one or more of the larger arteries leading from the heart. The main artery of the heart (aorta) and the pulmonary (lung) artery, among others, may be affected. When this disorder causes progressive inflammation of many arteries, it is known as polyarteritis. One of the consequences of polyarteritis is the reduction of blood flow to any of several organs and/or arms and legs. Arteries in the head and arms may be affected, and this can result in the loss of the major pulse points in the body. Some people with Takayasu arteritis have irregular narrowing",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Polyarteritis Nodosa",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "aortic regurgitation",
+      "preferred_label": "aortic regurgitation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I06.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005648",
+        "orpha": null,
+        "umls": "UMLS:C0003504",
+        "mesh": "MESH:D001022"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005648",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:57",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007148",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I06.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:396.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8153",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001022",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200307",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C51223",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:78031003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003504",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1548485475",
+          "display": null
+        }
+      ],
+      "context": "d arms may be affected, and this can result in the loss of the major pulse points in the body. Some people with Takayasu arteritis have irregular narrowing of portions of the large arteries (segmental stenosis) and abnormal backward flow of blood from the aorta into the left ventricle of the heart (aortic regurgitation). Other patients may have symptoms of ballooning and weakening (aneurysm) of the wall of a major vessel. Takayasu arteritis is a rare disorder that affects more females than males. Approximately 80 to 90 percent of the cases affect females. This disorder is common in Japan, and occurs throughout th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Aortic Valve Insufficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Takayasu arteritis",
+      "preferred_label": "Takayasu arteritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M31.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017991",
+        "orpha": "Orphanet:99079",
+        "umls": "UMLS:C0039263",
+        "mesh": "MESH:D013625"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017991",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2508",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001857",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7730",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M31.4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:446.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013625",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10043097",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200423",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35062",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:806",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:207600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99079",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:239937004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039263",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1327645131",
+          "display": null
+        }
+      ],
+      "context": "Takayasu arteritis is a rare disorder characterized by the progressive inflammation of one or more of the larger arteries leading from the heart. The main artery of the heart (aorta) and the pulmonary (lung) artery, among others, may be affected. When this disorder causes progressive inflammation of many arteries, it",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Takayasu Arteritis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

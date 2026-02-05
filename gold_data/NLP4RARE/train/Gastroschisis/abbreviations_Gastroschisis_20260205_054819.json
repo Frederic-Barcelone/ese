@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:48:19.690541",
+  "document": "Gastroschisis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gastroschisis.pdf",
+  "total_candidates": 22,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CDC",
+      "long_form": "Centers for Disease Control and Prevention",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "As of 2015, this condition is estimated to affect about 2 to 5 per 10,000 newborns. The Centers for Disease Control and Prevention (CDC) estimates that there are about 1,871 babies born with gastroschisis in the United States each year. Gastroschisis can be diagnosed by prenatal ultrasound or upon birth. It is differentiated from omphalocele by the presence of freely floating abdominal organs in the amniotic cavity without a membranous covering. The organs appearing on the outer surface of the abdomen, after delivery, confirms the",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Collecting duct carcinoma",
+      "matched_text": "CDC",
+      "abbreviation": "CDC",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C64",
+      "orpha": "ORPHA:247203"
+    },
+    {
+      "name": "gastroschisis",
+      "matched_text": "gastroschisis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q79.3",
+      "orpha": "Orphanet:2368"
+    },
+    {
+      "name": "omphalocele",
+      "matched_text": "omphalocele",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:660"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

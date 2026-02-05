@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:53:43.144393",
+  "document": "Glutaric-Aciduria-Type-I.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Glutaric-Aciduria-Type-I.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "GCDH",
+      "hgnc_symbol": "GCDH",
+      "full_name": "glutaryl-CoA dehydrogenase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4189",
+        "entrez": "2639",
+        "ensembl": "ENSG00000105607",
+        "uniprot": "Q92947",
+        "omim": "608801"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4189",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2639",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000105607",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "608801",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q92947",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "25",
+          "disease_name": "Glutaryl-CoA dehydrogenase deficiency",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "the mitochondrial enzyme glutaryl-CoA dehydrogenase (GCDH)). It is in the group of disorders known as cerebral organic acidemias. Individuals with this condition have deficiency or absence of GCDH enzyme that is involved in the lysine metabolism. GCDH deficiency results in increased concentrations of potentially neurotoxic metabolites, glutaric acid (GA),",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

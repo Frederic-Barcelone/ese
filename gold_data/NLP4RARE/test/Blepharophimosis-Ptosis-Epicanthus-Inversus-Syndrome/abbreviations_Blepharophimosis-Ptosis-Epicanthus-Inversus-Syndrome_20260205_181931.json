@@ -1,0 +1,179 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:19:31.525295",
+  "document": "Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf",
+  "total_candidates": 46,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "POI",
+      "long_form": "premature ovarian insufficiency",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "is), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type | and type II, which are both characterized by the typical eyelid malformation. However, BPES type | is also associated with loss of ovarian function or premature ovarian insufficiency (POI). Menstrual periods in women with POI become less frequent over time and stop before the age of 40 thus leading to either difficulty (subfertility) or inability to conceive (infertility). Other minor facial features frequently observed in both types include “lazy” eye (amblyopia), crossed eyes (stra",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "BPES",
+      "long_form": "blepharophimosis, ptosis, and epicanthus inversus syndrome",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type | and type II, which are both cha",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0007201"
+        },
+        {
+          "source": "DOID",
+          "id": "DOID:14778"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:23"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:66312"
+        },
+        {
+          "source": "MESH",
+          "id": "MESH:C562419"
+        },
+        {
+          "source": "NORD",
+          "id": "NORD:862"
+        },
+        {
+          "source": "OMIM",
+          "id": "OMIM:110100"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:126"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:715391004"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C0220663"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "primary ovarian failure",
+      "matched_text": "premature ovarian insufficiency",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:E28.3",
+      "orpha": "Orphanet:619"
+    },
+    {
+      "name": "infertility disorder",
+      "matched_text": "infertility",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "eyelid malformation",
+      "matched_text": "eyelid malformation",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98561"
+    },
+    {
+      "name": "blepharophimosis",
+      "matched_text": "blepharophimosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H02.52",
+      "orpha": null
+    },
+    {
+      "name": "crossed eyes",
+      "matched_text": "crossed eyes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H50.0",
+      "orpha": null
+    },
+    {
+      "name": "telecanthus",
+      "matched_text": "telecanthus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98575"
+    },
+    {
+      "name": "strabismus",
+      "matched_text": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "amblyopia",
+      "matched_text": "amblyopia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "ptosis",
+      "matched_text": "ptosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "BPES",
+      "matched_text": "BPES",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:126"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

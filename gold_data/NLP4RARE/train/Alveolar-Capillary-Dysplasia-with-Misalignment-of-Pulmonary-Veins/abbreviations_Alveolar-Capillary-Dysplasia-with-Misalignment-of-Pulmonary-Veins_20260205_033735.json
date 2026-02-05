@@ -1,0 +1,57 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:37:35.782928",
+  "document": "Alveolar-Capillary-Dysplasia-with-Misalignment-of-Pulmonary-Veins.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Alveolar-Capillary-Dysplasia-with-Misalignment-of-Pulmonary-Veins.pdf",
+  "total_candidates": 10,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ACDMPY",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ACDMPY is a very rare disorder. The incidence and prevalence is unknown. More than 200 people with this di",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ACDMPV",
+      "long_form": "Congenital alveolar capillary dysplasia",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ure. However, many infants may go misdiagnosed or undiagnosed, so determining the true frequency of ACDMPV in the general population is difficult.",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Congenital alveolar capillary dysplasia",
+      "matched_text": "ACDMPV",
+      "abbreviation": "ACDMPV",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q33.6",
+      "orpha": "ORPHA:210122"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

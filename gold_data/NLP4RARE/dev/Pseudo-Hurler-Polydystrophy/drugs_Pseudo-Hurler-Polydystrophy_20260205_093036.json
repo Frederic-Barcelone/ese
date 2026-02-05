@@ -1,0 +1,164 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:30:36.558072",
+  "document": "Pseudo-Hurler-Polydystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pseudo-Hurler-Polydystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "Pseudo",
+      "preferred_name": "Pseudo",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "219492",
+          "display": null
+        }
+      ],
+      "context": "Pseudo-Hurler polydystrophy (mucolipidosis type Ill) is a rare genetic metabolic disorder characterized by a defective enzyme known as\n\nUPD-N-acetylglucosam",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "N-acetylglucosamine",
+      "preferred_name": "N-acetylglucosamine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000117",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1362871",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000117",
+          "display": "Acetylglucosamine"
+        }
+      ],
+      "context": "Pseudo-Hurler polydystrophy (mucolipidosis type Ill) is a rare genetic metabolic disorder characterized by a defective enzyme known as\n\nUPD-N-acetylglucosamine-1-phosphotransferase. This defective enzyme ultimately results in the accumulation of certain complex carbohydrates (mucopolysaccharides) and fatty s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "N-acetylglucosamine 6-phosphate",
+        "Uridine Diphosphate N-Acetylglucosamine",
+        "N-acetylglucosamine-1-phosphate"
+      ],
+      "pubtator_normalized_name": "Acetylglucosamine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hip",
+      "preferred_name": "HIP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D012701",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "978673",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012701",
+          "display": "Serotonin"
+        }
+      ],
+      "context": "s, curvature of the spine (scoliosis), and/or skeletal deformities of the hands (e.g., claw-hands). Growth delays accompanied by deterioration of the hip joints typically develop in children with pseudo-Hurler polydystrophy. Additional symptoms may include clouding of the corneas of the eyes, mild to m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Serotonin",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

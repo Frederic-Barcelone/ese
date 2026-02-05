@@ -1,0 +1,381 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:34:11.543686",
+  "document": "Macroglossia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Macroglossia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Beckwith-Wiedemann syndrome",
+      "preferred_label": "Beckwith-Wiedemann syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007534",
+        "orpha": "Orphanet:116",
+        "umls": "UMLS:C0004903",
+        "mesh": "MESH:D001506"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007534",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5572",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3343",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2562",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001506",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10050344",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200959",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34415",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:845",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:130650",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:116",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:81780002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004903",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:803086260",
+          "display": null
+        }
+      ],
+      "context": "Macroglossia is the abnormal enlargement of the tongue. In rare cases, macroglossia occurs as an isolated finding that is present at birth (congenital). In many cases, macroglossia may occur secondary to a primary disorder that may be either congenital (e.g., Down syndrome or Beckwith-Wiedemann syndrome) or acquired (e.g., as a result of trauma or malignancy). Symptoms and physical findings associated with macroglossia may include noisy, high-pitched breathing (stridor), snoring, and/or feeding difficulties. In some cases, the tongue may protrude from the mouth. When inherited, macroglossia is tra",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Beckwith-Wiedemann Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Down syndrome",
+      "preferred_label": "Down syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008608",
+        "orpha": "Orphanet:870",
+        "umls": "UMLS:C0013080",
+        "mesh": "MESH:D004314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008608",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14250",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001064",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4385",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004314",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044688",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200965",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2993",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:190685",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:870",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:41040004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013080",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1624623908",
+          "display": null
+        },
+        {
+          "system": "nlxdys",
+          "code": "nlxdys:20090502",
+          "display": null
+        }
+      ],
+      "context": "Macroglossia is the abnormal enlargement of the tongue. In rare cases, macroglossia occurs as an isolated finding that is present at birth (congenital). In many cases, macroglossia may occur secondary to a primary disorder that may be either congenital (e.g., Down syndrome or Beckwith-Wiedemann syndrome) or acquired (e.g., as a result of trauma or malignancy). Symptoms and physical findings associated with macroglossia may include noisy, high-pitched breathing (stridor), snoring, and/or feeding difficulties. In some cases, the tongue may protrude from the mouth. When",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Down Syndrome Critical Region",
+        "Transient Myeloproliferative Disorder of Down Syndrome",
+        "Cataracts Congenital with Sensorineural Deafness Down Syndrome-Like Facial Appearance Short Stature and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Macroglossia",
+      "preferred_label": "macroglossia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015496",
+        "orpha": "Orphanet:156207",
+        "umls": "UMLS:C0024421",
+        "mesh": "MESH:D008260"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015496",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3342",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44236",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008260",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025391",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:156207",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024421",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:670519908",
+          "display": null
+        }
+      ],
+      "context": "Macroglossia is the abnormal enlargement of the tongue. In rare cases, macroglossia occurs as an isolated finding that is present at birth (congenital). In many cases, macroglossia may occur secondary to a primary disorder that may be either congenital (e.g., Down syndrome or Beckwith-Wiedemann syndrome) or acq",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Beckwith-Wiedemann Syndrome",
+        "Congenital macroglossia",
+        "Mental Retardation X-Linked With Brachydactyly And Macroglossia"
+      ],
+      "pubtator_normalized_name": "Macroglossia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trauma",
+      "preferred_label": "trauma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "of the tongue. In rare cases, macroglossia occurs as an isolated finding that is present at birth (congenital). In many cases, macroglossia may occur secondary to a primary disorder that may be either congenital (e.g., Down syndrome or Beckwith-Wiedemann syndrome) or acquired (e.g., as a result of trauma or malignancy). Symptoms and physical findings associated with macroglossia may include noisy, high-pitched breathing (stridor), snoring, and/or feeding difficulties. In some cases, the tongue may protrude from the mouth. When inherited, macroglossia is transmitted as an autosomal dominant genetic",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trauma Nervous System",
+        "Osteoporosis",
+        "Stress Disorders Post-Traumatic"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

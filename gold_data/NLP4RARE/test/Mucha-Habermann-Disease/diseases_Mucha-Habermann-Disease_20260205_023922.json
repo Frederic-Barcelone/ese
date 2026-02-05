@@ -1,0 +1,79 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:39:22.646726",
+  "document": "Mucha-Habermann-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mucha-Habermann-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Mucha-Habermann disease",
+      "preferred_label": "Mucha-Habermann disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024250",
+        "orpha": null,
+        "umls": "UMLS:C0162852",
+        "mesh": "C537077"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024250",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:696.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57997",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86487001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162852",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537077",
+          "display": "Febrile Ulceronecrotic Mucha-Habermann disease"
+        }
+      ],
+      "context": "Mucha-Habermann disease affects men more often than women. The disorder is most common in children and young adults, but can affect people of any age including newborns (with lesions present at birth) and the elderly. The incidence of Mucha-Habermann disease is unknown. A diagnosis of Mucha-Habermann disease is made based",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pityriasis Lichenoides"
+      ],
+      "pubtator_normalized_name": "Febrile Ulceronecrotic Mucha-Habermann disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

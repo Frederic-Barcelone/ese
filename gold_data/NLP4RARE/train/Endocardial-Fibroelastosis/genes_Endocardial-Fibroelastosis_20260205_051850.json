@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:18:50.274018",
+  "document": "Endocardial-Fibroelastosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Endocardial-Fibroelastosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "wave",
+      "hgnc_symbol": "WASF1",
+      "full_name": "WASP family member 1",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "12732",
+        "entrez": "8936",
+        "ensembl": "ENSG00000112290",
+        "uniprot": "Q92558",
+        "omim": "605035"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "12732",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "8936",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000112290",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "605035",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q92558",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "he chest typically reveal abnormal enlargement of the heart, especially the left ventricle (ventricular hypertrophy). Damage to the heart may be demonstrated by measuring the electrical activity of the heart (i.e., electrocardiogram [EKG)). This test may show subtle changes (i.e., S-T segment and T-wave changes) that strongly suggest damage to the heart that is characteristic of EFE. Repeated electrocardiograms may be required to monitor changes in heart function.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

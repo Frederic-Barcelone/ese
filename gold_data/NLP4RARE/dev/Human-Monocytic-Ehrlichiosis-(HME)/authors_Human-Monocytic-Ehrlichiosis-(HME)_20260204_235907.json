@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:59:07.764616",
+  "document": "Human-Monocytic-Ehrlichiosis-(HME).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Human-Monocytic-Ehrlichiosis-(HME).pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 1,
+  "unique_authors": 1,
+  "authors": [
+    {
+      "full_name": "Sennetsu Fever",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Sennetsu Fever",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

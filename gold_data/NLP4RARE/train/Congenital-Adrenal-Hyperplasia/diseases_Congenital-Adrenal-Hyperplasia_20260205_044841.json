@@ -1,0 +1,208 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:48:41.272957",
+  "document": "Congenital-Adrenal-Hyperplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Adrenal-Hyperplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Congenital adrenal hyperplasia",
+      "preferred_label": "congenital adrenal hyperplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018479",
+        "orpha": "Orphanet:418",
+        "umls": "UMLS:C0001627",
+        "mesh": "MESH:D000312"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018479",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050811",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1467",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:255.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7900",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000312",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010323",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200370",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34360",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:992",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:418",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237751000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001627",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:172733763",
+          "display": null
+        }
+      ],
+      "context": "Congenital adrenal hyperplasia (CAH) is a group of rare inherited autosomal recessive disorders characterized by a deficiency of one of the enzymes needed to make specific hormones. CAH effects the adrenal glands located at the top of each kidney. Normally, the adrenal glands are responsible for producing three different hormone",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital adrenal hyperplasia due to 21 hydroxylase deficiency",
+        "Lipoid congenital adrenal hyperplasia",
+        "Congenital adrenal hyperplasia due to 11-Beta-hydroxylase deficiency"
+      ],
+      "pubtator_normalized_name": "Adrenal Hyperplasia Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "21 hydroxylase deficiency",
+      "preferred_label": "21 hydroxylase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008728",
+        "orpha": "Orphanet:90794",
+        "umls": "UMLS:C4273964",
+        "mesh": "MESH:C535979"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008728",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12665",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:903755",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535979",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200374",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C131087",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:201910",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:90794",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:717261006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4273964",
+          "display": null
+        }
+      ],
+      "context": "ater levels; and 3. androgens, which are male sex hormones. An enzyme deficiency will make the body unable to produce one or more of these hormones, which in turn will result in the overproduction of another type of hormone precursor in order to compensate for the loss. The most common form of CAH, 21 hydroxylase deficiency, affects approximately 1:10,000 to 1:15,000 people in the United States and Europe. Among the Yupik Eskimos, the occurrence of the salt-wasting form of this disorder may be as high as 1 in 282 individuals. Other forms of CAH are much rarer. In contrast, non-classical CAH affects approximately 1 in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hyperandrogenism Nonclassic Type due to 21-Hydroxylase Deficiency",
+        "Antley-Bixler Syndrome Phenotype"
+      ],
+      "pubtator_normalized_name": "Congenital adrenal hyperplasia due to 21 hydroxylase deficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:16:07.475751",
+  "document": "Trisomy-X.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Trisomy-X.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "chromosomal disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90-Q99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019040",
+        "orpha": "Orphanet:68335",
+        "umls": "UMLS:C0008626",
+        "mesh": "MESH:D025063"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019040",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080014",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90-Q99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3441",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D025063",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100280",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68335",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409709004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008626",
+          "display": null
+        }
+      ],
+      "context": "Trisomy X is a chromosomal disorder that affects only females. Reported estimates of frequency have varied with the most common estimate being one in 1,000 female births. Because many females with the disorder may have few or no symptoms, they may never be diagnosed. Researchers believe that the disorder is underdiagnosed and that th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Trisomy X",
+      "preferred_label": "trisomy X",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018066",
+        "orpha": "Orphanet:3375",
+        "umls": "UMLS:C0221033",
+        "mesh": "MESH:C535318"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018066",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5672",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:113140",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535318",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C129718",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1798",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3375",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:35111009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0221033",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:423644907",
+          "display": null
+        }
+      ],
+      "context": "Trisomy X is a chromosomal disorder that affects only females. Reported estimates of frequency have varied with the most common estimate being one in 1,000 female births. Because many females with the disorder may have few or no symptoms, they may never be diagnosed. Researchers believe that the disorder is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Klinefelter Syndrome",
+        "Triple X syndrome",
+        "Chromosome Xq duplication syndrome"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

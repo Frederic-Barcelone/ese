@@ -1,0 +1,40 @@
+{
+  "doc_id": "AIDS-Dysmorphic-Syndrome",
+  "doc_filename": "AIDS-Dysmorphic-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "AIDS dysmorphic syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "immunodeficiency",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "DNA",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 3242,
+  "file_size_human": "3.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "AIDS Dysmorphic Syndrome: Craniofacial Abnormalities and Perinatal HIV Infection",
+  "short_description": "Clinical document describing facial malformations, growth deficiencies, and diagnostic considerations in infants with perinatal HIV infection.",
+  "long_description": "This clinical research document examines AIDS dysmorphic syndrome (also known as HIV embryopathy), focusing on specific craniofacial abnormalities observed in HIV-infected infants. The document details characteristic features including prominent boxlike forehead, large wide eyes, flattened nasal bridge, and pronounced philtrum. It discusses perinatal HIV transmission rates, diagnostic challenges in infants under 18 months due to maternal antibodies, and specialized testing methods including viral cultures and PCR. The document also covers the epidemiology of pediatric HIV infection, transmission routes, and laboratory monitoring approaches for assessing immune function and disease progression.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:22:17.479239"
+}

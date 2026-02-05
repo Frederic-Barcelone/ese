@@ -1,0 +1,35 @@
+{
+  "doc_id": "Achalasia",
+  "doc_filename": "Achalasia.pdf",
+  "top_entities": [
+    {
+      "name": "achalasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "barium",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2101,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Achalasia: Clinical Overview and Diagnostic Approaches",
+  "short_description": "Clinical document describing the causes, demographics, and diagnostic methods for achalasia, a rare esophageal motility disorder.",
+  "long_description": "This clinical document provides a comprehensive overview of achalasia, a rare esophageal disorder characterized by impaired muscle function. The document discusses the unknown etiology of the condition, with suspected involvement of nerve degeneration in Auerbach's plexus, and mentions potential inherited forms. It covers the demographic characteristics of affected patients, typically adults aged 25-60 years with equal gender distribution except in inherited cases where males are more frequently affected. The document details diagnostic approaches including radiological examination with barium studies to identify esophageal dilation and food retention, as well as manometric pressure measurements for definitive diagnosis confirmation.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:25:34.603584"
+}

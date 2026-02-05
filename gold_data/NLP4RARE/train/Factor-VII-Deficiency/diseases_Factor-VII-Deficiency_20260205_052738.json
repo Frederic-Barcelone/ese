@@ -1,0 +1,100 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:27:38.047597",
+  "document": "Factor-VII-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Factor-VII-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Factor VII deficiency",
+      "preferred_label": "factor VII deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009211",
+        "orpha": "Orphanet:327",
+        "umls": "UMLS:C0272320",
+        "mesh": "D005168"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009211",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2215",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2238",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:473015",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10016079",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C131631",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:227500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:327",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0272320",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005168",
+          "display": "Factor VII Deficiency"
+        }
+      ],
+      "context": "Factor VII deficiency affects males and females in equal numbers. The disorder is estimated to affect 1 in 300,000 to 500,000 individuals in the general population. However, many cases of factor VII deficiency go undiagnosed or misdiagnosed, making it difficult to determine the true frequency in the general population.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Vitamin K-Dependent Clotting Factors Combined Deficiency Of 1",
+        "Familial Multiple Coagulation Factor Deficiency IV"
+      ],
+      "pubtator_normalized_name": "Factor VII Deficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

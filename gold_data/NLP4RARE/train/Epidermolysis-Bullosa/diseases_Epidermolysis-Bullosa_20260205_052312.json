@@ -1,0 +1,367 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:23:12.110625",
+  "document": "Epidermolysis-Bullosa.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Epidermolysis-Bullosa.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "epidermolytic ichthyosis",
+      "preferred_label": "epidermolytic ichthyosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007239",
+        "orpha": null,
+        "umls": "UMLS:C0079153",
+        "mesh": "MESH:D017488"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007239",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4603",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:38179",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017488",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1100",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:113800",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:254167000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0079153",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1183730789",
+          "display": null
+        }
+      ],
+      "context": "Some type of EB occurs in an estimated 1 out of every 50,000 live births. The disorder occurs in every racial and ethnic group throughout the world and affects both sexes equally. Any blistering disorder in the newborn period may mimic EB. These include herpes simplex virus, epidermolytic ichthyosis, bullous impetigo and incontinentia pigmenti. Clinical diagnosis of the type of EB based on presentation in the neonatal period should be avoided as all types of EB may look alike in this age group. When EB is suspected, a skin biopsy should be obtained and sent to an appropriate laboratory to conf",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ichthyosis Cyclic with Epidermolytic Hyperkeratosis"
+      ],
+      "pubtator_normalized_name": "Hyperkeratosis Epidermolytic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "incontinentia pigmenti",
+      "preferred_label": "incontinentia pigmenti",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q82.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010631",
+        "orpha": "Orphanet:464",
+        "umls": "UMLS:C0021171",
+        "mesh": "MESH:D007184"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010631",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12305",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6778",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q82.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7049",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007184",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200974",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84787",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1300",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:308300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:464",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:367520004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021171",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Incongenita_pigmenti",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1542530268",
+          "display": null
+        }
+      ],
+      "context": "in an estimated 1 out of every 50,000 live births. The disorder occurs in every racial and ethnic group throughout the world and affects both sexes equally. Any blistering disorder in the newborn period may mimic EB. These include herpes simplex virus, epidermolytic ichthyosis, bullous impetigo and incontinentia pigmenti. Clinical diagnosis of the type of EB based on presentation in the neonatal period should be avoided as all types of EB may look alike in this age group. When EB is suspected, a skin biopsy should be obtained and sent to an appropriate laboratory to confirm the diagnosis with transmission electron",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Incontinentia Pigmenti",
+        "Incontinentia pigmenti familial male-lethal type"
+      ],
+      "pubtator_normalized_name": "Pigmentation Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bullous impetigo",
+      "preferred_label": "bullous impetigo",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:L01.03",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018182",
+        "orpha": "Orphanet:36237",
+        "umls": "UMLS:C0021100",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018182",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18820",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L01.03",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:507838",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10006563",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:36237",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:399183005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021100",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1398484288",
+          "display": null
+        }
+      ],
+      "context": "me type of EB occurs in an estimated 1 out of every 50,000 live births. The disorder occurs in every racial and ethnic group throughout the world and affects both sexes equally. Any blistering disorder in the newborn period may mimic EB. These include herpes simplex virus, epidermolytic ichthyosis, bullous impetigo and incontinentia pigmenti. Clinical diagnosis of the type of EB based on presentation in the neonatal period should be avoided as all types of EB may look alike in this age group. When EB is suspected, a skin biopsy should be obtained and sent to an appropriate laboratory to confirm the diagnosis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "herpes simplex",
+      "preferred_label": "herpes simplex",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:B00",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004609",
+        "orpha": null,
+        "umls": "UMLS:C0019348",
+        "mesh": "MESH:D006561"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004609",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8566",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002022",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B00",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:058.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9234",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006561",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:88594005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019348",
+          "display": null
+        }
+      ],
+      "context": "Some type of EB occurs in an estimated 1 out of every 50,000 live births. The disorder occurs in every racial and ethnic group throughout the world and affects both sexes equally. Any blistering disorder in the newborn period may mimic EB. These include herpes simplex virus, epidermolytic ichthyosis, bullous impetigo and incontinentia pigmenti. Clinical diagnosis of the type of EB based on presentation in the neonatal period should be avoided as all types of EB may look alike in this age group. When EB is suspected, a skin biopsy should be obtained and sent to a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Encephalitis Herpes Simplex",
+        "Neonatal herpes",
+        "Herpes Genitalis"
+      ],
+      "pubtator_normalized_name": "Herpes Simplex",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:26:43.772968",
+  "document": "Cervical-Dystonia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cervical-Dystonia.pdf",
+  "total_candidates": 37,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": "Magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "a in the general population is unknown but is estimated to be about 60,000 people in the United States. A diagnosis of cervical dystonia is based upon clinical examination, a detailed patient history, and knowledge of the disorder. No specific laboratory or imaging test confirms a diagnosis of cervical dystonia. There are no abnormalities in laboratory or imaging tests. Magnetic resonance imaging (MRI) of the brain is normal, and MRI of the neck does not help with the diagnosis unless compression of the spinal cord is suspected. Electromyography is not indicated unless there are additional signs of nerve irritation.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "inherited disease susceptibility",
+      "matched_text": "genetic susceptibility",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Z15",
+      "orpha": null
+    },
+    {
+      "name": "nervous system disorder",
+      "matched_text": "neurological disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G00-G99",
+      "orpha": null
+    },
+    {
+      "name": "cervical dystonia",
+      "matched_text": "Cervical dystonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93962"
+    },
+    {
+      "name": "focal dystonia",
+      "matched_text": "focal dystonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:22:52.332445",
+  "document": "ALAD-Porphyria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ALAD-Porphyria.pdf",
+  "total_candidates": 14,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ALAD",
+      "long_form": "aminolevulinic acid dehydratase",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ALAD porphyria is an extremely rare disorder with few cases reported in the medical literature. Most cases have occurred in Europe. However, the disorder can potentially occur in any population. More males have been identified with ALAD porphyria than females in the medical literature, but the disorder",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Glycogen storage disease due to acid maltase deficiency, late-onset",
+      "matched_text": "late-onset",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:420429"
+    },
+    {
+      "name": "ALAD porphyria",
+      "matched_text": "ALAD porphyria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:100924"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

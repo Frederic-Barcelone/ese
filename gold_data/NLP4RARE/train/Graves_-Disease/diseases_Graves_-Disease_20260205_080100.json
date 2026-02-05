@@ -1,0 +1,187 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:01:00.017710",
+  "document": "Graves_-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Graves_-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "hyperthyroidism",
+      "preferred_label": "hyperthyroidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004425",
+        "orpha": null,
+        "umls": "UMLS:C0020550",
+        "mesh": "MESH:D006980"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004425",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:7998",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009189",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:242.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6972",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006980",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200329",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3123",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:34486009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020550",
+          "display": null
+        }
+      ],
+      "context": "r usually develops during middle age with a peak incidence of 40-60, but can also affect children, adolescents and the elderly. Graves’ disease occurs in almost any part of the world. Graves’ disease is estimated to affect 2%-3% of the general population. Graves’ disease is the most common cause of hyperthyroidism. A diagnosis of Graves’ disease is made based upon a detailed patient and family history, a thorough clinical evaluation, identification of characteristic findings, and specialized tests such as blood tests that measure the levels of thyroid hormone and thyroid-stimulating hormone. Blood tests to d",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Graves Disease",
+        "Hyperthyroidism Nonautoimmune",
+        "Hyperthyroidism Familial Gestational"
+      ],
+      "pubtator_normalized_name": "Hyperthyroidism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Graves’ disease",
+      "preferred_label": "Graves disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005364",
+        "orpha": null,
+        "umls": "UMLS:C0018213",
+        "mesh": "MESH:D006111"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005364",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12361",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004237",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:242.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6677",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006111",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200328",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3071",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:353295004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018213",
+          "display": null
+        }
+      ],
+      "context": "Graves’ disease affects females more often than males by a ratio of 5-10 to 1. The disorder usually develops during middle age with a peak incidence of 40-60, but can also affect children, adolescents and the elderly. Graves’ disease occurs in almost any part of the world. Graves’ disease is estimated to affect 2%",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Graves Ophthalmopathy"
+      ],
+      "pubtator_normalized_name": "Graves Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

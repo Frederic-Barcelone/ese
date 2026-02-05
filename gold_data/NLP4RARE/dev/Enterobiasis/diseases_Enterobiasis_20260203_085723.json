@@ -1,0 +1,319 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:57:23.312763",
+  "document": "Enterobiasis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Enterobiasis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "pinworm",
+      "preferred_label": "Enterobiasis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0086227",
+        "mesh": "D017229"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0086227",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017229",
+          "display": "Enterobiasis"
+        }
+      ],
+      "context": "Enterobiasis or pinworm infection is a common, contagious, parasitic infestation found mainly in children. The disorder is spread by swallowing or inhaling the tiny eggs of the pinworm. Enterobiasis rarely causes any serious physical problems except for the main symptom, which is severe rectal itching.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Enterobiasis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "Enterobiasis or pinworm infection is a common, contagious, parasitic infestation found mainly in children. The disorder is spread by swallowing or inhaling the tiny eggs of the pinworm. Enterobiasis rarely causes any serious physical problems except for the main symptom, which is severe rectal itching.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infestation",
+      "preferred_label": "parasitic infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005135",
+        "orpha": null,
+        "umls": "UMLS:C0030499",
+        "mesh": "MESH:D010272"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005135",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1398",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001067",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.13",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:45325",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010272",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27864",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:17322007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0030499",
+          "display": null
+        }
+      ],
+      "context": "Enterobiasis or pinworm infection is a common, contagious, parasitic infestation found mainly in children. The disorder is spread by swallowing or inhaling the tiny eggs of the pinworm. Enterobiasis rarely causes any serious physical problems except for the main symptom, which is severe rectal itching.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Enterobiasis or pinworm infection is a common, contagious, parasitic infestation found mainly in children. The disorder is spread by swallowing or inhaling the tiny eggs of the pinworm. Enterobiasis rarely causes any serious physical problems except for the main symptom, which is severe rectal itching.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "parasitic infestation",
+      "preferred_label": "Infestation",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0851341",
+        "mesh": "D007239"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0851341",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007239",
+          "display": "Infections"
+        }
+      ],
+      "context": "Enterobiasis or pinworm infection is a common, contagious, parasitic infestation found mainly in children. The disorder is spread by swallowing or inhaling the tiny eggs of the pinworm. Enterobiasis rarely causes any serious physical problems except for the main symptom, which is severe rectal itching.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myiasis",
+        "Fascioliasis",
+        "Lice Infestations"
+      ],
+      "pubtator_normalized_name": "Infections",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

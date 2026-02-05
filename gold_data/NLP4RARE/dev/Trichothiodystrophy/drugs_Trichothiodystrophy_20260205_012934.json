@@ -1,0 +1,113 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:29:34.850026",
+  "document": "Trichothiodystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Trichothiodystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "sulfur",
+      "preferred_name": "sulfur",
+      "brand_name": "BENSULFOID",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "POWDER",
+      "route": "TOPICAL",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013455",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA002918",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013455",
+          "display": "Sulfur"
+        }
+      ],
+      "context": "rmed. TTD is typically diagnosed by polarized light microscopy of hair shafts, revealing a tiger-tail pattern, and at times by measurement of reduced sulfur content in patient’s hair. The classical tiger-tail pattern alone usually is enough to diagnose TTD. However, there are other conditions with similar",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "sulfuric acid",
+        "Sulfur Dioxide",
+        "Sulfur-35"
+      ],
+      "pubtator_normalized_name": "Sulfur",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "prenatal",
+      "preferred_name": "Prenatal",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "219363",
+          "display": null
+        }
+      ],
+      "context": "n reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthy",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

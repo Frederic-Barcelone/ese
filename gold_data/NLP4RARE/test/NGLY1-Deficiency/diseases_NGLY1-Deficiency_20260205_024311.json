@@ -1,0 +1,141 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:43:11.282418",
+  "document": "NGLY1-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/NGLY1-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "NGLY1 deficiency",
+      "preferred_label": "NGLY1 Deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0800044",
+        "orpha": "Orphanet:404454",
+        "umls": null,
+        "mesh": "C000626124"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0800044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060728",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12315",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C126746",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1919",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:615273",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:404454",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:768846004",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C000626124",
+          "display": "NGLY1 deficiency"
+        }
+      ],
+      "context": "NGLY1 NGLY1 deficiency is an extremely rare disorder that was first reported in the medical literature in 2012. According to the NGLY1 Foundation, as of January 2018, there are approximately 63 individuals worldwide who have been identified with the disorder. Rare diseases like NGLY1 deficiency often go undiagnosed or mi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "NGLY1 deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rare diseases",
+      "preferred_label": "rare diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "NGLY1 NGLY1 deficiency is an extremely rare disorder that was first reported in the medical literature in 2012. According to the NGLY1 Foundation, as of January 2018, there are approximately 63 individuals worldwide who have been identified with the disorder. Rare diseases like NGLY1 deficiency often go undiagnosed or misdiagnosed, making it difficult to determine the true frequency in the general population.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

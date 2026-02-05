@@ -1,0 +1,122 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:17:49.602145",
+  "document": "Encephalitis-Japanese.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Encephalitis-Japanese.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Japanese Encephalitis",
+      "preferred_label": "Japanese encephalitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A83.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019209",
+        "orpha": "Orphanet:79139",
+        "umls": "UMLS:C0014057",
+        "mesh": "MESH:D004672"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019209",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10844",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007332",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6797",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A83.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:062.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4032",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004672",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10014596",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34577",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1088",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79139",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:52947006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014057",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:961032639",
+          "display": null
+        }
+      ],
+      "context": "Japanese Encephalitis is a severe inflammation of the brain caused by the Japanese B Encephalitis Virus that is transmitted by the bite of infected mosquitoes in certain areas of the world, particularly Asia. This disorder most commonly affects children and tends to be more actively spread during the summer. Symptoms in",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Encephalitis Japanese",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

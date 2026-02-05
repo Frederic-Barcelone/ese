@@ -1,0 +1,35 @@
+{
+  "doc_id": "Chromosome-6-Ring",
+  "doc_filename": "Chromosome-6-Ring.pdf",
+  "top_entities": [
+    {
+      "name": "Kapur-Toriello syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "mental retardation",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2398,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.15,
+  "title": "Chromosome 6 Ring: Clinical Overview and Manifestations",
+  "short_description": "Clinical document describing Chromosome 6 Ring, a rare chromosomal disorder characterized by deletion of material from both ends of chromosome 6 and ring formation.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Chromosome 6 Ring, a rare chromosomal abnormality resulting from the loss of genetic material from both ends of the 6th chromosome and subsequent joining to form a ring structure. The document details the variable clinical presentation, which can range from minimal physical abnormalities with normal intelligence to significant manifestations including growth retardation, mental retardation, psychomotor delays, and craniofacial abnormalities such as microcephaly, malformed ears, and micrognathia. It also covers associated ocular defects including ptosis, microphthalmia, and strabismus. The document notes that this condition typically occurs sporadically due to de novo embryonic errors, with approximately 23 cases reported in medical literature and a slight male predominance.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:40:29.361233"
+}

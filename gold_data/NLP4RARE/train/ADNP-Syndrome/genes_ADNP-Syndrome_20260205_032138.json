@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:21:38.824219",
+  "document": "ADNP-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ADNP-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ADNP",
+      "hgnc_symbol": "ADNP",
+      "full_name": "activity dependent neuroprotector homeobox",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "15766",
+        "entrez": "23394",
+        "ensembl": "ENSG00000101126",
+        "uniprot": "Q9H2P0",
+        "omim": "611386"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "15766",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "23394",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000101126",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "611386",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9H2P0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "404448",
+          "disease_name": "Helsmoortel-Van der Aa syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ADNP syndrome affects females and males in equal numbers. The exact number of people who have this disorder is unknown. According to one estimate, about 1 in 20,000 people in the general population in the United States and Europe have the disorder. Rare disorders like ADNP syndrome often go misdiagnosed",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

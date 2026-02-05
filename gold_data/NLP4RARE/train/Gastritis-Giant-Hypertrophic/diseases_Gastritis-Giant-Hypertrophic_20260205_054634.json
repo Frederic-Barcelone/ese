@@ -1,0 +1,197 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:46:34.497302",
+  "document": "Gastritis-Giant-Hypertrophic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gastritis-Giant-Hypertrophic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Giant hypertrophic gastritis",
+      "preferred_label": "gastric mucosal hypertrophy",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007652",
+        "orpha": "Orphanet:2494",
+        "umls": "UMLS:C0017155",
+        "mesh": "MESH:D005758"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007652",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8757",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000946",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2436",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:535.21",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4844",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005758",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10017868",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C67277",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1432",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:137280",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2494",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60002000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017155",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1343994188",
+          "display": null
+        }
+      ],
+      "context": "Giant hypertrophic gastritis (GHG) is a general term for inflammation of the stomach due to the accumulation of inflammatory cells in the inner wall (mucosa) of the stomach resulting in abnormally large, coiled ridges or folds that resemble polyps in the inner wall of the stomach (hypertrophic gastric folds). GHG encompasses a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "polyps",
+      "preferred_label": "polyp",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:N84",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005079",
+        "orpha": null,
+        "umls": "UMLS:C0032584",
+        "mesh": "MESH:D011127"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005079",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000662",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:N84",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19397",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011127",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3340",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:441456002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032584",
+          "display": null
+        }
+      ],
+      "context": "Giant hypertrophic gastritis (GHG) is a general term for inflammation of the stomach due to the accumulation of inflammatory cells in the inner wall (mucosa) of the stomach resulting in abnormally large, coiled ridges or folds that resemble polyps in the inner wall of the stomach (hypertrophic gastric folds). GHG encompasses a collection of disorders. The symptoms of GHG may vary from case to case. The exact cause of GHG is unknown. Giant hypertrophic gastritis affects males and females in equal numbers. It can affect children or adults but",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polypoidal Choroidal Vasculopathy"
+      ],
+      "pubtator_normalized_name": "Polyps",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

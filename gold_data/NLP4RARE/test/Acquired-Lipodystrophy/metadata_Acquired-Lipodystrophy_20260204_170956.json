@@ -1,0 +1,55 @@
+{
+  "doc_id": "Acquired-Lipodystrophy",
+  "doc_filename": "Acquired-Lipodystrophy.pdf",
+  "top_entities": [
+    {
+      "name": "acquired generalized lipodystrophy",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "genetic",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Insulin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "TRIGLYCERIDES",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "AGL",
+      "mention_count": 1,
+      "entity_type": "gene"
+    },
+    {
+      "name": "KIDINS220",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 2627,
+  "file_size_human": "2.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Acquired Lipodystrophy: Clinical Overview and Subtypes",
+  "short_description": "Clinical document describing acquired lipodystrophy, a non-inherited condition characterized by loss of body fat in specific areas, with various subtypes and metabolic complications.",
+  "long_description": "This clinical reference document provides a comprehensive overview of acquired lipodystrophy, a group of disorders involving the loss of adipose tissue that develops during an individual's lifetime rather than being inherited. The document details the various subtypes including acquired generalized lipodystrophy (Lawrence syndrome), acquired partial lipodystrophy (Barraquer-Simons syndrome), localized lipodystrophy, and HIV-associated lipodystrophy. It covers the clinical presentation, including characteristic fat loss patterns affecting the arms, legs, face, neck, and chest, as well as associated metabolic complications such as insulin resistance, glucose intolerance, hypertriglyceridemia, and diabetes. The document also provides epidemiological data showing gender and ethnic distribution patterns across different subtypes, with particular attention to the prevalence in HIV-infected individuals receiving antiretroviral therapy.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T16:09:56.430467"
+}

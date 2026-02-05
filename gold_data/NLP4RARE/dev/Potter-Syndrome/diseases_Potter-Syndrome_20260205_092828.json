@@ -1,0 +1,262 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:28:28.468082",
+  "document": "Potter-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Potter-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "bilateral renal agenesis",
+      "preferred_label": "bilateral renal agenesis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "ICD10CM:Q60.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015986",
+        "orpha": "Orphanet:1848",
+        "umls": "UMLS:C1609433",
+        "mesh": "C536482"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015986",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080200",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16579",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q60.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:296299",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101219",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1656",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1848",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1609433",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536482",
+          "display": "Hereditary renal agenesis"
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidence or prevalence of Potter syndrome range from 1 in 4,000 to 10,000 births. A couple studies have shown that ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary renal agenesis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "obstructive uropathy",
+      "preferred_label": "obstructive uropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003330",
+        "orpha": null,
+        "umls": "UMLS:C0178879",
+        "mesh": "C536483"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003330",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5200",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009571",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:599.60",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:64247",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200178",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3675",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:7163005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0178879",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536483",
+          "display": "Uropathy distal obstructive polydactyly"
+        }
+      ],
+      "context": "ter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimates for the incidence or prevalence of Potter syndrome range from 1 in 4,000 to 10,000 births. A couple studies have shown that male newborns are affected more often than female newborns, probably due to the obstructive uropathy that is seen more often in males.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Kashani Strom Utley syndrome"
+      ],
+      "pubtator_normalized_name": "Uropathy distal obstructive polydactyly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Potter syndrome",
+      "preferred_label": "Potter syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q60.6",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001558",
+        "orpha": null,
+        "umls": "UMLS:C0178426",
+        "mesh": "C536482"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001558",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12594",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q60.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:472617",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200157",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C40435",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:41962002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0178426",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536482",
+          "display": "Hereditary renal agenesis"
+        }
+      ],
+      "context": "Potter syndrome is a rare disorder, and the exact incidence or prevalence is unknown. The main cause of this condition, bilateral renal agenesis, occurs in approximately 1 in 5,000 fetuses and accounts for about 20% of Potter syndrome cases. The incidence or prevalence of other causes are unknown. Overall, estimat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary renal agenesis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

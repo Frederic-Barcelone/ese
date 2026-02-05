@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:56:06.380508",
+  "document": "Autosomal-Dominant-Porencephaly-Type-I.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Autosomal-Dominant-Porencephaly-Type-I.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "porencephaly",
+      "preferred_label": "porencephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017410",
+        "orpha": "Orphanet:2940",
+        "umls": "UMLS:C4082173",
+        "mesh": "MESH:D065708"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017410",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060263",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7430",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002132",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:901502",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D065708",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036172",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1201074",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2940",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4082173",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:137059367",
+          "display": null
+        }
+      ],
+      "context": "Autosomal dominant porencephaly type | affects males and females in equal numbers. The incidence of the disorder in the general population is unknown. Autosomal dominant porencephaly type | may go undiagnosed or misdiagnosed, making it difficult to determine the true frequency of this disorder.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:29:15.600996",
+  "document": "Hypoplastic-Left-Heart-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Hypoplastic-Left-Heart-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hypoplastic left heart syndrome",
+      "preferred_label": "hypoplastic left heart syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:Q23.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004933",
+        "orpha": "Orphanet:2248",
+        "umls": "UMLS:C0152101",
+        "mesh": "MESH:D018636"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004933",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9955",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6739",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q23.4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57746",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018636",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10021076",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200249",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98894",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1277",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:241550",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2248",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62067003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152101",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1811800027",
+          "display": null
+        }
+      ],
+      "context": "Hypoplastic left heart syndrome is a term used to describe a group of closely related rare heart defects that are present at birth (congenital). The normal heart has four chambers. The two upper chambers, known as atria, are separated from each other by a fibrous partition known as the atrial septum. The two lower chambers are kn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypoplastic Left Heart Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heart defects",
+      "preferred_label": "heart defect",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005453",
+        "orpha": null,
+        "umls": "UMLS:C0152021",
+        "mesh": "MESH:D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1682",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005207",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57501",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006330",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C95834",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:13213009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2004408087",
+          "display": null
+        }
+      ],
+      "context": "Hypoplastic left heart syndrome is a term used to describe a group of closely related rare heart defects that are present at birth (congenital). The normal heart has four chambers. The two upper chambers, known as atria, are separated from each other by a fibrous partition known as the atrial septum. The two lower chambers are known as ventricles and are separated from each other by the ventricular se",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Septal Defects",
+        "Heart defects limb shortening",
+        "Heart Septal Defects Ventricular"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

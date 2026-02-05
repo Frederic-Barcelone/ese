@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:10:44.352539",
+  "document": "Fructose-Intolerance-Hereditary.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Fructose-Intolerance-Hereditary.pdf",
+  "total_candidates": 37,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HFI",
+      "long_form": "Hereditary fructose intolerance",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "There are three inherited disorders of fructose metabolism that are recognized and characterized. Essential fructosuria, is a mild disorder not requiring treatment, while Hereditary fructose intolerance (HFI) and Hereditary fructose-1,6-biphosphatase deficiency (HFBP) are treatable and controllable but must be taken seriously. Hereditary Fructose Intolerance may be diagnosed at birth or shortly thereafter when the infant is weaned. Like other autosomal disorders it is equally distributed among males and females. Estimates of the incidence of the disorder range widely from 1:10,000 to 1:100,000 births.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HFBP",
+      "long_form": "Hereditary fructose-1,6biphosphatase deficiency",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "There are three inherited disorders of fructose metabolism that are recognized and characterized. Essential fructosuria, is a mild disorder not requiring treatment, while Hereditary fructose intolerance (HFI) and Hereditary fructose-1,6-biphosphatase deficiency (HFBP) are treatable and controllable but must be taken seriously. Hereditary Fructose Intolerance may be diagnosed at birth or shortly thereafter when the infant is weaned. Like other autosomal disorders it is equally distributed among males and females. Estimates of the incidence of the disorder range widely from 1:10,000 to 1:100,000 births. A diagnosis of HF can be definitively confirmed by either o",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HF",
+      "long_form": "Hydrops fetalis",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ial fructosuria, is a mild disorder not requiring treatment, while Hereditary fructose intolerance (HFI) and Hereditary fructose-1,6-biphosphatase deficiency (HFBP) are treatable and controllable but mu",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DNA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ch of these tests carries with it a substantial risk, especially to a newborn child. A non-invasive DNA test is increasingly being recommended instead.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Fructose-1,6-bisphosphatase deficiency",
+      "matched_text": "fructose-1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:348"
+    },
+    {
+      "name": "hereditary fructose intolerance",
+      "matched_text": "Hereditary fructose intolerance",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E74.12",
+      "orpha": "Orphanet:469"
+    },
+    {
+      "name": "essential fructosuria",
+      "matched_text": "Essential fructosuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E74.11",
+      "orpha": "Orphanet:2056"
+    },
+    {
+      "name": "Hydrops fetalis",
+      "matched_text": "HF",
+      "abbreviation": "HF",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "P83.2",
+      "orpha": "ORPHA:1041"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Fructose",
+      "matched_text": "fructose",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "DNA",
+      "matched_text": "DNA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

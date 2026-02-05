@@ -1,0 +1,35 @@
+{
+  "doc_id": "Dysautonomia-Familial",
+  "doc_filename": "Dysautonomia-Familial.pdf",
+  "top_entities": [
+    {
+      "name": "Riley-Day syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "genetic disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1637,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Familial Dysautonomia: Genetic Disorder in Ashkenazi Jewish Populations",
+  "short_description": "A rare genetic disorder affecting males and females equally, primarily occurring in infants of Ashkenazi Jewish or Eastern European ancestry.",
+  "long_description": "This document provides information about familial dysautonomia, a rare genetic disorder that demonstrates equal prevalence between males and females. The condition predominantly affects infants from Ashkenazi Jewish or Eastern European backgrounds, with approximately 1 in 30 people of East European Jewish ancestry serving as carriers of the defective gene responsible for this disorder. The document appears to focus on the epidemiological and genetic characteristics of this hereditary condition.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:12:32.401640"
+}

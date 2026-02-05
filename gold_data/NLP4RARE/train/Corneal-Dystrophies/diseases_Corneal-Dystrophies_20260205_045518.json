@@ -1,0 +1,311 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:55:18.878755",
+  "document": "Corneal-Dystrophies.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Corneal-Dystrophies.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "cause symptoms (asymptomatic) in some individuals; in others they may cause significant vision impairment. The age of onset and specific symptoms vary among the different forms of corneal dystrophy. The disorders have some similar characteristics - most forms of corneal dystrophy affect both eyes (bilateral), progress slowly, do not affect other areas of the body, and tend to run in families. Most forms are inherited as autosomal dominant traits; a few are inherited as autosomal recessive traits. Corneal dystrophies affect women and men in equal numbers, except for Fuchs corneal dystrophy which affect",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Corneal dystrophies",
+      "preferred_label": "corneal dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018102",
+        "orpha": "Orphanet:34533",
+        "umls": "UMLS:C0010036",
+        "mesh": "MESH:D003317"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018102",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2566",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001131",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:371.50",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3619",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003317",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10011005",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34513",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:34533",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:5587004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010036",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1291475891",
+          "display": null
+        }
+      ],
+      "context": "Corneal dystrophies are a group of genetic, often progressive, eye disorders in which abnormal material often accumulates in the clear (transparent) outer layer of the eye (cornea). Corneal dystrophies may not cause symptoms (asymptomatic) in some individuals; in others they may cause significant vision impairment. Th",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneal Dystrophy Band-Shaped",
+        "Corneal dystrophy and perceptive deafness",
+        "Oculodental syndrome Rutherfurd syndrome"
+      ],
+      "pubtator_normalized_name": "Corneal Dystrophies Hereditary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vision impairment",
+      "preferred_label": "vision impairment",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H54",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001941",
+        "orpha": null,
+        "umls": "UMLS:C0456909",
+        "mesh": "MESH:D001766"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001941",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1432",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H54",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:369",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:99138",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001766",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97109",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:105597003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0456909",
+          "display": null
+        }
+      ],
+      "context": "Corneal dystrophies are a group of genetic, often progressive, eye disorders in which abnormal material often accumulates in the clear (transparent) outer layer of the eye (cornea). Corneal dystrophies may not cause symptoms (asymptomatic) in some individuals; in others they may cause significant vision impairment. The age of onset and specific symptoms vary among the different forms of corneal dystrophy. The disorders have some similar characteristics - most forms of corneal dystrophy affect both eyes (bilateral), progress slowly, do not affect other areas of the body, and tend to run in families. Most form",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Vision Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eye disorders",
+      "preferred_label": "eye disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005328",
+        "orpha": null,
+        "umls": "UMLS:C0015397",
+        "mesh": "MESH:D005128"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005328",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5614",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003966",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:379.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5092",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005128",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26767",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:371405004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015397",
+          "display": null
+        }
+      ],
+      "context": "Corneal dystrophies are a group of genetic, often progressive, eye disorders in which abnormal material often accumulates in the clear (transparent) outer layer of the eye (cornea). Corneal dystrophies may not cause symptoms (asymptomatic) in some individuals; in others they may cause significant vision impairment. The age of onset and specific symptoms vary among the diffe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "REM Sleep Behavior Disorder",
+        "Ocular Motility Disorders",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Eye Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

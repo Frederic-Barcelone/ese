@@ -1,0 +1,358 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:48:50.657982",
+  "document": "Botulism.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Botulism.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "foodborne botulism",
+      "preferred_label": "foodborne botulism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016453",
+        "orpha": "Orphanet:228371",
+        "umls": "UMLS:C1739094",
+        "mesh": "D001906"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050352",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20591",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:005.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:320728",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128341",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:228371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:398523009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1739094",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2033726602",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001906",
+          "display": "Botulism"
+        }
+      ],
+      "context": "nosis of botulism may be made based upon a thorough clinical evaluation and a detailed patient history. The mouse bioassay is the “gold standard” method for laboratory confirmation of the clinical diagnosis and may demonstrate the presence of botulinum toxin in serum, gastric fluid, stool, or food (foodborne botulism) specimens. Botulism can also be confirmed by culture of C. botulinum organisms from gastric fluid, stool, or a contaminated wound (wound botulism).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Botulism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "wound botulism",
+      "preferred_label": "wound botulism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A48.52",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015803",
+        "orpha": "Orphanet:178475",
+        "umls": "UMLS:C1306794",
+        "mesh": "D001906"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015803",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050353",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20149",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A48.52",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:040.42",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:224933",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128342",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:178475",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:398530003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1306794",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1674998448",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001906",
+          "display": "Botulism"
+        }
+      ],
+      "context": "d for laboratory confirmation of the clinical diagnosis and may demonstrate the presence of botulinum toxin in serum, gastric fluid, stool, or food (foodborne botulism) specimens. Botulism can also be confirmed by culture of C. botulinum organisms from gastric fluid, stool, or a contaminated wound (wound botulism).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Botulism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "botulism",
+      "preferred_label": "botulism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005498",
+        "orpha": "Orphanet:1267",
+        "umls": "UMLS:C0006057",
+        "mesh": "MESH:D001906"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005498",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:5000-0060",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11976",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005542",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:943",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14204",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001906",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10006041",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84599",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:867",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1267",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:398565003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006057",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:78422942",
+          "display": null
+        }
+      ],
+      "context": "Clostridium botulinum. The clinical diagnosis of botulism may be made based upon a thorough clinical evaluation and a detailed patient history. The mouse bioassay is the “gold standard” method for laboratory confirmation of the clinical diagnosis and may demonstrate the presence of botulinum toxin in serum, gastric fluid, stool, or food (foodborne botulis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Botulism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "wound",
+      "preferred_label": "wound",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "” method for laboratory confirmation of the clinical diagnosis and may demonstrate the presence of botulinum toxin in serum, gastric fluid, stool, or food (foodborne botulism) specimens. Botulism can also be confirmed by culture of C. botulinum organisms from gastric fluid, stool, or a contaminated wound (wound botulism).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Wound Infection",
+        "Wounds Nonpenetrating",
+        "Wounds Gunshot"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

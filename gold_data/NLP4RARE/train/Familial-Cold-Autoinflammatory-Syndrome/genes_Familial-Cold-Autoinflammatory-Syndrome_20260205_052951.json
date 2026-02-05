@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:29:51.376797",
+  "document": "Familial-Cold-Autoinflammatory-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Familial-Cold-Autoinflammatory-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "FCAS",
+      "hgnc_symbol": "NLRP3",
+      "full_name": "NLR family pyrin domain containing 3",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "16400",
+        "entrez": "114548",
+        "ensembl": "ENSG00000162711",
+        "uniprot": "Q96P20",
+        "omim": "606416"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "16400",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "114548",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000162711",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "606416",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q96P20",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "Since FCAS is a newly discovered condition, the actual incidence and prevalence of the disease is difficult to determine at this time.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

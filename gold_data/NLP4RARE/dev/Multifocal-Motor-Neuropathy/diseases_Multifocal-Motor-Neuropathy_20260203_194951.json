@@ -1,0 +1,757 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:49:51.989270",
+  "document": "Multifocal-Motor-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Multifocal-Motor-Neuropathy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Multifocal motor neuropathy",
+      "preferred_label": "multifocal motor neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G61.82",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018979",
+        "orpha": "Orphanet:641",
+        "umls": "UMLS:C0393847",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018979",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:11011",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G61.82",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:357.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:581615",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200031",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1952",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:641",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230591002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0393847",
+          "display": null
+        }
+      ],
+      "context": "Multifocal motor neuropathy is a rare disorder characterized by slowly progressive muscle weakness, primarily of the arms and legs. The disorder is considered to be immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that targe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Multifocal motor neuropathy is a rare disorder characterized by slowly progressive muscle weakness, primarily of the arms and legs. The disorder is considered to be immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protei",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "arms",
+      "preferred_label": "arms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009994",
+        "orpha": "Orphanet:99756",
+        "umls": "UMLS:C0206655",
+        "mesh": "MESH:D018232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4051",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000248",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4701",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006779",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8920/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065867",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3749",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268220",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ARMS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99756",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404053004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206655",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1742058067",
+          "display": null
+        }
+      ],
+      "context": "Multifocal motor neuropathy is a rare disorder characterized by slowly progressive muscle weakness, primarily of the arms and legs. The disorder is considered to be immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. Other symptoms including muscles cramps and wasting (atrophy",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphocytic Choriomeningitis"
+      ],
+      "pubtator_normalized_name": "Arms Malformation of",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Multifocal motor neuropathy is a rare disorder characterized by slowly progressive muscle weakness, primarily of the arms and legs. The disorder is considered to be immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. Other symptoms including muscles cramps and wasting (atrophy) of muscles can also o",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "e disorder is considered to be immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. Other symptoms including muscles cramps and wasting (atrophy) of muscles can also occur. The term multifocal means arising from two or more spots. The term motor refers to the motor nerves, which are those that carry nerve impulses from the brain to the muscles. The exact, underlying cause of this disorder is not fully understood. The disorder is acquired at some point duri",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "acquired",
+      "preferred_label": "acquired",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021141",
+        "orpha": "Orphanet:409941",
+        "umls": null,
+        "mesh": "D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021141",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:409941",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000163",
+          "display": "Acquired Immunodeficiency Syndrome"
+        }
+      ],
+      "context": "ng (atrophy) of muscles can also occur. The term multifocal means arising from two or more spots. The term motor refers to the motor nerves, which are those that carry nerve impulses from the brain to the muscles. The exact, underlying cause of this disorder is not fully understood. The disorder is acquired at some point during a person’s life; a person is not born with the disorder. Multifocal motor neuropathy usually responds to treatment with intravenous immunoglobulin. Multifocal motor neuropathy affects both men and women, although men are more frequently affected than women by a ratio of about 2",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acquired ichthyosis",
+        "Blindness",
+        "Anemia Hemolytic"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "men",
+      "preferred_label": "MEN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E31.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017169",
+        "orpha": "Orphanet:276161",
+        "umls": "UMLS:C0027662",
+        "mesh": "MESH:D009377"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017169",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3125",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21044",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E31.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:258.0",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8360/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:45036",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009377",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10061299",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100148",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C6432",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:131100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:276161",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:46724008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027662",
+          "display": null
+        }
+      ],
+      "context": "xact, underlying cause of this disorder is not fully understood. The disorder is acquired at some point during a person’s life; a person is not born with the disorder. Multifocal motor neuropathy usually responds to treatment with intravenous immunoglobulin. Multifocal motor neuropathy affects both men and women, although men are more frequently affected than women by a ratio of about 2.7:1. Men also tend to be diagnosed at a younger age. The median age of onset is 40 years old, although the disorder has been reported individuals ranging from 20-80 years of age. In a handful of instances, the dis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Meningism",
+        "Meningioma",
+        "Substance-Related Disorders"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "sponds to treatment with intravenous immunoglobulin. Multifocal motor neuropathy affects both men and women, although men are more frequently affected than women by a ratio of about 2.7:1. Men also tend to be diagnosed at a younger age. The median age of onset is 40 years old, although the disorder has been reported individuals ranging from 20-80 years of age. In a handful of instances, the disorder has occurred in children (pediatric cases). Multifocal motor neuropathy is estimated to affect about 0.6 per 100,000 in the general population. Because rare disorders often go undiagnosed or misdiagno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "onset is 40 years old, although the disorder has been reported individuals ranging from 20-80 years of age. In a handful of instances, the disorder has occurred in children (pediatric cases). Multifocal motor neuropathy is estimated to affect about 0.6 per 100,000 in the general population. Because rare disorders often go undiagnosed or misdiagnosed, determining their true frequency in the general population is difficult.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "muscle weakness",
+      "preferred_label": "Paresis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0030552",
+        "mesh": "D010291"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0030552",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010291",
+          "display": "Paresis"
+        }
+      ],
+      "context": "Multifocal motor neuropathy is a rare disorder characterized by slowly progressive muscle weakness, primarily of the arms and legs. The disorder is considered to be immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. Other symptoms including muscles cram",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Worster Drought syndrome",
+        "Facial Paralysis",
+        "Vocal Cord Paralysis"
+      ],
+      "pubtator_normalized_name": "Paresis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

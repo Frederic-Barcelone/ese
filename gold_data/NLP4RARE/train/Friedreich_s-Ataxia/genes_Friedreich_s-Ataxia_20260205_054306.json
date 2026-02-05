@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:43:06.314652",
+  "document": "Friedreich_s-Ataxia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Friedreich_s-Ataxia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "FXN",
+      "hgnc_symbol": "FXN",
+      "full_name": "frataxin",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "3951",
+        "entrez": "2395",
+        "ensembl": "ENSG00000165060",
+        "uniprot": "Q16595",
+        "omim": "606829"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "3951",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2395",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000165060",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "606829",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q16595",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "95",
+          "disease_name": "Friedreich ataxia",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "FXN The prevalence of FRDA is approximately 1 in 40,000 people. FRDA is the most common inherited ataxia in Europe, the Middle East, South Asia (Indian subcontinent), and North Africa. It is rarely identified in other populations.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

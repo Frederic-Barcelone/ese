@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:07:26.339901",
+  "document": "Diencephalic-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Diencephalic-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "thrive",
+      "preferred_name": "Thrive",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1011867",
+          "display": null
+        }
+      ],
+      "context": "s and young children may develop symptoms that include the failure to gain weight and grow as would be expected based upon age and gender (failure to thrive) and abnormal progressive thinness and weakness (emaciation). Affected infants and children may behave in an alert, happy and outgoing manner, which ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "alert",
+      "preferred_name": "Alert",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000077408",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1863601",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000077408",
+          "display": "Modafinil"
+        }
+      ],
+      "context": "d upon age and gender (failure to thrive) and abnormal progressive thinness and weakness (emaciation). Affected infants and children may behave in an alert, happy and outgoing manner, which is in contrast to their outward appearance. Additional symptoms such as vomiting, vision abnormalities, headaches, ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "alertenone"
+      ],
+      "pubtator_normalized_name": "Modafinil",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,779 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:29:29.151367",
+  "document": "Familial-Adenomatous-Polyposis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Familial-Adenomatous-Polyposis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Familial adenomatous polyposis",
+      "preferred_label": "Familial Adenomatous Polyposis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021055",
+        "orpha": "Orphanet:733",
+        "umls": "UMLS:C0032580",
+        "mesh": "D011125"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021055",
+          "display": null
+        },
+        {
+          "system": "DECIPHER",
+          "code": "DECIPHER:49",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050424",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6408",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8220/0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:46010",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10056981",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200915",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3339",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1121",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:175100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:733",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:72900001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032580",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011125",
+          "display": "Adenomatous Polyposis Coli"
+        }
+      ],
+      "context": "Familial adenomatous polyposis (FAP) is a rare inherited cancer predisposition syndrome characterized by hundreds to thousands of precancerous colorectal polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an auto",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Attenuated familial adenomatous polyposis"
+      ],
+      "pubtator_normalized_name": "Adenomatous Polyposis Coli",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FAP",
+      "preferred_label": "Familial adenomatous polyposis",
+      "abbreviation": "FAP",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D12.6",
+        "icd11": "2B90.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:733",
+        "umls": null,
+        "mesh": "D011125"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:733",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D12.6",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2B90.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011125",
+          "display": "Adenomatous Polyposis Coli"
+        }
+      ],
+      "context": "Familial adenomatous polyposis (FAP) is a rare inherited cancer predisposition syndrome characterized by hundreds to thousands of precancerous colorectal polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Attenuated familial adenomatous polyposis"
+      ],
+      "pubtator_normalized_name": "Adenomatous Polyposis Coli",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "colorectal cancer",
+      "preferred_label": "colorectal carcinoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024331",
+        "orpha": null,
+        "umls": "UMLS:C0009402",
+        "mesh": "D015179"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024331",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080199",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001951",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3170",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2955",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009402",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015179",
+          "display": "Colorectal Neoplasms"
+        }
+      ],
+      "context": "g features: familial adenomatous polyposis, Gardner syndrome, Turcot syndrome and attenuated FAP. Familial adenomatous polyposis affects males and females in equal numbers. It occurs in approximately one in 5,000 to 10,000 individuals in the United States and accounts for about 0.5% of all cases of colorectal cancer. One estimate suggests that familial adenomatous polyposis affects 50,000 American families. According to national registries, familial adenomatous polyposis occurs in 2.29-3.2 per 100,000 individuals. Classical FAP is diagnosed clinically when an individual has 100 or more adenomatous colorectal p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polyposis Syndrome Hereditary Mixed 1"
+      ],
+      "pubtator_normalized_name": "Colorectal Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "colorectal polyps",
+      "preferred_label": "colorectal polyp",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021392",
+        "orpha": null,
+        "umls": "UMLS:C0949059",
+        "mesh": "C563365"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021392",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:182694",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C5679",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:399505005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0949059",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:537826614",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C563365",
+          "display": "Polyposis Syndrome Hereditary Mixed 1"
+        }
+      ],
+      "context": "Familial adenomatous polyposis (FAP) is a rare inherited cancer predisposition syndrome characterized by hundreds to thousands of precancerous colorectal polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Colorectal Adenomatous Polyposis Autosomal Recessive"
+      ],
+      "pubtator_normalized_name": "Polyposis Syndrome Hereditary Mixed 1",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Gardner syndrome",
+      "preferred_label": "Gardner syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021056",
+        "orpha": null,
+        "umls": "UMLS:C2713442",
+        "mesh": "D005736"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021056",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080409",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:398651",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:175100",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2713442",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005736",
+          "display": "Gardner Syndrome"
+        }
+      ],
+      "context": "elop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposis conditions that have overlapping features: familial adenomatous polyposis, Gardner syndrome, Turcot syndrome and attenuated FAP. Familial adenomatous polyposis affects males and females in equal numbers. It occurs in approximately one in 5,000 to 10,000 individuals in the United States and accounts for about 0.5% of all cases of colorectal cancer. One estimate suggests that familial adeno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gardner-Diamond syndrome",
+        "Samson Gardner syndrome",
+        "Gardner Morrisson Abbot syndrome"
+      ],
+      "pubtator_normalized_name": "Gardner Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Turcot syndrome",
+      "preferred_label": "Turcot Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010159",
+        "orpha": null,
+        "umls": "UMLS:C5399763",
+        "mesh": "MESH:C536928"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010159",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:420",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1748029",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536928",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1805",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:276300",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61665008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5399763",
+          "display": null
+        }
+      ],
+      "context": "colon and/or rectum at a relatively young age. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposis conditions that have overlapping features: familial adenomatous polyposis, Gardner syndrome, Turcot syndrome and attenuated FAP. Familial adenomatous polyposis affects males and females in equal numbers. It occurs in approximately one in 5,000 to 10,000 individuals in the United States and accounts for about 0.5% of all cases of colorectal cancer. One estimate suggests that familial adenomatous polyposis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Turcot syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "attenuated FAP",
+      "preferred_label": "attenuated FAP",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016362",
+        "orpha": "Orphanet:220460",
+        "umls": "UMLS:C2674616",
+        "mesh": "MESH:C538265"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016362",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8532",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:436213",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538265",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C6729",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:220460",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:715866009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2674616",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1023083906",
+          "display": null
+        }
+      ],
+      "context": "at a relatively young age. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposis conditions that have overlapping features: familial adenomatous polyposis, Gardner syndrome, Turcot syndrome and attenuated FAP. Familial adenomatous polyposis affects males and females in equal numbers. It occurs in approximately one in 5,000 to 10,000 individuals in the United States and accounts for about 0.5% of all cases of colorectal cancer. One estimate suggests that familial adenomatous polyposis affects 50,000 Amer",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "polyposis",
+      "preferred_label": "polyposis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000147",
+        "orpha": null,
+        "umls": "UMLS:C0334108",
+        "mesh": "D011125"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000147",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:137722",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100257",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4089",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0334108",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011125",
+          "display": "Adenomatous Polyposis Coli"
+        }
+      ],
+      "context": "l polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposis conditions that have overlapping features: familial adenomatous polyposis, Gardner syndrome, Turcot syndrome and attenuated FAP. Familial adenomatous polyposis affects males and females in equal numbers. It occurs in approximately one in 5,000 to 10,000 individuals in the United States and accounts",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Turcot syndrome",
+        "Polyposis Syndrome Hereditary Mixed 1",
+        "Intestinal Polyposis"
+      ],
+      "pubtator_normalized_name": "Adenomatous Polyposis Coli",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "Familial adenomatous polyposis (FAP) is a rare inherited cancer predisposition syndrome characterized by hundreds to thousands of precancerous colorectal polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal dominant manner and caused",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polyps",
+      "preferred_label": "polyp",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:N84",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005079",
+        "orpha": null,
+        "umls": "UMLS:C0032584",
+        "mesh": "MESH:D011127"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005079",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000662",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:N84",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19397",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011127",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3340",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:441456002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032584",
+          "display": null
+        }
+      ],
+      "context": "Familial adenomatous polyposis (FAP) is a rare inherited cancer predisposition syndrome characterized by hundreds to thousands of precancerous colorectal polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposis conditions that ha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polypoidal Choroidal Vasculopathy"
+      ],
+      "pubtator_normalized_name": "Polyps",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

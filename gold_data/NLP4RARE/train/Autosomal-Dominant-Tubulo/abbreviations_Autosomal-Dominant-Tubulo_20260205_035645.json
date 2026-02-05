@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:56:45.111182",
+  "document": "Autosomal-Dominant-Tubulo.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Autosomal-Dominant-Tubulo.pdf",
+  "total_candidates": 35,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ADTKD",
+      "long_form": "Autosomal dominant tubulointerstitial kidney disease",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Autosomal dominant tubulointerstitial kidney disease (ADTKD) describes a group of diseases that affect the tubules of the kidney. These conditions have the following characteristics: (1) They are inherited in an autosomal dominant manner; this means that a parent has a 50% chance of passing the disease on to their children. Often many family members are affected. (2) Chronic kidney disease develops. This initially is noticed as an elevated blood creatinine",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ADTKD-UMOD",
+      "long_form": "UMOD-related autosomal dominant tubulointerstitial kidney disease",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "levated uric acid concentrations in blood and gout, which sometimes starts in the teenage years. In ADTKD-UMOD and ADTKDREN, some — but not all - family members are affected by gout. All types of autosomal domi",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ADTKDREN",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "id concentrations in blood and gout, which sometimes starts in the teenage years. In ADTKD-UMOD and ADTKDREN, some — but not all - family members are affected by gout. All types of autosomal dominant tubuloin",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "UMOD-related autosomal dominant tubulointerstitial kidney disease",
+      "matched_text": "ADTKD-UMOD",
+      "abbreviation": "ADTKD-UMOD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q61.5",
+      "orpha": "ORPHA:88950"
+    },
+    {
+      "name": "autosomal dominant tubulointerstitial kidney disease",
+      "matched_text": "Autosomal dominant tubulointerstitial kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:34149"
+    },
+    {
+      "name": "Autosomal dominant tubulointerstitial kidney disease",
+      "matched_text": "ADTKD",
+      "abbreviation": "ADTKD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q61.5",
+      "orpha": "ORPHA:34149"
+    },
+    {
+      "name": "chronic kidney disease",
+      "matched_text": "Chronic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:N18.9",
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "anemia",
+      "matched_text": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Cold",
+      "matched_text": "cold",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,115 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:48:05.407495",
+  "document": "Complete-DiGeorge-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Complete-DiGeorge-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "DiGeorge syndrome",
+      "preferred_label": "DiGeorge syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D82.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008564",
+        "orpha": null,
+        "umls": "UMLS:C0012236",
+        "mesh": "MESH:D004062"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008564",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11198",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15118",
+          "display": null
+        },
+        {
+          "system": "GTR",
+          "code": "GTR:AN1145678",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D82.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:279.11",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4297",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004062",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200712",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2989",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:188400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:77128003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012236",
+          "display": null
+        }
+      ],
+      "context": "Complete DiGeorge syndrome affects both boys and girls. The exact incidence or prevalence of this disorder is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Digeorge Syndrome-Velocardiofacial Syndrome Complex 2",
+        "Microphthalmia and mental deficiency"
+      ],
+      "pubtator_normalized_name": "DiGeorge Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

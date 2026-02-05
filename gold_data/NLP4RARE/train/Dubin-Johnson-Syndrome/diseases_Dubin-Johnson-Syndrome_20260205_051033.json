@@ -1,0 +1,342 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:10:33.628026",
+  "document": "Dubin-Johnson-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dubin-Johnson-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "VII",
+      "preferred_label": "Hereditary combined deficiency of vitamin K-dependent clotting factors",
+      "abbreviation": "VII",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D68.2",
+        "icd11": "3B14.2",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:98434",
+        "umls": null,
+        "mesh": "D006467"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:98434",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D68.2",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B14.2",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006467",
+          "display": "Hemophilia A"
+        }
+      ],
+      "context": "Dubin Johnson Syndrome is a rare genetic liver disorder that tends to affect people of Middle Eastern Jewish heritage disproportionately to other groups. It appears to be associated with clotting factor VII in this population. Symptoms may include a yellowish color to the skin (jaundice), and a liver that is sometimes enlarged and tender. Jaundice, which is caused by excess bilirubin (bile pigment), is usually the only symptom of Dubin Johnson Syndrome. Otherwise a physical examination is normal. The",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Facial Nerve Diseases",
+        "Facial Nerve Injuries",
+        "Vestibulocochlear Nerve Diseases"
+      ],
+      "pubtator_normalized_name": "Hemophilia A",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Dubin Johnson Syndrome",
+      "preferred_label": "Dubin Johnson syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009380",
+        "orpha": "Orphanet:234",
+        "umls": "UMLS:C0022350",
+        "mesh": "MESH:D007566"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009380",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12308",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2793",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7181",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007566",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10013800",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34741",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1063",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:237500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:234",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:44553005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022350",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1691610999",
+          "display": null
+        }
+      ],
+      "context": "Dubin Johnson Syndrome is a rare genetic liver disorder that tends to affect people of Middle Eastern Jewish heritage disproportionately to other groups. It appears to be associated with clotting factor VII in this population. Symptoms may include a yellowish color to the skin (jaundice), and a liver that is sometimes en",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Jaundice Chronic Idiopathic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic diseases",
+      "preferred_label": "genetic disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "There may sometimes be a mild recurrence of the jaundice. Pregnancy or use of oral contraceptives may cause the disease to become apparent in women when no symptoms appeared previously. Dubin Johnson Syndrome is inherited as an autosomal recessive genetic trait. Human traits, including the classic genetic diseases, are the product of the interaction of two genes, one received from the father and one from the mother. In recessive disorders, the condition does not appear unless a person inherits the same defective gene for the same trait from each parent. If an individual receives one normal gene and one gene",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Predisposition to Disease",
+        "Genetic Diseases X-Linked",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "liver disorder",
+      "preferred_label": "liver disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": "ICD10CM:K70-K77",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005154",
+        "orpha": null,
+        "umls": "UMLS:C4021780",
+        "mesh": "MESH:D008107"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005154",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:409",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001421",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K70-K77",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:573.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:893061",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008107",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3196",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235856003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4021780",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1784240230",
+          "display": null
+        }
+      ],
+      "context": "Dubin Johnson Syndrome is a rare genetic liver disorder that tends to affect people of Middle Eastern Jewish heritage disproportionately to other groups. It appears to be associated with clotting factor VII in this population. Symptoms may include a yellowish color to the skin (jaundice), and a liver that is sometimes enlarged and tender. Jaundice, whic",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "NGLY1 deficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

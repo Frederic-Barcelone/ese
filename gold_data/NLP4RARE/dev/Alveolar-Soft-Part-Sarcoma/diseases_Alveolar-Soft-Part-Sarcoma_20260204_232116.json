@@ -1,0 +1,521 @@
+{
+  "run_id": "RUN_20260204_221636_6f662baa7bb0",
+  "timestamp": "2026-02-04T23:21:16.760508",
+  "document": "Alveolar-Soft-Part-Sarcoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alveolar-Soft-Part-Sarcoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ASPS",
+      "preferred_label": "Alveolar soft tissue sarcoma",
+      "abbreviation": "ASPS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": "C49.9",
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:163699",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:163699",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C49.9",
+          "display": null
+        }
+      ],
+      "context": "Alveolar soft part sarcoma (ASPS) is a rare, slow growing soft tissue tumor of an unclear cause.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Alveolar soft part sarcoma",
+      "preferred_label": "alveolar soft Part sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011655",
+        "orpha": "Orphanet:163699",
+        "umls": "UMLS:C0206657",
+        "mesh": "MESH:D018234"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011655",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4239",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007143",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5654",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0012218",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9581/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61652",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018234",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10001882",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200063",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C7943",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:760",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:606243",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ASPS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:163699",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404056007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206657",
+          "display": null
+        }
+      ],
+      "context": "Alveolar soft part sarcoma (ASPS) is a rare, slow growing soft tissue tumor of an unclear cause.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sarcoma Alveolar Soft Part",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "soft tissue sarcomas",
+      "preferred_label": "soft tissue sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018078",
+        "orpha": "Orphanet:3394",
+        "umls": "UMLS:C4551687",
+        "mesh": "D012509"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018078",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001968",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4898",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1642116",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9306",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1953",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3394",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:424952003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551687",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012509",
+          "display": "Sarcoma"
+        }
+      ],
+      "context": "It is among the least common sarcomas, representing 0.2-1 percent of large studies of soft tissue sarcomas. ASPS is characterized by a painless mass that most commonly arises in the leg or buttock, with a particular affinity to travel to the lungs as multiple nodules, presumably while the sarcoma itself is still small. This disorder is very rare because it involves a specific breaking and joining event",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sarcoma Clear Cell"
+      ],
+      "pubtator_normalized_name": "Sarcoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "soft tissue tumor",
+      "preferred_label": "soft tissue tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006424",
+        "orpha": null,
+        "umls": "UMLS:C0037579",
+        "mesh": "C535644"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006424",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000541",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11495",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3377",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:SOFT_TISSUE",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:387837005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037579",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535644",
+          "display": "Intestinal polyposis osteomas sebaceous cysts"
+        }
+      ],
+      "context": "Alveolar soft part sarcoma (ASPS) is a rare, slow growing soft tissue tumor of an unclear cause.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Intestinal polyposis osteomas sebaceous cysts",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sarcomas",
+      "preferred_label": "sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005089",
+        "orpha": null,
+        "umls": "UMLS:C1261473",
+        "mesh": "MESH:D012509"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005089",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1115",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000691",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8800/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:224714",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012509",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9118",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:424413001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1261473",
+          "display": null
+        }
+      ],
+      "context": "It is among the least common sarcomas, representing 0.2-1 percent of large studies of soft tissue sarcomas. ASPS is characterized by a painless mass that most commonly arises in the leg or buttock, with a particular affinity to travel to the lungs as multiple nodules, presumably while the sarcoma itself is still small. This disorder is",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma",
+        "Carcinoma Renal Cell",
+        "Sarcoma Ewing"
+      ],
+      "pubtator_normalized_name": "Sarcoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancers",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "age. It is rare in children under 5 or in adults over 50. Women outnumber men, especially under age 25. There appears to be no link of this tumor to a particular ethnicity. ASPS accounts for about 0.2-1% of all soft tissue sarcomas. In turn, soft tissue sarcomas account for approximately 1% of all cancers.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

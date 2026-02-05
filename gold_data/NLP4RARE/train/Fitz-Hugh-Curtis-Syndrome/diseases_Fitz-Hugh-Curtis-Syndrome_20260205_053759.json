@@ -1,0 +1,224 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:37:59.523191",
+  "document": "Fitz-Hugh-Curtis-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fitz-Hugh-Curtis-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Chlamydia",
+      "preferred_label": "chlamydia trachomatis infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005701",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D002690"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005701",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11263",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007205",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:079.98",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002690",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34463",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:105629000",
+          "display": null
+        }
+      ],
+      "context": ") of the abdomen, fever, chills, headaches, and a general feeling of poor health (malaise). Fitz-Hugh-Curtis syndrome is a complication of pelvic inflammatory disease (PID), a general term for infection of the upper genital tract in women. Infection is most often caused by Neisseria gonorrhoeae and Chlamydia trachomatis. A diagnosis of Fitz-Hugh-Curtis syndrome is made through the exclusion of other causes of upper right abdominal pain. A diagnosis may be confirmed with a variety of specialized tests including x-ray examination, diagnostic laparoscopy, and certain laboratory exams. X-ray examination ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "pelvic inflammatory disease",
+      "preferred_label": "pelvic inflammatory disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:N70-N77",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000922",
+        "orpha": null,
+        "umls": "UMLS:C0242172",
+        "mesh": "MESH:D000292"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000922",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1003",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001388",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:N70-N77",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:614.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:66845",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000292",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3889",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:198130006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0242172",
+          "display": null
+        }
+      ],
+      "context": "nd the chest (diaphragm), which plays an essential role in breathing, may also be affected. Common symptoms include severe pain in the upper right area (quadrant) of the abdomen, fever, chills, headaches, and a general feeling of poor health (malaise). Fitz-Hugh-Curtis syndrome is a complication of pelvic inflammatory disease (PID), a general term for infection of the upper genital tract in women. Infection is most often caused by Neisseria gonorrhoeae and Chlamydia trachomatis. A diagnosis of Fitz-Hugh-Curtis syndrome is made through the exclusion of other causes of upper right abdominal pain. A diagnosis may be confir",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pelvic Inflammatory Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Fitz-Hugh-Curtis syndrome",
+      "preferred_label": "Fitz-Hugh-Curtis syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0023158",
+        "orpha": null,
+        "umls": "UMLS:C0549148",
+        "mesh": "MESH:C537936"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0023158",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:639814",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537936",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237041005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0549148",
+          "display": null
+        }
+      ],
+      "context": "Fitz-Hugh-Curtis syndrome is a rare disorder that occurs almost exclusively in women. It is characterized by inflammation of the membrane lining the stomach (peritoneum) and the tissues surrounding the liver (perihepatitis). The muscle that separates the stomach and the chest (diaphragm), which plays an essential role in br",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fitz-Hugh-Curtis syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

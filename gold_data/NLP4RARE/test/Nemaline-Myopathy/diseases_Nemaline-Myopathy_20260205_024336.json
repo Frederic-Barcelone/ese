@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:43:36.598033",
+  "document": "Nemaline-Myopathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Nemaline-Myopathy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Nemaline myopathy",
+      "preferred_label": "nemaline myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G71.21",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018958",
+        "orpha": "Orphanet:607",
+        "umls": "UMLS:C0206157",
+        "mesh": "MESH:D017696"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018958",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3191",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12033",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G71.21",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61528",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017696",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200869",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:161800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:607",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75072002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206157",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1996502540",
+          "display": null
+        }
+      ],
+      "context": "Nemaline myopathy is a rare disorder that affects males and females. The incidence is unknown although two studies (one in Finland and one in an American Ashkenazi Jewish population) estimated the incidence to be 1 in 50,000 live births. An incidence of 1/500 has been reported in the Amish community. A diagnosis of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myopathies Nemaline",
+        "Intranuclear Rod Myopathy",
+        "Actin-Accumulation Myopathy"
+      ],
+      "pubtator_normalized_name": "Nemaline myopathy 5",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:10:01.064695",
+  "document": "Duane-syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Duane-syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "eye movement disorders",
+      "preferred_label": "eye movement disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001584",
+        "orpha": null,
+        "umls": "UMLS:C0028850",
+        "mesh": "D020187"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001584",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1279",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001990",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14457",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:45030009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0028850",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020187",
+          "display": "REM Sleep Behavior Disorder"
+        }
+      ],
+      "context": "Duane syndrome has been seen in diverse ethnic groups. The frequency of DS in the general population of individuals with eye movement disorders (strabismus) is approximately one to 5 percent. Most individuals are diagnosed by the age of 10 years. The female to male ratio of individuals with DS is approximately 60:40, showing a slightly higher preponderance of female patients.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ocular Motility Disorders"
+      ],
+      "pubtator_normalized_name": "REM Sleep Behavior Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Duane syndrome",
+      "preferred_label": "Duane syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024265",
+        "orpha": null,
+        "umls": "UMLS:C0994516",
+        "mesh": "D004370"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024265",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0061027",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10763",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:201329",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:126800",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128082002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0994516",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004370",
+          "display": "Duane Retraction Syndrome"
+        }
+      ],
+      "context": "Duane syndrome has been seen in diverse ethnic groups. The frequency of DS in the general population of individuals with eye movement disorders (strabismus) is approximately one to 5 percent. Most individuals are diagnosed by the age of 10 years. The female to male ratio of individuals with DS is approximately 60",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bor-Duane hydrocephalus contiguous gene syndrome",
+        "Bpes With Duane Retraction Syndrome"
+      ],
+      "pubtator_normalized_name": "Duane Retraction Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "strabismus",
+      "preferred_label": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003432",
+        "orpha": null,
+        "umls": "UMLS:C0038379",
+        "mesh": "MESH:D013285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003432",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:540",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:378.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21337",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013285",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35040",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22066006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038379",
+          "display": null
+        }
+      ],
+      "context": "Duane syndrome has been seen in diverse ethnic groups. The frequency of DS in the general population of individuals with eye movement disorders (strabismus) is approximately one to 5 percent. Most individuals are diagnosed by the age of 10 years. The female to male ratio of individuals with DS is approximately 60:40, showing a slightly higher preponderance of female patients.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Esotropia",
+        "Exotropia",
+        "fourth cranial nerve palsy familial congenital"
+      ],
+      "pubtator_normalized_name": "Strabismus",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

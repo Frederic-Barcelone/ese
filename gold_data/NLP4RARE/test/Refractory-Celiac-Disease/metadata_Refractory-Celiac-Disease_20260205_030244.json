@@ -1,0 +1,45 @@
+{
+  "doc_id": "Refractory-Celiac-Disease",
+  "doc_filename": "Refractory-Celiac-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "small intestinal bacterial overgrowth",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "refractory celiac disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Azathioprine",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Aspirin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 3490,
+  "file_size_human": "3.4 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Refractory Celiac Disease: Clinical Overview and Management",
+  "short_description": "Clinical document describing refractory celiac disease (RCD), a rare autoimmune disorder that does not respond to gluten-free diet treatment, including diagnostic criteria and therapeutic approaches.",
+  "long_description": "This clinical document provides a comprehensive overview of refractory celiac disease (RCD), a complex autoimmune disorder that affects adults and is characterized by persistent symptoms despite strict adherence to a gluten-free diet for at least 12 months. The document details the diagnostic challenges, emphasizing the need for exclusion of other conditions such as intestinal lymphoma, Crohn's disease, and bacterial overgrowth. It discusses the rarity of the condition, with estimates suggesting approximately 20,000 patients in the USA, and describes the two types of RCD with Type I being less severe and more common. The document outlines various diagnostic procedures including endoscopy, biopsy examination, and specialized testing for abnormal T lymphocyte populations. Treatment options are extensively covered, ranging from dietary interventions like elemental diets and total parenteral nutrition to immunosuppressive therapies including steroids, azathioprine, and more recent approaches involving chemotherapy with cladribine and stem cell transplantation.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:02:44.656643"
+}

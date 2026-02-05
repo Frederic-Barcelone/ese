@@ -1,0 +1,260 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:20:37.469201",
+  "document": "ACTH-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ACTH-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "adrenal insufficiency",
+      "preferred_label": "adrenal insufficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000004",
+        "orpha": null,
+        "umls": "UMLS:C0405580",
+        "mesh": "MESH:D000309"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000004",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10493",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009491",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:255.41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:589758",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000309",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26691",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386584007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0405580",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733056203",
+          "display": null
+        }
+      ],
+      "context": "ACTH deficiency arises as a result of decreased or absent production of adrenocorticotropic hormone (ACTH) by the pituitary gland. A decline in the concentration of ACTH in the blood leads to a reduction in the secretion of adrenal hormones, resulting in adrenal insufficiency (hypoadrenalism). Adrenal insufficiency leads to weight loss, lack of appetite (anorexia), weakness, nausea, vomiting, and low blood pressure (hypotension). Because these symptoms are so general, the diagnosis is sometimes delayed or missed entirely. For that reason, some clinicians believe the dis",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Achalasia Addisonianism Alacrimia syndrome",
+        "Addison Disease",
+        "Adrenal Insufficiency Congenital"
+      ],
+      "pubtator_normalized_name": "Adrenal Insufficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pituitary gland",
+      "preferred_label": "hypophysitis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021156",
+        "orpha": null,
+        "umls": "UMLS:C0342409",
+        "mesh": "MESH:D000072659"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021156",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:575012",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000072659",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C12399",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237705001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0342409",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1589682285",
+          "display": null
+        }
+      ],
+      "context": "ACTH deficiency arises as a result of decreased or absent production of adrenocorticotropic hormone (ACTH) by the pituitary gland. A decline in the concentration of ACTH in the blood leads to a reduction in the secretion of adrenal hormones, resulting in adrenal insufficiency (hypoadrenalism). Adrenal insufficiency leads to weight loss, lack of appetite (anorexia), weakness, nausea, vomiting, and low blood pressure (hypotensi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autoimmune Hypophysitis"
+      ],
+      "pubtator_normalized_name": "Hypophysitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypotension",
+      "preferred_label": "hypotension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I95",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005468",
+        "orpha": null,
+        "umls": "UMLS:C0020649",
+        "mesh": "MESH:D007022"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005468",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005251",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002615",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I95",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:458.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5715",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007022",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:45007003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020649",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1663360295",
+          "display": null
+        }
+      ],
+      "context": "ary gland. A decline in the concentration of ACTH in the blood leads to a reduction in the secretion of adrenal hormones, resulting in adrenal insufficiency (hypoadrenalism). Adrenal insufficiency leads to weight loss, lack of appetite (anorexia), weakness, nausea, vomiting, and low blood pressure (hypotension). Because these symptoms are so general, the diagnosis is sometimes delayed or missed entirely. For that reason, some clinicians believe the disorder to be more common than previously thought. Symptoms of ACTH deficiency most often occur in adults, but the disorder may also be diagnosed in infancy.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypotension Orthostatic",
+        "Shy-Drager Syndrome",
+        "Intracranial Hypotension"
+      ],
+      "pubtator_normalized_name": "Hypotension",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

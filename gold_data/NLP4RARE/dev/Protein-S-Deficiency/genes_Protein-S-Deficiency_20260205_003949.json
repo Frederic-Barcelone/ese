@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:39:49.251654",
+  "document": "Protein-S-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Protein-S-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "PROS1",
+      "hgnc_symbol": "PROS1",
+      "full_name": "protein S",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "9456",
+        "entrez": "5627",
+        "ensembl": "ENSG00000184500",
+        "uniprot": "P07225",
+        "omim": "176880"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "9456",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "5627",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000184500",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "176880",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P07225",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "743",
+          "disease_name": "Severe hereditary thrombophilia due to congenital protein S deficiency",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "PROS1 Protein S deficiency is a rare disorder that affects both men and women. The exact prevalence the common form of protein S deficiency (the number of people who have the disorder in a given population) and incidence (new cases identified each year) of the disorder overall is unknown. Severe protein",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

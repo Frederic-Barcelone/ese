@@ -1,0 +1,685 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:02:44.619904",
+  "document": "Refractory-Celiac-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Refractory-Celiac-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "small intestinal bacterial overgrowth",
+      "preferred_label": "small intestinal bacterial overgrowth",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0400000",
+        "orpha": null,
+        "umls": "UMLS:C3160854",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0400000",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1708316",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3160854",
+          "display": null
+        }
+      ],
+      "context": "llains that trigger the immune reaction in celiac disease. The diagnosis of RCD is made by exclusion, especially of any other disorder that can affect the huge number of thread-like projections that line the interior of the intestine (intestinal villi), such as intestinal lymphoma, Crohn's disease, small intestinal bacterial overgrowth or hypogammaglobulinemia. Refractory celiac disease is rare among adults and is almost never seen in children. Data regarding the true incidence and prevalence of RCD are unreliable, but some have estimated that there might be 20,000 patients in the USA. However, those estimations are based on inco",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Refractory celiac disease",
+      "preferred_label": "refractory celiac disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K90.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018353",
+        "orpha": "Orphanet:398063",
+        "umls": "UMLS:C4749333",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018353",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009266",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21640",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K90.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1670595",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1653",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:398063",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4749333",
+          "display": null
+        }
+      ],
+      "context": "Refractory celiac disease (RCD) is a complex autoimmune disorder much like the more",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "hypogammaglobulinemia",
+      "preferred_label": "hypogammaglobulinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016463",
+        "orpha": "Orphanet:229720",
+        "umls": "UMLS:C5680904",
+        "mesh": "D000361"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016463",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20596",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1843258",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26931",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:229720",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5680904",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000361",
+          "display": "Agammaglobulinemia"
+        }
+      ],
+      "context": "n celiac disease. The diagnosis of RCD is made by exclusion, especially of any other disorder that can affect the huge number of thread-like projections that line the interior of the intestine (intestinal villi), such as intestinal lymphoma, Crohn's disease, small intestinal bacterial overgrowth or hypogammaglobulinemia. Refractory celiac disease is rare among adults and is almost never seen in children. Data regarding the true incidence and prevalence of RCD are unreliable, but some have estimated that there might be 20,000 patients in the USA. However, those estimations are based on incomplete data. In one recen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Common Variable Immunodeficiency",
+        "Hypogammaglobulinemia and Isolated growth hormone deficiency X-linked",
+        "WHIM syndrome"
+      ],
+      "pubtator_normalized_name": "Agammaglobulinemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autoimmune disorder",
+      "preferred_label": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007179",
+        "orpha": null,
+        "umls": "UMLS:C0004364",
+        "mesh": "MESH:D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007179",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:417",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005809",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:720",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2135",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001327",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2889",
+          "display": null
+        },
+        {
+          "system": "OBI",
+          "code": "OBI:1110054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85828009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004364",
+          "display": null
+        }
+      ],
+      "context": "Refractory celiac disease (RCD) is a complex autoimmune disorder much like the more",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Demyelinating Autoimmune Diseases CNS",
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases of the Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intestinal disorders",
+      "preferred_label": "intestinal disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005020",
+        "orpha": null,
+        "umls": "UMLS:C0021831",
+        "mesh": "MESH:D007410"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005020",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5295",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009431",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:575",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7130",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007410",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26801",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85919009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021831",
+          "display": null
+        }
+      ],
+      "context": "y celiac disease may be made. As noted above, examination of the interior wall of the intestine (upper and lower) by means of an enteroscope or colonoscope as well as obtaining intestinal biopsies to be examined under a microscope is useful, especially to determine if the symptoms are the result of intestinal disorders other than RCD. Capsule endoscopy, which examines the small intestinal lining using a camera mounted on a swallowed pill, may also be useful in evaluating the degree of small intestinal inflammation and injury. Some specialized centers are able to offer sophisticated examinations of the biopsy mate",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Crohn's disease",
+      "preferred_label": "Crohn's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": "ICD10CM:K50",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005011",
+        "orpha": "Orphanet:206",
+        "umls": "UMLS:C0010346",
+        "mesh": "MESH:D003424"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005011",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8778",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000384",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K50",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:555.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3664",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003424",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200921",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2965",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:206",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:7620006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010346",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1267652425",
+          "display": null
+        }
+      ],
+      "context": "d rye, are the villains that trigger the immune reaction in celiac disease. The diagnosis of RCD is made by exclusion, especially of any other disorder that can affect the huge number of thread-like projections that line the interior of the intestine (intestinal villi), such as intestinal lymphoma, Crohn's disease, small intestinal bacterial overgrowth or hypogammaglobulinemia. Refractory celiac disease is rare among adults and is almost never seen in children. Data regarding the true incidence and prevalence of RCD are unreliable, but some have estimated that there might be 20,000 patients in the USA. Howev",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pediatric Crohn's disease"
+      ],
+      "pubtator_normalized_name": "Crohn Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "celiac disease",
+      "preferred_label": "celiac disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K90.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005130",
+        "orpha": "Orphanet:555",
+        "umls": "UMLS:C0007570",
+        "mesh": "MESH:D002446"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005130",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10608",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001060",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K90.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:579.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3291",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002446",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26714",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:212750",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:555",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:396331005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007570",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2005943638",
+          "display": null
+        }
+      ],
+      "context": "common celiac disease but, unlike celiac disease, it is resistant or unresponsive to at least 12 months of treatment with a strict gluten-free diet. Gliadin, a component of the wheat storage protein gluten, together with similar proteins in barley and rye, are the villains that trigger the immune reaction in celiac dise",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Celiac Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lymphoma",
+      "preferred_label": "lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005062",
+        "orpha": "Orphanet:223735",
+        "umls": "UMLS:C0024299",
+        "mesh": "MESH:D008223"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005062",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060058",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000574",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:202.80",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9590/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44223",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008223",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10025310",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100004",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3208",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MLYM",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:223735",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:373168002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024299",
+          "display": null
+        }
+      ],
+      "context": "barley and rye, are the villains that trigger the immune reaction in celiac disease. The diagnosis of RCD is made by exclusion, especially of any other disorder that can affect the huge number of thread-like projections that line the interior of the intestine (intestinal villi), such as intestinal lymphoma, Crohn's disease, small intestinal bacterial overgrowth or hypogammaglobulinemia. Refractory celiac disease is rare among adults and is almost never seen in children. Data regarding the true incidence and prevalence of RCD are unreliable, but some have estimated that there might be 20,000 patients",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma Non-Hodgkin",
+        "Lymphoma B-Cell",
+        "Lymphoma Large B-Cell Diffuse"
+      ],
+      "pubtator_normalized_name": "Lymphoma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

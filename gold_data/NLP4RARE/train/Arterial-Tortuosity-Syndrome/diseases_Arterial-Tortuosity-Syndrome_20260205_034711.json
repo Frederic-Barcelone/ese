@@ -1,0 +1,107 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:47:11.744088",
+  "document": "Arterial-Tortuosity-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Arterial-Tortuosity-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Arterial tortuosity syndrome",
+      "preferred_label": "arterial tortuosity syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q87.82",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008818",
+        "orpha": "Orphanet:3342",
+        "umls": "UMLS:C1859726",
+        "mesh": "MESH:C565942"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008818",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050645",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:774",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q87.82",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:347942",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C565942",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:803",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:208050",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3342",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:458432002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1859726",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:371764699",
+          "display": null
+        }
+      ],
+      "context": "Arterial tortuosity syndrome affects males and females in equal numbers. Approximately 100 cases have been reported in the medical literature. The exact incidence and prevalence is unknown. Because affected individuals may go undiagnosed or misdiagnosed, determining the true frequency of arterial tortuosity syndrome in the gen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Arterial Tortuosity Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

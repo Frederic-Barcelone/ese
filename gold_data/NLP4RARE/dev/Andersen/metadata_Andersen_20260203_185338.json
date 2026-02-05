@@ -1,0 +1,23 @@
+{
+  "doc_id": "Andersen",
+  "doc_filename": "Andersen.pdf",
+  "file_size_bytes": 1655,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Andersen-Tawil Syndrome: Epidemiology and Diagnostic Challenges",
+  "short_description": "Clinical overview of Andersen-Tawil syndrome prevalence, gender distribution, and diagnostic difficulties in the general population.",
+  "long_description": "This document provides epidemiological information about Andersen-Tawil syndrome, a rare genetic disorder that affects both males and females equally. The text discusses the challenges in determining accurate prevalence data due to underdiagnosis and misdiagnosis, noting that while over 100 cases have been documented in medical literature, the true frequency in the general population remains unknown. This highlights the ongoing need for improved recognition and diagnostic capabilities for this rare condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-03T17:53:38.262510"
+}

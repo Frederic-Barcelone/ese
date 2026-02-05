@@ -1,0 +1,35 @@
+{
+  "doc_id": "Fibrous-Dysplasia",
+  "doc_filename": "Fibrous-Dysplasia.pdf",
+  "top_entities": [
+    {
+      "name": "fibrous dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Fabry disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1704,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Fibrous Dysplasia: Epidemiology and Demographics",
+  "short_description": "Clinical document describing the epidemiological characteristics and demographic patterns of fibrous dysplasia (FD).",
+  "long_description": "This clinical research document provides an overview of the epidemiological aspects of fibrous dysplasia, a bone disorder that affects both males and females equally. The document discusses diagnostic patterns, noting that the condition is typically identified earlier in pediatric populations. It addresses the challenges in determining accurate incidence and prevalence rates due to underdiagnosis of mild cases, and compares the frequency of monostotic versus polyostotic forms of the disease, with monostotic cases being approximately four times more common.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T08:14:01.570816"
+}

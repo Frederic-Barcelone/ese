@@ -1,0 +1,35 @@
+{
+  "doc_id": "Encephalitis-Herpes-Simplex",
+  "doc_filename": "Encephalitis-Herpes-Simplex.pdf",
+  "top_entities": [
+    {
+      "name": "Isolated femoral agenesis/hypoplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Herpes simplex virus encephalitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2330,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Herpes Simplex Encephalitis: Clinical Overview and Diagnostic Approaches",
+  "short_description": "Clinical document describing herpes simplex encephalitis (HSE), a rare neurological disorder causing brain inflammation with symptoms including headaches, fever, and neurological abnormalities.",
+  "long_description": "This clinical reference document provides a comprehensive overview of herpes simplex encephalitis (HSE), the most common form of acute encephalitis in the United States affecting approximately 2,000 individuals annually. The document details the characteristic symptoms including headaches, fever, drowsiness, hyperactivity, and weakness, while noting the absence of typical skin lesions. It explains that HSE is caused by herpes simplex virus and typically occurs in early childhood or adulthood, affecting both sexes equally. The document emphasizes diagnostic approaches including patient history evaluation, clinical assessment, and specialized testing such as polymerase chain reaction (PCR) analysis of cerebrospinal fluid and advanced imaging techniques like CT and MRI scans.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:17:26.002183"
+}

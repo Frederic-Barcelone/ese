@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:06:18.218274",
+  "document": "Erythema-Multiforme.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Erythema-Multiforme.pdf",
+  "total_candidates": 34,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "EM",
+      "long_form": "Erythema multiforme",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Erythema multiforme (EM) is the name applied to a group of hypersensitivity disorders, affecting mostly children and young adults, and characterized by symmetric red, patchy lesions, primarily on the arms and legs. The cause is unknown, but EM frequently occurs in association with herpes simplex virus, suggesting an immunologic process initiated by the virus. In half of the cases, the triggering agents appear to be medic",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "erythema multiforme",
+      "matched_text": "Erythema multiforme",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:L51",
+      "orpha": null
+    },
+    {
+      "name": "hypersensitivity",
+      "matched_text": "hypersensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "herpes simplex",
+      "matched_text": "herpes simplex",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B00",
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Mycoplasma pneumoniae",
+      "matched_text": "Mycoplasma pneumoniae",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,646 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:44:53.305004",
+  "document": "Antisynthetase-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Antisynthetase-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "interstitial lung disease",
+      "preferred_label": "interstitial lung disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J80-J84",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015925",
+        "orpha": "Orphanet:182095",
+        "umls": "UMLS:C5441745",
+        "mesh": "MESH:D017563"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015925",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3082",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004244",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J80-J84",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1788738",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017563",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10022611",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C164315",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:182095",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:233703007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5441745",
+          "display": null
+        }
+      ],
+      "context": "mmune system and the presence of specific autoantibodies that target a specific protein in the body. The symptoms and severity of the disorder can vary greatly among affected individuals. Common symptoms include inflammation of the muscles (myositis), inflammation of several joints (polyarthritis), interstitial lung disease, thickening and cracking of the skin of the hands, and a condition called Raynaud phenomenon, in which the fingers or toes are numb or have a prickly sensation in response to cold. Affected individuals also have nonspecific symptoms like fatigue, unexplained fevers, and unintended weight loss. The",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Interstitial Pneumonitis Desquamative Familial",
+        "Surfactant Dysfunction",
+        "Surfactant Metabolism Dysfunction Pulmonary 2"
+      ],
+      "pubtator_normalized_name": "Lung Diseases Interstitial",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Antisynthetase syndrome",
+      "preferred_label": "antisynthetase syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019344",
+        "orpha": "Orphanet:81",
+        "umls": "UMLS:C5959873",
+        "mesh": "MESH:C537778"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019344",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080744",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001982",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:735",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:279.49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1866768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537778",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10068801",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1926",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:81",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:445187004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5959873",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1572057936",
+          "display": null
+        }
+      ],
+      "context": "Antisynthetase syndrome is a rare, chronic disorder that can affect multiple systems of the body. The disorder is immune-mediated, which means there is inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. The symptoms",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Antisynthetase syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dermatomyositis",
+      "preferred_label": "dermatomyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:M33",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016367",
+        "orpha": "Orphanet:221",
+        "umls": "UMLS:C0011633",
+        "mesh": "MESH:D003882"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016367",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10223",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000398",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6263",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8331",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003882",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10012503",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200274",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26744",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1048",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:221",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:396230008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011633",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:739030149",
+          "display": null
+        }
+      ],
+      "context": "nse to cold. Affected individuals also have nonspecific symptoms like fatigue, unexplained fevers, and unintended weight loss. The exact, underlying cause is not fully understood. Antisynthetase syndrome sometimes occurs along with other conditions such as uncommon inflammatory muscle diseases like dermatomyositis or polymyositis. Antisynthetase syndrome is a rare disorder that affects females twice as often as males. Age of onset can range from the late teens to the elderly, with a mean average of the 50s. The exact incidence or prevalence of the disorder is unknown. Because rare disorders often go undiagno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amyopathic dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Dermatomyositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polyarthritis",
+      "preferred_label": "polyarthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024280",
+        "orpha": null,
+        "umls": "UMLS:C0162323",
+        "mesh": "D001168"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024280",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56408",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26996",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:416956002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001168",
+          "display": "Arthritis"
+        }
+      ],
+      "context": "tioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. The symptoms and severity of the disorder can vary greatly among affected individuals. Common symptoms include inflammation of the muscles (myositis), inflammation of several joints (polyarthritis), interstitial lung disease, thickening and cracking of the skin of the hands, and a condition called Raynaud phenomenon, in which the fingers or toes are numb or have a prickly sensation in response to cold. Affected individuals also have nonspecific symptoms like fatigue, unexplained fevers, and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arthritis Juvenile",
+        "Rheumatic Fever",
+        "Negative rheumatoid factor polyarthritis"
+      ],
+      "pubtator_normalized_name": "Arthritis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polymyositis",
+      "preferred_label": "polymyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M33.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019127",
+        "orpha": "Orphanet:732",
+        "umls": "UMLS:C0085655",
+        "mesh": "MESH:D017285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019127",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080745",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003063",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7425",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39086",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017285",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036102",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200276",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26925",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:732",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31384009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085655",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Polymyositis",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1157134196",
+          "display": null
+        }
+      ],
+      "context": "ed individuals also have nonspecific symptoms like fatigue, unexplained fevers, and unintended weight loss. The exact, underlying cause is not fully understood. Antisynthetase syndrome sometimes occurs along with other conditions such as uncommon inflammatory muscle diseases like dermatomyositis or polymyositis. Antisynthetase syndrome is a rare disorder that affects females twice as often as males. Age of onset can range from the late teens to the elderly, with a mean average of the 50s. The exact incidence or prevalence of the disorder is unknown. Because rare disorders often go undiagnosed or misdiagno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Polymyositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "myositis",
+      "preferred_label": "Myositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008054",
+        "orpha": "ORPHA:93672",
+        "umls": null,
+        "mesh": "D009220"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008054",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "ORPHA:93672",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009220",
+          "display": "Myositis"
+        }
+      ],
+      "context": "s inflammation resulting from abnormal functioning of the immune system and the presence of specific autoantibodies that target a specific protein in the body. The symptoms and severity of the disorder can vary greatly among affected individuals. Common symptoms include inflammation of the muscles (myositis), inflammation of several joints (polyarthritis), interstitial lung disease, thickening and cracking of the skin of the hands, and a condition called Raynaud phenomenon, in which the fingers or toes are numb or have a prickly sensation in response to cold. Affected individuals also have nonspecific",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myositis Inclusion Body",
+        "Myositis Ossificans",
+        "Dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Myositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "ation in response to cold. Affected individuals also have nonspecific symptoms like fatigue, unexplained fevers, and unintended weight loss. The exact, underlying cause is not fully understood. Antisynthetase syndrome sometimes occurs along with other conditions such as uncommon inflammatory muscle diseases like dermatomyositis or polymyositis. Antisynthetase syndrome is a rare disorder that affects females twice as often as males. Age of onset can range from the late teens to the elderly, with a mean average of the 50s. The exact incidence or prevalence of the disorder is unknown. Because rare disord",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

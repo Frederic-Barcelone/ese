@@ -1,0 +1,45 @@
+{
+  "doc_id": "Meningitis-Tuberculous",
+  "doc_filename": "Meningitis-Tuberculous.pdf",
+  "top_entities": [
+    {
+      "name": "tuberculous meningitis",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "miliary tuberculosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "prednisone",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "isoniazid",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2147,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Tuberculous Meningitis (TBM): Clinical Overview and Treatment Guidelines",
+  "short_description": "Clinical document describing tuberculous meningitis, a rare form of meningitis caused by Mycobacterium tuberculosis, including symptoms, patient demographics, and treatment protocols.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Tuberculous Meningitis (TBM), a rare but serious complication of tuberculosis infection. The document explains that TBM is characterized by inflammation of the meninges caused by Mycobacterium tuberculosis, typically developing gradually and most commonly affecting children aged one to five years. It details the connection between TBM and tuberculosis exposure, particularly miliary tuberculosis, and outlines standard treatment protocols including antibiotic therapy with isoniazid, rifampin, streptomycin, and ethambutol for 9-12 months, along with potential corticosteroid supplementation. The document serves as a clinical reference for healthcare professionals managing patients with this rare neurological complication of tuberculosis.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T08:24:35.119638"
+}

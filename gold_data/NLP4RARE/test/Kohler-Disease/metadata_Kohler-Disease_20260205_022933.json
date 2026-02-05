@@ -1,0 +1,40 @@
+{
+  "doc_id": "Kohler-Disease",
+  "doc_filename": "Kohler-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "Macrodactyly of toes, bilateral",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Kohler disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Stress",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1989,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Kohler Disease: Rare Pediatric Foot Bone Disorder",
+  "short_description": "Clinical overview of Kohler disease, a rare bone disorder affecting the navicular bone in children's feet, characterized by limping, pain, and swelling.",
+  "long_description": "This document provides a comprehensive clinical overview of Kohler disease, a rare pediatric bone disorder that primarily affects the navicular bone of the foot. The condition is believed to result from stress-related compression during critical growth periods and predominantly affects children aged 3-7 years, with a five-fold higher incidence in males compared to females. The document details the characteristic symptoms including limping, pain, and swelling that lead children to walk on the lateral aspect of their foot. It outlines the diagnostic approach, which combines clinical assessment with radiographic findings showing flattening, sclerosis, and fragmentation of the navicular bone, while noting that bilateral involvement occurs in approximately 25% of cases and that similar radiographic changes may be present in asymptomatic children.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:29:33.868623"
+}

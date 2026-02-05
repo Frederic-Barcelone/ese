@@ -1,0 +1,343 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:40:43.495637",
+  "document": "Fox-Fordyce-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fox-Fordyce-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "apocrine sweat glands",
+      "preferred_label": "apocrine sweat gland",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002260",
+        "orpha": null,
+        "umls": "UMLS:C0085160",
+        "mesh": "MESH:D016575"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002260",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2282",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:705.83",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:43115",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016575",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C32132",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:69741000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085160",
+          "display": null
+        }
+      ],
+      "context": "Fox-Fordyce disease is a rare skin disorder that primarily affects women. The disorder is characterized by intense itching especially in the underarm area, the pubic area and around the nipples. In Fox-Fordyce disease abnormalities affecting the apocrine sweat glands causes inflammation, and enlargement of the glands and the characteristic intense itching. Skin near an affected area may become darkened and dry and multiple, small, raised bumps (papules) may develop. Hair follicles in the affected area can become secondarily damaged, resulting in hair loss. The",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Fox-Fordyce disease",
+      "preferred_label": "Fox-Fordyce disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:L75.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006553",
+        "orpha": null,
+        "umls": "UMLS:C0016632",
+        "mesh": "MESH:D005588"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006553",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1381",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L75.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:705.82",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42092",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005588",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84716",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:65038009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0016632",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Fox-Fordyce_disease",
+          "display": null
+        }
+      ],
+      "context": "Fox-Fordyce disease is a rare skin disorder that primarily affects women. The disorder is characterized by intense itching especially in the underarm area, the pubic area and around the nipples. In Fox-Fordyce disease abnormalities affecting the apocrine sweat glands causes inflammation, and enlargement of the glands",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fox-Fordyce Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin disorder",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "Fox-Fordyce disease is a rare skin disorder that primarily affects women. The disorder is characterized by intense itching especially in the underarm area, the pubic area and around the nipples. In Fox-Fordyce disease abnormalities affecting the apocrine sweat glands causes inflammation, and enlargement of the glands and the characteristic i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hair loss",
+      "preferred_label": "hair loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004907",
+        "orpha": "Orphanet:79364",
+        "umls": "UMLS:C0002170",
+        "mesh": "MESH:D000505"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004907",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:987",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:704.09",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7982",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000505",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C50575",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79364",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56317004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002170",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1313926062",
+          "display": null
+        }
+      ],
+      "context": "ne sweat glands causes inflammation, and enlargement of the glands and the characteristic intense itching. Skin near an affected area may become darkened and dry and multiple, small, raised bumps (papules) may develop. Hair follicles in the affected area can become secondarily damaged, resulting in hair loss. The exact cause of Fox-Fordyce disease is unknown. Fox-Fordyce disease occurs primarily in women between 13 and 35 years of age. However, in rare cases, it can affect men and children and women who are post-menopausal. Some reports place the ration of affected women to men at 9:1. The incidence of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Davenport Donlan syndrome"
+      ],
+      "pubtator_normalized_name": "Alopecia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

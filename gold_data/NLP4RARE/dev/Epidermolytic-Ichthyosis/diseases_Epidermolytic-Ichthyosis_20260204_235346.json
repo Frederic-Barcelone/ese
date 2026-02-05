@@ -1,0 +1,308 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:53:46.776057",
+  "document": "Epidermolytic-Ichthyosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Epidermolytic-Ichthyosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "palmoplantar keratoderma",
+      "preferred_label": "palmoplantar keratoderma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006590",
+        "orpha": null,
+        "umls": "UMLS:C0022596",
+        "mesh": "D007645"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006590",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3390",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000745",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.39",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44017",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34748",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:706885006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022596",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007645",
+          "display": "Keratoderma Palmoplantar"
+        }
+      ],
+      "context": "ng, but an increase in the severity of the scaling and skin thickening. Scales tend to form in parallel rows of spines or ridges. A generalized erythroderma (redness of the skin) may be present in some individuals. Skin infections with common bacteria can be a problem. Heat intolerance is common. A palmoplantar keratoderma may be present and can be so severe as to limit ambulation and hand function. Surgical intervention may then be required. On the other end of the scale, there are individuals who have only minimal blistering in areas subject to friction, or have only a palmoplantar keratoderma. Rarely patients are",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Keratoderma Palmoplantar Epidermolytic",
+        "Porokeratosis",
+        "Porokeratosis punctata palmaris et plantaris"
+      ],
+      "pubtator_normalized_name": "Keratoderma Palmoplantar",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ichthyosis hystrix",
+      "preferred_label": "ichthyosis hystrix",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0859383",
+        "orpha": null,
+        "umls": "UMLS:C0263580",
+        "mesh": "C566528"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0859383",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75527",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:146590",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0263580",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C566528",
+          "display": "HID Syndrome"
+        }
+      ],
+      "context": "and hand function. Surgical intervention may then be required. On the other end of the scale, there are individuals who have only minimal blistering in areas subject to friction, or have only a palmoplantar keratoderma. Rarely patients are covered in brown-grey hyperkeratotic spines. This is called ichthyosis hystrix (Curth-Macklin). El occurs in approximately 1 in 100,000 individuals. It affects males and females in equal numbers. El is diagnosed by physical signs and symptoms. Molecular genetic testing for mutations in the KRT1 and KRT10 genes is available to confirm the diagnosis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ichthyosis hystrix Curth Macklin type",
+        "Ichthyosis hystrix gravior"
+      ],
+      "pubtator_normalized_name": "HID Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Skin infections",
+      "preferred_label": "skin infection",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021201",
+        "orpha": null,
+        "umls": "UMLS:C0037278",
+        "mesh": "D003881"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021201",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52365",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35025",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:19824006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037278",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003881",
+          "display": "Dermatomycoses"
+        }
+      ],
+      "context": "visible areas of skin thickening. Over time, there is a gradual decrease in blistering, but an increase in the severity of the scaling and skin thickening. Scales tend to form in parallel rows of spines or ridges. A generalized erythroderma (redness of the skin) may be present in some individuals. Skin infections with common bacteria can be a problem. Heat intolerance is common. A palmoplantar keratoderma may be present and can be so severe as to limit ambulation and hand function. Surgical intervention may then be required. On the other end of the scale, there are individuals who have only minimal blisteri",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Staphylococcal Skin Infections",
+        "protothecosis"
+      ],
+      "pubtator_normalized_name": "Dermatomycoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "erythroderma",
+      "preferred_label": "erythroderma",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:L26",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043233",
+        "orpha": null,
+        "umls": "UMLS:C0011606",
+        "mesh": "MESH:D003873"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043233",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009456",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L26",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:L26",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3767",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003873",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C39646",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:399992009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011606",
+          "display": null
+        }
+      ],
+      "context": "Infants with El may be born with red, blistering and denuded skin with visible areas of skin thickening. Over time, there is a gradual decrease in blistering, but an increase in the severity of the scaling and skin thickening. Scales tend to form in parallel rows of spines or ridges. A generalized erythroderma (redness of the skin) may be present in some individuals. Skin infections with common bacteria can be a problem. Heat intolerance is common. A palmoplantar keratoderma may be present and can be so severe as to limit ambulation and hand function. Surgical intervention may then be required. On the ot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hyperkeratosis Epidermolytic",
+        "Ichthyosis Lamellar",
+        "Chanarin-Dorfman Syndrome"
+      ],
+      "pubtator_normalized_name": "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

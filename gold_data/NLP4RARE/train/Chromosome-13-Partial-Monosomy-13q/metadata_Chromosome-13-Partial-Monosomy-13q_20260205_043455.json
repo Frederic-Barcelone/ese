@@ -1,0 +1,40 @@
+{
+  "doc_id": "Chromosome-13-Partial-Monosomy-13q",
+  "doc_filename": "Chromosome-13-Partial-Monosomy-13q.pdf",
+  "top_entities": [
+    {
+      "name": "monosomy",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "intellectual disability",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "ARMC9",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 2210,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Chromosome 13, Partial Monosomy 13q: Clinical Overview and Characteristics",
+  "short_description": "A comprehensive overview of Chromosome 13, Partial Monosomy 13q, a rare chromosomal disorder involving deletion of the long arm of chromosome 13.",
+  "long_description": "This clinical document provides a detailed examination of Chromosome 13, Partial Monosomy 13q, a rare genetic condition characterized by the deletion of a portion of the long arm (q) of chromosome 13. The document outlines the variable clinical presentation depending on the size and location of the deletion, including typical manifestations such as low birth weight, craniofacial malformations, ocular abnormalities, limb defects, and genital malformations in males. It discusses the associated developmental delays, psychomotor retardation, and intellectual disabilities that commonly affect patients. The document also addresses the epidemiological aspects, noting the slight female predominance, sporadic occurrence pattern, and historical context since the disorder's first description in 1963, with over 125 documented cases in medical literature.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:34:55.448233"
+}

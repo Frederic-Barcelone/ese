@@ -1,0 +1,866 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:03:53.224892",
+  "document": "Binswanger-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Binswanger-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy",
+      "preferred_label": "cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000914",
+        "orpha": "Orphanet:136",
+        "umls": "UMLS:C4551768",
+        "mesh": "MESH:D046589"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000914",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111035",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1049",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1634330",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D046589",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065551",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84606",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:883",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:125310",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:136",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:390936003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551768",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1621899838",
+          "display": null
+        }
+      ],
+      "context": "aused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease is actually a clinical syndrome of vascular dementia with multiple causes, not a specific disease. The reduced blood flow in brain tissue appears to produce secondary inflammation that may be a target for treatment. Binswanger disease affects",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "CADASIL",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CADASIL",
+      "preferred_label": "Cerebral autosomal dominant arteriopathy-subcortical infarcts-leukoencephalopathy",
+      "abbreviation": "CADASIL",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": "I67.8",
+        "icd11": "8B22.C0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:136",
+        "umls": null,
+        "mesh": "D046589"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:136",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "I67.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8B22.C0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D046589",
+          "display": "CADASIL"
+        }
+      ],
+      "context": "ease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease is actually a clinical syndrome of vascular dementia with multiple causes, not a specific disease. The reduced blood flow in brain tissue appears to p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "CADASIL",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "strokes",
+      "preferred_label": "cerebrovascular disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I60-I69",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011057",
+        "orpha": null,
+        "umls": "UMLS:C0007820",
+        "mesh": "MESH:D002561"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011057",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6713",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003763",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I60-I69",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:437.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:858",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002561",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2938",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62914000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007820",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:843843448",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is usually based on a thorough clinical evaluation, including a detailed patient history, physical examination, and magnetic resonance imaging (MRI) or computerized tomography (CT) scanning of the brain. MRI and CT reveal nerve fiber (white matter) degeneration and multiple small strokes in the deep structures of the brain.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cerebrovascular Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Hypertension",
+      "preferred_label": "hypertensive disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005044",
+        "orpha": null,
+        "umls": "UMLS:C0020538",
+        "mesh": "MESH:D006973"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10763",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000537",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000822",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I15",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:997.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38341003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020538",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "hereditary diseases",
+      "preferred_label": "hereditary diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease is actually a clinical syndrome of vascular dementia with multiple causes, not a specific disease. The reduced blood flow in brain tis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Binswanger disease",
+      "preferred_label": "Binswanger disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043224",
+        "orpha": null,
+        "umls": "UMLS:C0011263",
+        "mesh": "MESH:D015161"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043224",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8277",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015161",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34522",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56267009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011263",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:645643099",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADA",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "diabetes mellitus",
+      "preferred_label": "diabetes mellitus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E08-E13",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005015",
+        "orpha": null,
+        "umls": "UMLS:C0011849",
+        "mesh": "MESH:D003920"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005015",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9351",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000400",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000819",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E08-E13",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E10-E14",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:250",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8350",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003920",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100158",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2985",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:73211009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011849",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:465177735",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease is actually a clinical syndrome of vascular dementia with multiple c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diabetes Mellitus Type 2",
+        "Diabetes Mellitus Type 1",
+        "Diabetes Gestational"
+      ],
+      "pubtator_normalized_name": "Diabetes Mellitus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vascular dementia",
+      "preferred_label": "vascular dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:F01.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004648",
+        "orpha": null,
+        "umls": "UMLS:C0011269",
+        "mesh": "MESH:D015140"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004648",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8725",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004718",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F01.5",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:F01",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:290.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41447",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015140",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34525",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:429998004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011269",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1365258270",
+          "display": null
+        }
+      ],
+      "context": "art disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease is actually a clinical syndrome of vascular dementia with multiple causes, not a specific disease. The reduced blood flow in brain tissue appears to produce secondary inflammation that may be a target for treatment. Binswanger disease affects males and females in equal numbers and usually occurs in individuals age 50 years or older. The diagnosis of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dementia Vascular",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arteriosclerosis",
+      "preferred_label": "arteriosclerosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002277",
+        "orpha": null,
+        "umls": "UMLS:C0003850",
+        "mesh": "MESH:D001161"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002277",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:0571-2299",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2349",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002634",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:440",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2076",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001161",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34403",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:72092001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003850",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal domina",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "heart disease",
+      "preferred_label": "heart disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005267",
+        "orpha": null,
+        "umls": "UMLS:C0018799",
+        "mesh": "MESH:D006331"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005267",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:114",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003777",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V47.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006331",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3079",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56265001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018799",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1512587470",
+          "display": null
+        }
+      ],
+      "context": "Binswanger disease is caused by arteriosclerosis, thromboembolism and other diseases that obstruct blood vessels that supply the deep structures of the brain. Hypertension, smoking, hypercholesterolemia, heart disease and diabetes mellitus are risk factors for Binswanger disease. Rare hereditary diseases such as CADASIL (cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy) also cause Binswanger disease. Thus, Binswanger disease is actually a clinical syndrome of vascular de",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Aortic Valve Disease",
+        "Microcephaly seizures mental retardation heart disorders"
+      ],
+      "pubtator_normalized_name": "Heart Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

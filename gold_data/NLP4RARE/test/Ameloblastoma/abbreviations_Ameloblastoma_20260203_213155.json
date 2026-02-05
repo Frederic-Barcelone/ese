@@ -1,0 +1,155 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T21:31:55.833338",
+  "document": "Ameloblastoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Ameloblastoma.pdf",
+  "total_candidates": 34,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "nic backgrounds and of all age groups. Ameloblastoma can show up either in a regular x-ray or in an MRI imaging study.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "ameloblastoma",
+      "matched_text": "Ameloblastoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:314419"
+    },
+    {
+      "name": "rare disorder",
+      "matched_text": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Kapur-Toriello syndrome",
+      "matched_text": "eye",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:2328"
+    },
+    {
+      "name": "Malignant Neoplasms",
+      "matched_text": "Malignancy",
+      "abbreviation": null,
+      "confidence": 0.9908150434494019,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "injury",
+      "matched_text": "injury",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "matched_text": "all",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Disease",
+      "matched_text": "disorder",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Neoplasms",
+      "matched_text": "tumors",
+      "abbreviation": null,
+      "confidence": 0.7982830286026001,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Cyst",
+      "matched_text": "cysts",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pathologic fistula",
+      "matched_text": "sinuses",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Neoplasm Metastasis",
+      "matched_text": "metastases",
+      "abbreviation": null,
+      "confidence": 0.9838703870773315,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Infections of musculoskeletal system",
+      "matched_text": "infections",
+      "abbreviation": null,
+      "confidence": 0.9714444875717163,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,404 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:43:35.372442",
+  "document": "Aniridia-Cerebellar-Ataxia-Mental-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Aniridia-Cerebellar-Ataxia-Mental-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "the absence, in whole (aniridia) or in part (partial aniridia), of the colored portion (iris) of the eye; impaired coordination of voluntary movements due to underdevelopment (hypoplasia) of the brain's cerebellum (cerebellar ataxia); and mental retardation. The condition usually affects both eyes (bilateral) but a few cases have been reported in which only one eye is affected. Some individuals with this syndrome also exhibit a delay in the acquisition of skills requiring coordination of muscular and mental activity (psychomotor retardation). ACAMD is thought to be inherited as an autosomal recessive g",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Gillespie syndrome",
+      "preferred_label": "Gillespie syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008795",
+        "orpha": "Orphanet:1065",
+        "umls": "UMLS:C0431401",
+        "mesh": "MESH:C536370"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008795",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111578",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:13",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:96563",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536370",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:786",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:206700",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1065",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:253176002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0431401",
+          "display": null
+        }
+      ],
+      "context": "Aniridia, cerebellar ataxia, and mental deficiency, also known as Gillespie syndrome, is an extremely rare inherited disorder that is characterized by the absence, in whole (aniridia) or in part (partial aniridia), of the colored portion (iris) of the eye; impaired coordination of voluntary movements due to underdevelopment (hypoplasia) of the brain's cerebellum (cerebellar ataxia)",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Aniridia cerebellar ataxia mental deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "n extremely rare inherited disorder that is characterized by the absence, in whole (aniridia) or in part (partial aniridia), of the colored portion (iris) of the eye; impaired coordination of voluntary movements due to underdevelopment (hypoplasia) of the brain's cerebellum (cerebellar ataxia); and mental retardation. The condition usually affects both eyes (bilateral) but a few cases have been reported in which only one eye is affected. Some individuals with this syndrome also exhibit a delay in the acquisition of skills requiring coordination of muscular and mental activity (psychomotor retardation). ACAMD is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cerebellar ataxia",
+      "preferred_label": "cerebellar ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011426",
+        "orpha": "Orphanet:48818",
+        "umls": "UMLS:C0878682",
+        "mesh": "D002524"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011426",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050711",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9499",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:168057",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200582",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:707",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:604290",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:48818",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:124224004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0878682",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002524",
+          "display": "Cerebellar Ataxia"
+        }
+      ],
+      "context": "Aniridia, cerebellar ataxia, and mental deficiency, also known as Gillespie syndrome, is an extremely rare inherited disorder that is characterized by the absence, in whole (aniridia) or in part (partial aniridia), of the colored portion (iris) of the eye; impaired coordination of voluntary movements due to underdevelopment (",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gait Ataxia",
+        "Spinocerebellar Degenerations",
+        "Cerebellar Ataxia and Hypogonadotropic Hypogonadism"
+      ],
+      "pubtator_normalized_name": "Cerebellar Ataxia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Aniridia",
+      "preferred_label": "aniridia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024507",
+        "orpha": null,
+        "umls": "UMLS:C0344542",
+        "mesh": "D015783"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024507",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0070532",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:576337",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:106210",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:253231007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0344542",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015783",
+          "display": "Aniridia"
+        }
+      ],
+      "context": "Aniridia, cerebellar ataxia, and mental deficiency, also known as Gillespie syndrome, is an extremely rare inherited disorder that is characterized by the absence, in whole (aniridia) or in part (partial aniridia), of the colored portion (iris) of the eye; impaired coordination of voluntary movements due to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Aniridia cerebellar ataxia mental deficiency",
+        "WAGR Syndrome",
+        "Zazam Sheriff Phillips syndrome"
+      ],
+      "pubtator_normalized_name": "Aniridia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

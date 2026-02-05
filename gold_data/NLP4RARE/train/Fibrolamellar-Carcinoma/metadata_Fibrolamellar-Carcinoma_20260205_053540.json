@@ -1,0 +1,35 @@
+{
+  "doc_id": "Fibrolamellar-Carcinoma",
+  "doc_filename": "Fibrolamellar-Carcinoma.pdf",
+  "top_entities": [
+    {
+      "name": "cancer",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "carcinoma of liver and intrahepatic biliary tract",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2229,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Fibrolamellar Carcinoma: Clinical Overview and Epidemiology",
+  "short_description": "Clinical document describing fibrolamellar carcinoma, a rare liver cancer primarily affecting healthy adolescents and young adults.",
+  "long_description": "This clinical document provides a comprehensive overview of fibrolamellar carcinoma, an ultra-rare form of primary liver cancer that predominantly affects adolescents and young adults who are otherwise healthy. The document covers the clinical presentation, including often asymptomatic early stages and potential symptoms such as abdominal pain, weight loss, and malaise. It discusses treatment approaches, primarily surgical resection, and addresses the possibility of tumor recurrence. The document also presents epidemiological data, noting the condition affects approximately 1 in 5 million people globally, with a median diagnosis age of 25 years, and provides geographic variation statistics including prevalence rates in the United States versus Mexico.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:35:40.635373"
+}

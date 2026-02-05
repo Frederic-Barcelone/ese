@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:22:52.332935",
+  "document": "ALAD-Porphyria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ALAD-Porphyria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ALAD",
+      "hgnc_symbol": "ALAD",
+      "full_name": "aminolevulinate dehydratase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "395",
+        "entrez": "210",
+        "ensembl": "ENSG00000148218",
+        "uniprot": "P13716",
+        "omim": "125270"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "395",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "210",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000148218",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "125270",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P13716",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "100924",
+          "disease_name": "Porphyria due to ALA dehydratase deficiency",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ALAD porphyria is an extremely rare disorder with few cases reported in the medical literature. Most cases have occurred in Europe. However, the disorder can potentially occur in any population. More males have been identified with ALAD porphyria than females in the medical literature, but the disorder",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

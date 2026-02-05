@@ -1,0 +1,112 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:35:40.027628",
+  "document": "Maple-Syrup-Urine-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Maple-Syrup-Urine-Disease.pdf",
+  "total_candidates": 9,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MSUD",
+      "long_form": "maple syrup urine disease",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "MSUD affects males and females in equal numbers. Estimated incidence is 1 in 185,000 live births. Due to a founder effect, the disorder occurs with greater frequency among individuals in the Mennonite populations in the United States, where the incidence is estimated to be as high as in 1 in 380. MSUD o",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0009563"
+        },
+        {
+          "source": "DOID",
+          "id": "DOID:9269"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:3228"
+        },
+        {
+          "source": "ICD10CM",
+          "id": "ICD10CM:E71.0"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:6217"
+        },
+        {
+          "source": "MESH",
+          "id": "MESH:D008375"
+        },
+        {
+          "source": "MedDRA",
+          "id": "MedDRA:10026817"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:1200791"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2200473"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C34806"
+        },
+        {
+          "source": "NORD",
+          "id": "NORD:1400"
+        },
+        {
+          "source": "OMIMPS",
+          "id": "OMIMPS:248600"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:511"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:27718001"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C0024776"
+        },
+        {
+          "source": "icd11.foundation",
+          "id": "icd11.foundation:1623706568"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Maple syrup urine disease",
+      "matched_text": "MSUD",
+      "abbreviation": "MSUD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E71.0",
+      "orpha": "ORPHA:511"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

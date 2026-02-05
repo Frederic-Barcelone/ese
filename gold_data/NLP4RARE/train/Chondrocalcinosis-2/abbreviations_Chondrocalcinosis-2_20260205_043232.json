@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:32:32.123825",
+  "document": "Chondrocalcinosis-2.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chondrocalcinosis-2.pdf",
+  "total_candidates": 35,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CPP",
+      "long_form": "Calcium pyrophosphate",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "recurring attacks of pain, swelling warmth and redness in one or more joints. Other affected people have swelling, stiffness, and pain with little or no inflammation. in the joints A knee, wrist, hip, or shoulder is most frequently affected, although any joint of the body may be involved. Acute episodes can last for days to weeks, and symptoms may subside without treatment. Calcium pyrophosphate (CPP) crystal deposits may accumulate around the bones of the spine (vertebrae) and cause back or neck pain and/or loss of mobility. Many patients with CPDD develop chronic arthritis which can resemble osteoarthritis. CCAL2 is a rare disorder. Eight families have been described in the medical literature. Some studies indicate a greater prevalence of non-genetic CPDD in females, but this is based on wea",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CPDD",
+      "long_form": "calcium pyrophosphate deposition disease",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "any joint of the body may be involved. Acute episodes can last for days to weeks, and symptoms may subside without treatment. Calcium pyrophosphate (CPP) crystal deposits may accumulate around the bones of the spine (vertebrae) and cause back or neck pain and/or loss of mobility. Many patients with CPDD develop chronic arthritis which can resemble osteoarthritis. CCAL2 is a rare disorder. Eight families have been described in the medical literature. Some studies indicate a greater prevalence of non-genetic CPDD in females, but this is based on weak evidence. There is no known ethnic predilection.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CCAL2",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "The symptoms of CCAL2 usually begin as acute, recurring attacks of pain, swelling warmth and redness in one or more joint",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Papilloma of choroid plexus",
+      "matched_text": "CPP",
+      "abbreviation": "CPP",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D33.0",
+      "orpha": "ORPHA:2807"
+    },
+    {
+      "name": "osteoarthritis",
+      "matched_text": "osteoarthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M19",
+      "orpha": null
+    },
+    {
+      "name": "non-genetic",
+      "matched_text": "non-genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "arthritis",
+      "matched_text": "arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Pyrophosphate",
+      "matched_text": "pyrophosphate",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "CPP",
+      "matched_text": "CPP",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

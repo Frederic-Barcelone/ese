@@ -1,0 +1,634 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:42:16.983515",
+  "document": "Kienbock-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Kienbock-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Kienböck Disease",
+      "preferred_label": "Kienböck Disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019967",
+        "orpha": "Orphanet:97332",
+        "umls": "UMLS:C0022682",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019967",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9690",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44028",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10064242",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1332",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:97332",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022682",
+          "display": null
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "acquired",
+      "preferred_label": "acquired",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021141",
+        "orpha": "Orphanet:409941",
+        "umls": null,
+        "mesh": "D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021141",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:409941",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000163",
+          "display": "Acquired Immunodeficiency Syndrome"
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienbö",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acquired ichthyosis",
+        "Blindness",
+        "Anemia Hemolytic"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bone disorder",
+      "preferred_label": "bone disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M80-M85",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005381",
+        "orpha": null,
+        "umls": "UMLS:C0005940",
+        "mesh": "MESH:D001847"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005381",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080001",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004260",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M80-M85",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:733.99",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14182",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001847",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100293",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:76069003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005940",
+          "display": null
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chronic Kidney Disease-Mineral and Bone Disorder",
+        "Antley-Bixler Syndrome Phenotype",
+        "Brittle Bone Disorder"
+      ],
+      "pubtator_normalized_name": "Bone Marrow Failure Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "injury",
+      "preferred_label": "injury",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is characterized by degenerative changes in the lunate bone of the wrist. Softe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chemical and Drug Induced Liver Injury",
+        "Smoke Inhalation Injury",
+        "Acute Kidney Injury"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "soft",
+      "preferred_label": "soft",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013894",
+        "orpha": "Orphanet:314394",
+        "umls": "UMLS:C3542022",
+        "mesh": "D017695"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013894",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:17419",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:762199",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:614813",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:314394",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3542022",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017695",
+          "display": "Soft Tissue Injuries"
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is characterized by degenerative changes in the lunate bone of the wrist. Softening, deterioration, fragmentation or compression of the affected bone can occur. These changes may produce pain, sw",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Soft Tissue Infections",
+        "Soft Tissue Neoplasms",
+        "Sarcoma"
+      ],
+      "pubtator_normalized_name": "Soft Tissue Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "h thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is characterized by degenerative changes in the lunate bone of the wrist. Softening, deterioration, fragmentation or compression of the affected bone can occur. These changes may produce pain, swelling, tenderness, thickening and/or stiffness in the overlying tissues of the wrist. The range of motion may become restricted. Many individuals with Kienböck Disease have a shorter ulna than radius (negative ulnar variance). Healing occurs through formati",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "scan",
+      "preferred_label": "SCAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020771",
+        "orpha": null,
+        "umls": "UMLS:C1846574",
+        "mesh": "D004401"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020771",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:337609",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:607250",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1846574",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004401",
+          "display": "Dysarthria"
+        }
+      ],
+      "context": "through formation of new bone in some cases. The exact cause of Kienböck Disease is not known. However, it is believed to be caused by inflammation or injury of the wrist. Kienböck Disease usually begins during childhood and seems to affect females more often than males. Arthroscopic procedures, CT scan and/or x-ray imaging may be used for diagnosis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dysarthria",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "acquired bone disorder",
+      "preferred_label": "Bone Diseases",
+      "abbreviation": null,
+      "confidence": 0.8686473727226257,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0005940",
+        "mesh": "D001847"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0005940",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001847",
+          "display": "Bone Diseases"
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bone Diseases Metabolic",
+        "Bone Marrow Diseases",
+        "Bone Diseases Developmental"
+      ],
+      "pubtator_normalized_name": "Bone Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Abnormalities",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Kienböck Disease is an acquired bone disorder. Abnormalities of the lunate bone in the wrist develops following an injury or inflammation. Recurrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is characterized b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "fragmentation",
+      "preferred_label": "abnormal fragmented structure",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0332472",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0332472",
+          "display": null
+        }
+      ],
+      "context": "urrent pain and stiffness occur in conjunction with thickening, swelling and tenderness in soft tissue overlying the lunate bone. The range of motion in the wrist may become limited. Kienböck Disease is characterized by degenerative changes in the lunate bone of the wrist. Softening, deterioration, fragmentation or compression of the affected bone can occur. These changes may produce pain, swelling, tenderness, thickening and/or stiffness in the overlying tissues of the wrist. The range of motion may become restricted. Many individuals with Kienböck Disease have a shorter ulna than radius (negative ulnar v",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

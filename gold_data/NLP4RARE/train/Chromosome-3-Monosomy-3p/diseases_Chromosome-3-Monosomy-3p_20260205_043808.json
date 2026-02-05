@@ -1,0 +1,386 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:38:08.616976",
+  "document": "Chromosome-3-Monosomy-3p.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chromosome-3-Monosomy-3p.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Chromosome 3, Monosomy 3p",
+      "preferred_label": "Chromosome 3, Monosomy 3p",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013424",
+        "orpha": "Orphanet:1620",
+        "umls": "UMLS:C4706503",
+        "mesh": "MESH:C536804"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013424",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060417",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3750",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1643555",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536804",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C41377",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:951",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613792",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1620",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:763528002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4706503",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 3, Monosomy 3p is a rare chromosomal disorder in which the end (distal) portion of the short arm (p) of chromosome 3 is missing (deleted or monosomic). The range and severity of symptoms and findings may be variable. However, associated features often include growth delays before and after birth (prenatal and pos",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chromosome 3 monosomy 3p2",
+        "Chromosome 3 monosomy 3p25",
+        "Chromosome 3 monosomy 3p14 p11"
+      ],
+      "pubtator_normalized_name": "Chromosome 3 monosomy 3p",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "chromosomal disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90-Q99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019040",
+        "orpha": "Orphanet:68335",
+        "umls": "UMLS:C0008626",
+        "mesh": "MESH:D025063"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019040",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080014",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90-Q99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3441",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D025063",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100280",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68335",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409709004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008626",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 3, Monosomy 3p is a rare chromosomal disorder in which the end (distal) portion of the short arm (p) of chromosome 3 is missing (deleted or monosomic). The range and severity of symptoms and findings may be variable. However, associated features often include growth delays before and after birth (prenatal and postnatal growth deficiency); seve",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "nd (distal) portion of the short arm (p) of chromosome 3 is missing (deleted or monosomic). The range and severity of symptoms and findings may be variable. However, associated features often include growth delays before and after birth (prenatal and postnatal growth deficiency); severe to profound mental retardation; distinctive malformations of the skull and facial (craniofacial) region; eyebrows that grow together (synophrys); and/or excessive hair growth (hypertrichosis). Additional physical abnormalities may also be present. In many cases, Chromosome 3, Monosomy 3p appears to occur spontaneously (de novo)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertrichosis",
+      "preferred_label": "hypertrichosis",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019280",
+        "orpha": "Orphanet:79365",
+        "umls": "UMLS:C0020555",
+        "mesh": "MESH:D006983"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:420",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18996",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000998",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:L68",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:43787",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006983",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10020864",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79365",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:29966009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020555",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2042627850",
+          "display": null
+        }
+      ],
+      "context": ", associated features often include growth delays before and after birth (prenatal and postnatal growth deficiency); severe to profound mental retardation; distinctive malformations of the skull and facial (craniofacial) region; eyebrows that grow together (synophrys); and/or excessive hair growth (hypertrichosis). Additional physical abnormalities may also be present. In many cases, Chromosome 3, Monosomy 3p appears to occur spontaneously (de novo) for unknown reasons. Chromosome 3, Monosomy 3p appears to affect males and females in relatively equal numbers. Since the disorder was originally reported in 19",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypertrichosis",
+        "Hypertrichosis congenital generalized X-linked",
+        "Hypertrichosis Congenital Anterior Cervical with Peripheral Sensory and Motor Neuropathy"
+      ],
+      "pubtator_normalized_name": "Hypertrichosis anterior cervical",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

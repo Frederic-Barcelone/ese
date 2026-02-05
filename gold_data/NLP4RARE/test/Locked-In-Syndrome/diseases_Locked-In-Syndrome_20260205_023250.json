@@ -1,0 +1,294 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:32:50.953045",
+  "document": "Locked-In-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Locked-In-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "stroke",
+      "preferred_label": "cerebrovascular disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I60-I69",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011057",
+        "orpha": null,
+        "umls": "UMLS:C0007820",
+        "mesh": "MESH:D002561"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011057",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6713",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003763",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I60-I69",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:437.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:858",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002561",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2938",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62914000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007820",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:843843448",
+          "display": null
+        }
+      ],
+      "context": "Locked-in syndrome is a rare neurological disorder that affects males and females in equal numbers. Locked-in syndrome can affect individuals of all ages including children, but most often is seen in adults who are more at risk for brain stroke and bleeding. Because cases of locked-in syndrome may go unrecognized or misdiagnosed, it is difficult to determine the actual number of individuals who have had the disorder in the general population.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cerebrovascular Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "neurological disorder",
+      "preferred_label": "nervous system disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G00-G99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005071",
+        "orpha": null,
+        "umls": "UMLS:C0027765",
+        "mesh": "MESH:D009422"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:863",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000618",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G00-G99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:349.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14336",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009422",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26835",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:118940003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027765",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Nervous_system_disease",
+          "display": null
+        }
+      ],
+      "context": "Locked-in syndrome is a rare neurological disorder that affects males and females in equal numbers. Locked-in syndrome can affect individuals of all ages including children, but most often is seen in adults who are more at risk for brain stroke and bleeding. Because cases of locked-in syndrome may go unrecognized or misdiagnosed, it is difficult to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Diseases",
+        "Heredodegenerative Disorders Nervous System",
+        "Peripheral Nervous System Diseases"
+      ],
+      "pubtator_normalized_name": "Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Locked-in syndrome",
+      "preferred_label": "locked-in syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G83.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016567",
+        "orpha": "Orphanet:2406",
+        "umls": "UMLS:C0023944",
+        "mesh": "MESH:D011782"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016567",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12697",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6919",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G83.5",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:344.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7378",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011782",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10024792",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1376",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2406",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38023001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023944",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:17562655",
+          "display": null
+        }
+      ],
+      "context": "Locked-in syndrome is a rare neurological disorder that affects males and females in equal numbers. Locked-in syndrome can affect individuals of all ages including children, but most often is seen in adults who are more at risk for brain stroke and bleeding. Because cases of locked-in syndrome may go unrecognized or",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Locked-In Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

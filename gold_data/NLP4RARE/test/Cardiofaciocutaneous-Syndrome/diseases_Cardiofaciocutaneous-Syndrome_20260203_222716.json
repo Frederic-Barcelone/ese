@@ -1,0 +1,159 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:27:16.042760",
+  "document": "Cardiofaciocutaneous-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Cardiofaciocutaneous-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CFC syndrome",
+      "preferred_label": "CFC syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015280",
+        "orpha": "Orphanet:1340",
+        "umls": "UMLS:C1275081",
+        "mesh": "MESH:C535579"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060233",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9146",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:266149",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535579",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84617",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:891",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:115150",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1340",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:403770008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1275081",
+          "display": null
+        }
+      ],
+      "context": "BRAF Currently, there is no study providing an accurate estimate of the population prevalence of CFC syndrome. However one study in Japan, reported the incidence to be approximately 1 in 810,000. It is thought that males and females are affected equally. There are patients are reported from all continents. The number of affected individuals reported in the medical literature is now close to 400 and the tot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "BRAF Currently, there is no study providing an accurate estimate of the population prevalence of CFC syndrome. However one study in Japan, reported the incidence to be approximately 1 in 810,000. It is thought that males and females are affected equally. There are patients are reported from all continents. The number of affected individuals reported in the medical literature is now close to 400 and the total number worldwide is estimated to be more than this. This may be an underestimate, however, because mildly affected adults may go undiagnosed.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

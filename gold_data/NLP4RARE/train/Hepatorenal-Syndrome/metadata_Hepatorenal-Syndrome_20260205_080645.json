@@ -1,0 +1,35 @@
+{
+  "doc_id": "Hepatorenal-Syndrome",
+  "doc_filename": "Hepatorenal-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "fulminant hepatic failure",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "hepatorenal syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1719,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Hepatorenal Syndrome: Epidemiology and Clinical Overview",
+  "short_description": "Clinical document describing the incidence, demographics, and associated conditions of hepatorenal syndrome in patients with liver disease.",
+  "long_description": "This clinical research document provides an epidemiological overview of hepatorenal syndrome, detailing its equal prevalence across genders and estimated occurrence rate of 8-10% in patients with ascites and cirrhosis. The document explains that while hepatorenal syndrome is most commonly associated with advanced cirrhosis and ascites, it can also manifest in patients with other forms of liver disease, including fulminant hepatic failure. This information serves as foundational knowledge for understanding the scope and clinical context of hepatorenal syndrome in hepatology practice.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:06:45.379737"
+}

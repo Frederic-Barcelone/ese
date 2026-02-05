@@ -1,0 +1,297 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:41:12.598230",
+  "document": "Pseudocholinesterase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pseudocholinesterase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Pseudocholinesterase deficiency",
+      "preferred_label": "butyrylcholinesterase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015270",
+        "orpha": "Orphanet:132",
+        "umls": "UMLS:C1283400",
+        "mesh": "MESH:C537417"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015270",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7482",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:289.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:220923",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537417",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:617936",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:132",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:191397007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1283400",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:581237559",
+          "display": null
+        }
+      ],
+      "context": "Pseudocholinesterase deficiency is an uncommon genetic disorder that makes an affected person very sensitive to any of several anesthetic agents, especially those derived from the drug known as choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Butyrylcholinesterase Deficiency Fluoride-Resistant Japanese Type"
+      ],
+      "pubtator_normalized_name": "Butyrylcholinesterase deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Pseudocholinesterase deficiency is an uncommon genetic disorder that makes an affected person very sensitive to any of several anesthetic agents, especially those derived from the drug known as choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the lungs may become paralyzed. Mech",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Infantile apnea",
+      "preferred_label": "infantile apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019092",
+        "orpha": "Orphanet:70590",
+        "umls": "UMLS:C0745261",
+        "mesh": "C535759"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019092",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6779",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1378556",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:70590",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:724229002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0745261",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535759",
+          "display": "Congenital myasthenic syndrome with episodic apnea"
+        }
+      ],
+      "context": "holinesterase. Pseudocholinesterase deficiency is present at birth and occurs in approximately 1 out of every 1,500 to 2,500 people in the United States. Among Caucasian Americans, it seems to affect males almost twice as often as females. Apnea is the temporary cessation of breathing during sleep. Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Congenital myasthenic syndrome with episodic apnea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "apnea",
+      "preferred_label": "apnea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000106",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001049"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000106",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001049",
+          "display": "Apnea"
+        }
+      ],
+      "context": "duals with pseudocholinesterase deficiency have a shortage or absence of the enzyme pseudocholinesterase in their blood serum. If the drug succinylcholine (or another anesthetic derivative of choline) is given during surgery, the respiratory muscles become paralyzed and the patient stops breathing (apnea). Artificial respiration (mechanical ventilation) may be necessary until the drug is eliminated from the body and the affected individual is able to resume breathing. If the person with pseudocholinesterase deficiency is not exposed to a choline-derived anesthetic, he or she may never be aware of h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sleep Apnea Obstructive",
+        "Sleep Apnea Syndromes",
+        "Sleep Apnea Central"
+      ],
+      "pubtator_normalized_name": "Apnea",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

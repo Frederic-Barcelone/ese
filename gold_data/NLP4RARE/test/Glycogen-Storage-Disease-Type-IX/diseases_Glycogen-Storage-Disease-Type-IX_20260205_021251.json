@@ -1,0 +1,180 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:12:51.434863",
+  "document": "Glycogen-Storage-Disease-Type-IX.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Glycogen-Storage-Disease-Type-IX.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "glycogen storage disease",
+      "preferred_label": "glycogen storage disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E74.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002412",
+        "orpha": "Orphanet:79201",
+        "umls": "UMLS:C0017919",
+        "mesh": "MESH:D006008"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002412",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2747",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18973",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E74.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:271.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6639",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006008",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10061990",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200838",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C61272",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:232200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79201",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:29633007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017919",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1187107383",
+          "display": null
+        }
+      ],
+      "context": "The autosomal recessive forms of glycogen storage disease |X affect males and females in equal numbers. The X-linked forms primarily affect males, although females can have symptoms, such as enlargement of the liver and, more rarely, females can have symptoms similar to those seen in males. GSD-IX types A, B and C are estimated to affect 1 in 100,000 indi",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Glycogen Storage Disease IIIB",
+        "Glycogen Storage Disease IIIC",
+        "Glycogen Storage Disease 0 Muscle"
+      ],
+      "pubtator_normalized_name": "Glycogen Storage Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "GSD",
+      "preferred_label": "Danon disease",
+      "abbreviation": "GSD",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E74.0",
+        "icd11": "5C51.3",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:34587",
+        "umls": null,
+        "mesh": "D052120"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:34587",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E74.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C51.3",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D052120",
+          "display": "Glycogen Storage Disease Type IIb"
+        }
+      ],
+      "context": "The autosomal recessive forms of glycogen storage disease |X affect males and females in equal numbers. The X-linked forms primarily affect males, although females can have symptoms, such as enlargement of the liver and, more rarely, females can have symptoms similar to those seen in males. GSD-IX types A, B and C are estimated to affect 1 in 100,000 individuals in the general population. These disorders account for approximately 25% of all glycogen storage disorders making GSD-IX one of the most common forms of these disorders. Because some affected individuals go undiagnosed or misdiagn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Glycogen Storage Disease Type IIb",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:38:33.107260",
+  "document": "Focal-Segmental-Glomerulosclerosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Focal-Segmental-Glomerulosclerosis.pdf",
+  "total_candidates": 29,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "FSGS",
+      "long_form": "Focal segmental glomerulosclerosis",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Focal segmental glomerulosclerosis (FSGS) is a term for a specific pattern of damage to the kidneys. The kidneys are two bean-shaped organs in the body, one on each side of the body just below the rib cage in the back. The kidney has multiple functions including filtering the blood of waste products and other substances and producing urine to carrying waste from the body. FSGS occurs when the filters of the kidney, which are made of clus",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "focal segmental glomerulosclerosis",
+      "matched_text": "Focal segmental glomerulosclerosis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "kidney failure",
+      "matched_text": "kidney failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Bean",
+      "matched_text": "bean",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,123 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:56:23.468112",
+  "document": "Citrullinemia-Type-1.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Citrullinemia-Type-1.pdf",
+  "total_candidates": 12,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CTLN1",
+      "long_form": "citrullinemia type I",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Citrullinemia type | (CTLN1) is a rare autosomal recessive genetic disorder that includes a neonatal acute (classic) form, a milder late-onset form, a form that begins during or after pregnancy, and an asymptomatic form. CTLN1 occurs in approximately 1/57,000 births.",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0008988"
+        },
+        {
+          "source": "DOID",
+          "id": "DOID:0070340"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:6114"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:1648491"
+        },
+        {
+          "source": "MedDRA",
+          "id": "MedDRA:10058298"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:1200805"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2200480"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C150601"
+        },
+        {
+          "source": "OMIM",
+          "id": "OMIM:215700"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:247525"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:398680004"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C4721769"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Glycogen storage disease due to acid maltase deficiency, late-onset",
+      "matched_text": "late-onset",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:420429"
+    },
+    {
+      "name": "Citrullinemia type I",
+      "matched_text": "CTLN1",
+      "abbreviation": "CTLN1",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E72.2",
+      "orpha": "ORPHA:247525"
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "citrullinemia",
+      "matched_text": "Citrullinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E72.23",
+      "orpha": "Orphanet:187"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

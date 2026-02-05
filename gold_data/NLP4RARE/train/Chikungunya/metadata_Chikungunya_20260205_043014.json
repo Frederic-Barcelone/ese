@@ -1,0 +1,45 @@
+{
+  "doc_id": "Chikungunya",
+  "doc_filename": "Chikungunya.pdf",
+  "top_entities": [
+    {
+      "name": "viral infectious disease",
+      "mention_count": 3,
+      "entity_type": "disease"
+    },
+    {
+      "name": "chikungunya",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Ibuprofen",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "CHIKUNGUNYA",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2327,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Chikungunya: Viral Infection and Clinical Overview",
+  "short_description": "Clinical document describing Chikungunya, a rare mosquito-transmitted viral infection characterized by fever, rash, and severe joint pain.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Chikungunya, a viral infection transmitted primarily through infected mosquito bites. The document covers the disease's classification as an arthritic virus due to its significant joint involvement, its geographic distribution in tropical regions including Africa, Southeast Asia, and India, and its clinical presentation featuring fever, rash, and severe arthralgias lasting 3-7 days. It discusses transmission mechanisms, affected populations, diagnostic methods including ELISA testing, and treatment approaches emphasizing supportive care with anti-inflammatory medications, as no specific antiviral therapy exists.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:30:14.772516"
+}

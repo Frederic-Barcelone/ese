@@ -1,0 +1,35 @@
+{
+  "doc_id": "Acoustic-Neuroma",
+  "doc_filename": "Acoustic-Neuroma.pdf",
+  "top_entities": [
+    {
+      "name": "Macrodactyly of toes, unilateral",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Vestibular schwannoma",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1975,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MED",
+  "document_type_name": "Patient Education & Advocacy",
+  "document_type_group": "Patient-Centric Documentation",
+  "classification_confidence": 0.25,
+  "title": "Acoustic Neuroma: Clinical Overview and Symptoms",
+  "short_description": "Clinical document describing acoustic neuroma (vestibular schwannoma), a benign tumor affecting the eighth cranial nerve that causes hearing loss, tinnitus, and balance issues.",
+  "long_description": "This clinical document provides a comprehensive overview of acoustic neuroma, also known as vestibular schwannoma, which is a rare benign tumor that develops on the eighth cranial nerve. The document explains how this non-cancerous growth affects the nerve responsible for hearing and balance, detailing the typical symptom progression including unilateral hearing loss (occurring in approximately 90% of cases), tinnitus, and dizziness or imbalance. The text clarifies that symptoms result from tumor pressure on the eighth cranial nerve, disrupting normal nerve signal transmission to the brain, while emphasizing that the condition is non-malignant and does not metastasize.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:27:31.511745"
+}

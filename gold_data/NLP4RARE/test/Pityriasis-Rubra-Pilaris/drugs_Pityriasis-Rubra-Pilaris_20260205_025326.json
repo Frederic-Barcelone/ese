@@ -1,0 +1,77 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:53:26.625359",
+  "document": "Pityriasis-Rubra-Pilaris.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pityriasis-Rubra-Pilaris.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "Vitamin A",
+      "preferred_name": "Vitamin A",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Acute Lymphoblastic Leukemia",
+        "Acute Myeloid Leukemia",
+        "Biphenotypic Acute Leukemia",
+        "Lymphoblastic Lymphoma",
+        "Chronic Myeloid Leukemia",
+        "Myelodysplastic Syndromes",
+        "Myeloprolipherative Neoplsm",
+        "Non-hodgkin Lymphoma"
+      ],
+      "nct_id": "NCT06508099",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000225",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06508099",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000225",
+          "display": "Adenine"
+        }
+      ],
+      "context": "of PRP is unknown, although a combination of a genetic predisposition, environmental trigger, and other unknown causes is believed to play key roles. Vitamin A deficiency was once believed to be related to the disorder, however, this theory lacks sufficient evidence and treatment with Vitamin A has been less",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ascorbic Acid",
+        "Arachidonic Acid",
+        "Folic Acid"
+      ],
+      "pubtator_normalized_name": "Adenine",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

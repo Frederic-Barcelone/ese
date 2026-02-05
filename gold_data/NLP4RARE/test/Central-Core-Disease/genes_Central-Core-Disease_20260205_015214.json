@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:52:14.845785",
+  "document": "Central-Core-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Central-Core-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "rmal \"floppiness\", muscle weakness, and a variety of skeletal abnormalities such as side-to-side curvature of the spine (scoliosis). Muscle weakness normally affects the proximal muscles, which are those muscles closest to the center of the body such as the muscles of the shoulder, pelvis and upper arms and legs. Affected infants may experience delays in acquiring motor milestones such as crawling or walking. Some individuals with CCD may be susceptible to developing malignant hyperthermia, a condition in which individuals develop adverse reactions to certain anesthetic drugs. CCD may be very mild",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:41:40.890377",
+  "document": "Anemia-Megaloblastic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anemia-Megaloblastic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Megaloblastic anemia",
+      "preferred_label": "megaloblastic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001700",
+        "orpha": null,
+        "umls": "UMLS:C0002888",
+        "mesh": "D000749"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001700",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13382",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001889",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:281.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1527",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200612",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34382",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:53165003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002888",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000749",
+          "display": "Anemia Megaloblastic"
+        }
+      ],
+      "context": "Megaloblastic anemia is a condition in which the bone marrow produces unusually large, structurally abnormal, immature red blood cells (megaloblasts). Bone marrow, the soft spongy material found inside certain bones, produces the main blood cells of the body -red cells, white cells, and platelets. Anemia is a condition",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Methylcobalamin Deficiency CblG Type",
+        "Thiamine responsive megaloblastic anemia syndrome",
+        "Imerslund-Grasbeck syndrome"
+      ],
+      "pubtator_normalized_name": "Anemia Megaloblastic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cobalamin deficiency",
+      "preferred_label": "cobalamin deficiency",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020696",
+        "orpha": null,
+        "umls": "UMLS:C0042847",
+        "mesh": "MESH:D014806"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020696",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000734",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0100502",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:266.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21880",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014806",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C131684",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:190634004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0042847",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1366882206",
+          "display": null
+        }
+      ],
+      "context": "Blood tests may reveal the abnormally large, misshapen red blood cells that characterize megaloblastic anemia. Blood tests can also confirm cobalamin or folate deficiency as the cause of megaloblastic anemia. Additional tests such as a Schilling test, which confirms poor absorption as the cause of cobalamin deficiency, may be necessary.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Transcobalamin I Deficiency",
+        "Homocystinuria-Megaloblastic Anemia due to Defect in Cobalamin Metabolism CblE Complementation Type"
+      ],
+      "pubtator_normalized_name": "Methylcobalamin Deficiency CblG Type",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "Megaloblastic anemia is a condition in which the bone marrow produces unusually large, structurally abnormal, immature red blood cells (megaloblasts). Bone marrow, the soft spongy material found inside certain bones, produces the main blood cells of the body -red cells, white cells, and platelets. Anemia is a condition characterized by the low levels of circulating, red blood cells. Red blood cells are released from the marrow into the bloodstream where they travel throughout the body delivering oxygen to tissue. A deficiency in healthy, fully-matured red blood cells can result in fatigue, paleness",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

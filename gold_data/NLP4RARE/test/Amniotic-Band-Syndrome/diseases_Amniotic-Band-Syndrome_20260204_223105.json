@@ -1,0 +1,102 @@
+{
+  "run_id": "RUN_20260204_212243_67ab17d4784c",
+  "timestamp": "2026-02-04T22:31:05.559529",
+  "document": "Amniotic-Band-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Amniotic-Band-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Amniotic band syndrome",
+      "preferred_label": "amniotic band syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015167",
+        "orpha": "Orphanet:295000",
+        "umls": "UMLS:C0220724",
+        "mesh": "MESH:D000652"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015167",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:429",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:66322",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000652",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84552",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:766",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:217100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:295000",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:440214006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220724",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1033549095",
+          "display": null
+        }
+      ],
+      "context": "Amniotic band syndrome is a well-known condition potentially associated with a variety of different birth defects. The abnormalities occur after the affected parts of the body have formed normally in early development. The severity of amniotic band syndrome can range from a single, isolated finding to multiple, disfiguri",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Amniotic Band Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

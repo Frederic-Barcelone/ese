@@ -1,0 +1,689 @@
+{
+  "run_id": "RUN_20260203_062811_cb5e3758076f",
+  "timestamp": "2026-02-03T07:42:12.650421",
+  "document": "Arteriovenous-Malformation.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Arteriovenous-Malformation.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 15,
+  "total_validated": 15,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "congenital",
+      "preferred_label": "Congenital",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "sizes in which there is one or more direct connections between the arterial and venous circulations. In the lesion there is no capillary bed, which is part of normal tissue. Brain AVMs are often presumed to be congenital, but there is no direct evidence that they form in utero. The distribution of age at detection for brain AVMs is normally-distributed with the mean age in the mid-30’s. Although a small number of AVMs manifest themselves at or shortly after birth, most of them present later in life, and just as lik",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Congenital central hypoventilation syndrome",
+        "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autosomal dominant",
+      "preferred_label": "Autosomal dominant optic atrophy and cataract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:67036",
+        "umls": null,
+        "mesh": "C537128"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:67036",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537128",
+          "display": "Optic atrophy and cataract autosomal dominant"
+        }
+      ],
+      "context": "VM are often attributed to result from an error in embryonic or fetal development, but there is no direct evidence of this assertion. No environmental risk factors have been identified for neurological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Optic atrophy and cataract autosomal dominant",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "Genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "om an error in embryonic or fetal development, but there is no direct evidence of this assertion. No environmental risk factors have been identified for neurological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hereditary hemorrhagic telangiectasia",
+      "preferred_label": "Hereditary hemorrhagic telangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:774",
+        "umls": null,
+        "mesh": "D013683"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:774",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013683",
+          "display": "Telangiectasia Hereditary Hemorrhagic"
+        }
+      ],
+      "context": "l development, but there is no direct evidence of this assertion. No environmental risk factors have been identified for neurological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Telangiectasia Hereditary Hemorrhagic Type 4",
+        "Familial Primary Pulmonary Hypertension",
+        "Osler-rendu-weber syndrome 2"
+      ],
+      "pubtator_normalized_name": "Telangiectasia Hereditary Hemorrhagic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "capillary malformation",
+      "preferred_label": "Capillary Malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016231",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C564254"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016231",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564254",
+          "display": "Capillary Malformation-Arteriovenous Malformation"
+        }
+      ],
+      "context": "e of this assertion. No environmental risk factors have been identified for neurological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection of an AVM are 1 per 100,000 po",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Vascular Malformations",
+        "Hemangioma Cavernous Central Nervous System",
+        "Hyperkeratotic Cutaneous Capillary-Venous Malformations Associated With Cerebral Capillary Malformations"
+      ],
+      "pubtator_normalized_name": "Capillary Malformation-Arteriovenous Malformation",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndromes",
+      "preferred_label": "Syndromes",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002254",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002254",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003866",
+          "display": "Depressive Disorder"
+        }
+      ],
+      "context": "rological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection of an AVM are 1 per 100,000 population per year (about 3000 new cases detected per year in the U",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Respiratory Distress Syndrome",
+        "Metabolic Syndrome",
+        "Mitochondrial Diseases"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Wyburn-Mason syndrome",
+      "preferred_label": "Wyburn-Mason syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:53719",
+        "umls": null,
+        "mesh": "C536752"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:53719",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536752",
+          "display": "Wyburn Mason's syndrome"
+        }
+      ],
+      "context": "does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection of an AVM are 1 per 100,000 population per year (about 3000 new cases detected per year in the U.S.) The population prevalence",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wyburn Mason's syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "roups. The best estimates for new detection of an AVM are 1 per 100,000 population per year (about 3000 new cases detected per year in the U.S.) The population prevalence is about 10 per 100,000, i.e., there are probably about 30,000 individuals in the U.S. who harbor an AVM or have had an AVM that was treated. They occur throughout life,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "fistulas",
+      "preferred_label": "pathologic fistula",
+      "abbreviation": null,
+      "confidence": 0.9816126823425293,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0016169",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0016169",
+          "display": null
+        }
+      ],
+      "context": "es at or shortly after birth, most of them present later in life, and just as likely, form and progress during the later years of life. The lack of capillaries allows blood traveling through the abnormal fistulous connections to flow rapidly. The low resistance of the direct A-V connections, termed fistulas, results in very high flow rates in the vessels leading to and within the AVM. These high flow rates can lower the pressure in the arteries leading to the AVM and to surrounding relatively normal brain tissue. Further, because of the direct A-V connections, the pressure in the arteries, even if som",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "stroke",
+      "preferred_label": "Cerebrovascular accident",
+      "abbreviation": null,
+      "confidence": 0.9585702419281006,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0038454",
+        "mesh": "D020521"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0038454",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020521",
+          "display": "Stroke"
+        }
+      ],
+      "context": "are transmitted to the veins draining the AVM and surrounding brain, which normally operate at very low pressures. AVM can occur in many different parts of the body, but those located in the central nervous system (brain and spinal cord) can cause problems that affect the brain like other forms of stroke. AVM are often attributed to result from an error in embryonic or fetal development, but there is no direct evidence of this assertion. No environmental risk factors have been identified for neurological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sneddon Syndrome"
+      ],
+      "pubtator_normalized_name": "Stroke",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "capillary malformation-AVM syndrome",
+      "preferred_label": "CAPILLARY MALFORMATION-ARTERIOVENOUS MALFORMATION (disorder)",
+      "abbreviation": null,
+      "confidence": 0.907938814163208,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1842180",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1842180",
+          "display": null
+        }
+      ],
+      "context": "e of this assertion. No environmental risk factors have been identified for neurological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection of an AVM are 1 per 100,000 population per",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "syndromes",
+      "preferred_label": "Syndrome",
+      "abbreviation": null,
+      "confidence": 0.7889410734176636,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0039082",
+        "mesh": "D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0039082",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003866",
+          "display": "Depressive Disorder"
+        }
+      ],
+      "context": "rological AVM. AVM does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection of an AVM are 1 per 100,000 population per year (about 3000 new cases detected per year in the U",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Wyburn-Mason syndrome",
+      "preferred_label": "Wyburn Mason's syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0265321",
+        "mesh": "C536752"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0265321",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536752",
+          "display": "Wyburn Mason's syndrome"
+        }
+      ],
+      "context": "does not usually run in families, but somewhere on the order of 5% of AVMs may be due to autosomal dominant inheritance of a genetic mutation, most commonly hereditary hemorrhagic telangiectasia or the capillary malformation-AVM syndrome. AVM can rarely be associated with certain syndromes such as Wyburn-Mason syndrome. AVM affects males and females in equal numbers. There does not appear to be an increased risk for particular ethnic and racial groups. The best estimates for new detection of an AVM are 1 per 100,000 population per year (about 3000 new cases detected per year in the U.S.) The population prevalence",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wyburn Mason's syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Arteriovenous malformation",
+      "preferred_label": "Congenital arteriovenous malformation",
+      "abbreviation": null,
+      "confidence": 0.9629726409912109,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0003857",
+        "mesh": "D002538"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0003857",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002538",
+          "display": "Intracranial Arteriovenous Malformations"
+        }
+      ],
+      "context": "Arteriovenous malformation (AVM) is a vascular lesion that is a tangle of vessels of varying",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Vascular Malformations"
+      ],
+      "pubtator_normalized_name": "Intracranial Arteriovenous Malformations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vascular lesion",
+      "preferred_label": "Cerebrovascular Disorders",
+      "abbreviation": null,
+      "confidence": 0.7817403078079224,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0007820",
+        "mesh": "D002561"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0007820",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002561",
+          "display": "Cerebrovascular Disorders"
+        }
+      ],
+      "context": "Arteriovenous malformation (AVM) is a vascular lesion that is a tangle of vessels of varying",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cerebrovascular Disorders",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

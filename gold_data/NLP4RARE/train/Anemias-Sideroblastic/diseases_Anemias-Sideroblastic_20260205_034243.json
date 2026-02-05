@@ -1,0 +1,286 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:42:43.972465",
+  "document": "Anemias-Sideroblastic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anemias-Sideroblastic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "sideroblastic anemias",
+      "preferred_label": "sideroblastic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015194",
+        "orpha": "Orphanet:1047",
+        "umls": "UMLS:C0002896",
+        "mesh": "MESH:D000756"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015194",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8955",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18714",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8067",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000756",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10040661",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200616",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C36078",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1047",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:41841004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002896",
+          "display": null
+        }
+      ],
+      "context": "The sideroblastic anemias are a group of blood disorders in which the body has enough iron but is unable to use it to make hemoglobin, which carries oxygen in the blood. As a result, iron accumulates in the mitochondria of red blood cells, giving a ringed appearance to the nucleus (ringed sideroblast). There are three categ",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "X-linked sideroblastic anemia",
+        "Anemia sideroblastic spinocerebellar ataxia",
+        "Anemia Sideroblastic Pyridoxine-Refractory Autosomal Recessive"
+      ],
+      "pubtator_normalized_name": "Anemia Sideroblastic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heart disease",
+      "preferred_label": "heart disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005267",
+        "orpha": null,
+        "umls": "UMLS:C0018799",
+        "mesh": "MESH:D006331"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005267",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:114",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003777",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V47.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006331",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3079",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56265001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018799",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1512587470",
+          "display": null
+        }
+      ],
+      "context": "nemias: inherited, acquired, and idiopathic (of unknown origin). The signs and symptoms can range from mild to severe, and include fatigue, breathing difficulties, and weakness. Enlargement of the liver or spleen may also occur. In severe cases, the increased levels of iron in the blood may lead to heart disease, liver damage, and kidney failure. Suspicion of an occurrence of sideroblastic anemia will generate blood studies including staining of the red blood cells to determine if the characteristic ringed sideroblasts are present in the mitochondria. Biochemical analyses may be conducted to determine the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Aortic Valve Disease",
+        "Microcephaly seizures mental retardation heart disorders"
+      ],
+      "pubtator_normalized_name": "Heart Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney failure",
+      "preferred_label": "kidney failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001106",
+        "orpha": null,
+        "umls": "UMLS:C0035078",
+        "mesh": "MESH:D051437"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001106",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1074",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002048",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:586",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11177",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D051437",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4376",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42399005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035078",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:761526554",
+          "display": null
+        }
+      ],
+      "context": "idiopathic (of unknown origin). The signs and symptoms can range from mild to severe, and include fatigue, breathing difficulties, and weakness. Enlargement of the liver or spleen may also occur. In severe cases, the increased levels of iron in the blood may lead to heart disease, liver damage, and kidney failure. Suspicion of an occurrence of sideroblastic anemia will generate blood studies including staining of the red blood cells to determine if the characteristic ringed sideroblasts are present in the mitochondria. Biochemical analyses may be conducted to determine the level of an enzyme essential to he",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acute Kidney Injury",
+        "Kidney Failure Chronic",
+        "Hyperuricemic Nephropathy Familial Juvenile 2"
+      ],
+      "pubtator_normalized_name": "Renal Insufficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

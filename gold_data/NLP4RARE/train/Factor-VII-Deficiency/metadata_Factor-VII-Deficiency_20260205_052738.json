@@ -1,0 +1,35 @@
+{
+  "doc_id": "Factor-VII-Deficiency",
+  "doc_filename": "Factor-VII-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "factor VII deficiency",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Factor VII",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1882,
+  "file_size_human": "1.8 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Factor VII Deficiency: Epidemiology and Clinical Presentation",
+  "short_description": "Clinical overview of Factor VII deficiency, a rare bleeding disorder affecting 1 in 300,000-500,000 individuals with variable severity and age of presentation.",
+  "long_description": "This document provides epidemiological information about Factor VII deficiency, a rare inherited bleeding disorder that affects both males and females equally. The condition has an estimated prevalence of 1 in 300,000 to 500,000 individuals in the general population, though many cases remain undiagnosed or misdiagnosed. The document highlights that the incidence is higher in populations with increased consanguineous marriages and notes that over 200 cases of true Factor VII deficiency have been documented in medical literature. Due to the variable severity of the condition, clinical presentation can range from birth to adulthood, making diagnosis challenging and contributing to underreporting of the disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:27:38.086267"
+}

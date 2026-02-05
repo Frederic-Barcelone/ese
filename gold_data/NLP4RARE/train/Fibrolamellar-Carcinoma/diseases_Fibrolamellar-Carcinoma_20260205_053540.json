@@ -1,0 +1,268 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:35:40.581455",
+  "document": "Fibrolamellar-Carcinoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fibrolamellar-Carcinoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "liver cancer",
+      "preferred_label": "carcinoma of liver and intrahepatic biliary tract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018531",
+        "orpha": "Orphanet:424936",
+        "umls": "UMLS:C0279000",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018531",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21786",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78921",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C7927",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:HCCIHCH",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:424936",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0279000",
+          "display": null
+        }
+      ],
+      "context": "5,000,000 people in the general population. Fibrolamellar carcinoma occurs with greater frequency among young adults with a median age of diagnosis of 25. It is found all over the world and the rate of occurrence can vary geographically. The disorder accounts for about 1% of all people with primary liver cancer in the United States, but accounts for about 5.8 percent of all people with primary liver cancer in Mexico.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Fibrolamellar carcinoma",
+      "preferred_label": "fibrolamellar carcinoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006210",
+        "orpha": "Orphanet:401920",
+        "umls": "UMLS:C0334287",
+        "mesh": "MESH:C537258"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006210",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5015",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000256",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21704",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8171/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:83122",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537258",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4131",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:FLC",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:401920",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:253018005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0334287",
+          "display": null
+        }
+      ],
+      "context": "Fibrolamellar carcinoma is a rare form of cancer that affects the liver. Unlike most cancers of the liver, it occurs with greater frequency in adolescents and young adults who are otherwise healthy. There are often no symptoms or signs of the disorder for a long time. Symptoms that can develop include abdominal pain, unin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fibrolamellar hepatocellular carcinoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "Fibrolamellar carcinoma is a rare form of cancer that affects the liver. Unlike most cancers of the liver, it occurs with greater frequency in adolescents and young adults who are otherwise healthy. There are often no symptoms or signs of the disorder for a long time. Symptoms that can develop include abdominal pain, unintended weight loss, and a",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

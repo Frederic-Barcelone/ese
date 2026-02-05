@@ -1,0 +1,104 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:27:27.264568",
+  "document": "Succinic-Semialdehyde-Dehydrogenase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Succinic-Semialdehyde-Dehydrogenase-Deficiency.pdf",
+  "total_candidates": 29,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "SSADH",
+      "long_form": "Succinic semialdehyde dehydrogenase",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Succinic semialdehyde dehydrogenase (SSADH) deficiency is a rare inborn error of metabolism that is inherited as an autosomal recessive trait. In individuals with the disorder, deficient activity of the SSADH enzyme disrupts the metabolism of gamma-aminobutyric acid (GABA). GABA is a natural chemical known as a \"neurotransmitter\" that serves to inhibit the electrical activities of nerve cells (inhibitory neurotransmitter). SSADH deficiency",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "GABA",
+      "long_form": "gammaaminobutyric acid",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Succinic semialdehyde dehydrogenase (SSADH) deficiency is a rare inborn error of metabolism that is inherited as an autosomal recessive trait. In individuals with the disorder, deficient activity of the SSADH enzyme disrupts the metabolism of gamma-aminobutyric acid (GABA). GABA is a natural chemical known as a \"neurotransmitter\" that serves to inhibit the electrical activities of nerve cells (inhibitory neurotransmitter). SSADH deficiency leads to abnormal accumulation of the compound succinic semialdehyde, which is reduced or converted to 4-hydroxybutyric acid, also known as GHB (gamma-hydroxybutyric acid). GHB is a natural compound that has a wide range of effec",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "GHB",
+      "long_form": "gamma-hydroxybutyric acid",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "natural chemical known as a \"neurotransmitter\" that serves to inhibit the electrical activities of nerve cells (inhibitory neurotransmitter). SSADH deficiency leads to abnormal accumulation of the compound succinic semialdehyde, which is reduced or converted to 4-hydroxybutyric acid, also known as GHB (gamma-hydroxybutyric acid). GHB is a natural compound that has a wide range of effects within the nervous system. The \"hallmark\" laboratory finding associated with SSADH deficiency is elevated levels of GHB in the urine (i.e., 4-hydroxybutyric or gamma-hydroxybutyric aciduria), the liquid portion of the blood (plasma), and t",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CSF",
+      "long_form": "cerebrospinal fluid",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "e blood (plasma), and the fluid that flows through the brain and spinal canal (cerebrospinal fluid [CSF)).",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Isolated femoral agenesis/hypoplasia",
+      "matched_text": "CSF",
+      "abbreviation": "CSF",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "Q72.4",
+      "orpha": "ORPHA:1987"
+    },
+    {
+      "name": "inborn error of metabolism",
+      "matched_text": "inborn error of metabolism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68367"
+    },
+    {
+      "name": "SSADH",
+      "matched_text": "SSADH",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:22"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Succinic semialdehyde dehydrogenase",
+      "matched_text": "Succinic semialdehyde dehydrogenase",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

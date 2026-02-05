@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:59:43.219988",
+  "document": "Behcet_s-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Behcet_s-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Diagnostic Criteria for Behçet's Syndrome",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "Behçet's syndrome",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Behcet_s-Syndrome_1",
+          "recommendation_type": "treatment",
+          "population": "patients suspected of Behçet's syndrome",
+          "condition": "clinical evaluation",
+          "severity": "na",
+          "action": "diagnosis based on clinical judgment with identification of recurrent oral ulcerations plus at least two of: eye lesions, skin lesions, recurrent genital ulcerations, or positive pathergy test",
+          "action_description": null,
+          "preferred": "clinical judgment",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "na",
+          "duration": "na",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Behcet_s-Syndrome",
+          "source_text": "The diagnosis of Behget's syndrome is made based on the clinical judgment of a physician. Criteria have been accepted, based upon the identification of recurrent oral ulcerations (aphthous stomatitis) that occur along with at least two of the following: eye lesions, skin lesions, recurrent genital ulcerations, and a positive pathergy test.",
+          "page_num": null
+        }
+      ],
+      "source_document": "Behcet_s-Syndrome",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

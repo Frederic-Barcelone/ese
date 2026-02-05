@@ -1,0 +1,118 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:00:39.086996",
+  "document": "Cysticercosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cysticercosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "pork",
+      "preferred_name": "Pork",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C557578",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "892628",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C557578",
+          "display": "insulin pork; isophane insulin pork drug combination 30:70"
+        }
+      ],
+      "context": ") within tissues of the body. The scientific name for the tapeworm that causes cysticercosis is Taenia solium (T. solium), which is also known as the pork tapeworm. T. solium cysts (cysticerci) may affect any area of the body including the brain, a condition known as neurocysticercosis. Symptoms vary fr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "insulin neutral",
+        "Insulin Regular Pork"
+      ],
+      "pubtator_normalized_name": "insulin pork; isophane insulin pork drug combination 30:70",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "beef",
+      "preferred_name": "Beef",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C013698",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "813648",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C013698",
+          "display": "tallow"
+        }
+      ],
+      "context": " have risen in the United States following increased immigration from endemic areas. Tapeworms can be acquired from various uncooked meats, including beef and fish, but only pork tapeworms appear to produce larvae capable of invading human muscle and forming cysts. A diagnosis of cysticercosis may be ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "tallow",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

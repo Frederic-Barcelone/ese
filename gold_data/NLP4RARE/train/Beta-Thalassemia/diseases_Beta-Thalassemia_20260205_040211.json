@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:02:11.439556",
+  "document": "Beta-Thalassemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Beta-Thalassemia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Beta thalassemia",
+      "preferred_label": "beta thalassemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D56.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019402",
+        "orpha": "Orphanet:848",
+        "umls": "UMLS:C0005283",
+        "mesh": "MESH:D017086"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019402",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12241",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:871",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D56.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:282.49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2611",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017086",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10043391",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201274",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34375",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1765",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:848",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:65959000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005283",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2063292324",
+          "display": null
+        }
+      ],
+      "context": "Beta thalassemia is relatively rare in the United States, but is one of the most common autosomal recessive disorders in the world. The incidence of symptomatic cases is estimated to be approximately 1 in 100,000 individuals in the general population. The disorder is particularly prevalent in the Mediterranean, Mid",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

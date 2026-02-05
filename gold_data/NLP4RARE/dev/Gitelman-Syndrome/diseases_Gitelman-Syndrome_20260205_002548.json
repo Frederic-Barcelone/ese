@@ -1,0 +1,117 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:25:48.540563",
+  "document": "Gitelman-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Gitelman-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Gitelman syndrome",
+      "preferred_label": "Gitelman syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009904",
+        "orpha": "Orphanet:358",
+        "umls": "UMLS:C0268450",
+        "mesh": "MESH:D053579"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009904",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050450",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8547",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:275.49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75681",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D053579",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062906",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200145",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84730",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1884",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:263800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:358",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:707756004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268450",
+          "display": null
+        }
+      ],
+      "context": "Gitelman syndrome affects males and females in equally. The disorder occurs in approximately 1 in 40,000 Caucasian individuals. However, many cases of these disorders may go undiagnosed or misdiagnosed, making it difficult to determine the true frequency of Gitelman syndrome in the general population. The prevalence",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Gitelman Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:45:31.290825",
+  "document": "OSMED-Heterozygous.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/OSMED-Heterozygous.pdf",
+  "total_candidates": 23,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "OSMED",
+      "long_form": "otospondyl-megaepiphyseal dysplasia",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Heterozygous OSMED (oto-spondyl-megaepiphyseal dysplasia) is a rare genetic disorder characterized by skeletal malformations resulting in shortening of the upper limbs and thighs and short stature (rhizomelic dwarfism). Additional symptoms include distinctive facial features and delays in psychomotor development. After the initial period of growth deficiency, affected individuals experience gradual improvement in bone growth that leads to normal physica",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "COL11A2",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "evelop hearing loss. Heterozygous OSMED occurs because of disruptions or changes (mutations) to the COL11A2 gene. A diagnosis of heterozygous OSMED is made based upon a thorough clinical evaluation, a detail",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "rhizomelic dwarfism",
+      "matched_text": "rhizomelic dwarfism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E71.540",
+      "orpha": "Orphanet:177"
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hearing loss",
+      "matched_text": "hearing loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H90",
+      "orpha": null
+    },
+    {
+      "name": "stature",
+      "matched_text": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "OSMED",
+      "matched_text": "OSMED",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

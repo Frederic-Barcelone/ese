@@ -1,0 +1,486 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:50:39.116675",
+  "document": "Congenital-Erythropoietic-Porphyria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Erythropoietic-Porphyria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Congenital erythropoietic porphyria",
+      "preferred_label": "Congenital Erythropoietic Porphyria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009902",
+        "orpha": "Orphanet:79277",
+        "umls": "UMLS:C5886774",
+        "mesh": "MESH:D017092"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009902",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13271",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4446",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1861084",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017092",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201268",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84697",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1599",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:263700",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79277",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:67312003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5886774",
+          "display": null
+        }
+      ],
+      "context": "Congenital erythropoietic porphyria (CEP) is a very rare inherited metabolic disorder resulting from the deficient function of the enzyme uroporphyrinogen Ill cosynthase (UROS), the fourth enzyme in the heme biosynthetic pathway. Due to the impaired function of this enzyme, excessive amounts of particular porphyrins accumulate, parti",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Porphyria Erythropoietic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CEP",
+      "preferred_label": "Congenital erythropoietic porphyria",
+      "abbreviation": "CEP",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E80.0",
+        "icd11": "5C58.12",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:79277",
+        "umls": null,
+        "mesh": "D017092"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:79277",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E80.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C58.12",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017092",
+          "display": "Porphyria Erythropoietic"
+        }
+      ],
+      "context": "Congenital erythropoietic porphyria (CEP) is a very rare inherited metabolic disorder resulting from the deficient function of the enzyme uroporphyrinogen Ill cosynthase (UROS), the fourth enzyme in the heme biosynthetic pathway. Due to the impaired function of this enzyme, excessive amounts of particular porphyrins accumulate, particular",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Porphyria Erythropoietic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inherited metabolic disorder",
+      "preferred_label": "inborn errors of metabolism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019052",
+        "orpha": "Orphanet:68367",
+        "umls": "UMLS:C0025521",
+        "mesh": "MESH:D008661"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019052",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:655",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22508",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008661",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062018",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100159",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34816",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68367",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86095007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025521",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733825440",
+          "display": null
+        }
+      ],
+      "context": "Congenital erythropoietic porphyria (CEP) is a very rare inherited metabolic disorder resulting from the deficient function of the enzyme uroporphyrinogen Ill cosynthase (UROS), the fourth enzyme in the heme biosynthetic pathway. Due to the impaired function of this enzyme, excessive amounts of particular porphyrins accumulate, particularly in the bone marrow, plasma, red blood cell",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amino Acid Metabolism Inborn Errors",
+        "Steroid Metabolism Inborn Errors",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolism Inborn Errors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypersensitivity",
+      "preferred_label": "hypersensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000605",
+        "orpha": null,
+        "umls": "UMLS:C3532523",
+        "mesh": "D006969"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000605",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060056",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:759636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:473010000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3532523",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006969",
+          "display": "Hypersensitivity Immediate"
+        }
+      ],
+      "context": "gen Ill cosynthase (UROS), the fourth enzyme in the heme biosynthetic pathway. Due to the impaired function of this enzyme, excessive amounts of particular porphyrins accumulate, particularly in the bone marrow, plasma, red blood cells, urine, teeth, and bones. The major symptom of this disorder is hypersensitivity of the skin to sunlight and some types of artificial light, such as fluorescent lights (photosensitivity). After exposure to light, the photo-activated porphyrins in the skin cause bullae (blistering) and the fluid-filled sacs rupture, and the lesions often get infected. These infected lesions can",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Drug Hypersensitivity",
+        "Hypersensitivity Delayed",
+        "Hypersensitivity"
+      ],
+      "pubtator_normalized_name": "Hypersensitivity Immediate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "photosensitivity",
+      "preferred_label": "photosensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007559",
+        "orpha": null,
+        "umls": "UMLS:C1868677",
+        "mesh": "D010787"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007559",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:358382",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:132100",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1868677",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010787",
+          "display": "Photosensitivity Disorders"
+        }
+      ],
+      "context": "on of this enzyme, excessive amounts of particular porphyrins accumulate, particularly in the bone marrow, plasma, red blood cells, urine, teeth, and bones. The major symptom of this disorder is hypersensitivity of the skin to sunlight and some types of artificial light, such as fluorescent lights (photosensitivity). After exposure to light, the photo-activated porphyrins in the skin cause bullae (blistering) and the fluid-filled sacs rupture, and the lesions often get infected. These infected lesions can lead to scarring, bone loss, and deformities. The hands, arms, and face are the most commonly affected ar",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Xeroderma pigmentosum variant type",
+        "Hair defect with photosensitivity and mental retardation",
+        "Cutaneous photosensitivity and colitis lethal"
+      ],
+      "pubtator_normalized_name": "Photosensitivity Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "porphyrins in the skin cause bullae (blistering) and the fluid-filled sacs rupture, and the lesions often get infected. These infected lesions can lead to scarring, bone loss, and deformities. The hands, arms, and face are the most commonly affected areas. CEP is inherited as an autosomal recessive genetic disorder. Typically, there is no family history of the disease. Neither parent has symptoms of CEP, but each carries a defective gene that they can pass to their children. Affected offspring have two copies of the defective gene, one inherited from each parent. CEP is a very rare genetic disorder that affec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

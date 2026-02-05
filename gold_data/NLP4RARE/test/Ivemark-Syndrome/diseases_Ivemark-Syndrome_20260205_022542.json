@@ -1,0 +1,102 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:25:42.816908",
+  "document": "Ivemark-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Ivemark-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "congestive heart failure",
+      "preferred_label": "congestive heart failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005009",
+        "orpha": null,
+        "umls": "UMLS:C0018802",
+        "mesh": "D006333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005009",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6000",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000373",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001635",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:428.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9169",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3080",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42343007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018802",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2136808878",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006333",
+          "display": "Heart Failure"
+        }
+      ],
+      "context": ". The symptoms of lvemark syndrome can vary greatly depending upon the specific abnormalities present. Many infants have symptoms associated with abnormalities affecting the heart including bluish discoloration to the skin due to a lack of oxygen in the blood (cyanosis), heart murmurs, and signs of congestive heart failure. lvemark syndrome often causes life-threatening complications during infancy. The exact cause of lvemark syndrome is not known. According to the medical literature, lvemark syndrome affects boys more often than girls. The exact incidence of lvemark syndrome is unknown. The incidence of laterality d",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Heart Failure",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

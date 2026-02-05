@@ -1,0 +1,84 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:39:52.980163",
+  "document": "Anaplastic-Astrocytoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anaplastic-Astrocytoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "star",
+      "hgnc_symbol": "STAR",
+      "full_name": "steroidogenic acute regulatory protein",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "11359",
+        "entrez": "6770",
+        "ensembl": "ENSG00000147465",
+        "uniprot": "P49675",
+        "omim": "600617"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "11359",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "6770",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000147465",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "600617",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P49675",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "361",
+          "disease_name": "Familial glucocorticoid deficiency",
+          "association_type": "Candidate gene tested in"
+        },
+        {
+          "orphacode": "325524",
+          "disease_name": "Classic congenital lipoid adrenal hyperplasia due to STAR deficency",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        },
+        {
+          "orphacode": "325529",
+          "disease_name": "Non-classic congenital lipoid adrenal hyperplasia due to STAR deficency",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "Anaplastic astrocytoma is a rare malignant brain tumor. Astrocytomas are tumors that develop from certain star-shaped brain cells called astrocytes. Astrocytes and similar cells form tissue that surrounds and protects other nerve cells found within the brain and spinal cord. Collectively, these cells are known as glial cells and the tissue they form is known as glial tissue. Tumors that arise from glial tis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

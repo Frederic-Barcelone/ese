@@ -1,0 +1,760 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:32:09.193523",
+  "document": "Chromosome-11-Partial-Monosomy-11q.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Chromosome-11-Partial-Monosomy-11q.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 13,
+  "total_validated": 13,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "monosomy",
+      "preferred_label": "monosomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020639",
+        "orpha": null,
+        "umls": "UMLS:C0026499",
+        "mesh": "MESH:D009006"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020639",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6432",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009006",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3239",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026499",
+          "display": null
+        }
+      ],
+      "context": "Partial monosomy 11q, also known as Jacobsen syndrome, is a rare chromosomal disorder in which a portion of chromosome 11 is deleted (missing). The range and severity of symptoms varies, greatly depending on the exact location and size of the missing genetic material. Symptoms commonly associated with partial monos",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Turner Syndrome",
+        "Telomeric 22q13 Monosomy Syndrome",
+        "Wolf-Hirschhorn Syndrome"
+      ],
+      "pubtator_normalized_name": "Monosomy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Jacobsen syndrome",
+      "preferred_label": "Jacobsen Distal 11q Deletion Syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0795841",
+        "mesh": "D054868"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0795841",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D054868",
+          "display": "Jacobsen Distal 11q Deletion Syndrome"
+        }
+      ],
+      "context": "Partial monosomy 11q, also known as Jacobsen syndrome, is a rare chromosomal disorder in which a portion of chromosome 11 is deleted (missing). The range and severity of symptoms varies, greatly depending on the exact location and size of the missing genetic material. Symptoms commonly associated with partial monosomy 11q include abnormally slow growt",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Jacobsen Distal 11q Deletion Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Partial monosomy 11q, also known as Jacobsen syndrome, is a rare chromosomal disorder in which a portion of chromosome 11 is deleted (missing). The range and severity of symptoms varies, greatly depending on the exact location and size of the missing genetic material. Symptoms commonly associated with partial monosomy 11q include abnormally slow growth before an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "Congenital chromosomal disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008626",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008626",
+          "display": null
+        }
+      ],
+      "context": "Partial monosomy 11q, also known as Jacobsen syndrome, is a rare chromosomal disorder in which a portion of chromosome 11 is deleted (missing). The range and severity of symptoms varies, greatly depending on the exact location and size of the missing genetic material. Symptoms commonly associated with partial monosomy 11q include abnormally slow growth before and after birth (prenat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Partial monosomy 11q, also known as Jacobsen syndrome, is a rare chromosomal disorder in which a portion of chromosome 11 is deleted (missing). The range and severity of symptoms varies, greatly depending on the exact location and size of the missing genetic material. Symptoms commonly associated with partial monosomy 11q include abnormally slow growth before and after birth (prenatal and postnatal physical growth retardation), moderate to severe delay in the acquisition of skills requiring the coordination of mental and muscular activity and intellect",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "g genetic material. Symptoms commonly associated with partial monosomy 11q include abnormally slow growth before and after birth (prenatal and postnatal physical growth retardation), moderate to severe delay in the acquisition of skills requiring the coordination of mental and muscular activity and intellectual disability. Rarely, individuals may have normal/borderline intelligence while most children have mild to severe intellectual disability. Characteristic physical abnormalities may include dimorphism (unusual shape) of the head and face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "face",
+      "preferred_label": "FACE",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010953",
+        "orpha": null,
+        "umls": "UMLS:C3160739",
+        "mesh": "C536384"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010953",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111084",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15324",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:463628",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C125709",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:600901",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3160739",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536384",
+          "display": "FACES syndrome"
+        }
+      ],
+      "context": "ing the coordination of mental and muscular activity and intellectual disability. Rarely, individuals may have normal/borderline intelligence while most children have mild to severe intellectual disability. Characteristic physical abnormalities may include dimorphism (unusual shape) of the head and face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to platelet abnormalities, and immunological defects. The exact cause of partial monosomy 11q is not fully understood. Partial monosomy 11q is an extremely rare chromosomal disorder that is apparent at birth. The disorder was",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Supraumbilical midabdominal raphe and facial cavernous hemangiomas",
+        "Facial Pain",
+        "DiGeorge Syndrome"
+      ],
+      "pubtator_normalized_name": "FACES syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital",
+      "preferred_label": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048408993",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "muscular activity and intellectual disability. Rarely, individuals may have normal/borderline intelligence while most children have mild to severe intellectual disability. Characteristic physical abnormalities may include dimorphism (unusual shape) of the head and face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to platelet abnormalities, and immunological defects. The exact cause of partial monosomy 11q is not fully understood. Partial monosomy 11q is an extremely rare chromosomal disorder that is apparent at birth. The disorder was initially described in the medical liter",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Congenital central hypoventilation syndrome",
+        "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "head and face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to platelet abnormalities, and immunological defects. The exact cause of partial monosomy 11q is not fully understood. Partial monosomy 11q is an extremely rare chromosomal disorder that is apparent at birth. The disorder was initially described in the medical literature in 1973. Since that time, more than 200 cases have been described in the medical literature. According to some sources, more females are affected than males. The prevalence has been estimated at 1/100,000 births.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to platelet abnormalities, and immunological defects. The exact cause of partial monosomy 11q is not fully understood. Partial monosomy 11q is an extremely rare chromosomal disorder that is apparent at birth. The disorder was initially described in the medical literature in 1973. Since that time, more than 200 cases have been described in the medical literature. According to some sources, more females are affected than males. The prevalence has been estimated at 1/100,000 births.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "extremely rare chromosomal disorder that is apparent at birth. The disorder was initially described in the medical literature in 1973. Since that time, more than 200 cases have been described in the medical literature. According to some sources, more females are affected than males. The prevalence has been estimated at 1/100,000 births.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital defects",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "muscular activity and intellectual disability. Rarely, individuals may have normal/borderline intelligence while most children have mild to severe intellectual disability. Characteristic physical abnormalities may include dimorphism (unusual shape) of the head and face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to platelet abnormalities, and immunological defects. The exact cause of partial monosomy 11q is not fully understood. Partial monosomy 11q is an extremely rare chromosomal disorder that is apparent at birth. The disorder was initially described in the medical literature in",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "platelet abnormalities",
+      "preferred_label": "Abnormal platelets",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0151854",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0151854",
+          "display": null
+        }
+      ],
+      "context": "Rarely, individuals may have normal/borderline intelligence while most children have mild to severe intellectual disability. Characteristic physical abnormalities may include dimorphism (unusual shape) of the head and face (craniofacial), hands, feet, congenital defects of the ear, bleeding due to platelet abnormalities, and immunological defects. The exact cause of partial monosomy 11q is not fully understood. Partial monosomy 11q is an extremely rare chromosomal disorder that is apparent at birth. The disorder was initially described in the medical literature in 1973. Since that time, more than 200 cases have be",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

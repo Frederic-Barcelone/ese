@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:22:38.728299",
+  "document": "Epidermal-Nevus-Syndromes.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Epidermal-Nevus-Syndromes.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "vitamin D",
+      "preferred_name": "Vitamin D",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Colorectal Cancer",
+        "Colon Cancer"
+      ],
+      "nct_id": "NCT05036109",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D014807",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05036109",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014807",
+          "display": "Vitamin D"
+        }
+      ],
+      "context": "y include cataracts, clouding (opacity) of the cornea or partial absence of tissue of the iris or retina (colobomas). Endocrine abnormalities such as vitamin D-resistant rickets have been associated with Schimmelpenning syndrome. The specific symptoms and severity of ENSs can vary greatly from one person to ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Folic Acid",
+        "Vitamin A"
+      ],
+      "pubtator_normalized_name": "Vitamin D",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hip",
+      "preferred_name": "HIP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D012701",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "978673",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012701",
+          "display": "Serotonin"
+        }
+      ],
+      "context": "l delays and paralysis of one side of the body (hemiparesis). Skeletal abnormalities can include abnormal curvature of the spine, malformation of the hip and abnormalities of the arms and legs (e.g., underdevelopment or absence or overgrowth of limbs). Ocular abnormalities may include cataracts, cloudi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Serotonin",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "Giant-Axonal-Neuropathy",
+  "doc_filename": "Giant-Axonal-Neuropathy.pdf",
+  "top_entities": [
+    {
+      "name": "neuropathy",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "giant axonal neuropathy",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2927,
+  "file_size_human": "2.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Giant Axonal Neuropathy: Clinical Overview and Diagnostic Guidelines",
+  "short_description": "A comprehensive clinical overview of giant axonal neuropathy, a rare autosomal recessive disorder affecting both peripheral and central nervous systems in early childhood.",
+  "long_description": "This document provides a detailed clinical description of giant axonal neuropathy, a rare genetic disorder that manifests in early childhood with severe neurological complications. The text covers the characteristic symptoms including hypotonia, muscle weakness, ataxia, seizures, and intellectual disability, along with distinctive features such as pale, tightly curled hair. It outlines the progressive nature of the disease, diagnostic approaches including nerve conduction studies and genetic testing, and the typical prognosis. The document serves as a clinical reference for healthcare professionals dealing with this rare autosomal recessive condition that affects both central and peripheral nervous systems.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:11:57.604201"
+}

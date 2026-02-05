@@ -1,0 +1,45 @@
+{
+  "doc_id": "Granuloma-Annulare",
+  "doc_filename": "Granuloma-Annulare.pdf",
+  "top_entities": [
+    {
+      "name": "granuloma annulare",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "skin disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Isotretinoin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Retinoic Acid",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2278,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Granuloma Annulare: Clinical Overview and Management",
+  "short_description": "Clinical document describing granuloma annulare, a chronic degenerative skin disorder characterized by ring-shaped lesions that commonly affect hands, feet, and fingers.",
+  "long_description": "This clinical reference document provides a comprehensive overview of granuloma annulare, a chronic degenerative skin condition. The document details the most common localized form, characterized by small, firm red or yellow nodules arranged in ring patterns on the skin, typically measuring 1-5 centimeters. It covers the five distinct forms of the condition (localized, generalized, linear, perforating, and subcutaneous), epidemiological factors including higher prevalence in females and frequent occurrence in children and young adults, and clinical management approaches. The document emphasizes that while the exact cause remains unknown, many cases resolve spontaneously without treatment, though recurrence is common. Treatment options for chronic cases include corticosteroids, dapsone, and isotretinoin.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:00:34.473489"
+}

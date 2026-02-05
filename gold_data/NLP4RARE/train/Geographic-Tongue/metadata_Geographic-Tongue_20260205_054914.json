@@ -1,0 +1,35 @@
+{
+  "doc_id": "Geographic-Tongue",
+  "doc_filename": "Geographic-Tongue.pdf",
+  "top_entities": [
+    {
+      "name": "geographic tongue",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "glossitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2300,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Geographic Tongue: Clinical Overview and Diagnostic Characteristics",
+  "short_description": "Clinical document describing geographic tongue, a benign inflammatory condition of the tongue characterized by map-like patterns of missing papillae.",
+  "long_description": "This clinical reference document provides a comprehensive overview of geographic tongue, a benign glossitis condition that presents with distinctive map-like patterns on the tongue surface. The document covers the pathophysiology involving missing papillae that create smooth, red or pink atrophic patches, the episodic nature of the condition with spontaneous healing and recurrence, and its generally asymptomatic presentation. It discusses the demographic patterns showing slight female predominance and higher frequency in young adults, with an estimated prevalence of 3% in the general population. The document emphasizes the clinical diagnostic approach based on characteristic visual appearance and patient history, noting that biopsy is typically unnecessary due to the distinct presentation pattern.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:49:14.978796"
+}

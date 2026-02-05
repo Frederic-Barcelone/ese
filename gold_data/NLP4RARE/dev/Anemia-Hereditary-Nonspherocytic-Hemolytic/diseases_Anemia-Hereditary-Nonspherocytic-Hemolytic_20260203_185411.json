@@ -1,0 +1,320 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T18:54:11.394802",
+  "document": "Anemia-Hereditary-Nonspherocytic-Hemolytic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Anemia-Hereditary-Nonspherocytic-Hemolytic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hereditary nonspherocytic hemolytic anemia",
+      "preferred_label": "Anemia, Hemolytic, Congenital Nonspherocytic",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0002882",
+        "mesh": "D000746"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0002882",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000746",
+          "display": "Anemia Hemolytic Congenital Nonspherocytic"
+        }
+      ],
+      "context": "Hereditary nonspherocytic hemolytic anemia is a term used to describe a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic he",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemolytic Anemia Lethal Congenital Nonspherocytic with Genital and Other Abnormalities"
+      ],
+      "pubtator_normalized_name": "Anemia Hemolytic Congenital Nonspherocytic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Hereditary nonspherocytic hemolytic anemia is a term used to describe a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic hemolytic anemia is a rare blood disorder tha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorders",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Hereditary nonspherocytic hemolytic anemia is a term used to describe a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic hemolytic anemia is a rare blood disorder that affects more males than females. Males",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "Hereditary nonspherocytic hemolytic anemia is a term used to describe a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic hemolytic anemia is a rare blood disorder that affects more males than females. Males are more likely to have severe symptoms of this disorder, whereas females have milder symptoms or no symptoms.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "blood disorder",
+      "preferred_label": "Hematological Disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0018939",
+        "mesh": "D006402"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0018939",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006402",
+          "display": "Hematologic Diseases"
+        }
+      ],
+      "context": "be a group of rare, genetically transmitted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the result. Hereditary nonspherocytic hemolytic anemia is a rare blood disorder that affects more males than females. Males are more likely to have severe symptoms of this disorder, whereas females have milder symptoms or no symptoms.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hematologic Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

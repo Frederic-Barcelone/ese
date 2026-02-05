@@ -1,0 +1,112 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:31:51.738311",
+  "document": "Pycnodysostosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pycnodysostosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Pycnodysostosis",
+      "preferred_label": "pycnodysostosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009940",
+        "orpha": "Orphanet:763",
+        "umls": "UMLS:C0238402",
+        "mesh": "MESH:D058631"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009940",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080038",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4611",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:116061",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D058631",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201023",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C131187",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1637",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:265800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:763",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:89647000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0238402",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1329974152",
+          "display": null
+        }
+      ],
+      "context": "Pycnodysostosis is an extremely rare disorder that affects both males and females. About 200 people have been reported in the medical literature with this disorder. It is estimated to affect about 1 in 1.7 million people in the general discussion. Pycnodysostosis may go undiagnosed or misdiagnosed, making it diffi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pycnodysostosis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

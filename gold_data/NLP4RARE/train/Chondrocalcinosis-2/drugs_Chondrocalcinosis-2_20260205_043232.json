@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:32:32.124810",
+  "document": "Chondrocalcinosis-2.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chondrocalcinosis-2.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "pyrophosphate",
+      "preferred_name": "Pyrophosphate",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000244",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1364533",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000244",
+          "display": "Adenosine Diphosphate"
+        }
+      ],
+      "context": "ected, although any joint of the body may be involved. Acute episodes can last for days to weeks, and symptoms may subside without treatment. Calcium pyrophosphate (CPP) crystal deposits may accumulate around the bones of the spine (vertebrae) and cause back or neck pain and/or loss of mobility. Many patients wi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "diphosphoric acid",
+        "sodium pyrophosphate",
+        "farnesyl pyrophosphate"
+      ],
+      "pubtator_normalized_name": "Adenosine Diphosphate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CPP",
+      "preferred_name": "CPP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C014896",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "14165",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C014896",
+          "display": "6-chloro-2-(1-piperazinyl)pyrazine"
+        }
+      ],
+      "context": " any joint of the body may be involved. Acute episodes can last for days to weeks, and symptoms may subside without treatment. Calcium pyrophosphate (CPP) crystal deposits may accumulate around the bones of the spine (vertebrae) and cause back or neck pain and/or loss of mobility. Many patients with CP",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "1-(3-chlorophenyl)piperazine"
+      ],
+      "pubtator_normalized_name": "6-chloro-2-(1-piperazinyl)pyrazine",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

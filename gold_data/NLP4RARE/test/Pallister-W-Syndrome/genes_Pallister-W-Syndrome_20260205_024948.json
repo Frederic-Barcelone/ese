@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:49:48.213700",
+  "document": "Pallister-W-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pallister-W-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "e genetic disorder characterized by unusual facial features such as clefting of the palate and the upper lip, a broad flat nose, widely spaced slanted eyes, and/or downslanting eyelid folds (palpebral fissures). Other symptoms may include mental retardation, speech problems, bone deformities of the arms and legs, and/or seizures. The exact cause of Pallister W syndrome is not known. Pallister W syndrome is apparent at birth. It is characterized by widely spaced eyes (hypertelorism) with downward slanting eyelid folds (palpebral fissures), a broad flat nasal bridge, a broad tip of the nose, a broad",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

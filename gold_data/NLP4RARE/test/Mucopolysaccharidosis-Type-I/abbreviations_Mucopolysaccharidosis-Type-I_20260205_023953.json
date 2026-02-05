@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:39:53.032947",
+  "document": "Mucopolysaccharidosis-Type-I.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mucopolysaccharidosis-Type-I.pdf",
+  "total_candidates": 17,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MPS",
+      "long_form": "mucopolysaccharidosis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "s and females in equal numbers, with an incidence of about 1 in 100,000 live births for the severe type, and an incidence of about 1in 500,000 live births for the attenuated type. Incidence is the number of people who develop a disorder over a given period of time (e.g. one year). The incidence for MPS disorders collectively is about 1 in 25,000. However, rare disorders, especially milder forms of MPS, often go misdiagnosed or undiagnosed, making it difficult to determine the true frequency in the general population.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "mucopolysaccharidosis",
+      "matched_text": "Mucopolysaccharidosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79213"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "MPS",
+      "matched_text": "MPS",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

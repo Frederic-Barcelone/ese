@@ -1,0 +1,348 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:54:11.705006",
+  "document": "Congenital-Varicella-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Varicella-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Congenital Varicella Syndrome",
+      "preferred_label": "congenital varicella syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017372",
+        "orpha": "Orphanet:291",
+        "umls": "UMLS:C0343560",
+        "mesh": "D000073618"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017372",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:45",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:771.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:87473",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116800",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1003",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:291",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:277644009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0343560",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2071159826",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000073618",
+          "display": "Varicella Zoster Virus Infection"
+        }
+      ],
+      "context": "Congenital Varicella Syndrome is an extremely rare disorder in which affected infants have distinctive abnormalities at birth (congenital) due to the mother's infection with chickenpox (maternal varicella zoster) early during pregnancy (i.e., up to 20 weeks gestation). Affected newborns may have a low birth weight and character",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Varicella Zoster Virus Infection",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "varicella zoster infection",
+      "preferred_label": "varicella zoster infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005608",
+        "orpha": null,
+        "umls": "UMLS:C0586989",
+        "mesh": "D000073618"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005608",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0006509",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:052.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:668886",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C96407",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:309465005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0586989",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000073618",
+          "display": "Varicella Zoster Virus Infection"
+        }
+      ],
+      "context": "ht and characteristic abnormalities of the skin; the arms, legs, hands, and/or feet (extremities); the brain; the eyes; and/or, in rare cases, other areas of the body. The range and severity of associated symptoms and physical findings may vary greatly from case to case depending upon when maternal varicella zoster infection occurred during fetal development.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Varicella Zoster Virus Infection",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chickenpox",
+      "preferred_label": "chickenpox",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:B01",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005700",
+        "orpha": null,
+        "umls": "UMLS:C0008049",
+        "mesh": "MESH:D002644"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005700",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8659",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007204",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B01",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:052.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2995",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002644",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97132",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38907003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008049",
+          "display": null
+        }
+      ],
+      "context": "Congenital Varicella Syndrome is an extremely rare disorder in which affected infants have distinctive abnormalities at birth (congenital) due to the mother's infection with chickenpox (maternal varicella zoster) early during pregnancy (i.e., up to 20 weeks gestation). Affected newborns may have a low birth weight and characteristic abnormalities of the skin; the arms, legs, hands, and/or feet (extremities); the brain; the eyes; and/or, in rare cases, other areas of the body. The",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chickenpox",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "zoster",
+      "preferred_label": "Zoster",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:B02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005609",
+        "orpha": null,
+        "umls": "UMLS:C0019360",
+        "mesh": "MESH:D006562"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005609",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8536",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0006510",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:053",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42437",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006562",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C71079",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:4740000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019360",
+          "display": null
+        }
+      ],
+      "context": "Congenital Varicella Syndrome is an extremely rare disorder in which affected infants have distinctive abnormalities at birth (congenital) due to the mother's infection with chickenpox (maternal varicella zoster) early during pregnancy (i.e., up to 20 weeks gestation). Affected newborns may have a low birth weight and characteristic abnormalities of the skin; the arms, legs, hands, and/or feet (extremities); the brain; the eyes; and/or, in rare cases, other areas of the body. The range and severity of asso",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Varicella Zoster Virus Infection",
+        "Zoster Sine Herpete",
+        "Encephalitis Varicella Zoster"
+      ],
+      "pubtator_normalized_name": "Herpes Zoster",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

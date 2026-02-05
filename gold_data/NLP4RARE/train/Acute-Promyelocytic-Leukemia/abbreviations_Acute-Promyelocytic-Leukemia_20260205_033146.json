@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:31:46.249638",
+  "document": "Acute-Promyelocytic-Leukemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acute-Promyelocytic-Leukemia.pdf",
+  "total_candidates": 34,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "APL",
+      "long_form": "Acquired partial lipodystrophy",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "APL comprises 5 to 10% of all cases of adult acute myeloid leukemia. Each year in the United States, it",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Acquired partial lipodystrophy",
+      "matched_text": "APL",
+      "abbreviation": "APL",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E88.1",
+      "orpha": "ORPHA:79087"
+    },
+    {
+      "name": "acute myeloid leukemia",
+      "matched_text": "acute myeloid leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:C92.0",
+      "orpha": "Orphanet:519"
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancers",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Radiation therapy",
+      "matched_text": "radiation therapy",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    }
+  ],
+  "pharma": []
+}

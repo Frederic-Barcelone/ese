@@ -1,0 +1,117 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:55:44.260566",
+  "document": "Autosomal-Dominant-Polycystic-Kidney-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Autosomal-Dominant-Polycystic-Kidney-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ADPKD",
+      "preferred_label": "ADPKD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004691",
+        "orpha": "Orphanet:730",
+        "umls": "UMLS:C0085413",
+        "mesh": "MESH:D016891"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004691",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:898",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001496",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10413",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:753.13",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:88404",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016891",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200153",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84578",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:828",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:730",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:765330003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085413",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:91220434",
+          "display": null
+        }
+      ],
+      "context": "ADPKD affects males and females in equal numbers. Although a head-count has never been done, autopsy records show that between 1 in 400-1,000 people in the general population had ADPKD. There are approximately 6,000 new cases diagnosed each year in the United States. Approximately 6-10 percent of individ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Polycystic Kidney Autosomal Dominant",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

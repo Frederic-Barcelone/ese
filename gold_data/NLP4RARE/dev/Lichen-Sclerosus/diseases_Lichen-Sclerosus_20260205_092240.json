@@ -1,0 +1,338 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:22:40.586752",
+  "document": "Lichen-Sclerosus.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Lichen-Sclerosus.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "balanitis xerotica obliterans",
+      "preferred_label": "balanitis xerotica obliterans",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001725",
+        "orpha": null,
+        "umls": "UMLS:C0152460",
+        "mesh": "MESH:D052798"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001725",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13477",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:607.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57542",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D052798",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3523",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:198033005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152460",
+          "display": null
+        }
+      ],
+      "context": "Lichen sclerosus is a chronic inflammatory skin disorder that most commonly affects women before puberty or after menopause. Although rare, it can also be seen in men. When found in males, the disease is known as balanitis xerotica obliterans. Lichen sclerosus affects mostly females, usually between the ages of 40 and 60 years. Females are six times as likely to be affected as are males. Younger females and males have also been identified in the medical literature in the United States. Female children under the age of thirteen have also",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Balanitis Xerotica Obliterans",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "squamous cell carcinoma",
+      "preferred_label": "squamous cell carcinoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005096",
+        "orpha": null,
+        "umls": "UMLS:C0007137",
+        "mesh": "MESH:D002294"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005096",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1749",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000707",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8070/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2874",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002294",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2929",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:402815007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007137",
+          "display": null
+        }
+      ],
+      "context": "cal features, and a detailed patient history. There should be focus on the functional impact of the lichen sclerosus and treatment to date, including over the counter products that might be applied. In order to be sure of the diagnosis, a skin biopsy may be needed. Biopsies may also be performed if squamous cell carcinoma is suspected.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Squamous Cell Carcinoma of Head and Neck",
+        "Esophageal Squamous Cell Carcinoma",
+        "Bowen's Disease"
+      ],
+      "pubtator_normalized_name": "Carcinoma Squamous Cell",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Lichen sclerosus",
+      "preferred_label": "lichen sclerosus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:L90.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007899",
+        "orpha": "Orphanet:33409",
+        "umls": "UMLS:C0023652",
+        "mesh": "MESH:D018459"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007899",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L90.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7338",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018459",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26817",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:151590",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:33409",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:25674000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023652",
+          "display": null
+        }
+      ],
+      "context": "Lichen sclerosus is a chronic inflammatory skin disorder that most commonly affects women before puberty or after menopause. Although rare, it can also be seen in men. When found in males, the disease is known as balanitis xerotica obliterans. Lichen sclerosus affects mostly females, usually between the ages of 40",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Vulvar Lichen Sclerosus"
+      ],
+      "pubtator_normalized_name": "Lichen Sclerosus et Atrophicus",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin disorder",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "Lichen sclerosus is a chronic inflammatory skin disorder that most commonly affects women before puberty or after menopause. Although rare, it can also be seen in men. When found in males, the disease is known as balanitis xerotica obliterans. Lichen sclerosus affects mostly females, usually between the ages of 40 and 60 years. Females are six times as l",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

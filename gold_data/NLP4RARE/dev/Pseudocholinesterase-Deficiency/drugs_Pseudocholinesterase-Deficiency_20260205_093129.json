@@ -1,0 +1,310 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:31:29.354599",
+  "document": "Pseudocholinesterase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pseudocholinesterase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "Pseudocholinesterase",
+      "preferred_name": "Pseudocholinesterase",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "224966",
+          "display": null
+        }
+      ],
+      "context": "Pseudocholinesterase deficiency is an uncommon genetic disorder that makes an affected person very sensitive to any of several anesthetic agents, especially those derived",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "choline",
+      "preferred_name": "Choline",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D002794",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2449",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002794",
+          "display": "Choline"
+        }
+      ],
+      "context": "on genetic disorder that makes an affected person very sensitive to any of several anesthetic agents, especially those derived from the drug known as choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the lungs may become par",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Phosphatidylcholines",
+        "Phosphorylcholine"
+      ],
+      "pubtator_normalized_name": "Choline",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mivacurium",
+      "preferred_name": "Mivacurium",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000077590",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "30077",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000077590",
+          "display": "Mivacurium"
+        }
+      ],
+      "context": "sitive to any of several anesthetic agents, especially those derived from the drug known as choline. When anesthetic drugs such as succinylcholine or mivacurium are administered to a susceptible person, the muscles that work the lungs may become paralyzed. Mechanical ventilation is essential until the excess ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mivacurium",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "succinylcholine",
+      "preferred_name": "Succinylcholine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013390",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10154",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013390",
+          "display": "Succinylcholine"
+        }
+      ],
+      "context": "med. Individuals with pseudocholinesterase deficiency have a shortage or absence of the enzyme pseudocholinesterase in their blood serum. If the drug succinylcholine (or another anesthetic derivative of choline) is given during surgery, the respiratory muscles become paralyzed and the patient stops breathing (apne",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Succinylcholine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sleep",
+      "preferred_name": "Sleep",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "219948",
+          "display": null
+        }
+      ],
+      "context": "ed States. Among Caucasian Americans, it seems to affect males almost twice as often as females. Apnea is the temporary cessation of breathing during sleep. Infantile apnea refers to pauses in breathing during an infant’s sleep. Apnea is called central apnea or diaphragmatic apnea when there are no chest",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "air",
+      "preferred_name": "air",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000111",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "411",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000111",
+          "display": "Acetylcysteine"
+        }
+      ],
+      "context": "ntral apnea or diaphragmatic apnea when there are no chest movements during the pauses in breathing. When there are chest movements but no passage of air through the mouth or nostrils, the disorder is known as obstructive apnea or upper airway apnea. Central apnea followed by or intermixed with an obst",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Acetylcysteine",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

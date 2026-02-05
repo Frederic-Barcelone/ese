@@ -1,0 +1,94 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:16:08.963888",
+  "document": "Hemimegalencephaly.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hemimegalencephaly.pdf",
+  "total_candidates": 25,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "EEG",
+      "long_form": "electroencephalogram",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "galencephaly is a very rare disorder for which prevalence estimates are not available. Examination by MRI is usually sufficient to confirm a suspected case of HME. Thus, an MRI examination should be performed as soon as HME is suspected. Seizures are diagnosed and defined by electroencephalography (EEG).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "r as an isolated or sporadic brain malformation or it may be associated with other neurodevelopmental syndromes. Thus, when detected, HME should prompt a search for other syndromic diagnoses. Hemimegalencephaly is a very rare disorder for which prevalence estimates are not available. Examination by MRI is usually sufficient to confirm a suspected case of HME. Thus, an MRI examination should be performed as soon as HME is suspected. Seizures are diagnosed and defined by electroencephalography (EEG).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HME",
+      "long_form": "Hemimegalencephaly",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Hemimegalencephaly (HME) is a rare neurological condition in which one-half of the brain, or one side of the brain, is abno",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "hemimegalencephaly",
+      "matched_text": "Hemimegalencephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:99802"
+    },
+    {
+      "name": "brain malformation",
+      "matched_text": "brain malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:199633"
+    },
+    {
+      "name": "infantile spasm",
+      "matched_text": "infantile spasms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "HME",
+      "matched_text": "HME",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

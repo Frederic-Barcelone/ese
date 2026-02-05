@@ -1,0 +1,35 @@
+{
+  "doc_id": "COPA-Syndrome",
+  "doc_filename": "COPA-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "copa syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "COPA",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 1901,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "COPA Syndrome: Clinical Overview and Epidemiology",
+  "short_description": "Clinical document discussing the epidemiology and diagnostic challenges of COPA syndrome, a rare genetic disorder first defined in 2015.",
+  "long_description": "This clinical research document provides an overview of COPA syndrome, focusing on its epidemiological characteristics and diagnostic challenges. The document discusses the gender distribution patterns, noting initial reports suggesting higher prevalence in females compared to males, though larger patient cohorts are needed for confirmation. It highlights the rarity of the condition, with fewer than 100 families identified in medical literature since the disorder was first defined in 2015. The document emphasizes the challenges in determining true prevalence due to the recent availability of genetic testing, frequent misdiagnosis or lack of diagnosis of rare disorders, and the likelihood that COPA syndrome remains underrecognized and underdiagnosed in the general population.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:16:14.631957"
+}

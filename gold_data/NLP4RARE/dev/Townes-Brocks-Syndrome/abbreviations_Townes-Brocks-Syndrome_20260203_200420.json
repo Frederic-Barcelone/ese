@@ -1,0 +1,341 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:04:20.141699",
+  "document": "Townes-Brocks-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Townes-Brocks-Syndrome.pdf",
+  "total_candidates": 51,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "TBS",
+      "long_form": "Townes Brocks syndrome",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Townes-Brocks syndrome (TBS) is an autosomal dominant genetic disorder characterized by absence of the anal opening (imperforate anus), abnormal ears associated with hearing impairment and thumb malformations. Abnormalities in the feet, heart and kidneys also occur frequently. Townes-Brocks syndrome is associated with a mutation in the SALL1 gene. The absence of the anal opening (imperforate anus) is the most common feature",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SALL1",
+      "long_form": "SALL1 gene",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "osomal dominant genetic disorder characterized by absence of the anal opening (imperforate anus), abnormal ears associated with hearing impairment and thumb malformations. Abnormalities in the feet, heart and kidneys also occur frequently. Townes-Brocks syndrome is associated with a mutation in the SALL1 gene. The absence of the anal opening (imperforate anus) is the most common feature of TBS. Small ears and a folded rim of skin and cartilage around the outer ear are usually present. Congenital sensorineural and/or conductive hearing loss can range from mild to severe and can be progressive. The m",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "SALL1"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Townes syndrome",
+      "matched_text": "Townes-Brocks syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Townes-Brocks syndrome",
+      "matched_text": "TBS",
+      "abbreviation": "TBS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q87.8",
+      "orpha": "ORPHA:857"
+    },
+    {
+      "name": "Autosomal dominant optic atrophy and cataract",
+      "matched_text": "autosomal dominant",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:67036"
+    },
+    {
+      "name": "Hereditary Diseases",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Anus, Imperforate",
+      "matched_text": "imperforate anus",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hearing impairment",
+      "matched_text": "hearing impairment",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "common",
+      "matched_text": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "congenital",
+      "matched_text": "Congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "conductive hearing loss",
+      "matched_text": "conductive hearing loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "polydactyly",
+      "matched_text": "polydactyly",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q69",
+      "orpha": null
+    },
+    {
+      "name": "Kapur-Toriello syndrome",
+      "matched_text": "eye",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:2328"
+    },
+    {
+      "name": "mental retardation",
+      "matched_text": "Mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "disease",
+      "matched_text": "disorders",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "cHILD",
+      "matched_text": "child",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:264665"
+    },
+    {
+      "name": "syndrome",
+      "matched_text": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hinman syndrome",
+      "matched_text": "has",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "N32.8",
+      "orpha": "ORPHA:84085"
+    },
+    {
+      "name": "Congenital Abnormality",
+      "matched_text": "Abnormalities",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital small ears",
+      "matched_text": "Small ears",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital sensorineural hearing loss",
+      "matched_text": "Congenital sensorineural",
+      "abbreviation": null,
+      "confidence": 0.9087306022644043,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Triphalangeal thumb",
+      "matched_text": "triphalangeal thumbs",
+      "abbreviation": null,
+      "confidence": 0.9717375040054321,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Duplication of thumb phalanx",
+      "matched_text": "duplicated thumbs",
+      "abbreviation": null,
+      "confidence": 0.9654101729393005,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Radial polydactyly",
+      "matched_text": "preaxial polydactyly",
+      "abbreviation": null,
+      "confidence": 0.9446849226951599,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Abnormality of the plantar skin of foot",
+      "matched_text": "Feet anomalies",
+      "abbreviation": null,
+      "confidence": 0.8610481023788452,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Short 3rd toe",
+      "matched_text": "short third toe",
+      "abbreviation": null,
+      "confidence": 0.9881516695022583,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Overriding toe",
+      "matched_text": "overlapping toes",
+      "abbreviation": null,
+      "confidence": 0.9664504528045654,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Flatfoot",
+      "matched_text": "flat feet",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital anomaly of the kidney",
+      "matched_text": "kidney malformations",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Horseshoe Kidney",
+      "matched_text": "horseshoe kidney",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Polycystic Kidney Diseases",
+      "matched_text": "polycystic kidneys",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Mutation Abnormality",
+      "matched_text": "gene change",
+      "abbreviation": null,
+      "confidence": 0.8821735739707947,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

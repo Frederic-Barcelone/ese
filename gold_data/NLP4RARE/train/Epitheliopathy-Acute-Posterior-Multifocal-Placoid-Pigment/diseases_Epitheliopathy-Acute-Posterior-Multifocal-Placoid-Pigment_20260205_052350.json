@@ -1,0 +1,411 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:23:50.103997",
+  "document": "Epitheliopathy-Acute-Posterior-Multifocal-Placoid-Pigment.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Epitheliopathy-Acute-Posterior-Multifocal-Placoid-Pigment.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acute posterior multifocal placoid pigment epitheliopathy",
+      "preferred_label": "acute posterior multifocal placoid pigment epitheliopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H30.14",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043089",
+        "orpha": null,
+        "umls": "UMLS:C0154884",
+        "mesh": "D000080363"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043089",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2183",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H30.14",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56348",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:89188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0154884",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2036282532",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000080363",
+          "display": "White Dot Syndromes"
+        }
+      ],
+      "context": "Acute posterior multifocal placoid pigment epitheliopathy (APMPPE) is a rare eye disorder of unknown (idiopathic) cause. The disorder is characterized by the impairment of central vision in one eye (unilateral) but, within a few days, the second eye may also become affected (bilateral). In most cases, the disorder resolves within a few weeks without loss",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "White Dot Syndromes",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "unilateral",
+      "preferred_label": "Macrodactyly of toes, unilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295243",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295243",
+          "display": null
+        }
+      ],
+      "context": "Acute posterior multifocal placoid pigment epitheliopathy (APMPPE) is a rare eye disorder of unknown (idiopathic) cause. The disorder is characterized by the impairment of central vision in one eye (unilateral) but, within a few days, the second eye may also become affected (bilateral). In most cases, the disorder resolves within a few weeks without loss of clearness of vision (acuity). However, in some cases, visual acuity does not improve. This disorder occurs predominantly in young adults, with a mean",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "bilateral",
+      "preferred_label": "Macrodactyly of toes, bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:295245",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:295245",
+          "display": null
+        }
+      ],
+      "context": "Acute posterior multifocal placoid pigment epitheliopathy (APMPPE) is a rare eye disorder of unknown (idiopathic) cause. The disorder is characterized by the impairment of central vision in one eye (unilateral) but, within a few days, the second eye may also become affected (bilateral). In most cases, the disorder resolves within a few weeks without loss of clearness of vision (acuity). However, in some cases, visual acuity does not improve. This disorder occurs predominantly in young adults, with a mean age of onset of 27 years. It is reported that, in approximately one-third o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "visual disorder",
+      "preferred_label": "visual disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021084",
+        "orpha": null,
+        "umls": "UMLS:C0042790",
+        "mesh": "MESH:D014786"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021084",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:12103",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014786",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10047518",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35126",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95677002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0042790",
+          "display": null
+        }
+      ],
+      "context": "that it may be caused by a virus. It can subside without treatment or it may recur at any time. The viruses may stay dormant in humans for extended periods of time, then for reasons yet unknown may unexplainably become reactivated. Acute posterior multifocal placoid pigment epitheliopathy is a rare visual disorder that affects males and females in equal numbers. Treatment of acute posterior multifocal placoid pigment epitheliopathy is symptomatic and supportive. Very often vision returns without specific treatment.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bilateral temporal lobe disorder",
+        "Epilepsy Partial Sensory"
+      ],
+      "pubtator_normalized_name": "Vision Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eye disorder",
+      "preferred_label": "eye disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005328",
+        "orpha": null,
+        "umls": "UMLS:C0015397",
+        "mesh": "MESH:D005128"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005328",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5614",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003966",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:379.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5092",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005128",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26767",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:371405004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015397",
+          "display": null
+        }
+      ],
+      "context": "Acute posterior multifocal placoid pigment epitheliopathy (APMPPE) is a rare eye disorder of unknown (idiopathic) cause. The disorder is characterized by the impairment of central vision in one eye (unilateral) but, within a few days, the second eye may also become affected (bilateral). In most cases, the disorder resolves within a few weeks without loss of clearness of vision (acuity).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "REM Sleep Behavior Disorder",
+        "Ocular Motility Disorders",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Eye Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "influenza",
+      "preferred_label": "influenza",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005812",
+        "orpha": null,
+        "umls": "UMLS:C0021400",
+        "mesh": "MESH:D009976"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005812",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8469",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007328",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:487.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9466",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009976",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C53482",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61700007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021400",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:145723401",
+          "display": null
+        }
+      ],
+      "context": ", the disorder resolves within a few weeks without loss of clearness of vision (acuity). However, in some cases, visual acuity does not improve. This disorder occurs predominantly in young adults, with a mean age of onset of 27 years. It is reported that, in approximately one-third of the cases, an influenza-like illness preceded the development of the disorder. The exact cause of acute posterior multifocal placoid pigment epitheliopathy is not known. Researchers suspect that it may be caused by a virus. It can subside without treatment or it may recur at any time. The viruses may stay dormant in human",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Influenza in Birds",
+        "Haemophilus Infections",
+        "Meningitis Haemophilus"
+      ],
+      "pubtator_normalized_name": "Influenza Human",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

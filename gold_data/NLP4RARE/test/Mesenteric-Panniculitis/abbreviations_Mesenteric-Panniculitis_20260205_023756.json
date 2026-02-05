@@ -1,0 +1,137 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:37:56.214799",
+  "document": "Mesenteric-Panniculitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mesenteric-Panniculitis.pdf",
+  "total_candidates": 43,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CT",
+      "long_form": "computed tomography",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "The epidemiology of mesenteric panniculitis has not been fully defined. A recent study reported that findings consistent with mesenteric panniculitis occurred in 359 patients (0.24%) from a total of 147,794 abdominal computed tomography (CT) examinations undertaken for over a 5-year period in a large community based medical system. Of these, 100 patients (28%) had known malignancy or were later diagnosed with cancer. In some reports, mesenteric panniculitis has a male predominance of 2:1. Mesenteric panniculitis most often appears during the sixth and seventh decade of life, and its incidence appears to increase with age. Children an",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "nodular non-suppurative panniculitis",
+      "matched_text": "idiopathic nodular panniculitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:33577"
+    },
+    {
+      "name": "gastrointestinal lymphoma",
+      "matched_text": "gastrointestinal lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pancreatic adenocarcinoma",
+      "matched_text": "pancreatic adenocarcinoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "retroperitoneal fibrosis",
+      "matched_text": "retroperitoneal fibrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:49041"
+    },
+    {
+      "name": "Mesenteric Panniculitis",
+      "matched_text": "mesenteric panniculitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:238593"
+    },
+    {
+      "name": "parasitic infection",
+      "matched_text": "parasitic infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Crohn's disease",
+      "matched_text": "Crohn’s disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K50",
+      "orpha": "Orphanet:206"
+    },
+    {
+      "name": "desmoid tumor",
+      "matched_text": "desmoid tumors",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:873"
+    },
+    {
+      "name": "pancreatitis",
+      "matched_text": "pancreatitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

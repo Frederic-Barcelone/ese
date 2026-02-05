@@ -1,0 +1,116 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:14:31.184129",
+  "document": "Ectodermal-Dysplasias.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Ectodermal-Dysplasias.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Ectodermal Dysplasias",
+      "preferred_label": "ectodermal dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019287",
+        "orpha": "Orphanet:79373",
+        "umls": "UMLS:C0013575",
+        "mesh": "MESH:D004476"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019287",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2121",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6317",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.31",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8544",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004476",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010452",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84683",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:305100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79373",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:8654005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013575",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1156567558",
+          "display": null
+        }
+      ],
+      "context": "Ectodermal Dysplasias are a group of rare disorders that may affect males and females in equal numbers. It is estimated the approximately 125,000 individuals in the United States are carriers for some form of the disease.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ectodermal Dysplasia 1 Anhidrotic",
+        "Ectodermal Dysplasia-Skin Fragility Syndrome",
+        "Hyper-IgM Immunodeficiency X-Linked with Ectodermal Dysplasia Hypohidrotic"
+      ],
+      "pubtator_normalized_name": "Ectodermal Dysplasia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

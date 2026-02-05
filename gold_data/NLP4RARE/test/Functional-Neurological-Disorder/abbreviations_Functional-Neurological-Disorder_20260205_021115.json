@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:11:15.279095",
+  "document": "Functional-Neurological-Disorder.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Functional-Neurological-Disorder.pdf",
+  "total_candidates": 19,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "FND",
+      "long_form": "Functional neurological disorder",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Functional neurological disorder (FND) is a medical condition in which there is a problem with the functioning of the nervous system and how the brain and body sends and/or receives signals, rather than a structural disease process such as multiple sclerosis or stroke. FND can encompass a wide variety of neurological symptoms, such as limb weakness or seizures.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "cerebrovascular disorder",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I60-I69",
+      "orpha": null
+    },
+    {
+      "name": "conversion disorder",
+      "matched_text": "Functional neurological disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "multiple sclerosis",
+      "matched_text": "multiple sclerosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G35",
+      "orpha": "Orphanet:802"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

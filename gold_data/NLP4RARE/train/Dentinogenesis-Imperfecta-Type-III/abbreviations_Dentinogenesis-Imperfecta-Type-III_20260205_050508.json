@@ -1,0 +1,93 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:05:08.603635",
+  "document": "Dentinogenesis-Imperfecta-Type-III.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dentinogenesis-Imperfecta-Type-III.pdf",
+  "total_candidates": 28,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "DGI-III",
+      "long_form": "Dentinogenesis imperfecta type III",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Dentinogenesis imperfecta type III (DGI-III) is one of five distinct, hereditary disorders of dentin development affecting the teeth. Dentin is the hard, bone-like material that makes up most of a tooth and lies under the enamel serving to protect the soft, pulp tissue. These heritable dentin disorders may affect only the teeth or may be associated with the condition known as osteogenesis imperfecta. Whether this association is present is a",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IIl",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "in the classification of dentinogenesis imperfecta into three types. Dentinogenesis imperfecta type IIl is characterized by rapid erosion of the crowns in baby and permanent teeth. Dental pulp inside sev",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "dentinogenesis imperfecta type III",
+      "matched_text": "Dentinogenesis imperfecta type III",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:166265"
+    },
+    {
+      "name": "Gorlin-Chaudhry-Moss syndrome",
+      "matched_text": "Dental",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:2095"
+    },
+    {
+      "name": "dentinogenesis imperfecta",
+      "matched_text": "dentinogenesis imperfecta",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:49042"
+    },
+    {
+      "name": "osteogenesis imperfecta",
+      "matched_text": "osteogenesis imperfecta",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q78.0",
+      "orpha": "Orphanet:666"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "amber",
+      "matched_text": "amber",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

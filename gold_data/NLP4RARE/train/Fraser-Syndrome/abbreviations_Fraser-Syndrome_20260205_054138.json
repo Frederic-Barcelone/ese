@@ -1,0 +1,126 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:41:38.558054",
+  "document": "Fraser-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fraser-Syndrome.pdf",
+  "total_candidates": 22,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "Macrodactyly of toes, unilateral",
+      "matched_text": "unilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:295243"
+    },
+    {
+      "name": "bilateral renal agenesis",
+      "matched_text": "bilateral renal agenesis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q60.1",
+      "orpha": "Orphanet:1848"
+    },
+    {
+      "name": "hearing loss disorder",
+      "matched_text": "hearing impairment",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H90",
+      "orpha": null
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Fraser syndrome",
+      "matched_text": "Fraser syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cryptophthalmos",
+      "matched_text": "cryptophthalmos",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98562"
+    },
+    {
+      "name": "penile agenesis",
+      "matched_text": "micropenis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:49"
+    },
+    {
+      "name": "cryptorchidism",
+      "matched_text": "cryptorchidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hypospadias",
+      "matched_text": "hypospadias",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q54",
+      "orpha": "Orphanet:440"
+    },
+    {
+      "name": "syndactyly",
+      "matched_text": "syndactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q70",
+      "orpha": null
+    },
+    {
+      "name": "blindness",
+      "matched_text": "blindness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H54",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

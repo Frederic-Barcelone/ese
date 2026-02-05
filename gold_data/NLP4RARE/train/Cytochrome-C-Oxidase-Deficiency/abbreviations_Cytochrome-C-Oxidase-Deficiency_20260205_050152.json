@@ -1,0 +1,90 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:01:52.509888",
+  "document": "Cytochrome-C-Oxidase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cytochrome-C-Oxidase-Deficiency.pdf",
+  "total_candidates": 28,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 3,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "matched_text": "skeletal muscles",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:364531"
+    },
+    {
+      "name": "Carnitine palmitoyl transferase II deficiency, severe infantile form",
+      "matched_text": "severe infantile form",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:228305"
+    },
+    {
+      "name": "COX deficiency, benign infantile mitochondrial myopathy",
+      "matched_text": "COX deficiency, benign infantile mitochondrial myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Cytochrome C Oxidase Deficiency",
+      "matched_text": "Cytochrome C Oxidase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:254905"
+    },
+    {
+      "name": "inborn errors of metabolism",
+      "matched_text": "inherited metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68367"
+    },
+    {
+      "name": "localized",
+      "matched_text": "localized",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "cytochrome C oxidase",
+      "matched_text": "Cytochrome C Oxidase",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

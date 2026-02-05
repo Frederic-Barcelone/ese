@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:43:11.282746",
+  "document": "NGLY1-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/NGLY1-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "NGLY1",
+      "hgnc_symbol": "NGLY1",
+      "full_name": "N-glycanase 1",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "17646",
+        "entrez": "55768",
+        "ensembl": "ENSG00000151092",
+        "uniprot": "Q96IV0",
+        "omim": "610661"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "17646",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "55768",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000151092",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "610661",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q96IV0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "404454",
+          "disease_name": "Alacrimia-choreoathetosis-liver dysfunction syndrome",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "NGLY1 NGLY1 deficiency is an extremely rare disorder that was first reported in the medical literature in 2012. According to the NGLY1 Foundation, as of January 2018, there are approximately 63 individuals worldwide who have been identified with the disorder. Rare diseases like NGLY1 deficiency often go",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

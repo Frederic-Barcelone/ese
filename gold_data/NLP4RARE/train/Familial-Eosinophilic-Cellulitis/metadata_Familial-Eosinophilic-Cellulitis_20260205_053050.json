@@ -1,0 +1,35 @@
+{
+  "doc_id": "Familial-Eosinophilic-Cellulitis",
+  "doc_filename": "Familial-Eosinophilic-Cellulitis.pdf",
+  "top_entities": [
+    {
+      "name": "Familial Eosinophilic Cellulitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "autoimmune disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2096,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Familial Eosinophilic Cellulitis: Clinical Overview and Management",
+  "short_description": "A clinical document describing familial eosinophilic cellulitis, a rare skin disorder characterized by flame-shaped inflammatory lesions with unknown etiology.",
+  "long_description": "This clinical reference document provides a comprehensive overview of familial eosinophilic cellulitis, a rare dermatological condition presenting as raised, red, swollen, and warm skin areas in distinctive flame-shaped patterns accompanied by pain. The document discusses the unknown etiology of the condition while noting potential associations with arthropod bites and possible autoimmune mechanisms. It covers the epidemiology, noting equal gender distribution and predominant occurrence in adults, and outlines current treatment approaches including corticosteroid therapy and supportive care, while emphasizing the often self-limiting nature of the condition.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:30:50.436405"
+}

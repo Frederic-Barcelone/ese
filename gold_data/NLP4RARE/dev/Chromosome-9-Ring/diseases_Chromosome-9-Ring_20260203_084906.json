@@ -1,0 +1,596 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:49:06.878741",
+  "document": "Chromosome-9-Ring.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Chromosome-9-Ring.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Chromosome 9 Ring",
+      "preferred_label": "chromosome 9 ring",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019905",
+        "orpha": "Orphanet:96173",
+        "umls": "UMLS:C0265430",
+        "mesh": "MESH:C538022"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019905",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1348",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:539244",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538022",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:962",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:96173",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60650002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265430",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 9 Ring is a rare disorder in which there is loss (deletion) of chromosomal material from both ends of the 9th chromosome and joining of the ends to form a ring. Associated symptoms and findings may vary, depending upon the amount and location of lost chromosomal material and other factors. Some affected i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome 9 Ring",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Chromosome 9 Ring is a rare disorder in which there is loss (deletion) of chromosomal material from both ends of the 9th chromosome and joining of the ends to form a ring. Associated symptoms and findings may vary, depending upon the amount and location of lost chromosomal material and other factors. Some affected individuals may have",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "osomal abnormality, such features may not be apparent. Chromosome 9 Ring may also be characterized by additional physical features in some cases, including growth retardation, heart defects, genital abnormalities, and/or other findings. In addition, many affected individuals have moderate to severe intellectual disability; however, in some instances, intelligence may be in the low normal range. Chromosome 9 Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically). Chromosome 9 Ring is a rare chromosomal abnormality that",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "to severe intellectual disability; however, in some instances, intelligence may be in the low normal range. Chromosome 9 Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically). Chromosome 9 Ring is a rare chromosomal abnormality that is thought to affect males and females in relatively equal numbers. Since the disorder was originally described, more than 12 cases have been reported in the medical literature.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "mosome 9 Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically). Chromosome 9 Ring is a rare chromosomal abnormality that is thought to affect males and females in relatively equal numbers. Since the disorder was originally described, more than 12 cases have been reported in the medical literature.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "Ring usually appears to result from spontaneous (de novo) errors very early in the development of the embryo that occur for unknown reasons (sporadically). Chromosome 9 Ring is a rare chromosomal abnormality that is thought to affect males and females in relatively equal numbers. Since the disorder was originally described, more than 12 cases have been reported in the medical literature.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "variable malformations",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.8616552114486694,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "in which there is loss (deletion) of chromosomal material from both ends of the 9th chromosome and joining of the ends to form a ring. Associated symptoms and findings may vary, depending upon the amount and location of lost chromosomal material and other factors. Some affected individuals may have variable malformations of the skull and facial (craniofacial) region. However, in others with the chromosomal abnormality, such features may not be apparent. Chromosome 9 Ring may also be characterized by additional physical features in some cases, including growth retardation, heart defects, genital abnormalities, and/o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal abnormality",
+      "preferred_label": "Chromosome Aberrations",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008625",
+        "mesh": "D002869"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008625",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002869",
+          "display": "Chromosome Aberrations"
+        }
+      ],
+      "context": "joining of the ends to form a ring. Associated symptoms and findings may vary, depending upon the amount and location of lost chromosomal material and other factors. Some affected individuals may have variable malformations of the skull and facial (craniofacial) region. However, in others with the chromosomal abnormality, such features may not be apparent. Chromosome 9 Ring may also be characterized by additional physical features in some cases, including growth retardation, heart defects, genital abnormalities, and/or other findings. In addition, many affected individuals have moderate to severe intellectual disab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sex Chromosome Aberrations"
+      ],
+      "pubtator_normalized_name": "Chromosome Aberrations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Chromosome 9 Ring",
+      "preferred_label": "Ring chromosome 9 syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0265430",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0265430",
+          "display": null
+        }
+      ],
+      "context": "findings may vary, depending upon the amount and location of lost chromosomal material and other factors. Some affected individuals may have variable malformations of the skull and facial (craniofacial) region. However, in others with the chromosomal abnormality, such features may not be apparent. Chromosome 9 Ring may also be characterized by additional physical features in some cases, including growth retardation, heart defects, genital abnormalities, and/or other findings. In addition, many affected individuals have moderate to severe intellectual disability; however, in some instances, intelligence may be",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "heart defects",
+      "preferred_label": "Congenital Heart Defects",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0018798",
+        "mesh": "D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0018798",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006330",
+          "display": "Heart Defects Congenital"
+        }
+      ],
+      "context": "individuals may have variable malformations of the skull and facial (craniofacial) region. However, in others with the chromosomal abnormality, such features may not be apparent. Chromosome 9 Ring may also be characterized by additional physical features in some cases, including growth retardation, heart defects, genital abnormalities, and/or other findings. In addition, many affected individuals have moderate to severe intellectual disability; however, in some instances, intelligence may be in the low normal range. Chromosome 9 Ring usually appears to result from spontaneous (de novo) errors very early in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart defects limb shortening",
+        "Deafness Congenital Heart Defects and Posterior Embryotoxon",
+        "Noncompaction of Left Ventricular Myocardium with Congenital Heart Defects"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

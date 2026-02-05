@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:16:14.575994",
+  "document": "COPA-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/COPA-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "COPA",
+      "hgnc_symbol": "COPA",
+      "full_name": "coat protein complex I subunit alpha",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2230",
+        "entrez": "1314",
+        "ensembl": "ENSG00000122218",
+        "uniprot": "P53621",
+        "omim": "601924"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2230",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "1314",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000122218",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "601924",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P53621",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "444092",
+          "disease_name": "Autoimmune interstitial lung disease-arthritis syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "d to be identified to confirm whether women are affected more often than men. Less than 100 families have been identified with this disorder in the medical literature, but the exact number of people who have this disorder is unknown. The low number of people identified with this disorder is because COPA syndrome was only first defined as a disorder in 2015, and genetic testing has only recently become available. In general, rare disorders often go misdiagnosed or undiagnosed, making it difficult to determine their true frequency in the general population. COPA syndrome is likely underrecognized an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

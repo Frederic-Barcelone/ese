@@ -1,0 +1,148 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:18:52.907708",
+  "document": "Hereditary-Leiomyomatosis-and-Renal-Cell-Carcinoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hereditary-Leiomyomatosis-and-Renal-Cell-Carcinoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "HLRCC",
+      "preferred_label": "Hereditary leiomyomatosis and renal cell cancer",
+      "abbreviation": "HLRCC",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "C64",
+        "icd11": "2C90.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:523",
+        "umls": null,
+        "mesh": "C535516"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:523",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C64",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2C90.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535516",
+          "display": "Hereditary leiomyomatosis and renal cell cancer"
+        }
+      ],
+      "context": "HLRCC affects males and females in equal numbers. The disorder may be recognized more readily in females because of the development of uterine fibroid and associated symptoms. The exact incidence and prevalence of HLRCC in the general population is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary leiomyomatosis and renal cell cancer",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "fibroid",
+      "preferred_label": "fibroid",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001572",
+        "orpha": null,
+        "umls": "UMLS:C0023267",
+        "mesh": "MESH:D007889"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001572",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:127",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:215.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8890/0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9710",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007889",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3157",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:146801000119103",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023267",
+          "display": null
+        }
+      ],
+      "context": "HLRCC affects males and females in equal numbers. The disorder may be recognized more readily in females because of the development of uterine fibroid and associated symptoms. The exact incidence and prevalence of HLRCC in the general population is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polyps Multiple And Recurrent Inflammatory Fibroid Gastrointestinal"
+      ],
+      "pubtator_normalized_name": "Leiomyoma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

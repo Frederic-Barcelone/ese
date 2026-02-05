@@ -1,0 +1,319 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:10:44.352962",
+  "document": "Fructose-Intolerance-Hereditary.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Fructose-Intolerance-Hereditary.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "fructose-1",
+      "preferred_label": "Fructose-1,6-bisphosphatase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:348",
+        "umls": null,
+        "mesh": "D015319"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:348",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015319",
+          "display": "Fructose-1 6-Diphosphatase Deficiency"
+        }
+      ],
+      "context": "There are three inherited disorders of fructose metabolism that are recognized and characterized. Essential fructosuria, is a mild disorder not requiring treatment, while Hereditary fructose intolerance (HFI) and Hereditary fructose-1,6-biphosphatase deficiency (HFBP) are treatable and controllable but must be taken seriously. Hereditary Fructose Intolerance may be diagnosed at birth or shortly thereafter when the infant is weaned. Like other autosomal disorders it is equally distributed among males and females. Estimates of the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fructose-1 6-Diphosphatase Deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Hereditary fructose intolerance",
+      "preferred_label": "hereditary fructose intolerance",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E74.12",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009249",
+        "orpha": "Orphanet:469",
+        "umls": "UMLS:C0016751",
+        "mesh": "D005633"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009249",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9869",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6622",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E74.12",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:271.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42105",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10019878",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200531",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84720",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1166",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:229600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:469",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:20052008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0016751",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1925240365",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D005633",
+          "display": "Fructose Intolerance"
+        }
+      ],
+      "context": "There are three inherited disorders of fructose metabolism that are recognized and characterized. Essential fructosuria, is a mild disorder not requiring treatment, while Hereditary fructose intolerance (HFI) and Hereditary fructose-1,6-biphosphatase deficiency (HFBP) are treatable and controllable but must be taken seriously. Hereditary Fructose Intolerance may be diagnosed at birth or shortly thereafter when the infant is weaned. Like other autosomal disorders it is equally distributed among mal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fructose Intolerance",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Essential fructosuria",
+      "preferred_label": "essential fructosuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E74.11",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009252",
+        "orpha": "Orphanet:2056",
+        "umls": "UMLS:C0268160",
+        "mesh": "MESH:C538068"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009252",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111680",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6471",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E74.11",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78645",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538068",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10015487",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:229800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2056",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40278002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268160",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1362211287",
+          "display": null
+        }
+      ],
+      "context": "There are three inherited disorders of fructose metabolism that are recognized and characterized. Essential fructosuria, is a mild disorder not requiring treatment, while Hereditary fructose intolerance (HFI) and Hereditary fructose-1,6-biphosphatase deficiency (HFBP) are treatable and controllable but must be taken seriously. Hereditary Fructose Intolerance may be diagnosed at birth or shortly thereafter when the i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fructosuria",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HF",
+      "preferred_label": "Hydrops fetalis",
+      "abbreviation": "HF",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "P83.2",
+        "icd11": "KA85.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:1041",
+        "umls": null,
+        "mesh": "D015160"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:1041",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "P83.2",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "KA85.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015160",
+          "display": "Hydrops Fetalis"
+        }
+      ],
+      "context": "sly. Hereditary Fructose Intolerance may be diagnosed at birth or shortly thereafter when the infant is weaned. Like other autosomal disorders it is equally distributed among males and females. Estimates of the incidence of the disorder range widely from 1:10,000 to 1:100,000 births. A diagnosis of HF can be definitively confirmed by either of two tests: an enzyme assay, requiring a liver biopsy, to determine the level of aldolase activity or a fructose tolerance test in which the patient's response to intravenous fructose feeding is carefully monitored. It should be carefully noted, however, th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hydrops Fetalis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

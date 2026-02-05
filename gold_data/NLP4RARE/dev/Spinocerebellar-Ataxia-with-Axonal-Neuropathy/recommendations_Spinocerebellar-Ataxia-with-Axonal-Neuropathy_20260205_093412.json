@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:34:12.556064",
+  "document": "Spinocerebellar-Ataxia-with-Axonal-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Spinocerebellar-Ataxia-with-Axonal-Neuropathy.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Clinical recommendations for SCAN1",
+      "guideline_year": null,
+      "organization": null,
+      "target_condition": "SCAN1",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Spinocerebellar-Ataxia-with-Axonal-Neuropathy_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected SCAN1",
+          "condition": "spinocerebellar ataxia",
+          "severity": null,
+          "action": "diagnose based on history and clinical signs",
+          "action_description": null,
+          "preferred": "history and clinical examination",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "unknown",
+          "references": [],
+          "source": "Spinocerebellar-Ataxia-with-Axonal-Neuropathy",
+          "source_text": "The diagnosis of SCAN1 is made on history and clinical signs as listed above.",
+          "page_num": null
+        }
+      ],
+      "source_document": "Spinocerebellar-Ataxia-with-Axonal-Neuropathy",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

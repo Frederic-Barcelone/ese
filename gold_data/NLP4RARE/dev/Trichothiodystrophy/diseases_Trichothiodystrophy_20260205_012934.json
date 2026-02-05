@@ -1,0 +1,159 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:29:34.849511",
+  "document": "Trichothiodystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Trichothiodystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ichthyosis",
+      "preferred_label": "ichthyosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019269",
+        "orpha": "Orphanet:79354",
+        "umls": "UMLS:C0020757",
+        "mesh": "MESH:D007057"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019269",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1697",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18985",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0008064",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7002",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007057",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10021198",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200618",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84776",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79354",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020757",
+          "display": null
+        }
+      ],
+      "context": "reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns of myelination is often",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ichthyosis Lamellar",
+        "Ichthyosis X-Linked",
+        "Ichthyosis Bullosa of Siemens"
+      ],
+      "pubtator_normalized_name": "Ichthyosis prematurity syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "ldwide. TTD has been reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

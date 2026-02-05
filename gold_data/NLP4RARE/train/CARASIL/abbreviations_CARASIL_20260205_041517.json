@@ -1,0 +1,103 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:15:17.400961",
+  "document": "CARASIL.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/CARASIL.pdf",
+  "total_candidates": 28,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 3,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CARASIL",
+      "long_form": "Cerebral autosomal recessive arteriopathy-subcortical infarcts-leukoencephalopathy",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "CARASIL is an extremely rare genetic disorder that is characterized by damage to the small blood vessels in",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "tter involvement or leukoaraiosis (changes in deep white matter in the brain, which are observed on MRI or CT). Such symptoms include an increasing muscle tone (spasticity), pyramidal signs, and pseudobu",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "volvement or leukoaraiosis (changes in deep white matter in the brain, which are observed on MRI or CT). Such symptoms include an increasing muscle tone (spasticity), pyramidal signs, and pseudobulbar p",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Cerebral autosomal recessive arteriopathy-subcortical infarcts-leukoencephalopathy",
+      "matched_text": "CARASIL",
+      "abbreviation": "CARASIL",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "I67.8",
+      "orpha": "ORPHA:199354"
+    },
+    {
+      "name": "cerebrovascular disorder",
+      "matched_text": "strokes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I60-I69",
+      "orpha": null
+    },
+    {
+      "name": "pseudobulbar palsy",
+      "matched_text": "pseudobulbar palsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "dementia",
+      "matched_text": "dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F02",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

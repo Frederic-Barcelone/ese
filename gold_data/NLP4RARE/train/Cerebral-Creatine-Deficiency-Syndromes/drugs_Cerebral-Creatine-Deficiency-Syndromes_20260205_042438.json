@@ -1,0 +1,279 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:24:38.597014",
+  "document": "Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "adenosine",
+      "preferred_name": "adenosine",
+      "brand_name": "ADENOSINE",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Adenosine Receptor Agonist",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "INJECTABLE",
+      "route": "INJECTION",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000255",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA076500",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000255",
+          "display": "Adenosine Triphosphate"
+        }
+      ],
+      "context": "dromes (CCDS) are inborn errors of creatine metabolism which interrupt the formation or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and bra",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Adenosine Diphosphate",
+        "Adenosine",
+        "Adenosine Monophosphate"
+      ],
+      "pubtator_normalized_name": "Adenosine Triphosphate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "adenosine triphosphate",
+      "preferred_name": "adenosine triphosphate",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000255",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "318",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000255",
+          "display": "Adenosine Triphosphate"
+        }
+      ],
+      "context": "dromes (CCDS) are inborn errors of creatine metabolism which interrupt the formation or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain developmen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "(gamma-S)ATP",
+        "alpha beta-methyleneadenosine 5'-triphosphate",
+        "Adenylyl Imidodiphosphate"
+      ],
+      "pubtator_normalized_name": "Adenosine Triphosphate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ATP",
+      "preferred_name": "ATP",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000255",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "318",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000255",
+          "display": "Adenosine Triphosphate"
+        }
+      ],
+      "context": " errors of creatine metabolism which interrupt the formation or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain development. CT",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Adenosine Triphosphate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sustain",
+      "preferred_name": "Sustain",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D015761",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "897009",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015761",
+          "display": "4-Aminopyridine"
+        }
+      ],
+      "context": "of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain development. CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabil",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "4-Aminopyridine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "creatine",
+      "preferred_name": "Creatine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D003401",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2907",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003401",
+          "display": "Creatine"
+        }
+      ],
+      "context": "delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn). Follow up genomic testing for specific genes and brain MRI with spectroscopy may be ordered to co",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Phosphocreatine",
+        "5 7-Dihydroxytryptamine"
+      ],
+      "pubtator_normalized_name": "Creatine",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

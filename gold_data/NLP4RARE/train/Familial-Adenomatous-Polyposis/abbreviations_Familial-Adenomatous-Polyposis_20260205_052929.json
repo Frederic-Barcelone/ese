@@ -1,0 +1,138 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:29:29.150874",
+  "document": "Familial-Adenomatous-Polyposis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Familial-Adenomatous-Polyposis.pdf",
+  "total_candidates": 40,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "FAP",
+      "long_form": "familial adenomatous polyposis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Familial adenomatous polyposis (FAP) is a rare inherited cancer predisposition syndrome characterized by hundreds to thousands of precancerous colorectal polyps (adenomatous polyps). If left untreated, affected individuals inevitably develop cancer of the colon and/or rectum at a relatively young age. FAP is inherited in an autosomal",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "APC",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ge. FAP is inherited in an autosomal dominant manner and caused by abnormalities (mutations) in the APC gene. Mutations in the APC gene cause a group of polyposis conditions that have overlapping feature",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Familial Adenomatous Polyposis",
+      "matched_text": "Familial adenomatous polyposis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:733"
+    },
+    {
+      "name": "Familial adenomatous polyposis",
+      "matched_text": "FAP",
+      "abbreviation": "FAP",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D12.6",
+      "orpha": "ORPHA:733"
+    },
+    {
+      "name": "colorectal carcinoma",
+      "matched_text": "colorectal cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "colorectal polyp",
+      "matched_text": "colorectal polyps",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Gardner syndrome",
+      "matched_text": "Gardner syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Turcot Syndrome",
+      "matched_text": "Turcot syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "attenuated FAP",
+      "matched_text": "attenuated FAP",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:220460"
+    },
+    {
+      "name": "polyposis",
+      "matched_text": "polyposis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "polyp",
+      "matched_text": "polyps",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:N84",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

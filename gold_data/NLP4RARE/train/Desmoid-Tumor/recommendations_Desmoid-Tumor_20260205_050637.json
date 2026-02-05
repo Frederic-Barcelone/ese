@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:06:37.149161",
+  "document": "Desmoid-Tumor.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Desmoid-Tumor.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 2,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "desmoid tumors",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Desmoid-Tumor_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected desmoid tumor",
+          "condition": "diagnostic workup",
+          "severity": "na",
+          "action": "biopsy required for conclusive diagnosis",
+          "action_description": null,
+          "preferred": "microscopic examination of biopsy tissue",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "na",
+          "duration": "na",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "strong",
+          "references": [],
+          "source": "Desmoid-Tumor",
+          "source_text": "The conclusive diagnosis of desmoid tumor requires a biopsy. Microscopic examination of the biopsy tissue confirms the diagnosis.",
+          "page_num": null
+        },
+        {
+          "recommendation_id": "rec_Desmoid-Tumor_2",
+          "recommendation_type": "treatment",
+          "population": "patients with desmoid tumor biopsy",
+          "condition": "diagnostic confirmation",
+          "severity": "na",
+          "action": "immunohistochemical staining to establish nuclear accumulation of beta-catenin",
+          "action_description": null,
+          "preferred": "beta-catenin immunohistochemical staining",
+          "alternatives": [
+            "smooth muscle actin",
+            "desmin",
+            "KIT antibodies"
+          ],
+          "dosing": [],
+          "taper_target": "na",
+          "duration": "na",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Desmoid-Tumor",
+          "source_text": "Additionally, immunohistochemical stains can establish the nuclear accumulation of beta-catenin, a protein that is caused by the genetic mutations usually found in desmoid tumors. Finally, antibodies are often examined in desmoid tumors, including smooth muscle actin, desmin and KIT, to aid in distinguishing them from other tumors.",
+          "page_num": null
+        }
+      ],
+      "source_document": "Desmoid-Tumor",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:56:06.595055",
+  "document": "Primary-Biliary-Cholangitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Primary-Biliary-Cholangitis.pdf",
+  "total_candidates": 37,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "PBC",
+      "long_form": "primary biliary cholangitis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Primary biliary cholangitis (PBC) is a chronic, or long lasting, progressive liver disorder that mostly affects women and usually appears during middle age. PBC leads to inflammation and scarring of the small bile ducts (the plumbing system of the liver which transports bile, the substance that helps digest fat). When PBC is very",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "primary biliary cholangitis",
+      "matched_text": "Primary biliary cholangitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K74.3",
+      "orpha": "Orphanet:186"
+    },
+    {
+      "name": "Primary biliary cholangitis",
+      "matched_text": "PBC",
+      "abbreviation": "PBC",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "K74.3",
+      "orpha": "ORPHA:186"
+    },
+    {
+      "name": "autoimmune disease",
+      "matched_text": "autoimmune diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "liver disorder",
+      "matched_text": "liver disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K70-K77",
+      "orpha": null
+    },
+    {
+      "name": "liver failure",
+      "matched_text": "liver failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cirrhosis",
+      "matched_text": "cirrhosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

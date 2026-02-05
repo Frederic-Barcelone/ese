@@ -1,0 +1,702 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:42:55.425752",
+  "document": "Laband-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Laband-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 12,
+  "total_validated": 12,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Laband syndrome",
+      "preferred_label": "Zimmerman Laband syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0796013",
+        "mesh": "C536725"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0796013",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536725",
+          "display": "Zimmerman Laband syndrome"
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the abilit",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Zimmerman Laband syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may als",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "fibromatosis",
+      "preferred_label": "fibromatosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005031",
+        "orpha": null,
+        "umls": "UMLS:C0016048",
+        "mesh": "D010411"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005031",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000497",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8836",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3042",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:723976005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0016048",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010411",
+          "display": "Penile Induration"
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may also be present. In most cases, Laband syndrome is be",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fibromatosis Aggressive",
+        "Fibroma",
+        "Desmoid disease hereditary"
+      ],
+      "pubtator_normalized_name": "Penile Induration",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "hildren with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may also be present. In most cases, Laband syndrome is believed to be inherited as an autosomal dominant trait. However, evidence of autosomal recessive inheritance has also been reported. In most cases, Laband syndrome may be diagnosed during early childhood. The diagnosis may be confirmed based u",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inherited",
+      "preferred_label": "inherited",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D017096"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017096",
+          "display": "Prion Diseases"
+        }
+      ],
+      "context": "gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may also be present. In most cases, Laband syndrome is believed to be inherited as an autosomal dominant trait. However, evidence of autosomal recessive inheritance has also been reported. In most cases, Laband syndrome may be diagnosed during early childhood. The diagnosis may be confirmed based upon a thorough clinical evaluation, a detailed patient history, and a variety of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polyneuropathies",
+        "Primary Immunodeficiency Diseases",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Prion Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autosomal dominant",
+      "preferred_label": "Autosomal dominant optic atrophy and cataract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:67036",
+        "umls": null,
+        "mesh": "C537128"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:67036",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537128",
+          "display": "Optic atrophy and cataract autosomal dominant"
+        }
+      ],
+      "context": "the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may also be present. In most cases, Laband syndrome is believed to be inherited as an autosomal dominant trait. However, evidence of autosomal recessive inheritance has also been reported. In most cases, Laband syndrome may be diagnosed during early childhood. The diagnosis may be confirmed based upon a thorough clinical evaluation, a detailed patient history, and a variety of specialized tests. X-ray",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Optic atrophy and cataract autosomal dominant",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "xhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may also be present. In most cases, Laband syndrome is believed to be inherited as an autosomal dominant trait. However, evidence of autosomal recessive inheritance has also been reported. In most cases, Laband syndrome may be diagnosed during early childhood. The diagnosis may be confirmed based upon a thorough clinical evaluation, a detailed patient history, and a variety of specialized tests. X-ray studies of the fingers and/or toes (digits) and clinical examin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital",
+      "preferred_label": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048408993",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "nical evaluation, a detailed patient history, and a variety of specialized tests. X-ray studies of the fingers and/or toes (digits) and clinical examination of the nose, ears, lips, and tongue may be helpful in identifying the disorder. Malformation or absence of the nails may be apparent at birth (congenital). Confirmation of Laband syndrome may not be made until gingival fibromatosis is observed when the primary teeth appear.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Congenital central hypoventilation syndrome",
+        "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "abnormalities",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and t",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "gingival fibromatosis",
+      "preferred_label": "Fibromatosis, Gingival",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0016049",
+        "mesh": "C535886"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0016049",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535886",
+          "display": "Jones syndrome"
+        }
+      ],
+      "context": "Laband syndrome, also known as Zimmerman-Laband syndrome, is an extremely rare genetic disorder characterized by abnormalities of the head and facial (craniofacial) area and the hands and feet. Most children with this disorder have abnormally large gums (gingival fibromatosis). Overgrown gums may affect the ability to chew, swallow, and/or speak. In addition, affected infants may exhibit abnormally long, thin fingers and toes and/or deformed (dysplastic) or absent nails at birth. In some cases, mental retardation may also be present. In most cases, Laband syndrome is be",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fibromatosis Gingival",
+        "Fibromatosis Gingival Hereditary",
+        "Fibromatosis Gingival with Distinctive Facies"
+      ],
+      "pubtator_normalized_name": "Jones syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:19:56.334107",
+  "document": "Holoprosencephaly.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Holoprosencephaly.pdf",
+  "total_candidates": 15,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HPE",
+      "long_form": "Holoprosencephaly",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Holoprosencephaly (HPE) is the failure of the prosencephalon, or forebrain, to develop normally. The forebrain is a region of the brain in the fetus that develops into parts of the adult brain, including the cerebral cortex. Instead of the normal complete separation of the left and right halves of the forebrain, there is an abnormal continuity between the two sides. There are several different types of holoprosencephaly",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Microform holoprosencephaly",
+      "matched_text": "HPE",
+      "abbreviation": "HPE",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "Q04.2",
+      "orpha": "ORPHA:280200"
+    },
+    {
+      "name": "holoprosencephaly",
+      "matched_text": "Holoprosencephaly",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q04.2",
+      "orpha": "Orphanet:2162"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

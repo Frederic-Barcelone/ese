@@ -1,0 +1,35 @@
+{
+  "doc_id": "Dup15q-Syndrome",
+  "doc_filename": "Dup15q-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "obsolete congenital abnormality",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Interatrial communication",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1776,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Dup15q Syndrome: Prevalence and Clinical Associations",
+  "short_description": "Clinical document detailing the prevalence of dup15q chromosome duplication syndrome in general and clinical populations, particularly in autism spectrum disorders and intellectual disability.",
+  "long_description": "This clinical research document provides comprehensive prevalence data for dup15q syndrome, a chromosomal duplication disorder affecting chromosome 15. The document presents epidemiological findings showing dup15q as one of the most common cytogenetic anomalies in autism spectrum disorder (ASD) patients, with prevalence rates ranging from 1:253 to 1:522 in ASD cohorts. It also details prevalence in other clinical populations, including patients with developmental delays, intellectual disabilities, and multiple congenital anomalies referred for chromosomal microarray analysis testing. The document serves as a reference for clinicians and researchers studying the genetic basis of neurodevelopmental disorders.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T22:51:13.821220"
+}

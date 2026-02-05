@@ -1,0 +1,72 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:49:56.507779",
+  "document": "Aspergillosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Aspergillosis.pdf",
+  "total_candidates": 19,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "allergic bronchopulmonary aspergillosis",
+      "matched_text": "Allergic bronchopulmonary aspergillosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B44.81",
+      "orpha": "Orphanet:1164"
+    },
+    {
+      "name": "fungal infectious disease",
+      "matched_text": "fungal infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B35-B49",
+      "orpha": null
+    },
+    {
+      "name": "invasive aspergillosis",
+      "matched_text": "Invasive aspergillosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "aspergillosis",
+      "matched_text": "Aspergillosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B44",
+      "orpha": "Orphanet:1163"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "ASPERGILLUS",
+      "matched_text": "Aspergillus",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

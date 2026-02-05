@@ -1,0 +1,213 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:35:23.135380",
+  "document": "Chromosome-14-Trisomy-Mosaic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chromosome-14-Trisomy-Mosaic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "chromosomal disorder",
+      "preferred_label": "chromosomal disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90-Q99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019040",
+        "orpha": "Orphanet:68335",
+        "umls": "UMLS:C0008626",
+        "mesh": "MESH:D025063"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019040",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080014",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90-Q99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3441",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D025063",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100280",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68335",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409709004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008626",
+          "display": null
+        }
+      ],
+      "context": "\"Chromosome 14, Trisomy Mosaic is a rare chromosomal disorder in which chromosome 14 appears three times (trisomy) rather than twice in some cells of the body. The term \"\"mosaic' indicates that some cells contain the extra chromosome 14, whereas others have the normal chromosomal pair. In observed cases, Chromosome 14, Trisomy Mosaic has appeared to affect fe",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Trisomy",
+      "preferred_label": "trisomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700065",
+        "orpha": null,
+        "umls": "UMLS:C0041107",
+        "mesh": "MESH:D014314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21702",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014314",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3421",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041107",
+          "display": null
+        }
+      ],
+      "context": "\"Chromosome 14, Trisomy Mosaic is a rare chromosomal disorder in which chromosome 14 appears three times (trisomy) rather than twice in some cells of the body. The term \"\"mosaic' indicates that some cells contain the extra chromosome 14, whereas others have the normal chromosomal pair. In observed cases, Chromosome 14, Tr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Trisomy"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Mosaic",
+      "preferred_label": "mosaic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700062",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C536987"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700062",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536987",
+          "display": "Mosaic variegated aneuploidy syndrome"
+        }
+      ],
+      "context": "\"Chromosome 14, Trisomy Mosaic is a rare chromosomal disorder in which chromosome 14 appears three times (trisomy) rather than twice in some cells of the body. The term \"\"mosaic' indicates that some cells contain the extra chromosome 14, whereas others have the normal chromosomal pair. In observed cases, Chromosome 14, Trisomy M",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Chromosome 7 trisomy mosaic"
+      ],
+      "pubtator_normalized_name": "Mosaic variegated aneuploidy syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

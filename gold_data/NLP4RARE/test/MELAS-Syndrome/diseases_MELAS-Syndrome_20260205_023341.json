@@ -1,0 +1,531 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:33:41.953078",
+  "document": "MELAS-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/MELAS-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "and hearing loss",
+      "preferred_label": "Kyphoscoliotic Ehlers-Danlos syndrome due to FKBP22 deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:300179",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:300179",
+          "display": null
+        }
+      ],
+      "context": "ects the nervous system and muscles. The most common early symptoms are seizures, recurrent headaches, loss of appetite and recurrent vomiting. Stroke-like episodes with temporary muscle weakness on one side of the body (hemiparesis) may also occur and this can lead to altered consciousness, vision and hearing loss, loss of motor skills and intellectual disability. MELAS is caused by mutations in mitochondrial DNA and in one patient, this syndrome has been associated with mutations in a nuclear gene, POLG1. MELAS syndrome is a rare disorder that affects males and females in equal numbers. Although rare, MELAS",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Stroke",
+      "preferred_label": "cerebrovascular disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I60-I69",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011057",
+        "orpha": null,
+        "umls": "UMLS:C0007820",
+        "mesh": "MESH:D002561"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011057",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6713",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003763",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I60-I69",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:437.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:858",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002561",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2938",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62914000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007820",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:843843448",
+          "display": null
+        }
+      ],
+      "context": "actic Acidosis, and Stroke-like episodes) syndrome is a rare disorder that begins in childhood, usually between two and fifteen years of age, and mostly affects the nervous system and muscles. The most common early symptoms are seizures, recurrent headaches, loss of appetite and recurrent vomiting. Stroke-like episodes with temporary muscle weakness on one side of the body (hemiparesis) may also occur and this can lead to altered consciousness, vision and hearing loss, loss of motor skills and intellectual disability. MELAS is caused by mutations in mitochondrial DNA and in one patient, this syndrom",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cerebrovascular Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "st common early symptoms are seizures, recurrent headaches, loss of appetite and recurrent vomiting. Stroke-like episodes with temporary muscle weakness on one side of the body (hemiparesis) may also occur and this can lead to altered consciousness, vision and hearing loss, loss of motor skills and intellectual disability. MELAS is caused by mutations in mitochondrial DNA and in one patient, this syndrome has been associated with mutations in a nuclear gene, POLG1. MELAS syndrome is a rare disorder that affects males and females in equal numbers. Although rare, MELAS syndrome is probably the most common type of mito",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mitochondrial myopathy",
+      "preferred_label": "mitochondrial myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009637",
+        "orpha": "Orphanet:206966",
+        "umls": "UMLS:C0162670",
+        "mesh": "MESH:D017240"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009637",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:699",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20371",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56484",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017240",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10027710",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C101328",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:206966",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162670",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:601991549",
+          "display": null
+        }
+      ],
+      "context": "lity. MELAS is caused by mutations in mitochondrial DNA and in one patient, this syndrome has been associated with mutations in a nuclear gene, POLG1. MELAS syndrome is a rare disorder that affects males and females in equal numbers. Although rare, MELAS syndrome is probably the most common type of mitochondrial myopathy caused by mutations in mtDNA. Some researchers believe that mitochondrial myopathies may go unrecognized and underdiagnosed in the general population, making it difficult to determine the true frequency of disorders like MELAS syndrome.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Visceral myopathy familial external ophthalmoplegia",
+        "Mitochondrial Myopathies",
+        "MELAS Syndrome"
+      ],
+      "pubtator_normalized_name": "Mitochondrial Myopathy with a Defect in Mitochondrial Protein Transport",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Lactic Acidosis",
+      "preferred_label": "lactic acidosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024306",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D000140"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024306",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3650",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000140",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91273001",
+          "display": null
+        }
+      ],
+      "context": "MELAS (Mitochondrial Encephalopathy, Lactic Acidosis, and Stroke-like episodes) syndrome is a rare disorder that begins in childhood, usually between two and fifteen years of age, and mostly affects the nervous system and muscles. The most common early symptoms are seizures, recurrent headaches, loss of appetite and recurrent vomiting. Stroke-like ep",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pyruvate Carboxylase Deficiency Disease",
+        "Myopathy with Lactic Acidosis Hereditary",
+        "MELAS Syndrome"
+      ],
+      "pubtator_normalized_name": "Acidosis Lactic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "MELAS",
+      "preferred_label": "MELAS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E88.41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010789",
+        "orpha": "Orphanet:550",
+        "umls": "UMLS:C0162671",
+        "mesh": "MESH:D017241"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010789",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3687",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7009",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E88.41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.87",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56485",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017241",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10053872",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200525",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84885",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:540000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:550",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:39925003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162671",
+          "display": null
+        }
+      ],
+      "context": "MELAS (Mitochondrial Encephalopathy, Lactic Acidosis, and Stroke-like episodes) syndrome is a rare disorder that begins in childhood, usually between two and fifteen years of age, and mostly affects the nervous system and muscles. The most common early symptoms are seizures, recurrent headaches, loss of",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Melanosis"
+      ],
+      "pubtator_normalized_name": "MELAS Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Mitochondrial Encephalopathy",
+      "preferred_label": "MELAS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:550",
+        "umls": null,
+        "mesh": "D017241"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:550",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017241",
+          "display": "MELAS Syndrome"
+        }
+      ],
+      "context": "MELAS (Mitochondrial Encephalopathy, Lactic Acidosis, and Stroke-like episodes) syndrome is a rare disorder that begins in childhood, usually between two and fifteen years of age, and mostly affects the nervous system and muscles. The most common early symptoms are seizures, recurrent headaches, loss of appetite and recurrent vomitin",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Melanosis"
+      ],
+      "pubtator_normalized_name": "MELAS Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

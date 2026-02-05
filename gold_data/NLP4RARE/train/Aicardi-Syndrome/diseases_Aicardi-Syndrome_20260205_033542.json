@@ -1,0 +1,729 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:35:42.178961",
+  "document": "Aicardi-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Aicardi-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "upper respiratory infections",
+      "preferred_label": "upper respiratory infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024355",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D012141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024355",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:519.8",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012141",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:275498002",
+          "display": null
+        }
+      ],
+      "context": "development of the retina and nerve in the back of the eye (colobomas), and/or abnormalities of the ribs and/or spinal column. Children of all ages with Aicardi syndrome have significant delay in motor development. Aicardi syndrome can be life-threatening during childhood due to complications from upper respiratory infections. Aicardi syndrome usually affects only females. In very rare cases, males with Klinefelter syndrome (47,XXY) may have Aicardi syndrome. It has been estimated that there are between 300 and 500 cases of Aicardi syndrome worldwide. There do not appear to be any differences based on ethnicity or gende",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Respiratory Tract Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Aicardi syndrome typically begins as involuntary muscle spasms between four months and four years of age. Other symptoms may include epilepsy, intellectual disability, profound muscle weakness (hypotonia), an abnormally small head (microcephaly), abnormally small eyes (microphthalmia), an incomplete development of the retina and nerve in the back of the eye (colobomas), and/or abnormalities of the ribs and/or spinal column. Children of all ages with Aicardi synd",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Klinefelter syndrome",
+      "preferred_label": "Klinefelter syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006823",
+        "orpha": null,
+        "umls": "UMLS:C0022735",
+        "mesh": "MESH:D007713"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006823",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1921",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001006",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44033",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007713",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10023463",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200386",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34752",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:405769009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022735",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1937385304",
+          "display": null
+        }
+      ],
+      "context": "d/or spinal column. Children of all ages with Aicardi syndrome have significant delay in motor development. Aicardi syndrome can be life-threatening during childhood due to complications from upper respiratory infections. Aicardi syndrome usually affects only females. In very rare cases, males with Klinefelter syndrome (47,XXY) may have Aicardi syndrome. It has been estimated that there are between 300 and 500 cases of Aicardi syndrome worldwide. There do not appear to be any differences based on ethnicity or gender. It is usual to have an MRI of the brain. This study makes pictures of the brain to look for a sma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Klinefelter Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Aicardi syndrome",
+      "preferred_label": "Aicardi syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010568",
+        "orpha": "Orphanet:50",
+        "umls": "UMLS:C0175713",
+        "mesh": "MESH:D058540"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010568",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8461",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5764",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61236",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D058540",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10054935",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200562",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35256",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:745",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:304050",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:50",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:80651009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0175713",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2057245946",
+          "display": null
+        }
+      ],
+      "context": "Aicardi syndrome typically begins as involuntary muscle spasms between four months and four years of age. Other symptoms may include epilepsy, intellectual disability, profound muscle weakness (hypotonia), an abnormally small head (microcephaly), abnormally small eyes (microphthalmia), an incomplete development of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Aicardi Syndrome",
+        "Aicardi-Goutieres syndrome 5",
+        "Aicardi-Goutieres Syndrome 4"
+      ],
+      "pubtator_normalized_name": "Aicardi-Goutieres syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microphthalmia",
+      "preferred_label": "microphthalmia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021129",
+        "orpha": null,
+        "umls": "UMLS:C0026010",
+        "mesh": "MESH:D008850"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021129",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10629",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005569",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000568",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:743.11",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10033",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008850",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98989",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:204108000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026010",
+          "display": null
+        }
+      ],
+      "context": "Aicardi syndrome typically begins as involuntary muscle spasms between four months and four years of age. Other symptoms may include epilepsy, intellectual disability, profound muscle weakness (hypotonia), an abnormally small head (microcephaly), abnormally small eyes (microphthalmia), an incomplete development of the retina and nerve in the back of the eye (colobomas), and/or abnormalities of the ribs and/or spinal column. Children of all ages with Aicardi syndrome have significant delay in motor development. Aicardi syndrome can be life-threatening during childhood due to com",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microphthalmia Isolated 1",
+        "Microphthalmia Syndromic 6",
+        "Cataract congenital with microcornea or slight microphthalmia"
+      ],
+      "pubtator_normalized_name": "Microphthalmia Syndromic 10",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microcephaly",
+      "preferred_label": "microcephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001149",
+        "orpha": null,
+        "umls": "UMLS:C4551563",
+        "mesh": "MESH:D008831"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001149",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10907",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000252",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:742.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644158",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008831",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85874",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1829003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551563",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:179350437",
+          "display": null
+        }
+      ],
+      "context": "Aicardi syndrome typically begins as involuntary muscle spasms between four months and four years of age. Other symptoms may include epilepsy, intellectual disability, profound muscle weakness (hypotonia), an abnormally small head (microcephaly), abnormally small eyes (microphthalmia), an incomplete development of the retina and nerve in the back of the eye (colobomas), and/or abnormalities of the ribs and/or spinal column. Children of all ages with Aicardi syndrome have significant delay in motor development. Aicardi syndrome can be life",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microcephaly Primary Autosomal Recessive 1",
+        "Paine syndrome",
+        "Microcephaly cervical spine fusion anomalies"
+      ],
+      "pubtator_normalized_name": "Microcephaly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "epilepsy",
+      "preferred_label": "epilepsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G40",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005027",
+        "orpha": null,
+        "umls": "UMLS:C0014544",
+        "mesh": "MESH:D004827"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005027",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1826",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000474",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G40",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G40",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:345.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4506",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004827",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3020",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84757009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014544",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:12718",
+          "display": null
+        }
+      ],
+      "context": "Aicardi syndrome typically begins as involuntary muscle spasms between four months and four years of age. Other symptoms may include epilepsy, intellectual disability, profound muscle weakness (hypotonia), an abnormally small head (microcephaly), abnormally small eyes (microphthalmia), an incomplete development of the retina and nerve in the back of the eye (colobomas), and/or abnormalities of the ribs and/or spinal column. Children of a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epilepsy Post-Traumatic",
+        "Epilepsy Tonic-Clonic",
+        "Epilepsy Temporal Lobe"
+      ],
+      "pubtator_normalized_name": "Epilepsy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "colobomas",
+      "preferred_label": "coloboma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001476",
+        "orpha": "Orphanet:194",
+        "umls": "UMLS:C0009363",
+        "mesh": "MESH:D003103"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001476",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12270",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:743.49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1046",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003103",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98877",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:194",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:93390002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009363",
+          "display": null
+        }
+      ],
+      "context": "s between four months and four years of age. Other symptoms may include epilepsy, intellectual disability, profound muscle weakness (hypotonia), an abnormally small head (microcephaly), abnormally small eyes (microphthalmia), an incomplete development of the retina and nerve in the back of the eye (colobomas), and/or abnormalities of the ribs and/or spinal column. Children of all ages with Aicardi syndrome have significant delay in motor development. Aicardi syndrome can be life-threatening during childhood due to complications from upper respiratory infections. Aicardi syndrome usually affects only fe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypomagnesemia 5 Renal with Ocular Involvement",
+        "Coloboma of optic nerve",
+        "CHARGE Syndrome"
+      ],
+      "pubtator_normalized_name": "Coloboma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

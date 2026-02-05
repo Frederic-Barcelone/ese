@@ -1,0 +1,155 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:47:15.241867",
+  "document": "Colorado-Tick-Fever.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Colorado-Tick-Fever.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Colorado Tick Fever",
+      "preferred_label": "Colorado tick fever",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A93.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005708",
+        "orpha": "Orphanet:83595",
+        "umls": "UMLS:C0009400",
+        "mesh": "MESH:D003121"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005708",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4885",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19042",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A93.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:066.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:40398",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003121",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010022",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:989",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:83595",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:6452009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009400",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:951357413",
+          "display": null
+        }
+      ],
+      "context": "Colorado Tick Fever is a rare viral disease transmitted by ticks that commonly inhabit the western United States. Major symptoms may include fever, headaches, muscle aches, and/or generalized discomfort (myalgia). The symptoms usually last for about a week and resolve on their own. Colorado Tick Fever is a rare viral",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Colorado Tick Fever",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare viral disease",
+      "preferred_label": "rare viral disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015576",
+        "orpha": "Orphanet:163585",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015576",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:163585",
+          "display": null
+        }
+      ],
+      "context": "Colorado Tick Fever is a rare viral disease transmitted by ticks that commonly inhabit the western United States. Major symptoms may include fever, headaches, muscle aches, and/or generalized discomfort (myalgia). The symptoms usually last for about a week and resolve on their own. Colorado Tick Fever is a rare viral disease caused by a viru",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

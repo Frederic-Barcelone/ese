@@ -1,0 +1,40 @@
+{
+  "doc_id": "Congenital-Syphilis",
+  "doc_filename": "Congenital-Syphilis.pdf",
+  "top_entities": [
+    {
+      "name": "Infantile neuroaxonal dystrophy",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "congenital syphilis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Crack cocaine",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2317,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Congenital Syphilis: Clinical Overview and Epidemiological Trends",
+  "short_description": "Clinical document describing congenital syphilis transmission, epidemiological trends, and diagnostic approaches in newborns.",
+  "long_description": "This clinical reference document provides a comprehensive overview of congenital syphilis, a chronic infectious disease caused by Treponema pallidum transmitted from infected mothers to fetuses during pregnancy. The document covers epidemiological data showing fluctuating incidence rates from the 1950s through 2000, including the impact of the National Syphilis Elimination Plan implemented in 1998. It highlights the concerning increase in cases, particularly in urban areas associated with crack cocaine use, and discusses diagnostic challenges due to variable symptom presentation. The document emphasizes the importance of screening children born to infected mothers and outlines key diagnostic methods including serological testing for antibodies and microscopic identification of the spirochete.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T00:59:01.230203"
+}

@@ -1,0 +1,367 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:45:15.110241",
+  "document": "Antley.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Antley.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Antley-Bixler syndrome",
+      "preferred_label": "Antley-Bixler syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008803",
+        "orpha": "Orphanet:83",
+        "umls": "UMLS:C5234850",
+        "mesh": "D054882"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008803",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0081289",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5826",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1714404",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200975",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:792",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:83",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62964007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5234850",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2027710139",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D054882",
+          "display": "Antley-Bixler Syndrome Phenotype"
+        }
+      ],
+      "context": "Antley-Bixler syndrome is a rare genetic disorder that can cause structural changes of the skull, bones of the face and other skeletal abnormalities. The disorder is typically associated with premature closure of joints (cranial sutures) between particular bones of the skull (craniosynostosis). Many affected infants and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Antley-Bixler Syndrome Phenotype",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Antley-Bixler syndrome is a rare genetic disorder that can cause structural changes of the skull, bones of the face and other skeletal abnormalities. The disorder is typically associated with premature closure of joints (cranial sutures) between particular bones of the skull (craniosynostosis). Many affected infants and children also may have a pr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "craniosynostosis",
+      "preferred_label": "craniosynostosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q75.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015469",
+        "orpha": "Orphanet:1531",
+        "umls": "UMLS:C0010278",
+        "mesh": "MESH:D003398"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015469",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2340",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6209",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q75.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1163",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003398",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10049889",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100227",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84655",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:123100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1531",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010278",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:458033798",
+          "display": null
+        }
+      ],
+      "context": "Antley-Bixler syndrome is a rare genetic disorder that can cause structural changes of the skull, bones of the face and other skeletal abnormalities. The disorder is typically associated with premature closure of joints (cranial sutures) between particular bones of the skull (craniosynostosis). Many affected infants and children also may have a prominent forehead, underdeveloped midfacial regions (midfacial hypoplasia), protruding eyes (proptosis), and low-set ears. This condition has been described in over 30 patients to date. The estimated prevalence for the condition is less than 1 i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Craniosynostosis with Anomalies of the Cranial Base and Digits",
+        "Craniosynostosis Type 2",
+        "Craniosynostosis radial aplasia syndrome"
+      ],
+      "pubtator_normalized_name": "Craniosynostoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "proptosis",
+      "preferred_label": "proptosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004770",
+        "orpha": null,
+        "umls": "UMLS:C0015300",
+        "mesh": "MESH:D005094"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004770",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9370",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000520",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.30",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41917",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005094",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C118763",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:18265008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015300",
+          "display": null
+        }
+      ],
+      "context": "alities. The disorder is typically associated with premature closure of joints (cranial sutures) between particular bones of the skull (craniosynostosis). Many affected infants and children also may have a prominent forehead, underdeveloped midfacial regions (midfacial hypoplasia), protruding eyes (proptosis), and low-set ears. This condition has been described in over 30 patients to date. The estimated prevalence for the condition is less than 1 in 1,000,000.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sanderson Fraser syndrome"
+      ],
+      "pubtator_normalized_name": "Exophthalmos",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "doc_id": "Hanhart-Syndrome",
+  "doc_filename": "Hanhart-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Hanhart syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1821,
+  "file_size_human": "1.8 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Hanhart Syndrome: Clinical Overview and Diagnostic Information",
+  "short_description": "Clinical document describing Hanhart syndrome, a rare developmental disorder affecting fewer than 1 in 20,000 children with equal prevalence in males and females.",
+  "long_description": "This clinical document provides an overview of Hanhart syndrome, a very rare developmental disorder with an incidence of fewer than 1 in 20,000 children. The document details the historical context, noting that approximately 30 cases were reported in medical literature between 1932 and 1991. It explains that the condition affects males and females equally and describes diagnostic approaches including neonatal clinical evaluation based on characteristic physical findings and prenatal detection through ultrasonography. The document serves as a reference for healthcare professionals regarding the identification and clinical presentation of this rare congenital disorder.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:03:20.645148"
+}

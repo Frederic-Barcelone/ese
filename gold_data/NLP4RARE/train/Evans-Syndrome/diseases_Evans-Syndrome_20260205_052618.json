@@ -1,0 +1,124 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:26:18.079887",
+  "document": "Evans-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Evans-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Evans syndrome",
+      "preferred_label": "Evans syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D69.41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016030",
+        "orpha": "Orphanet:1959",
+        "umls": "UMLS:C0272126",
+        "mesh": "MESH:C536380"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016030",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8931",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6389",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D69.41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:287.32",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75773",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536380",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10053873",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200310",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C61284",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1112",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1959",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75331009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0272126",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048228553",
+          "display": null
+        }
+      ],
+      "context": "The incidence and prevalence of Evans syndrome is unknown. The disorder can affect children or adults.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Keratosis palmoplantaris with esophageal cancer"
+      ],
+      "pubtator_normalized_name": "Evans Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

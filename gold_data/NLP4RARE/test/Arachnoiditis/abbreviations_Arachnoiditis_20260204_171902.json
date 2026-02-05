@@ -1,0 +1,99 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T17:19:02.267794",
+  "document": "Arachnoiditis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Arachnoiditis.pdf",
+  "total_candidates": 20,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "reflex sympathetic dystrophy",
+      "matched_text": "reflex sympathetic dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M89.0",
+      "orpha": "Orphanet:83452"
+    },
+    {
+      "name": "chronic pain syndrome",
+      "matched_text": "chronic pain syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G89.4",
+      "orpha": null
+    },
+    {
+      "name": "cauda equina syndrome",
+      "matched_text": "cauda equina syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G83.4",
+      "orpha": null
+    },
+    {
+      "name": "multiple sclerosis",
+      "matched_text": "multiple sclerosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G35",
+      "orpha": "Orphanet:802"
+    },
+    {
+      "name": "arachnoiditis",
+      "matched_text": "arachnoiditis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:137817"
+    },
+    {
+      "name": "syringomyelia",
+      "matched_text": "syringomyelia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:3280"
+    },
+    {
+      "name": "fibromyalgia",
+      "matched_text": "fibromyalgia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M79.7",
+      "orpha": "Orphanet:41842"
+    },
+    {
+      "name": "syndrome",
+      "matched_text": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

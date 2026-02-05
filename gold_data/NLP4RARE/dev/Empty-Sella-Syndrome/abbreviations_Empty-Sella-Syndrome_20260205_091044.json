@@ -1,0 +1,120 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:10:44.192022",
+  "document": "Empty-Sella-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Empty-Sella-Syndrome.pdf",
+  "total_candidates": 50,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 2,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CT",
+      "long_form": "computerized tomography",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "1 percent of individuals with empty sella syndrome ultimately develop symptoms associated with the disorder, although this may be higher in men compared to women. A diagnosis of empty sella syndrome is made based upon identification of characteristic symptoms, a detailed patient history, a thorough clinical evaluation and specialized imaging techniques. Imaging may include computerized tomography (CT) scanning and magnetic resonance imaging (MRI). During CT scanning, a computer and x-rays are used to create a film showing cross-sectional images of certain tissue structures. An MRI uses a magnetic field and radio waves to produce cross-sectional images of particular organs, tissues and structures such as the sella turcica.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "drome ultimately develop symptoms associated with the disorder, although this may be higher in men compared to women. A diagnosis of empty sella syndrome is made based upon identification of characteristic symptoms, a detailed patient history, a thorough clinical evaluation and specialized imaging techniques. Imaging may include computerized tomography (CT) scanning and magnetic resonance imaging (MRI). During CT scanning, a computer and x-rays are used to create a film showing cross-sectional images of certain tissue structures. An MRI uses a magnetic field and radio waves to produce cross-sectional images of particular organs, tissues and structures such as the sella turcica.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "idiopathic intracranial hypertension",
+      "matched_text": "idiopathic intracranial hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G93.2",
+      "orpha": "Orphanet:238624"
+    },
+    {
+      "name": "Empty Sella Syndrome",
+      "matched_text": "Empty sella syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:213711"
+    },
+    {
+      "name": "high blood pressure",
+      "matched_text": "high blood pressure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I15",
+      "orpha": null
+    },
+    {
+      "name": "pituitary tumor",
+      "matched_text": "pituitary tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:304055"
+    },
+    {
+      "name": "hypophysitis",
+      "matched_text": "pituitary gland",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "empty sella",
+      "matched_text": "empty sella",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "depression",
+      "matched_text": "depression",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F32",
+      "orpha": null
+    },
+    {
+      "name": "trauma",
+      "matched_text": "trauma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

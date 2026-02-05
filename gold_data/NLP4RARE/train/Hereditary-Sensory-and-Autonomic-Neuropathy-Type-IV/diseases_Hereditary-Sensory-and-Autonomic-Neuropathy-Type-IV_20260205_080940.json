@@ -1,0 +1,69 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:09:40.191761",
+  "document": "Hereditary-Sensory-and-Autonomic-Neuropathy-Type-IV.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hereditary-Sensory-and-Autonomic-Neuropathy-Type-IV.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "HSAN",
+      "preferred_label": "Hereditary sensory and autonomic neuropathy type 1B",
+      "abbreviation": "HSAN",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": "G60.8",
+        "icd11": "8C21.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:139564",
+        "umls": null,
+        "mesh": "D009477"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:139564",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G60.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C21.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009477",
+          "display": "Hereditary Sensory and Autonomic Neuropathies"
+        }
+      ],
+      "context": "HSAN IV affects males and females in equal numbers. Several hundred cases have been reported in the medical literature. The exact incidence and prevalence is unknown. More cases have been reported in Japan than any other country and the frequency of the disorder is higher in the Japanese and Israeli-Bed",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysautonomia Familial"
+      ],
+      "pubtator_normalized_name": "Hereditary Sensory and Autonomic Neuropathies",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

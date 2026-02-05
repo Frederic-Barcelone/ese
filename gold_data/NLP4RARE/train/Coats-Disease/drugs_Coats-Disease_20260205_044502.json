@@ -1,0 +1,113 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:45:02.417479",
+  "document": "Coats-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Coats-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "retinal",
+      "preferred_name": "retinal",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2268087",
+          "display": null
+        }
+      ],
+      "context": "diagnosis of Coats disease is made based upon a thorough clinical ophthalmic evaluation, a detailed patient history, and specialized tests, including retinal fluorescein angiography, diagnostic echography, and in some cases computed tomography imaging of the orbits.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "fluorescein",
+      "preferred_name": "Fluorescein",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D016650",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "25138",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016650",
+          "display": "Fluorescein-5-isothiocyanate"
+        }
+      ],
+      "context": "s of Coats disease is made based upon a thorough clinical ophthalmic evaluation, a detailed patient history, and specialized tests, including retinal fluorescein angiography, diagnostic echography, and in some cases computed tomography imaging of the orbits.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fluorescein",
+        "fluorescein isothiocyanate dextran",
+        "calcein AM"
+      ],
+      "pubtator_normalized_name": "Fluorescein-5-isothiocyanate",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

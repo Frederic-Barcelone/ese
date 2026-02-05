@@ -1,0 +1,35 @@
+{
+  "doc_id": "Caroli-Disease",
+  "doc_filename": "Caroli-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "congenital hepatic fibrosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "polycystic kidney disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2235,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Caroli Disease: Clinical Overview and Diagnostic Information",
+  "short_description": "Clinical document describing Caroli disease, a rare inherited disorder characterized by abnormal widening of intrahepatic bile ducts, including its two forms and diagnostic approaches.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Caroli disease, a rare inherited disorder affecting the bile ducts within the liver. The document distinguishes between two forms: the simple form characterized by bile duct dilatation, and the more complex Caroli syndrome associated with congenital hepatic fibrosis, portal hypertension, and potential complications including polycystic kidney disease and liver failure. The text covers epidemiological aspects, noting higher prevalence in females and typical adult presentation, while also addressing pediatric cases. The document concludes with diagnostic considerations, emphasizing the role of imaging studies such as ultrasound and CT scans when patients present with hepatomegaly, splenomegaly, and intermittent abdominal pain.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:20:30.564814"
+}

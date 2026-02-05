@@ -1,0 +1,40 @@
+{
+  "doc_id": "Cystinuria",
+  "doc_filename": "Cystinuria.pdf",
+  "top_entities": [
+    {
+      "name": "inborn errors of metabolism",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cystinuria",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Cystine",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1699,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Cystinuria: Inherited Metabolic Disorder Overview",
+  "short_description": "Clinical overview of cystinuria, an inherited metabolic disorder affecting amino acid transport and causing kidney stone formation.",
+  "long_description": "This document provides essential clinical information about cystinuria, a hereditary metabolic disorder characterized by defective amino acid transport. The condition affects both males and females equally, with symptoms typically manifesting between ages 10-30, though elevated cystine excretion can be detected in infancy. With a prevalence of approximately 1 in 7,000 to 1 in 10,000 people in the United States, this disorder represents a significant clinical concern with varying prevalence rates across different countries. The document serves as a foundational reference for understanding the epidemiological and demographic characteristics of this inherited condition.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:01:24.317730"
+}

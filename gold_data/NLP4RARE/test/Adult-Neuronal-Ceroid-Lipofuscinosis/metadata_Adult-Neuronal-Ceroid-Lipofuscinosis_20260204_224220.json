@@ -1,0 +1,35 @@
+{
+  "doc_id": "Adult-Neuronal-Ceroid-Lipofuscinosis",
+  "doc_filename": "Adult-Neuronal-Ceroid-Lipofuscinosis.pdf",
+  "top_entities": [
+    {
+      "name": "Adult neuronal ceroid lipofuscinosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "ceroid lipofuscinoses",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1759,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Adult Neuronal Ceroid Lipofuscinosis: Epidemiological Overview",
+  "short_description": "A clinical document detailing the prevalence and incidence rates of adult neuronal ceroid lipofuscinoses, an extremely rare neurological disorder.",
+  "long_description": "This document provides epidemiological data on adult neuronal ceroid lipofuscinoses (ANCL), a group of extremely rare neurodegenerative disorders. The content focuses on statistical measures of disease occurrence, reporting a prevalence of approximately 1.5 per 9 million people in the general population. The document also discusses incidence rates, which vary by geographic region and range from 1.5 to 7 cases per 100,000 live births. The text includes clear definitions of epidemiological terms, distinguishing between prevalence (total existing cases at a given time) and incidence (new cases born per year), making it a valuable reference for understanding the rarity and distribution of this neurological condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T21:42:20.530213"
+}

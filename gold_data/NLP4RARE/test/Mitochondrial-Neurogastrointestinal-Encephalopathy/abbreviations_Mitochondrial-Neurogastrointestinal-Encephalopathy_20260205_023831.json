@@ -1,0 +1,94 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:38:31.448284",
+  "document": "Mitochondrial-Neurogastrointestinal-Encephalopathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mitochondrial-Neurogastrointestinal-Encephalopathy.pdf",
+  "total_candidates": 24,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MNGIE",
+      "long_form": "Mitochondrial neurogastrointestinal encephalomyopathy",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Mitochondrial neurogastrointestinal encephalomyopathy (MNGIE) is a rare multisystem disorder characterized by progressive degeneration of the muscles of the gastrointestinal tract causing gastrointestinal dysmotility, weakness of extra-ocular muscles causing drooping of the eyelids (ptosis) and restricted eye movements (ophthalmoparesis), degeneration of peripheral nerves causing altered sensation and weakness the distal arms and legs, and general wasting (",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TP",
+      "long_form": "thymidine phosphorylase",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "weakness the distal arms and legs, and general wasting (cachexia). The specific symptoms associated with MNGIE vary from case to case and may include vomiting, nausea, diarrhea, abdominal pain, and numbness or sensations of pins and needles in the hands and feet. . Additional findings may occur in some cases. MNGIE is caused by changes (mutations) in the TYMP gene encoding thymidine phosphorylase (TP) and is inherited as an autosomal recessive trait.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "TYMP",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " feet. . Additional findings may occur in some cases. MNGIE is caused by changes (mutations) in the TYMP gene encoding thymidine phosphorylase (TP) and is inherited as an autosomal recessive trait.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "mitochondrial neurogastrointestinal encephalomyopathy",
+      "matched_text": "Mitochondrial neurogastrointestinal encephalomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:298"
+    },
+    {
+      "name": "diarrhea",
+      "matched_text": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "ptosis",
+      "matched_text": "ptosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Thymidine",
+      "matched_text": "thymidine",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

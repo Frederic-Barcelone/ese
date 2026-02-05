@@ -1,0 +1,78 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:23:22.068930",
+  "document": "ATR.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ATR.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ATR",
+      "hgnc_symbol": "ATR",
+      "full_name": "ATR checkpoint kinase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "882",
+        "entrez": "545",
+        "ensembl": "ENSG00000175054",
+        "uniprot": "Q13535",
+        "omim": "601215"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "882",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "545",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000175054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "601215",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q13535",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "808",
+          "disease_name": "Seckel syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "313846",
+          "disease_name": "Familial cutaneous telangiectasia and oropharyngeal cancer predisposition syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ATR-16 syndrome affects males and females in equal numbers. The exact incidence and prevalence of the disorder is unknown. Cases may go undiagnosed or misdiagnosed, making it difficult to determine the true frequency in the general population. More than 20 cases have been reported in the medical litera",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ]
+    }
+  ]
+}

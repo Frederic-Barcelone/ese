@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:50:39.119003",
+  "document": "Congenital-Erythropoietic-Porphyria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Erythropoietic-Porphyria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "heme",
+      "preferred_name": "Heme",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D006418",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "5168",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006418",
+          "display": "Heme"
+        }
+      ],
+      "context": "are inherited metabolic disorder resulting from the deficient function of the enzyme uroporphyrinogen Ill cosynthase (UROS), the fourth enzyme in the heme biosynthetic pathway. Due to the impaired function of this enzyme, excessive amounts of particular porphyrins accumulate, particularly in the bone ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "heme a"
+      ],
+      "pubtator_normalized_name": "Heme",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

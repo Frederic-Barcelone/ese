@@ -1,0 +1,129 @@
+{
+  "run_id": "RUN_20260204_212243_67ab17d4784c",
+  "timestamp": "2026-02-04T22:28:32.383880",
+  "document": "Adenylosuccinate-Lyase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Adenylosuccinate-Lyase-Deficiency.pdf",
+  "total_candidates": 37,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ASLD",
+      "long_form": "Adenylosuccinate lyase deficiency",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Adenylosuccinate lyase deficiency (ASLD) is a rare, inherited metabolic disorder due to a lack of the enzyme adenylosuccinate lyase (ASL). The defect is characterized by the appearance of two unusual chemicals, succinylaminoimidazole carboxamide riboside (SAICA riboside) and succinyladenosine, in cerebrospinal fluid, in urine and, to a much smaller extent, in plasma. These compounds, which are never found in healthy individuals, are for",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ASL",
+      "long_form": "adenylosuccinate lyase",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Adenylosuccinate lyase deficiency (ASLD) is a rare, inherited metabolic disorder due to a lack of the enzyme adenylosuccinate lyase (ASL). The defect is characterized by the appearance of two unusual chemicals, succinylaminoimidazole carboxamide riboside (SAICA riboside) and succinyladenosine, in cerebrospinal fluid, in urine and, to a much smaller extent, in plasma. These compounds, which are never found in healthy individuals, are formed from the two natural compounds acted upon by the enzyme. The symptoms and the physical findin",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SAICA",
+      "long_form": "succinylaminoimidazole carboxamide",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "racterized by the appearance of two unusual chemicals, succinylaminoimidazole carboxamide riboside (SAICA riboside) and succinyladenosine, in cerebrospinal fluid, in urine and, to a much smaller extent, in",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "adenylosuccinate lyase deficiency",
+      "matched_text": "Adenylosuccinate lyase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:46"
+    },
+    {
+      "name": "Adenylosuccinate lyase deficiency",
+      "matched_text": "ASLD",
+      "abbreviation": "ASLD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "E79.8",
+      "orpha": "ORPHA:46"
+    },
+    {
+      "name": "inborn errors of metabolism",
+      "matched_text": "inherited metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68367"
+    },
+    {
+      "name": "divergent strabismus",
+      "matched_text": "divergent strabismus",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:H50.1",
+      "orpha": null
+    },
+    {
+      "name": "muscle wasting",
+      "matched_text": "muscle wasting",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "epilepsy",
+      "matched_text": "epilepsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G40",
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "MeTopic",
+      "matched_text": "metopic",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "suture",
+      "matched_text": "suture",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

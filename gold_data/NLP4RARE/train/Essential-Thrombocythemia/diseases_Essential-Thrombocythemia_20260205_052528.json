@@ -1,0 +1,57 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:25:28.099992",
+  "document": "Essential-Thrombocythemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Essential-Thrombocythemia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "inherited genetic",
+      "preferred_label": "inherited genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C566273"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C566273",
+          "display": "alpha-1-Antitrypsin Deficiency Autosomal Recessive"
+        }
+      ],
+      "context": "on for this is unknown. The average age of onset is mid-fifties, but the range is wide, and includes women in their childbearing years, which makes up an important subset of ET patients with special therapeutic considerations (discussed below). In children ET is exceedingly rare and typically is an inherited genetic disorder. In adults, the genetic mutations typically identified in ET (described below) are not inherited, and instead are acquired genetic accidents (known as an acquired mutation) that happen during an individual’s lifetime. Genetic accidents happen to all of us as we age, although they do not al",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "alpha-1-Antitrypsin Deficiency Autosomal Recessive",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

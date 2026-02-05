@@ -1,0 +1,175 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:31:57.398969",
+  "document": "Li.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Li.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Li-Fraumeni-like syndrome",
+      "preferred_label": "Li-fraumeni-like syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0800290",
+        "orpha": null,
+        "umls": "UMLS:C2675080",
+        "mesh": "C567189"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0800290",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:382523",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2675080",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567189",
+          "display": "Li-Fraumeni-Like Syndrome"
+        }
+      ],
+      "context": "Li-Fraumeni-like syndrome is similar to Li-Fraumeni syndrome, but is short of meeting the classic criteria. See Clinical Testing for more information.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Li-Fraumeni-Like Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Li-Fraumeni syndrome",
+      "preferred_label": "Li-Fraumeni syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018875",
+        "orpha": "Orphanet:524",
+        "umls": "UMLS:C0085390",
+        "mesh": "MESH:D016864"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018875",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3012",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6902",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V84.01",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:88399",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016864",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066795",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3476",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1913",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:609266",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:524",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:428850001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085390",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1968061860",
+          "display": null
+        }
+      ],
+      "context": "Li-Fraumeni-like syndrome is similar to Li-Fraumeni syndrome, but is short of meeting the classic criteria. See Clinical Testing for more information.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Li-Fraumeni-Like Syndrome",
+        "Li-Fraumeni Syndrome 2",
+        "Sarcoma family syndrome of Li and Fraumeni"
+      ],
+      "pubtator_normalized_name": "Li-Fraumeni Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T17:08:08.437930",
+  "document": "ASAH1.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/ASAH1.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ASAH1",
+      "hgnc_symbol": "ASAH1",
+      "full_name": "N-acylsphingosine amidohydrolase 1",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "735",
+        "entrez": "427",
+        "ensembl": "ENSG00000104763",
+        "uniprot": "Q13510",
+        "omim": "613468"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "735",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "427",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000104763",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "613468",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q13510",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "333",
+          "disease_name": "Farber disease",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "2590",
+          "disease_name": "Spinal muscular atrophy-progressive myoclonic epilepsy syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ASAH1-related disorders are extremely rare disorders. They affect males and females in equal numbers. Fewer than 200 individuals have been described in the medical literature. However, rare disorders like ASAH1-related disorders often go undiagnosed or misdiagnosed, making it difficult to determine the t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

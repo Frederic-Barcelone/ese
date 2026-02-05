@@ -1,0 +1,30 @@
+{
+  "doc_id": "Maple-Syrup-Urine-Disease",
+  "doc_filename": "Maple-Syrup-Urine-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "Maple syrup urine disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1682,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Maple Syrup Urine Disease: Epidemiology and Population Incidence",
+  "short_description": "Clinical document detailing the incidence rates and population distribution of Maple Syrup Urine Disease (MSUD) across different demographic groups.",
+  "long_description": "This clinical research document provides epidemiological data on Maple Syrup Urine Disease (MSUD), a rare genetic metabolic disorder. The document presents incidence statistics showing equal distribution between males and females, with an overall estimated incidence of 1 in 185,000 live births in the general population. It highlights significantly higher prevalence rates in specific populations due to founder effects, including Mennonite communities in the United States (1 in 380) and Ashkenazi Jewish populations (1 in 26,000 live births). This information is crucial for understanding the genetic epidemiology and risk assessment for MSUD in clinical practice.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:35:40.065447"
+}

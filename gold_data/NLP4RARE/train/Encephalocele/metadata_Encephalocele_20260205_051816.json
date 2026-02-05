@@ -1,0 +1,35 @@
+{
+  "doc_id": "Encephalocele",
+  "doc_filename": "Encephalocele.pdf",
+  "top_entities": [
+    {
+      "name": "encephalocele",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Collecting duct carcinoma",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1750,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Encephalocele: Epidemiology and Demographics",
+  "short_description": "CDC statistics on encephalocele birth prevalence, showing approximately 375 cases annually in the US with gender and geographic variations in location.",
+  "long_description": "This document presents epidemiological data from the Centers for Disease Control and Prevention regarding encephalocele, a neural tube defect. It details the annual incidence rate of approximately 1 in 10,000 births (375 cases per year) in the United States, highlighting important demographic patterns including gender-based differences in anatomical location and geographic variations in presentation between Western populations and Southeast Asian populations.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:18:16.428217"
+}

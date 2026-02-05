@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:32:10.515216",
+  "document": "Acute-Respiratory-Distress-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acute-Respiratory-Distress-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "sacs",
+      "hgnc_symbol": "SACS",
+      "full_name": "sacsin molecular chaperone",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "10519",
+        "entrez": "26278",
+        "ensembl": "ENSG00000151835",
+        "uniprot": "Q9NZJ4",
+        "omim": "604490"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "10519",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "26278",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000151835",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "604490",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9NZJ4",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "98",
+          "disease_name": "Autosomal recessive spastic ataxia of Charlevoix-Saguenay",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "The diagnosis is based on the presence of respiratory distress accompanied by low levels of oxygen in the blood and the presence of known risk factors such as sepsis, pneumonia, or trauma. Chest x-rays will show fluid filling spaces that should be filled with air. The presence of fluid in the air sacs and the “wet” breathing sounds sometimes made by patients may suggest congestive heart failure but a medical examination will often distinguish between that condition and ARDS.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

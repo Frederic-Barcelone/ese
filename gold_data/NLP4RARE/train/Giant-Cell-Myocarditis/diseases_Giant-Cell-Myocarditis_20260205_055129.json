@@ -1,0 +1,451 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:51:29.640174",
+  "document": "Giant-Cell-Myocarditis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Giant-Cell-Myocarditis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "heart abnormalities",
+      "preferred_label": "congenital heart disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005453",
+        "orpha": null,
+        "umls": "UMLS:C0152021",
+        "mesh": "MESH:D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1682",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005207",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57501",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006330",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C95834",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:13213009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2004408087",
+          "display": null
+        }
+      ],
+      "context": "ts (median age 42 years). Approximately 300 cases have been reported in the medical literature. A diagnosis of giant cell myocarditis is made by biopsy of heart tissue. A biopsy is a test in which small tissue sample is surgically removed and studied microscopically. Tests to exclude other cause of heart abnormalities may also be performed. These tests may include echocardiogram and cardiac catheterization.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart defects limb shortening",
+        "Gay Feinmesser Cohen syndrome",
+        "Cardiac valvular dysplasia X-linked"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cardiovascular disorder",
+      "preferred_label": "cardiovascular disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I00-I99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004995",
+        "orpha": null,
+        "umls": "UMLS:C0007222",
+        "mesh": "MESH:D002318"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004995",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1287",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000319",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I00-I99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:459.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2848",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002318",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100005",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2931",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:49601007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007222",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:426429380",
+          "display": null
+        }
+      ],
+      "context": "Giant cell myocarditis is a rare cardiovascular disorder that occurs for unknown reasons (idiopathic). It is characterized by inflammation of the heart muscle (myocardium), a condition referred to as myocarditis. Inflammation is caused by widespread infiltration of giant cells associated with other inflammatory cells and heart muscle cell destruction. Gi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Giant cell myocarditis",
+      "preferred_label": "giant cell myocarditis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0023232",
+        "orpha": null,
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0023232",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6502",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97055",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1183",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60812006",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:507103735",
+          "display": null
+        }
+      ],
+      "context": "Giant cell myocarditis is a rare cardiovascular disorder that occurs for unknown reasons (idiopathic). It is characterized by inflammation of the heart muscle (myocardium), a condition referred to as myocarditis. Inflammation is caused by widespread infiltration of giant cells associated with other inflammatory cells and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "heart failure",
+      "preferred_label": "heart failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I50",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005252",
+        "orpha": null,
+        "umls": "UMLS:C0018801",
+        "mesh": "MESH:D006333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005252",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003144",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I50",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:I50",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:428.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6749",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006333",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C50577",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84114007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018801",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1458683894",
+          "display": null
+        }
+      ],
+      "context": "filtration of giant cells associated with other inflammatory cells and heart muscle cell destruction. Giant cells are abnormal masses produced by the fusion of inflammatory cells called macrophages. Individuals with giant cell myocarditis may develop abnormal heartbeats, chest pain and, eventually, heart failure. Many individuals eventually require a heart transplant. The disorder most often occurs in young adults. Giant cell myocarditis affects males and females in equal numbers. It can affect individuals of any age although the majority of cases occur in young or middle-aged adults (median age 42 years).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Failure Diastolic",
+        "Heart Failure Systolic",
+        "Lowry Maclean syndrome"
+      ],
+      "pubtator_normalized_name": "Heart Failure",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "myocarditis",
+      "preferred_label": "myocarditis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I40",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004496",
+        "orpha": null,
+        "umls": "UMLS:C0027059",
+        "mesh": "MESH:D009205"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004496",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:820",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009609",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7137",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I40",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:429.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44553",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009205",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34831",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1882",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:50920009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027059",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1018829714",
+          "display": null
+        }
+      ],
+      "context": "Giant cell myocarditis is a rare cardiovascular disorder that occurs for unknown reasons (idiopathic). It is characterized by inflammation of the heart muscle (myocardium), a condition referred to as myocarditis. Inflammation is caused by widespread infiltration of giant cells associated with other inflammatory cells and heart muscle cell destruction. Giant cells are abnormal masses produced by the fusion of inflammatory cells called macrophages. Individuals with giant cell myocarditis may develop abnormal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chagas Cardiomyopathy"
+      ],
+      "pubtator_normalized_name": "Myocarditis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

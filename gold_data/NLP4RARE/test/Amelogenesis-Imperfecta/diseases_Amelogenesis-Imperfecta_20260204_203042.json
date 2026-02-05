@@ -1,0 +1,116 @@
+{
+  "run_id": "RUN_20260204_192247_f15afd8b1e20",
+  "timestamp": "2026-02-04T20:30:42.805885",
+  "document": "Amelogenesis-Imperfecta.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Amelogenesis-Imperfecta.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Amelogenesis imperfecta",
+      "preferred_label": "amelogenesis imperfecta",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019507",
+        "orpha": "Orphanet:88661",
+        "umls": "UMLS:C0002452",
+        "mesh": "MESH:D000567"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019507",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:0828-0533",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2187",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5791",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:520.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:240",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000567",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:765",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:104500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:88661",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:78494001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002452",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1923123066",
+          "display": null
+        }
+      ],
+      "context": "Amelogenesis imperfecta (Al) refers to a group of rare, inherited disorders characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. Al affects ,000 to 16,000 children in the United States. Of this number, abo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amelogenesis imperfecta local hypoplastic form",
+        "Amelogenesis imperfecta hypoplastic-hypomaturation X-linked 1",
+        "Amelogenesis Imperfecta Type III"
+      ],
+      "pubtator_normalized_name": "Amelogenesis Imperfecta",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

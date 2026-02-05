@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:02:17.332327",
+  "document": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified - appears to be educational text about C3 Glomerulopathy",
+      "guideline_year": 2013,
+      "organization": "Not specified",
+      "target_condition": "C3 Glomerulopathy (C3G)",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected C3 glomerulopathy",
+          "condition": "C3 glomerulopathy diagnosis",
+          "severity": "na",
+          "action": "kidney biopsy required for diagnosis",
+          "action_description": null,
+          "preferred": "kidney biopsy",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "na",
+          "duration": "na",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "strong",
+          "references": [],
+          "source": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis",
+          "source_text": "C3G can ONLY be diagnosed by a kidney biopsy",
+          "page_num": null
+        }
+      ],
+      "source_document": "C3-Glomerulopathy_-Dense-Deposit-Disease-and-C3-Glomerulonephritis",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

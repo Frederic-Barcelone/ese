@@ -1,0 +1,150 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:41:44.472280",
+  "document": "Muscular-Dystrophy-Becker.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Muscular-Dystrophy-Becker.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "DMD",
+      "hgnc_symbol": "DMD",
+      "full_name": "dystrophin",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2928",
+        "entrez": "1756",
+        "ensembl": "ENSG00000198947",
+        "uniprot": "P11532",
+        "omim": "300377"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2928",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "1756",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000198947",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "300377",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P11532",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "154",
+          "disease_name": "Familial isolated dilated cardiomyopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "206546",
+          "disease_name": "Symptomatic form of muscular dystrophy of Duchenne and Becker in female carriers",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "777",
+          "disease_name": "X-linked non-syndromic intellectual disability",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "98895",
+          "disease_name": "Becker muscular dystrophy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "98896",
+          "disease_name": "Duchenne muscular dystrophy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "Becker muscular dystrophy is in the category of inherited muscle wasting diseases caused by a gene abnormality (mutation) that results in deficient or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-linked recessive inheritance so it mostly affects males, but some females are affected. Becker muscular dystrophy usually begins in the teens or early twenties and symptoms vary greatly between affected individuals. Muscle dete",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "If",
+      "hgnc_symbol": "CBLIF",
+      "full_name": "cobalamin binding intrinsic factor",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4268",
+        "entrez": "2694",
+        "ensembl": "ENSG00000134812",
+        "uniprot": "P27352",
+        "omim": "609342"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4268",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2694",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134812",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "609342",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P27352",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "olecular genetic testing. DMD is the only gene that has been associated with Becker muscular dystrophy and many different types of DMD gene mutations have been identified in individuals with this condition. Identification of a DMD gene mutation from molecular genetic testing confirms the diagnosis. If molecular genetic testing is performed and a DMD gene mutation is not found, a skeletal muscle biopsy is recommended to examine the appearance of the dystrophin protein.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

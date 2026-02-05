@@ -1,0 +1,35 @@
+{
+  "doc_id": "Lowe-syndrome",
+  "doc_filename": "Lowe-syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "genetic disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Lowe syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1599,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Lowe Syndrome: Rare Genetic Disorder Overview",
+  "short_description": "Clinical overview of Lowe syndrome, a rare X-linked genetic disorder affecting primarily males with global prevalence data.",
+  "long_description": "This document provides essential clinical information about Lowe syndrome, a rare genetic disorder with an estimated prevalence of 1-10 per 1,000,000 males. The condition demonstrates a clear male predominance due to its genetic inheritance pattern and has been documented across multiple continents including North and South America, Europe, Japan, and India. This overview serves as a foundational reference for understanding the epidemiological characteristics and global distribution of this uncommon genetic condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:33:10.045954"
+}

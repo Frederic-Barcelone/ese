@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:51:00.531609",
+  "document": "Giant-Cell-Arteritis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Giant-Cell-Arteritis.pdf",
+  "total_candidates": 46,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "GCA",
+      "long_form": "Giant cell arteritis",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Giant cell arteritis (GCA) is the most common blood vessel disorder in persons over 50 years old that causes inflammation of ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "LV-GCA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "h constitutional symptoms such as polymyalgia, fevers, anorexia, and weight loss, a presentation of LV-GCA. The cause of giant cell arteritis is still unknown but is thought to be from the immune system cau",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "polymyalgia rheumatica",
+      "matched_text": "Polymyalgia rheumatica",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M35.3",
+      "orpha": "Orphanet:93569"
+    },
+    {
+      "name": "inflammatory disorder",
+      "matched_text": "inflammatory disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "giant cell arteritis",
+      "matched_text": "Giant cell arteritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:397"
+    },
+    {
+      "name": "vasculitis",
+      "matched_text": "vasculitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:52759"
+    },
+    {
+      "name": "blindness",
+      "matched_text": "blindness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H54",
+      "orpha": null
+    },
+    {
+      "name": "arteritis",
+      "matched_text": "arteritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Steroids",
+      "matched_text": "steroids",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    },
+    {
+      "name": "corticosteroids",
+      "matched_text": "corticosteroids",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "NOT_YET_RECRUITING"
+    }
+  ],
+  "pharma": []
+}

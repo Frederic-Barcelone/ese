@@ -1,0 +1,198 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:40:42.652390",
+  "document": "Banti_s-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Banti_s-Syndrome.pdf",
+  "total_candidates": 41,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "of India and Japan, but rare in Western countries. Increased arsenic levels are present in drinking water in some countries and may contribute to regional differences in incidence. The diagnosis of Banti syndrome my be confirmed by a thorough clinical evaluation and a variety of specialized tests, particularly advanced imaging techniques such as a splenic venography and magnetic resonance imaging (MRI). During MRI, a magnetic field and radio waves are used to create cross-sectional images of targeted parts of the body.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Banti syndrome",
+      "matched_text": "Banti syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "disease",
+      "matched_text": "disorder",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "infection",
+      "matched_text": "infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A00-B99",
+      "orpha": null
+    },
+    {
+      "name": "hypertensive disorder",
+      "matched_text": "increased blood pressure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I15",
+      "orpha": null
+    },
+    {
+      "name": "congenital",
+      "matched_text": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "blood Clots",
+      "matched_text": "blood clots",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cirrhosis",
+      "matched_text": "cirrhosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hinman syndrome",
+      "matched_text": "has",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "N32.8",
+      "orpha": "ORPHA:84085"
+    },
+    {
+      "name": "common",
+      "matched_text": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "rare",
+      "matched_text": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Idiopathic Noncirrhotic Portal Hypertension",
+      "matched_text": "Banti syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hypertensive disease",
+      "matched_text": "hypertension",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital Abnormality",
+      "matched_text": "abnormalities",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Vascular occlusion",
+      "matched_text": "vascular obstruction",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Liver Cirrhosis",
+      "matched_text": "cirrhosis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Azathioprine",
+      "matched_text": "azathioprine",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Red blood cells",
+      "matched_text": "red blood cells",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "arsenic",
+      "matched_text": "arsenic",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

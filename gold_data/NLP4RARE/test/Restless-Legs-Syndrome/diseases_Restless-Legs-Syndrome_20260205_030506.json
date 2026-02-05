@@ -1,0 +1,548 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:05:06.545516",
+  "document": "Restless-Legs-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Restless-Legs-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Restless legs syndrome",
+      "preferred_label": "restless legs syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G25.81",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005391",
+        "orpha": null,
+        "umls": "UMLS:C0035258",
+        "mesh": "MESH:D012148"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005391",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050425",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004270",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G25.81",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.99",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48427",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012148",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84501",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32914008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035258",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1254916765",
+          "display": null
+        }
+      ],
+      "context": "c RLS). In primary RLS, the disorder is often genetic in origin or occurs for unknown reasons (idiopathic). Secondary RLS may occur in association with certain conditions, such as iron deficiency, low levels of the oxygen-carrying component of red blood cells (anemia), kidney failure, or pregnancy. Restless legs syndrome appears to be about twice as common in women than men. Associated symptoms may become apparent at any age, and the disorder is usually chronic, often becoming more severe with increasing age. However, in some affected individuals, RLS symptoms may periodically subside and recur with varying levels",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Restless legs syndrome 2",
+        "Restless legs syndrome 1"
+      ],
+      "pubtator_normalized_name": "Restless Legs Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "peripheral neuropathy",
+      "preferred_label": "peripheral neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005244",
+        "orpha": null,
+        "umls": "UMLS:C0031117",
+        "mesh": "D010523"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005244",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:870",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003100",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12192",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18386",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10034606",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386033004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031117",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010523",
+          "display": "Peripheral Nervous System Diseases"
+        }
+      ],
+      "context": "dies may be conducted to help detect or rule out possible associated conditions, including tests to measure iron and ferritin levels in the blood to assess iron stores in the body. In addition, a neurological examination may be conducted if associated neurological abnormalities are suspected (e.g., peripheral neuropathy). In addition, some physicians may recommend specialized sleep studies to evaluate sleep disturbances and possible PLMS, but sleep studies are not needed RLS.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Motor neuropathy peripheral with dysautonomia",
+        "Inherited Peripheral Neuropathy",
+        "Alcoholic Neuropathy"
+      ],
+      "pubtator_normalized_name": "Peripheral Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sleep disturbances",
+      "preferred_label": "sleep disturbances",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100081",
+        "orpha": null,
+        "umls": "UMLS:C0851578",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100081",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0008568",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:208862",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3376",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0851578",
+          "display": null
+        }
+      ],
+      "context": "sias may also sometimes affect the arms or other areas of the body. Those with RLS may vigorously move the affected area, engage in pacing, or perform other, often repetitive movements, such as stretching, bending, or rocking. Symptoms typically worsen in the evening or at night, often resulting in sleep disturbances. Some individuals with RLS may also develop symptoms during other extended periods of inactivity, such as while sitting in a movie theater or traveling in a car. RLS may occur as a primary condition or due to another underlying disorder, certain medications, or other factors (secondary or symptomat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "movement disorder",
+      "preferred_label": "movement disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005395",
+        "orpha": null,
+        "umls": "UMLS:C0026650",
+        "mesh": "MESH:D009069"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005395",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:480",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004280",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.99",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10113",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009069",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116757",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:60342002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026650",
+          "display": null
+        }
+      ],
+      "context": "Restless legs syndrome (RLS) is a neurologic and sleep related movement disorder",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Conversion Disorder",
+        "REM Sleep Behavior Disorder",
+        "Stereotypic Movement Disorder"
+      ],
+      "pubtator_normalized_name": "Movement Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney failure",
+      "preferred_label": "kidney failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001106",
+        "orpha": null,
+        "umls": "UMLS:C0035078",
+        "mesh": "MESH:D051437"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001106",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1074",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002048",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:586",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11177",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D051437",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4376",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42399005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035078",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:761526554",
+          "display": null
+        }
+      ],
+      "context": "ctors (secondary or symptomatic RLS). In primary RLS, the disorder is often genetic in origin or occurs for unknown reasons (idiopathic). Secondary RLS may occur in association with certain conditions, such as iron deficiency, low levels of the oxygen-carrying component of red blood cells (anemia), kidney failure, or pregnancy. Restless legs syndrome appears to be about twice as common in women than men. Associated symptoms may become apparent at any age, and the disorder is usually chronic, often becoming more severe with increasing age. However, in some affected individuals, RLS symptoms may periodically",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acute Kidney Injury",
+        "Kidney Failure Chronic",
+        "Hyperuricemic Nephropathy Familial Juvenile 2"
+      ],
+      "pubtator_normalized_name": "Renal Insufficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "other factors (secondary or symptomatic RLS). In primary RLS, the disorder is often genetic in origin or occurs for unknown reasons (idiopathic). Secondary RLS may occur in association with certain conditions, such as iron deficiency, low levels of the oxygen-carrying component of red blood cells (anemia), kidney failure, or pregnancy. Restless legs syndrome appears to be about twice as common in women than men. Associated symptoms may become apparent at any age, and the disorder is usually chronic, often becoming more severe with increasing age. However, in some affected individuals, RLS symptoms",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "RLS",
+      "preferred_label": "RLS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017413",
+        "orpha": "Orphanet:294049",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017413",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:294049",
+          "display": null
+        }
+      ],
+      "context": "s or dysesthesias, that are often likened to crawling, cramping, aching, burning, itching, or prickling deep within the affected areas. Although the legs are usually involved, an urge to move with paresthesias or dysesthesias may also sometimes affect the arms or other areas of the body. Those with RLS may vigorously move the affected area, engage in pacing, or perform other, often repetitive movements, such as stretching, bending, or rocking. Symptoms typically worsen in the evening or at night, often resulting in sleep disturbances. Some individuals with RLS may also develop symptoms during oth",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

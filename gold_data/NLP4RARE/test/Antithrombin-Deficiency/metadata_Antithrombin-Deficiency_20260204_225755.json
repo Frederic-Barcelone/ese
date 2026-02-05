@@ -1,0 +1,45 @@
+{
+  "doc_id": "Antithrombin-Deficiency",
+  "doc_filename": "Antithrombin-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "Antithrombin Deficiency",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Venous Thrombosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Antithrombin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Heparin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2026,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Antithrombin Deficiency: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing antithrombin deficiency, a rare blood disorder affecting clotting mechanisms, including prevalence, types, and diagnostic considerations.",
+  "long_description": "This clinical reference document provides a comprehensive overview of antithrombin deficiency, a rare inherited and acquired blood disorder that affects the body's natural anticoagulation system. The document details the epidemiology of the condition, noting that Type I antithrombin deficiency occurs in approximately 1 in 3,000-5,000 people in the United States and affects both genders equally across all ethnic groups. It explains the relationship between antithrombin deficiency and venous thromboembolism, highlighting that about 1% of patients with venous thrombosis have congenital antithrombin deficiency. The document also addresses important diagnostic considerations, emphasizing that while low antithrombin levels may suggest deficiency, various medical conditions and treatments can temporarily reduce these levels, necessitating careful interpretation and repeat testing under appropriate clinical conditions.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T21:57:55.342912"
+}

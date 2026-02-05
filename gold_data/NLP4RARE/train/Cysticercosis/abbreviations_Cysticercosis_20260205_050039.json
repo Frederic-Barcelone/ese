@@ -1,0 +1,83 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:00:39.085783",
+  "document": "Cysticercosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cysticercosis.pdf",
+  "total_candidates": 43,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ncluding beef and fish, but only pork tapeworms appear to produce larvae capable of invading human muscle and forming cysts. A diagnosis of cysticercosis may be made based upon a thorough clinical evaluation, a detailed patient history and a variety of specialized tests. Magnetic resonance imaging (MRI) and computed tomography (CT) scan may be used to diagnose neurocysticercosis.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CT",
+      "long_form": "computed tomography",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "story and a variety of specialized tests. Magnetic resonance imaging (MRI) and computed tomography (CT) scan may be used to diagnose neurocysticercosis.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "rare infectious disease",
+      "matched_text": "rare infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68416"
+    },
+    {
+      "name": "cysticercosis",
+      "matched_text": "Cysticercosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B69",
+      "orpha": "Orphanet:1560"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Pork",
+      "matched_text": "pork",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Beef",
+      "matched_text": "beef",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,140 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:30:50.642649",
+  "document": "Acute-Intermittent-Porphyria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acute-Intermittent-Porphyria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "AIP",
+      "preferred_label": "Placenta accreta spectrum disorder",
+      "abbreviation": "AIP",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "O43.2",
+        "icd11": "JA8A.2",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:662721",
+        "umls": null,
+        "mesh": "D000081012"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:662721",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "O43.2",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "JA8A.2",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000081012",
+          "display": "Autoimmune Pancreatitis"
+        }
+      ],
+      "context": "In Europe the prevalence of symptomatic AIP is reported to be 5.9 per million people in the general population.., It is likely to be similar elsewhere in the world apart from Sweden where it is higher due to a founder effect. Recent population based genetic studies have shown that approximately 1 in 2000 of the population inherit a disease c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Autoimmune Pancreatitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "porphyria",
+      "preferred_label": "porphyria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0037939",
+        "orpha": null,
+        "umls": "UMLS:C5848305",
+        "mesh": "MESH:D011164"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0037939",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1844832",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011164",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200811",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97096",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:418470004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5848305",
+          "display": null
+        }
+      ],
+      "context": "where it is higher due to a founder effect. Recent population based genetic studies have shown that approximately 1 in 2000 of the population inherit a disease causing (pathogenic) mutation in the HMBS gene. This suggests that only 1% of those who inherit a pathogenic mutation will ever experience porphyria symptoms. AIP can occur in individuals of all ethnic backgrounds, although it may be less frequently reported in African-American individuals. Women are affected by symptomatic AIP more often than men. The disorder is most common in young or middle-aged women.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Porphyria Cutanea Tarda",
+        "Porphyria Variegate",
+        "Porphyria Acute Intermittent"
+      ],
+      "pubtator_normalized_name": "Porphyrias",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

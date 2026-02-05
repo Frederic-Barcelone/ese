@@ -1,0 +1,327 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:39:30.453355",
+  "document": "Amyotrophic-Lateral-Sclerosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Amyotrophic-Lateral-Sclerosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Amyotrophic lateral sclerosis",
+      "preferred_label": "amyotrophic lateral sclerosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G12.21",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004976",
+        "orpha": "Orphanet:803",
+        "umls": "UMLS:C0002736",
+        "mesh": "MESH:D000690"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004976",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:332",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5786",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0007354",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G12.21",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:335.20",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:274",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000690",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10002026",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34373",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:768",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:803",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86044005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002736",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:12566",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1982355687",
+          "display": null
+        }
+      ],
+      "context": "Amyotrophic lateral sclerosis (ALS) is one of a group of disorders known as motor neuron diseases. It is characterized by the progressive degeneration and eventual death of nerve cells (motor neurons) in the brain, brainstem and spinal cord that facilitate communication between the nervous system and voluntary muscles of the bo",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amyotrophic lateral sclerosis 1",
+        "Amyotrophic Lateral Sclerosis 2 Juvenile",
+        "Amyotrophic Lateral Sclerosis 8"
+      ],
+      "pubtator_normalized_name": "Amyotrophic Lateral Sclerosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "motor neuron diseases",
+      "preferred_label": "motor neuron disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G12.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020128",
+        "orpha": "Orphanet:98503",
+        "umls": "UMLS:C0085084",
+        "mesh": "MESH:D016472"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020128",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:231",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003782",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19477",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G12.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:335.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:38785",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016472",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10028003",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98503",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:37340000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085084",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:661720689",
+          "display": null
+        }
+      ],
+      "context": "Amyotrophic lateral sclerosis (ALS) is one of a group of disorders known as motor neuron diseases. It is characterized by the progressive degeneration and eventual death of nerve cells (motor neurons) in the brain, brainstem and spinal cord that facilitate communication between the nervous system and voluntary muscles of the body. Ordinarily, motor neurons in the brain (upper motor neurons) sen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amyotrophic Lateral Sclerosis",
+        "Motor Neuron Disease with Dementia and Ophthalmoplegia",
+        "Neuronopathy Distal Hereditary Motor Type Viib"
+      ],
+      "pubtator_normalized_name": "Motor Neuron Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "respiratory failure",
+      "preferred_label": "respiratory failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021113",
+        "orpha": null,
+        "umls": "UMLS:C1145670",
+        "mesh": "MESH:D012131"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021113",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11162",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009686",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:518.83",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:257837",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012131",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26872",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:39871006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1145670",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:370028006",
+          "display": null
+        }
+      ],
+      "context": "wer motor neurons) and then to various muscles. ALS affects both the upper and lower motor neurons, so that the transmission of messages is interrupted, and muscles gradually weaken and waste away. As a result, the ability to initiate and control voluntary movement is lost. Ultimately, ALS leads to respiratory failure because affected individuals lose the ability to control muscles in the chest and diaphragm. ALS is often called Lou Gehrig's disease. Amyotrophic lateral sclerosis is a rare disorder that affects approximately 30,000 people in the United States. Although the median age at which symptoms develop is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hereditary Myopathy with Early Respiratory Failure",
+        "Spinal muscular atrophy with respiratory distress 1",
+        "Combined Oxidative Phosphorylation Deficiency 3"
+      ],
+      "pubtator_normalized_name": "Respiratory Insufficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

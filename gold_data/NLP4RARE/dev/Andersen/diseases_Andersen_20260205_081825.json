@@ -1,0 +1,112 @@
+{
+  "run_id": "RUN_20260205_071244_1919c33689fc",
+  "timestamp": "2026-02-05T08:18:25.918239",
+  "document": "Andersen.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Andersen.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Andersen-Tawil syndrome",
+      "preferred_label": "Andersen-Tawil syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008222",
+        "orpha": "Orphanet:37553",
+        "umls": "UMLS:C1563715",
+        "mesh": "MESH:D050030"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008222",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050434",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9453",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:327586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D050030",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200827",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84559",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1883",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:170390",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:37553",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:422348008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1563715",
+          "display": null
+        }
+      ],
+      "context": "Andersen-Tawil syndrome affects males and females in equal numbers. The exact incidence or prevalence of the disorder is unknown. More than 100 cases have been reported in the medical literature. Because many cases go undiagnosed or misdiagnosed, determining the true frequency of Andersen-Tawil syndrome in the general pop",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Andersen Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

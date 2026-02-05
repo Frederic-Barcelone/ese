@@ -1,0 +1,1376 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:58:56.607533",
+  "document": "Ewing-Sarcoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Ewing-Sarcoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 23,
+  "total_validated": 23,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Ewing sarcoma",
+      "preferred_label": "Ewing sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C40.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012817",
+        "orpha": "Orphanet:319",
+        "umls": "UMLS:C0553580",
+        "mesh": "MESH:D012512"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012817",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3369",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000174",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6390",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C40.3",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9260/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:107816",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012512",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10015560",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200053",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9341",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612219",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ES",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0553580",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:458106328",
+          "display": null
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sarcoma Ewing",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare bone tumor",
+      "preferred_label": "Rare bone tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:68411",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:68411",
+          "display": null
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "soft",
+      "preferred_label": "soft",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013894",
+        "orpha": "Orphanet:314394",
+        "umls": "UMLS:C3542022",
+        "mesh": "D017695"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013894",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:17419",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:762199",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:614813",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:314394",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3542022",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017695",
+          "display": "Soft Tissue Injuries"
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological ch",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Soft Tissue Infections",
+        "Soft Tissue Neoplasms",
+        "Sarcoma"
+      ],
+      "pubtator_normalized_name": "Soft Tissue Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "extraosseous Ewing sarcoma",
+      "preferred_label": "extraosseous Ewing sarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018270",
+        "orpha": "Orphanet:370334",
+        "umls": "UMLS:C0279980",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018270",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4232",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:17600",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:76053",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C7135",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:370334",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0279980",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:489162074",
+          "display": null
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "tumor",
+      "preferred_label": "neoplasm",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C7B-C7B",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005070",
+        "orpha": null,
+        "umls": "UMLS:C0027651",
+        "mesh": "MESH:D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005070",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14566",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000616",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002664",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C7B-C7B",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:239.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10294",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009369",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3262",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:OTHER",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:55342001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027651",
+          "display": null
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neoplasm Metastasis",
+        "Breast Neoplasms",
+        "Neoplasms Adipose Tissue"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "primitive neuroectodermal tumor (PNET)",
+      "preferred_label": "primitive neuroectodermal tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005462",
+        "orpha": null,
+        "umls": "UMLS:C0206663",
+        "mesh": "MESH:D017599"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005462",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:171",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005235",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9503/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:64627",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017599",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3716",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:PNET",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206663",
+          "display": null
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neuroectodermal Tumors Primitive Peripheral"
+      ],
+      "pubtator_normalized_name": "Neuroectodermal Tumors Primitive",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Ewing family of tumors",
+      "preferred_label": "Ewing family of tumors",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021038",
+        "orpha": null,
+        "umls": "UMLS:C3536893",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021038",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:760735",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27291",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3536893",
+          "display": null
+        }
+      ],
+      "context": "known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is pref",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Ewing sarcoma of bone",
+      "preferred_label": "Ewing sarcoma of bone",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002625",
+        "orpha": null,
+        "umls": "UMLS:C0585474",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002625",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3368",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:170.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:108438",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4835",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:307608006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0585474",
+          "display": null
+        }
+      ],
+      "context": "s have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "tumor of the chest wall",
+      "preferred_label": "neoplasm of chest wall",
+      "abbreviation": null,
+      "confidence": 0.55,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021388",
+        "orpha": null,
+        "umls": "UMLS:C1290309",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021388",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:239.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:220935",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4929",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:126640008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290309",
+          "display": null
+        }
+      ],
+      "context": "l translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often affects the long bone of the legs (femur) and flat bones su",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often affects the long bone of the legs (femur) and flat bones such as those found in the pelvis and chest well. Ewing sarcoma is an aggressive cancer that may spread (metastasize) to the lungs, other bones, and bone marrow potentially causing life-threatening complications. The exact cause of these tumors is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Ewing sarcoma",
+      "preferred_label": "Ewings sarcoma",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0553580",
+        "mesh": "D012512"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0553580",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012512",
+          "display": "Sarcoma Ewing"
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sarcoma Ewing",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bone tumor",
+      "preferred_label": "Bone neoplasms",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0005967",
+        "mesh": "D018213"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0005967",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D018213",
+          "display": "Neoplasms Bone Tissue"
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Bone Neoplasms",
+        "Bone Marrow Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms Bone Tissue",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tumors",
+      "preferred_label": "Neoplasms",
+      "abbreviation": null,
+      "confidence": 0.7982830286026001,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0027651",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0027651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosse",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Neoplasms Adipose Tissue",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "PNET",
+      "preferred_label": "Neuroectodermal Tumor, Primitive",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0206663",
+        "mesh": "D018241"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0206663",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D018241",
+          "display": "Neuroectodermal Tumors Primitive Peripheral"
+        }
+      ],
+      "context": "Ewing sarcoma is a rare bone tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neuroectodermal Tumors Primitive"
+      ],
+      "pubtator_normalized_name": "Neuroectodermal Tumors Primitive Peripheral",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal abnormality",
+      "preferred_label": "Chromosome Aberrations",
+      "abbreviation": null,
+      "confidence": 0.6868285655975341,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008625",
+        "mesh": "D002869"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008625",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002869",
+          "display": "Chromosome Aberrations"
+        }
+      ],
+      "context": "tumor that occurs most often in adolescents. It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sex Chromosome Aberrations"
+      ],
+      "pubtator_normalized_name": "Chromosome Aberrations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "translocation",
+      "preferred_label": "Chromosomal translocation",
+      "abbreviation": null,
+      "confidence": 0.6518948197364807,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0040715",
+        "mesh": "D014178"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0040715",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014178",
+          "display": "Translocation Genetic"
+        }
+      ],
+      "context": "It can also arise outside of the bone in soft tissue (extraosseous Ewing sarcoma). Ewing sarcoma is related to another type of tumor known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the ch",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Translocation Genetic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Ewing family of tumors",
+      "preferred_label": "Ewing Sarcoma/Peripheral Primitive Neuroectodermal Tumor",
+      "abbreviation": null,
+      "confidence": 0.661164116859436,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C3536893",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C3536893",
+          "display": null
+        }
+      ],
+      "context": "known as primitive neuroectodermal tumor (PNET). Researchers have learned that these tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is pref",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "extraosseous Ewing sarcoma",
+      "preferred_label": "Extra-osseous Ewing's sarcoma",
+      "abbreviation": null,
+      "confidence": 0.6536139369010925,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0279980",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0279980",
+          "display": null
+        }
+      ],
+      "context": "se tumors are associated with the same chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "neuroectodermal tumor",
+      "preferred_label": "Neuroectodermal Tumors",
+      "abbreviation": null,
+      "confidence": 0.6767462611198425,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0206093",
+        "mesh": "D017599"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0206093",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017599",
+          "display": "Neuroectodermal Tumors"
+        }
+      ],
+      "context": "chromosomal abnormality (balanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often affects the l",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neuroectodermal Tumors Primitive Peripheral",
+        "Neuroectodermal Tumors Primitive",
+        "Neuroectodermal Tumor Melanotic"
+      ],
+      "pubtator_normalized_name": "Neuroectodermal Tumors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Askin’s tumor",
+      "preferred_label": "Askin's tumor",
+      "abbreviation": null,
+      "confidence": 0.6626125693321228,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0877849",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0877849",
+          "display": null
+        }
+      ],
+      "context": "alanced reciprocal translocation) and share many physiological characteristics. Consequently, these tumors are sometimes collectively classified as the Ewing family of tumors (EFT). This general term encompasses Ewing sarcoma of bone, extraosseous Ewing sarcoma, primitive neuroectodermal tumor, and Askin’s tumor (a tumor of the chest wall). Ewing sarcoma of bone accounts for approximately 70 percent of the tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often affects the long bone of the leg",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "aggressive cancer",
+      "preferred_label": "aggressive cancer",
+      "abbreviation": null,
+      "confidence": 0.967451274394989,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C2945759",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C2945759",
+          "display": null
+        }
+      ],
+      "context": "e tumors in this family. Generally, the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often affects the long bone of the legs (femur) and flat bones such as those found in the pelvis and chest well. Ewing sarcoma is an aggressive cancer that may spread (metastasize) to the lungs, other bones, and bone marrow potentially causing life-threatening complications. The exact cause of these tumors is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "metastasize",
+      "preferred_label": "Neoplasm Metastasis",
+      "abbreviation": null,
+      "confidence": 0.9698439836502075,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0027627",
+        "mesh": "D009362"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0027627",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009362",
+          "display": "Neoplasm Metastasis"
+        }
+      ],
+      "context": "the term Ewing sarcoma is preferred because, despite the different names, it is one tumor, molecularly. Ewing sarcoma of bone most often affects the long bone of the legs (femur) and flat bones such as those found in the pelvis and chest well. Ewing sarcoma is an aggressive cancer that may spread (metastasize) to the lungs, other bones, and bone marrow potentially causing life-threatening complications. The exact cause of these tumors is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neoplasms Unknown Primary"
+      ],
+      "pubtator_normalized_name": "Neoplasm Metastasis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

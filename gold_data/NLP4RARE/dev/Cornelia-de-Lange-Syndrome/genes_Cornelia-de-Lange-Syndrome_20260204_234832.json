@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:48:32.818709",
+  "document": "Cornelia-de-Lange-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Cornelia-de-Lange-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial appearance; malformations of the hands and arms (upper limbs); and mild to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

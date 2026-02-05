@@ -1,0 +1,1300 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:05:55.782575",
+  "document": "Trisomy-9p-(Multiple-Variants).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Trisomy-9p-(Multiple-Variants).pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 20,
+  "total_validated": 20,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Trisomy 9p",
+      "preferred_label": "Chromosome 9, partial trisomy 9p",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0265428",
+        "mesh": "C538026"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0265428",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538026",
+          "display": "Chromosome 9 partial trisomy 9p"
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered fr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chromosome 9 partial trisomy 9p",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 throu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndrome",
+      "preferred_label": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002254",
+        "orpha": null,
+        "umls": "UMLS:C0039082",
+        "mesh": "MESH:D013577"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002254",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:225",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11688",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013577",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28193",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000086",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039082",
+          "display": null
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy",
+      "preferred_label": "trisomy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700065",
+        "orpha": null,
+        "umls": "UMLS:C0041107",
+        "mesh": "MESH:D014314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21702",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014314",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3421",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041107",
+          "display": null
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Trisomy"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for females. Each chromosome has a short arm designated as \"p,\" a long arm identified by",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for females. Each chromosome has a short arm designated as \"p,\" a long arm identified by the letter \"q,\" and a narrowed reg",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.39999999999999997,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "ls of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for females. Each chromosome has a short arm designated as \"p,\" a long arm identified by the letter \"q,\" and a narrowed region at which the two arms are joined (centromere). Chromosomes are further subdivided into bands that are numbered outward from the centromere. For example, the short arm of chromosome 9 includes bands 9p11 to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arm",
+      "preferred_label": "Anorectal malformation",
+      "abbreviation": null,
+      "confidence": 0.39999999999999997,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:96346",
+        "umls": null,
+        "mesh": "D000071056"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:96346",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000071056",
+          "display": "Anorectal Malformations"
+        }
+      ],
+      "context": "dy. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for females. Each chromosome has a short arm designated as \"p,\" a long arm identified by the letter \"q,\" and a narrowed region at which the two arms are joined (centromere). Chromosomes are further subdivided into bands that are numbered outward from the centromere. For example, the short arm of chromosome 9 includes bands 9p11 to 9p24, and t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sacral Agenesis Syndrome"
+      ],
+      "pubtator_normalized_name": "Anorectal Malformations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arms",
+      "preferred_label": "arms",
+      "abbreviation": null,
+      "confidence": 0.39999999999999997,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009994",
+        "orpha": "Orphanet:99756",
+        "umls": "UMLS:C0206655",
+        "mesh": "MESH:D018232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4051",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000248",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4701",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006779",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8920/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065867",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3749",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268220",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ARMS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99756",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404053004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206655",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1742058067",
+          "display": null
+        }
+      ],
+      "context": "ach individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequal 23rd pair of X and Y chromosomes for males and two X chromosomes for females. Each chromosome has a short arm designated as \"p,\" a long arm identified by the letter \"q,\" and a narrowed region at which the two arms are joined (centromere). Chromosomes are further subdivided into bands that are numbered outward from the centromere. For example, the short arm of chromosome 9 includes bands 9p11 to 9p24, and the long arm includes bands 9q11 to 9q34. In observed cases, trisomy 9p has appeared to affect females ap",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphocytic Choriomeningitis"
+      ],
+      "pubtator_normalized_name": "Arms Malformation of",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.39999999999999997,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "e, the short arm of chromosome 9 includes bands 9p11 to 9p24, and the long arm includes bands 9q11 to 9q34. In observed cases, trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "was",
+      "preferred_label": "Wiskott-Aldrich syndrome",
+      "abbreviation": "WAS",
+      "confidence": 0.65,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D82.0",
+        "icd11": "3B62.0Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:906",
+        "umls": null,
+        "mesh": "D014923"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:906",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D82.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3B62.0Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014923",
+          "display": "Wiskott-Aldrich Syndrome"
+        }
+      ],
+      "context": "ort arm of chromosome 9 includes bands 9p11 to 9p24, and the long arm includes bands 9q11 to 9q34. In observed cases, trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wiskott-Aldrich Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "e long arm includes bands 9q11 to 9q34. In observed cases, trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy 21 (Down syndrome)",
+      "preferred_label": "Down syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008608",
+        "orpha": "Orphanet:870",
+        "umls": "UMLS:C0013080",
+        "mesh": "MESH:D004314"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008608",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14250",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001064",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q90",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4385",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004314",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044688",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200965",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2993",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:190685",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:870",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:41040004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013080",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1624623908",
+          "display": null
+        },
+        {
+          "system": "nlxdys",
+          "code": "nlxdys:20090502",
+          "display": null
+        }
+      ],
+      "context": "1 to 9q34. In observed cases, trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Down Syndrome Critical Region",
+        "Transient Myeloproliferative Disorder of Down Syndrome",
+        "Cataracts Congenital with Sensorineural Deafness Down Syndrome-Like Facial Appearance Short Stature and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy 18",
+      "preferred_label": "trisomy 18",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018071",
+        "orpha": "Orphanet:3380",
+        "umls": "UMLS:C4317091",
+        "mesh": "MESH:C580500"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1085",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6321",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1384417",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C580500",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10053884",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200963",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C36626",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1797",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3380",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:51500006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4317091",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1505179968",
+          "display": null
+        }
+      ],
+      "context": ", trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chromosome 18 trisomy 18p",
+        "Chromosome 18 trisomy 18q",
+        "Trisomy 18-Like Syndrome"
+      ],
+      "pubtator_normalized_name": "Trisomy 18 Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy 13",
+      "preferred_label": "Patau syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0152095",
+        "mesh": "D000073839"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0152095",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000073839",
+          "display": "Trisomy 13 Syndrome"
+        }
+      ],
+      "context": "females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Trisomy 13 Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Patau syndrome",
+      "preferred_label": "Patau syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018068",
+        "orpha": "Orphanet:3378",
+        "umls": "UMLS:C0152095",
+        "mesh": "MESH:C536305"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018068",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11665",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7341",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:758.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56261",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536305",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044686",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200964",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C36529",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1796",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3378",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:21111006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152095",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1435958084",
+          "display": null
+        }
+      ],
+      "context": "oximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Trisomy 13 Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chromosomal syndrome",
+      "preferred_label": "Congenital chromosomal disease",
+      "abbreviation": null,
+      "confidence": 0.9481190800666809,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0008626",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0008626",
+          "display": null
+        }
+      ],
+      "context": "Trisomy 9p is a rare chromosomal syndrome in which a portion of the 9th chromosome appears three times (trisomy) rather than twice in cells of the body. Chromosomes are found in the nucleus of all body cells. They carry the genetic characteristics of each individual. Pairs of human chromosomes are numbered from 1 through 22, with an unequa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "trisomy 21",
+      "preferred_label": "Down Syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0013080",
+        "mesh": "D004314"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0013080",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004314",
+          "display": "Down Syndrome"
+        }
+      ],
+      "context": "1 to 9q34. In observed cases, trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Down Syndrome Critical Region",
+        "Transient Myeloproliferative Disorder of Down Syndrome",
+        "Cataracts Congenital with Sensorineural Deafness Down Syndrome-Like Facial Appearance Short Stature and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Down Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trisomy 18 (",
+      "preferred_label": "Trisomy 18 (chromosomal abnormality)",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C3537048",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C3537048",
+          "display": null
+        }
+      ],
+      "context": ", trisomy 9p has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Edwards’s syndrome",
+      "preferred_label": "Complete trisomy 18 syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0152096",
+        "mesh": "D000073842"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0152096",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000073842",
+          "display": "Trisomy 18 Syndrome"
+        }
+      ],
+      "context": "has appeared to affect females approximately twice as frequently as males. As of 2013, more than 150 cases have been reported in the medical literature since the disorder was first described in 1970. Trisomy 9p is the fourth most common type of trisomy after trisomy 21 (Down syndrome), trisomy 18 (Edwards’s syndrome) and trisomy 13 (Patau syndrome).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Trisomy 18 Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

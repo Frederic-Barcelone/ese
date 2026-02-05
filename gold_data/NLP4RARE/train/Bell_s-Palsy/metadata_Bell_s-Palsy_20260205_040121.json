@@ -1,0 +1,35 @@
+{
+  "doc_id": "Bell_s-Palsy",
+  "doc_filename": "Bell_s-Palsy.pdf",
+  "top_entities": [
+    {
+      "name": "Bell's palsy",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "nervous system disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2209,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MED",
+  "document_type_name": "Patient Education & Advocacy",
+  "document_type_group": "Patient-Centric Documentation",
+  "classification_confidence": 0.25,
+  "title": "Bell's Palsy: Clinical Overview and Diagnosis",
+  "short_description": "Clinical document describing Bell's palsy, a neurological disorder causing sudden facial paralysis due to 7th cranial nerve dysfunction.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Bell's palsy, a non-progressive neurological disorder affecting the 7th cranial nerve. The document details the characteristic symptoms including sudden onset facial paralysis, potential preceding symptoms such as fever and ear pain, and the underlying pathophysiology involving ischemia and compression of the facial nerve. It discusses potential viral and immune causes, genetic predisposition, and diagnostic approaches including clinical examination and electromyography testing to assess nerve damage and confirm diagnosis.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:01:21.809490"
+}

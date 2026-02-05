@@ -1,0 +1,535 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:49:45.572386",
+  "document": "Gerstmann-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gerstmann-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "neurological disorder",
+      "preferred_label": "nervous system disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G00-G99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005071",
+        "orpha": null,
+        "umls": "UMLS:C0027765",
+        "mesh": "MESH:D009422"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:863",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000618",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G00-G99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:349.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14336",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009422",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26835",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:118940003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027765",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Nervous_system_disease",
+          "display": null
+        }
+      ],
+      "context": "Gerstmann syndrome is a rare neurological disorder that can occur as the result of a brain injury or as a developmental disorder. The syndrome is characterized by the loss or absence of four cognitive abilities-the loss of the ability to express thoughts in writing (agraphia, dysgraphia), to perform simple arithmetic problems (acalculia), to recogn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Diseases",
+        "Heredodegenerative Disorders Nervous System",
+        "Peripheral Nervous System Diseases"
+      ],
+      "pubtator_normalized_name": "Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Gerstmann syndrome",
+      "preferred_label": "Gerstmann syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005773",
+        "orpha": "Orphanet:221117",
+        "umls": "UMLS:C0017494",
+        "mesh": "MESH:D005862"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005773",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4969",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007285",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8660",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:784.69",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42208",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005862",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048608",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1180",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:221117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36785009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017494",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1121787098",
+          "display": null
+        }
+      ],
+      "context": "Gerstmann syndrome is a rare neurological disorder that can occur as the result of a brain injury or as a developmental disorder. The syndrome is characterized by the loss or absence of four cognitive abilities-the loss of the ability to express thoughts in writing (agraphia, dysgraphia), to perform simple arithmetic",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gerstmann-Straussler-Scheinker Disease"
+      ],
+      "pubtator_normalized_name": "Gerstmann Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "finger agnosia",
+      "preferred_label": "finger agnosia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000671",
+        "orpha": null,
+        "umls": "UMLS:C0234509",
+        "mesh": "D000377"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000671",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060141",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0010525",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:115960",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0234509",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000377",
+          "display": "Agnosia"
+        }
+      ],
+      "context": "or as a developmental disorder. The syndrome is characterized by the loss or absence of four cognitive abilities-the loss of the ability to express thoughts in writing (agraphia, dysgraphia), to perform simple arithmetic problems (acalculia), to recognize or indicate one's own or another's fingers (finger agnosia), and to distinguish between the right and left sides of one's body. Additional cognitive defects may occur in some cases. Gerstmann syndrome affects males and females in equal numbers. The incidence of Gerstmann syndrome in the general population is unknown. The disorder was first described by Dr.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gerstmann Syndrome"
+      ],
+      "pubtator_normalized_name": "Agnosia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "brain injury",
+      "preferred_label": "brain injury",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043510",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D001930"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043510",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001930",
+          "display": null
+        }
+      ],
+      "context": "Gerstmann syndrome is a rare neurological disorder that can occur as the result of a brain injury or as a developmental disorder. The syndrome is characterized by the loss or absence of four cognitive abilities-the loss of the ability to express thoughts in writing (agraphia, dysgraphia), to perform simple arithmetic problems (acalculia), to recognize or indicate one's own or another's fingers",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Brain Injuries Traumatic",
+        "Brain Concussion",
+        "Brain Injury Chronic"
+      ],
+      "pubtator_normalized_name": "Brain Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dysgraphia",
+      "preferred_label": "dysgraphia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003038",
+        "orpha": null,
+        "umls": "UMLS:C0234144",
+        "mesh": "D000381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003038",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4540",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0010526",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:115942",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C182452",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0234144",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000381",
+          "display": "Agraphia"
+        }
+      ],
+      "context": "Gerstmann syndrome is a rare neurological disorder that can occur as the result of a brain injury or as a developmental disorder. The syndrome is characterized by the loss or absence of four cognitive abilities-the loss of the ability to express thoughts in writing (agraphia, dysgraphia), to perform simple arithmetic problems (acalculia), to recognize or indicate one's own or another's fingers (finger agnosia), and to distinguish between the right and left sides of one's body. Additional cognitive defects may occur in some cases. Gerstmann syndrome affects males and females in equ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Agraphia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "agraphia",
+      "preferred_label": "agraphia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000716",
+        "orpha": null,
+        "umls": "UMLS:C0001825",
+        "mesh": "MESH:D000381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000716",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060223",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1790",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000381",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001825",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1372096058",
+          "display": null
+        }
+      ],
+      "context": "Gerstmann syndrome is a rare neurological disorder that can occur as the result of a brain injury or as a developmental disorder. The syndrome is characterized by the loss or absence of four cognitive abilities-the loss of the ability to express thoughts in writing (agraphia, dysgraphia), to perform simple arithmetic problems (acalculia), to recognize or indicate one's own or another's fingers (finger agnosia), and to distinguish between the right and left sides of one's body. Additional cognitive defects may occur in some cases. Gerstmann syndrome affects males and fe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gerstmann Syndrome",
+        "Alexia Pure"
+      ],
+      "pubtator_normalized_name": "Agraphia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "apraxia",
+      "preferred_label": "apraxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:R48.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000665",
+        "orpha": null,
+        "umls": "UMLS:C0003635",
+        "mesh": "MESH:D001072"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000665",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060135",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:R48.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8166",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001072",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C180557",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003635",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:986651951",
+          "display": null
+        }
+      ],
+      "context": "ng. Affected children may also have problems in spelling, performing the basic four mathematical calculations, and distinguishing left from right. Also, they generally fail the finger identification test. Many, but not all such children will find it difficult to copy simple drawings (constructional apraxia).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Apraxia oculomotor Cogan type",
+        "Apraxia Ideomotor",
+        "Wieacker syndrome"
+      ],
+      "pubtator_normalized_name": "Apraxias",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

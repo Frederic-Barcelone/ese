@@ -1,0 +1,953 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:28:57.598070",
+  "document": "Charcot.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Charcot.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 12,
+  "total_validated": 12,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CMTX",
+      "preferred_label": "X-linked Charcot-Marie-Tooth disease",
+      "abbreviation": "CMTX",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": "8C20.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:64747",
+        "umls": null,
+        "mesh": "C535919"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:64747",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C20.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535919",
+          "display": "Charcot-Marie-Tooth disease X-linked 1"
+        }
+      ],
+      "context": "tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Charcot-Marie-Tooth disease X-linked recessive 2",
+        "Charcot-Marie-Tooth disease X-linked recessive 3",
+        "Spastic Paraplegia Hereditary"
+      ],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth disease X-linked 1",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT1A",
+      "preferred_label": "Charcot-Marie-Tooth disease type 1A",
+      "abbreviation": "CMT1A",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G60.0",
+        "icd11": "LD41.G1",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:101081",
+        "umls": null,
+        "mesh": "D002607"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:101081",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G60.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LD41.G1",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002607",
+          "display": "Charcot-Marie-Tooth Disease"
+        }
+      ],
+      "context": "ymptoms, family history and clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT4E",
+      "preferred_label": "Charcot-Marie-Tooth disease type 4E",
+      "abbreviation": "CMT4E",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G60.0",
+        "icd11": "8C20.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:99951",
+        "umls": null,
+        "mesh": "C535301"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:99951",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G60.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C20.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535301",
+          "display": "Charcot-Marie-Tooth disease Type 4E"
+        }
+      ],
+      "context": "l tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth disease Type 4E",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "neurological disorder",
+      "preferred_label": "nervous system disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G00-G99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005071",
+        "orpha": null,
+        "umls": "UMLS:C0027765",
+        "mesh": "MESH:D009422"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:863",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000618",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G00-G99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:349.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14336",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009422",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26835",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:118940003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027765",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Nervous_system_disease",
+          "display": null
+        }
+      ],
+      "context": "In the most severe cases, breathing difficulties can hasten death. Symptoms of CMT hereditary neuropathy usually begin gradually sometime in adolescence, early adulthood or middle age. The condition affects an equal number of males and females. CMT hereditary neuropathy is the most common inherited neurological disorder affecting more than 250,000 Americans. Since this condition is frequently undiagnosed, misdiagnosed or diagnosed very late in life, the true number of affected persons may be higher. The diagnosis of CMT hereditary neuropathy can be challenging. The diagnosis is based on physical symptoms, family h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Diseases",
+        "Heredodegenerative Disorders Nervous System",
+        "Peripheral Nervous System Diseases"
+      ],
+      "pubtator_normalized_name": "Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sensitivity",
+      "preferred_label": "sensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000605",
+        "orpha": null,
+        "umls": "UMLS:C3532523",
+        "mesh": "D007333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000605",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060056",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:759636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:473010000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3532523",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007333",
+          "display": "Insulin Resistance"
+        }
+      ],
+      "context": "Symptoms of CMT disease usually begin gradually in adolescence, but can begin earlier or later. In almost all cases, the longest nerve fibers are affected first. Over time, affected individuals may lose the normal use of their feet, hands, legs and arms. Common red flags can include decreased sensitivity to heat, touch or pain, muscle weakness in the hand, foot or lower leg, trouble with fine motor skills, high-stepped gait (foot drop), loss of muscle mass in the lower leg, frequent tripping or falling, hammertoe, high foot arch and flat feet. Stretch reflexes may be lost. The disease is slowly pro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatitis Contact",
+        "Photophobia",
+        "Glutamate Monosodium Sensitivity"
+      ],
+      "pubtator_normalized_name": "Insulin Resistance",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "neuropathy",
+      "preferred_label": "neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005244",
+        "orpha": null,
+        "umls": "UMLS:C0031117",
+        "mesh": "D010523"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005244",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:870",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003100",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12192",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18386",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10034606",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:386033004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0031117",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010523",
+          "display": "Peripheral Nervous System Diseases"
+        }
+      ],
+      "context": "or falling, hammertoe, high foot arch and flat feet. Stretch reflexes may be lost. The disease is slowly progressive and variable and those affected may remain active for years and live a normal life span. In the most severe cases, breathing difficulties can hasten death. Symptoms of CMT hereditary neuropathy usually begin gradually sometime in adolescence, early adulthood or middle age. The condition affects an equal number of males and females. CMT hereditary neuropathy is the most common inherited neurological disorder affecting more than 250,000 Americans. Since this condition is frequently undiagno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Nerve Compression Syndromes",
+        "Cranial Nerve Diseases",
+        "Optic Nerve Diseases"
+      ],
+      "pubtator_normalized_name": "Peripheral Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT1B",
+      "preferred_label": "CMT1B",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007307",
+        "orpha": "Orphanet:101082",
+        "umls": "UMLS:C0270912",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007307",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0110152",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1246",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:124377",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C118782",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:118200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:101082",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0270912",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1632280319",
+          "display": null
+        }
+      ],
+      "context": ", family history and clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CMT1D",
+      "preferred_label": "CMT1D",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011890",
+        "orpha": "Orphanet:101084",
+        "umls": "UMLS:C1843247",
+        "mesh": "MESH:C537985"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011890",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0110150",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9189",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:334709",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537985",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:607678",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:101084",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:719979008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1843247",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2062905967",
+          "display": null
+        }
+      ],
+      "context": "y history and clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth disease Type 1D",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT2E",
+      "preferred_label": "CMT2E",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011894",
+        "orpha": "Orphanet:99939",
+        "umls": "UMLS:C1843225",
+        "mesh": "MESH:C537994"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011894",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0110165",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9193",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:375127",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537994",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C134953",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:607684",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99939",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:717012004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1843225",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1476045360",
+          "display": null
+        }
+      ],
+      "context": "ry and clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth disease Type 2E",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT4A",
+      "preferred_label": "CMT4A",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008961",
+        "orpha": "Orphanet:99948",
+        "umls": "UMLS:C1859198",
+        "mesh": "MESH:C535419"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008961",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0110185",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1252",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:347821",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535419",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:214400",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99948",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:715796006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1859198",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1476665103",
+          "display": null
+        }
+      ],
+      "context": "clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth disease Type 4A",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT4F",
+      "preferred_label": "CMT4F",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013959",
+        "orpha": "Orphanet:99952",
+        "umls": "UMLS:C3540453",
+        "mesh": "D015417"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013959",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0110193",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12441",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:761704",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:614895",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99952",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:715801001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3540453",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:330503211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015417",
+          "display": "Hereditary Sensory and Motor Neuropathy"
+        }
+      ],
+      "context": ". Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hereditary Sensory and Motor Neuropathy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CMT",
+      "preferred_label": "CMT",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015626",
+        "orpha": "Orphanet:166",
+        "umls": "UMLS:C0007959",
+        "mesh": "MESH:D002607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015626",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10595",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6034",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:356.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2980",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002607",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10034699",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200855",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75467",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:919",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:118220",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:166",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007959",
+          "display": null
+        }
+      ],
+      "context": "Symptoms of CMT disease usually begin gradually in adolescence, but can begin earlier or later. In almost all cases, the longest nerve fibers are affected first. Over time, affected individuals may lose the normal use of their feet, hands, legs and arms. Common red flags can include decreased sensitivity to heat,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spastic Paraplegia Hereditary"
+      ],
+      "pubtator_normalized_name": "Charcot-Marie-Tooth disease Type 1D",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

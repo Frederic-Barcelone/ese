@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260205_071244_1919c33689fc",
+  "timestamp": "2026-02-05T08:16:40.062121",
+  "document": "Alpers-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alpers-Disease.pdf",
+  "total_candidates": 38,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "The child is unable to achieve normal muscle tone (hypotonia), yet the limbs appear to be stiff. On MRI examination an increased density of the grey matter in the brain is noted. Usually, but not always,",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "mitochondrial DNA depletion syndrome 4a",
+      "matched_text": "Alpers disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G31.81",
+      "orpha": "Orphanet:726"
+    },
+    {
+      "name": "nervous system disorder",
+      "matched_text": "neurologic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G00-G99",
+      "orpha": null
+    },
+    {
+      "name": "spastic quadriplegia",
+      "matched_text": "spastic quadriplegia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G80.0",
+      "orpha": "Orphanet:210141"
+    },
+    {
+      "name": "mental retardation",
+      "matched_text": "Mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "liver disorder",
+      "matched_text": "liver disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K70-K77",
+      "orpha": null
+    },
+    {
+      "name": "optic atrophy",
+      "matched_text": "optic atrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H47.2",
+      "orpha": null
+    },
+    {
+      "name": "dementia",
+      "matched_text": "dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F02",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

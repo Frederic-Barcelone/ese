@@ -1,0 +1,35 @@
+{
+  "doc_id": "Gottron-Syndrome",
+  "doc_filename": "Gottron-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Gottron syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "premature aging",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2155,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Gottron Syndrome: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing Gottron syndrome, an extremely rare inherited disorder characterized by premature aging and skin atrophy affecting the hands and feet.",
+  "long_description": "This clinical document provides a comprehensive overview of Gottron syndrome (GS), an extremely rare inherited disorder that affects fewer than 40 documented cases worldwide. The document details the characteristic features of this congenital condition, including premature aging appearance, fragile and thin skin particularly on the hands and feet, subcutaneous fat atrophy, and associated physical manifestations such as small stature, micrognathia, and prominent chest veins. The text emphasizes that GS is a mild, nonprogressive form of skin atrophy that presents from infancy, causing affected children to appear older than their chronological age. The document also notes a potential female predominance and discusses the symptomatic and supportive treatment approach, highlighting the importance of genetic counseling for affected families.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T06:20:44.851248"
+}

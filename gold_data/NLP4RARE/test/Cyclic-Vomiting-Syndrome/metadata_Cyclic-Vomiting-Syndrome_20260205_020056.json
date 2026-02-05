@@ -1,0 +1,35 @@
+{
+  "doc_id": "Cyclic-Vomiting-Syndrome",
+  "doc_filename": "Cyclic-Vomiting-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "cyclic vomiting syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "not rare",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2522,
+  "file_size_human": "2.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Cyclic Vomiting Syndrome: Clinical Overview and Diagnostic Criteria",
+  "short_description": "Clinical document describing cyclic vomiting syndrome (CVS), its demographics, prevalence, and diagnostic approaches based on consensus criteria.",
+  "long_description": "This clinical research document provides a comprehensive overview of cyclic vomiting syndrome (CVS), a disorder that affects approximately 2% of Caucasian school-aged children according to studies from Scotland and Australia. The document details the demographic patterns showing a slight female predominance (55:45 ratio) and typical onset between ages 3-7, though cases can occur from infancy to old age. It discusses the historical context of CVS, first described in medical literature in 1806, and addresses the diagnostic challenges including frequent misdiagnosis and delayed recognition. The document outlines current diagnostic criteria established by the North American Society for Pediatric Gastroenterology, Hepatology and Nutrition and the Rome IV Committee, emphasizing that CVS diagnosis requires ruling out other causes of recurrent vomiting through various clinical tests and evaluations.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:00:56.175481"
+}

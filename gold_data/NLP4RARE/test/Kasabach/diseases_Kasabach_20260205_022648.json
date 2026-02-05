@@ -1,0 +1,953 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:26:48.557971",
+  "document": "Kasabach.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Kasabach.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 12,
+  "total_validated": 12,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "kaposiform hemangioendotheliomas",
+      "preferred_label": "Kaposiform hemangioendothelioma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016236",
+        "orpha": "Orphanet:2122",
+        "umls": "UMLS:C1367420",
+        "mesh": "MESH:C537007"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016236",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3077",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:234548",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537007",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27510",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2122",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:403983000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1367420",
+          "display": null
+        }
+      ],
+      "context": "Kasabach-Merritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on the skin which can be firm, indurated and purpuric. Areas of petechiae (tiny red dots) can appear a",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kaposiform Hemangioendothelioma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Kasabach-Merritt phenomenon",
+      "preferred_label": "Kasabach-Merritt Phenomenon",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007708",
+        "orpha": "Orphanet:2330",
+        "umls": "UMLS:C0221025",
+        "mesh": "MESH:D059885"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007708",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:70",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:287.39",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:65122",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D059885",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10058423",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201035",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3821",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1320",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:141000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2330",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86635005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0221025",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2059601885",
+          "display": null
+        }
+      ],
+      "context": "Kasabach-Merritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kasabach-Merritt Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "coagulopathy",
+      "preferred_label": "blood coagulation disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001531",
+        "orpha": null,
+        "umls": "UMLS:C0005779",
+        "mesh": "MESH:D001778"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001531",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1247",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009314",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:287.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:604",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001778",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2902",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64779008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0005779",
+          "display": null
+        }
+      ],
+      "context": "Kasabach-Merritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "lymphatic malformation",
+      "preferred_label": "lymphatic malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q82.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019313",
+        "orpha": null,
+        "umls": "UMLS:C0398368",
+        "mesh": "C567763"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019313",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050580",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:13057",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q82.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:140763",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:153100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:254199006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0398368",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567763",
+          "display": "CLAPO Syndrome"
+        }
+      ],
+      "context": "t morbidity and mortality. The morbidity and mortality is caused by bleeding. The cause of Kasabach-Merritt phenomenon is unknown. It is believed to be secondary to sequestration or trapping of platelets into the tumor. These tumors are made up of abnormal endothelial cells (spindle cells) and also lymphatic malformation. It is unclear why the KMP occurs and if it is caused by the spindle cells or the lymphatic component. Kasabach-Merritt phenomenon is a rare disorder that affects males and females equally The diagnosis is most often made during infancy but older children have been reported with this phenomenon. KH",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "CLAPO Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare vascular tumors",
+      "preferred_label": "Rare vascular tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:211237",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:211237",
+          "display": null
+        }
+      ],
+      "context": "Kasabach-Merritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on the skin which can be firm, indurated and purpuric. Areas of pete",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "thrombocytopenia",
+      "preferred_label": "thrombocytopenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002049",
+        "orpha": null,
+        "umls": "UMLS:C0040034",
+        "mesh": "MESH:D013921"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002049",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1588",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:287.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52737",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013921",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3408",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:302215000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040034",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:683583694",
+          "display": null
+        }
+      ],
+      "context": "Kasabach-Merritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated int",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Purpura Thrombocytopenic Idiopathic",
+        "Thrombocytopenia Neonatal Alloimmune",
+        "Thrombocytopenia cyclic"
+      ],
+      "pubtator_normalized_name": "Thrombocytopenia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tufted angiomas",
+      "preferred_label": "tufted angioma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011927",
+        "orpha": "Orphanet:1063",
+        "umls": "UMLS:C0346073",
+        "mesh": "MESH:C536924"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011927",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:425",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0012329",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:215.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9161/0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:83402",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536924",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4487",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:607859",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1063",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:705155008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0346073",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1994573217",
+          "display": null
+        }
+      ],
+      "context": "ritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on the skin which can be firm, indurated and purpuric. Areas of petechiae (tiny red dots) can appear around the lesion or",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Tufted angioma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disseminated",
+      "preferred_label": "disseminated",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0022202",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D004211"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0022202",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004211",
+          "display": "Disseminated Intravascular Coagulation"
+        }
+      ],
+      "context": "thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on the skin which can be firm, indurated and purpuric. Areas of petechiae (tiny red dots) can appear around the lesion or on other parts of the body. If the vascular lesion is internal, these petechiae can be seen on the skin. Bruisi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Multiple Sclerosis",
+        "Dermatitis Atopic",
+        "Mycobacterium Infections Nontuberculous"
+      ],
+      "pubtator_normalized_name": "Disseminated Intravascular Coagulation",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hemangiomas",
+      "preferred_label": "hemangioma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D18.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006500",
+        "orpha": null,
+        "umls": "UMLS:C0018916",
+        "mesh": "MESH:D006391"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006500",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:255",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000635",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001028",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D18.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:228.09",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9120/0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5477",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006391",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3085",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:HEMA",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:400210000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018916",
+          "display": null
+        }
+      ],
+      "context": "d on the skin which can be firm, indurated and purpuric. Areas of petechiae (tiny red dots) can appear around the lesion or on other parts of the body. If the vascular lesion is internal, these petechiae can be seen on the skin. Bruising and spontaneous bleeding can also occur. These tumors are not hemangiomas. They usually present in young infants, less than three months of age, but have rarely been reported in older children. These tumors occur in the extremities, chest, neck, abdomen and pelvis. They infiltrate across tissue plans and can be aggravated by interventions, infection and trauma. When thes",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemangioma Cavernous Central Nervous System",
+        "Hemangioma Cavernous",
+        "Hemangioma capillary infantile"
+      ],
+      "pubtator_normalized_name": "Hemangioma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anemia",
+      "preferred_label": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002280",
+        "orpha": null,
+        "umls": "UMLS:C0002871",
+        "mesh": "MESH:D000740"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002280",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2355",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001903",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:285.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1526",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000740",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2869",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271737000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002871",
+          "display": null
+        }
+      ],
+      "context": "Kasabach-Merritt phenomenon (KMP) is a rare condition that is associated with a coagulopathy with features including profound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic",
+        "Anemia Sickle Cell",
+        "Anemia Aplastic"
+      ],
+      "pubtator_normalized_name": "Anemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trauma",
+      "preferred_label": "trauma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "e not hemangiomas. They usually present in young infants, less than three months of age, but have rarely been reported in older children. These tumors occur in the extremities, chest, neck, abdomen and pelvis. They infiltrate across tissue plans and can be aggravated by interventions, infection and trauma. When these tumors with KMP are internal such as in the pleural or retroperitoneum, they can cause significant morbidity and mortality. The morbidity and mortality is caused by bleeding. The cause of Kasabach-Merritt phenomenon is unknown. It is believed to be secondary to sequestration or trapping",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trauma Nervous System",
+        "Osteoporosis",
+        "Stress Disorders Post-Traumatic"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "DIC",
+      "preferred_label": "DIC",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D65",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001243",
+        "orpha": null,
+        "umls": "UMLS:C0012739",
+        "mesh": "MESH:D004211"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001243",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11247",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D65",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:286.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41620",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004211",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200639",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2992",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:67406007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012739",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1622289887",
+          "display": null
+        }
+      ],
+      "context": "ound thrombocytopenia (low platelets), hypofibrinogenemia (low fibrinogen), and anemia. This phenomenon is only associated with two rare vascular tumors: kaposiform hemangioendotheliomas and tufted angiomas. This condition can be life threatening secondary to the risk of bleeding and progression to DIC (disseminated intravascular coagulopathy). Initially a vascular lesion is noted on the skin which can be firm, indurated and purpuric. Areas of petechiae (tiny red dots) can appear around the lesion or on other parts of the body. If the vascular lesion is internal, these petechiae can be seen on th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_154258_53fad6008e2b",
+  "timestamp": "2026-02-04T16:49:13.116794",
+  "document": "Anemia-Hereditary-Nonspherocytic-Hemolytic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Anemia-Hereditary-Nonspherocytic-Hemolytic.pdf",
+  "total_candidates": 15,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "RBCs",
+      "long_form": "red blood cells",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "tted blood disorders characterized by the premature destruction of red blood cells (erythrocytes or RBCs). If the red blood cells cannot be replaced faster than they destroy themselves, anemia is the resu",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "hereditary nonspherocytic hemolytic anemia",
+      "matched_text": "Hereditary nonspherocytic hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "blood disorder",
+      "matched_text": "blood disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D50-D89",
+      "orpha": "Orphanet:97992"
+    },
+    {
+      "name": "anemia",
+      "matched_text": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Red blood cells",
+      "matched_text": "red blood cells",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

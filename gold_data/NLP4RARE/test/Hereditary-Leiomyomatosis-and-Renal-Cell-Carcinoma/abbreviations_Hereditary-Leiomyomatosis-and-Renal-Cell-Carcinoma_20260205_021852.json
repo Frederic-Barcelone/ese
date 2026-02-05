@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:18:52.907387",
+  "document": "Hereditary-Leiomyomatosis-and-Renal-Cell-Carcinoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hereditary-Leiomyomatosis-and-Renal-Cell-Carcinoma.pdf",
+  "total_candidates": 6,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HLRCC",
+      "long_form": "hereditary leiomyomatosis and renal cell cancer",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "HLRCC affects males and females in equal numbers. The disorder may be recognized more readily in females because of the development of uterine fibroid and associated symptoms. The exact incidence and prevalence of HLRCC in the general population is unknown.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Hereditary leiomyomatosis and renal cell cancer",
+      "matched_text": "HLRCC",
+      "abbreviation": "HLRCC",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C64",
+      "orpha": "ORPHA:523"
+    },
+    {
+      "name": "fibroid",
+      "matched_text": "fibroid",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

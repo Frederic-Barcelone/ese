@@ -1,0 +1,35 @@
+{
+  "doc_id": "Cleidocranial-Dysplasia",
+  "doc_filename": "Cleidocranial-Dysplasia.pdf",
+  "top_entities": [
+    {
+      "name": "cleidocranial dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "skeletal dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2090,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Cleidocranial Dysplasia: Clinical Overview and Characteristics",
+  "short_description": "Clinical overview of cleidocranial dysplasia, a rare autosomal dominant skeletal disorder characterized by absent or defective collarbones and distinctive craniofacial features.",
+  "long_description": "This document provides a comprehensive clinical overview of cleidocranial dysplasia, a rare skeletal dysplasia with an estimated birth prevalence of 1 in 1 million. The condition is characterized by distinctive features including short stature, narrow sloping shoulders due to defective or absent clavicles, premature closure of cranial sutures, delayed fontanel closure, and various skeletal abnormalities affecting the pelvis, chest, and jaw. Additional manifestations include delayed tooth eruption, high arched palate, and irregular finger length. The document explains that this autosomal dominant genetic disorder affects males and females equally, is apparent at birth, and has been documented in approximately 1,000 cases in medical literature.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:55:46.486962"
+}

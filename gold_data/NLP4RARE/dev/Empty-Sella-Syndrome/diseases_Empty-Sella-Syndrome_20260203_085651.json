@@ -1,0 +1,1463 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:56:51.059144",
+  "document": "Empty-Sella-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Empty-Sella-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 22,
+  "total_validated": 22,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Empty sella syndrome",
+      "preferred_label": "Empty Sella Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006745",
+        "orpha": "Orphanet:213711",
+        "umls": "UMLS:C0206630",
+        "mesh": "MESH:D018203"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006745",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4226",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000919",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6339",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8930/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:60196",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018203",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10057649",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C8973",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1086",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ESS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:213711",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:699356008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206630",
+          "display": null
+        }
+      ],
+      "context": "Empty sella syndrome is a rare disorder characterized by enlargement or malformation of a structure in the skull known as the sella turcica. The sella turcica is a saddle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Empty Sella Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Empty sella syndrome is a rare disorder characterized by enlargement or malformation of a structure in the skull known as the sella turcica. The sella turcica is a saddle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella turcica is either p",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "depression",
+      "preferred_label": "depression",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F32",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002050",
+        "orpha": null,
+        "umls": "UMLS:C0011581",
+        "mesh": "MESH:D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002050",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1596",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F32",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:311",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4229",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003866",
+          "display": null
+        },
+        {
+          "system": "MFOMD",
+          "code": "MFOMD:0000013",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2982",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:35489007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011581",
+          "display": null
+        }
+      ],
+      "context": "Empty sella syndrome is a rare disorder characterized by enlargement or malformation of a structure in the skull known as the sella turcica. The sella turcica is a saddle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella turcica is either partially filled with cerebrospinal fluid and a very small associated pituitary gland lying in the floor of the sella (partially empty sella) or compl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Respiratory Insufficiency",
+        "Depression Postpartum",
+        "Bipolar Disorder"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pituitary gland",
+      "preferred_label": "hypophysitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021156",
+        "orpha": null,
+        "umls": "UMLS:C0342409",
+        "mesh": "MESH:D000072659"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021156",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:575012",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000072659",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C12399",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237705001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0342409",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1589682285",
+          "display": null
+        }
+      ],
+      "context": "Empty sella syndrome is a rare disorder characterized by enlargement or malformation of a structure in the skull known as the sella turcica. The sella turcica is a saddle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella turcica is either partially filled with cerebrospinal fluid and a very small associated pituitary gland lying in the floor of the sella (partially empty sella) or completely filled with cerebrospinal fluid with no visualized pituitary gland (completely empty sell",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autoimmune Hypophysitis"
+      ],
+      "pubtator_normalized_name": "Hypophysitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "empty sella",
+      "preferred_label": "empty sella",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006740",
+        "orpha": null,
+        "umls": "UMLS:C0014008",
+        "mesh": "MESH:D004652"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006740",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3642",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000914",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:253.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41766",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004652",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10014567",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84686",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237722004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014008",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:49112094",
+          "display": null
+        }
+      ],
+      "context": "dle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella turcica is either partially filled with cerebrospinal fluid and a very small associated pituitary gland lying in the floor of the sella (partially empty sella) or completely filled with cerebrospinal fluid with no visualized pituitary gland (completely empty sella). Most individuals with empty sella syndrome do not have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorde",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Empty Sella Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "y sella) or completely filled with cerebrospinal fluid with no visualized pituitary gland (completely empty sella). Most individuals with empty sella syndrome do not have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevate",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "idiopathic",
+      "preferred_label": "idiopathic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0700005",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D010300"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0700005",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:894194405",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010300",
+          "display": "Parkinson Disease"
+        }
+      ],
+      "context": "spinal fluid with no visualized pituitary gland (completely empty sella). Most individuals with empty sella syndrome do not have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic Noncirrhotic Portal Hypertension",
+        "Idiopathic Pulmonary Fibrosis",
+        "Calcinosis Cutis"
+      ],
+      "pubtator_normalized_name": "Parkinson Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pituitary tumor",
+      "preferred_label": "pituitary tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017611",
+        "orpha": "Orphanet:304055",
+        "umls": "UMLS:C0032019",
+        "mesh": "D010911"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017611",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21253",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:239.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19326",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3330",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:304055",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:127024001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032019",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010911",
+          "display": "Pituitary Neoplasms"
+        }
+      ],
+      "context": "ot have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypothalamic Neoplasms"
+      ],
+      "pubtator_normalized_name": "Pituitary Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "trauma",
+      "preferred_label": "trauma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obes",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Trauma Nervous System",
+        "Osteoporosis",
+        "Stress Disorders Post-Traumatic"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "idiopathic intracranial hypertension",
+      "preferred_label": "idiopathic intracranial hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G93.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009468",
+        "orpha": "Orphanet:238624",
+        "umls": "UMLS:C0033845",
+        "mesh": "MESH:D011559"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009468",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11459",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001132",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4561",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G93.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:348.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18732",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011559",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10037149",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85035",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1294",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:243200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:238624",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:68267002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0033845",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:815670637",
+          "display": null
+        }
+      ],
+      "context": "s concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most pe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic intracranial hypertension with papilledema"
+      ],
+      "pubtator_normalized_name": "Pseudotumor Cerebri",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "idiopathic intracranial hypertension",
+      "preferred_label": "Pseudotumor Cerebri",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0033845",
+        "mesh": "D011559"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0033845",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011559",
+          "display": "Pseudotumor Cerebri"
+        }
+      ],
+      "context": "s concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most pe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pseudotumor Cerebri",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "men",
+      "preferred_label": "MEN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E31.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017169",
+        "orpha": "Orphanet:276161",
+        "umls": "UMLS:C0027662",
+        "mesh": "MESH:D009377"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017169",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3125",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21044",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E31.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:258.0",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8360/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:45036",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009377",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10061299",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100148",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C6432",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:131100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:276161",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:46724008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027662",
+          "display": null
+        }
+      ],
+      "context": "disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most people with empty sella syndrome do not have symptoms and may go undiagnosed, determining the disorder’s true frequency in the general population is difficult. Some researchers have estima",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Meningism",
+        "Meningioma",
+        "Substance-Related Disorders"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "high blood pressure",
+      "preferred_label": "high blood pressure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": "ICD10CM:I15",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005044",
+        "orpha": null,
+        "umls": "UMLS:C0020538",
+        "mesh": "MESH:D006973"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10763",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000537",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000822",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I15",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:997.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006973",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3117",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38341003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020538",
+          "display": null
+        }
+      ],
+      "context": "ition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most people with empty sella syndrome do not have symptoms and may go undiagnosed, determining the disorder’s true frequency in the general population is difficult. Some researchers have estimated that less than 1 percent of individuals with empty sella syndrome ultimately d",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypertension",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malformation",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.7584223031997681,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Empty sella syndrome is a rare disorder characterized by enlargement or malformation of a structure in the skull known as the sella turcica. The sella turcica is a saddle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella turcica is either partially filled with cerebrospinal fluid and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sella syndrome",
+      "preferred_label": "Syndrome",
+      "abbreviation": null,
+      "confidence": 0.8798424363136291,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0039082",
+        "mesh": "D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0039082",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003866",
+          "display": "Depressive Disorder"
+        }
+      ],
+      "context": "Empty sella syndrome is a rare disorder characterized by enlargement or malformation of a structure in the skull known as the sella turcica. The sella turcica is a saddle-shaped depression located in the bone at the base of skull (sphenoid bone), in which resides the pituitary gland. In empty sella syndrome, the sella turcica is either partially filled with cerebrospinal fluid and a very small associated pituitary gland lying in the floor of the sella (partially empty sella) or completely filled with cerebrospinal fluid with no visualized pituitary gland (completely empty sella). Most individuals with",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "deficiencies",
+      "preferred_label": "Tyrosine Transaminase Deficiency Disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0268487",
+        "mesh": "D020176"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0268487",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020176",
+          "display": "Tyrosinemias"
+        }
+      ],
+      "context": "tary gland lying in the floor of the sella (partially empty sella) or completely filled with cerebrospinal fluid with no visualized pituitary gland (completely empty sella). Most individuals with empty sella syndrome do not have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Tyrosinemias",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "primary disorder",
+      "preferred_label": "primary disorders",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0277554",
+        "mesh": "D006970"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0277554",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006970",
+          "display": "Disorders of Excessive Somnolence"
+        }
+      ],
+      "context": "lly empty sella) or completely filled with cerebrospinal fluid with no visualized pituitary gland (completely empty sella). Most individuals with empty sella syndrome do not have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevate",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Taste Disorders",
+        "Primary Immunodeficiency Diseases",
+        "Sleep Initiation and Maintenance Disorders"
+      ],
+      "pubtator_normalized_name": "Disorders of Excessive Somnolence",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "secondary disorder",
+      "preferred_label": "Headache Disorders, Secondary",
+      "abbreviation": null,
+      "confidence": 0.8740634679794311,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1565107",
+        "mesh": "D051271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1565107",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D051271",
+          "display": "Headache Disorders Secondary"
+        }
+      ],
+      "context": "visualized pituitary gland (completely empty sella). Most individuals with empty sella syndrome do not have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Headache Disorders Secondary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pituitary tumor",
+      "preferred_label": "Pituitary Neoplasms",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0032019",
+        "mesh": "D010911"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0032019",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010911",
+          "display": "Pituitary Neoplasms"
+        }
+      ],
+      "context": "ot have any associated symptoms, but the finding raises concerns about hormone deficiencies. Empty sella syndrome may occur as a primary disorder, for which the cause is unknown (idiopathic), or as a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypothalamic Neoplasms"
+      ],
+      "pubtator_normalized_name": "Pituitary Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Primary empty sella syndrome",
+      "preferred_label": "Empty Sella Syndrome, Primary",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0271574",
+        "mesh": "D004652"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0271574",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004652",
+          "display": "Empty Sella Syndrome"
+        }
+      ],
+      "context": "a secondary disorder, in which it occurs due to an underlying condition or disorder such as a treated pituitary tumor, head trauma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most people with empty sella syndrome do not have symptoms and may go undiagnosed, determining the disorder’s true frequency in the general pop",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Empty Sella Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "obese",
+      "preferred_label": "Obesity",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0028754",
+        "mesh": "D009765"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0028754",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009765",
+          "display": "Obesity"
+        }
+      ],
+      "context": "auma, or a condition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most people with empty sella syndrome do not have symptoms and may go undiagnosed, determining the disorder’s true frequency in the general population is difficult. Some researchers have estimated that less than 1 percent of individuals with empt",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Obesity Maternal",
+        "Obesity Abdominal",
+        "Obesity Metabolically Benign"
+      ],
+      "pubtator_normalized_name": "Obesity",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "high blood pressure",
+      "preferred_label": "Hypertensive disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0020538",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0020538",
+          "display": null
+        }
+      ],
+      "context": "ition known as idiopathic intracranial hypertension (also called pseudotumor cerebri) during which elevated intracranial pressure causes empty sella syndrome. Primary empty sella syndrome affects approximately 4 times more women than men. Most cases occur in middle-aged women who are obese and have high blood pressure (hypertension). Because most people with empty sella syndrome do not have symptoms and may go undiagnosed, determining the disorder’s true frequency in the general population is difficult. Some researchers have estimated that less than 1 percent of individuals with empty sella syndrome ultimately d",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

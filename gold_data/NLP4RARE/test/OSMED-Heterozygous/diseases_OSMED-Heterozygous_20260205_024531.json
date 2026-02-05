@@ -1,0 +1,372 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:45:31.291506",
+  "document": "OSMED-Heterozygous.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/OSMED-Heterozygous.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "rhizomelic dwarfism",
+      "preferred_label": "rhizomelic dwarfism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E71.540",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015776",
+        "orpha": "Orphanet:177",
+        "umls": "UMLS:C0282529",
+        "mesh": "MESH:D018902"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015776",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2580",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:13160",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E71.540",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:79471",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018902",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85047",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:215100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:177",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56692003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0282529",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:260357080",
+          "display": null
+        }
+      ],
+      "context": "Heterozygous OSMED (oto-spondyl-megaepiphyseal dysplasia) is a rare genetic disorder characterized by skeletal malformations resulting in shortening of the upper limbs and thighs and short stature (rhizomelic dwarfism). Additional symptoms include distinctive facial features and delays in psychomotor development. After the initial period of growth deficiency, affected individuals experience gradual improvement in bone growth that leads to normal physical development by early childhood. Mental and motor developme",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Heterozygous OSMED (oto-spondyl-megaepiphyseal dysplasia) is a rare genetic disorder characterized by skeletal malformations resulting in shortening of the upper limbs and thighs and short stature (rhizomelic dwarfism). Additional symptoms include distinctive facial features and delays in psychomotor development. After the initial period of growth deficiency, affected individuals e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hearing loss",
+      "preferred_label": "hearing loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005365",
+        "orpha": null,
+        "umls": "UMLS:C1384666",
+        "mesh": "MESH:D034381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005365",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004238",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:389.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034381",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1384666",
+          "display": null
+        }
+      ],
+      "context": "or development. After the initial period of growth deficiency, affected individuals experience gradual improvement in bone growth that leads to normal physical development by early childhood. Mental and motor development is also normal by early childhood. In some cases, affected individuals develop hearing loss. Heterozygous OSMED occurs because of disruptions or changes (mutations) to the COL11A2 gene. A diagnosis of heterozygous OSMED is made based upon a thorough clinical evaluation, a detailed patient history, identification of characteristic symptoms, and a variety of specialized tests including x-ra",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deafness",
+        "Hearing Loss Functional",
+        "Hearing Loss Sensorineural"
+      ],
+      "pubtator_normalized_name": "Hearing Loss",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "Heterozygous OSMED (oto-spondyl-megaepiphyseal dysplasia) is a rare genetic disorder characterized by skeletal malformations resulting in shortening of the upper limbs and thighs and short stature (rhizomelic dwarfism). Additional symptoms include distinctive facial features and delays in psychomotor development. After the initial period of growth deficiency, affected individuals experience gradual improvement in bone growth that leads to normal physical development by early childhood. Menta",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "OSMED",
+      "preferred_label": "OSMED",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044206",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C535776"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044206",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:215150",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535776",
+          "display": "Pierre Robin syndrome with fetal chondrodysplasia"
+        }
+      ],
+      "context": "Heterozygous OSMED (oto-spondyl-megaepiphyseal dysplasia) is a rare genetic disorder characterized by skeletal malformations resulting in shortening of the upper limbs and thighs and short stature (rhizomelic dwarfism). Additional symptoms include distinctive facial features and delays in psychomotor development. Aft",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pierre Robin syndrome with fetal chondrodysplasia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

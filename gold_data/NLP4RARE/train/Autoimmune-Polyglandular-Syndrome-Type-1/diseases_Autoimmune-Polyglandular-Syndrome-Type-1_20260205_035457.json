@@ -1,0 +1,254 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:54:57.709667",
+  "document": "Autoimmune-Polyglandular-Syndrome-Type-1.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Autoimmune-Polyglandular-Syndrome-Type-1.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Autoimmune polyglandular syndrome type 1",
+      "preferred_label": "Autoimmune Polyglandular Syndrome Type 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009411",
+        "orpha": "Orphanet:3453",
+        "umls": "UMLS:C0085859",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009411",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050167",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8466",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:258.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39125",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200738",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C129727",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:798",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:240300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3453",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:11244009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085859",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune polyglandular syndrome type 1 (APS-1) is a rare and complex recessively inherited disorder of immune-cell dysfunction with multiple autoimmunhities. It presents as a group of symptoms including potentially life-threatening endocrine gland and gastrointestinal dysfunctions. Autoimmune disorders occur when antibodies and immune c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "APS",
+      "preferred_label": "Antiphospholipid syndrome",
+      "abbreviation": "APS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D68.6",
+        "icd11": "4A41.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:464",
+        "umls": null,
+        "mesh": "D016736"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:464",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D68.6",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A41.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016736",
+          "display": "Antiphospholipid Syndrome"
+        }
+      ],
+      "context": "Autoimmune polyglandular syndrome type 1 (APS-1) is a rare and complex recessively inherited disorder of immune-cell dysfunction with multiple autoimmunhities. It presents as a group of symptoms including potentially life-threatening endocrine gland and gastrointestinal dysfunctions. Autoimmune disorders occur when antibodies and immune cells",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Familial antiphospholipid syndrome"
+      ],
+      "pubtator_normalized_name": "Antiphospholipid Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Autoimmune disorders",
+      "preferred_label": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007179",
+        "orpha": null,
+        "umls": "UMLS:C0004364",
+        "mesh": "MESH:D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007179",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:417",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005809",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:720",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2135",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001327",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2889",
+          "display": null
+        },
+        {
+          "system": "OBI",
+          "code": "OBI:1110054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85828009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004364",
+          "display": null
+        }
+      ],
+      "context": "Autoimmune polyglandular syndrome type 1 (APS-1) is a rare and complex recessively inherited disorder of immune-cell dysfunction with multiple autoimmunhities. It presents as a group of symptoms including potentially life-threatening endocrine gland and gastrointestinal dysfunctions. Autoimmune disorders occur when antibodies and immune cells are launched by the body against one or several antigens of its own tissues. APS-1 is caused by changes (mutations) in the autoimmune regulator (AIRE) gene. HLA-DR/DQ genes also play a role in predisposing to which of the component autoimmune disease the patie",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Demyelinating Autoimmune Diseases CNS",
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases of the Nervous System",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

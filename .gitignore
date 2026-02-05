@@ -1,6 +1,10 @@
 # Environment variables
 .env
 .env.*
+.gitignore
+.claude
+CLAUDE.MD
+
 
 # Python cache and virtual environments
 __pycache__/
@@ -23,6 +27,10 @@ cache/
 .idea/
 
 # other Folders not needed
+EU_ERN/
+ctis/
+EU_guidelines/
+EU_guidance/
 FDA_DATA/
 FDA_TH/
 FDA_TH_in/
@@ -47,7 +55,7 @@ FDA_guidance_library/
 Pdfs/
 ouput_datasources/
 corpus_log/
-gold_data/NLP4RARE
+
 backup_2026_01_05
 
 # Test artifacts (timestamped extraction outputs)

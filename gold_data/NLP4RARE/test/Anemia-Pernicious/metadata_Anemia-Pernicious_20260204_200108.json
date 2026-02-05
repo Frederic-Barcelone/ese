@@ -1,0 +1,45 @@
+{
+  "doc_id": "Anemia-Pernicious",
+  "doc_filename": "Anemia-Pernicious.pdf",
+  "top_entities": [
+    {
+      "name": "pernicious anemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "blood disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Red blood cells",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Cobalt",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1910,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Pernicious Anemia: Clinical Overview and Diagnostic Approaches",
+  "short_description": "Clinical document describing pernicious anemia, a rare blood disorder caused by vitamin B12 absorption deficiency due to lack of intrinsic factor.",
+  "long_description": "This clinical document provides a comprehensive overview of pernicious anemia, a rare hematological disorder characterized by the body's inability to properly utilize vitamin B12 for red blood cell development. The document explains the underlying pathophysiology involving the absence of intrinsic factor, a gastric protein essential for vitamin B12 absorption. It details diagnostic approaches including clinical evaluation, patient history assessment, and specialized laboratory testing procedures such as the Schilling test, which uses radioactive cobalt-labeled vitamin B12 to measure intestinal absorption capacity through X-ray studies.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T19:01:08.370225"
+}

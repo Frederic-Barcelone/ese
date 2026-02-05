@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:58:29.830850",
+  "document": "Congenital-Pulmonary-Lymphangiectasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Congenital-Pulmonary-Lymphangiectasia.pdf",
+  "total_candidates": 24,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CPL",
+      "long_form": "congenital pulmonary lymphangiectasia",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Congenital pulmonary lymphangiectasia (CPL) is a rare developmental disorder that is present at birth (congenital). Affected infants have abnormally widened (dilated) lymphatic vessels within the lungs. The lymphatic system helps the immune system in protecting the body against infection and disease. It consists of a network of tubular chan",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0009933"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:9900"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:340355"
+        },
+        {
+          "source": "MESH",
+          "id": "MESH:C537727"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C99034"
+        },
+        {
+          "source": "NORD",
+          "id": "NORD:1054"
+        },
+        {
+          "source": "OMIM",
+          "id": "OMIM:265300"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:2414"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:45142002"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C1849554"
+        },
+        {
+          "source": "icd11.foundation",
+          "id": "icd11.foundation:2069435755"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "congenital pulmonary lymphangiectasia",
+      "matched_text": "Congenital pulmonary lymphangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2414"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

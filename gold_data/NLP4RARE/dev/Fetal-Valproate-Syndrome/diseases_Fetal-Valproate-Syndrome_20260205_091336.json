@@ -1,0 +1,444 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:13:36.302732",
+  "document": "Fetal-Valproate-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Fetal-Valproate-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "cleft lip and palate",
+      "preferred_label": "cleft lip and palate",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q35-Q37",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016044",
+        "orpha": "Orphanet:199306",
+        "umls": "UMLS:C0158646",
+        "mesh": "C536528"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016044",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:17092",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q35-Q37",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:749.25",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57640",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10009260",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:199306",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:66948001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0158646",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536528",
+          "display": "Van der Woude syndrome"
+        }
+      ],
+      "context": "FVS affects males and females in equal numbers. There is a 20-fold increase in neural tube defects, cleft lip and palate, cardiovascular abnormalities, genitourinary defects, developmental delay, endocrine disorders, limb defects, and autism, when VPA is used during the 1st trimester of pregnancy compared to no use of antiepilepticdrugs.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ectrodactyly Ectodermal Dysplasia And Cleft Lip-Palate Syndrome 1",
+        "Hay-Wells syndrome",
+        "Orofaciodigital syndrome 6"
+      ],
+      "pubtator_normalized_name": "Van der Woude syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "neural tube defects",
+      "preferred_label": "neural tube defects",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020705",
+        "orpha": null,
+        "umls": "UMLS:C3891448",
+        "mesh": "D009436"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020705",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:856010",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:182940",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3891448",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009436",
+          "display": "Neural Tube Defects"
+        }
+      ],
+      "context": "FVS affects males and females in equal numbers. There is a 20-fold increase in neural tube defects, cleft lip and palate, cardiovascular abnormalities, genitourinary defects, developmental delay, endocrine disorders, limb defects, and autism, when VPA is used during the 1st trimester of pregnancy compared to no use of antiepilepticdrugs.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neural tube defect folate-sensitive",
+        "Neural tube defects X-linked",
+        "Craniofacial Abnormalities Cataracts Congenital Heart Disease Sacral Neural Tube Defects and Growth and Developmental Retardation"
+      ],
+      "pubtator_normalized_name": "Neural Tube Defects",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "endocrine disorders",
+      "preferred_label": "endocrine disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005151",
+        "orpha": null,
+        "umls": "UMLS:C0014130",
+        "mesh": "MESH:D004700"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005151",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:28",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001379",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:259.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4043",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004700",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100109",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3009",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:362969004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014130",
+          "display": null
+        }
+      ],
+      "context": "FVS affects males and females in equal numbers. There is a 20-fold increase in neural tube defects, cleft lip and palate, cardiovascular abnormalities, genitourinary defects, developmental delay, endocrine disorders, limb defects, and autism, when VPA is used during the 1st trimester of pregnancy compared to no use of antiepilepticdrugs.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Borjeson-Forssman-Lehmann syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autism",
+      "preferred_label": "autism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F84.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005260",
+        "orpha": null,
+        "umls": "UMLS:C0004352",
+        "mesh": "MESH:D001321"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005260",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12849",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003758",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000717",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F84.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:299.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:13966",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001321",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97161",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:209850",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004352",
+          "display": null
+        }
+      ],
+      "context": "FVS affects males and females in equal numbers. There is a 20-fold increase in neural tube defects, cleft lip and palate, cardiovascular abnormalities, genitourinary defects, developmental delay, endocrine disorders, limb defects, and autism, when VPA is used during the 1st trimester of pregnancy compared to no use of antiepilepticdrugs.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autistic Disorder",
+        "Rett Syndrome",
+        "Akinetic Mutism"
+      ],
+      "pubtator_normalized_name": "Autism Spectrum Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FVS",
+      "preferred_label": "FVS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012275",
+        "orpha": "Orphanet:1906",
+        "umls": "UMLS:C0236026",
+        "mesh": "MESH:C536525"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012275",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060471",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5447",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:65922",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536525",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10016524",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98930",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1141",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:609442",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1906",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:17231009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0236026",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1055155432",
+          "display": null
+        }
+      ],
+      "context": "FVS affects males and females in equal numbers. There is a 20-fold increase in neural tube defects, cleft lip and palate, cardiovascular abnormalities, genitourinary defects, developmental delay, endocrine disorders, limb defects, and autism, when VPA is used during the 1st trimester of pregnancy compa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

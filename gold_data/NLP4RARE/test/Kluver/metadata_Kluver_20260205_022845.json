@@ -1,0 +1,35 @@
+{
+  "doc_id": "Kluver",
+  "doc_filename": "Kluver.pdf",
+  "top_entities": [
+    {
+      "name": "Klver-Bucy syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "herpes simplex encephalitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2134,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Klüver-Bucy Syndrome: Clinical Overview and Symptoms",
+  "short_description": "Clinical document describing Klüver-Bucy syndrome, a rare neurological disorder caused by temporal lobe damage resulting in distinctive behavioral and cognitive symptoms.",
+  "long_description": "This clinical document provides a comprehensive overview of Klüver-Bucy syndrome, a rare neurological condition resulting from damage to the temporal lobes of the brain. The document details the characteristic symptoms including excessive oral tendencies, hypermetamorphosis (compulsive exploration behavior), memory loss, emotional changes, hypersexuality, visual agnosia, and increased appetite. It explains the various etiologies including brain trauma, degenerative diseases, tumors, and infections such as herpes simplex encephalitis. The document notes that the syndrome affects both sexes equally and discusses treatment approaches, which are primarily supportive with potential use of psychotropic medications for symptom management.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:28:45.033456"
+}

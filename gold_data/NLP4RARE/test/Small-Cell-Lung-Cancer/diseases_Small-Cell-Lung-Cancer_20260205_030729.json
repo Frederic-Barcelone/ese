@@ -1,0 +1,294 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:07:29.084430",
+  "document": "Small-Cell-Lung-Cancer.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Small-Cell-Lung-Cancer.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "small cell lung cancer",
+      "preferred_label": "Small cell lung cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008433",
+        "orpha": "Orphanet:70573",
+        "umls": "UMLS:C0149925",
+        "mesh": "MESH:D055752"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008433",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5411",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000702",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9344",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:162.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57450",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D055752",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4917",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:182280",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:SCLC",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:70573",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:254632001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0149925",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1800431439",
+          "display": null
+        }
+      ],
+      "context": "The incidence of small cell lung cancer in the United States has been declining over the last two decades, which most researchers attribute to the decline in smoking in the country. Lung cancer, as a group, is the second most common form of cancer in the United States. SCLC accounts for about 10%-15% of people who have lung cancer. There",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Small Cell Lung Carcinoma"
+      ],
+      "pubtator_normalized_name": "Carcinoma Non-Small-Cell Lung",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Lung cancer",
+      "preferred_label": "lung cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008903",
+        "orpha": null,
+        "umls": "UMLS:C0242379",
+        "mesh": "D008175"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008903",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1324",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:162.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:66885",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C7377",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:211980",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363358000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0242379",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008175",
+          "display": "Lung Neoplasms"
+        }
+      ],
+      "context": "The incidence of small cell lung cancer in the United States has been declining over the last two decades, which most researchers attribute to the decline in smoking in the country. Lung cancer, as a group, is the second most common form of cancer in the United States. SCLC accounts for about 10%-15% of people who have lung cancer. There are about 30,000 to 35,000 new people diagnosed with SCLC each year in the United States. Almost everyone who develops SCLC has a history of smoking. It",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carcinoma Non-Small-Cell Lung",
+        "Small Cell Lung Carcinoma"
+      ],
+      "pubtator_normalized_name": "Lung Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "The incidence of small cell lung cancer in the United States has been declining over the last two decades, which most researchers attribute to the decline in smoking in the country. Lung cancer, as a group, is the second most common form of cancer in the United States. SCLC accounts for about 10%-15% of people who have lung cancer. There are about 30,000 to 35,000 new people diagnosed with SCLC each year in the United States. Almost everyone who develops SCLC has a history of smoking. It is extremely rare in individuals who have never smoked",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:02:35.131310",
+  "document": "Hajdu-Cheney-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hajdu-Cheney-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Hajdu-Cheney syndrome",
+      "preferred_label": "Hajdu-Cheney syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007057",
+        "orpha": "Orphanet:955",
+        "umls": "UMLS:C0917715",
+        "mesh": "MESH:C537586"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007057",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2736",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:182961",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537586",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84745",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1214",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:102500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:955",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:63122002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0917715",
+          "display": null
+        }
+      ],
+      "context": "Hajdu-Cheney syndrome is an extremely rare disorder. More than 80 affected individuals have been described in the medical literature. The exact prevalence or incidence of the disorder is unknown. Rare disorders often go undiagnosed or misdiagnosed, making it difficult to determine the true frequency in the general popul",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hajdu-Cheney Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

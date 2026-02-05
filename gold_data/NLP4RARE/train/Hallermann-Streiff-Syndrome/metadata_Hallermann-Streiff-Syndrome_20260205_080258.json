@@ -1,0 +1,35 @@
+{
+  "doc_id": "Hallermann-Streiff-Syndrome",
+  "doc_filename": "Hallermann-Streiff-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Gorlin-Chaudhry-Moss syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Hallermann-Streiff syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2089,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Hallermann-Streiff Syndrome: Clinical Diagnosis and Differential Considerations",
+  "short_description": "Clinical overview of Hallermann-Streiff syndrome diagnosis, including characteristic findings and diagnostic approaches.",
+  "long_description": "This document provides clinical information about Hallermann-Streiff syndrome, a rare genetic disorder affecting both males and females equally with over 150 reported cases. The text outlines the diagnostic process, which typically begins with identification of characteristic physical findings during infancy, particularly congenital cataracts and microphthalmia (unusually small eyes). The document emphasizes the importance of comprehensive clinical evaluation including detailed patient history and specialized testing such as radiographic, ophthalmologic, and dental studies. It also discusses the complex differential diagnosis process and recommends whole exome sequencing due to the extensive list of similar autosomal recessive disorders that must be considered.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:02:58.822953"
+}

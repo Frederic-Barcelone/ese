@@ -1,0 +1,178 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:41:04.226984",
+  "document": "Multiple-System-Atrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Multiple-System-Atrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "MSA",
+      "preferred_label": "Multiple system atrophy",
+      "abbreviation": "MSA",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G23.3",
+        "icd11": "8D87.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:102",
+        "umls": null,
+        "mesh": "D019578"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:102",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G23.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8D87.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019578",
+          "display": "Multiple System Atrophy"
+        }
+      ],
+      "context": "MSA appears to affect males and females in equal numbers. The peak onset of MSA is between 55-60 years of age, with a range from 30 to over 90 years. The incidence of MSA in the United States is estimated at 0.6 cases per 100,000 people per year in the general population giving a current estimate of ab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Multiple system atrophy (MSA) with orthostatic hypotension"
+      ],
+      "pubtator_normalized_name": "Multiple System Atrophy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Parkinson’s disease",
+      "preferred_label": "Parkinson's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G20",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005180",
+        "orpha": "Orphanet:319705",
+        "umls": "UMLS:C0030567",
+        "mesh": "MESH:D010300"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005180",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14330",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G20",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G20",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:332.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10590",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010300",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200010",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26845",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:168600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319705",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:49049000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0030567",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:2098",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:296066191",
+          "display": null
+        }
+      ],
+      "context": "w cases per year in the USA. A prevalence study in London, UK, gave an age-adjusted figure of 4.4 living cases per 100,000 population at any one time, which would currently translate to about 14,000 living cases in the USA. There is about 1 living case of MSA in the population for every 40 cases of Parkinson’s disease, but because survival in MSA is shorter than for PD, about 1 new MSA case presents every year for about every 20 who present with PD.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Parkinson Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,449 @@
+{
+  "run_id": "RUN_20260203_062811_cb5e3758076f",
+  "timestamp": "2026-02-03T07:33:17.916862",
+  "document": "AP.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/AP.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "HSP",
+      "preferred_label": "Immunoglobulin A vasculitis",
+      "abbreviation": "IgAV",
+      "confidence": 0.9500000000000001,
+      "is_rare_disease": true,
+      "category": "immunology",
+      "codes": {
+        "icd10": "D69.0",
+        "icd11": "4A44.92",
+        "snomed": "191306005",
+        "mondo": null,
+        "orpha": "ORPHA:761",
+        "umls": null,
+        "mesh": "D011695"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:761",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D69.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A44.92",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "191306005",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011695",
+          "display": null
+        }
+      ],
+      "context": "AP-4-associated HSP affects males and females of ethnic groups from around the world. The prevalence of AP-4-HSP is unknown. AP-4-HSP is likely under-recognized since the symptoms (phenotypic spectrum) largely overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "disease_lexicon_igan.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "HSP",
+      "preferred_label": "Hereditary spastic paraplegia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:685",
+        "umls": null,
+        "mesh": "D015419"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:685",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015419",
+          "display": "Spastic Paraplegia Hereditary"
+        }
+      ],
+      "context": "AP-4-associated HSP affects males and females of ethnic groups from around the world. The prevalence of AP-4-HSP is unknown. AP-4-HSP is likely under-recognized since the symptoms (phenotypic spectrum) largely overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "MASA (Mental Retardation Aphasia Shuffling Gait Adducted Thumbs) Syndrome",
+        "Spastic paraplegia 11 autosomal recessive",
+        "Spastic Paraplegia Type 7"
+      ],
+      "pubtator_normalized_name": "Spastic Paraplegia Hereditary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cerebral palsy",
+      "preferred_label": "Cerebral Palsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006497",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D002547"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006497",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002547",
+          "display": "Cerebral Palsy"
+        }
+      ],
+      "context": "AP-4-associated HSP affects males and females of ethnic groups from around the world. The prevalence of AP-4-HSP is unknown. AP-4-HSP is likely under-recognized since the symptoms (phenotypic spectrum) largely overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as having cerebral palsy. Many of the initial clinical manifestations of AP-4-associated HSP are nonspecific and may resemble other disorders characterized by spasticity, developmental delay / intellectual disability, and seizures",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cerebral Palsy Ataxic Autosomal Recessive",
+        "Cerebral palsy spastic diplegic",
+        "Neuhauser syndrome"
+      ],
+      "pubtator_normalized_name": "Cerebral Palsy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "Genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "AP-4-associated HSP affects males and females of ethnic groups from around the world. The prevalence of AP-4-HSP is unknown. AP-4-HSP is likely under-recognized since the symptoms (phenotypic spectrum) largely overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as having cerebral palsy. Many of the initial clinical manifestations of AP-4-associated HSP are nonspecific and may resemble other disorders characterized by spasticity, developmental delay / intellectual disability, and seizures. Patients may be misdiagnosed",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "Mietens syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2557",
+        "umls": null,
+        "mesh": "C537444"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2557",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537444",
+          "display": "Mental retardation Mietens Weber type"
+        }
+      ],
+      "context": "y overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as having cerebral palsy. Many of the initial clinical manifestations of AP-4-associated HSP are nonspecific and may resemble other disorders characterized by spasticity, developmental delay / intellectual disability, and seizures. Patients may be misdiagnosed as having cerebral palsy. The diagnosis of AP-4-associated HSP is based on clinical characteristics and testing that may include a brain MRI showing characteristic features such as a thin corpus callosum, wide lateral ventricles and changes in the white m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mental retardation Mietens Weber type",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorders",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7937811493873597,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "er-recognized since the symptoms (phenotypic spectrum) largely overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as having cerebral palsy. Many of the initial clinical manifestations of AP-4-associated HSP are nonspecific and may resemble other disorders characterized by spasticity, developmental delay / intellectual disability, and seizures. Patients may be misdiagnosed as having cerebral palsy. The diagnosis of AP-4-associated HSP is based on clinical characteristics and testing that may include a brain MRI showing characteristic features such as",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "developmental delay",
+      "preferred_label": "Developmental delay",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0424605",
+        "mesh": "D002658"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0424605",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002658",
+          "display": "Developmental Disabilities"
+        }
+      ],
+      "context": "typic spectrum) largely overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as having cerebral palsy. Many of the initial clinical manifestations of AP-4-associated HSP are nonspecific and may resemble other disorders characterized by spasticity, developmental delay / intellectual disability, and seizures. Patients may be misdiagnosed as having cerebral palsy. The diagnosis of AP-4-associated HSP is based on clinical characteristics and testing that may include a brain MRI showing characteristic features such as a thin corpus callosum, wide lateral ventricles",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Language Development Disorders",
+        "Achondroplasia",
+        "Growth Retardation Developmental Delay Coarse Facies And Early Death"
+      ],
+      "pubtator_normalized_name": "Developmental Disabilities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "Intellectual Disability",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C3714756",
+        "mesh": "D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C3714756",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008607",
+          "display": "Intellectual Disability"
+        }
+      ],
+      "context": "y overlap with that of cerebral palsy and, in the absence of genetic testing, patients may be misdiagnosed as having cerebral palsy. Many of the initial clinical manifestations of AP-4-associated HSP are nonspecific and may resemble other disorders characterized by spasticity, developmental delay / intellectual disability, and seizures. Patients may be misdiagnosed as having cerebral palsy. The diagnosis of AP-4-associated HSP is based on clinical characteristics and testing that may include a brain MRI showing characteristic features such as a thin corpus callosum, wide lateral ventricles and changes in the white m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "thin corpus callosum",
+      "preferred_label": "Thin corpus callosum",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C5441562",
+        "mesh": "C537483"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C5441562",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537483",
+          "display": "Spastic paraplegia 11 autosomal recessive"
+        }
+      ],
+      "context": "aracterized by spasticity, developmental delay / intellectual disability, and seizures. Patients may be misdiagnosed as having cerebral palsy. The diagnosis of AP-4-associated HSP is based on clinical characteristics and testing that may include a brain MRI showing characteristic features such as a thin corpus callosum, wide lateral ventricles and changes in the white matter. A definitive diagnosis is reached by genetic testing.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Nakamura Osame syndrome"
+      ],
+      "pubtator_normalized_name": "Spastic paraplegia 11 autosomal recessive",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

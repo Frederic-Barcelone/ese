@@ -1,0 +1,35 @@
+{
+  "doc_id": "Acute-Myeloid-Leukemia",
+  "doc_filename": "Acute-Myeloid-Leukemia.pdf",
+  "top_entities": [
+    {
+      "name": "acute myeloid leukemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Acute myeloid leukemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1726,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Acute Myeloid Leukemia: Epidemiology and Demographics",
+  "short_description": "Overview of acute myeloid leukemia prevalence, demographics, and population statistics in adults.",
+  "long_description": "This document provides epidemiological information about acute myeloid leukemia (AML), highlighting its status as the most common form of acute leukemia in adults, representing approximately 80% of acute leukemia cases. The content covers key demographic data including incidence rates of 3-5 cases per 100,000 people in the US population, age distribution showing that over half of patients are 65 years or older, and slight gender and ethnic variations in disease occurrence. This information serves as foundational knowledge for understanding the population burden and characteristics of AML patients.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:31:16.878862"
+}

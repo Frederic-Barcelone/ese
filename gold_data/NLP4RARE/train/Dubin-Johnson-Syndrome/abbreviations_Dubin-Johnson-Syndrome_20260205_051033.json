@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:10:33.627688",
+  "document": "Dubin-Johnson-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dubin-Johnson-Syndrome.pdf",
+  "total_candidates": 45,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "VII",
+      "long_form": "Hereditary combined deficiency of vitamin K-dependent clotting factors",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ewish heritage disproportionately to other groups. It appears to be associated with clotting factor VII in this population. Symptoms may include a yellowish color to the skin (jaundice), and a liver that",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Hereditary combined deficiency of vitamin K-dependent clotting factors",
+      "matched_text": "VII",
+      "abbreviation": "VII",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D68.2",
+      "orpha": "ORPHA:98434"
+    },
+    {
+      "name": "Dubin Johnson syndrome",
+      "matched_text": "Dubin Johnson Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:234"
+    },
+    {
+      "name": "genetic disease",
+      "matched_text": "genetic diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "liver disorder",
+      "matched_text": "liver disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:K70-K77",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,130 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:36:26.438857",
+  "document": "Fibromuscular-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fibromuscular-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "CAT",
+      "hgnc_symbol": "CAT",
+      "full_name": "catalase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "1516",
+        "entrez": "847",
+        "ensembl": "ENSG00000121691",
+        "uniprot": "P04040",
+        "omim": "115500"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "1516",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "847",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000121691",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "115500",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P04040",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "926",
+          "disease_name": "Acatalasemia",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "sease. (For more information on these disorders, search for the term in the Rare Disease Database.) In order to diagnosis FMD, a test must be done to image the blood vessels. There are many options for imaging the arteries, including specialized blood vessel ultrasound known as duplex ultrasound; a CAT scan of the arteries which is obtained after a dye is given through the veins, or a special type of MRI. In many cases, the diagnosis of FMD requires that a procedure known as an arteriogram be performed. Arteriography is a procedure that is performed by a radiologist, vascular surgeon, cardiologis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "s that supply the kidneys with blood (renal arteries) and the arteries called the carotid and vertebral arteries which are found in the neck and supply the brain with blood. Less commonly, FMD affects the arteries in the abdomen (supplying the liver, spleen and intestines) and extremities (legs and arms). In more than one-half of people with this disease, there will be evidence of FMD in more than one artery. FMD affects women far more commonly than men, although men and children can be affected with this disease. In children with FMD, the disease seems to more commonly present with significant na",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

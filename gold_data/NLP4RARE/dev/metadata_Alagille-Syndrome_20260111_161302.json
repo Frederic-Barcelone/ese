@@ -1,0 +1,21 @@
+{
+  "doc_id": "Alagille-Syndrome",
+  "doc_filename": "Alagille-Syndrome.pdf",
+  "file_size_bytes": 2538,
+  "file_size_human": "2.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Alagille Syndrome: Clinical Overview and Genetic Characteristics",
+  "short_description": "Clinical document describing Alagille syndrome, a rare genetic disorder affecting multiple organ systems with variable symptoms and autosomal dominant inheritance patterns.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Alagille syndrome (OMIM #118450), a rare genetic disorder with an estimated incidence of 1:30,000 to 1:45,000. The document details the multi-system nature of the condition, affecting the liver, heart, skeleton, eyes, and kidneys, with symptoms typically manifesting in the first three months of life. Key clinical features include cholestasis, jaundice, poor growth, pruritis, and distinctive facial features. The document explains the genetic basis involving mutations in JAG1 (majority of cases) and NOTCH2 genes (less than 1%), inherited as autosomal dominant traits, though approximately half of cases result from de novo mutations. The text emphasizes the significant variability in symptom presentation and severity, even within families, and notes challenges in accurate diagnosis that may affect true prevalence estimates.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-01-11T15:13:02.810505"
+}

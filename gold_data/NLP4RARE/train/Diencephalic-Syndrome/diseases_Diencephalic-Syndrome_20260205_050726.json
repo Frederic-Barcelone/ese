@@ -1,0 +1,102 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:07:26.339143",
+  "document": "Diencephalic-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Diencephalic-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Diencephalic syndrome",
+      "preferred_label": "diencephalic syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015663",
+        "orpha": "Orphanet:1672",
+        "umls": "UMLS:C0342436",
+        "mesh": "D007027"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015663",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6276",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:253.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:90981",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116955",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1052",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1672",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237733001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0342436",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:879659089",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007027",
+          "display": "Hypothalamic Diseases"
+        }
+      ],
+      "context": "Diencephalic syndrome is a rare disorder caused by a tumor that is usually located in the diencephalon, a portion of the brain just above the brainstem. The diencephalon includes the hypothalamus and the thalamus. Affected infants and young children may develop symptoms that include the failure to gain weight and grow a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypothalamic Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

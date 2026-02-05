@@ -1,0 +1,263 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:10:37.814449",
+  "document": "Stomach-Cancer.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Stomach-Cancer.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Stomach cancer",
+      "preferred_label": "gastric carcinoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004950",
+        "orpha": null,
+        "umls": "UMLS:C0699791",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004950",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5517",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000178",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:230.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:147066",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4911",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:92756002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0699791",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1503707183",
+          "display": null
+        }
+      ],
+      "context": "Stomach cancer is a general term for cancer affecting the stomach. Generally, it refers to cancer that arises from the cells lining the stomach. These cells, like all cancerous cells, exhibit abnormal and rapid growth. Early in the course of the disease there are usually no symptoms (asymptomatic). As the disease",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "indigestion",
+      "preferred_label": "indigestion",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K30",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002268",
+        "orpha": null,
+        "umls": "UMLS:C0013395",
+        "mesh": "MESH:D004415"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002268",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2321",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0008533",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K30",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41681",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004415",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26756",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013395",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:869622187",
+          "display": null
+        }
+      ],
+      "context": "er affecting the stomach. Generally, it refers to cancer that arises from the cells lining the stomach. These cells, like all cancerous cells, exhibit abnormal and rapid growth. Early in the course of the disease there are usually no symptoms (asymptomatic). As the disease progresses, symptoms like indigestion, nausea, vomiting, and feeling full earlier than normal (early satiety) may develop. The cause of stomach cancer is multifactorial, which means that multiple factors that occur together are necessary for the cancer to develop. These factors can include genetic, immunologic, infectious, and environm",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dyspepsia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "Stomach cancer is a general term for cancer affecting the stomach. Generally, it refers to cancer that arises from the cells lining the stomach. These cells, like all cancerous cells, exhibit abnormal and rapid growth. Early in the course of the disease there are usually no symptoms (asymptomatic). As the disease progresses, symptoms like in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

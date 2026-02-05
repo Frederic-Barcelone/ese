@@ -1,0 +1,387 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:51:41.431813",
+  "document": "Peeling-Skin-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Peeling-Skin-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "autosomal recessive congenital ichthyosis",
+      "preferred_label": "autosomal recessive congenital ichthyosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017265",
+        "orpha": "Orphanet:281097",
+        "umls": "UMLS:C1274215",
+        "mesh": "C567370"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017265",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060655",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21106",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:697564",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200991",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:242300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:281097",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1274215",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:430849255",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C567370",
+          "display": "Ichthyosis Congenital Autosomal Recessive Ichthyin-Related"
+        }
+      ],
+      "context": "ufficient to make the diagnosis, although specialized tests including surgical removal and microscopic evaluation (biopsy) of affected tissue may be necessary at times. The continual shedding of large sheets of skin distinguishes peeling skin syndrome from Netherton syndrome and from other types of autosomal recessive congenital ichthyosis, such as congenital ichthyosiform erythroderma. The skin of so-called “collodion babies” peels off after a few weeks and does not return, in contrast to patients with peeling skin syndrome whose symptoms return time after time.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ichthyosis Nonlamellar and Nonerythrodermic Congenital Autosomal Recessive"
+      ],
+      "pubtator_normalized_name": "Ichthyosis Congenital Autosomal Recessive Ichthyin-Related",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital ichthyosiform erythroderma",
+      "preferred_label": "congenital ichthyosiform erythroderma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019306",
+        "orpha": "Orphanet:79394",
+        "umls": "UMLS:C0079154",
+        "mesh": "MESH:D017490"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019306",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1699",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9736",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0007431",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:38180",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017490",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200617",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84805",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79394",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:205550003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0079154",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:546439698",
+          "display": null
+        }
+      ],
+      "context": "ed tests including surgical removal and microscopic evaluation (biopsy) of affected tissue may be necessary at times. The continual shedding of large sheets of skin distinguishes peeling skin syndrome from Netherton syndrome and from other types of autosomal recessive congenital ichthyosis, such as congenital ichthyosiform erythroderma. The skin of so-called “collodion babies” peels off after a few weeks and does not return, in contrast to patients with peeling skin syndrome whose symptoms return time after time.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hyperkeratosis Epidermolytic",
+        "Ichthyosiform Erythroderma Congenital",
+        "Ichthyosis Lamellar"
+      ],
+      "pubtator_normalized_name": "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "peeling skin syndrome",
+      "preferred_label": "peeling skin syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019347",
+        "orpha": "Orphanet:817",
+        "umls": null,
+        "mesh": "C564818"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019347",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060283",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7347",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.39",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1562",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:270300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:817",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:239065004",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:523640904",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564818",
+          "display": "Peeling Skin Syndrome"
+        }
+      ],
+      "context": "A good history and physical exam are often sufficient to make the diagnosis, although specialized tests including surgical removal and microscopic evaluation (biopsy) of affected tissue may be necessary at times. The continual shedding of large sheets of skin distinguishes peeling skin syndrome from Netherton syndrome and from other types of autosomal recessive congenital ichthyosis, such as congenital ichthyosiform erythroderma. The skin of so-called “collodion babies” peels off after a few weeks and does not return, in contrast to patients with peeling skin syndrome whose symptoms retur",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Peeling skin syndrome acral type"
+      ],
+      "pubtator_normalized_name": "Peeling Skin Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Netherton syndrome",
+      "preferred_label": "Netherton syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009735",
+        "orpha": "Orphanet:634",
+        "umls": "UMLS:C5574950",
+        "mesh": "MESH:D056770"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009735",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050474",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7182",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1802991",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D056770",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062909",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200993",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84922",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1290",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:256500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:634",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:54336006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5574950",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1797493665",
+          "display": null
+        }
+      ],
+      "context": "good history and physical exam are often sufficient to make the diagnosis, although specialized tests including surgical removal and microscopic evaluation (biopsy) of affected tissue may be necessary at times. The continual shedding of large sheets of skin distinguishes peeling skin syndrome from Netherton syndrome and from other types of autosomal recessive congenital ichthyosis, such as congenital ichthyosiform erythroderma. The skin of so-called “collodion babies” peels off after a few weeks and does not return, in contrast to patients with peeling skin syndrome whose symptoms return time after time.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Netherton Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

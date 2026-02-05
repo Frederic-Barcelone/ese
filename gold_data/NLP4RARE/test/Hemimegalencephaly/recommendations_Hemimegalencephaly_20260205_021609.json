@@ -1,0 +1,64 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:16:09.001428",
+  "document": "Hemimegalencephaly.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hemimegalencephaly.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 2,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Unable to identify specific guideline title",
+      "guideline_year": null,
+      "organization": "Unable to identify organization",
+      "target_condition": "Hemimegalencephaly (HME)",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Hemimegalencephaly_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected hemimegalencephaly",
+          "condition": "suspected HME",
+          "severity": "na",
+          "action": "search for other syndromic diagnoses",
+          "action_description": null,
+          "preferred": "na",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "na",
+          "duration": "na",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Hemimegalencephaly",
+          "source_text": "when detected, HME should prompt a search for other syndromic diagnoses",
+          "page_num": null
+        },
+        {
+          "recommendation_id": "rec_Hemimegalencephaly_2",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected hemimegalencephaly",
+          "condition": "suspected HME",
+          "severity": "na",
+          "action": "perform MRI examination",
+          "action_description": null,
+          "preferred": "MRI examination",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "na",
+          "duration": "na",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Hemimegalencephaly",
+          "source_text": "an MRI examination should be performed as soon as HME is suspected",
+          "page_num": null
+        }
+      ],
+      "source_document": "Hemimegalencephaly",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "Mucopolysaccharidosis-Type-I",
+  "doc_filename": "Mucopolysaccharidosis-Type-I.pdf",
+  "top_entities": [
+    {
+      "name": "mucopolysaccharidosis",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "MPS",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1800,
+  "file_size_human": "1.8 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Mucopolysaccharidosis Type I: Epidemiology and Incidence",
+  "short_description": "Clinical document detailing the incidence rates and epidemiological characteristics of Mucopolysaccharidosis Type I, including severe and attenuated forms.",
+  "long_description": "This clinical research document provides epidemiological data on Mucopolysaccharidosis Type I (MPS I), a rare genetic disorder. The document outlines that MPS I affects males and females equally, with the severe form occurring in approximately 1 in 100,000 live births and the attenuated form in about 1 in 500,000 live births. It also discusses the collective incidence of all MPS disorders at approximately 1 in 25,000 births and addresses the challenges in determining accurate prevalence due to misdiagnosis and underdiagnosis of milder forms of the condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:39:53.091706"
+}

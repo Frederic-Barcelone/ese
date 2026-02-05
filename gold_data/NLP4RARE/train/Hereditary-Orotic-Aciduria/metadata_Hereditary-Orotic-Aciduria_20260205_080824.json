@@ -1,0 +1,40 @@
+{
+  "doc_id": "Hereditary-Orotic-Aciduria",
+  "doc_filename": "Hereditary-Orotic-Aciduria.pdf",
+  "top_entities": [
+    {
+      "name": "Hereditary Orotic Aciduria",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "megaloblastic anemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Thrive",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2037,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Hereditary Orotic Aciduria: Clinical Overview and Epidemiology",
+  "short_description": "Clinical document describing hereditary orotic aciduria, an extremely rare genetic disorder affecting fewer than 20 reported individuals worldwide.",
+  "long_description": "This clinical document provides a comprehensive overview of hereditary orotic aciduria, an ultra-rare genetic disorder with an estimated birth prevalence of less than 1 in 1,000,000 live births. The document details the clinical manifestations of untreated cases, including megaloblastic anemia, failure to thrive, increased susceptibility to infections, and orotic acid crystalluria. It emphasizes the rarity of the condition with only approximately 20 cases reported in medical literature, affecting both males and females equally. The document also addresses the challenges in determining accurate prevalence rates for rare diseases due to frequent misdiagnosis or lack of diagnosis, and notes that neurological development impairment has become less common since effective treatments became available.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:08:24.772194"
+}

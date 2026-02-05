@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:59:53.977043",
+  "document": "Soft-Tissue-Sarcoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Soft-Tissue-Sarcoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 0,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "genes": []
+}

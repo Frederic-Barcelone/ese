@@ -1,0 +1,129 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:41:44.470438",
+  "document": "Muscular-Dystrophy-Becker.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Muscular-Dystrophy-Becker.pdf",
+  "total_candidates": 31,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 2,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "Ck",
+      "long_form": "creatine kinase",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "uscles of the heart deteriorate (cardiomyopathy) in some affected individuals, and this process can become life-threatening. Learning disabilities involving visual abilities may be present. Becker muscular dystrophy occurs in approximately 1 in 30,000 male births. The diagnosis of Becker muscular dystrophy is based on physical symptoms, family history, an elevated concentration of creatine kinase (Ck) in the blood indicating destruction of muscle, and molecular genetic testing. DMD is the only gene that has been associated with Becker muscular dystrophy and many different types of DMD gene mutations have been identified in individuals with this condition. Identification of a DMD gene mutation from molecular genetic testing confirms the diagnosis. If molecular genetic testing is performed and a",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DMD",
+      "long_form": "Duchenne muscular dystrophy",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-linked recessive inheritanc",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "matched_text": "skeletal muscle",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:364531"
+    },
+    {
+      "name": "Duchenne muscular dystrophy",
+      "matched_text": "DMD",
+      "abbreviation": "DMD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G71.0",
+      "orpha": "ORPHA:98896"
+    },
+    {
+      "name": "Becker muscular dystrophy",
+      "matched_text": "Becker muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98895"
+    },
+    {
+      "name": "learning disability",
+      "matched_text": "Learning disabilities",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "dystrophinopathy",
+      "matched_text": "dystrophinopathies",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:207085"
+    },
+    {
+      "name": "muscle wasting",
+      "matched_text": "muscle wasting",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cardiomyopathy",
+      "matched_text": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I42",
+      "orpha": "Orphanet:167848"
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Creatine",
+      "matched_text": "creatine",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

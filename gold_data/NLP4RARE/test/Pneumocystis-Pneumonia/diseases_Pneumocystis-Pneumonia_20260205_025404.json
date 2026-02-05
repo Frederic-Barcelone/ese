@@ -1,0 +1,740 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:54:04.885584",
+  "document": "Pneumocystis-Pneumonia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pneumocystis-Pneumonia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "granulomatosis with polyangiitis",
+      "preferred_label": "Granulomatosis with polyangiitis",
+      "abbreviation": "GPA",
+      "confidence": 1.0,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "M31.3",
+        "icd11": "4A44.A2",
+        "snomed": "195353004",
+        "mondo": null,
+        "orpha": "ORPHA:900",
+        "umls": "C3495801",
+        "mesh": "D014890"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:900",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "M31.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A44.A2",
+          "display": null
+        },
+        {
+          "system": "SNOMED-CT",
+          "code": "195353004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "C3495801",
+          "display": null
+        },
+        {
+          "system": "UMLS_CUI_alt",
+          "code": "C0018202",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014890",
+          "display": null
+        }
+      ],
+      "context": "mocystis pneumonia is commonly seen in HIV infected people with a CD4 count of less than 200 cells/mm3. People receiving high doses of glucocorticoids or other immunosuppressive drugs after an organ transplant or to treat cancer are at risk for PJP. People with other inflammatory conditions such as granulomatosis with polyangiitis (Wegener’s), polymyositis or dermatomyositis can also have an increased risk of acquiring PJP. The diagnosis of Pneumocystis pneumonia requires multiple tests such as a chest X-ray and a sample of sputum collected by a procedure called bronchoalveolar lavage to differentiate PUP between from other",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "disease_lexicon_anca.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Churg-Strauss Syndrome"
+      ],
+      "pubtator_normalized_name": "Granulomatosis with Polyangiitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Pneumocystis pneumonia",
+      "preferred_label": "Pneumocystis Pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:B59",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019121",
+        "orpha": "Orphanet:723",
+        "umls": "UMLS:C1535939",
+        "mesh": "MESH:D011020"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019121",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11339",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007448",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4386",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B59",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:777048",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011020",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3334",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1923",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:723",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:415125002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1535939",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:404370038",
+          "display": null
+        }
+      ],
+      "context": "Pneumocystis pneumonia is characterized by a gradual onset with shortness of breath and/or difficulty breathing. This disorder may be accompanied with fevers, night sweats, weight loss and dry cough. Dry cough is one distinction from typical pneumonia because spit (sputum) is too thick to become productive, therefore pro",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pneumonia Pneumocystis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dermatomyositis",
+      "preferred_label": "dermatomyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:M33",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016367",
+        "orpha": "Orphanet:221",
+        "umls": "UMLS:C0011633",
+        "mesh": "MESH:D003882"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016367",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10223",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000398",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6263",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8331",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003882",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10012503",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200274",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26744",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1048",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:221",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:396230008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011633",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:739030149",
+          "display": null
+        }
+      ],
+      "context": "h a CD4 count of less than 200 cells/mm3. People receiving high doses of glucocorticoids or other immunosuppressive drugs after an organ transplant or to treat cancer are at risk for PJP. People with other inflammatory conditions such as granulomatosis with polyangiitis (Wegener’s), polymyositis or dermatomyositis can also have an increased risk of acquiring PJP. The diagnosis of Pneumocystis pneumonia requires multiple tests such as a chest X-ray and a sample of sputum collected by a procedure called bronchoalveolar lavage to differentiate PUP between from other causes of pneumonia. To further confirm PJP,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amyopathic dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Dermatomyositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "HIV",
+      "preferred_label": "HIV infection",
+      "abbreviation": "HIV",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "B20",
+        "icd11": "1C62",
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": null,
+        "mesh": "D015658"
+      },
+      "all_identifiers": [
+        {
+          "system": "ICD-10",
+          "code": "B20",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "1C62",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015658",
+          "display": "HIV Infections"
+        }
+      ],
+      "context": "ve, therefore productive cough is not as common in PJP. Uncommonly, the PJP fungus can spread to other body organs such as the liver, kidney and spleen as the disease progresses. PJP is a frequent AIDS-defining diagnosis in the United States and in Europe. Pneumocystis pneumonia is commonly seen in HIV infected people with a CD4 count of less than 200 cells/mm3. People receiving high doses of glucocorticoids or other immunosuppressive drugs after an organ transplant or to treat cancer are at risk for PJP. People with other inflammatory conditions such as granulomatosis with polyangiitis (Wegener’",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "AIDS-Related Opportunistic Infections"
+      ],
+      "pubtator_normalized_name": "HIV Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polymyositis",
+      "preferred_label": "polymyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M33.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019127",
+        "orpha": "Orphanet:732",
+        "umls": "UMLS:C0085655",
+        "mesh": "MESH:D017285"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019127",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080745",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003063",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7425",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39086",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017285",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10036102",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200276",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26925",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:732",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31384009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085655",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Polymyositis",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1157134196",
+          "display": null
+        }
+      ],
+      "context": "ected people with a CD4 count of less than 200 cells/mm3. People receiving high doses of glucocorticoids or other immunosuppressive drugs after an organ transplant or to treat cancer are at risk for PJP. People with other inflammatory conditions such as granulomatosis with polyangiitis (Wegener’s), polymyositis or dermatomyositis can also have an increased risk of acquiring PJP. The diagnosis of Pneumocystis pneumonia requires multiple tests such as a chest X-ray and a sample of sputum collected by a procedure called bronchoalveolar lavage to differentiate PUP between from other causes of pneumonia. To fu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Polymyositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "pneumonia",
+      "preferred_label": "pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J18.9",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005249",
+        "orpha": null,
+        "umls": "UMLS:C0032285",
+        "mesh": "MESH:D011014"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005249",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:552",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003106",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J18.9",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:486",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10813",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011014",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3333",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:233604007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032285",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:142052508",
+          "display": null
+        }
+      ],
+      "context": "Pneumocystis pneumonia is characterized by a gradual onset with shortness of breath and/or difficulty breathing. This disorder may be accompanied with fevers, night sweats, weight loss and dry cough. Dry cough is one distinction from typical pneumonia because spit (sputum) is too thick to become productive, therefore productive cough is not as common in PJP. Uncommonly, the PJP fungus can spread to other body organs such as the liver, kidney and spleen as the disease progresses. PJP is a frequent AIDS-defining diagnosis in the United States and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pneumonia Aspiration",
+        "Pneumonia Lipid",
+        "Pneumonia Ventilator-Associated"
+      ],
+      "pubtator_normalized_name": "Pneumonia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "is a frequent AIDS-defining diagnosis in the United States and in Europe. Pneumocystis pneumonia is commonly seen in HIV infected people with a CD4 count of less than 200 cells/mm3. People receiving high doses of glucocorticoids or other immunosuppressive drugs after an organ transplant or to treat cancer are at risk for PJP. People with other inflammatory conditions such as granulomatosis with polyangiitis (Wegener’s), polymyositis or dermatomyositis can also have an increased risk of acquiring PJP. The diagnosis of Pneumocystis pneumonia requires multiple tests such as a chest X-ray and a sample o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "AIDS",
+      "preferred_label": "AIDS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012268",
+        "orpha": null,
+        "umls": "UMLS:C0001175",
+        "mesh": "MESH:D000163"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012268",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:635",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000765",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:99",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000163",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200809",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2851",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62479008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001175",
+          "display": null
+        }
+      ],
+      "context": "y cough is one distinction from typical pneumonia because spit (sputum) is too thick to become productive, therefore productive cough is not as common in PJP. Uncommonly, the PJP fungus can spread to other body organs such as the liver, kidney and spleen as the disease progresses. PJP is a frequent AIDS-defining diagnosis in the United States and in Europe. Pneumocystis pneumonia is commonly seen in HIV infected people with a CD4 count of less than 200 cells/mm3. People receiving high doses of glucocorticoids or other immunosuppressive drugs after an organ transplant or to treat cancer are at risk",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "AIDS-Associated Nephropathy",
+        "AIDS Dementia Complex",
+        "HIV Seropositivity"
+      ],
+      "pubtator_normalized_name": "Acquired Immunodeficiency Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

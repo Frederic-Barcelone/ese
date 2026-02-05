@@ -1,0 +1,45 @@
+{
+  "doc_id": "Candidiasis",
+  "doc_filename": "Candidiasis.pdf",
+  "top_entities": [
+    {
+      "name": "candidiasis",
+      "mention_count": 3,
+      "entity_type": "disease"
+    },
+    {
+      "name": "viral infectious disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Yeast",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Candida Albicans",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2325,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.15,
+  "title": "Candidiasis: Clinical Overview and Risk Factors",
+  "short_description": "Clinical document describing Candida albicans infections, their causes, symptoms, and risk factors in various patient populations.",
+  "long_description": "This clinical reference document provides a comprehensive overview of candidiasis, an infection caused by Candida albicans yeast. The document explains that while Candida is normally harmless and present in healthy individuals, it can cause infections affecting the skin, mucous membranes, mouth, intestines, and vagina under certain conditions. It details risk factors including immunocompromised states, chemotherapy, broad-spectrum antibiotic use, diabetes mellitus, and pregnancy. The document also addresses severe manifestations that can affect the blood, heart, and brain in patients with compromised immune systems, and discusses transmission to newborns through maternal infection.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:17:49.377519"
+}

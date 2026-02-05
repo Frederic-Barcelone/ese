@@ -1,0 +1,35 @@
+{
+  "doc_id": "Grover_s-Disease",
+  "doc_filename": "Grover_s-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "skin disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "trauma",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2200,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Grover's Disease: Clinical Overview and Characteristics",
+  "short_description": "A clinical document describing Grover's disease, a rare transient skin disorder characterized by small raised red lesions primarily affecting males over 40-50 years old.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Grover's disease, a rare dermatological condition presenting as small, firm, raised red lesions typically found on the chest and back. The document details the diagnostic characteristics observable under microscopic examination, including the loss of intercellular cement leading to cell separation and blister formation. It discusses the demographic patterns showing predominance in males over 40-50 years of age, explores potential etiological factors including sun damage, heat exposure, and trauma, and examines various environmental triggers such as hot tubs, heating devices, and prolonged bed confinement. The document serves as an educational resource for healthcare professionals seeking to understand this uncommon but clinically significant skin disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:14:14.000467"
+}

@@ -1,0 +1,503 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:05:17.794213",
+  "document": "Trichothiodystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Trichothiodystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "TTD is present at birth. Males and females are affected in equal numbers. The estimated incidence is about 1 in 1,000,000 newborns in the United States and Europe. Over 100 patients have been reported worldwide. TTD has been reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "TTD is present at birth. Males and females are affected in equal numbers. The estimated incidence is about 1 in 1,000,000 newborns in the United States and Europe. Over 100 patients have been reported worldwide. TTD has been reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, int",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "ldwide. TTD has been reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ichthyosis",
+      "preferred_label": "Ichthyoses",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0020757",
+        "mesh": "D017490"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0020757",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017490",
+          "display": "Ichthyosis Lamellar"
+        }
+      ],
+      "context": "reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns of myelination is often",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ichthyosis X-Linked",
+        "Ichthyosis Bullosa of Siemens",
+        "Ichthyosis"
+      ],
+      "pubtator_normalized_name": "Ichthyosis Lamellar",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns of myelination is often performed. Laboratory testing for immune function, blood count and iron levels can also be performed. TTD is typically diagnosed by polarized light microscopy of hair shafts, revealing a tiger-tail pattern, and at times by measurement of reduced sulfur content in patient’s hair. The classical tiger-tail pattern alone usually is enough to diagnose TTD. However, there are other con",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "zed light microscopy of hair shafts, revealing a tiger-tail pattern, and at times by measurement of reduced sulfur content in patient’s hair. The classical tiger-tail pattern alone usually is enough to diagnose TTD. However, there are other conditions with similar hair shaft abnormalities and often genetic testing is ordered to confirm the diagnosis. However, there are a few patients with features of TTD who will not have mutations in the known genes. They may have mutations in yet to be identified TTD associated genes.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "short stature",
+      "preferred_label": "Dwarfism",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0013336",
+        "mesh": "D004393"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0013336",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004393",
+          "display": "Dwarfism Pituitary"
+        }
+      ],
+      "context": "ed worldwide. TTD has been reported in all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dwarfism stiff joint ocular abnormalities",
+        "Dwarfism",
+        "Abuse dwarfism syndrome"
+      ],
+      "pubtator_normalized_name": "Dwarfism Pituitary",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual impairment",
+      "preferred_label": "Mental impairment",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0683322",
+        "mesh": "D060825"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0683322",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D060825",
+          "display": "Cognitive Dysfunction"
+        }
+      ],
+      "context": "all ethnic groups. An initial evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns of myelination is often performed. Laboratory tes",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cataract Congenital with Mental Impairment and Dentate Gyrus Atrophy",
+        "Trichothiodystrophy Syndromes",
+        "Spastic paraplegia 11 autosomal recessive"
+      ],
+      "pubtator_normalized_name": "Cognitive Dysfunction",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "developmental delay",
+      "preferred_label": "Developmental delay",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0424605",
+        "mesh": "D002658"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0424605",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002658",
+          "display": "Developmental Disabilities"
+        }
+      ],
+      "context": "al evaluation for TTD involves a diagnostic work-up, including obtaining a detailed history of the patient’s prenatal and neonatal history. A detailed physical exam is performed to assess clinical features such as hair abnormalities, short stature, small chin, ichthyosis, intellectual impairment or developmental delay, and bone and teeth anomalies. Evaluation by a developmental pediatrician or neurologist may determine whether there is any developmental delay or intellectual impairment. MRI imaging of the brain to identify abnormal patterns of myelination is often performed. Laboratory testing for immune functio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Language Development Disorders",
+        "Achondroplasia",
+        "Growth Retardation Developmental Delay Coarse Facies And Early Death"
+      ],
+      "pubtator_normalized_name": "Developmental Disabilities",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

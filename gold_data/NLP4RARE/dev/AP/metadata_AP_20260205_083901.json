@@ -1,0 +1,35 @@
+{
+  "doc_id": "AP",
+  "doc_filename": "AP.pdf",
+  "top_entities": [
+    {
+      "name": "AP-4 associated hereditary spastic paraplegia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Hereditary spastic paraplegia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1979,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "AP-4-Associated Hereditary Spastic Paraplegia: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing AP-4-associated hereditary spastic paraplegia (HSP), its global prevalence, diagnostic challenges, and characteristic features.",
+  "long_description": "This clinical document provides an overview of AP-4-associated hereditary spastic paraplegia (AP-4-HSP), a genetic neurological disorder that affects individuals worldwide regardless of gender or ethnicity. The document highlights the diagnostic challenges associated with this condition, noting that it is likely under-recognized due to symptom overlap with cerebral palsy, leading to frequent misdiagnosis. The text describes the nonspecific initial clinical manifestations including spasticity, developmental delay, intellectual disability, and seizures. It outlines the diagnostic approach, which includes brain MRI imaging showing characteristic features such as thin corpus callosum, wide lateral ventricles, and white matter changes, with definitive diagnosis requiring genetic testing.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:39:01.651876"
+}

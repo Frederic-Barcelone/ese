@@ -1,0 +1,192 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:11:04.539324",
+  "document": "Bronchiolitis-Obliterans-Organizing-Pneumonia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Bronchiolitis-Obliterans-Organizing-Pneumonia.pdf",
+  "total_candidates": 71,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 2,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "BOOP",
+      "long_form": "Bronchiolitis obliterans organizing pneumonia",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Bronchiolitis obliterans organizing pneumonia (BOOP) is a rare inflammatory lung disorder",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HRCT",
+      "long_form": "high-resolution computed tomography",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "United States. BOOP has been reported throughout the world. A diagnosis of BOOP may be made based upon a clinical evaluation, a detailed patient history, identification of characteristic findings, and specialized tests such as x-ray studies, especially a high-resolution chest computed tomography or HRCT, pulmonary function studies that includes a diffusing capacity test, and often a lung biopsy for microscopic tissue analysis. Lung biopsy may be via conventional transbronchial biopsy which frequently captures the diagnosis, transbronchial cryobiopsy which is newer and recovers a larger bit of tiss",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IPF",
+      "long_form": "Idiopathic pulmonary fibrosis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "rders associated with BOOP include the connective-tissue diseases, immunological disorders, and inflammatory bowel disease. BOOP has also been seen in association with lung abscess, lung cancer, and lymphoma. Importantly, the BOOP lesion is seen in individuals with idiopathic pulmonary fibrosis, or IPF, and in these situations, the primary lung disease is the IPF and the secondary process is BOOP. BOOP affects males and females in equal numbers. It develops in individuals between 40-60 years old, but the disorder may affect individuals of any age. BOOP is estimated to account for 5 to 10% of the",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "bronchiolitis obliterans organizing pneumonia",
+      "matched_text": "Bronchiolitis obliterans organizing pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J84.116",
+      "orpha": "Orphanet:1302"
+    },
+    {
+      "name": "respiratory tract infectious disorder",
+      "matched_text": "respiratory infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "bronchiolitis obliterans syndrome",
+      "matched_text": "bronchiolitis obliterans",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1303"
+    },
+    {
+      "name": "Cryptogenic organizing pneumonia",
+      "matched_text": "BOOP",
+      "abbreviation": "BOOP",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "J84.1",
+      "orpha": "ORPHA:1302"
+    },
+    {
+      "name": "idiopathic pulmonary fibrosis",
+      "matched_text": "idiopathic pulmonary fibrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J84.112",
+      "orpha": "Orphanet:2032"
+    },
+    {
+      "name": "inflammatory bowel disease",
+      "matched_text": "inflammatory bowel disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pulmonary function",
+      "matched_text": "pulmonary function",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "lung disorder",
+      "matched_text": "lung disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "lung abscess",
+      "matched_text": "lung abscess",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "lung cancer",
+      "matched_text": "lung cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pneumonia",
+      "matched_text": "pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J18.9",
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "lymphoma",
+      "matched_text": "lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:223735"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Radiation therapy",
+      "matched_text": "radiation therapy",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "RECRUITING"
+    },
+    {
+      "name": "Cough",
+      "matched_text": "cough",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

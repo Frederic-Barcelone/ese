@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:57:19.801967",
+  "document": "Progressive-Osseous-Heteroplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Progressive-Osseous-Heteroplasia.pdf",
+  "total_candidates": 9,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "POH",
+      "long_form": "Progressive osseous heteroplasia",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "nce of heterotopic ossification (e.g., x-ray and roentgenograms) with characteristic appearance for POH. An additional test may include the removal and testing of tissues (biopsy). In some cases, there m",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "progressive osseous heteroplasia",
+      "matched_text": "progressive osseous heteroplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2762"
+    },
+    {
+      "name": "Progressive osseous heteroplasia",
+      "matched_text": "POH",
+      "abbreviation": "POH",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "M61.5",
+      "orpha": "ORPHA:2762"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

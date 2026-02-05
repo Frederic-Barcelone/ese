@@ -1,0 +1,623 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T09:08:15.662676",
+  "document": "Ichthyosis-Lamellar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Ichthyosis-Lamellar.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Lamellar ichthyosis",
+      "preferred_label": "lamellar ichthyosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q80.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017778",
+        "orpha": "Orphanet:313",
+        "umls": "UMLS:C5848247",
+        "mesh": "D017490"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017778",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10803",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q80.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1852191",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10023686",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200617",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84805",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1289",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:313",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5848247",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:600146417",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017490",
+          "display": "Ichthyosis Lamellar"
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of sc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lamellar ichthyosis type 3",
+        "Ichthyosis Lamellar 5",
+        "Lamellar ichthyosis type 2"
+      ],
+      "pubtator_normalized_name": "Ichthyosis Lamellar",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamel",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic",
+      "preferred_label": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar icht",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases X-Linked",
+        "Genetic Predisposition to Disease",
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin disorder",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar ichthyosis is a ve",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "n lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar ichthyosis is a very rare disorder occurring in less than one in 200,000 people. Lamellar ichthyosis is not limited by gender, race or ethnicity; it occurs in all populations. Lamellar ichthyosis is treated topically with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "er of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar ichthyosis is a very rare disorder occurring in less than one in 200,000 people. Lamellar ichthyosis is not limited by gender, race or ethnicity; it occurs in all populations. Lamellar ichthyosis is treated topically with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and mild keratolytics (products containing alpha-hydroxy acids.. Severe lamellar ichthyosis can be treated systemically with oral syn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "nder, race or ethnicity; it occurs in all populations. Lamellar ichthyosis is treated topically with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and mild keratolytics (products containing alpha-hydroxy acids.. Severe lamellar ichthyosis can be treated systemically with oral synthetic retinoids. Retinoids are only used in severe cases of lamellar ichthyosis due to their known bone toxicity and other complications.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Lamellar ichthyosis",
+      "preferred_label": "Congenital Nonbullous Ichthyosiform Erythroderma",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0079154",
+        "mesh": "C538603"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0079154",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538603",
+          "display": "Ichthyosiform erythroderma Brocq congenital nonbullous form"
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of sc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ichthyosis Lamellar"
+      ],
+      "pubtator_normalized_name": "Ichthyosiform erythroderma Brocq congenital nonbullous form",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic skin disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 0.9798112273216247,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "Lamellar ichthyosis is a rare genetic skin disorder. In lamellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar ichthyosis is a ve",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "ellar ichthyosis, the skin cells are produced at a normal rate, but they do not separate normally at the surface of the outermost layer of skin (stratum corneum) and are not shed as quickly as they should be. The result of this retention is the formation of scale. Lamellar ichthyosis is a very rare disorder occurring in less than one in 200,000 people. Lamellar ichthyosis is not limited by gender, race or ethnicity; it occurs in all populations. Lamellar ichthyosis is treated topically with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and m",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

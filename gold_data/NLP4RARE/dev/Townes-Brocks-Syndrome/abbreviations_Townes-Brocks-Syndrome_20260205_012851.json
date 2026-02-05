@@ -1,0 +1,129 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:28:51.147581",
+  "document": "Townes-Brocks-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Townes-Brocks-Syndrome.pdf",
+  "total_candidates": 49,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "TBS",
+      "long_form": "Townes Brocks syndrome",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Townes-Brocks syndrome (TBS) is an autosomal dominant genetic disorder characterized by absence of the anal opening (imperforate anus), abnormal ears associated with hearing impairment and thumb malformations. Abnormalities in the feet, heart and kidneys also occur frequently. Townes-Brocks syndrome is associated with a mutation in the SALL1 gene. The absence of the anal opening (imperforate anus) is the most common feature",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "SALL1",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "eart and kidneys also occur frequently. Townes-Brocks syndrome is associated with a mutation in the SALL1 gene. The absence of the anal opening (imperforate anus) is the most common feature of TBS. Small e",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "polydactyly of a triphalangeal thumb",
+      "matched_text": "triphalangeal thumbs",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93336"
+    },
+    {
+      "name": "conductive hearing loss",
+      "matched_text": "conductive hearing loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Townes-Brocks syndrome",
+      "matched_text": "Townes-Brocks syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:857"
+    },
+    {
+      "name": "Townes-Brocks syndrome",
+      "matched_text": "TBS",
+      "abbreviation": "TBS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q87.8",
+      "orpha": "ORPHA:857"
+    },
+    {
+      "name": "hearing loss disorder",
+      "matched_text": "hearing impairment",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:H90",
+      "orpha": null
+    },
+    {
+      "name": "mental retardation",
+      "matched_text": "Mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "imperforate anus",
+      "matched_text": "imperforate anus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q42.3",
+      "orpha": null
+    },
+    {
+      "name": "polydactyly",
+      "matched_text": "polydactyly",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q69",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

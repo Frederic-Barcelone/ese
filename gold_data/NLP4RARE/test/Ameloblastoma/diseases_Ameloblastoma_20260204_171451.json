@@ -1,0 +1,308 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T17:14:51.031776",
+  "document": "Ameloblastoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Ameloblastoma.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Ameloblastoma",
+      "preferred_label": "ameloblastoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017795",
+        "orpha": "Orphanet:314419",
+        "umls": "UMLS:C0002448",
+        "mesh": "MESH:D000564"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017795",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050894",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5747",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9310/0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1457",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000564",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066796",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4313",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:764",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:314419",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:285311001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002448",
+          "display": null
+        }
+      ],
+      "context": "Ameloblastoma is a rare disorder of the jaw involving abnormal tissue growth. The resulting tumors or cysts are usually not malignant (benign) but the tissue growth may be aggressive in the involved area. On occasion, tissue near the jaws, such as around the sinuses and eye sockets, may become involved as well.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Adenoameloblastoma"
+      ],
+      "pubtator_normalized_name": "Ameloblastoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "Ameloblastoma is a rare disorder of the jaw involving abnormal tissue growth. The resulting tumors or cysts are usually not malignant (benign) but the tissue growth may be aggressive in the involved area. On occasion, tissue near the jaws, such as around the sinuses and eye sockets, may become involved as well. The tissues involve",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Malignancy",
+      "preferred_label": "malignancy",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "(benign) but the tissue growth may be aggressive in the involved area. On occasion, tissue near the jaws, such as around the sinuses and eye sockets, may become involved as well. The tissues involved are most often those that give rise to the teeth so that ameloblastoma may cause facial distortion. Malignancy is uncommon as are metastases, but they do occur. The cause of ameloblastoma is not understood. Causes may include injury to the mouth or jaw, infections of the teeth or gums, or inflammation of these same areas. Infections by viruses or lack of protein or minerals in the persons diet are also susp",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hematologic Neoplasms",
+        "Leukemia Lymphocytic Chronic B-Cell",
+        "Neoplasms Second Primary"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "injury",
+      "preferred_label": "injury",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021178",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014947"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021178",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000546",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014947",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3671",
+          "display": null
+        }
+      ],
+      "context": "inuses and eye sockets, may become involved as well. The tissues involved are most often those that give rise to the teeth so that ameloblastoma may cause facial distortion. Malignancy is uncommon as are metastases, but they do occur. The cause of ameloblastoma is not understood. Causes may include injury to the mouth or jaw, infections of the teeth or gums, or inflammation of these same areas. Infections by viruses or lack of protein or minerals in the persons diet are also suspected of causing the growth or development of these tumors. In general, however, scientists do not understand the cause of",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chemical and Drug Induced Liver Injury",
+        "Smoke Inhalation Injury",
+        "Acute Kidney Injury"
+      ],
+      "pubtator_normalized_name": "Wounds and Injuries",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

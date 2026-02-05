@@ -1,0 +1,130 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:50:19.961940",
+  "document": "Gianotti-Crosti-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gianotti-Crosti-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "itch",
+      "hgnc_symbol": "ITCH",
+      "full_name": "itchy E3 ubiquitin protein ligase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "13890",
+        "entrez": "83737",
+        "ensembl": "ENSG00000078747",
+        "uniprot": "Q96J02",
+        "omim": "606409"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "13890",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "83737",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000078747",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "606409",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q96J02",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "228426",
+          "disease_name": "Syndromic multisystem autoimmune disease due to Itch deficiency",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ages months and nine years. Major symptoms may include blisters on the skin of the legs, buttocks and arms. The disorder is usually preceded by a viral infection. Gianotti-Crosti Syndrome is characterized by blisters on the skin that may or may not itch. They are usually found on the face, buttocks, arms or legs. The blisters consist of large, flat-topped, fluid filled sacks. They usually occur along with upper respiratory tract infection. The blisters usually last from twenty to twenty-five days; they do not usually recur. There may be an enlarge",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "ages months and nine years. Major symptoms may include blisters on the skin of the legs, buttocks and arms. The disorder is usually preceded by a viral infection. Gianotti-Crosti Syndrome is characterized by blisters on the skin that may or may not itch. They are usually found on the face, buttocks, arms or legs. The blisters consist of large, flat-topped, fluid filled sacks. They usually occur along wi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

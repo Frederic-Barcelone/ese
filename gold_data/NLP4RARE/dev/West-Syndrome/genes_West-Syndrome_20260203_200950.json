@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:09:50.494842",
+  "document": "West-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/West-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "wave",
+      "hgnc_symbol": "WASF1",
+      "full_name": "WASP family member 1",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "12732",
+        "entrez": "8936",
+        "ensembl": "ENSG00000112290",
+        "uniprot": "Q92558",
+        "omim": "605035"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "12732",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "8936",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000112290",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "605035",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q92558",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "West syndrome is a constellation of symptoms characterized by epileptic/infantile spasms, abnormal brain wave patterns called hypsarrhythmia and intellectual disability. The spasms that occur may range from violent jackknife or \"salaam\" movements where the whole body bends in half, or they may be no more than a mild twitching of the shoulder or eye changes. These spasms usually begin in the early months af",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

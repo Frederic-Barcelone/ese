@@ -1,0 +1,35 @@
+{
+  "doc_id": "Trisomy-18-Syndrome",
+  "doc_filename": "Trisomy-18-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "trisomy 18",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "chromosomal disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2005,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Trisomy 18 Syndrome (Edwards Syndrome): Clinical Overview",
+  "short_description": "Clinical document describing Trisomy 18 syndrome, a rare chromosomal disorder affecting approximately 1 in 5,000-7,000 live births with higher prevalence in females.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Trisomy 18 syndrome, also known as Edwards syndrome, named after researcher JH Edwards who first identified it in 1960. The document explains the chromosomal abnormality where chromosome 18 appears three times instead of twice in body cells, discusses the possibility of mosaicism in some cases, and presents key epidemiological data including the female predominance (3-4:1 ratio), birth prevalence rates, and the correlation with advanced maternal age. This information serves as a foundational resource for understanding the genetic basis and demographic characteristics of this rare chromosomal disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:15:41.484806"
+}

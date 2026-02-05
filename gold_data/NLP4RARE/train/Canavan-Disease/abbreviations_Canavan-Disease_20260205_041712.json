@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:17:12.776009",
+  "document": "Canavan-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Canavan-Disease.pdf",
+  "total_candidates": 29,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ASPA",
+      "long_form": "aspartoacylase",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "3-6 months of age. Symptoms may include an abnormally large head (macrocephaly), lack of head control, severely diminished muscle tone resulting in \"floppiness,\"\" and delays in reaching developmental milestones such as independent sitting and walking. Most affected children develop life-threatening complications by 10 years of age. Canavan disease occurs because of mutations in the aspartoacylase (ASPA) gene that affects the breakdown (metabolism) of the N-acetylaspartic acid (NNA). It is inherited as an autosomal recessive condition. Canavan disease affects males and females in equal numbers. It affects all ethnic groups, but occurs with greater frequency in individuals of Ashkenazi Jewish descent. In this population, the carrier frequency is estimated to be as high as one in 40-58 people. The",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "NNA",
+      "long_form": "N-acetylaspartic acid",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "he aspartoacylase (ASPA) gene that affects the breakdown (metabolism) of the N-acetylaspartic acid (NNA). It is inherited as an autosomal recessive condition. Canavan disease affects males and females in",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "rare genetic neurological disorder",
+      "matched_text": "rare genetic neurological disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:71859"
+    },
+    {
+      "name": "Canavan disease",
+      "matched_text": "Canavan disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:141"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

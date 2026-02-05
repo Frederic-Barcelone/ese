@@ -1,0 +1,67 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:39:58.918675",
+  "document": "Balo-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Balo-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 2,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not identified - Clinical text about Balo Disease",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "Balo Disease",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Balo-Disease_1",
+          "recommendation_type": "treatment",
+          "population": "patients with Balo Disease",
+          "condition": "acute presentations",
+          "severity": "acute",
+          "action": "corticosteroids are usually useful",
+          "action_description": null,
+          "preferred": "corticosteroids",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Balo-Disease",
+          "source_text": "Corticosteroids are usually useful in decreasing severity of acute presentations through their anti-inflammatory actions",
+          "page_num": null
+        },
+        {
+          "recommendation_id": "rec_Balo-Disease_2",
+          "recommendation_type": "treatment",
+          "population": "patients with Balo Disease",
+          "condition": "symptomatic",
+          "severity": "non-severe",
+          "action": "treatment to relieve symptoms including pharmacologic and rehabilitative modalities",
+          "action_description": null,
+          "preferred": null,
+          "alternatives": [
+            "pharmacologic modalities",
+            "rehabilitative modalities"
+          ],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Balo-Disease",
+          "source_text": "Treatment to relieve symptoms, such as spasticity, weakness, pain, or ataxia, includes pharmacologic and rehabilitative modalities",
+          "page_num": null
+        }
+      ],
+      "source_document": "Balo-Disease",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

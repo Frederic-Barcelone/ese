@@ -1,0 +1,23 @@
+{
+  "doc_id": "Appendiceal-Cancer-and-Tumors",
+  "doc_filename": "Appendiceal-Cancer-and-Tumors.pdf",
+  "file_size_bytes": 2693,
+  "file_size_human": "2.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Appendiceal Cancer and Tumors: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document providing an overview of appendiceal cancers, their epidemiology, association with peritoneal carcinomatosis, and diagnostic challenges.",
+  "long_description": "This clinical reference document presents a comprehensive overview of appendiceal cancers and tumors, covering their epidemiological characteristics including peak occurrence in the 6th decade and equal gender distribution. The document discusses the relationship between appendiceal cancer and peritoneal carcinomatosis, detailing how these rare cancers (1-2 cases per million) can spread throughout the abdominal cavity alongside other gastrointestinal and gynecologic malignancies. It emphasizes the diagnostic challenges posed by the lack of unique imaging features, requiring histopathological examination for definitive diagnosis. The text covers various tumor types, diagnostic approaches including the significance of mucin-filled appendix findings on imaging, and the distinctive characteristics of goblet cell carcinoid tumors with their unique neuroendocrine and epithelial cell combination.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-03T21:14:02.660966"
+}

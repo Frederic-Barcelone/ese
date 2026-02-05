@@ -1,0 +1,449 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:00:12.551266",
+  "document": "Pyruvate-Dehydrogenase-Complex-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pyruvate-Dehydrogenase-Complex-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "abnormal eye movements",
+      "preferred_label": "abnormal eye movements",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020261",
+        "orpha": "Orphanet:98691",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020261",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98691",
+          "display": null
+        }
+      ],
+      "context": "mon symptoms of PDCD may initially be poor feeding, lethargy and rapid breathing (tachypnea) in an infant. Neurologic symptoms are progressive and usually start in infancy but may even be apparent at birth. These symptoms can include motor delay, poor muscle tone, seizures, incoordination (ataxia), abnormal eye movements and poor visual tracking. Infants with the prenatal onset form may demonstrate brain malformations on neuroimaging. Individuals with the early childhood-onset form of PDCD may have normal neurologic development with intermittent periods of ataxia, often associated with upper respiratory infection o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "brain malformations",
+      "preferred_label": "brain malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016054",
+        "orpha": "Orphanet:199633",
+        "umls": null,
+        "mesh": "D020785"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016054",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100217",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:199633",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020785",
+          "display": "Central Nervous System Vascular Malformations"
+        }
+      ],
+      "context": "ant. Neurologic symptoms are progressive and usually start in infancy but may even be apparent at birth. These symptoms can include motor delay, poor muscle tone, seizures, incoordination (ataxia), abnormal eye movements and poor visual tracking. Infants with the prenatal onset form may demonstrate brain malformations on neuroimaging. Individuals with the early childhood-onset form of PDCD may have normal neurologic development with intermittent periods of ataxia, often associated with upper respiratory infection or other minor stress. Varying degrees of neurologic deficits and mental retardation may occur in in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemangioma Cavernous Central Nervous System",
+        "Fetal akinesia syndrome X-linked",
+        "Brain Anomalies Retardation Ectodermal Dysplasia Skeletal Malformations Hirschsprung Disease Ear-Eye Anomalies Cleft Palate-Cryptorchidism And Kidney Dysplasia-Hypoplasia"
+      ],
+      "pubtator_normalized_name": "Central Nervous System Vascular Malformations",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "ay demonstrate brain malformations on neuroimaging. Individuals with the early childhood-onset form of PDCD may have normal neurologic development with intermittent periods of ataxia, often associated with upper respiratory infection or other minor stress. Varying degrees of neurologic deficits and mental retardation may occur in individuals with PDCD. Several hundred cases of PDCD have been reported. More males than females have severe disease and early death and progressive neurological symptoms are observed more often in females, although some females have severe symptoms. Biochemical abnormalities may vary",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "acidosis",
+      "preferred_label": "acidosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E87.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006022",
+        "orpha": null,
+        "umls": "UMLS:C0001122",
+        "mesh": "D000138"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006022",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000014",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001941",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E87.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:276.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1296",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:51387008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001122",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000138",
+          "display": "Acidosis"
+        }
+      ],
+      "context": "n individuals with PDCD. Several hundred cases of PDCD have been reported. More males than females have severe disease and early death and progressive neurological symptoms are observed more often in females, although some females have severe symptoms. Biochemical abnormalities may vary from severe acidosis (due to abnormally high levels of lactic acid) appearing shortly after birth to a mildly elevated level which usually follows a meal high in carbohydrates. In some cases elevation of blood lactate levels is seen only during the acute episodes. Excretion of abnormally large amounts of the amino acid",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acidosis Lactic",
+        "Acidosis Renal Tubular",
+        "Acidosis Respiratory"
+      ],
+      "pubtator_normalized_name": "Acidosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "Common symptoms of PDCD may initially be poor feeding, lethargy and rapid breathing (tachypnea) in an infant. Neurologic symptoms are progressive and usually start in infancy but may even be apparent at birth. These symptoms can include motor delay, poor muscle tone, seizures, incoordination (ataxia), abnormal eye movements and poor visual tracking. Infants with the prenatal onset form may demonstrate brain malformations on neuroimaging. Individuals with the early childhood-onset form of PDCD may have normal neurologic development with intermittent periods of ataxia, often associated with uppe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "PDCD",
+      "preferred_label": "PDCD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017392",
+        "orpha": "Orphanet:293462",
+        "umls": "UMLS:C0339282",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017392",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21168",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:371.56",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:573065",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:293462",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:231934009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0339282",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2027634766",
+          "display": null
+        }
+      ],
+      "context": "Common symptoms of PDCD may initially be poor feeding, lethargy and rapid breathing (tachypnea) in an infant. Neurologic symptoms are progressive and usually start in infancy but may even be apparent at birth. These symptoms can include motor delay, poor muscle tone, seizures, incoordination (ataxia), abnormal eye movemen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "MRS",
+      "preferred_label": "MRS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100623",
+        "orpha": null,
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100623",
+          "display": null
+        }
+      ],
+      "context": "s. In some cases elevation of blood lactate levels is seen only during the acute episodes. Excretion of abnormally large amounts of the amino acid alanine (alaninuria) may occur only during acute episodes. Imaging studies such as magnetic resonance imaging (MRI) and magnetic resonance spectroscopy (MRS) may reveal structural brain abnormalities associated with severe disease. A definitive diagnosis can be made by demonstrating abnormal PDC enzyme levels or function in leukocytes, fibroblasts or from a tissue biopsy.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:31:54.647579",
+  "document": "Cholera.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cholera.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "severe forms",
+      "preferred_label": "Mucopolysaccharidosis type 2, severe form",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:217085",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:217085",
+          "display": null
+        }
+      ],
+      "context": ". There are several strains of V. cholerae and the severity of the disease is based on the particular infectious strain. Cholera is caused by the bacterium vibrio cholerae which is a rod-shaped gram negative organism. There are several different types of this bacteria which can produce mild or more severe forms of the disease. The symptoms of cholera develop due to the release of a toxin (Vibrio c. 01) by the bacteria.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "infectious disease",
+      "preferred_label": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "Cholera is an acute infectious disease caused by the bacterium vibrio cholerae, which lives and multiples (colonizes) in the small intestine but does not destroy or invade the intestinal tissue (noninvasive). The major symptom of cholera is massive watery diarrhea that occurs because of a toxin secreted by the bacteria that stimulates t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysentery",
+        "Post-Infectious Disorders",
+        "Travel-Related Illness"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diarrhea",
+      "preferred_label": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001673",
+        "orpha": null,
+        "umls": "UMLS:C1290807",
+        "mesh": "MESH:D003967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001673",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13250",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002014",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:009.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:713159",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2987",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128333008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290807",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:116759077",
+          "display": null
+        }
+      ],
+      "context": "Cholera is an acute infectious disease caused by the bacterium vibrio cholerae, which lives and multiples (colonizes) in the small intestine but does not destroy or invade the intestinal tissue (noninvasive). The major symptom of cholera is massive watery diarrhea that occurs because of a toxin secreted by the bacteria that stimulates the cells of the small intestine to secrete fluid. There are several strains of V. cholerae and the severity of the disease is based on the particular infectious strain. Cholera is caused by the bacterium vibrio cholerae which",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diarrhea 5 With Tufting Enteropathy Congenital",
+        "Diarrhea 3 Secretory Sodium Congenital",
+        "Dysentery"
+      ],
+      "pubtator_normalized_name": "Diarrhea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Cholera",
+      "preferred_label": "cholera",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015766",
+        "orpha": "Orphanet:173",
+        "umls": "UMLS:C0008354",
+        "mesh": "MESH:D002771"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015766",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1498",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6043",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:A00",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:001.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:40263",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002771",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10008631",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C157812",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:928",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:173",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:63650001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008354",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:257068234",
+          "display": null
+        }
+      ],
+      "context": "Cholera is an acute infectious disease caused by the bacterium vibrio cholerae, which lives and multiples (colonizes) in the small intestine but does not destroy or invade the intestinal tissue (noninvasive). The major symptom of cholera is massive watery diarrhea that occurs because of a toxin secreted by",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gastrointestinal Diseases",
+        "Vipoma",
+        "Cholera Morbus"
+      ],
+      "pubtator_normalized_name": "Cholera",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

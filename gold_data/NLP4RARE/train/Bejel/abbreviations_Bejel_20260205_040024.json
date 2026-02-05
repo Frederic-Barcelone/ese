@@ -1,0 +1,129 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:00:24.892134",
+  "document": "Bejel.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Bejel.pdf",
+  "total_candidates": 39,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "VDRL",
+      "long_form": "Venereal Disease Research Laboratory",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "dum, the bacterium that causes syphilis. The disease is not sexually transmitted. The diagnosis of bejel is based on the geographic history of the patient as well as laboratory testing of material from the lesions (darkfield examination). The responsible bacterium is readily identifiable on sight in a microscope as a treponema. Samples of the fluid that surrounds the lesions yield a positive VDRL (Venereal Disease Research Laboratory) and FTA-ABS (fluorescent treponemal antibody-absorption) test. However, additional history may be required to differentiate bejel from venereal syphilis.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FTA-ABS",
+      "long_form": "fluorescent treponemal antibodyabsorption",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "e is not sexually transmitted. The diagnosis of bejel is based on the geographic history of the patient as well as laboratory testing of material from the lesions (darkfield examination). The responsible bacterium is readily identifiable on sight in a microscope as a treponema. Samples of the fluid that surrounds the lesions yield a positive VDRL (Venereal Disease Research Laboratory) and FTA-ABS (fluorescent treponemal antibody-absorption) test. However, additional history may be required to differentiate bejel from venereal syphilis.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "rare infectious disease",
+      "matched_text": "rare infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68416"
+    },
+    {
+      "name": "Amniotic band syndrome",
+      "matched_text": "ABS",
+      "abbreviation": "ABS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q79.8",
+      "orpha": "ORPHA:295000"
+    },
+    {
+      "name": "infectious disease",
+      "matched_text": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A00-B99",
+      "orpha": null
+    },
+    {
+      "name": "Venereal Disease",
+      "matched_text": "Venereal Disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "syphilis",
+      "matched_text": "syphilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "bejel",
+      "matched_text": "Bejel",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "pinta",
+      "matched_text": "pinta",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A67",
+      "orpha": null
+    },
+    {
+      "name": "bejel",
+      "matched_text": "endemic syphilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A65",
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "FTA",
+      "matched_text": "FTA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

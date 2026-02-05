@@ -1,0 +1,30 @@
+{
+  "doc_id": "Congenital-Central-Hypoventilation-Syndrome",
+  "doc_filename": "Congenital-Central-Hypoventilation-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Congenital central hypoventilation syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2079,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Congenital Central Hypoventilation Syndrome (CCHS): Epidemiology and Diagnostic Challenges",
+  "short_description": "Clinical overview of CCHS, a rare genetic disorder affecting breathing control equally in males and females, with over 1,000 known cases worldwide as of 2013.",
+  "long_description": "This document provides an epidemiological overview of Congenital Central Hypoventilation Syndrome (CCHS), a rare genetic disorder that impairs automatic breathing control. The text discusses the equal gender distribution of the condition, diagnostic challenges particularly in milder cases that may go unrecognized until triggered by sedation or anesthesia, and the importance of healthcare provider education. While over 1,000 cases have been documented globally as of 2013, the true prevalence remains unknown due to underdiagnosis and the lack of comprehensive population-based studies across diverse populations. The document emphasizes that many milder cases may be misdiagnosed or overlooked, suggesting the actual frequency of CCHS is likely higher than current estimates.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:50:00.079220"
+}

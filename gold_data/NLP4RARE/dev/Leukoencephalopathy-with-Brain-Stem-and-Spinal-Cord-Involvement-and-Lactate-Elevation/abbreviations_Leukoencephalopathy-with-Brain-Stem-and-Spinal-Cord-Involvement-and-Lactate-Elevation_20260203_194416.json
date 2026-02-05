@@ -1,0 +1,88 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:44:16.114040",
+  "document": "Leukoencephalopathy-with-Brain-Stem-and-Spinal-Cord-Involvement-and-Lactate-Elevation.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Leukoencephalopathy-with-Brain-Stem-and-Spinal-Cord-Involvement-and-Lactate-Elevation.pdf",
+  "total_candidates": 16,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "LBSL",
+      "long_form": "Leukoencephalopathy with Brainstem and Spinal Cord Involvement and Lactate Elevation",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "LBSL is an extremely rare disorder that was first reported in the medical literature in 2002. According to the nonprofit organization, A Cure for Ellie, as of April 2018, there are about 100 individuals worldwide who have been identified with the disorder. Because rare diseases like LBSL often go undiag",
+      "lexicon_source": "scispacy+umls",
+      "lexicon_ids": [
+        {
+          "source": "UMLS",
+          "id": "C1970180"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Leukoencephalopathy with Brainstem and Spinal Cord Involvement and Lactate Elevation",
+      "matched_text": "LBSL",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "rare disorder",
+      "matched_text": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Wiskott-Aldrich syndrome",
+      "matched_text": "was",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D82.0",
+      "orpha": "ORPHA:906"
+    },
+    {
+      "name": "disease",
+      "matched_text": "disorder",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "Disease",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.7835971593856812,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

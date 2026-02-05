@@ -1,0 +1,35 @@
+{
+  "doc_id": "Peutz-Jeghers-Syndrome",
+  "doc_filename": "Peutz-Jeghers-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Peutz Jeghers Syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Peutz-Jeghers syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1765,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Peutz-Jeghers Syndrome: Epidemiology and Cancer Risk",
+  "short_description": "Clinical overview of Peutz-Jeghers syndrome, a rare genetic disorder affecting 1/50,000 to 1/200,000 births with increased cancer risk, particularly in women.",
+  "long_description": "This document provides epidemiological information about Peutz-Jeghers syndrome (PJS), a rare genetic disorder that affects both males and females equally across all racial and ethnic groups. The document outlines the birth prevalence estimates ranging from 1/50,000 to 1/200,000, with potential higher prevalence in specific countries like the Netherlands and China. It emphasizes the gender-specific cancer risks associated with PJS, noting that women face elevated risks for developing breast, ovarian, cervical, and uterine cancers compared to men with the condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:52:08.587570"
+}

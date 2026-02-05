@@ -1,0 +1,84 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:20:27.511872",
+  "document": "Dup15q-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Dup15q-Syndrome.pdf",
+  "total_candidates": 17,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CMA",
+      "long_form": "chromosomal microarray analysis",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "The prevalence of dup15q in the general population is unknown but may be as high as 1:5000. Dup15q is one of the most common chromosome (cytogenetic) anomalies in persons with ASD. In patients referred for clinical chromosomal microarray analysis (CMA) testing due to developmental concerns (developmental delay, intellectual disability, or ASD) or multiple congenital anomalies, the prevalence of dup15q is approximately 1:508. In ASD cohorts, the prevalence of dup15q is 1:253-1:522. In intellectual disability cohorts, the prevalence of dup15q is 1",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ASD",
+      "long_form": "Interatrial communication",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "high as 1:5000. Dup15q is one of the most common chromosome (cytogenetic) anomalies in persons with ASD. In patients referred for clinical chromosomal microarray analysis (CMA) testing due to development",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "obsolete congenital abnormality",
+      "matched_text": "congenital anomalies",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Interatrial communication",
+      "matched_text": "ASD",
+      "abbreviation": "ASD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q21.1",
+      "orpha": "ORPHA:1478"
+    },
+    {
+      "name": "intellectual disability",
+      "matched_text": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "Dup15q",
+      "matched_text": "dup15q",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:238446"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

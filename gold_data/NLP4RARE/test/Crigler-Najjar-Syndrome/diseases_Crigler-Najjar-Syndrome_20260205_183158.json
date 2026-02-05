@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:31:58.540440",
+  "document": "Crigler-Najjar-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Crigler-Najjar-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Crigler-Najjar syndrome",
+      "preferred_label": "Crigler-Najjar syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E80.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009044",
+        "orpha": "Orphanet:205",
+        "umls": "UMLS:C5551003",
+        "mesh": "MESH:D003414"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009044",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3803",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16526",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E80.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1789261",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003414",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10011386",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200941",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84656",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1016",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:205",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:28259009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5551003",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:291439191",
+          "display": null
+        }
+      ],
+      "context": "Crigler-Najjar syndrome affects males and females in equal numbers. The incidence is estimated to be 1 in 750,000-1,000,000 people in the general population. Many researchers believe that the disorder often goes undiagnosed or misdiagnosed making it difficult to determine its true frequency in the general population. It i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Crigler Najjar syndrome type 2"
+      ],
+      "pubtator_normalized_name": "Crigler-Najjar Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

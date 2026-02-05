@@ -1,0 +1,35 @@
+{
+  "doc_id": "Achondroplasia",
+  "doc_filename": "Achondroplasia.pdf",
+  "top_entities": [
+    {
+      "name": "Schwartz-Jampel syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "skeletal dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1649,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Achondroplasia: Clinical Overview and Epidemiology",
+  "short_description": "Clinical document describing achondroplasia as a common form of skeletal dysplasia causing dwarfism, with epidemiological data on its frequency and demographic distribution.",
+  "long_description": "This clinical document provides an overview of achondroplasia, a genetic disorder that represents one of the most common forms of skeletal dysplasia leading to dwarfism. The document discusses the condition's onset during fetal development and presents epidemiological data indicating that achondroplasia affects males and females equally, with an estimated birth frequency ranging from one in 15,000 to one in 35,000 births. This information serves as foundational knowledge for understanding the prevalence and basic characteristics of this skeletal disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:26:39.767335"
+}

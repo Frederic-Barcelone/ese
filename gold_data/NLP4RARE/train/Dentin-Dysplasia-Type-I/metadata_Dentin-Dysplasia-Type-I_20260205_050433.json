@@ -1,0 +1,35 @@
+{
+  "doc_id": "Dentin-Dysplasia-Type-I",
+  "doc_filename": "Dentin-Dysplasia-Type-I.pdf",
+  "top_entities": [
+    {
+      "name": "radicular dentin dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "dentin dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2032,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Dentin Dysplasia Type I: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing dentin dysplasia type I, a rare inherited disorder affecting tooth dentin development and root formation.",
+  "long_description": "This clinical document provides a comprehensive overview of dentin dysplasia type I, also known as radicular dentin dysplasia, which affects approximately 1 in 100,000 individuals. The document details the pathophysiology of this inherited disorder, explaining how it impacts dentin development and results in characteristic features such as absent or half-moon shaped pulp chambers, abnormally short roots, and premature tooth loss. The text covers the anatomical structures involved (dentin, pulp, enamel), clinical presentation, demographic distribution showing equal prevalence between males and females, and diagnostic approaches primarily relying on radiographic examination. This appears to be educational or reference material for healthcare professionals dealing with dental anomalies.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:04:33.646472"
+}

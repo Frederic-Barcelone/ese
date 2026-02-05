@@ -1,0 +1,35 @@
+{
+  "doc_id": "Chronic-Inflammatory-Demyelinating-Polyneuropathy",
+  "doc_filename": "Chronic-Inflammatory-Demyelinating-Polyneuropathy.pdf",
+  "top_entities": [
+    {
+      "name": "autoimmune disorder",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Chronic inflammatory demyelinating polyneuropathy",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2174,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Chronic Inflammatory Demyelinating Polyneuropathy (CIDP): Clinical Overview",
+  "short_description": "Clinical document describing CIDP as an autoimmune disorder affecting peripheral nerves, including epidemiology, symptoms, and diagnostic approaches.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Chronic Inflammatory Demyelinating Polyneuropathy (CIDP), a rare autoimmune disorder that attacks healthy peripheral nerve tissue. The document covers the unknown etiology but suspected autoimmune pathogenesis, epidemiological data showing male predominance (2:1 ratio) with average onset at age 50, and prevalence of 5-7 cases per 100,000 individuals. It details the diagnostic challenges and criteria, including the requirement for symptoms lasting at least two months, characteristic symmetric weakness patterns, and specific diagnostic tests such as nerve conduction studies, electromyography, lumbar puncture, and MRI imaging to identify slow conduction velocities, elevated spinal fluid protein, and nerve root inflammation.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:43:18.339981"
+}

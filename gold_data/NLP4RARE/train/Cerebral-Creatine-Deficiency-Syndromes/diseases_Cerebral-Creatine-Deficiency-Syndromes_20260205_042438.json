@@ -1,0 +1,549 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:24:38.596158",
+  "document": "Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cerebral-Creatine-Deficiency-Syndromes.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Cerebral creatine deficiency syndromes",
+      "preferred_label": "cerebral creatine deficiency syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000456",
+        "orpha": "Orphanet:79172",
+        "umls": "UMLS:C5244016",
+        "mesh": "C535598"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000456",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050798",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18952",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1826001",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200842",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:300352",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79172",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5244016",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535598",
+          "display": "Creatine deficiency X-linked"
+        }
+      ],
+      "context": "Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine metabolism which interrupt the formation or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Creatine deficiency X-linked",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "X-linked intellectual disabilities",
+      "preferred_label": "X-linked intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100284",
+        "orpha": null,
+        "umls": "UMLS:C1136249",
+        "mesh": "D038901"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100284",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:211749",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1136249",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D038901",
+          "display": "Mental Retardation X-Linked"
+        }
+      ],
+      "context": "ion or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain development. CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabilities. In regards to GAMT deficiency, there have been estimations from 1 out of 2,640,000 to 1 out of 550,000 patients being diagnosed to a conflicting report of 1 out of 115,000 patients being diagnosed. As of 2015, there have only been 110 individuals with GAMT deficiency diagnosed worldwide. The preva",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "X-Linked Intellectual Disability",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Mental Retardation X-Linked",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CCDS",
+      "preferred_label": "Creatine deficiency syndrome",
+      "abbreviation": "CCDS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:79172",
+        "umls": null,
+        "mesh": "C535598"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:79172",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535598",
+          "display": "Creatine deficiency X-linked"
+        }
+      ],
+      "context": "Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine metabolism which interrupt the formation or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arginine-Glycine Amidinotransferase Deficiency",
+        "Guanidinoacetate methyltransferase deficiency"
+      ],
+      "pubtator_normalized_name": "Creatine deficiency X-linked",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "GAMT deficiency",
+      "preferred_label": "GAMT deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012999",
+        "orpha": "Orphanet:382",
+        "umls": "UMLS:C0574080",
+        "mesh": "MESH:C537622"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012999",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050799",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2578",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:154356",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537622",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201300",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1967",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612736",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:382",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:124239003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0574080",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1811642217",
+          "display": null
+        }
+      ],
+      "context": "essary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain development. CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabilities. In regards to GAMT deficiency, there have been estimations from 1 out of 2,640,000 to 1 out of 550,000 patients being diagnosed to a conflicting report of 1 out of 115,000 patients being diagnosed. As of 2015, there have only been 110 individuals with GAMT deficiency diagnosed worldwide. The prevalence of AGAT is not known beca",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Guanidinoacetate methyltransferase deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cerebral palsy",
+      "preferred_label": "cerebral palsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G80",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006497",
+        "orpha": null,
+        "umls": "UMLS:C0007789",
+        "mesh": "MESH:D002547"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006497",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:0723-4729",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1969",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000632",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0100021",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G80",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G80",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:343.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:854",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002547",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34460",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128188000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007789",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:76906748",
+          "display": null
+        }
+      ],
+      "context": "diagnosed to a conflicting report of 1 out of 115,000 patients being diagnosed. As of 2015, there have only been 110 individuals with GAMT deficiency diagnosed worldwide. The prevalence of AGAT is not known because there have been no studies on record. CCDS patients are frequently misdiagnosed with cerebral palsy as infants and toddlers. Children are often misdiagnosed with autism or global developmental delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (C",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cerebral Palsy Ataxic Autosomal Recessive",
+        "Cerebral palsy spastic diplegic",
+        "Neuhauser syndrome"
+      ],
+      "pubtator_normalized_name": "Cerebral Palsy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inborn",
+      "preferred_label": "inborn",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048408993",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030342",
+          "display": "Genetic Diseases Inborn"
+        }
+      ],
+      "context": "Cerebral creatine deficiency syndromes (CCDS) are inborn errors of creatine metabolism which interrupt the formation or transportation of creatine. Creatine is necessary to increase adenosine triphosphate (ATP), which provides energy to all cells in the body. Creatine is essential to sustain the high energy levels needed for muscle and brain development.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Metabolism Inborn Errors",
+        "Primary Immunodeficiency Diseases",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autism",
+      "preferred_label": "autism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F84.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005260",
+        "orpha": null,
+        "umls": "UMLS:C0004352",
+        "mesh": "MESH:D001321"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005260",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12849",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003758",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000717",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F84.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:299.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:13966",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001321",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97161",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:209850",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004352",
+          "display": null
+        }
+      ],
+      "context": "d. As of 2015, there have only been 110 individuals with GAMT deficiency diagnosed worldwide. The prevalence of AGAT is not known because there have been no studies on record. CCDS patients are frequently misdiagnosed with cerebral palsy as infants and toddlers. Children are often misdiagnosed with autism or global developmental delays. CCDS screening is non-invasive. Testing in both urine and plasma is recommended for all three types of CCDS by measuring the concentration of creatine (Cr), guanidinoacetate (GAA), and creatinine (Crn). Follow up genomic testing for specific genes and brain MRI with",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autistic Disorder",
+        "Rett Syndrome",
+        "Akinetic Mutism"
+      ],
+      "pubtator_normalized_name": "Autism Spectrum Disorder",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

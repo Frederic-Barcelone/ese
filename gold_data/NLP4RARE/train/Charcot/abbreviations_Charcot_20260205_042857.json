@@ -1,0 +1,303 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:28:57.597346",
+  "document": "Charcot.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Charcot.pdf",
+  "total_candidates": 65,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 8,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "NCV",
+      "long_form": "tests include nerve conduction velocity",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ns. Since this condition is frequently undiagnosed, misdiagnosed or diagnosed very late in life, the true number of affected persons may be higher. The diagnosis of CMT hereditary neuropathy can be challenging. The diagnosis is based on physical symptoms, family history and clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "EMG",
+      "long_form": "electromyogram, electromyography",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "may be higher. The diagnosis of CMT hereditary neuropathy can be challenging. The diagnosis is based on physical symptoms, family history and clinical tests. Clinical tests include nerve conduction velocity (NCV) which measures the speed at which impulses travel along the nerves and electromyogram (EMG) which records the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT",
+      "long_form": "Charcot-Marie-Tooth disease",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Symptoms of CMT disease usually begin gradually in adolescence, but can begin earlier or later. In almost all cases, the longest nerve fibers are affected first. Over time, affected individuals may lose the normal use of their feet, hands, legs and arms. Common red flags can include decreased sensitivity to heat,",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0015626"
+        },
+        {
+          "source": "DOID",
+          "id": "DOID:10595"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:6034"
+        },
+        {
+          "source": "ICD9",
+          "id": "ICD9:356.1"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:2980"
+        },
+        {
+          "source": "MESH",
+          "id": "MESH:D002607"
+        },
+        {
+          "source": "MedDRA",
+          "id": "MedDRA:10034699"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:1200016"
+        },
+        {
+          "source": "NANDO",
+          "id": "NANDO:2200855"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C75467"
+        },
+        {
+          "source": "NORD",
+          "id": "NORD:919"
+        },
+        {
+          "source": "OMIMPS",
+          "id": "OMIMPS:118220"
+        },
+        {
+          "source": "Orphanet",
+          "id": "Orphanet:166"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C0007959"
+        }
+      ]
+    },
+    {
+      "short_form": "CMT1A",
+      "long_form": "Charcot-Marie-Tooth disease type 1A",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ords the electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT1B",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "e electrical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT1D",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "rical activity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT2E",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ctivity of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT4A",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " of muscle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT4E",
+      "long_form": "Charcot-Marie-Tooth disease type 4E",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "cle cell. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMT4F",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "l. . Molecular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CMTX",
+      "long_form": "X-linked Charcot-Marie-Tooth disease",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ular genetic testing is currently available for CMT1A, CMT1B, CMT1D, CMT2E, CMT4A, CMT4E, CMT4F and CMTX.",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "X-linked Charcot-Marie-Tooth disease",
+      "matched_text": "CMTX",
+      "abbreviation": "CMTX",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:64747"
+    },
+    {
+      "name": "Charcot-Marie-Tooth disease type 1A",
+      "matched_text": "CMT1A",
+      "abbreviation": "CMT1A",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G60.0",
+      "orpha": "ORPHA:101081"
+    },
+    {
+      "name": "Charcot-Marie-Tooth disease type 4E",
+      "matched_text": "CMT4E",
+      "abbreviation": "CMT4E",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G60.0",
+      "orpha": "ORPHA:99951"
+    },
+    {
+      "name": "nervous system disorder",
+      "matched_text": "neurological disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G00-G99",
+      "orpha": null
+    },
+    {
+      "name": "sensitivity",
+      "matched_text": "sensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "neuropathy",
+      "matched_text": "neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CMT1B",
+      "matched_text": "CMT1B",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:101082"
+    },
+    {
+      "name": "CMT1D",
+      "matched_text": "CMT1D",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:101084"
+    },
+    {
+      "name": "CMT2E",
+      "matched_text": "CMT2E",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:99939"
+    },
+    {
+      "name": "CMT4A",
+      "matched_text": "CMT4A",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:99948"
+    },
+    {
+      "name": "CMT4F",
+      "matched_text": "CMT4F",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:99952"
+    },
+    {
+      "name": "CMT",
+      "matched_text": "CMT",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:166"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

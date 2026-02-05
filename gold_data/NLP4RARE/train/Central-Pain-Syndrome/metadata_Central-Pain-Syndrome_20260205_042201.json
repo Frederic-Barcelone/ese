@@ -1,0 +1,35 @@
+{
+  "doc_id": "Central-Pain-Syndrome",
+  "doc_filename": "Central-Pain-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "cerebrovascular disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "spinal cord injury",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1635,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Central Pain Syndrome: Prevalence and Associated Conditions",
+  "short_description": "Clinical overview of central pain syndrome prevalence rates across different neurological conditions including stroke, spinal cord injury, and multiple sclerosis.",
+  "long_description": "This document provides epidemiological data on central pain syndrome, a neurological condition affecting millions worldwide. It presents specific prevalence statistics showing that 5-10% of stroke patients, 20-40% of spinal cord injury patients, and approximately 30% of multiple sclerosis patients develop this condition. The document serves as a reference for understanding the scope and impact of central pain syndrome across various neurological patient populations, highlighting its significance as a secondary complication in neurological disorders.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:22:01.379240"
+}

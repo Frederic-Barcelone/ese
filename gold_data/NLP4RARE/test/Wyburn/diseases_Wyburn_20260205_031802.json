@@ -1,0 +1,243 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:18:02.645426",
+  "document": "Wyburn.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Wyburn.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "arteriovenous malformations",
+      "preferred_label": "arteriovenous hemangioma/malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001256",
+        "orpha": null,
+        "umls": "UMLS:C0334533",
+        "mesh": "MESH:D001165"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001256",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:0571-2717",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11294",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0100026",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9123/0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:137780",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001165",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2882",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:233982006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0334533",
+          "display": null
+        }
+      ],
+      "context": "The exact cause of Wyburn-Mason syndrome is unknown. It is considered a developmental abnormality characterized by arteriovenous malformations. No specific genetic abnormality or hereditary tendencies have been identified. The specific, underlying mechanism(s) that cause the vascular malformations in Wyburn-Mason syndrome are not known. However, they are thought to result from abnormalities of blood vessel development during embryonic or",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Wyburn-Mason syndrome",
+      "preferred_label": "Wyburn-Mason syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018892",
+        "orpha": "Orphanet:53719",
+        "umls": "UMLS:C0265321",
+        "mesh": "MESH:C536752"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018892",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7900",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:120534",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536752",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048661",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1863",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:53719",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:6729006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265321",
+          "display": null
+        }
+      ],
+      "context": "The exact cause of Wyburn-Mason syndrome is unknown. It is considered a developmental abnormality characterized by arteriovenous malformations. No specific genetic abnormality or hereditary tendencies have been identified. The specific, underlying mechanism(s) that cause the vascular malformations in Wyburn-Mason syndrome are not known. H",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Wyburn Mason's syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vascular malformations",
+      "preferred_label": "vascular malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0024291",
+        "orpha": null,
+        "umls": "UMLS:C0158570",
+        "mesh": "MESH:D054079"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0024291",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0006888",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56387",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D054079",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100295",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0158570",
+          "display": null
+        }
+      ],
+      "context": "The exact cause of Wyburn-Mason syndrome is unknown. It is considered a developmental abnormality characterized by arteriovenous malformations. No specific genetic abnormality or hereditary tendencies have been identified. The specific, underlying mechanism(s) that cause the vascular malformations in Wyburn-Mason syndrome are not known. However, they are thought to result from abnormalities of blood vessel development during embryonic or fetal growth. Wyburn-Mason syndrome is an extremely rare disorder that appears to affect males and females in equal numbers. The incidence or prevalence rat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Vascular Malformations",
+        "Vascular Malformation Primary Intraosseous",
+        "Congenital Lipomatous Overgrowth Vascular Malformations and Epidermal Nevi"
+      ],
+      "pubtator_normalized_name": "Vascular Malformations",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

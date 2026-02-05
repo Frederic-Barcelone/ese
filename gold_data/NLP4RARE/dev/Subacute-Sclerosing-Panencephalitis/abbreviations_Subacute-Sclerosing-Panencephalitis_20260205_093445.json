@@ -1,0 +1,83 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:34:45.800831",
+  "document": "Subacute-Sclerosing-Panencephalitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Subacute-Sclerosing-Panencephalitis.pdf",
+  "total_candidates": 26,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "SSPE",
+      "long_form": "sclerosing panencephalitis",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Subacute sclerosing panencephalitis (SSPE) is a progressive neurological disorder characterized by inflammation of the brain (encephalitis). The disease may develop due to reactivation of the measles virus or an inappropriate immune response to the measles virus. SSPE usually develops 2 to 10 years after the original viral attack. Initial symptoms may include memory loss, irritability, seizures, involuntary muscle movements, and/or behavi",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Subacute sclerosing leukoencephalitis",
+      "matched_text": "SSPE",
+      "abbreviation": "SSPE",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "A81.1",
+      "orpha": "ORPHA:2806"
+    },
+    {
+      "name": "Subacute sclerosing panencephalitis",
+      "matched_text": "Subacute sclerosing panencephalitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A81.1",
+      "orpha": "Orphanet:2806"
+    },
+    {
+      "name": "nervous system disorder",
+      "matched_text": "neurological disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G00-G99",
+      "orpha": null
+    },
+    {
+      "name": "encephalitis",
+      "matched_text": "encephalitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A85",
+      "orpha": "Orphanet:97275"
+    },
+    {
+      "name": "measles",
+      "matched_text": "measles",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B05",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

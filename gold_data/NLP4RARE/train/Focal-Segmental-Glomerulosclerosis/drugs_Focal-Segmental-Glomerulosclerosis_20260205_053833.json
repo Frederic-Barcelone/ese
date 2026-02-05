@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:38:33.108579",
+  "document": "Focal-Segmental-Glomerulosclerosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Focal-Segmental-Glomerulosclerosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "bean",
+      "preferred_name": "Bean",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013024",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1370773",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013024",
+          "display": "Soybean Oil"
+        }
+      ],
+      "context": "Focal segmental glomerulosclerosis (FSGS) is a term for a specific pattern of damage to the kidneys. The kidneys are two bean-shaped organs in the body, one on each side of the body just below the rib cage in the back. The kidney has multiple functions including filtering th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "locust bean gum"
+      ],
+      "pubtator_normalized_name": "Soybean Oil",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "Fatal-Familial-Insomnia",
+  "doc_filename": "Fatal-Familial-Insomnia.pdf",
+  "top_entities": [
+    {
+      "name": "sporadic fatal insomnia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "prion disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1957,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Fatal Familial Insomnia: Epidemiology and Demographics",
+  "short_description": "Clinical overview of Fatal Familial Insomnia (FFI), an extremely rare prion disorder affecting approximately 1 in 1,000,000 people annually.",
+  "long_description": "This document provides epidemiological information about Fatal Familial Insomnia (FFI), an extremely rare genetic prion disorder. It discusses the unknown exact incidence and prevalence, noting that the sporadic form (SFI) has only been documented in about two dozen cases in medical literature. The document explains that prion disorders collectively affect about 1 in 1,000,000 people per year, with genetic prion diseases comprising approximately 15% of all prion disease cases. It details demographic characteristics including equal gender distribution, typical onset age of 45-50 years (though cases have been reported from teens to 70s), and global occurrence across various populations.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:33:18.177785"
+}

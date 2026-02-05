@@ -1,0 +1,422 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:31:40.225178",
+  "document": "Familial-Isolated-Hypoparathyroidism.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Familial-Isolated-Hypoparathyroidism.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Familial isolated hypoparathyroidism",
+      "preferred_label": "familial isolated hypoparathyroidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016390",
+        "orpha": "Orphanet:2238",
+        "umls": "UMLS:C1832648",
+        "mesh": "MESH:C537156"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016390",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111387",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2910",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:322005",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537156",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1128",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:146200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2238",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:725036000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1832648",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1907423603",
+          "display": null
+        }
+      ],
+      "context": "the network of glands that regulate the chemical processes within the body. Parathyroid hormone plays a vital role in regulating the levels of calcium and phosphorus in the blood. Parathyroid hormone deficiency causes low levels of calcium in the blood (hypocalcemia) and high levels of phosphorous. Familial isolated hypoparathyroidism, with the exception of the X-linked form, affects males and females in equal numbers. The X-linked form affects males almost exclusively. The exact incidence and prevalence of these disorders in the general population is unknown. Some mild cases may go unrecognized, making it difficult to determine",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypoparathyroidism familial isolated",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypoparathyroidism",
+      "preferred_label": "hypoparathyroidism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E20",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001220",
+        "orpha": null,
+        "umls": "UMLS:C0020626",
+        "mesh": "MESH:D007011"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001220",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11199",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009451",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6733",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E20",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E20",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:252.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6985",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007011",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200345",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C78350",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36976004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020626",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1708733050",
+          "display": null
+        }
+      ],
+      "context": "Familial iFamilial isolated hypoparathyroidism is a group of extremely rare genetic disorders characterized by parathyroid glands that do not produce or secrete enough parathyroid hormone to maintain normal mineral balance. The parathyroid glands are part of the endocrine system, the network of glands that regulate the chemical processes within",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypoparathyroidism-retardation-dysmorphism syndrome",
+        "Autoimmune polyendocrinopathy syndrome type 1",
+        "Dahlberg Borer Newcomer syndrome"
+      ],
+      "pubtator_normalized_name": "Hypoparathyroidism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorders",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Familial iFamilial isolated hypoparathyroidism is a group of extremely rare genetic disorders characterized by parathyroid glands that do not produce or secrete enough parathyroid hormone to maintain normal mineral balance. The parathyroid glands are part of the endocrine system, the network of glands that regulate the chemical processes within the body. Parathyroid hormone plays a vital ro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypocalcemia",
+      "preferred_label": "hypocalcemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018543",
+        "orpha": "Orphanet:428",
+        "umls": "UMLS:C4048195",
+        "mesh": "D006996"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018543",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0090109",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2877",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:884527",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:601198",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:428",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:711152006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4048195",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006996",
+          "display": "Hypocalcemia"
+        }
+      ],
+      "context": "roid glands are part of the endocrine system, the network of glands that regulate the chemical processes within the body. Parathyroid hormone plays a vital role in regulating the levels of calcium and phosphorus in the blood. Parathyroid hormone deficiency causes low levels of calcium in the blood (hypocalcemia) and high levels of phosphorous. Familial isolated hypoparathyroidism, with the exception of the X-linked form, affects males and females in equal numbers. The X-linked form affects males almost exclusively. The exact incidence and prevalence of these disorders in the general population is unknown.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypocalcemia Autosomal Dominant with Bartter Syndrome",
+        "Hypomagnesemia 1 Intestinal",
+        "Hypercalciuric Hypocalcemia Familial"
+      ],
+      "pubtator_normalized_name": "Hypocalcemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Familial",
+      "preferred_label": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000544"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000544",
+          "display": "Alzheimer Disease"
+        }
+      ],
+      "context": "Familial iFamilial isolated hypoparathyroidism is a group of extremely rare genetic disorders characterized by parathyroid glands that do not produce or secrete enough parathyroid hormone to maintain normal mineral balance. The parathyroid glands are part of the endocrine system, the network of glands that",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dementia",
+        "Stomach Neoplasms",
+        "Atrial Fibrillation"
+      ],
+      "pubtator_normalized_name": "Alzheimer Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

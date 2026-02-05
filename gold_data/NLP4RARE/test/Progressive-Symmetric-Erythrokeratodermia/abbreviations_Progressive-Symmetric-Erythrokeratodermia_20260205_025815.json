@@ -1,0 +1,93 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:58:15.802568",
+  "document": "Progressive-Symmetric-Erythrokeratodermia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Progressive-Symmetric-Erythrokeratodermia.pdf",
+  "total_candidates": 36,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "PSEK",
+      "long_form": "Progressive symmetric erythrokeratoderma",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Progressive symmetric erythrokeratoderma (PSEK) represents a group of rare genetic skin disorders characterized by well-demarcated plaques of reddened, dry, and thickened skin. Typically, these lesions are distributed symmetrically on the body and tend to slowly expand and progress over time. The severity and progression of the disorder can vary greatly from one person to another, even among members of the same family. In some families, PSEK c",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PSEKis",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " as erythrokeratodermia variabilis or loricrin keratoderma. In the majority, the molecular cause of PSEKis not known. The symptoms of PSEK usually develop shortly after birth or during the first year of lif",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "erythrokeratodermia variabilis",
+      "matched_text": "erythrokeratodermia variabilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "palmoplantar keratoderma",
+      "matched_text": "palmoplantar keratoderma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "loricrin keratoderma",
+      "matched_text": "loricrin keratoderma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79395"
+    },
+    {
+      "name": "erythrokeratoderma",
+      "matched_text": "erythrokeratoderma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79355"
+    },
+    {
+      "name": "skin disorder",
+      "matched_text": "skin disorders",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

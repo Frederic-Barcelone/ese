@@ -1,0 +1,45 @@
+{
+  "doc_id": "Tongue-Hairy",
+  "doc_filename": "Tongue-Hairy.pdf",
+  "top_entities": [
+    {
+      "name": "Gorlin-Chaudhry-Moss syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "hereditary disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "alcohol",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Tetracycline",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 3107,
+  "file_size_human": "3.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DSC",
+  "document_type_name": "Disease Landscape & Epidemiology",
+  "document_type_group": "Disease Landscape",
+  "classification_confidence": 0.15,
+  "title": "Hairy Tongue (Black Hairy Tongue/Lingua Nigra): Clinical Overview and Management",
+  "short_description": "Clinical document describing hairy tongue, a benign condition characterized by abnormal elongation and dark discoloration of tongue papillae due to failed desquamation and bacterial overgrowth.",
+  "long_description": "This clinical reference document provides a comprehensive overview of hairy tongue (also known as black hairy tongue or lingua nigra), an uncommon but benign oral condition. The document details the pathophysiology involving abnormal elongation and dark discoloration of filiform papillae on the tongue's dorsal surface, resulting from failed desquamation, overgrowth of pigment-producing bacteria or fungi, and accumulation of keratin and debris. It covers potential predisposing factors including antibiotic use, bismuth medications, poor oral hygiene, smoking, and alcohol consumption. The document emphasizes that the condition is non-infectious and non-malignant, discusses diagnostic considerations, and outlines treatment approaches focused on removing predisposing factors and improving oral hygiene practices.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:15:15.468150"
+}

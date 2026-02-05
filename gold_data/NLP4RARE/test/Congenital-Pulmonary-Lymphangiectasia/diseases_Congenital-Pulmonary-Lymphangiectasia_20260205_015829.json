@@ -1,0 +1,102 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:58:29.831153",
+  "document": "Congenital-Pulmonary-Lymphangiectasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Congenital-Pulmonary-Lymphangiectasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Congenital pulmonary lymphangiectasia",
+      "preferred_label": "congenital pulmonary lymphangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009933",
+        "orpha": "Orphanet:2414",
+        "umls": "UMLS:C1849554",
+        "mesh": "MESH:C537727"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009933",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9900",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:340355",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537727",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C99034",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:265300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2414",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:45142002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1849554",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2069435755",
+          "display": null
+        }
+      ],
+      "context": "Congenital pulmonary lymphangiectasia (CPL) is a rare developmental disorder that is present at birth (congenital). Affected infants have abnormally widened (dilated) lymphatic vessels within the lungs. The lymphatic system helps the immune system in protecting the body against infection and disease. It consists of a network of tubular",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lymphangiectasia pulmonary congenital",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:27:15.006060",
+  "document": "Facioscapulohumeral-Muscular-Dystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Facioscapulohumeral-Muscular-Dystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "IBM2",
+      "hgnc_symbol": "GNE",
+      "full_name": "glucosamine (UDP-N-acetyl)-2-epimerase/N-acetylmannosamine kinase",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "23657",
+        "entrez": "10020",
+        "ensembl": "ENSG00000159921",
+        "uniprot": "Q9Y223",
+        "omim": "603824"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "23657",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "10020",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000159921",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "603824",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9Y223",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "umber of genetic neuromuscular diseases that may be characterized by muscle weakness of varying severity, muscle atrophy, and associated symptoms that may be similar to those that may occur with FSHD. These include myofibrillar myopathy, inclusion body myositis, including inclusion body myopathy 2 (IBM2), mitochondrial myopathies, congenital myopathies and polymyositis. These conditions typically have characteristic features that may differentiate them from FSHD. (For more information on such disorders, choose the exact disease name in question as your search term in the Rare Disease Database.)",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

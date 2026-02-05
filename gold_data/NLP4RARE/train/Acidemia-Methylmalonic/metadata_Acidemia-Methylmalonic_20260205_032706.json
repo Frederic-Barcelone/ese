@@ -1,0 +1,45 @@
+{
+  "doc_id": "Acidemia-Methylmalonic",
+  "doc_filename": "Acidemia-Methylmalonic.pdf",
+  "top_entities": [
+    {
+      "name": "methylmalonic acidemia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "mental retardation",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "CoA",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Adenosylcobalamin",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1956,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.25,
+  "title": "Methylmalonic Acidemia: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing methylmalonic acidemia, an inherited organic acidemia affecting amino acid metabolism with potential neurological complications.",
+  "long_description": "This clinical reference document provides a comprehensive overview of methylmalonic acidemia, a rare inherited metabolic disorder classified as an organic acidemia. The document explains the enzymatic defects affecting the metabolism of four specific amino acids (methionine, threonine, isoleucine, and valine), leading to abnormally high acid levels in blood and tissues. It covers the clinical presentation ranging from acute symptoms like drowsiness, coma, and seizures to long-term consequences including mental retardation. The document details the underlying enzymatic deficiencies involving methylmalonyl CoA mutase, methylmalonyl racemase, or adenosylcobalamin synthetic enzymes, and describes the diagnostic marker of elevated methylmalonate excretion in urine. It also addresses the autosomal recessive inheritance pattern and epidemiological data showing an incidence rate of 1 in 50,000 to 1 in 100,000 live births.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:27:06.431036"
+}

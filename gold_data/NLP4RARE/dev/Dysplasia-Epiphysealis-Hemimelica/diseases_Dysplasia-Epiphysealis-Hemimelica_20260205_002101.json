@@ -1,0 +1,162 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:21:01.352220",
+  "document": "Dysplasia-Epiphysealis-Hemimelica.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Dysplasia-Epiphysealis-Hemimelica.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Dysplasia epiphysealis hemimelica",
+      "preferred_label": "dysplasia epiphysealis hemimelica",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007489",
+        "orpha": "Orphanet:1822",
+        "umls": "UMLS:C0432282",
+        "mesh": "MESH:C537997"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007489",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2019",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:96591",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537997",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1072",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:127800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1822",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:205480005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0432282",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1995096940",
+          "display": null
+        }
+      ],
+      "context": "Dysplasia epiphysealis hemimelica (DEH), also known as Trevor’s disease, is a developmental bone disease of childhood. It is rare and clinical experience with this condition is limited. Most cases are diagnosed before 8 years of age. It is characterized by an abnormal growth of cartilage arising from the cartilage of the terminal e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysplasia Epiphysealis Hemimelica with Chondromas and Osteochondromas"
+      ],
+      "pubtator_normalized_name": "Dysplasia epiphysealis hemimelica",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "localized",
+      "preferred_label": "localized",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0045042",
+        "orpha": null,
+        "umls": "UMLS:C0392752",
+        "mesh": "D016110"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0045042",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98236",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0392752",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016110",
+          "display": "Epidermolysis Bullosa Simplex"
+        }
+      ],
+      "context": "joints are most commonly affected, as well as part of the foot (tarsal bones). The upper limbs and spine are rarely involved. The abnormal cartilage produces an irregular nodular mass located either in the medial or lateral part of the bone (hemimelic), usually medial. DEH may affect a single bone (localized form), multiple bones in a single limb (classical form) or an entire limb (generalized) usually involving a leg from the pelvis to the foot. Approximately two-thirds of affected children have multiple lesions. DEH was first described in the medical literature in 1926. Trevor recognized this conditi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Solitary Fibrous Tumor Pleural",
+        "Scleroderma Localized",
+        "Acute Generalized Exanthematous Pustulosis"
+      ],
+      "pubtator_normalized_name": "Epidermolysis Bullosa Simplex",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

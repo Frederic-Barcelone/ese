@@ -1,0 +1,35 @@
+{
+  "doc_id": "Behcet_s-Syndrome",
+  "doc_filename": "Behcet_s-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "aphthous stomatitis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "sterile",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1911,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "REC",
+  "document_type_name": "Recommendations & Guidelines",
+  "document_type_group": "Clinical Recommendations",
+  "classification_confidence": 0.25,
+  "title": "Behçet's Syndrome Diagnostic Criteria",
+  "short_description": "Clinical document outlining the diagnostic criteria for Behçet's syndrome based on recurrent oral ulcerations and additional clinical manifestations.",
+  "long_description": "This clinical document describes the diagnostic approach for Behçet's syndrome, emphasizing that diagnosis relies on physician clinical judgment rather than strict criteria. The document outlines the accepted classification criteria which require recurrent oral ulcerations (aphthous stomatitis) plus at least two additional manifestations including eye lesions, skin lesions, recurrent genital ulcerations, or a positive pathergy test. The document clarifies that these criteria were developed for clinical study inclusion rather than definitive diagnosis, highlighting the distinction between classification and diagnostic criteria in clinical practice.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:59:43.219769"
+}

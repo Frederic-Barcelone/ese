@@ -1,0 +1,513 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T00:45:44.685741",
+  "document": "Agenesis-of-Corpus-Callosum.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Agenesis-of-Corpus-Callosum.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Agenesis of corpus callosum",
+      "preferred_label": "agenesis of corpus callosum",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009022",
+        "orpha": "Orphanet:200",
+        "umls": "UMLS:C0175754",
+        "mesh": "MESH:D061085"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009022",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:104498",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D061085",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98905",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:217990",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:200",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:5102002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0175754",
+          "display": null
+        }
+      ],
+      "context": "Agenesis of corpus callosum (ACC) is a rare disorder that is present at birth (congenital). It is characterized by a partial or complete absence (agenesis) of an area of the brain that connects the two cerebral hemispheres. This part of the brain is normally composed of transverse fibers. The cause of agenesis of corpus callo",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Aicardi Syndrome",
+        "Calloso-genital dysplasia",
+        "Partial agenesis of corpus callosum"
+      ],
+      "pubtator_normalized_name": "Agenesis of Corpus Callosum",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Fetal alcohol syndrome",
+      "preferred_label": "fetal alcohol syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q86.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016011",
+        "orpha": "Orphanet:1915",
+        "umls": "UMLS:C0015923",
+        "mesh": "D063647"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016011",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050667",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:599",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q86.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8820",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10016845",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84713",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1915",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:205788004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015923",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:362980699",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D063647",
+          "display": "Fetal Alcohol Spectrum Disorders"
+        }
+      ],
+      "context": "can be inherited as either an autosomal recessive trait or an X-linked dominant trait. It can also be caused by an infection or injury during the twelfth to the twenty-second week of pregnancy (intrauterine) leading to developmental disturbance of the fetal brain. Intrauterine exposure to alcohol (Fetal alcohol syndrome) can also result in ACC. In some cases mental retardation may result, but intelligence may be only mildly impaired and subtle psychosocial symptoms may be present. Agenesis of Corpus Callosum produces symptoms during the first two years of life in approximately ninety percent of those affected. It",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fetal Alcohol Spectrum Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "X-linked dominant trait. It can also be caused by an infection or injury during the twelfth to the twenty-second week of pregnancy (intrauterine) leading to developmental disturbance of the fetal brain. Intrauterine exposure to alcohol (Fetal alcohol syndrome) can also result in ACC. In some cases mental retardation may result, but intelligence may be only mildly impaired and subtle psychosocial symptoms may be present. Agenesis of Corpus Callosum produces symptoms during the first two years of life in approximately ninety percent of those affected. It has been thought to be a very rare condition but the incre",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "meningomyelocele",
+      "preferred_label": "meningomyelocele",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019773",
+        "orpha": "Orphanet:93969",
+        "umls": "UMLS:C0025312",
+        "mesh": "MESH:D008591"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019773",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060326",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3475",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002475",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7538",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008591",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200814",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93969",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:414667000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025312",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1200528084",
+          "display": null
+        }
+      ],
+      "context": "term meaning open (or non-fused) spine. In spina bifida, one or more of the individual bones of the spine fails to close completely, leaving a cleft or defect in the spinal canal. Part of the contents of the spine can protrude or herniate through this abnormal opening that produces a meningocele or meningomyelocele. (For more information on this disorder, choose “spina bifida” as your search term in the Rare Disease Database.) Ultrasound and magnetic resonance imaging (MRI) are imaging techniques that aid in diagnosis of agenesis of corpus callosum.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Meningomyelocele",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "spina bifida",
+      "preferred_label": "spina bifida",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020705",
+        "orpha": null,
+        "umls": "UMLS:C3891448",
+        "mesh": "D016135"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020705",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:856010",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:182940",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3891448",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016135",
+          "display": "Spinal Dysraphism"
+        }
+      ],
+      "context": "se of neuro-imaging techniques, such as MRI, is resulting in an increased rate of diagnosis. This condition may also be identified during pregnancy through an ultrasound. Currently, the highest estimate of incidence is 7 in 1000 individuals. Agenesis of corpus callosum can occur in conjunction with spina bifida. Spina bifida is a term meaning open (or non-fused) spine. In spina bifida, one or more of the individual bones of the spine fails to close completely, leaving a cleft or defect in the spinal canal. Part of the contents of the spine can protrude or herniate through this abnormal opening that produc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spina Bifida Occulta",
+        "Spina Bifida Cystica",
+        "Acrodysplasia scoliosis"
+      ],
+      "pubtator_normalized_name": "Spinal Dysraphism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "meningocele",
+      "preferred_label": "meningocele",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001147",
+        "orpha": "Orphanet:93968",
+        "umls": "UMLS:C0025299",
+        "mesh": "MESH:D008588"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001147",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1088",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002435",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44356",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008588",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C105595",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93968",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:171131006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025299",
+          "display": null
+        }
+      ],
+      "context": "na bifida is a term meaning open (or non-fused) spine. In spina bifida, one or more of the individual bones of the spine fails to close completely, leaving a cleft or defect in the spinal canal. Part of the contents of the spine can protrude or herniate through this abnormal opening that produces a meningocele or meningomyelocele. (For more information on this disorder, choose “spina bifida” as your search term in the Rare Disease Database.) Ultrasound and magnetic resonance imaging (MRI) are imaging techniques that aid in diagnosis of agenesis of corpus callosum.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sacral defect and anterior sacral meningocele",
+        "Lateral meningocele syndrome",
+        "Sacral Agenesis Syndrome"
+      ],
+      "pubtator_normalized_name": "Meningocele",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

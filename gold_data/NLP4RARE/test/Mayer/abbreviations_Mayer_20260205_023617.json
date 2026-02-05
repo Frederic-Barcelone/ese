@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:36:17.731028",
+  "document": "Mayer.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Mayer.pdf",
+  "total_candidates": 30,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MRKH",
+      "long_form": "Mayer Rokitansky KUuster Hauser",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Mayer-Rokitansky-KUuster-Hauser (MRKH) syndrome is a rare disorder that affects women. It is characterized by the failure of the uterus and the vagina to develop properly in women who have normal ovarian function and normal external genitalia. Women with this disorder develop normal secondary sexual characteristics during puberty (e.g., breast development and pubic hair), but do not have a menstrual cycle (primary amenorrhea). Often,",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "KUuster-Hauser",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "Mayer-Rokitansky-KUuster-Hauser (MRKH) syndrome is a rare disorder that affects women. It is characterized by the failure of the ut",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "amenorrhea",
+      "matched_text": "amenorrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "MRKH",
+      "matched_text": "MRKH",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:3109"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

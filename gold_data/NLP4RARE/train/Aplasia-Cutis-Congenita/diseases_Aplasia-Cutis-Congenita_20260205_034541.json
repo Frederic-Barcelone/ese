@@ -1,0 +1,121 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:45:41.018662",
+  "document": "Aplasia-Cutis-Congenita.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Aplasia-Cutis-Congenita.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Aplasia Cutis Congenita",
+      "preferred_label": "aplasia cutis congenita",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007145",
+        "orpha": "Orphanet:1114",
+        "umls": "UMLS:C0282160",
+        "mesh": "C536840"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007145",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080661",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5835",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001057",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:757.39",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:79390",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C98822",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:794",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:107600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1114",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:35484002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0282160",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:350175828",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536840",
+          "display": "Aplasia cutis congenita of limbs recessive"
+        }
+      ],
+      "context": "Aplasia Cutis Congenita is a rare disorder with a complicated pattern of inheritance. Babies are born with the absence of certain layer(s) of skin, most often on the scalp, but also on the trunk, and/or arms and legs. The affected area is typically covered with a thin, transparent membrane. The skull and/or underlying are",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epidermolysis bullosa with pyloric atresia",
+        "Ectodermal Dysplasia",
+        "Jones Hersh Yusk syndrome"
+      ],
+      "pubtator_normalized_name": "Aplasia cutis congenita of limbs recessive",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

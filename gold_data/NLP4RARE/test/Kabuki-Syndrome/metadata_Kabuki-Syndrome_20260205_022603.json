@@ -1,0 +1,30 @@
+{
+  "doc_id": "Kabuki-Syndrome",
+  "doc_filename": "Kabuki-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Kabuki syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1727,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Kabuki Syndrome: Epidemiology and Population Demographics",
+  "short_description": "Clinical overview of Kabuki syndrome prevalence, incidence rates, and demographic distribution across different populations.",
+  "long_description": "This document provides epidemiological information about Kabuki syndrome, a genetic disorder that affects both males and females equally. It details the estimated incidence rates ranging from 1 in 32,000 to 1 in 86,000 individuals in the general population, notes that over 400 genetically confirmed cases have been documented in medical literature, and discusses the global distribution of the condition across various ethnic groups since its initial identification in Japan.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:26:03.846126"
+}

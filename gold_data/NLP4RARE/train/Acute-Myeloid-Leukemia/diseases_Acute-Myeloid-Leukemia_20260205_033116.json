@@ -1,0 +1,287 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:31:16.835975",
+  "document": "Acute-Myeloid-Leukemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acute-Myeloid-Leukemia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acute myeloid leukemia",
+      "preferred_label": "acute myeloid leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C92.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018874",
+        "orpha": "Orphanet:519",
+        "umls": "UMLS:C0023467",
+        "mesh": "MESH:D015470"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018874",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9119",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000222",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12757",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C92.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:205.00",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9861/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9730",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D015470",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10000880",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3171",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1905",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:601626",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:AML",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:519",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91861009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0023467",
+          "display": null
+        }
+      ],
+      "context": "Acute myeloid leukemia is the most common form of acute leukemia in adults, making up about 80% of people with acute leukemia. In the United States, it is estimated that 3-5 people per every 100,000 people in the general population has the disease. More than half the people diagnosed with AML are 65 years of age or older",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukemia Promyelocytic Acute",
+        "Leukemia Monocytic Acute",
+        "Leukemia Myelomonocytic Acute"
+      ],
+      "pubtator_normalized_name": "Leukemia Myeloid Acute",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "AML",
+      "preferred_label": "Acute myeloid leukemia",
+      "abbreviation": "AML",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": "C92.0",
+        "icd11": "2A60",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:519",
+        "umls": null,
+        "mesh": "D015470"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:519",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C92.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2A60",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015470",
+          "display": "Leukemia Myeloid Acute"
+        }
+      ],
+      "context": "Acute myeloid leukemia is the most common form of acute leukemia in adults, making up about 80% of people with acute leukemia. In the United States, it is estimated that 3-5 people per every 100,000 people in the general population has the disease. More than half the people diagnosed with AML are 65 years of age or older. Slightly more men than women are affected by the disease, and it occurs with slightly more frequency in people of European heritage.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukemia Promyelocytic Acute",
+        "Leukemia Monocytic Acute",
+        "Leukemia Myelomonocytic Acute"
+      ],
+      "pubtator_normalized_name": "Leukemia Myeloid Acute",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "acute leukemia",
+      "preferred_label": "acute leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010643",
+        "orpha": null,
+        "umls": "UMLS:C0085669",
+        "mesh": "MESH:C564112"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010643",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12603",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000068",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002488",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:208.00",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9801/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:43225",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C564112",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9300",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91855006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085669",
+          "display": null
+        }
+      ],
+      "context": "Acute myeloid leukemia is the most common form of acute leukemia in adults, making up about 80% of people with acute leukemia. In the United States, it is estimated that 3-5 people per every 100,000 people in the general population has the disease. More than half the people diagnosed with AML are 65 years of age or older. Slightly more men than women are affecte",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Leukemia Promyelocytic Acute",
+        "Leukemia Biphenotypic Acute",
+        "Precursor Cell Lymphoblastic Leukemia-Lymphoma"
+      ],
+      "pubtator_normalized_name": "Leukemia Myeloid Acute",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

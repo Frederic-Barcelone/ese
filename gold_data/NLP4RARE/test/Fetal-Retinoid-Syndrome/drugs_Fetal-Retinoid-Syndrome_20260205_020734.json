@@ -1,0 +1,70 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:07:34.709183",
+  "document": "Fetal-Retinoid-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Fetal-Retinoid-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "isotretinoin",
+      "preferred_name": "Isotretinoin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ganglioneuroblastoma, Nodular",
+        "Neuroblastoma"
+      ],
+      "nct_id": "NCT06172296",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D015474",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06172296",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015474",
+          "display": "Isotretinoin"
+        }
+      ],
+      "context": "ngenital malformations) that can result from a mother taking retinoids during pregnancy. The absolute risk of congenital malformations following oral isotretinoin therapy is currently unclear. Overall malformation rates in live-born infants from prospectively reported pregnancies range from 5% to 20%. Fetal ret",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "4-oxoretinoic acid",
+        "Accutane embryopathy"
+      ],
+      "pubtator_normalized_name": "Isotretinoin",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:23:22.208043",
+  "document": "Hypohidrotic-Ectodermal-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hypohidrotic-Ectodermal-Dysplasia.pdf",
+  "total_candidates": 37,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "Gl",
+      "long_form": "gastrointestinal",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "rmally thin, dry, and soft with an abnormal lack of pigmentation (hypopigmentation). However, the skin around the eyes (periorbital) may be darkly pigmented (hyperpigmentation) and finely wrinkled, appearing prematurely aged. In many cases, affected infants and children may also exhibit underdevelopment (hypoplasia) or absence (aplasia) of mucous glands within the respiratory and gastrointestinal (Gl) tracts and, in some cases, decreased function of certain components of the immune system (e.g., depressed lymphocyte function, and rarely cellular immune hypofunction), potentially causing an increased susceptibility to certain infections and/or allergic conditions. Many affected infants and children experience recurrent attacks of wheezing and breathlessness (asthma), respiratory infections; chr",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HED",
+      "long_form": "ectodermal dysplasia",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Hypohidrotic ectodermal dysplasia (HED) is a rare inherited multisystem disorder that belongs to the group of diseases known as ectodermal dysplasias. Ectodermal dysplasias typically affect the hair, teeth, nails, sweat glands, and/or skin. HED is primarily characterized by partial or complete absence of certain sweat glands (eccrine gla",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "respiratory tract infectious disorder",
+      "matched_text": "respiratory infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hypohidrotic ectodermal dysplasia",
+      "matched_text": "Hypohidrotic ectodermal dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:238468"
+    },
+    {
+      "name": "Hypohidrotic ectodermal dysplasia",
+      "matched_text": "HED",
+      "abbreviation": "HED",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "Q82.4",
+      "orpha": "ORPHA:238468"
+    },
+    {
+      "name": "ectodermal dysplasia",
+      "matched_text": "ectodermal dysplasias",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:79373"
+    },
+    {
+      "name": "atrophic rhinitis",
+      "matched_text": "atrophic rhinitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hypopigmentation",
+      "matched_text": "hypopigmentation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hypotrichosis",
+      "matched_text": "hypotrichosis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "atopic eczema",
+      "matched_text": "eczema",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:L20",
+      "orpha": null
+    },
+    {
+      "name": "anhidrosis",
+      "matched_text": "anhidrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:L74.4",
+      "orpha": null
+    },
+    {
+      "name": "hypodontia",
+      "matched_text": "hypodontia",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:K00.0",
+      "orpha": "Orphanet:99798"
+    },
+    {
+      "name": "skin rash",
+      "matched_text": "skin rashes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "asthma",
+      "matched_text": "asthma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J45",
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

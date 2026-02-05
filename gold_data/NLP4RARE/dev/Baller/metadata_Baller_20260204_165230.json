@@ -1,0 +1,35 @@
+{
+  "doc_id": "Baller",
+  "doc_filename": "Baller.pdf",
+  "top_entities": [
+    {
+      "name": "BALLER-Gerold syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "genetic disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1594,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Baller-Gerold Syndrome: Clinical Overview and Characteristics",
+  "short_description": "Clinical document describing Baller-Gerold syndrome (BGS), a rare congenital genetic disorder affecting skull, facial, and limb bone development.",
+  "long_description": "This clinical document provides an overview of Baller-Gerold syndrome (BGS), a rare genetic disorder present from birth. The document outlines the characteristic features of this congenital condition, which primarily affects craniofacial development and bone formation in the forearms and hands. BGS presents with distinctive skull malformations and facial abnormalities, making it identifiable through specific physical manifestations. This appears to be educational or reference material for healthcare professionals dealing with rare genetic disorders and their clinical presentations.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T15:52:30.589748"
+}

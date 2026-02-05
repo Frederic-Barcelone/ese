@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:34:40.943599",
+  "document": "Agammaglobulinemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Agammaglobulinemia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Agammaglobulinemia",
+      "preferred_label": "agammaglobulinemia",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015977",
+        "orpha": "Orphanet:183669",
+        "umls": "UMLS:C0001768",
+        "mesh": "MESH:D000361"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015977",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2583",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20320",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:279.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:168",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000361",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10001471",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:601495",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:183669",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001768",
+          "display": null
+        }
+      ],
+      "context": "Agammaglobulinemia is a group of inherited immune deficiencies characterized by a low concentration of antibodies in the blood due to the lack of particular lymphocytes in the blood and lymph. Antibodies are proteins (immunoglobulins, (IgM), (IgG) etc) that are critical and key components of the immune system. They a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Severe combined immunodeficiency due to adenosine deaminase deficiency",
+        "Agammaglobulinemia X-linked type 2",
+        "Bruton type agammaglobulinemia"
+      ],
+      "pubtator_normalized_name": "Agammaglobulinemia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

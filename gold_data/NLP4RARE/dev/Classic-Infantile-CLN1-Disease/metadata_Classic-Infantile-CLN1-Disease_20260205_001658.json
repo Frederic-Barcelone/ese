@@ -1,0 +1,35 @@
+{
+  "doc_id": "Classic-Infantile-CLN1-Disease",
+  "doc_filename": "Classic-Infantile-CLN1-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "Classic Infantile CLN1 Disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "neuronal ceroid lipofuscinosis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1654,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Classic Infantile CLN1 Disease: Epidemiology and Prevalence",
+  "short_description": "Clinical document describing the epidemiological characteristics and prevalence rates of classic infantile CLN1 disease across different populations.",
+  "long_description": "This clinical research document provides epidemiological data on classic infantile CLN1 disease, a form of neuronal ceroid lipofuscinosis. The document details the equal gender distribution of the condition and presents prevalence statistics, noting that in the United States, classic infantile CLN1 disease and other neuronal ceroid lipofuscinoses occur in approximately 3 per 100,000 live births. The document highlights geographical variations in disease frequency, specifically noting higher prevalence rates in Finland where the condition affects approximately 1 in 190,000 individuals, demonstrating potential genetic founder effects or population-specific risk factors.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T23:16:58.853878"
+}

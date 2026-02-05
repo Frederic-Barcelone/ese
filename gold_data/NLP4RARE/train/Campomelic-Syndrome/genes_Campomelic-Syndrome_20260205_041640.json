@@ -1,0 +1,99 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:16:40.723820",
+  "document": "Campomelic-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Campomelic-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "SOX9",
+      "hgnc_symbol": "SOX9",
+      "full_name": "SRY-box transcription factor 9",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "11204",
+        "entrez": "6662",
+        "ensembl": "ENSG00000125398",
+        "uniprot": "P48436",
+        "omim": "608160"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "11204",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "6662",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000125398",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "608160",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P48436",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "718",
+          "disease_name": "Isolated Pierre Robin sequence",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "140",
+          "disease_name": "Campomelic dysplasia",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        },
+        {
+          "orphacode": "242",
+          "disease_name": "46,XY complete gonadal dysgenesis",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "2138",
+          "disease_name": "46,XX ovotesticular difference of sex development",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "251510",
+          "disease_name": "46,XY partial gonadal dysgenesis",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "393",
+          "disease_name": "46,XX testicular difference of sex development",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "sex. Approximately one hundred cases of this disorder have been reported in the medical literature. Diagnosis is based on clinical examination, x-rays of vertebrae, hips, chest, legs and feet, ultrasound of kidneys and echocardiogram of the heart. DNA analysis of blood can confirm a mutation in the SOX9 gene.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

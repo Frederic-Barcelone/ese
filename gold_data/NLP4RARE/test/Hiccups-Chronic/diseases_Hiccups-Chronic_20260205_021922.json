@@ -1,0 +1,91 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:19:22.902408",
+  "document": "Hiccups-Chronic.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hiccups-Chronic.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "chronic hiccups",
+      "preferred_label": "chronic hiccups",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018334",
+        "orpha": "Orphanet:396",
+        "umls": "UMLS:C0744898",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018334",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6657",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0100247",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:900733",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1242",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:396",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:716771000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0744898",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1300687612",
+          "display": null
+        }
+      ],
+      "context": "A hiccup is an involuntary spasmodic contraction of the muscle at the base of the lungs (diaphragm) followed by the rapid closure of the vocal cords. Usually, hiccups last for a few hours or, occasionally, a day or two. However, chronic hiccups are ones that continue for an extended period of time. Episodes that last for more than two days and less than a month are sometimes called persistent hiccups. On rare occasions, hiccups persist even longer than a month or recur frequently over an extended period of time. The longest recorded episo",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

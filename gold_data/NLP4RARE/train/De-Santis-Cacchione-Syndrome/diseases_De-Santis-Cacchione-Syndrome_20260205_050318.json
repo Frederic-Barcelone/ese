@@ -1,0 +1,960 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:03:18.813596",
+  "document": "De-Santis-Cacchione-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/De-Santis-Cacchione-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 12,
+  "total_validated": 12,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "De Sanctis-Cacchione syndrome",
+      "preferred_label": "de Sanctis-Cacchione syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010217",
+        "orpha": "Orphanet:1569",
+        "umls": "UMLS:C0265201",
+        "mesh": "MESH:C535992"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010217",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0112158",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8276",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75550",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535992",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84666",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1035",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:278800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1569",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:414673004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265201",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:594988031",
+          "display": null
+        }
+      ],
+      "context": "De Sanctis-Cacchione syndrome is an extremely rare disorder characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "De Sanctis-Cacchione syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dwarfism",
+      "preferred_label": "Schwartz-Jampel syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:800",
+        "umls": null,
+        "mesh": "D010009"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:800",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010009",
+          "display": "Osteochondrodysplasias"
+        }
+      ],
+      "context": "De Sanctis-Cacchione syndrome is an extremely rare disorder characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Stuve-Wiedemann syndrome"
+      ],
+      "pubtator_normalized_name": "Osteochondrodysplasias",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "xeroderma pigmentosum",
+      "preferred_label": "xeroderma pigmentosum",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q82.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019600",
+        "orpha": "Orphanet:910",
+        "umls": "UMLS:C0043346",
+        "mesh": "MESH:D014983"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019600",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050427",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7910",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q82.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21943",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014983",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048220",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3452",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1870",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:910",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:44600005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0043346",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1243068849",
+          "display": null
+        }
+      ],
+      "context": "De Sanctis-Cacchione syndrome is an extremely rare disorder characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviole",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Xeroderma pigmentosum variant type",
+        "Xeroderma Pigmentosum Complementation Group B",
+        "Xeroderma Pigmentosum Type G-Cockayne Syndrome"
+      ],
+      "pubtator_normalized_name": "Xeroderma Pigmentosum",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "De Sanctis-Cacchione syndrome is an extremely rare disorder characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "photosensitivity",
+      "preferred_label": "photosensitivity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007559",
+        "orpha": null,
+        "umls": "UMLS:C1868677",
+        "mesh": "D010787"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007559",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:15065",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:358382",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:132100",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1868677",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010787",
+          "display": "Photosensitivity Disorders"
+        }
+      ],
+      "context": "urring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associated with De Sanctis-Cacchione syndrome are low intelligence, an abnormally small head (microcephaly), the loss of ability to coordinate voluntary",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Xeroderma pigmentosum variant type",
+        "Hair defect with photosensitivity and mental retardation",
+        "Cutaneous photosensitivity and colitis lethal"
+      ],
+      "pubtator_normalized_name": "Photosensitivity Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin disorders",
+      "preferred_label": "skin disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005093",
+        "orpha": null,
+        "umls": "UMLS:C0037274",
+        "mesh": "MESH:D012871"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005093",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:37",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000701",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:709.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20777",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012871",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100281",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3371",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95320005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037274",
+          "display": null
+        }
+      ],
+      "context": "characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associated with De Sanctis-Cacchione syndrome are low intelligence, an abn",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Skin Diseases Eczematous",
+        "Skin Diseases Papulosquamous"
+      ],
+      "pubtator_normalized_name": "Skin Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypogonadism",
+      "preferred_label": "hypogonadism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002146",
+        "orpha": null,
+        "umls": "UMLS:C0020619",
+        "mesh": "MESH:D007006"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002146",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1924",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:253.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5711",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007006",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9227",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:48130008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020619",
+          "display": null
+        }
+      ],
+      "context": "De Sanctis-Cacchione syndrome is an extremely rare disorder characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypogonadism and Testicular Atrophy",
+        "Spinocerebellar Degenerations",
+        "Cerebellar Ataxia and Hypogonadotropic Hypogonadism"
+      ],
+      "pubtator_normalized_name": "Hypogonadism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eye disorders",
+      "preferred_label": "eye disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005328",
+        "orpha": null,
+        "umls": "UMLS:C0015397",
+        "mesh": "MESH:D005128"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005328",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5614",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003966",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:379.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5092",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005128",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26767",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:371405004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015397",
+          "display": null
+        }
+      ],
+      "context": "t stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associated with De Sanctis-Cacchione syndrome are low intelligence, an abnormally small head (microcephaly), the loss of ability to coordinate voluntary movement (ataxia), and/or absent (areflexia) or weakened (hyporeflexia) reflexes. De",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "REM Sleep Behavior Disorder",
+        "Ocular Motility Disorders",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Eye Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microcephaly",
+      "preferred_label": "microcephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001149",
+        "orpha": null,
+        "umls": "UMLS:C4551563",
+        "mesh": "MESH:D008831"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001149",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10907",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000252",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:742.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644158",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008831",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85874",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1829003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551563",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:179350437",
+          "display": null
+        }
+      ],
+      "context": "heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associated with De Sanctis-Cacchione syndrome are low intelligence, an abnormally small head (microcephaly), the loss of ability to coordinate voluntary movement (ataxia), and/or absent (areflexia) or weakened (hyporeflexia) reflexes. De Sanctis-Cacchione syndrome is inherited as an autosomal recessive trait. De Sanctis-Cacchione syndrome is an extremely rare disorder that affects males and females in e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microcephaly Primary Autosomal Recessive 1",
+        "Paine syndrome",
+        "Microcephaly cervical spine fusion anomalies"
+      ],
+      "pubtator_normalized_name": "Microcephaly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin cancers",
+      "preferred_label": "skin cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C43-C44",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002898",
+        "orpha": null,
+        "umls": "UMLS:C0007114",
+        "mesh": "D012878"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002898",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4159",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C43-C44",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:173.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:40101",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2920",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:372130007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007114",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1706880799",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012878",
+          "display": "Skin Neoplasms"
+        }
+      ],
+      "context": "m), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associated with De Sanctis-Cacchione syndrome are low intelligence, an abnormally small head (microcephaly), the loss of ability to coordinate voluntary movement (ataxia), and/or absent (areflexia) or weakened (hyporeflexia) reflexes. De Sanctis-Cacchione",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hereditary leiomyomatosis and renal cell cancer"
+      ],
+      "pubtator_normalized_name": "Skin Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "De Sanctis-Cacchione syndrome is an extremely rare disorder characterized by the skin and eye symptoms of xeroderma pigmentosum (XP) occurring in association with neurological abnormalities, mental retardation, unusually short stature (dwarfism), and underdevelopment of the testes or ovaries (hypogonadism). Xeroderma pigmentosum is a group of rare inherited skin disorders characterized by a heightened reaction to ultraviolet light (photosensitivity), skin discolorations, and the possible development of several types of eye disor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "colorations, and the possible development of several types of eye disorders and skin cancers. The most common neurological abnormalities associated with De Sanctis-Cacchione syndrome are low intelligence, an abnormally small head (microcephaly), the loss of ability to coordinate voluntary movement (ataxia), and/or absent (areflexia) or weakened (hyporeflexia) reflexes. De Sanctis-Cacchione syndrome is inherited as an autosomal recessive trait. De Sanctis-Cacchione syndrome is an extremely rare disorder that affects males and females in equal numbers. Although about 200 cases have been reported in We",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

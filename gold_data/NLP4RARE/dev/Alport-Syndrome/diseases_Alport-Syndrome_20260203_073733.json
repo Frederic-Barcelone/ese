@@ -1,0 +1,293 @@
+{
+  "run_id": "RUN_20260203_062811_cb5e3758076f",
+  "timestamp": "2026-02-03T07:37:33.097257",
+  "document": "Alport-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alport-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Alport syndrome",
+      "preferred_label": "Alport syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:63",
+        "umls": null,
+        "mesh": "C537113"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:63",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537113",
+          "display": "Leiomyomatosis esophageal and vulval with nephropathy"
+        }
+      ],
+      "context": "Alport syndrome is estimated to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Nephritis Hereditary",
+        "Alport Syndrome Mental Retardation Midface Hypoplasia and Elliptocytosis",
+        "MYH9-Related Disorders"
+      ],
+      "pubtator_normalized_name": "Leiomyomatosis esophageal and vulval with nephropathy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "kidney disease",
+      "preferred_label": "Kidney Disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001343",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001343",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007674",
+          "display": "Kidney Diseases"
+        }
+      ],
+      "context": "Alport syndrome is estimated to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_disease.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Renal Insufficiency Chronic",
+        "Kidney Failure Chronic",
+        "Glomerulonephritis"
+      ],
+      "pubtator_normalized_name": "Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "Disease",
+      "abbreviation": null,
+      "confidence": 0.7945809245109559,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0012634",
+        "mesh": "D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0012634",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004194",
+          "display": "Disease"
+        }
+      ],
+      "context": "Alport syndrome is estimated to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chronic kidney disease",
+      "preferred_label": "Chronic Kidney Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1561643",
+        "mesh": "D051436"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1561643",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D051436",
+          "display": "Renal Insufficiency Chronic"
+        }
+      ],
+      "context": "Alport syndrome is estimated to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chronic Kidney Diseases of Uncertain Etiology"
+      ],
+      "pubtator_normalized_name": "Renal Insufficiency Chronic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "end-stage renal disease",
+      "preferred_label": "Kidney Failure, Chronic",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0022661",
+        "mesh": "D007676"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0022661",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007676",
+          "display": "Kidney Failure Chronic"
+        }
+      ],
+      "context": "to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kidney Failure Chronic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "XLAS",
+      "preferred_label": "X-linked hydrocephalus syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0265216",
+        "mesh": "C536029"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0265216",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C536029",
+          "display": "MASA (Mental Retardation Aphasia Shuffling Gait Adducted Thumbs) Syndrome"
+        }
+      ],
+      "context": "in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "VACTERL Association With Hydrocephalus"
+      ],
+      "pubtator_normalized_name": "MASA (Mental Retardation Aphasia Shuffling Gait Adducted Thumbs) Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

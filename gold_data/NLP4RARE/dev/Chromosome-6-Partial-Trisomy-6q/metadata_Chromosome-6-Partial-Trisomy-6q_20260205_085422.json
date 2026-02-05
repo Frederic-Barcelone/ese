@@ -1,0 +1,35 @@
+{
+  "doc_id": "Chromosome-6-Partial-Trisomy-6q",
+  "doc_filename": "Chromosome-6-Partial-Trisomy-6q.pdf",
+  "top_entities": [
+    {
+      "name": "chromosomal disorder",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Chromosome 6, Partial Trisomy 6q",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2267,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.15,
+  "title": "Chromosome 6, Partial Trisomy 6q: Clinical Overview and Characteristics",
+  "short_description": "Clinical documentation of an extremely rare chromosomal disorder involving partial trisomy of chromosome 6q, affecting approximately 30 reported cases worldwide.",
+  "long_description": "This clinical document provides a comprehensive overview of Chromosome 6, Partial Trisomy 6q, an extremely rare genetic disorder characterized by the presence of three copies of a portion of chromosome 6q instead of the normal two copies. The document details the variable clinical manifestations including growth retardation, intellectual disability, craniofacial malformations, neck abnormalities, joint contractures, and other physical anomalies. It explains the typical inheritance pattern through balanced parental translocations and emphasizes the equal gender distribution of this condition. With only approximately 30 cases documented in medical literature, this resource serves as an important reference for healthcare providers and researchers studying rare chromosomal disorders, highlighting the necessity of chromosomal testing for accurate diagnosis and differential diagnosis considerations.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T07:54:22.944327"
+}

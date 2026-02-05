@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_220014_1050310d17db",
+  "timestamp": "2026-02-04T23:03:18.069232",
+  "document": "Alkaptonuria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alkaptonuria.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "HGD",
+      "hgnc_symbol": "HGD",
+      "full_name": "homogentisate 1,2-dioxygenase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4892",
+        "entrez": "3081",
+        "ensembl": "ENSG00000113924",
+        "uniprot": "Q93099",
+        "omim": "607474"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4892",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "3081",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000113924",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "607474",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q93099",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "56",
+          "disease_name": "Alkaptonuria",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "dividuals may develop discoloration of the skin overlying cartilage within the body such as over part of the outer ear. In some cases, the whites of the eyes (sclera) may also become discolored. In adulthood, affected individuals also develop progressive arthritis of the spine and large joints. The HGD gene codes for the enzyme required for the breakdown of homogentisic acid. Mutations in the HGD gene cause alkaptonuria. Alkaptonuria affects males and females in equal numbers, although symptoms tend to develop sooner and become more severe in males. More than 1,000 affected individuals have been",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "Blue-Rubber-Bleb-Nevus-syndrome",
+  "doc_filename": "Blue-Rubber-Bleb-Nevus-syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "blue rubber bleb nevus syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Venous malformation",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2630,
+  "file_size_human": "2.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Blue Rubber Bleb Nevus Syndrome (BRBNS): Clinical Overview",
+  "short_description": "Clinical overview of Blue Rubber Bleb Nevus Syndrome, a rare vascular disorder characterized by distinctive skin lesions and gastrointestinal complications.",
+  "long_description": "This document provides a comprehensive clinical overview of Blue Rubber Bleb Nevus Syndrome (BRBNS), a rare vascular disorder affecting approximately 150 reported cases worldwide. The document details the characteristic features of this condition, including multifocal venous malformations that present as soft, elevated, dark-colored lesions on the skin and internal organs. It covers the clinical presentation, with lesions typically appearing at birth or early childhood, the predominant gastrointestinal involvement that can lead to bleeding and anemia, diagnostic approaches including physical examination and endoscopy, and the sporadic nature of inheritance. The document serves as an educational resource for healthcare professionals and researchers studying rare vascular malformation syndromes.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:07:20.008698"
+}

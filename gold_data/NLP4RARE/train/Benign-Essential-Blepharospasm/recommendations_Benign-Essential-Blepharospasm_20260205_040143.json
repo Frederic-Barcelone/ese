@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:01:43.542692",
+  "document": "Benign-Essential-Blepharospasm.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Benign-Essential-Blepharospasm.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "benign essential blepharospasm",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Benign-Essential-Blepharospasm_1",
+          "recommendation_type": "treatment",
+          "population": "patients with suspected benign essential blepharospasm",
+          "condition": "diagnostic evaluation",
+          "severity": "not specified",
+          "action": "make diagnosis based on thorough clinical evaluation, detailed patient history and identification of characteristic symptoms",
+          "action_description": null,
+          "preferred": "not specified",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "not applicable",
+          "duration": "not specified",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "weak",
+          "references": [],
+          "source": "Benign-Essential-Blepharospasm",
+          "source_text": "A diagnosis is made based upon a thorough clinical evaluation, a detailed patient history and identification of characteristic symptoms",
+          "page_num": null
+        }
+      ],
+      "source_document": "Benign-Essential-Blepharospasm",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:18:22.011479",
+  "document": "Carbamoyl-Phosphate-Synthetase-I-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Carbamoyl-Phosphate-Synthetase-I-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "urea cycle disorders",
+      "preferred_label": "urea cycle disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004739",
+        "orpha": "Orphanet:79167",
+        "umls": "UMLS:C0154246",
+        "mesh": "MESH:D056806"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004739",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9267",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7837",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:270.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D056806",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200802",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84785",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79167",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36444000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0154246",
+          "display": null
+        }
+      ],
+      "context": "n, in the form of ammonia (hyperammonemia), in the blood. Affected children may experience vomiting, refusal to eat, progressive lethargy, and coma. CPSID is inherited as an autosomal recessive genetic disorder. The estimated frequency of CPSID is 1 in 150-200,000 births. The estimated frequency of urea cycle disorders collectively is one in 30,000. However, because urea cycle disorders like CPSID often go unrecognized, these disorders are under-diagnosed, making it difficult to determine the true frequency of urea cycle disorders in the general population.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Argininosuccinic Aciduria"
+      ],
+      "pubtator_normalized_name": "Urea Cycle Disorders Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "process known as the urea cycle. The lack of the CPSI enzyme results in excessive accumulation of nitrogen, in the form of ammonia (hyperammonemia), in the blood. Affected children may experience vomiting, refusal to eat, progressive lethargy, and coma. CPSID is inherited as an autosomal recessive genetic disorder. The estimated frequency of CPSID is 1 in 150-200,000 births. The estimated frequency of urea cycle disorders collectively is one in 30,000. However, because urea cycle disorders like CPSID often go unrecognized, these disorders are under-diagnosed, making it difficult to determine the true frequen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

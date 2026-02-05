@@ -1,0 +1,345 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T08:47:57.849847",
+  "document": "Balo-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Balo-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Autoimmune disorders",
+      "preferred_label": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007179",
+        "orpha": null,
+        "umls": "UMLS:C0004364",
+        "mesh": "MESH:D001327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007179",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:417",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005809",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:720",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2135",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001327",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2889",
+          "display": null
+        },
+        {
+          "system": "OBI",
+          "code": "OBI:1110054",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109100",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85828009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004364",
+          "display": null
+        }
+      ],
+      "context": "its most serious form, Balo Disease may also suggest the presence of an infectious disease, starting with a high fever and painful headaches. The cause of MS and its variants remains unknown. However, some studies indicate that autoimmune factors may play a role in the development of Balo Disease. Autoimmune disorders are caused when the body’s natural defenses against “foreign” or invading organisms (e.g., antibodies) begin to attack healthy tissue for unknown reasons. Balo Disease is a rare disorder that affects males and females in equal numbers. More cases have been reported from China and the Philippines th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Demyelinating Autoimmune Diseases CNS",
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Autoimmune Diseases of the Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infectious disease",
+      "preferred_label": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "ype of MS, including muscle spasms and paralysis. Other neurological symptoms develop depending on the areas of the brain that are affected and may include intellectual impairment and/or physiological abnormalities. However, in its most serious form, Balo Disease may also suggest the presence of an infectious disease, starting with a high fever and painful headaches. The cause of MS and its variants remains unknown. However, some studies indicate that autoimmune factors may play a role in the development of Balo Disease. Autoimmune disorders are caused when the body’s natural defenses against “foreign” or invad",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysentery",
+        "Post-Infectious Disorders",
+        "Travel-Related Illness"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Balo Disease",
+      "preferred_label": "Balo disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016430",
+        "orpha": "Orphanet:228165",
+        "umls": "UMLS:C0004712",
+        "mesh": "D002549"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016430",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060215",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5885",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:341.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:498",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10010252",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200028",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35257",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:835",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:228165",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:49692006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004712",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002549",
+          "display": "Diffuse Cerebral Sclerosis of Schilder"
+        }
+      ],
+      "context": "symptoms that might be found in the more common type of MS, including muscle spasms and paralysis. Other neurological symptoms develop depending on the areas of the brain that are affected and may include intellectual impairment and/or physiological abnormalities. However, in its most serious form, Balo Disease may also suggest the presence of an infectious disease, starting with a high fever and painful headaches. The cause of MS and its variants remains unknown. However, some studies indicate that autoimmune factors may play a role in the development of Balo Disease. Autoimmune disorders are caused when",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Diffuse Cerebral Sclerosis of Schilder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "have been reported from China and the Philippines than elsewhere. Treatment is symptomatic and supportive. Corticosteroids are usually useful in decreasing severity of acute presentations through their anti-inflammatory actions. Treatment to relieve symptoms, such as spasticity, weakness, pain, or ataxia, includes pharmacologic and rehabilitative modalities.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

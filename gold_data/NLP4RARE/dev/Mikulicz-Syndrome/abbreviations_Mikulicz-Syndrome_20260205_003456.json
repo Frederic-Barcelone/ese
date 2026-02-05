@@ -1,0 +1,128 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:34:56.693319",
+  "document": "Mikulicz-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Mikulicz-Syndrome.pdf",
+  "total_candidates": 32,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "SLE",
+      "long_form": "lupus",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " as tuberculosis, leukemia, syphilis, Hodgkin's disease, lymphosarcoma, Sjégren syndrome, or lupus (SLE). People who have Mikulicz syndrome are at heightened risk for developing lymphomas. Mikulicz syndr",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Systemic lupus erythematosus",
+      "matched_text": "SLE",
+      "abbreviation": "SLE",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "M32.0",
+      "orpha": "ORPHA:536"
+    },
+    {
+      "name": "Hodgkin's disease",
+      "matched_text": "Hodgkin's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:C81",
+      "orpha": "Orphanet:98293"
+    },
+    {
+      "name": "Sjogren syndrome",
+      "matched_text": "Sjogren syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M35.0",
+      "orpha": "Orphanet:378"
+    },
+    {
+      "name": "lymphosarcoma",
+      "matched_text": "lymphosarcoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "tuberculosis",
+      "matched_text": "tuberculosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A15-A19",
+      "orpha": "Orphanet:3389"
+    },
+    {
+      "name": "leukemia",
+      "matched_text": "leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "syphilis",
+      "matched_text": "syphilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "lymphoma",
+      "matched_text": "lymphomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:223735"
+    },
+    {
+      "name": "Lupus",
+      "matched_text": "lupus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M32",
+      "orpha": "Orphanet:536"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "parotid",
+      "matched_text": "parotid",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:11:57.569046",
+  "document": "Giant-Axonal-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Giant-Axonal-Neuropathy.pdf",
+  "total_candidates": 50,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "GAN",
+      "long_form": "giant axonal neuropathy",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "second decade of life and death in the second or third decade. Giant axonal neuropathy is a rare disorder that presents in early childhood. This disorder affects equal numbers of males and females. The prevalence of giant axonal neuropathy and the frequency of carriers of one defective copy of the GAN gene is not known, but it is known that giant axonal neuropathy is a very rare disease. Diagnosis of giant axonal neuropathy is made by clinical findings and specialized tests including nerve conduction velocity, brain MRI and peripheral nerve biopsy. The hallmark finding on a peripheral nerve biop",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "pathy is made by clinical findings and specialized tests including nerve conduction velocity, brain MRI and peripheral nerve biopsy. The hallmark finding on a peripheral nerve biopsy is the appearance of",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "giant axonal neuropathy",
+      "matched_text": "Giant axonal neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "intellectual disability",
+      "matched_text": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "neuropathy",
+      "matched_text": "neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "dependence",
+      "matched_text": "dependence",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "scoliosis",
+      "matched_text": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M41",
+      "orpha": null
+    },
+    {
+      "name": "dementia",
+      "matched_text": "dementia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F02",
+      "orpha": null
+    },
+    {
+      "name": "ataxia",
+      "matched_text": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

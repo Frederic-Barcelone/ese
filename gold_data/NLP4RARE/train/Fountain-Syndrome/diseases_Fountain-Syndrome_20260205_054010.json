@@ -1,0 +1,261 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:40:10.695087",
+  "document": "Fountain-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fountain-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Fountain syndrome is an extremely rare genetic multisystem disorder that is characterized by intellectual disability; abnormal swelling of the cheeks and lips due to the excessive accumulation of body fluids under the skin (subcutaneous) of the face (edema); skeletal abnormalities; and/or deafness due to malformation of a structure (cochlea) within the inner ear. The exact underlying cause of Fountain syndrome is",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "deafness",
+      "preferred_label": "hearing loss disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005365",
+        "orpha": null,
+        "umls": "UMLS:C1384666",
+        "mesh": "MESH:D034381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005365",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004238",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:389.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034381",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1384666",
+          "display": null
+        }
+      ],
+      "context": "Fountain syndrome is an extremely rare genetic multisystem disorder that is characterized by intellectual disability; abnormal swelling of the cheeks and lips due to the excessive accumulation of body fluids under the skin (subcutaneous) of the face (edema); skeletal abnormalities; and/or deafness due to malformation of a structure (cochlea) within the inner ear. The exact underlying cause of Fountain syndrome is unknown. The disorder is believed to be inherited as an autosomal recessive trait. Fountain syndrome is an extremely rare inherited disorder that is believed to affect males and fem",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deaf-Blind Disorders"
+      ],
+      "pubtator_normalized_name": "Ermine phenotype",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Fountain syndrome",
+      "preferred_label": "fountain syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009241",
+        "orpha": "Orphanet:3219",
+        "umls": "UMLS:C0795944",
+        "mesh": "MESH:C537270"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009241",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:64",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:208650",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537270",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:229120",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3219",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:720957007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0795944",
+          "display": null
+        }
+      ],
+      "context": "Fountain syndrome is an extremely rare genetic multisystem disorder that is characterized by intellectual disability; abnormal swelling of the cheeks and lips due to the excessive accumulation of body fluids under the skin (subcutaneous) of the face (edema); skeletal abnormalities; and/or deafness due to malformatio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fountain syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

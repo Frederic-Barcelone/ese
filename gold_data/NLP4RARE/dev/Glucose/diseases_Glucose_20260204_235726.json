@@ -1,0 +1,303 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:57:26.636594",
+  "document": "Glucose.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Glucose.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Glucose-galactose malabsorption",
+      "preferred_label": "glucose-galactose malabsorption",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011731",
+        "orpha": "Orphanet:35710",
+        "umls": "UMLS:C0268186",
+        "mesh": "MESH:C562602"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011731",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0070563",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6521",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:271.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78647",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562602",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066388",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200909",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1190",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:606824",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:35710",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:190749000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268186",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2108415931",
+          "display": null
+        }
+      ],
+      "context": "Glucose-galactose malabsorption is an inherited metabolic disorder characterized by the small intestine's inability to transport and absorb glucose and galactose (simple sugars or monosaccharides). Glucose and galactose have very similar chemical structures, and normally the same transport enzyme provides them with entry into spe",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Glucose-Galactose Malabsorption",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inherited metabolic disorder",
+      "preferred_label": "inborn errors of metabolism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019052",
+        "orpha": "Orphanet:68367",
+        "umls": "UMLS:C0025521",
+        "mesh": "MESH:D008661"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019052",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:655",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22508",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008661",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062018",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100159",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34816",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68367",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86095007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025521",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733825440",
+          "display": null
+        }
+      ],
+      "context": "Glucose-galactose malabsorption is an inherited metabolic disorder characterized by the small intestine's inability to transport and absorb glucose and galactose (simple sugars or monosaccharides). Glucose and galactose have very similar chemical structures, and normally the same transport enzyme provides them with entry into specialized cells in the small intesti",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amino Acid Metabolism Inborn Errors",
+        "Steroid Metabolism Inborn Errors",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolism Inborn Errors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diarrhea",
+      "preferred_label": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001673",
+        "orpha": null,
+        "umls": "UMLS:C1290807",
+        "mesh": "MESH:D003967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001673",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13250",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002014",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:009.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:713159",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2987",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128333008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290807",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:116759077",
+          "display": null
+        }
+      ],
+      "context": "ide. Two-thirds of those affected are females. One report suggests that about half of the cases of severe GGM reported have occurred among families that have experienced intermarriage (consanguinity). The diagnosis is usually made upon review of the presenting signs especially the pervasive, watery diarrhea. A simple test, known as the \"glucose breath hydrogen test\" is often used to confirm the physical diagnosis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diarrhea 5 With Tufting Enteropathy Congenital",
+        "Diarrhea 3 Secretory Sodium Congenital",
+        "Dysentery"
+      ],
+      "pubtator_normalized_name": "Diarrhea",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

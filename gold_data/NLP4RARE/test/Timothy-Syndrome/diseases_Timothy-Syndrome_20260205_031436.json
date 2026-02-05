@@ -1,0 +1,388 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:14:36.098658",
+  "document": "Timothy-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Timothy-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "sudden cardiac death",
+      "preferred_label": "sudden cardiac death",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007264",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D016757"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007264",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:95281009",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016757",
+          "display": "Death Sudden Cardiac"
+        }
+      ],
+      "context": "Timothy syndrome is a rare genetic disorder that affects the heart and several other organs. The most obvious manifestation is the abnormally long repolarization (QT interval) in the heart that predisposes patients to cardiac arrhythmias and sudden cardiac death. Unlike other forms of long QT syndrome, patients with Timothy syndrome also present with cardiac malformations, thickening of the cardiac walls (cardiac hypertrophy) and enlargement of the heart (cardiac dilatation). Timothy syndrome has been diagnosed in an extremely low number of individuals in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Jervell-Lange Nielsen Syndrome"
+      ],
+      "pubtator_normalized_name": "Death Sudden Cardiac",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cardiac arrhythmias",
+      "preferred_label": "cardiac arrhythmia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020745",
+        "orpha": null,
+        "umls": "UMLS:C5542154",
+        "mesh": "D001145"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020745",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1781114",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:115000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5542154",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001145",
+          "display": "Arrhythmias Cardiac"
+        }
+      ],
+      "context": "Timothy syndrome is a rare genetic disorder that affects the heart and several other organs. The most obvious manifestation is the abnormally long repolarization (QT interval) in the heart that predisposes patients to cardiac arrhythmias and sudden cardiac death. Unlike other forms of long QT syndrome, patients with Timothy syndrome also present with cardiac malformations, thickening of the cardiac walls (cardiac hypertrophy) and enlargement of the heart (cardiac dilatation). Timothy syndrome has been diagnosed in an extremely low",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiac Arrhythmia Ankyrin-B-Related"
+      ],
+      "pubtator_normalized_name": "Arrhythmias Cardiac",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Timothy syndrome",
+      "preferred_label": "TIMOTHY syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010979",
+        "orpha": "Orphanet:65283",
+        "umls": "UMLS:C1832916",
+        "mesh": "MESH:C536962"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010979",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060173",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9294",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:331395",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536962",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C142894",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1772",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:601005",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:65283",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1832916",
+          "display": null
+        }
+      ],
+      "context": "Timothy syndrome is a rare genetic disorder that affects the heart and several other organs. The most obvious manifestation is the abnormally long repolarization (QT interval) in the heart that predisposes patients to cardiac arrhythmias and sudden cardiac death. Unlike other forms of long QT syndrome, patients wit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Timothy syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Timothy syndrome is a rare genetic disorder that affects the heart and several other organs. The most obvious manifestation is the abnormally long repolarization (QT interval) in the heart that predisposes patients to cardiac arrhythmias and sudden cardiac death. Unlike other forms of long QT syndrome, patients with Timothy syndrome also pre",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "long QT syndrome",
+      "preferred_label": "Long QT Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019171",
+        "orpha": "Orphanet:768",
+        "umls": "UMLS:C1141890",
+        "mesh": "D008133"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019171",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16547",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:685787",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10057926",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200228",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1675",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:192500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:768",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:442917000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1141890",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1208831985",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008133",
+          "display": "Long QT Syndrome"
+        }
+      ],
+      "context": "Timothy syndrome is a rare genetic disorder that affects the heart and several other organs. The most obvious manifestation is the abnormally long repolarization (QT interval) in the heart that predisposes patients to cardiac arrhythmias and sudden cardiac death. Unlike other forms of long QT syndrome, patients with Timothy syndrome also present with cardiac malformations, thickening of the cardiac walls (cardiac hypertrophy) and enlargement of the heart (cardiac dilatation). Timothy syndrome has been diagnosed in an extremely low number of individuals in the world because it has a high mortalit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Long Qt Syndrome 2",
+        "Long QT syndrome type 3",
+        "Timothy syndrome"
+      ],
+      "pubtator_normalized_name": "Long QT Syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

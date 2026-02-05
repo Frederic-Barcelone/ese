@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:19:27.942940",
+  "document": "X.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/X.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "XMEA",
+      "hgnc_symbol": "VMA21",
+      "full_name": "vacuolar ATPase assembly factor VMA21",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "22082",
+        "entrez": "203547",
+        "ensembl": "ENSG00000160131",
+        "uniprot": "Q3ZAQ7",
+        "omim": "300913"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "22082",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "203547",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000160131",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "300913",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q3ZAQ7",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "X-linked myopathy with excessive autophagy (XMEA) is an extremely rare genetic disorder characterized by muscle disease (myopathy). The disorder is fully expressed in males only and is characterized by slowly progressive muscle weakness, especially in the legs. Onset is usually during childhood often between 5-10 years of age. XMEA occurs due to",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

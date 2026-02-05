@@ -1,0 +1,175 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:35:08.283619",
+  "document": "Agranulocytosis-Acquired.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Agranulocytosis-Acquired.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acquired agranulocytosis",
+      "preferred_label": "acquired agranulocytosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021758",
+        "orpha": null,
+        "umls": "UMLS:C0235585",
+        "mesh": "MESH:C538171"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021758",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5717",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:115995",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538171",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:743",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:72050006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0235585",
+          "display": null
+        }
+      ],
+      "context": "Acquired agranulocytosis is a rare, drug-induced blood disorder that is characterized by a severe reduction in the number of white blood cells (granulocytes) in the circulating blood. The name granulocyte refers to grain-like bodies within the cell. Granulocytes include basophils, eosinophils, and neutrophils. Acquired Agr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Acquired agranulocytosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancer",
+      "preferred_label": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004992",
+        "orpha": null,
+        "umls": "UMLS:C0006826",
+        "mesh": "D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004992",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:162",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:199.1",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8000/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14297",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9305",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:MT",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363346000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0006826",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:406",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009369",
+          "display": "Neoplasms"
+        }
+      ],
+      "context": "the circulating blood. The name granulocyte refers to grain-like bodies within the cell. Granulocytes include basophils, eosinophils, and neutrophils. Acquired Agranulocytosis is a rare blood disorder that affects males and females in equal numbers. People who are taking certain medications such as cancer drugs, alkylating agents, anti-thyroid drugs, dibenzepin compounds, or other drugs can be at risk for this disorder. The diagnosis of acquired agranulocytosis is made by combining a thorough history with tests to confirm abnormally low levels of granulocytes in the circulating blood. Regular period",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

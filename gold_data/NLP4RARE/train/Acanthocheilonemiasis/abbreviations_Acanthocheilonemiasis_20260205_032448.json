@@ -1,0 +1,101 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:24:48.962807",
+  "document": "Acanthocheilonemiasis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acanthocheilonemiasis.pdf",
+  "total_candidates": 33,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "DEC",
+      "long_form": "diethylcarbamazine",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "black insect (midge), called A. Cailicoides. Acanthocheilonema perstans, the parasite that causes Acanthocheilonemiasis is common in central Africa and in some areas of South America. This disorder affects males and females in equal numbers. Acanthocheilonemiasis is treated by means of the administration of antifilarial drugs, some of which are newer than others. Ivermectin or diethyl-carbamazine (DEC) are frequently prescribed. Occasionally, surgery may be required to remove large adult worms. Mild cases of acanthocheilonemiasis do not require treatment.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "rare infectious disease",
+      "matched_text": "rare infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68416"
+    },
+    {
+      "name": "infectious disease",
+      "matched_text": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A00-B99",
+      "orpha": null
+    },
+    {
+      "name": "parasitic disease",
+      "matched_text": "parasitic diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "eosinophilia",
+      "matched_text": "eosinophilia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D72.11",
+      "orpha": "Orphanet:168956"
+    },
+    {
+      "name": "localized",
+      "matched_text": "localized",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "INSECT",
+      "matched_text": "insect",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

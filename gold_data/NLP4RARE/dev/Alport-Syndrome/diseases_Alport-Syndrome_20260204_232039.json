@@ -1,0 +1,305 @@
+{
+  "run_id": "RUN_20260204_221636_6f662baa7bb0",
+  "timestamp": "2026-02-04T23:20:39.485747",
+  "document": "Alport-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alport-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "chronic kidney disease",
+      "preferred_label": "chronic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": "ICD10CM:N18.9",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005300",
+        "orpha": null,
+        "umls": "UMLS:C1561643",
+        "mesh": "MESH:D007676"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005300",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:784",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003884",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:N18.9",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:N18",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:585.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:473458",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007676",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100023",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C80078",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:709044004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1561643",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:412389819",
+          "display": null
+        }
+      ],
+      "context": "Alport syndrome is estimated to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Kidney Failure Chronic",
+        "Chronic Kidney Disease-Mineral and Bone Disorder",
+        "Chronic Kidney Diseases of Uncertain Etiology"
+      ],
+      "pubtator_normalized_name": "Renal Insufficiency Chronic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Alport syndrome",
+      "preferred_label": "Alport syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q87.81",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018965",
+        "orpha": "Orphanet:63",
+        "umls": "UMLS:C1567741",
+        "mesh": "MESH:D009394"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018965",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10983",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5785",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q87.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:339209",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009394",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10001843",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200126",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34842",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:756",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:301050",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:63",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1567741",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1170919425",
+          "display": null
+        }
+      ],
+      "context": "Alport syndrome is estimated to affect approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Nephritis Hereditary",
+        "Alport Syndrome Mental Retardation Midface Hypoplasia and Elliptocytosis",
+        "MYH9-Related Disorders"
+      ],
+      "pubtator_normalized_name": "Leiomyomatosis esophageal and vulval with nephropathy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "renal disease",
+      "preferred_label": "kidney disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005240",
+        "orpha": null,
+        "umls": "UMLS:C0022658",
+        "mesh": "MESH:D007674"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005240",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:557",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003086",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:583.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9635",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007674",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3149",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:90708001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022658",
+          "display": null
+        }
+      ],
+      "context": "approximately 1 in 5,000-10,000 people in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Kidney disorder involving deposition of calcium and oxalate or phosphate in the renal tubules"
+      ],
+      "pubtator_normalized_name": "Chronic Kidney Disease-Mineral and Bone Disorder",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

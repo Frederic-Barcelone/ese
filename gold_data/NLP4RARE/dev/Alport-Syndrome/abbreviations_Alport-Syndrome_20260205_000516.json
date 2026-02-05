@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:05:16.246630",
+  "document": "Alport-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alport-Syndrome.pdf",
+  "total_candidates": 10,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "XLAS",
+      "long_form": "X-linked Alport syndrome",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "in the general population in the United States, which means that approximately 30,000-60,000 people in the United States have the disorder. Alport syndrome is estimated to account for 3% of children with chronic kidney disease and 0.2% of adults with end-stage renal disease in the United States. In XLAS, males are affected more severely than females. In the autosomal forms of Alport syndrome, males and females are affected with equal severity.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "chronic kidney disease",
+      "matched_text": "chronic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:N18.9",
+      "orpha": null
+    },
+    {
+      "name": "Alport syndrome",
+      "matched_text": "Alport syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q87.81",
+      "orpha": "Orphanet:63"
+    },
+    {
+      "name": "kidney disorder",
+      "matched_text": "renal disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

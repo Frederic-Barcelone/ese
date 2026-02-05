@@ -1,0 +1,161 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:51:14.550099",
+  "document": "Congenital-Fibrosis-of-the-Extraocular-Muscles.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Fibrosis-of-the-Extraocular-Muscles.pdf",
+  "total_candidates": 30,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 6,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CFEOM",
+      "long_form": "Congenital fibrosis of the extraocular muscles",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Congenital fibrosis of the extraocular muscles (CFEOM) includes at least five rare genetic eye movement disorders present at birth that are characterized by incomitant strabismus. Specifically, there is an inability to move the eyes in certain directions (opthalmoplegia), droopy eyelids (ptosis) and eyes that are fixed in an abnormal position. The oculomotor nucleus and nerve (cranial nerve III) and the muscles it serves and, in some cases the trochl",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "III",
+      "long_form": "cranial nerve III",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "s) and eyes that are fixed in an abnormal position. The oculomotor nucleus and nerve (cranial nerve III) and the muscles it serves and, in some cases the trochlear nucleus and nerve (cranial nerve IV) an",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IV",
+      "long_form": "cranial nerve IV",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ve III) and the muscles it serves and, in some cases the trochlear nucleus and nerve (cranial nerve IV) and/or the abducens nucleus and nerve (cranial nerve VI) and the muscles they serve are affected. ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "VI",
+      "long_form": "cranial nerve VI",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "trochlear nucleus and nerve (cranial nerve IV) and/or the abducens nucleus and nerve (cranial nerve VI) and the muscles they serve are affected. Affected individuals have limited ability to move their e",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CFEOM1",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " a downward position, and elevate the chin so they can see. These disorders have been classified as CFEOM1, CFEOM2, and CFEOMS based on ophthalmologic findings and molecular genetic testing. CFEOMS can be c",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CFEOM2",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ard position, and elevate the chin so they can see. These disorders have been classified as CFEOM1, CFEOM2, and CFEOMS based on ophthalmologic findings and molecular genetic testing. CFEOMS can be character",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CFEOMS",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": ", and elevate the chin so they can see. These disorders have been classified as CFEOM1, CFEOM2, and CFEOMS based on ophthalmologic findings and molecular genetic testing. CFEOMS can be characterized by addi",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "congenital fibrosis of the extraocular muscles",
+      "matched_text": "Congenital fibrosis of the extraocular muscles",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:45358"
+    },
+    {
+      "name": "eye movement disorder",
+      "matched_text": "eye movement disorders",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Tukel syndrome",
+      "matched_text": "Tukel syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "strabismus",
+      "matched_text": "strabismus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "ptosis",
+      "matched_text": "ptosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CFEOM1",
+      "matched_text": "CFEOM1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CFEOM2",
+      "matched_text": "CFEOM2",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

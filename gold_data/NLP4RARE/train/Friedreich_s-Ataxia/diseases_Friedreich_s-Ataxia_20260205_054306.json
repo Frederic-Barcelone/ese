@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:43:06.314363",
+  "document": "Friedreich_s-Ataxia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Friedreich_s-Ataxia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "FRDA",
+      "preferred_label": "Friedreich ataxia",
+      "abbreviation": "FRDA",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G11.1",
+        "icd11": "8A03.10",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:95",
+        "umls": null,
+        "mesh": "C565561"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:95",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G11.1",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8A03.10",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C565561",
+          "display": "Friedreich Ataxia 1"
+        }
+      ],
+      "context": "FXN The prevalence of FRDA is approximately 1 in 40,000 people. FRDA is the most common inherited ataxia in Europe, the Middle East, South Asia (Indian subcontinent), and North Africa. It is rarely identified in other populations.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Friedreich Ataxia",
+        "Ataxia with vitamin E deficiency",
+        "Spinocerebellar ataxia autosomal recessive 1"
+      ],
+      "pubtator_normalized_name": "Friedreich Ataxia 1",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ataxia",
+      "preferred_label": "ataxia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100308",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D001259"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100308",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001259",
+          "display": "Ataxia"
+        }
+      ],
+      "context": "FXN The prevalence of FRDA is approximately 1 in 40,000 people. FRDA is the most common inherited ataxia in Europe, the Middle East, South Asia (Indian subcontinent), and North Africa. It is rarely identified in other populations.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ataxia Telangiectasia",
+        "Ataxia Neuropathy Spectrum",
+        "Leukoencephalopathies"
+      ],
+      "pubtator_normalized_name": "Ataxia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

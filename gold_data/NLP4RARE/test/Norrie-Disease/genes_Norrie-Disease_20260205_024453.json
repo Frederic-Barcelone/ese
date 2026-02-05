@@ -1,0 +1,94 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:44:53.196450",
+  "document": "Norrie-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Norrie-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "NDP",
+      "hgnc_symbol": "NDP",
+      "full_name": "norrin cystine knot growth factor NDP",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "7678",
+        "entrez": "4693",
+        "ensembl": "ENSG00000124479",
+        "uniprot": "Q00604",
+        "omim": "300658"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "7678",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "4693",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000124479",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "300658",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q00604",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "649",
+          "disease_name": "Norrie disease",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        },
+        {
+          "orphacode": "190",
+          "disease_name": "Coats disease",
+          "association_type": "Candidate gene tested in"
+        },
+        {
+          "orphacode": "891",
+          "disease_name": "Familial exudative vitreoretinopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "90050",
+          "disease_name": "Retinopathy of prematurity",
+          "association_type": "Major susceptibility factor in"
+        },
+        {
+          "orphacode": "91495",
+          "disease_name": "Persistent hyperplastic primary vitreous",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "Norrie disease is a rare X-linked disorder that occurs due to errors or disruption (mutations) of the NDP gene. Norrie disease is a rare disorder that is fully expressed in males only. In rare cases, Carrier females may display some symptoms of the disorder. The incidence and prevalence rates for Norrie disease are unknown. The disorder has been reported in all ethnic groups. A diagnosis of Norrie dise",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

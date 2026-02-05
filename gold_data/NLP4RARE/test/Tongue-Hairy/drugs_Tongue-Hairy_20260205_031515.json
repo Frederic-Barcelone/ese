@@ -1,0 +1,222 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:15:15.421493",
+  "document": "Tongue-Hairy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Tongue-Hairy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "alcohol",
+      "preferred_name": "alcohol",
+      "brand_name": "DEHYDRATED ALCOHOL",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "SOLUTION",
+      "route": "INTRA-ARTERIAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D000438",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "ANDA219400",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000438",
+          "display": "Alcohols"
+        }
+      ],
+      "context": " overgrowth of certain fungi); the use of particular oral bismuth-containing medications; the use of mouthwashes; smoking; chewing tobacco; excessive alcohol consumption; and/or poor oral hygiene. Hairy tongue is not infectious nor does it lead to oral cancer. In males or females with hairy tongue, the age",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Ethanol",
+        "Methanol"
+      ],
+      "pubtator_normalized_name": "Alcohols",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tetracycline",
+      "preferred_name": "Tetracycline",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D013752",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10395",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013752",
+          "display": "Tetracycline"
+        }
+      ],
+      "context": "mains unknown, several potential predisposing factors have been implicated. Such factors include treatment with certain antibiotic medications (e.g., tetracycline therapy, which may lead to overgrowth of certain fungi); the use of particular oral bismuth-containing medications; the use of mouthwashes; smoking; ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tetracyclines",
+        "tetracycline CMT-3",
+        "Lymecycline"
+      ],
+      "pubtator_normalized_name": "Tetracycline",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bismuth",
+      "preferred_name": "bismuth",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001729",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1599",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001729",
+          "display": "Bismuth"
+        }
+      ],
+      "context": "treatment with certain antibiotic medications (e.g., tetracycline therapy, which may lead to overgrowth of certain fungi); the use of particular oral bismuth-containing medications; the use of mouthwashes; smoking; chewing tobacco; excessive alcohol consumption; and/or poor oral hygiene. Hairy tongue is no",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "bismuth oxide",
+        "bismuth vanadium tetraoxide",
+        "bismuth selenide"
+      ],
+      "pubtator_normalized_name": "Bismuth",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tobacco",
+      "preferred_name": "Tobacco",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10623",
+          "display": null
+        }
+      ],
+      "context": ", which may lead to overgrowth of certain fungi); the use of particular oral bismuth-containing medications; the use of mouthwashes; smoking; chewing tobacco; excessive alcohol consumption; and/or poor oral hygiene. Hairy tongue is not infectious nor does it lead to oral cancer. In males or females with ha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

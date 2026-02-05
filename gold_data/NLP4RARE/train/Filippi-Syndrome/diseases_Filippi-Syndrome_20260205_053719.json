@@ -1,0 +1,457 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:37:19.174262",
+  "document": "Filippi-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Filippi-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "\"Filippi syndrome is an extremely rare genetic disorder that may be apparent at birth (congenital). The disorder is characterized by an unusual facial appearance, abnormalities of the fingers and toes, and mild to severe mental retardation. Primary physical findings include growth delays, webbing or fusion (syndactyly) of certain fingers and toes, inward deviation or bending (clinodactyly) of the fifth fingers (\"\"pinkies\"\") and microcephaly, condition that indicates that the head circumference is smaller than would be expected for an",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Filippi syndrome",
+      "preferred_label": "FILIPPI syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010092",
+        "orpha": "Orphanet:3255",
+        "umls": "UMLS:C0795940",
+        "mesh": "MESH:C538152"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010092",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0112194",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:62",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:163197",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538152",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1149",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:272440",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3255",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:720954000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0795940",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1989471300",
+          "display": null
+        }
+      ],
+      "context": "\"Filippi syndrome is an extremely rare genetic disorder that may be apparent at birth (congenital). The disorder is characterized by an unusual facial appearance, abnormalities of the fingers and toes, and mild to severe mental retardation. Primary physical findings include growth delays, webbing or fusion (syndacty",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Filippi syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "\"Filippi syndrome is an extremely rare genetic disorder that may be apparent at birth (congenital). The disorder is characterized by an unusual facial appearance, abnormalities of the fingers and toes, and mild to severe mental retardation. Primary physical findings include growth delays, webbing or fusion (syndactyly) of certain fingers and toes, inwar",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "microcephaly",
+      "preferred_label": "microcephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001149",
+        "orpha": null,
+        "umls": "UMLS:C4551563",
+        "mesh": "MESH:D008831"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001149",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10907",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000252",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:742.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1644158",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008831",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85874",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1829003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4551563",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:179350437",
+          "display": null
+        }
+      ],
+      "context": "an unusual facial appearance, abnormalities of the fingers and toes, and mild to severe mental retardation. Primary physical findings include growth delays, webbing or fusion (syndactyly) of certain fingers and toes, inward deviation or bending (clinodactyly) of the fifth fingers (\"\"pinkies\"\") and microcephaly, condition that indicates that the head circumference is smaller than would be expected for an infant's age and sex. Filippi syndrome is transmitted as an autosomal recessive trait. The diagnosis of Filippi syndrome may be made at birth or during early infancy based upon a thorough clinical evaluat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microcephaly Primary Autosomal Recessive 1",
+        "Paine syndrome",
+        "Microcephaly cervical spine fusion anomalies"
+      ],
+      "pubtator_normalized_name": "Microcephaly",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndactyly",
+      "preferred_label": "syndactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q70",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021002",
+        "orpha": null,
+        "umls": "UMLS:C0039075",
+        "mesh": "MESH:D013576"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021002",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11193",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001159",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q70",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:755.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52619",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013576",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10042778",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039075",
+          "display": null
+        }
+      ],
+      "context": "syndrome is an extremely rare genetic disorder that may be apparent at birth (congenital). The disorder is characterized by an unusual facial appearance, abnormalities of the fingers and toes, and mild to severe mental retardation. Primary physical findings include growth delays, webbing or fusion (syndactyly) of certain fingers and toes, inward deviation or bending (clinodactyly) of the fifth fingers (\"\"pinkies\"\") and microcephaly, condition that indicates that the head circumference is smaller than would be expected for an infant's age and sex. Filippi syndrome is transmitted as an autosomal recessive",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Syndactyly",
+        "Syndactyly type 3",
+        "Syndactyly type v"
+      ],
+      "pubtator_normalized_name": "Acrocephalosyndactylia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

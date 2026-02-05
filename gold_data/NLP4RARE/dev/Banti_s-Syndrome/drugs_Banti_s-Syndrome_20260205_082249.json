@@ -1,0 +1,168 @@
+{
+  "run_id": "RUN_20260205_071244_1919c33689fc",
+  "timestamp": "2026-02-05T08:22:49.735547",
+  "document": "Banti_s-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Banti_s-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "azathioprine",
+      "preferred_name": "Azathioprine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Crohn Disease",
+        "Azathioprine",
+        "Methotrexate"
+      ],
+      "nct_id": "NCT05040464",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001379",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05040464",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001379",
+          "display": "Azathioprine"
+        }
+      ],
+      "context": "the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transplantation. Banti syndrome affects males and females equally. It is relatively common in parts of India and Japan, bu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Azathioprine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "red blood cells",
+      "preferred_name": "Red blood cells",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "389304",
+          "display": null
+        }
+      ],
+      "context": "Banti syndrome is a disorder of the spleen, the large, gland-like organ in the upper left side of the abdomen that produces red blood cells before birth and, in newborns, removes and destroys aged red blood cells, and plays a role in fighting infection. In the case of Banti syndrome, the ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "arsenic",
+      "preferred_name": "arsenic",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001151",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1111",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001151",
+          "display": "Arsenic"
+        }
+      ],
+      "context": "lots, or various underlying disorders causing inflammation and obstruction of veins (vascular obstruction) of the liver, such as cirrhosis. Increased arsenic intake has also been implicated in some cases. Also, cases have occurred in patients taking long-term azathioprine, particularly after kidney transpl",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arsenic Trioxide",
+        "arsenic acid",
+        "Arsenicals"
+      ],
+      "pubtator_normalized_name": "Arsenic",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

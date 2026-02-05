@@ -1,0 +1,35 @@
+{
+  "doc_id": "Horner_s-Syndrome",
+  "doc_filename": "Horner_s-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "absence of sweating",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Horner syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1912,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Horner's Syndrome: Clinical Overview and Diagnostic Approach",
+  "short_description": "Clinical document describing Horner syndrome, a rare neurological disorder characterized by miosis, ptosis, anhidrosis, and enophthalmos.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Horner syndrome, a relatively uncommon neurological condition that affects the sympathetic nervous system. The document details the four classic signs of the disorder: constricted pupil (miosis), drooping upper eyelid (ptosis), absence of facial sweating (anhidrosis), and sunken eyeball appearance (enophthalmos). It emphasizes that the condition affects both sexes equally across all age groups and ethnicities worldwide. The document also outlines the diagnostic approach, highlighting the use of pharmacological testing combined with advanced imaging techniques such as magnetic resonance imaging and carotid artery ultrasonography for accurate diagnosis and lesion localization.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:20:21.283377"
+}

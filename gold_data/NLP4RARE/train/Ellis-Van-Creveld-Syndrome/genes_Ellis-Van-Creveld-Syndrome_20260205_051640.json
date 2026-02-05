@@ -1,0 +1,146 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:16:40.325922",
+  "document": "Ellis-Van-Creveld-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Ellis-Van-Creveld-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "EVC",
+      "hgnc_symbol": "EVC",
+      "full_name": "EvC ciliary complex subunit 1",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "3497",
+        "entrez": "2121",
+        "ensembl": "ENSG00000072840",
+        "uniprot": "P57679",
+        "omim": "604831"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "3497",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2121",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000072840",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "604831",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P57679",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "289",
+          "disease_name": "Ellis Van Creveld syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "952",
+          "disease_name": "Acrofacial dysostosis, Weyers type",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "ty, Pennsylvania and in the native population of Western Australia. Ellis-Van-Creveld syndrome is diagnosed by the observation of short stature, slow growth, skeletal abnormalities determined by imaging techniques and sometimes teeth present at birth (natal teeth). Molecular genetic testing for the EVC and EVC2 genes is available on a research basis only. Prenatal diagnosis is possible by ultrasound.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "EVC2",
+      "hgnc_symbol": "EVC2",
+      "full_name": "EvC ciliary complex subunit 2",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "19747",
+        "entrez": "132884",
+        "ensembl": "ENSG00000173040",
+        "uniprot": "Q86UK5",
+        "omim": "607261"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "19747",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "132884",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000173040",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "607261",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q86UK5",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "289",
+          "disease_name": "Ellis Van Creveld syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "952",
+          "disease_name": "Acrofacial dysostosis, Weyers type",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "sylvania and in the native population of Western Australia. Ellis-Van-Creveld syndrome is diagnosed by the observation of short stature, slow growth, skeletal abnormalities determined by imaging techniques and sometimes teeth present at birth (natal teeth). Molecular genetic testing for the EVC and EVC2 genes is available on a research basis only. Prenatal diagnosis is possible by ultrasound.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

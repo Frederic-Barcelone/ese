@@ -1,0 +1,40 @@
+{
+  "doc_id": "Dentinogenesis-Imperfecta-Type-III",
+  "doc_filename": "Dentinogenesis-Imperfecta-Type-III.pdf",
+  "top_entities": [
+    {
+      "name": "dentinogenesis imperfecta type III",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Gorlin-Chaudhry-Moss syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "amber",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2231,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Dentinogenesis Imperfecta Type III: Clinical Overview and Diagnostic Features",
+  "short_description": "Clinical document describing dentinogenesis imperfecta type III, a hereditary disorder affecting dentin development in teeth with characteristic rapid crown erosion and pulp exposure.",
+  "long_description": "This clinical reference document provides a comprehensive overview of dentinogenesis imperfecta type III (DGI-III), one of five distinct hereditary disorders affecting dentin development in teeth. The document details the pathophysiology of this condition, explaining how it affects the hard, bone-like dentin material that protects tooth pulp. Key clinical features are described, including rapid erosion of crowns in both primary and permanent teeth, exposed dental pulp with characteristic opalescent appearance, and distinctive radiographic findings such as enlarged pulp chambers in baby teeth and reduced or absent pulp chambers in permanent teeth. The document also covers carrier manifestations, including shell teeth with thin ivory layers, and diagnostic approaches emphasizing the importance of X-ray examination, family history, and clinical evaluation.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:05:08.665936"
+}

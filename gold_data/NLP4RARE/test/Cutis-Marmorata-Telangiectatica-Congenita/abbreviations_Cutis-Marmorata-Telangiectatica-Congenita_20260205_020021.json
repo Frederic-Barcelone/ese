@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:00:21.244246",
+  "document": "Cutis-Marmorata-Telangiectatica-Congenita.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Cutis-Marmorata-Telangiectatica-Congenita.pdf",
+  "total_candidates": 21,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CMTC",
+      "long_form": "cutis marmorata telangiectatica congenita",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "The exact cause of CMTC is not known. Most cases occur randomly, for no apparent reason (spontaneously). Researchers believe that the disease results from genetic mosaicism. One theory suggests that abnormal pericyte recruitment can cause skin capillaries to contract inappropriately. In a few rare cases, it has appeared t",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "familial",
+      "matched_text": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CMTC",
+      "matched_text": "CMTC",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1556"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

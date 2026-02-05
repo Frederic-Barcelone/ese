@@ -1,0 +1,154 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T18:30:17.409173",
+  "document": "Carpenter-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Carpenter-Syndrome.pdf",
+  "total_candidates": 45,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ACPS",
+      "long_form": "acrocephalopolysyndactyly",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Carpenter syndrome belongs to a group of rare genetic disorders known as “acrocephalopolysyndactyly” (ACPS) disorders. All forms of ACPS are characterized by premature closure of the fibrous joints (cranial sutures) between certain bones of the skull (craniosynostosis), causing the top of the head to appear pointed (acrocephaly); webbing or fusion (syndactyly) of certain fingers or toes (digits); and/or",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0000078"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:673840"
+        },
+        {
+          "source": "SCTID",
+          "id": "SCTID:205260006"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C0687154"
+        }
+      ]
+    },
+    {
+      "short_form": "DNA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "he disease causing gene, homozygosity (two copies) for the same nonsense mutation, (a change in the DNA that causes a change in the protein) was found. This is indicative of a founder effect in patients ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "acrocephalopolysyndactyly",
+      "matched_text": "acrocephalopolysyndactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Carpenter syndrome",
+      "matched_text": "Carpenter syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:65759"
+    },
+    {
+      "name": "craniosynostosis",
+      "matched_text": "craniosynostosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q75.0",
+      "orpha": "Orphanet:1531"
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "acrocephaly",
+      "matched_text": "acrocephaly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:63440"
+    },
+    {
+      "name": "polydactyly",
+      "matched_text": "polydactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q69",
+      "orpha": null
+    },
+    {
+      "name": "syndactyly",
+      "matched_text": "syndactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q70",
+      "orpha": null
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "SUTURES",
+      "matched_text": "sutures",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "DNA",
+      "matched_text": "DNA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

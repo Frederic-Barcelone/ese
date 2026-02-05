@@ -1,0 +1,382 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:07:00.121317",
+  "document": "Diastrophic-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Diastrophic-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "dwarfism",
+      "preferred_label": "Schwartz-Jampel syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:800",
+        "umls": null,
+        "mesh": "D010009"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:800",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010009",
+          "display": "Osteochondrodysplasias"
+        }
+      ],
+      "context": "Diastrophic dysplasia, which is also known as disastrophic dwarfism, is a rare disorder that is present at birth (congenital). The range and severity of associated symptoms and physical findings may vary greatly from case to case. However, the disorder is often characterized by short stature and unusually short arms and legs (short-limbed dwarfism); abnormal develo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Stuve-Wiedemann syndrome"
+      ],
+      "pubtator_normalized_name": "Osteochondrodysplasias",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Diastrophic dysplasia",
+      "preferred_label": "diastrophic dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q77.5",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009107",
+        "orpha": "Orphanet:628",
+        "umls": "UMLS:C0220726",
+        "mesh": "MESH:C536170"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009107",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14687",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6275",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q77.5",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:113103",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536170",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C156311",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1051",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:222600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:628",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:58561002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220726",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1681550532",
+          "display": null
+        }
+      ],
+      "context": "Diastrophic dysplasia, which is also known as disastrophic dwarfism, is a rare disorder that is present at birth (congenital). The range and severity of associated symptoms and physical findings may vary greatly from case to case. However, the disorder is often characterized by short stature and unusually short arms and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Diastrophic dysplasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skeletal dysplasia",
+      "preferred_label": "skeletal dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018230",
+        "orpha": "Orphanet:364526",
+        "umls": "UMLS:C0410528",
+        "mesh": "C535858"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018230",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98053",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:364526",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0410528",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535858",
+          "display": "HEM dysplasia"
+        }
+      ],
+      "context": "rder that is present at birth (congenital). The range and severity of associated symptoms and physical findings may vary greatly from case to case. However, the disorder is often characterized by short stature and unusually short arms and legs (short-limbed dwarfism); abnormal development of bones (skeletal dysplasia) and joints (joint dysplasia) in many areas of the body; progressive abnormal curvature of the spine (scoliosis and/or kyphosis); abnormal tissue changes of the outer, visible portions of the ears (pinnae); and/or, in some cases, malformations of the head and facial (craniofacial) area.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acrocephalosyndactylia",
+        "Carnevale syndrome",
+        "Platyspondylic Lethal Skeletal Dysplasia Torrance Type"
+      ],
+      "pubtator_normalized_name": "HEM dysplasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "scoliosis",
+      "preferred_label": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M41",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005392",
+        "orpha": null,
+        "umls": "UMLS:C0036439",
+        "mesh": "MESH:D012600"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005392",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060249",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004273",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002650",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M41",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:M41",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:737.43",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11348",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012600",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C78603",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:298382003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036439",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1925604007",
+          "display": null
+        }
+      ],
+      "context": "greatly from case to case. However, the disorder is often characterized by short stature and unusually short arms and legs (short-limbed dwarfism); abnormal development of bones (skeletal dysplasia) and joints (joint dysplasia) in many areas of the body; progressive abnormal curvature of the spine (scoliosis and/or kyphosis); abnormal tissue changes of the outer, visible portions of the ears (pinnae); and/or, in some cases, malformations of the head and facial (craniofacial) area.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spondylocarpotarsal synostosis",
+        "gaze palsy familial horizontal with progressive scoliosis",
+        "Macrocephaly Alopecia Cutis Laxa and Scoliosis"
+      ],
+      "pubtator_normalized_name": "Scoliosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "Diastrophic dysplasia, which is also known as disastrophic dwarfism, is a rare disorder that is present at birth (congenital). The range and severity of associated symptoms and physical findings may vary greatly from case to case. However, the disorder is often characterized by short stature and unusually short arms and legs (short-limbed dwarfism); abnormal development of bones (skeletal dysplasia) and joints (joint dysplasia) in many areas of the body; progressive abnormal curvature of the spine (scoliosis and/or kyphosis); abnormal tissue changes of the outer, visible portions of th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

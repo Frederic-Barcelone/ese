@@ -1,0 +1,35 @@
+{
+  "doc_id": "Branchiootorenal-Spectrum-Disorders",
+  "doc_filename": "Branchiootorenal-Spectrum-Disorders.pdf",
+  "top_entities": [
+    {
+      "name": "hearing loss disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Bos syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1570,
+  "file_size_human": "1.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Branchiootorenal Spectrum Disorders (BOR/BOS Syndrome)",
+  "short_description": "Clinical overview of BOR/BOS syndrome, a genetic disorder affecting hearing and kidney development with equal prevalence in males and females.",
+  "long_description": "This document provides epidemiological information about Branchiootorenal/Branchiootic Spectrum (BOR/BOS) syndrome, a rare genetic disorder that affects approximately 1 in 40,000 individuals. The syndrome demonstrates no gender preference, affecting males and females equally. Notably, BOR/BOS syndrome accounts for 2-3% of cases in children with profound deafness, highlighting its significance in pediatric hearing loss. The document appears to focus on the prevalence and demographic characteristics of this multisystem disorder that typically involves abnormalities of the ears, kidneys, and branchial arch derivatives.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:09:45.627871"
+}

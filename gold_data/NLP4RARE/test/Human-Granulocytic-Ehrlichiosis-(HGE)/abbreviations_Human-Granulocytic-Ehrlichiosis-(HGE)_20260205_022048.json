@@ -1,0 +1,102 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:20:48.414485",
+  "document": "Human-Granulocytic-Ehrlichiosis-(HGE).pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Human-Granulocytic-Ehrlichiosis-(HGE).pdf",
+  "total_candidates": 18,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "HME",
+      "long_form": "Human Monocytic Ehrlichiosis",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "s disease that belongs to a group of diseases known as the Human Ehrlichioses. The Ehrlichioses are infectious diseases caused by bacteria in the \"Ehrlichia\" family. Several forms of Human Ehrlichial infection have been identified including Human Granulocytic Ehrlichiosis (HGE), Sennetsu Fever, and Human Monocytic Ehrlichiosis (HME). Though caused by different strains of Ehrlichia bacteria, the disorders are all characterized by similar symptoms.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HGE",
+      "long_form": "human granulocytic ehrlichiosis",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Human Granulocytic Ehrlichiosis (HGE) is a rare infectious disease that belongs to a group of diseases known as the Human Ehrlichioses. The Ehrlichioses are infectious diseases caused by bacteria in the \"Ehrlichia\" family. Several forms of Human Ehrlichial infection have been identified including Human Granulocytic Ehrlichiosis (HGE),",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Human Monocytic Ehrlichiosis (HME)",
+      "matched_text": "Human Monocytic Ehrlichiosis (HME)",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "human granulocytic anaplasmosis",
+      "matched_text": "Human Granulocytic Ehrlichiosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A79.82",
+      "orpha": null
+    },
+    {
+      "name": "rare infectious disease",
+      "matched_text": "rare infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:68416"
+    },
+    {
+      "name": "infectious disease",
+      "matched_text": "infectious diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A00-B99",
+      "orpha": null
+    },
+    {
+      "name": "sennetsu fever",
+      "matched_text": "Sennetsu Fever",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "diseases",
+      "matched_text": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

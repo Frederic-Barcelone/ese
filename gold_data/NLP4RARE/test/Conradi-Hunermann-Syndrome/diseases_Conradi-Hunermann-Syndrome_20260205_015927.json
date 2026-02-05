@@ -1,0 +1,427 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:59:27.587793",
+  "document": "Conradi-Hunermann-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Conradi-Hunermann-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Conradi-HUnermann syndrome",
+      "preferred_label": "X-linked chondrodysplasia punctata 2",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020603",
+        "orpha": "Orphanet:35173",
+        "umls": "UMLS:C0282102",
+        "mesh": "D002806"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020603",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080352",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6189",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:79381",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201357",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1005",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:302960",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:35173",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0282102",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002806",
+          "display": "Chondrodysplasia Punctata"
+        }
+      ],
+      "context": "ture. Many affected individuals also have a prominent forehead; unusually flattened midfacial regions (midfacial hypoplasia), with a low nasal bridge; loss of transparency of the lenses of the eyes (cataracts); sparse, coarse scalp hair; and/or abnormal thickening, dryness, and scaling of the skin. Conradi-HUnermann syndrome is inherited as an X-linked dominant trait that occurs almost exclusively in females.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chondrodysplasia Punctata",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chondrodysplasia punctata",
+      "preferred_label": "chondrodysplasia punctata",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q77.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019701",
+        "orpha": "Orphanet:93442",
+        "umls": "UMLS:C0008445",
+        "mesh": "MESH:D002806"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019701",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2581",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:8542",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q77.3",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3052",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002806",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201017",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84632",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93442",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:360507004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008445",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1923035846",
+          "display": null
+        }
+      ],
+      "context": "Conradi-Htinermann syndrome is a rare genetic disorder characterized by skeletal malformations, skin abnormalities, cataracts and short stature. The specific symptoms and severity of the disorder may vary greatly from one individual to another. Conradi-Hinermann syndrome is classified as a form of chondrodysplasia punctata, a group of disorders characterized by the formation of small, hardened spots of calcium on the \"growing portion\" or heads of the long bones (stippled epiphyses) or inside other areas of cartilage in the body. Conradi-Huinermann syndrome is commonly associated with disproportionate and assymetric s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chondrodysplasia Punctata",
+        "Rhizomelic chondrodysplasia punctata type 2",
+        "Brachytelephalangic Chondrodysplasia Punctata"
+      ],
+      "pubtator_normalized_name": "Chondrodysplasia Punctata Rhizomelic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Conradi-Htinermann syndrome is a rare genetic disorder characterized by skeletal malformations, skin abnormalities, cataracts and short stature. The specific symptoms and severity of the disorder may vary greatly from one individual to another. Conradi-Hinermann syndrome is classified as a form of chondrodysplasia punctata, a group of disorders charact",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cataracts",
+      "preferred_label": "cataract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005129",
+        "orpha": null,
+        "umls": "UMLS:C0086543",
+        "mesh": "MESH:D002386"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005129",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:83",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000518",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:366.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39462",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002386",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26713",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:116200",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:193570009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0086543",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:109841337",
+          "display": null
+        }
+      ],
+      "context": "Conradi-Htinermann syndrome is a rare genetic disorder characterized by skeletal malformations, skin abnormalities, cataracts and short stature. The specific symptoms and severity of the disorder may vary greatly from one individual to another. Conradi-Hinermann syndrome is classified as a form of chondrodysplasia punctata, a group of disorders characterized by the formation of small, hardened spots of calcium on the \"gro",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cataract congenital with microcornea or slight microphthalmia",
+        "Cataract Nuclear Progressive",
+        "Cataract Age-Related Nuclear"
+      ],
+      "pubtator_normalized_name": "Cataract",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "Conradi-Htinermann syndrome is a rare genetic disorder characterized by skeletal malformations, skin abnormalities, cataracts and short stature. The specific symptoms and severity of the disorder may vary greatly from one individual to another. Conradi-Hinermann syndrome is classified as a form of chondrodysplasia punctata, a group of disorders characterized by the formation of small, hardened spots of calcium on the \"growing portion\" or h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

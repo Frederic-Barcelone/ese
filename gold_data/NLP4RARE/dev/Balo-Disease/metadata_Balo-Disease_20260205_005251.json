@@ -1,0 +1,40 @@
+{
+  "doc_id": "Balo-Disease",
+  "doc_filename": "Balo-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "autoimmune disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "infectious disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "corticosteroids",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2303,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Balo Disease: Clinical Overview and Treatment Guidelines",
+  "short_description": "Clinical document describing Balo Disease, a rare variant of multiple sclerosis, including symptoms, etiology, demographics, and treatment approaches.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Balo Disease, a rare demyelinating disorder considered a variant of multiple sclerosis. The document details the characteristic gradual onset of neurological symptoms including muscle spasms, paralysis, and potential intellectual impairment, while also describing more severe presentations that may mimic infectious diseases with fever and headaches. It discusses the unknown etiology with potential autoimmune involvement, epidemiological patterns showing equal gender distribution with higher prevalence in China and the Philippines, and current treatment strategies focusing on symptomatic management with corticosteroids and rehabilitative approaches.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T23:52:51.325253"
+}

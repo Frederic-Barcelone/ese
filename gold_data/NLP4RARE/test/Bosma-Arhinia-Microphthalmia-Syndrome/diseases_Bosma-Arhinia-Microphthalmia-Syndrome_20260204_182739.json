@@ -1,0 +1,134 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T18:27:39.404069",
+  "document": "Bosma-Arhinia-Microphthalmia-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Bosma-Arhinia-Microphthalmia-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "BAM syndrome is an extremely rare disorder that is known to affect patients from many different ethnic groups. As with many rare disorders, the exact incidence or prevalence of this disorder is unknown. The disorder probably goes misdiagnosed or undiagnosed making it difficult to determine the true frequency in the general population. Fewer",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "syndrome",
+      "preferred_label": "syndrome",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002254",
+        "orpha": null,
+        "umls": "UMLS:C0039082",
+        "mesh": "MESH:D013577"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002254",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:225",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11688",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013577",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28193",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000086",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039082",
+          "display": null
+        }
+      ],
+      "context": "BAM syndrome is an extremely rare disorder that is known to affect patients from many different ethnic groups. As with many rare disorders, the exact incidence or prevalence of this disorder is unknown. The disorder probably goes misdiagnosed or undiagnosed making it difficult to determine the true frequency in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

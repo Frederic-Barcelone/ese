@@ -1,0 +1,418 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T00:46:11.824251",
+  "document": "Alagille-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alagille-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "congenital heart defects",
+      "preferred_label": "congenital heart defects",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005453",
+        "orpha": null,
+        "umls": "UMLS:C0152021",
+        "mesh": "MESH:D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005453",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1682",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005207",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:746.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57501",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006330",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C95834",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:13213009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2004408087",
+          "display": null
+        }
+      ],
+      "context": "ch often develop during the first three months of life, include blockage of the flow of bile from the liver (cholestasis), yellowing of the skin and mucous membranes (jaundice), poor weight gain and growth, severe itching (pruritis) and pale, loose stools. Additional symptoms include heart murmurs, congenital heart defects, vertebral (back bone) differences, thickening of the ring that normally lines the cornea in the eye (posterior embryotoxon) and distinctive facial features. Most people with Alagille syndrome have mutations in one copy of the JAG1 gene. A small percentage (less than 1 percent) of patients have mut",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart defects limb shortening",
+        "Deafness Congenital Heart Defects and Posterior Embryotoxon",
+        "Noncompaction of Left Ventricular Myocardium with Congenital Heart Defects"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Alagille syndrome",
+      "preferred_label": "Alagille syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007318",
+        "orpha": "Orphanet:52",
+        "umls": "UMLS:C0085280",
+        "mesh": "MESH:D016738"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007318",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9245",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:804",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39014",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016738",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10053870",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200931",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35139",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:748",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:118450",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:52",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31742004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085280",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1249656206",
+          "display": null
+        }
+      ],
+      "context": "Alagille syndrome (OMIM #118450) is a rare genetic disorder that can affect multiple organ systems of the body including the liver, heart, skeleton, eyes and kidneys. The specific symptoms and severity of Alagille syndrome can vary greatly from one person to another, even within the same family. Some individuals may",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Alagille Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ALGS",
+      "preferred_label": "Alagille syndrome",
+      "abbreviation": "ALGS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q44.7",
+        "icd11": "LB71.0",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:52",
+        "umls": null,
+        "mesh": "D016738"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:52",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q44.7",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LB71.0",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016738",
+          "display": "Alagille Syndrome"
+        }
+      ],
+      "context": "e (less than 1 percent) of patients have mutations of the NOTCH2 gene. These mutations are inherited as autosomal dominant traits, however in about half of cases the mutation occurs as a new change (\"de novo\") in the individual and was not inherited from a parent. The current estimated incidence of ALGS is between 1:30,000 and 1:45,000 with no difference in gender. Alagille syndrome affects males and females in equal numbers. The incidence of Alagille syndrome has been estimated to be approximately 1 in 30,000-45,000 individuals in the general population. Some cases of Alagille syndrome may go und",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Alagille Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Alagille syndrome (OMIM #118450) is a rare genetic disorder that can affect multiple organ systems of the body including the liver, heart, skeleton, eyes and kidneys. The specific symptoms and severity of Alagille syndrome can vary greatly from one person to another, even within the same family. Some individuals may have mild forms of the disorder while oth",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cholestasis",
+      "preferred_label": "cholestasis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001751",
+        "orpha": null,
+        "umls": "UMLS:C0008370",
+        "mesh": "MESH:D002779"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001751",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13580",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:576.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:925",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002779",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:30144000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008370",
+          "display": null
+        }
+      ],
+      "context": "e can vary greatly from one person to another, even within the same family. Some individuals may have mild forms of the disorder while others may have more serious forms. Common symptoms, which often develop during the first three months of life, include blockage of the flow of bile from the liver (cholestasis), yellowing of the skin and mucous membranes (jaundice), poor weight gain and growth, severe itching (pruritis) and pale, loose stools. Additional symptoms include heart murmurs, congenital heart defects, vertebral (back bone) differences, thickening of the ring that normally lines the cornea in th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cholestasis Intrahepatic",
+        "Cholestasis Extrahepatic",
+        "Cholestasis progressive familial intrahepatic 1"
+      ],
+      "pubtator_normalized_name": "Cholestasis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

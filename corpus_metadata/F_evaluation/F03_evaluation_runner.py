@@ -78,7 +78,7 @@ PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 
 # Which datasets to run (set to False to skip)
 RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
-RUN_PAPERS = True     # Papers in gold_data/PAPERS/
+RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs

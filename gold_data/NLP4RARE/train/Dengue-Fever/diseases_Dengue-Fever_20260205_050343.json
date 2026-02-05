@@ -1,0 +1,354 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:03:43.716180",
+  "document": "Dengue-Fever.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dengue-Fever.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "viral infection",
+      "preferred_label": "viral infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005108",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014777"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005108",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:934",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000763",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:079.99",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014777",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3439",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:34014006",
+          "display": null
+        }
+      ],
+      "context": "Dengue Fever is an acute viral infection characterized by fever. It is caused by a bite from mosquitoes carrying dengue virus. The primary form of Dengue Fever is characterized by a skin rash and a high fever with severe pain in the head and muscles. Other symptoms may include shaking chills, diarrhea, and vomiting. Bouts of extreme exhau",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Dengue Fever",
+      "preferred_label": "Dengue fever",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005502",
+        "orpha": "Orphanet:99828",
+        "umls": "UMLS:C0011311",
+        "mesh": "MESH:D003715"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005502",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12205",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005547",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6254",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:061",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3721",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003715",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10012310",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34528",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99828",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:38362002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011311",
+          "display": null
+        }
+      ],
+      "context": "Dengue Fever is an acute viral infection characterized by fever. It is caused by a bite from mosquitoes carrying dengue virus. The primary form of Dengue Fever is characterized by a skin rash and a high fever with severe pain in the head and muscles. Other symptoms may include shaking chills, diarrhea, and vomi",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Severe Dengue"
+      ],
+      "pubtator_normalized_name": "Dengue",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin rash",
+      "preferred_label": "skin rash",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006547",
+        "orpha": null,
+        "umls": "UMLS:C0015230",
+        "mesh": "MESH:D005076"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006547",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050486",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000697",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000988",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:782.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8732",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005076",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:271807003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0015230",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Exanthem",
+          "display": null
+        }
+      ],
+      "context": "Dengue Fever is an acute viral infection characterized by fever. It is caused by a bite from mosquitoes carrying dengue virus. The primary form of Dengue Fever is characterized by a skin rash and a high fever with severe pain in the head and muscles. Other symptoms may include shaking chills, diarrhea, and vomiting. Bouts of extreme exhaustion may last for months after the initial symptoms. Dengue Fever is caused by a virus that belongs to a family of viruses known as Flaviviruses. Ther",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Exanthema",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diarrhea",
+      "preferred_label": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001673",
+        "orpha": null,
+        "umls": "UMLS:C1290807",
+        "mesh": "MESH:D003967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001673",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13250",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002014",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:009.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:713159",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2987",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128333008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290807",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:116759077",
+          "display": null
+        }
+      ],
+      "context": "Dengue Fever is an acute viral infection characterized by fever. It is caused by a bite from mosquitoes carrying dengue virus. The primary form of Dengue Fever is characterized by a skin rash and a high fever with severe pain in the head and muscles. Other symptoms may include shaking chills, diarrhea, and vomiting. Bouts of extreme exhaustion may last for months after the initial symptoms. Dengue Fever is caused by a virus that belongs to a family of viruses known as Flaviviruses. There is no vaccine, so travelers going to parts of the world where it is endemic during Dengue season (July to Nov",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diarrhea 5 With Tufting Enteropathy Congenital",
+        "Diarrhea 3 Secretory Sodium Congenital",
+        "Dysentery"
+      ],
+      "pubtator_normalized_name": "Diarrhea",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:56:47.149160",
+  "document": "Creatine-Transporter-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Creatine-Transporter-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "cerebral creatine deficiency syndromes",
+      "preferred_label": "cerebral creatine deficiency syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000456",
+        "orpha": "Orphanet:79172",
+        "umls": "UMLS:C5244016",
+        "mesh": "C535598"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000456",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050798",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18952",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1826001",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200842",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:300352",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79172",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5244016",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C535598",
+          "display": "Creatine deficiency X-linked"
+        }
+      ],
+      "context": "CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabilities. It is the most common of the three cerebral creatine deficiency syndromes. Children with CTD are often misdiagnosed with autism or global developmental delays.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Creatine deficiency X-linked",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "X-linked intellectual disabilities",
+      "preferred_label": "X-linked intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100284",
+        "orpha": null,
+        "umls": "UMLS:C1136249",
+        "mesh": "D038901"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100284",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:211749",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1136249",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D038901",
+          "display": "Mental Retardation X-Linked"
+        }
+      ],
+      "context": "CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabilities. It is the most common of the three cerebral creatine deficiency syndromes. Children with CTD are often misdiagnosed with autism or global developmental delays.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "X-Linked Intellectual Disability",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Mental Retardation X-Linked",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autism",
+      "preferred_label": "autism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F84.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005260",
+        "orpha": null,
+        "umls": "UMLS:C0004352",
+        "mesh": "MESH:D001321"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005260",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12849",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003758",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000717",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F84.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:299.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:13966",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001321",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97161",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:209850",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004352",
+          "display": null
+        }
+      ],
+      "context": "CTD is estimated to account for 1-2% of all unexplained X-linked intellectual disabilities. It is the most common of the three cerebral creatine deficiency syndromes. Children with CTD are often misdiagnosed with autism or global developmental delays.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autistic Disorder",
+        "Rett Syndrome",
+        "Akinetic Mutism"
+      ],
+      "pubtator_normalized_name": "Autism Spectrum Disorder",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

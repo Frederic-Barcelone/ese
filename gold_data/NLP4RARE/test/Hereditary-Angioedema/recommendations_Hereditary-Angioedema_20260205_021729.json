@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:17:29.787038",
+  "document": "Hereditary-Angioedema.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hereditary-Angioedema.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "hereditary angioedema",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Hereditary-Angioedema_1",
+          "recommendation_type": "treatment",
+          "population": "patients with high clinical suspicion and recurrent episodic angioedema of uncertain etiology",
+          "condition": "hereditary angioedema suspected",
+          "severity": "not specified",
+          "action": "genetic testing",
+          "action_description": null,
+          "preferred": "genetic testing",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": "not applicable",
+          "duration": "not specified",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "strong",
+          "references": [],
+          "source": "Hereditary-Angioedema",
+          "source_text": "In instances of high clinical suspicion and recurrent episodic angioedema of uncertain etiology, genetic testing is indicated.",
+          "page_num": null
+        }
+      ],
+      "source_document": "Hereditary-Angioedema",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

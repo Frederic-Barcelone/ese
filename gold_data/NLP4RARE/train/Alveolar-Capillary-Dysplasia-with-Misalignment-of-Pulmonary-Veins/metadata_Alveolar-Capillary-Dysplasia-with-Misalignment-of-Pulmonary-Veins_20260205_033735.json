@@ -1,0 +1,30 @@
+{
+  "doc_id": "Alveolar-Capillary-Dysplasia-with-Misalignment-of-Pulmonary-Veins",
+  "doc_filename": "Alveolar-Capillary-Dysplasia-with-Misalignment-of-Pulmonary-Veins.pdf",
+  "top_entities": [
+    {
+      "name": "Congenital alveolar capillary dysplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1639,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Alveolar Capillary Dysplasia with Misalignment of Pulmonary Veins (ACDMPV): Epidemiology and Diagnostic Challenges",
+  "short_description": "Clinical overview of ACDMPV, a rare pulmonary disorder affecting infants, discussing its unknown incidence and diagnostic difficulties.",
+  "long_description": "This document provides epidemiological information about Alveolar Capillary Dysplasia with Misalignment of Pulmonary Veins (ACDMPV), a very rare congenital pulmonary disorder. The text highlights the challenges in determining the true prevalence of this condition, noting that while over 200 cases have been documented in medical literature, the actual incidence remains unknown due to frequent misdiagnosis or lack of diagnosis in affected infants. This underscores the complexity of identifying and properly diagnosing this rare pediatric pulmonary condition in clinical practice.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:37:35.818784"
+}

@@ -1,0 +1,706 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:02:44.620479",
+  "document": "Refractory-Celiac-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Refractory-Celiac-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 13,
+  "total_validated": 13,
+  "total_rejected": 0,
+  "total_investigational": 3,
+  "drugs": [
+    {
+      "matched_text": "azathioprine",
+      "preferred_name": "Azathioprine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Crohn Disease",
+        "Azathioprine",
+        "Methotrexate"
+      ],
+      "nct_id": "NCT05040464",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001379",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05040464",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001379",
+          "display": "Azathioprine"
+        }
+      ],
+      "context": "s a mainstay of treatment but its beneficial effect is short-lived in patients of lymphoma. Treatment involving other immunosuppressive drugs such as azathioprine, cyclosporine, enteric-coated budesonide, 5-aminosalicylic acid (5-ASA), or inflixamab has been used with a limited number of patients. More recently",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Azathioprine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ASA",
+      "preferred_name": "Aspirin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Multiple Myeloma in Relapse",
+        "Multiple Myeloma Progression",
+        "Multiple Myeloma Stage II",
+        "Multiple Myeloma Stage I",
+        "Multiple Myeloma With Failed Remission",
+        "Multiple Myeloma Stage III"
+      ],
+      "nct_id": "NCT03428373",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001241",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT03428373",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001241",
+          "display": "Aspirin"
+        }
+      ],
+      "context": "f lymphoma. Treatment involving other immunosuppressive drugs such as azathioprine, cyclosporine, enteric-coated budesonide, 5-aminosalicylic acid (5-ASA), or inflixamab has been used with a limited number of patients. More recently chemotherapy with cladribine with or without\n\nautologous stem cell tra",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "resolvin D1",
+        "Aspirin Dipyridamole Drug Combination"
+      ],
+      "pubtator_normalized_name": "Aspirin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cladribine",
+      "preferred_name": "Cladribine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Refractory Acute Myeloid Leukemia",
+        "Relapsed Acute Myeloid Leukemia"
+      ],
+      "nct_id": "NCT06561152",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D017338",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06561152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017338",
+          "display": "Cladribine"
+        }
+      ],
+      "context": "eric-coated budesonide, 5-aminosalicylic acid (5-ASA), or inflixamab has been used with a limited number of patients. More recently chemotherapy with cladribine with or without\n\nautologous stem cell transplantation has also been reported to be useful.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "cladribine triphosphate",
+        "cladribine monophosphate"
+      ],
+      "pubtator_normalized_name": "Cladribine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "TPN",
+      "preferred_name": "niacinamide|pyridoxine hydrochloride|tyrosine",
+      "brand_name": "TPN",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "SUSPENSION",
+      "route": "ORAL",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA008378",
+          "display": null
+        }
+      ],
+      "context": "g of nutrients that require no digestion, including amino acids, carbohydrates, vitamins, minerals, and triglycerides); and total parental nutrition (TPN) that is defined as nutrition maintained entirely by intravenous injection or by some other nongastrointestinal route. Steroid therapy is a mainstay ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "budesonide",
+      "preferred_name": "budesonide",
+      "brand_name": "UCERIS",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": "Corticosteroid",
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "AEROSOL, FOAM",
+      "route": "RECTAL",
+      "marketing_status": "Prescription",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D019819",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA205613",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019819",
+          "display": "Budesonide"
+        }
+      ],
+      "context": "l effect is short-lived in patients of lymphoma. Treatment involving other immunosuppressive drugs such as azathioprine, cyclosporine, enteric-coated budesonide, 5-aminosalicylic acid (5-ASA), or inflixamab has been used with a limited number of patients. More recently chemotherapy with cladribine with or wit",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Budesonide Formoterol Fumarate Drug Combination",
+        "budesonide-glycopyrrolate-formoterol fumarate drug combination"
+      ],
+      "pubtator_normalized_name": "Budesonide",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "aminosalicylic acid",
+      "preferred_name": "aminosalicylic acid",
+      "brand_name": "PARASAL",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": "TABLET",
+      "route": "ORAL",
+      "marketing_status": "Discontinued",
+      "codes": {
+        "rxcui": null,
+        "mesh": "D010131",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "FDA_NDA",
+          "code": "NDA006811",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010131",
+          "display": "Aminosalicylic Acid"
+        }
+      ],
+      "context": "ort-lived in patients of lymphoma. Treatment involving other immunosuppressive drugs such as azathioprine, cyclosporine, enteric-coated budesonide, 5-aminosalicylic acid (5-ASA), or inflixamab has been used with a limited number of patients. More recently chemotherapy with cladribine with or without\n\nautologous stem c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_fda_approved_drugs.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mesalamine",
+        "acetyl 4-aminosalicylic acid",
+        "Aminosalicylic Acids"
+      ],
+      "pubtator_normalized_name": "Aminosalicylic Acid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "gluten",
+      "preferred_name": "gluten",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C509359",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1370781",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C509359",
+          "display": "5(6)-gluten-3alpha-ol"
+        }
+      ],
+      "context": "uch like the more\n\ncommon celiac disease but, unlike celiac disease, it is resistant or unresponsive to at least 12 months of treatment with a strict gluten-free diet. Gliadin, a component of the wheat storage protein gluten, together with similar proteins in barley and rye, are the villains that trigger ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "5(6)-gluten-3-one"
+      ],
+      "pubtator_normalized_name": "5(6)-gluten-3alpha-ol",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "wheat",
+      "preferred_name": "Wheat",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004043",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "901299",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004043",
+          "display": "Dietary Fiber"
+        }
+      ],
+      "context": "unlike celiac disease, it is resistant or unresponsive to at least 12 months of treatment with a strict gluten-free diet. Gliadin, a component of the wheat storage protein gluten, together with similar proteins in barley and rye, are the villains that trigger the immune reaction in celiac disease. The di",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "wheat germ oil",
+        "wheat germ agglutinin-sepharose 6MB"
+      ],
+      "pubtator_normalized_name": "Dietary Fiber",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "barley",
+      "preferred_name": "Barley",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C078017",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "862453",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C078017",
+          "display": "barley oil"
+        }
+      ],
+      "context": "st 12 months of treatment with a strict gluten-free diet. Gliadin, a component of the wheat storage protein gluten, together with similar proteins in barley and rye, are the villains that trigger the immune reaction in celiac disease. The diagnosis of RCD is made by exclusion, especially of any other diso",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "barley oil",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rye",
+      "preferred_name": "Rye",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "892638",
+          "display": null
+        }
+      ],
+      "context": "s of treatment with a strict gluten-free diet. Gliadin, a component of the wheat storage protein gluten, together with similar proteins in barley and rye, are the villains that trigger the immune reaction in celiac disease. The diagnosis of RCD is made by exclusion, especially of any other disorder tha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "barium",
+      "preferred_name": "barium",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D001464",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1311067",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001464",
+          "display": "Barium"
+        }
+      ],
+      "context": "the presence of abnormal populations of T lymphocytes in the tissue indicating a diagnosis of the more aggressive Type ll RCD. Other imaging studies (barium X-ray, CT scan, capsule enteroscopy and MRE) may be undertaken, especially if there is concern for the presence of a lymphoma. Several therapies for ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alginates",
+        "barium chloride",
+        "barium titanate(IV)"
+      ],
+      "pubtator_normalized_name": "Barium",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "triglycerides",
+      "preferred_name": "TRIGLYCERIDES",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D014280",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10808",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014280",
+          "display": "Triglycerides"
+        }
+      ],
+      "context": " (an elemental diet is a liquid diet consisting of nutrients that require no digestion, including amino acids, carbohydrates, vitamins, minerals, and triglycerides); and total parental nutrition (TPN) that is defined as nutrition maintained entirely by intravenous injection or by some other nongastrointestinal r",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "fish oil triglycerides"
+      ],
+      "pubtator_normalized_name": "Triglycerides",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "5-ASA",
+      "preferred_name": "5-ASA",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C116459",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "52582",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C116459",
+          "display": "5-ASA-glutamate"
+        }
+      ],
+      "context": " of lymphoma. Treatment involving other immunosuppressive drugs such as azathioprine, cyclosporine, enteric-coated budesonide, 5-aminosalicylic acid (5-ASA), or inflixamab has been used with a limited number of patients. More recently chemotherapy with cladribine with or without\n\nautologous stem cell tra",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "5-aminosalicyltaurine",
+        "5-aminosalicyl-glycine",
+        "5-(7-hydroxy-3-O-phosphonocholyl)aminosalicylic acid"
+      ],
+      "pubtator_normalized_name": "5-ASA-glutamate",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

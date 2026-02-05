@@ -1,0 +1,151 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:42:12.426039",
+  "document": "Myopathy-Myofibrillar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Myopathy-Myofibrillar.pdf",
+  "total_candidates": 30,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 6,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "DES",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "gs, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CRYAB",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "lectromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MYOT",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "yography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "LDB3",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "hy, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene i",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "ZASP",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is availab",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "BAG3",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "matched_text": "Skeletal muscle",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:364531"
+    },
+    {
+      "name": "cerebellar ataxia, intellectual disability, and dysequilibrium",
+      "matched_text": "DES",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1766"
+    },
+    {
+      "name": "congestive heart failure",
+      "matched_text": "congestive heart failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "myofibrillar myopathy",
+      "matched_text": "Myofibrillar myopathies",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:593"
+    },
+    {
+      "name": "cardiomyopathy",
+      "matched_text": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I42",
+      "orpha": "Orphanet:167848"
+    },
+    {
+      "name": "arrhythmia",
+      "matched_text": "arrhythmia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "DES",
+      "matched_text": "DES",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

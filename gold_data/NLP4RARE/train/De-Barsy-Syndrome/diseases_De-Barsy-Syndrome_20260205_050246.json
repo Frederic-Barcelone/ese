@@ -1,0 +1,97 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:02:46.993814",
+  "document": "De-Barsy-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/De-Barsy-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "De Barsy syndrome",
+      "preferred_label": "De Barsy syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017569",
+        "orpha": "Orphanet:2962",
+        "umls": "UMLS:C0268354",
+        "mesh": "MESH:C535990"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017569",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0070143",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:49",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82794",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535990",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1034",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2962",
+          "display": null
+        },
+        {
+          "system": "PMID",
+          "code": "PMID:18388779",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:238826008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268354",
+          "display": null
+        }
+      ],
+      "context": "De Barsy syndrome affects males and females in equal numbers. Fewer than 50 cases have been reported in the medical literature. The exact incidence and prevalence of this disorder is unknown. Because cases may go misdiagnosed or undiagnosed, determining the true frequency of de Barsy syndrome in the general populati",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "De Barsy syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,417 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:46:02.899199",
+  "document": "Coffin-Lowry-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Coffin-Lowry-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Coffin-Lowry syndrome",
+      "preferred_label": "COFFIN-Lowry syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010561",
+        "orpha": "Orphanet:192",
+        "umls": "UMLS:C0265252",
+        "mesh": "MESH:D038921"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010561",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3783",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6123",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:75556",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D038921",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200952",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84643",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:983",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:303600",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:192",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15182000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265252",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:380089065",
+          "display": null
+        }
+      ],
+      "context": "Coffin-Lowry syndrome is a rare genetic disorder characterized by mental retardation; abnormalities of the head and facial (craniofacial) area; large, soft hands with short, thin (tapered) fingers; short stature; and/or various skeletal abnormalities. Characteristic facial features may include an underdeveloped upper ja",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Coffin-Lowry Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Coffin-Lowry syndrome is a rare genetic disorder characterized by mental retardation; abnormalities of the head and facial (craniofacial) area; large, soft hands with short, thin (tapered) fingers; short stature; and/or various skeletal abnormalities. Characteristic facial features may include an underdeveloped upper jawbone (maxillary hypoplasia), an abnormally prominent brow, dow",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Coffin-Lowry syndrome is a rare genetic disorder characterized by mental retardation; abnormalities of the head and facial (craniofacial) area; large, soft hands with short, thin (tapered) fingers; short stature; and/or various skeletal abnormalities. Characteristic facial features may include an underdeveloped upper jawbone (maxillary hypoplasia",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertelorism",
+      "preferred_label": "hypertelorism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007778",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D006972"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007778",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000316",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.41",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006972",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34715",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:145400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22006008",
+          "display": null
+        }
+      ],
+      "context": ", soft hands with short, thin (tapered) fingers; short stature; and/or various skeletal abnormalities. Characteristic facial features may include an underdeveloped upper jawbone (maxillary hypoplasia), an abnormally prominent brow, downslanting eyelid folds (palpebral fissures), widely spaced eyes (hypertelorism), large ears, and/or unusually thick eyebrows. Skeletal abnormalities may include abnormal front-to-back and side-to-side curvature of the spine (kyphoscoliosis) and unusual prominence of the breastbone (sternum) (pectus carinatum). Coffin-Lowry syndrome is caused by mutations in the RSK2 gene and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acrocephalosyndactylia",
+        "Hypertelorism with esophageal abnormality and hypospadias",
+        "Ascending aortic aneurysm hypertelorism bifid uvula cleft palate and arterial tortuosity"
+      ],
+      "pubtator_normalized_name": "Hypertelorism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "Coffin-Lowry syndrome is a rare genetic disorder characterized by mental retardation; abnormalities of the head and facial (craniofacial) area; large, soft hands with short, thin (tapered) fingers; short stature; and/or various skeletal abnormalities. Characteristic facial features may include an underdeveloped upper jawbone (maxillary hypoplasia), an abnormally prominent brow, downslanting eyelid folds (palpebral fissures), widely spaced eyes (hypertelorism), large ears, and/or unusually thick eyebrows. S",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

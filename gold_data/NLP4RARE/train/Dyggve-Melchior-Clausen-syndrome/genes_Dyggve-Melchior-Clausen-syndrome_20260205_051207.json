@@ -1,0 +1,141 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:12:07.118587",
+  "document": "Dyggve-Melchior-Clausen-syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dyggve-Melchior-Clausen-syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "SMS",
+      "hgnc_symbol": "SMS",
+      "full_name": "spermine synthase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "11123",
+        "entrez": "6611",
+        "ensembl": "ENSG00000102172",
+        "uniprot": "P52788",
+        "omim": "300105"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "11123",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "6611",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000102172",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "300105",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P52788",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "3063",
+          "disease_name": "X-linked intellectual disability, Snyder type",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "DMC and SMS syndromes are rare genetic disorders. As of 2007 there were over 90 individuals with DMC or SMS reported in the literature (Lachman, 2007, p 934) who were from a number of different ethnic groups (El Ghouzzi et al. 2003; Pogue et al. 2005; Aglan et al. 2009). A diagnosis of DMC syndrome may be susp",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "DYM",
+      "hgnc_symbol": "DYM",
+      "full_name": "dymeclin",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "21317",
+        "entrez": "54808",
+        "ensembl": "ENSG00000141627",
+        "uniprot": "Q7RTS9",
+        "omim": "607461"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "21317",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "54808",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000141627",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "607461",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q7RTS9",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "239",
+          "disease_name": "Dyggve-Melchior-Clausen disease",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        },
+        {
+          "orphacode": "178355",
+          "disease_name": "Smith-McCort dysplasia",
+          "association_type": "Disease-causing germline mutation(s) (loss of function) in"
+        }
+      ],
+      "context": "and disproportionate short stature. Radiographs may confirm specific skeletal abnormalities and findings consistent with DMC syndrome and includes notching of the vertebral bodies, lacy appearance of the iliac crest, and small and malformed carpal bones. Alternatively, gene testing for mutations in DYM can be done.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

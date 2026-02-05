@@ -1,0 +1,23 @@
+{
+  "doc_id": "Balo-Disease",
+  "doc_filename": "Balo-Disease.pdf",
+  "file_size_bytes": 2303,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Balo Disease: Clinical Overview and Treatment Approaches",
+  "short_description": "Clinical document describing Balo Disease, a rare variant of multiple sclerosis, including its symptoms, potential autoimmune causes, and treatment options.",
+  "long_description": "This clinical document provides a comprehensive overview of Balo Disease, a rare neurological disorder that is considered a variant of multiple sclerosis. The document details the gradual onset of symptoms including muscle spasms, paralysis, and various neurological manifestations depending on affected brain areas. It discusses the potential autoimmune etiology of the condition, noting that the exact cause remains unknown but may involve the body's immune system attacking healthy tissue. The document highlights the equal gender distribution of the disease and its higher prevalence in China and the Philippines. Treatment approaches are outlined, emphasizing symptomatic and supportive care, with corticosteroids being the primary therapeutic intervention for acute presentations due to their anti-inflammatory properties.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-03T07:39:58.918326"
+}

@@ -1,0 +1,149 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:53:06.111153",
+  "document": "Atypical-Hemolytic-Uremic-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Atypical-Hemolytic-Uremic-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "aHUS",
+      "preferred_label": "Atypical hemolytic uremic syndrome",
+      "abbreviation": "AHUS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "D59.3",
+        "icd11": "3A10.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2134",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2134",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "D59.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "3A10.Y",
+          "display": null
+        }
+      ],
+      "context": "E.coli In childhood, aHUS affects males and females in equal numbers. In adulthood, females are affected more often than males, most likely because pregnancy is a triggering event. The exact overall incidence and prevalence is unknown. One study placed the incidence in the United States at 2 individuals per 1 million in the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "hemolytic uremic syndrome",
+      "preferred_label": "hemolytic uremic syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D59.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001549",
+        "orpha": "Orphanet:544458",
+        "umls": "UMLS:C0019061",
+        "mesh": "MESH:D006463"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001549",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12554",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22233",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D59.3",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:283.11",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:42403",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006463",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75545",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:544458",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:111407006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019061",
+          "display": null
+        }
+      ],
+      "context": "alence is unknown. One study placed the incidence in the United States at 2 individuals per 1 million in the general population. In Europe, the disorder is estimated to affect approximately .11 per 1 million individuals between the ages of 0-18. aHUS accounts for approximately 5-10% of all cases of hemolytic uremic syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

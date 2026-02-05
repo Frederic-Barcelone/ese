@@ -1,0 +1,30 @@
+{
+  "doc_id": "Duodenal-Atresia-or-Stenosis",
+  "doc_filename": "Duodenal-Atresia-or-Stenosis.pdf",
+  "top_entities": [
+    {
+      "name": "Duodenal Atresia or Stenosis",
+      "mention_count": 2,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1741,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Duodenal Atresia or Stenosis: Congenital Digestive Disorder",
+  "short_description": "Clinical overview of duodenal atresia or stenosis, a rare congenital digestive disorder affecting approximately 1 in 2,500-10,000 live births.",
+  "long_description": "This document provides clinical information about duodenal atresia or stenosis, a rare congenital digestive disorder characterized by complete or partial blockage of the duodenum. The condition typically occurs sporadically without apparent cause, though some cases demonstrate autosomal recessive inheritance patterns. The document discusses epidemiological data showing the disorder affects approximately 1 in 2,500 to 10,000 live births globally, with higher incidence rates observed in Finland (1 in 3,400 births). The condition shows no gender preference, affecting males and females equally.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:10:56.001369"
+}

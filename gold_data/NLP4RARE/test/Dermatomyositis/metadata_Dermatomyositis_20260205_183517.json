@@ -1,0 +1,35 @@
+{
+  "doc_id": "Dermatomyositis",
+  "doc_filename": "Dermatomyositis.pdf",
+  "top_entities": [
+    {
+      "name": "juvenile dermatomyositis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "dermatomyositis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1701,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Dermatomyositis: Epidemiology and Demographics",
+  "short_description": "Clinical overview of dermatomyositis incidence, age distribution, and demographic patterns across different populations.",
+  "long_description": "This document provides epidemiological data on dermatomyositis, a rare inflammatory muscle disease. It details the age-related occurrence patterns, showing peak incidence between ages 40-60 in adults and 5-15 years in children. The document presents specific incidence rates (9.63 cases per million in general population, 3 per million in children) and highlights the gender disparity with females being affected twice as frequently as males. This information is essential for understanding the demographic characteristics and prevalence of dermatomyositis across different age groups and populations.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T17:35:17.880433"
+}

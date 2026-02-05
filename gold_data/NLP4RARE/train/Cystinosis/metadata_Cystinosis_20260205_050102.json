@@ -1,0 +1,35 @@
+{
+  "doc_id": "Cystinosis",
+  "doc_filename": "Cystinosis.pdf",
+  "top_entities": [
+    {
+      "name": "Fanconi renotubular syndrome 1",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "kidney failure",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1677,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Cystinosis: Epidemiology and Clinical Impact",
+  "short_description": "Document describing the prevalence, demographics, and clinical significance of cystinosis as a rare genetic disorder.",
+  "long_description": "This document provides epidemiological information about cystinosis, a rare genetic disorder that affects both males and females equally with an estimated prevalence of 1 in 100,000-200,000 people globally. The content highlights that cystinosis occurs across all ethnic groups worldwide and represents the most common cause of renal Fanconi syndrome in children. Additionally, it notes that cystinosis accounts for approximately 5% of all childhood kidney failure cases, emphasizing its significant impact on pediatric nephrology despite its rarity.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:01:02.796177"
+}

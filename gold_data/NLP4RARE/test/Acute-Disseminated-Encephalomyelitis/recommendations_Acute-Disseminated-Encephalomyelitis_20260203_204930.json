@@ -1,0 +1,47 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:49:30.207696",
+  "document": "Acute-Disseminated-Encephalomyelitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acute-Disseminated-Encephalomyelitis.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "ADEM (Acute Disseminated Encephalomyelitis)",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Acute-Disseminated-Encephalomyelitis_1",
+          "recommendation_type": "treatment",
+          "population": "individuals with suspected ADEM",
+          "condition": "suspected ADEM",
+          "severity": "not specified",
+          "action": "diagnosis based upon identification of characteristic symptoms, detailed patient history, thorough clinical evaluation and specialized tests including MRI",
+          "action_description": null,
+          "preferred": "MRI",
+          "alternatives": [
+            "infectious tests",
+            "immunologic tests",
+            "metabolic tests"
+          ],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "weak",
+          "references": [],
+          "source": "Acute-Disseminated-Encephalomyelitis",
+          "source_text": "A diagnosis of ADEM is made based upon identification of characteristic symptoms, a detailed patient history, a thorough clinical evaluation and a variety of specialized tests including imaging techniques such as magnetic resonance imaging (MRI).",
+          "page_num": null
+        }
+      ],
+      "source_document": "Acute-Disseminated-Encephalomyelitis",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "African-Iron-Overload",
+  "doc_filename": "African-Iron-Overload.pdf",
+  "top_entities": [
+    {
+      "name": "African iron overload",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "blood plasma",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1767,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MED",
+  "document_type_name": "Patient Education & Advocacy",
+  "document_type_group": "Patient-Centric Documentation",
+  "classification_confidence": 0.25,
+  "title": "African Iron Overload: Diagnostic Approaches and Clinical Evaluation",
+  "short_description": "Clinical guidance on diagnosing African iron overload through symptom identification, patient history, and specialized blood tests including ferritin and transferrin saturation measurements.",
+  "long_description": "This document provides comprehensive information on the diagnostic process for African iron overload, a condition characterized by excessive iron accumulation in the body. The text outlines the multi-faceted approach to diagnosis, which includes identifying characteristic symptoms, conducting detailed patient histories, performing thorough clinical evaluations, and utilizing specialized laboratory tests. Key diagnostic markers discussed include elevated ferritin levels in blood plasma, which serves as an indicator of the body's iron stores, and transferrin saturation measurements, which assess the iron transport protein's capacity. The document emphasizes the importance of combining clinical assessment with biochemical testing to accurately diagnose this iron metabolism disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T18:58:53.077706"
+}

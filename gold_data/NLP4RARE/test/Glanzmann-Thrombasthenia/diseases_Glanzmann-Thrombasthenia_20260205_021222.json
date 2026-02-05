@@ -1,0 +1,168 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:12:22.965542",
+  "document": "Glanzmann-Thrombasthenia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Glanzmann-Thrombasthenia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Glanzmann thrombasthenia",
+      "preferred_label": "Glanzmann thrombasthenia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100326",
+        "orpha": "Orphanet:849",
+        "umls": "UMLS:C0040015",
+        "mesh": "D013915"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100326",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2478",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52736",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1186",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:273800",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:849",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040015",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1927726560",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013915",
+          "display": "Thrombasthenia"
+        }
+      ],
+      "context": "The symptoms of Glanzmann thrombasthenia usually begin at birth or shortly thereafter and include the tendency to bruise and bleed easily and sometimes profusely, especially after surgical procedures. Other symptoms may include susceptibility to easy bruising, nosebleeds (epistaxis), bleeding from the gums (gingival), intermittent gastroi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Glanzmann Thrombasthenia Autosomal Dominant",
+        "Schlegelberger Grote syndrome"
+      ],
+      "pubtator_normalized_name": "Thrombasthenia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "purpura",
+      "preferred_label": "purpura",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002610",
+        "orpha": null,
+        "umls": "UMLS:C0034150",
+        "mesh": "MESH:D011693"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002610",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3326",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000979",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19584",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011693",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:387778001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0034150",
+          "display": null
+        }
+      ],
+      "context": "especially after surgical procedures. Other symptoms may include susceptibility to easy bruising, nosebleeds (epistaxis), bleeding from the gums (gingival), intermittent gastrointestinal bleeding, and/or variably large red or purple colored spots on the skin that are caused by bleeding in the skin (purpura). Women with GT often also have unusually heavy menstrual bleeding, irregular uterine bleeding, and excess bleeding in childbirth. Rarely, internal bleeding and blood in the urine (hematuria) can occur. The severity of the symptoms varies greatly. Some affected individuals have mild bruising and ot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Purpura",
+        "Purpura Thrombotic Thrombocytopenic",
+        "Purpura Thrombocytopenic"
+      ],
+      "pubtator_normalized_name": "Purpura Thrombocytopenic Idiopathic",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,1174 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T18:56:58.897398",
+  "document": "Arthritis-Infectious.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Arthritis-Infectious.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 16,
+  "total_validated": 16,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Infectious arthritis",
+      "preferred_label": "Arthritis, Infectious",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0003869",
+        "mesh": "D001170"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0003869",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001170",
+          "display": "Arthritis Infectious"
+        }
+      ],
+      "context": "Infectious arthritis is an inflammation of one or more joints that occurs as a result of infection by bacteria, viruses or, less frequently, fungi or parasites. The symptoms of Infectious arthritis depend upon which agent has caused the infection but symptoms often include fever, chills, general weakness, and headaches",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arthritis Reactive"
+      ],
+      "pubtator_normalized_name": "Arthritis Infectious",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infection",
+      "preferred_label": "Communicable Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0009450",
+        "mesh": "D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0009450",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003141",
+          "display": "Communicable Diseases"
+        }
+      ],
+      "context": "Infectious arthritis is an inflammation of one or more joints that occurs as a result of infection by bacteria, viruses or, less frequently, fungi or parasites. The symptoms of Infectious arthritis depend upon which agent has caused the infection but symptoms often include fever, chills, general weakness, and headaches, followed by inflammation and painful swelling of one or more joints of the b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Noncommunicable Diseases",
+        "Communicable Diseases Imported",
+        "Communicable Diseases Emerging"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "Infectious arthritis is an inflammation of one or more joints that occurs as a result of infection by bacteria, viruses or, less frequently, fungi or parasites. The symptoms of Infectious arthritis depend upon which agent has caused the infection but symptoms often include fever, chills, general weakness, and headaches, followed by inflammation and painful swelling of one or more joints of the body. Any disease-causing microbe may infect a joint. Bacteria are most often responsible, typically producing an acute arthriti",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disease",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "ria, viruses or, less frequently, fungi or parasites. The symptoms of Infectious arthritis depend upon which agent has caused the infection but symptoms often include fever, chills, general weakness, and headaches, followed by inflammation and painful swelling of one or more joints of the body. Any disease-causing microbe may infect a joint. Bacteria are most often responsible, typically producing an acute arthritic attack. In young children the most common bacteria are staphylococci, haemophilus influenzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common",
+      "preferred_label": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021137",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021137",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003139",
+          "display": "Common Cold"
+        }
+      ],
+      "context": "ten include fever, chills, general weakness, and headaches, followed by inflammation and painful swelling of one or more joints of the body. Any disease-causing microbe may infect a joint. Bacteria are most often responsible, typically producing an acute arthritic attack. In young children the most common bacteria are staphylococci, haemophilus influenzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carotid Artery Diseases",
+        "Carotid Stenosis",
+        "Common Bile Duct Diseases"
+      ],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rubella",
+      "preferred_label": "rubella",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:B06",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004656",
+        "orpha": null,
+        "umls": "UMLS:C0035920",
+        "mesh": "MESH:D012409"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004656",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8781",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1002026",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4742",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B06",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:056",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48514",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012409",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85051",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36653000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035920",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:410022648",
+          "display": null
+        }
+      ],
+      "context": "ritic attack. In young children the most common bacteria are staphylococci, haemophilus influenzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect peop",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Rubella Syndrome Congenital"
+      ],
+      "pubtator_normalized_name": "Rubella",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mumps",
+      "preferred_label": "mumps",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:B26",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000989",
+        "orpha": null,
+        "umls": "UMLS:C0026780",
+        "mesh": "MESH:D019351"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000989",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10264",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007383",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B26",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:072",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44521",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D019351",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C29888",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:36989005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0026780",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1208294714",
+          "display": null
+        }
+      ],
+      "context": "ack. In young children the most common bacteria are staphylococci, haemophilus influenzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mumps",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hepatitis B",
+      "preferred_label": "Hepatitis B",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005344",
+        "orpha": null,
+        "umls": "UMLS:C0019163",
+        "mesh": "MESH:D006509"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005344",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2043",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004197",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:070.30",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6807",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006509",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3097",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:66071002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019163",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1718385802",
+          "display": null
+        }
+      ],
+      "context": "oung children the most common bacteria are staphylococci, haemophilus influenzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and bot",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hepatitis C",
+        "Hepatitis B Chronic",
+        "Hepatitis E"
+      ],
+      "pubtator_normalized_name": "Hepatitis B",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tuberculosis",
+      "preferred_label": "tuberculosis",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A15-A19",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018076",
+        "orpha": "Orphanet:3389",
+        "umls": "UMLS:C0041296",
+        "mesh": "MESH:D014376"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018076",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:399",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7827",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A15-A19",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:A15-A19",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:017.96",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:22513",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014376",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10044755",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3423",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1801",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3389",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56717001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0041296",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2072728114",
+          "display": null
+        }
+      ],
+      "context": "nzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and both sexes. About half of all cases involve adults over the age of 60. The incid",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tuberculosis Meningeal",
+        "Tuberculosis Pulmonary",
+        "Tuberculosis Multidrug-Resistant"
+      ],
+      "pubtator_normalized_name": "Tuberculosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rheumatoid arthritis",
+      "preferred_label": "rheumatoid arthritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008383",
+        "orpha": "Orphanet:284130",
+        "umls": "UMLS:C0003873",
+        "mesh": "MESH:D001172"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008383",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:7148",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000685",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001370",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:714.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2078",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001172",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2884",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:180300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:284130",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:69896004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003873",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:576319925",
+          "display": null
+        }
+      ],
+      "context": "monly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and both sexes. About half of all cases involve adults over the age of 60. The incidence is reported as 2-10 cases per 100,000 of general population. For patients",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arthritis Juvenile",
+        "Rheumatoid Arthritis Systemic Juvenile",
+        "Felty Syndrome"
+      ],
+      "pubtator_normalized_name": "Arthritis Rheumatoid",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "ed with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and both sexes. About half of all cases involve adults over the age of 60. The incidence is reported as 2-10 cases per 100,000 of general population. For patients with immunologic disorders, the incidence increases to about 30-70 cases per 100,000 people. In gonococcal art",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "all",
+      "preferred_label": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013108",
+        "orpha": null,
+        "umls": "UMLS:C2751595",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013108",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442767",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:613065",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2751595",
+          "display": null
+        }
+      ],
+      "context": "s or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and both sexes. About half of all cases involve adults over the age of 60. The incidence is reported as 2-10 cases per 100,000 of general population. For patients with immunologic disorders, the incidence increases to about 30-70 cases per 100,000 people. In gonococcal arthritis, the disorder",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "gonococcal arthritis",
+      "preferred_label": "Gonococcal joint infection",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0153216",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0153216",
+          "display": null
+        }
+      ],
+      "context": "arthritis can affect people of all ages and both sexes. About half of all cases involve adults over the age of 60. The incidence is reported as 2-10 cases per 100,000 of general population. For patients with immunologic disorders, the incidence increases to about 30-70 cases per 100,000 people. In gonococcal arthritis, the disorder is found in three times as many women as men. A thorough history and physical examination are essential for diagnosis. Blood tests as well as tests of the fluid commonly found in the joints are essential for identification of the infecting agent and to confirm diagnosis. Once the infe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "men",
+      "preferred_label": "MEN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E31.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017169",
+        "orpha": "Orphanet:276161",
+        "umls": "UMLS:C0027662",
+        "mesh": "MESH:D009377"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017169",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3125",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21044",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E31.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:258.0",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8360/1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:45036",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009377",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10061299",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100148",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C6432",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:131100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:276161",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:46724008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027662",
+          "display": null
+        }
+      ],
+      "context": "ases involve adults over the age of 60. The incidence is reported as 2-10 cases per 100,000 of general population. For patients with immunologic disorders, the incidence increases to about 30-70 cases per 100,000 people. In gonococcal arthritis, the disorder is found in three times as many women as men. A thorough history and physical examination are essential for diagnosis. Blood tests as well as tests of the fluid commonly found in the joints are essential for identification of the infecting agent and to confirm diagnosis. Once the infecting agent is known, an appropriate course of treatment ma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Meningism",
+        "Meningioma",
+        "Substance-Related Disorders"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hepatitis B infections",
+      "preferred_label": "Hepatitis B",
+      "abbreviation": null,
+      "confidence": 0.9126009941101074,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019163",
+        "mesh": "D006509"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019163",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006509",
+          "display": "Hepatitis B"
+        }
+      ],
+      "context": "oung children the most common bacteria are staphylococci, haemophilus influenzae, and gramnegative bacilli. Older children and adults are most commonly infected with gonococci, staphylococci, streptococci or pneumococci. Acute infectious arthritis at any age may be associated with rubella, mumps or hepatitis B infections. Fungi and fungi-like bacteria such as mycobacterium tuberculosis, etc may cause chronic infectious arthritis. People with rheumatoid arthritis and chronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and both sexes. Ab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hepatitis C",
+        "Hepatitis B Chronic",
+        "Hepatitis E"
+      ],
+      "pubtator_normalized_name": "Hepatitis B",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "immunologic disorders",
+      "preferred_label": "Immune System Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0021053",
+        "mesh": "D007154"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0021053",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007154",
+          "display": "Immune System Diseases"
+        }
+      ],
+      "context": "hronically inflamed joints are particularly susceptible to infectious arthritis. Infectious arthritis can affect people of all ages and both sexes. About half of all cases involve adults over the age of 60. The incidence is reported as 2-10 cases per 100,000 of general population. For patients with immunologic disorders, the incidence increases to about 30-70 cases per 100,000 people. In gonococcal arthritis, the disorder is found in three times as many women as men. A thorough history and physical examination are essential for diagnosis. Blood tests as well as tests of the fluid commonly found in the joints are e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Autoimmune Diseases of the Nervous System"
+      ],
+      "pubtator_normalized_name": "Immune System Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

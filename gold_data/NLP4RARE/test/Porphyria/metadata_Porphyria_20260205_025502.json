@@ -1,0 +1,30 @@
+{
+  "doc_id": "Porphyria",
+  "doc_filename": "Porphyria.pdf",
+  "top_entities": [
+    {
+      "name": "porphyria",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1576,
+  "file_size_human": "1.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Porphyria Prevalence and Population Distribution",
+  "short_description": "Clinical document discussing the estimated prevalence rates of porphyria and its variable distribution across different populations.",
+  "long_description": "This clinical research document examines the epidemiological aspects of porphyria, a group of rare metabolic disorders. The document addresses the uncertainty surrounding porphyria prevalence, noting that clinicians estimate occurrence rates between 1 in 500 to 1 in 50,000 individuals in the general population. It highlights the significant variability in prevalence estimates and discusses how certain forms of porphyria show higher frequency in specific populations, with Finland mentioned as an example of geographic clustering. This information is relevant for understanding the global burden of porphyria and informing clinical practice and public health planning.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:55:02.523166"
+}

@@ -1,0 +1,30 @@
+{
+  "doc_id": "Ring-Chromosome-4",
+  "doc_filename": "Ring-Chromosome-4.pdf",
+  "top_entities": [
+    {
+      "name": "ring chromosome 4",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1557,
+  "file_size_human": "1.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Ring Chromosome 4: Clinical Literature Review",
+  "short_description": "A clinical review documenting approximately 40 cases of ring chromosome 4 reported in medical literature, showing equal gender distribution.",
+  "long_description": "This document presents a clinical overview of ring chromosome 4, a rare chromosomal abnormality that has been documented in approximately 40 individuals since its original description. The review indicates that this genetic condition affects males and females with relatively equal frequency, suggesting no significant sex-linked predisposition. Ring chromosome 4 occurs when both ends of chromosome 4 break and rejoin to form a circular structure, potentially leading to various developmental and clinical manifestations depending on the genetic material lost during the ring formation process.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:05:56.973853"
+}

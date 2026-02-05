@@ -1,0 +1,143 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T08:08:00.145097",
+  "document": "Hereditary-Multiple-Osteochondromas.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Hereditary-Multiple-Osteochondromas.pdf",
+  "total_candidates": 37,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "EXT1",
+      "long_form": "Hereditary Multiple Exostoses",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "single copy of an abnormal gene is necessary to cause a particular disease. The abnormal gene can be inherited from either parent or can be the result of a new mutation in the affected individual. Approximately 10% of cases of HMO are thought to be the result of new mutations. At present two genes, EXT1 and EXT2, are known to show mutations in HMO patients and it is thought that these genes function as tumor suppressors. For some affected individuals no mutation in either gene is detected. In almost all these cases, the “mutation negative” patients do not have a familial history for exostoses. Mos",
+      "lexicon_source": "2025_08_umls_biological_abbreviations_v5.tsv",
+      "lexicon_ids": [
+        {
+          "source": "UMLS:MTH",
+          "id": "EXT1"
+        }
+      ]
+    },
+    {
+      "short_form": "Ext2",
+      "long_form": "exostoses, multiple, type 2",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "py of an abnormal gene is necessary to cause a particular disease. The abnormal gene can be inherited from either parent or can be the result of a new mutation in the affected individual. Approximately 10% of cases of HMO are thought to be the result of new mutations. At present two genes, EXT1 and EXT2, are known to show mutations in HMO patients and it is thought that these genes function as tumor suppressors. For some affected individuals no mutation in either gene is detected. In almost all these cases, the “mutation negative” patients do not have a familial history for exostoses. Most likely,",
+      "lexicon_source": "2025_mondo_diseases.json",
+      "lexicon_ids": [
+        {
+          "source": "MONDO",
+          "id": "MONDO_0007586"
+        },
+        {
+          "source": "GARD",
+          "id": "GARD:2205"
+        },
+        {
+          "source": "MEDGEN",
+          "id": "MEDGEN:377018"
+        },
+        {
+          "source": "NCIT",
+          "id": "NCIT:C18252"
+        },
+        {
+          "source": "OMIM",
+          "id": "OMIM:133701"
+        },
+        {
+          "source": "UMLS",
+          "id": "UMLS:C1851413"
+        }
+      ]
+    },
+    {
+      "short_form": "HMO",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "nt or can be the result of a new mutation in the affected individual. Approximately 10% of cases of HMO are thought to be the result of new mutations. At present two genes, EXT1 and EXT2, are known to sh",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DNA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ir body cells and the mutation is absent or undetectable in blood cells, which are usually used for DNA analysis. Data indicates that individuals with EXT1 mutations may have more severe effects than tho",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "hereditary multiple osteochondromas",
+      "matched_text": "Hereditary multiple osteochondromas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:321"
+    },
+    {
+      "name": "genetic condition",
+      "matched_text": "genetic condition",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "familial",
+      "matched_text": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Ext2",
+      "matched_text": "EXT2",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "DNA",
+      "matched_text": "DNA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,30 @@
+{
+  "doc_id": "Carney-Complex",
+  "doc_filename": "Carney-Complex.pdf",
+  "top_entities": [
+    {
+      "name": "Carney complex",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1605,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Carney Complex: Clinical Overview and Demographics",
+  "short_description": "Clinical document describing Carney complex, a rare disorder affecting approximately 600 individuals since its first description in 1985.",
+  "long_description": "This clinical document provides demographic and epidemiological information about Carney complex, a rare genetic disorder that affects males and females equally. The document outlines key statistics including the total number of reported cases since the condition was first described in medical literature in 1985, and notes that while the disorder can present at any age, the mean age at diagnosis is 20 years. This appears to be part of a larger clinical reference or educational material about this uncommon medical condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T17:22:38.031767"
+}

@@ -1,0 +1,276 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:17:55.969803",
+  "document": "Mixed-Cryoglobulinemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Mixed-Cryoglobulinemia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Mixed cryoglobulinemia",
+      "preferred_label": "mixed cryoglobulinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D89.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007407",
+        "orpha": "Orphanet:91138",
+        "umls": "UMLS:C1852456",
+        "mesh": "MESH:C565141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007407",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6386",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D89.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:273.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:343814",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C565141",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10027756",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1452",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:123550",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:91138",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:190815001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1852456",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:55133785",
+          "display": null
+        }
+      ],
+      "context": "Mixed cryoglobulinemia is believed to be a rare disorder, but the exact incidence and prevalence in the general population is unknown. Less than 1% of HCV-infected patients in Northern Europe and North America develop cryoglobulinemia while 2-5% of HCV-infected patients in South Europe develop the disorder. Mixed cryoglo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cryoglobulinemia Familial Mixed",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cryoglobulinemia",
+      "preferred_label": "cryoglobulinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D89.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005576",
+        "orpha": null,
+        "umls": "UMLS:C0010403",
+        "mesh": "MESH:D003449"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005576",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2917",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005846",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D89.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:273.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3673",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003449",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26736",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:30911005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010403",
+          "display": null
+        }
+      ],
+      "context": "Mixed cryoglobulinemia is believed to be a rare disorder, but the exact incidence and prevalence in the general population is unknown. Less than 1% of HCV-infected patients in Northern Europe and North America develop cryoglobulinemia while 2-5% of HCV-infected patients in South Europe develop the disorder. Mixed cryoglobulinemia most often presents in individuals between the ages of 40-60. Females are affected three times as often as males. Approximately 90% of cases of mixed cryoglobulinemia are associated with infection with",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cryoglobulinemia Familial Mixed"
+      ],
+      "pubtator_normalized_name": "Cryoglobulinemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hepatitis",
+      "preferred_label": "Hepatitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002251",
+        "orpha": null,
+        "umls": "UMLS:C0019158",
+        "mesh": "MESH:D006505"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002251",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2237",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:571.41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5515",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006505",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3095",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:197268000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019158",
+          "display": null
+        }
+      ],
+      "context": "le 2-5% of HCV-infected patients in South Europe develop the disorder. Mixed cryoglobulinemia most often presents in individuals between the ages of 40-60. Females are affected three times as often as males. Approximately 90% of cases of mixed cryoglobulinemia are associated with infection with the hepatitis C virus.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hepatitis C Chronic",
+        "Hepatitis C",
+        "Hepatitis E"
+      ],
+      "pubtator_normalized_name": "Hepatitis B",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

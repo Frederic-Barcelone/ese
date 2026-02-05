@@ -1,0 +1,160 @@
+{
+  "run_id": "RUN_20260204_175932_a13c97c28f9f",
+  "timestamp": "2026-02-04T19:03:52.553041",
+  "document": "Acute-Disseminated-Encephalomyelitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acute-Disseminated-Encephalomyelitis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ADEM",
+      "preferred_label": "Acute disseminated encephalomyelitis",
+      "abbreviation": "ADEM",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G04.0",
+        "icd11": "8A42",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:83597",
+        "umls": null,
+        "mesh": "D004673"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:83597",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G04.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8A42",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004673",
+          "display": "Encephalomyelitis Acute Disseminated"
+        }
+      ],
+      "context": "ADEM can develop at any age, but is much more frequent in children than adults. Males and females are affected in equal numbers, although a slight male preponderance was seen ina couple pediatric studies. In children, the mean at presentation is between 5-8 years old. The exact incidence of ADEM in the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Encephalomyelitis Acute Disseminated",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infectious",
+      "preferred_label": "infectious",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "imaging (MRI). An MRI uses a magnetic field and radio waves to produce cross-sectional images of particular organs and bodily tissues and can demonstrate characteristic brain lesions in individuals with ADEM. Additional tests to exclude other conditions may also be performed. Such tests may include infectious, immunologic, and metabolic tests.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Infectious Mononucleosis",
+        "Travel-Related Illness",
+        "Noncommunicable Diseases"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

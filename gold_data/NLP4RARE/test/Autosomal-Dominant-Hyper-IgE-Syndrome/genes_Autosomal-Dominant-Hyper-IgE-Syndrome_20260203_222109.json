@@ -1,0 +1,104 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:21:09.527695",
+  "document": "Autosomal-Dominant-Hyper-IgE-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Autosomal-Dominant-Hyper-IgE-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "STAT3",
+      "hgnc_symbol": "STAT3",
+      "full_name": "signal transducer and activator of transcription 3",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "11364",
+        "entrez": "6774",
+        "ensembl": "ENSG00000168610",
+        "uniprot": "P40763",
+        "omim": "102582"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "11364",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "6774",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000168610",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "102582",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P40763",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "2314",
+          "disease_name": "Autosomal dominant hyper-IgE syndrome due to STAT3 deficiency",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "438159",
+          "disease_name": "STAT3-related early-onset multisystem autoimmune disease",
+          "association_type": "Disease-causing germline mutation(s) (gain of function) in"
+        },
+        {
+          "orphacode": "520",
+          "disease_name": "Acute promyelocytic leukemia",
+          "association_type": "Part of a fusion gene in"
+        },
+        {
+          "orphacode": "512017",
+          "disease_name": "Chronic lymphoproliferative disorder of natural killer cells",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "86872",
+          "disease_name": "T-cell large granular lymphocyte leukemia",
+          "association_type": "Disease-causing somatic mutation(s) in"
+        },
+        {
+          "orphacode": "667662",
+          "disease_name": "Breast implant-associated anaplastic large cell lymphoma",
+          "association_type": "Part of a fusion gene in"
+        },
+        {
+          "orphacode": "99885",
+          "disease_name": "Isolated permanent neonatal diabetes mellitus",
+          "association_type": "Disease-causing germline mutation(s) (gain of function) in"
+        }
+      ],
+      "context": "rized by repeated bacterial infections of the skin and lungs (pneumonia), skeletal abnormalities, and characteristic facial features. The first symptom is often the development of a dry, red flaky skin rash (eczema) at birth or early during infancy. Researchers have discovered that mutations in the STAT3 gene cause AD-HIES in over 60% of the patients. Most cases of AD-HIES occur as the result of a new mutation in this gene. There are two main forms of hyper IgE syndrome - one inherited in an autosomal dominant pattern and one in an autosomal recessive pattern. Both involve defects of the immune sys",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

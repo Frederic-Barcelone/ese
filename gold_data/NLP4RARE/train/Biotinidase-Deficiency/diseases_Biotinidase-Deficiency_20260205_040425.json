@@ -1,0 +1,209 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:04:25.685880",
+  "document": "Biotinidase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Biotinidase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Biotinidase deficiency",
+      "preferred_label": "biotinidase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D81.810",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009665",
+        "orpha": "Orphanet:79241",
+        "umls": "UMLS:C0220754",
+        "mesh": "MESH:D028921"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009665",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:856",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:894",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D81.810",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:66323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D028921",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10071434",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200822",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84598",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:857",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:253260",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79241",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:8808004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220754",
+          "display": null
+        }
+      ],
+      "context": "Biotinidase deficiency can be diagnosed in newborns through newborn screening. Newborn screening is a special type of screening test that newborns receive to see if they have certain diseases. Because the newborn screen is a screening test, a positive result does not mean that an infant definitely has the disease. Often,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Biotinidase deficiency can be diagnosed in newborns through newborn screening. Newborn screening is a special type of screening test that newborns receive to see if they have certain diseases. Because the newborn screen is a screening test, a positive result does not mean that an infant definitely has the disease. Often, a repeat test must be done to confirm the diagnosis. A clinical diagnosis is possible after birth by testing for biotinidase activity in the blood. Usually, this is per",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,432 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T10:15:23.967515",
+  "document": "West-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/West-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "West syndrome is a constellation of symptoms characterized by epileptic/infantile spasms, abnormal brain wave patterns called hypsarrhythmia and intellectual disability. The spasms that occur may range from violent jackknife or \"salaam\" movements where the whole body bends in half, or they may be no more than a mild twitching of the shoulder or eye changes. These spasms usually begin in the early months after birth and can sometimes be helped with medication. They",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infantile spasms",
+      "preferred_label": "infantile spasm",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100620",
+        "orpha": null,
+        "umls": "UMLS:C5779964",
+        "mesh": "D013036"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100620",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1830477",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5779964",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013036",
+          "display": "Spasms Infantile"
+        }
+      ],
+      "context": "West syndrome is a constellation of symptoms characterized by epileptic/infantile spasms, abnormal brain wave patterns called hypsarrhythmia and intellectual disability. The spasms that occur may range from violent jackknife or \"salaam\" movements where the whole body bends in half, or they may be no more than a mild twitching of the shoulder or eye changes. These spasms usually begin i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Infantile Epileptic-Dyskinetic Encephalopathy",
+        "Aicardi Syndrome",
+        "CDKL5 deficiency disorder"
+      ],
+      "pubtator_normalized_name": "Spasms Infantile",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "West syndrome",
+      "preferred_label": "West syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018097",
+        "orpha": "Orphanet:3451",
+        "umls": "UMLS:C0037769",
+        "mesh": "D013036"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018097",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050562",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7887",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:348.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11519",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10021750",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200878",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84788",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1848",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3451",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:28055006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0037769",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1023597213",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013036",
+          "display": "Spasms Infantile"
+        }
+      ],
+      "context": "West syndrome is a constellation of symptoms characterized by epileptic/infantile spasms, abnormal brain wave patterns called hypsarrhythmia and intellectual disability. The spasms that occur may range from violent jackknife or \"salaam\" movements where the whole body bends in half, or they may be no more than a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Infantile Epileptic-Dyskinetic Encephalopathy"
+      ],
+      "pubtator_normalized_name": "Spasms Infantile",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Epilepsy",
+      "preferred_label": "epilepsy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G40",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005027",
+        "orpha": null,
+        "umls": "UMLS:C0014544",
+        "mesh": "MESH:D004827"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005027",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1826",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000474",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G40",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:G40",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:345.91",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4506",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004827",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3020",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84757009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0014544",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:12718",
+          "display": null
+        }
+      ],
+      "context": "f the shoulder or eye changes. These spasms usually begin in the early months after birth and can sometimes be helped with medication. They can also occur in older patients; if this happens, they are called \"epileptic spasms' rather than infantile spasms. Currently, the International League Against Epilepsy (ILAE) has revised the terminology and epileptic spasms is now preferentially used to encompass the different age groups of onset. There are many different causes of epileptic spasms and if a specific cause can be identified, a diagnosis of symptomatic epileptic spasms can be made. If a cause canno",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epilepsy Post-Traumatic",
+        "Epilepsy Tonic-Clonic",
+        "Epilepsy Temporal Lobe"
+      ],
+      "pubtator_normalized_name": "Epilepsy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "bends",
+      "preferred_label": "Bends",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020797",
+        "orpha": null,
+        "umls": "UMLS:C0011119",
+        "mesh": "MESH:D003665"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020797",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:993.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41434",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003665",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:89684003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011119",
+          "display": null
+        }
+      ],
+      "context": "West syndrome is a constellation of symptoms characterized by epileptic/infantile spasms, abnormal brain wave patterns called hypsarrhythmia and intellectual disability. The spasms that occur may range from violent jackknife or \"salaam\" movements where the whole body bends in half, or they may be no more than a mild twitching of the shoulder or eye changes. These spasms usually begin in the early months after birth and can sometimes be helped with medication. They can also occur in older patients; if this happens, they are called \"epileptic spasms' rather than infant",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Decompression Sickness",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

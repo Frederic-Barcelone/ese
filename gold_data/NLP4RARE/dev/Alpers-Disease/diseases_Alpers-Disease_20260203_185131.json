@@ -1,0 +1,804 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T18:51:31.329006",
+  "document": "Alpers-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Alpers-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 10,
+  "total_validated": 10,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Alpers disease",
+      "preferred_label": "Alpers Syndrome (disorder)",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0205710",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0205710",
+          "display": null
+        }
+      ],
+      "context": "Alpers disease is a progressive neurologic disorder that begins during childhood and is complicated in many instances by serious liver disease. Symptoms include increased muscle tone with exaggerated reflexes (spasticity), seizures, and loss of cognitive ability (dementia). Alpers disease usually begins during ea",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "neurologic disorder",
+      "preferred_label": "nervous system disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": "ICD10CM:G00-G99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005071",
+        "orpha": null,
+        "umls": "UMLS:C0027765",
+        "mesh": "MESH:D009422"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:863",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000618",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G00-G99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:349.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:14336",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009422",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26835",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:118940003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027765",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Nervous_system_disease",
+          "display": null
+        }
+      ],
+      "context": "Alpers disease is a progressive neurologic disorder that begins during childhood and is complicated in many instances by serious liver disease. Symptoms include increased muscle tone with exaggerated reflexes (spasticity), seizures, and loss of cognitive ability (dementia). Alpers disease usually begins during early childhood, usually indicated by s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Central Nervous System Diseases",
+        "Heredodegenerative Disorders Nervous System",
+        "Peripheral Nervous System Diseases"
+      ],
+      "pubtator_normalized_name": "Nervous System Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "liver disease",
+      "preferred_label": "Liver diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0023895",
+        "mesh": "D008107"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0023895",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008107",
+          "display": "Liver Diseases"
+        }
+      ],
+      "context": "Alpers disease is a progressive neurologic disorder that begins during childhood and is complicated in many instances by serious liver disease. Symptoms include increased muscle tone with exaggerated reflexes (spasticity), seizures, and loss of cognitive ability (dementia). Alpers disease usually begins during early childhood, usually indicated by seizures at any age between 3 months and 5 years. It is characterized by lack of coordinatio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chemical and Drug Induced Liver Injury",
+        "Liver Diseases Alcoholic",
+        "Liver Diseases Parasitic"
+      ],
+      "pubtator_normalized_name": "Liver Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dementia",
+      "preferred_label": "Presenile dementia",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "neurology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0011265",
+        "mesh": "D000544"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0011265",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000544",
+          "display": "Alzheimer Disease"
+        }
+      ],
+      "context": "Alpers disease is a progressive neurologic disorder that begins during childhood and is complicated in many instances by serious liver disease. Symptoms include increased muscle tone with exaggerated reflexes (spasticity), seizures, and loss of cognitive ability (dementia). Alpers disease usually begins during early childhood, usually indicated by seizures at any age between 3 months and 5 years. It is characterized by lack of coordination of motor movement, partial paralysis, seizures, and muscle twitching. The child is unable to achieve normal muscle tone (hypoton",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Frontotemporal Dementia",
+        "Polycystic lipomembranous osteodysplasia with sclerosing leukoencephalopathy",
+        "Presenile And Senile Dementia"
+      ],
+      "pubtator_normalized_name": "Alzheimer Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "child",
+      "preferred_label": "cHILD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017015",
+        "orpha": "Orphanet:264665",
+        "umls": "UMLS:C3161253",
+        "mesh": "D002658"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017015",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10559",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:853969",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:264665",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3161253",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1408868257",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D002658",
+          "display": "Developmental Disabilities"
+        }
+      ],
+      "context": "ty), seizures, and loss of cognitive ability (dementia). Alpers disease usually begins during early childhood, usually indicated by seizures at any age between 3 months and 5 years. It is characterized by lack of coordination of motor movement, partial paralysis, seizures, and muscle twitching. The child is unable to achieve normal muscle tone (hypotonia), yet the limbs appear to be stiff. On MRI examination an increased density of the grey matter in the brain is noted. Usually, but not always, Alpers disease is associated with liver damage. Mental retardation may be severe and is progressive. The",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Learning Disabilities",
+        "Precursor Cell Lymphoblastic Leukemia-Lymphoma",
+        "Child Nutrition Disorders"
+      ],
+      "pubtator_normalized_name": "Developmental Disabilities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "tial paralysis, seizures, and muscle twitching. The child is unable to achieve normal muscle tone (hypotonia), yet the limbs appear to be stiff. On MRI examination an increased density of the grey matter in the brain is noted. Usually, but not always, Alpers disease is associated with liver damage. Mental retardation may be severe and is progressive. The loss of intellectual functions such as thinking, remembering, and reasoning may also interfere with a person’s daily functioning (dementia). In later stages, patients may lose control of the movement of their arms and legs (spastic quadriplegia). The liver may",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arms",
+      "preferred_label": "arms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009994",
+        "orpha": "Orphanet:99756",
+        "umls": "UMLS:C0206655",
+        "mesh": "MESH:D018232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4051",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000248",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4701",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006779",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8920/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065867",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3749",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268220",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ARMS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99756",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404053004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206655",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1742058067",
+          "display": null
+        }
+      ],
+      "context": "is associated with liver damage. Mental retardation may be severe and is progressive. The loss of intellectual functions such as thinking, remembering, and reasoning may also interfere with a person’s daily functioning (dementia). In later stages, patients may lose control of the movement of their arms and legs (spastic quadriplegia). The liver may become cirrhotic and fail completely, or may not progress beyond signs of jaundice. Affected individuals may also become blind as a result of optic atrophy as the optic nerve degenerates. It is thought that Alpers disease affects males and females in e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphocytic Choriomeningitis"
+      ],
+      "pubtator_normalized_name": "Arms Malformation of",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "spastic quadriplegia",
+      "preferred_label": "spastic quadriplegia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G80.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016215",
+        "orpha": "Orphanet:210141",
+        "umls": "UMLS:C0426970",
+        "mesh": "D011782"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016215",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10970",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:17109",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G80.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:344.09",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98433",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116904",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:612900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:210141",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:192965001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0426970",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1155284708",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D011782",
+          "display": "Quadriplegia"
+        }
+      ],
+      "context": "with liver damage. Mental retardation may be severe and is progressive. The loss of intellectual functions such as thinking, remembering, and reasoning may also interfere with a person’s daily functioning (dementia). In later stages, patients may lose control of the movement of their arms and legs (spastic quadriplegia). The liver may become cirrhotic and fail completely, or may not progress beyond signs of jaundice. Affected individuals may also become blind as a result of optic atrophy as the optic nerve degenerates. It is thought that Alpers disease affects males and females in equal numbers usually during ear",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spastic Quadriplegia Retinitis Pigmentosa and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Quadriplegia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "optic atrophy",
+      "preferred_label": "optic atrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H47.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003608",
+        "orpha": null,
+        "umls": "UMLS:C0029124",
+        "mesh": "MESH:D009896"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003608",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5723",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H47.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:377.10",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18180",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009896",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34863",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:76976005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0029124",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:568505454",
+          "display": null
+        }
+      ],
+      "context": "erson’s daily functioning (dementia). In later stages, patients may lose control of the movement of their arms and legs (spastic quadriplegia). The liver may become cirrhotic and fail completely, or may not progress beyond signs of jaundice. Affected individuals may also become blind as a result of optic atrophy as the optic nerve degenerates. It is thought that Alpers disease affects males and females in equal numbers usually during early childhood. However, some clinicians are convinced that the difficulty of diagnosis makes estimating the frequency of this disorder less accurate. It is probable that Alp",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Optic Atrophy Hereditary Leber",
+        "Optic Atrophy Autosomal Dominant",
+        "Jensen syndrome"
+      ],
+      "pubtator_normalized_name": "Optic Atrophy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "also become blind as a result of optic atrophy as the optic nerve degenerates. It is thought that Alpers disease affects males and females in equal numbers usually during early childhood. However, some clinicians are convinced that the difficulty of diagnosis makes estimating the frequency of this disorder less accurate. It is probable that Alpers disease affects fewer, than one (1) person per 200,000 of population.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

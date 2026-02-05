@@ -1,0 +1,35 @@
+{
+  "doc_id": "Progressive-Osseous-Heteroplasia",
+  "doc_filename": "Progressive-Osseous-Heteroplasia.pdf",
+  "top_entities": [
+    {
+      "name": "progressive osseous heteroplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Progressive osseous heteroplasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1765,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Progressive Osseous Heteroplasia: Diagnostic Evaluation and Clinical Findings",
+  "short_description": "Clinical document describing diagnostic methods for progressive osseous heteroplasia (POH), including physical examination, imaging studies, and laboratory tests.",
+  "long_description": "This clinical document outlines the comprehensive diagnostic approach for progressive osseous heteroplasia (POH), a rare disorder characterized by heterotopic ossification. The document details the multi-faceted evaluation process including thorough clinical assessment, identification of characteristic physical findings, and specialized diagnostic tests. Key diagnostic modalities discussed include radiographic imaging (x-rays and roentgenograms) to visualize heterotopic bone formation with POH-specific patterns, tissue biopsy for histological confirmation, and serum alkaline phosphatase testing which may show transient elevation in some cases. The document serves as a clinical reference for healthcare providers involved in diagnosing this uncommon ossification disorder.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:57:19.844915"
+}

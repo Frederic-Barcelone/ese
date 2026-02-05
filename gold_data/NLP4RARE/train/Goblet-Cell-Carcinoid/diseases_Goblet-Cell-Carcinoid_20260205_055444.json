@@ -1,0 +1,672 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:54:44.879403",
+  "document": "Goblet-Cell-Carcinoid.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Goblet-Cell-Carcinoid.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "GCC",
+      "preferred_label": "Goblet cell carcinoma",
+      "abbreviation": "GCC",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": "C18.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:329984",
+        "umls": null,
+        "mesh": "C564221"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:329984",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C18.1",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564221",
+          "display": "Glucocorticoid Receptor Deficiency"
+        }
+      ],
+      "context": "The exact cause of GCC is unknown. One study has suggested a possible connection between schistosomiasis (a parasitic infection found in certain tropical and subtropical countries) and GCC, however a causal relationship has not been established and the vast majority of GCC occur in the absence of schistosomiasis. Recent",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Glucocorticoid Receptor Deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "neuroendocrine tumors",
+      "preferred_label": "neuroendocrine tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019496",
+        "orpha": "Orphanet:877",
+        "umls": "UMLS:C0206754",
+        "mesh": "MESH:D018358"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019496",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:169",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001901",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9316",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:239.7",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:64652",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018358",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3809",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:877",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:255046005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206754",
+          "display": null
+        }
+      ],
+      "context": "infection found in certain tropical and subtropical countries) and GCC, however a causal relationship has not been established and the vast majority of GCC occur in the absence of schistosomiasis. Recent studies have shown that GCCs do have a unique genomic profile distinct from adenocarcinomas and neuroendocrine tumors of the appendix which may offer future targetable pathways for treatment. There are no genetic, familial or environmental factors known to cause this disorder. It does not run in families. GCC is very rare with approximately 1 case per 2 million individuals. The average age at the time of diagnosis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Gastro-enteropancreatic neuroendocrine tumor"
+      ],
+      "pubtator_normalized_name": "Neuroendocrine Tumors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "parasitic infection",
+      "preferred_label": "parasitic infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005135",
+        "orpha": null,
+        "umls": "UMLS:C0030499",
+        "mesh": "MESH:D010272"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005135",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1398",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001067",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.13",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:45325",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010272",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27864",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:17322007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0030499",
+          "display": null
+        }
+      ],
+      "context": "The exact cause of GCC is unknown. One study has suggested a possible connection between schistosomiasis (a parasitic infection found in certain tropical and subtropical countries) and GCC, however a causal relationship has not been established and the vast majority of GCC occur in the absence of schistosomiasis. Recent studies have shown that GCCs do have a unique genomic profile distinct from adenocarcinomas and neuroendo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Parasitic Diseases Animal",
+        "Lung Diseases Parasitic",
+        "Central Nervous System Parasitic Infections"
+      ],
+      "pubtator_normalized_name": "Parasitic Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "schistosomiasis",
+      "preferred_label": "schistosomiasis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:B65",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015254",
+        "orpha": "Orphanet:1247",
+        "umls": "UMLS:C0036323",
+        "mesh": "MESH:D012552"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015254",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1395",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001475",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9687",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:B65",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:120.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48573",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012552",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10039603",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1247",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:10087007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036323",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1194562592",
+          "display": null
+        }
+      ],
+      "context": "The exact cause of GCC is unknown. One study has suggested a possible connection between schistosomiasis (a parasitic infection found in certain tropical and subtropical countries) and GCC, however a causal relationship has not been established and the vast majority of GCC occur in the absence of schistosomiasis. Recent studies have shown that GCCs do have a unique genomic profile distinct from adenoc",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Schistosomiasis mansoni",
+        "Schistosomiasis haematobia",
+        "Schistosomiasis japonica"
+      ],
+      "pubtator_normalized_name": "Schistosomiasis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "adenocarcinomas",
+      "preferred_label": "adenocarcinomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004970",
+        "orpha": null,
+        "umls": "UMLS:C0001418",
+        "mesh": "MESH:D000230"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004970",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:2000-0386",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:299",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000228",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8140/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:122",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000230",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2852",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ADNOS",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:443961001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0001418",
+          "display": null
+        }
+      ],
+      "context": "miasis (a parasitic infection found in certain tropical and subtropical countries) and GCC, however a causal relationship has not been established and the vast majority of GCC occur in the absence of schistosomiasis. Recent studies have shown that GCCs do have a unique genomic profile distinct from adenocarcinomas and neuroendocrine tumors of the appendix which may offer future targetable pathways for treatment. There are no genetic, familial or environmental factors known to cause this disorder. It does not run in families. GCC is very rare with approximately 1 case per 2 million individuals. The average ag",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carcinoma Renal Cell",
+        "Colonic Neoplasms",
+        "Adenocarcinoma of Lung"
+      ],
+      "pubtator_normalized_name": "Adenocarcinoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ovarian cancer",
+      "preferred_label": "ovarian cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C56",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008170",
+        "orpha": "Orphanet:213500",
+        "umls": "UMLS:C1140680",
+        "mesh": "MESH:D010051"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008170",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2394",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7295",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C56",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:183.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:216027",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D010051",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C7431",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:167000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:213500",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:363443007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1140680",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:685124533",
+          "display": null
+        }
+      ],
+      "context": "most frequently reported between 50-55. While most studies have reported that men and women are affected in equal numbers, a few have suggested a slightly increased frequency in women (2-3:1). Advanced GCCs tend to present more frequently in women and 15-30% of women are initially diagnosed with an ovarian cancer. Less than 1% of GCCs are accurately diagnosed prior to surgery. Because there are no unique features of GCC on imaging studies such as ultrasound, CT scan, PET scan or MRI, the actual diagnosis of GCC cannot be made until a tumor specimen is examined by a pathologist. This is frequently accomplish",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carcinoma Ovarian Epithelial",
+        "Hereditary Breast and Ovarian Cancer Syndrome",
+        "Ovarian Germ Cell Cancer"
+      ],
+      "pubtator_normalized_name": "Ovarian Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "appendicitis",
+      "preferred_label": "appendicitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005649",
+        "orpha": null,
+        "umls": "UMLS:C0003615",
+        "mesh": "MESH:D001064"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005649",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8337",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007149",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:541",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1630",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001064",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35145",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:74400008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003615",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1881255733",
+          "display": null
+        }
+      ],
+      "context": "ly diagnosed prior to surgery. Because there are no unique features of GCC on imaging studies such as ultrasound, CT scan, PET scan or MRI, the actual diagnosis of GCC cannot be made until a tumor specimen is examined by a pathologist. This is frequently accomplished at the time of appendectomy for appendicitis, surgery for an intestinal blockage or presumed ovarian cancer, or through a diagnostic tumor biopsy performed for an abnormal clinical or radiographic finding such as a palpable tumor or tumors seen on an imaging study. GCCs tend to be easier to identify because of the unique combination of neuroe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Appendicitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "familial",
+      "preferred_label": "familial",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000544"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000544",
+          "display": "Alzheimer Disease"
+        }
+      ],
+      "context": "ablished and the vast majority of GCC occur in the absence of schistosomiasis. Recent studies have shown that GCCs do have a unique genomic profile distinct from adenocarcinomas and neuroendocrine tumors of the appendix which may offer future targetable pathways for treatment. There are no genetic, familial or environmental factors known to cause this disorder. It does not run in families. GCC is very rare with approximately 1 case per 2 million individuals. The average age at the time of diagnosis is most frequently reported between 50-55. While most studies have reported that men and women are affec",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dementia",
+        "Stomach Neoplasms",
+        "Atrial Fibrillation"
+      ],
+      "pubtator_normalized_name": "Alzheimer Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

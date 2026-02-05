@@ -1,0 +1,72 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:55:20.780944",
+  "document": "Fetal-Hydantoin-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Fetal-Hydantoin-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Fetal hydantoin syndrome",
+      "preferred_label": "fetal hydantoin syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0060690",
+        "orpha": null,
+        "umls": "UMLS:C0149969",
+        "mesh": "C537922"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0060690",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:101775",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:617955",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0149969",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537922",
+          "display": "Fetal hydantoin syndrome"
+        }
+      ],
+      "context": "Fetal hydantoin syndrome affects males and females in equal numbers. The exact incidence and prevalence of the disorder is unknown. Studies have suggested that approximately 5%-10% of infants exposed to phenytoin during pregnancy will develop fetal hydantoin syndrome. There is no diagnostic testing that can identify fetal",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Fetal hydantoin syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

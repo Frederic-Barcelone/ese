@@ -1,0 +1,377 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:49:48.212778",
+  "document": "Pallister-W-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Pallister-W-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Pallister W syndrome",
+      "preferred_label": "Pallister W syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010708",
+        "orpha": "Orphanet:2804",
+        "umls": "UMLS:C0796110",
+        "mesh": "MESH:C538106"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010708",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:358",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:163215",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538106",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:311450",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2804",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:719020006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0796110",
+          "display": null
+        }
+      ],
+      "context": "Pallister W syndrome is a rare genetic disorder characterized by unusual facial features such as clefting of the palate and the upper lip, a broad flat nose, widely spaced slanted eyes, and/or downslanting eyelid folds (palpebral fissures). Other symptoms may include mental retardation, speech problems, bone deformitie",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Pallister W syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "mental retardation",
+      "preferred_label": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "Pallister W syndrome is a rare genetic disorder characterized by unusual facial features such as clefting of the palate and the upper lip, a broad flat nose, widely spaced slanted eyes, and/or downslanting eyelid folds (palpebral fissures). Other symptoms may include mental retardation, speech problems, bone deformities of the arms and legs, and/or seizures. The exact cause of Pallister W syndrome is not known. Pallister W syndrome is apparent at birth. It is characterized by widely spaced eyes (hypertelorism) with downward slanting eyelid folds (palpebral fissures), a broad flat",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fragile X Syndrome",
+        "Mental Retardation Autosomal Recessive 1",
+        "Myotonia with Skeletal Abnormalities and Mental Retardation"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Pallister W syndrome is a rare genetic disorder characterized by unusual facial features such as clefting of the palate and the upper lip, a broad flat nose, widely spaced slanted eyes, and/or downslanting eyelid folds (palpebral fissures). Other symptoms may include mental retardation, speech problems, bone deformities of the arms and legs, and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypertelorism",
+      "preferred_label": "hypertelorism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007778",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D006972"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007778",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000316",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:376.41",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006972",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34715",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:145400",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:22006008",
+          "display": null
+        }
+      ],
+      "context": "ting eyelid folds (palpebral fissures). Other symptoms may include mental retardation, speech problems, bone deformities of the arms and legs, and/or seizures. The exact cause of Pallister W syndrome is not known. Pallister W syndrome is apparent at birth. It is characterized by widely spaced eyes (hypertelorism) with downward slanting eyelid folds (palpebral fissures), a broad flat nasal bridge, a broad tip of the nose, a broad flat jaw, central clefting of the palate or upper lip, seizures, and mental retardation. There may also be bone abnormalities in the arms and legs such as abnormal deviation of the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acrocephalosyndactylia",
+        "Hypertelorism with esophageal abnormality and hypospadias",
+        "Ascending aortic aneurysm hypertelorism bifid uvula cleft palate and arterial tortuosity"
+      ],
+      "pubtator_normalized_name": "Hypertelorism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cowlick",
+      "preferred_label": "Cowlick",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044233",
+        "orpha": null,
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044233",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:139400",
+          "display": null
+        }
+      ],
+      "context": "clefting of the palate or upper lip, seizures, and mental retardation. There may also be bone abnormalities in the arms and legs such as abnormal deviation of the elbow away from the body when the arm is extended (cubitus valgus). Other symptoms may include hair that does not lie flat on the head (cowlick), missing teeth (partial adontia), broad uvula, and a high broad forehead. Additional findings may include tremor and/or involuntary muscle contractions (i.e., spasticity). Pallister W syndrome is a very rare disorder. As of the year 2000, only six cases had been reported in the medical literature.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

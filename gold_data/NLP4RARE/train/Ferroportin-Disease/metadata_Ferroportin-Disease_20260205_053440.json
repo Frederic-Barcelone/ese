@@ -1,0 +1,35 @@
+{
+  "doc_id": "Ferroportin-Disease",
+  "doc_filename": "Ferroportin-Disease.pdf",
+  "top_entities": [
+    {
+      "name": "hemochromatosis type 1",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "ferroportin disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1715,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Ferroportin Disease: Epidemiology and Prevalence",
+  "short_description": "Clinical overview of ferroportin disease epidemiology, including gender distribution, incidence rates, and demographic characteristics.",
+  "long_description": "This document provides epidemiological information about ferroportin disease, a hereditary iron overload disorder. It discusses the equal gender distribution of the condition, notes that the exact incidence remains unknown but is likely underreported in medical literature, and highlights that the disease affects individuals across all racial and ethnic groups. The document positions ferroportin disease as potentially the second most common form of hereditary iron overload after classic hemochromatosis, emphasizing its clinical significance in the spectrum of iron metabolism disorders.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:34:40.118740"
+}

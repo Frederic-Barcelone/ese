@@ -1,0 +1,435 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:05:33.221312",
+  "document": "Rheumatic-Fever.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Rheumatic-Fever.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "streptococcal infections",
+      "preferred_label": "streptococcal infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021680",
+        "orpha": null,
+        "umls": "UMLS:C0038395",
+        "mesh": "MESH:D013290"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021680",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001476",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:041.09",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:20963",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013290",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C87062",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85769006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0038395",
+          "display": null
+        }
+      ],
+      "context": "world. It primarily affects children between the ages of 6 and 16, and develops after an infection with streptococcal bacteria, such as strep throat or scarlet fever. About 5% of those with untreated strep infection will develop rheumatic fever. Although rheumatic fever is clearly linked to Group A streptococcal infections (strep throat), the exact mechanism causing the disorder is not well understood. Strep throat is highly contagious, whereas rheumatic fever is not contagious. People who have had rheumatic fever tend to develop flare-ups with repeated strep infections.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal infections"
+      ],
+      "pubtator_normalized_name": "Streptococcal Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inflammatory disease",
+      "preferred_label": "inflammatory disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021166",
+        "orpha": null,
+        "umls": "UMLS:C1290884",
+        "mesh": "D015212"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021166",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:452939",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C93210",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128139000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290884",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D015212",
+          "display": "Inflammatory Bowel Diseases"
+        }
+      ],
+      "context": "Rheumatic fever is an inflammatory disease that is rare in the United States but common in some other parts of the world. It primarily affects children between the ages of 6 and 16, and develops after an infection with streptococcal bacteria, such as strep throat or scarlet fever. About 5% of those with untreated strep infection will develo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Pelvic Inflammatory Disease",
+        "Myositis",
+        "Colitis Ulcerative"
+      ],
+      "pubtator_normalized_name": "Inflammatory Bowel Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Rheumatic fever",
+      "preferred_label": "rheumatic fever",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I00-I02",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017767",
+        "orpha": "Orphanet:3099",
+        "umls": "UMLS:C0035436",
+        "mesh": "MESH:D012213"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017767",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1586",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001160",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5699",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I00-I02",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:390-392",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:48448",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012213",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10039054",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34984",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1668",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:3099",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:81077008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035436",
+          "display": null
+        }
+      ],
+      "context": "Rheumatic fever is an inflammatory disease that is rare in the United States but common in some other parts of the world. It primarily affects children between the ages of 6 and 16, and develops after an infection with streptococcal bacteria, such as strep throat or scarlet fever. About 5% of those with untreated",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rheumatic Fever",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "scarlet fever",
+      "preferred_label": "scarlet fever",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A38",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005952",
+        "orpha": "Orphanet:688995",
+        "umls": "UMLS:C0036285",
+        "mesh": "MESH:D012541"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005952",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8596",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007477",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A38",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:A38",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:034.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11327",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012541",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C94575",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:688995",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:30242009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036285",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:107294155",
+          "display": null
+        }
+      ],
+      "context": "Rheumatic fever is an inflammatory disease that is rare in the United States but common in some other parts of the world. It primarily affects children between the ages of 6 and 16, and develops after an infection with streptococcal bacteria, such as strep throat or scarlet fever. About 5% of those with untreated strep infection will develop rheumatic fever. Although rheumatic fever is clearly linked to Group A streptococcal infections (strep throat), the exact mechanism causing the disorder is not well understood. Strep throat is highly contagious, whereas rheumatic fever",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Yersinia pseudotuberculosis Infections"
+      ],
+      "pubtator_normalized_name": "Scarlet Fever",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "strep throat",
+      "preferred_label": "Strep throat",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:J02.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021783",
+        "orpha": null,
+        "umls": "UMLS:C0036689",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021783",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J02.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:034.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:508129",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C116003",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:43878008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0036689",
+          "display": null
+        }
+      ],
+      "context": "Rheumatic fever is an inflammatory disease that is rare in the United States but common in some other parts of the world. It primarily affects children between the ages of 6 and 16, and develops after an infection with streptococcal bacteria, such as strep throat or scarlet fever. About 5% of those with untreated strep infection will develop rheumatic fever. Although rheumatic fever is clearly linked to Group A streptococcal infections (strep throat), the exact mechanism causing the disorder is not well understood. Strep throat is highly contagious, whereas",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

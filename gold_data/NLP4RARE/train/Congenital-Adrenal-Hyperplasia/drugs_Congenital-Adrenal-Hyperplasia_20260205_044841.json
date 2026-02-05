@@ -1,0 +1,162 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:48:41.273385",
+  "document": "Congenital-Adrenal-Hyperplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Adrenal-Hyperplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "corticosteroids",
+      "preferred_name": "corticosteroids",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "NOT_YET_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Ocular Myasthenia Gravis"
+      ],
+      "nct_id": "NCT06342544",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C011244",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT06342544",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C011244",
+          "display": "corticosteroid methanetriol mixture"
+        }
+      ],
+      "context": "effects the adrenal glands located at the top of each kidney. Normally, the adrenal glands are responsible for producing three different hormones: 1. corticosteroids, which gauge the body's response to illness or injury; 2. mineralocorticoids, which regulate salt and water levels; and 3. androgens, which are male ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "corticosteroid methanetriol mixture",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "androgens",
+      "preferred_name": "androgens",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "777",
+          "display": null
+        }
+      ],
+      "context": "rmones: 1. corticosteroids, which gauge the body's response to illness or injury; 2. mineralocorticoids, which regulate salt and water levels; and 3. androgens, which are male sex hormones. An enzyme deficiency will make the body unable to produce one or more of these hormones, which in turn will result in t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "hydroxylase",
+      "preferred_name": "Hydroxylase",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C003402",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "5536",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C003402",
+          "display": "sapropterin"
+        }
+      ],
+      "context": "h in turn will result in the overproduction of another type of hormone precursor in order to compensate for the loss. The most common form of CAH, 21 hydroxylase deficiency, affects approximately 1:10,000 to 1:15,000 people in the United States and Europe. Among the Yupik Eskimos, the occurrence of the salt-wa",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "sapropterin",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

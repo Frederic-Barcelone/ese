@@ -1,0 +1,35 @@
+{
+  "doc_id": "Chromosome-8-Monosomy-8p",
+  "doc_filename": "Chromosome-8-Monosomy-8p.pdf",
+  "top_entities": [
+    {
+      "name": "partial deletion of the short arm of chromosome 8",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "chromosomal disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2156,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Chromosome 8, Monosomy 8p: Clinical Overview and Characteristics",
+  "short_description": "Clinical documentation of a rare chromosomal disorder involving deletion of part of chromosome 8, characterized by growth deficiency, intellectual disability, and craniofacial malformations.",
+  "long_description": "This clinical document provides a comprehensive overview of Chromosome 8, Monosomy 8p, a rare genetic disorder first described in 1973 with over 20 reported cases in medical literature. The condition results from deletion of a portion of the eighth chromosome and presents with highly variable symptoms including growth deficiency, mental retardation, distinctive craniofacial features such as microcephaly and epicanthal folds, cardiac abnormalities, and genital defects in males. The document details the characteristic facial features that may diminish with age, including short broad nose, low nasal bridge, and micrognathia. Most cases appear to result from spontaneous de novo errors during early embryonic development, affecting males and females equally.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T03:40:56.137681"
+}

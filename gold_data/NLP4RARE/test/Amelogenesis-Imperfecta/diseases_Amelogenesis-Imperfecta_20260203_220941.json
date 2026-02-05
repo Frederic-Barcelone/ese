@@ -1,0 +1,516 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:09:41.501952",
+  "document": "Amelogenesis-Imperfecta.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Amelogenesis-Imperfecta.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Amelogenesis imperfecta",
+      "preferred_label": "amelogenesis imperfecta",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019507",
+        "orpha": "Orphanet:88661",
+        "umls": "UMLS:C0002452",
+        "mesh": "MESH:D000567"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019507",
+          "display": null
+        },
+        {
+          "system": "CSP",
+          "code": "CSP:0828-0533",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2187",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5791",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:520.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:240",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000567",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:765",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:104500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:88661",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:78494001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002452",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1923123066",
+          "display": null
+        }
+      ],
+      "context": "Amelogenesis imperfecta (AI) refers to a group of rare, inherited disorders characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, abo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amelogenesis imperfecta local hypoplastic form",
+        "Amelogenesis imperfecta hypoplastic-hypomaturation X-linked 1",
+        "Amelogenesis Imperfecta Type III"
+      ],
+      "pubtator_normalized_name": "Amelogenesis Imperfecta",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Amelogenesis imperfecta (AI) refers to a group of rare, inherited disorders characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, about 40% have the hypocalcified d",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inherited",
+      "preferred_label": "inherited",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D017096"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017096",
+          "display": "Prion Diseases"
+        }
+      ],
+      "context": "Amelogenesis imperfecta (AI) refers to a group of rare, inherited disorders characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, about 40% have the hypocalcified dominant typ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polyneuropathies",
+        "Primary Immunodeficiency Diseases",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Prion Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorders",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Amelogenesis imperfecta (AI) refers to a group of rare, inherited disorders characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, about 40% have the hypocalcified dominant type. The aut",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "autosomal dominant",
+      "preferred_label": "Autosomal dominant optic atrophy and cataract",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "ophthalmology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:67036",
+        "umls": null,
+        "mesh": "C537128"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:67036",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537128",
+          "display": "Optic atrophy and cataract autosomal dominant"
+        }
+      ],
+      "context": "ers characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, about 40% have the hypocalcified dominant type. The autosomal dominant and recessive forms of the disorder affect males and females in equal numbers. The X-linked dominant type of the disorder affects twice as many males as females. The X-linked recessive type affects only males. Diagnosis of AI is usually made by visual examination, family history and X-ray examinati",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Optic atrophy and cataract autosomal dominant",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "X-linked",
+      "preferred_label": "X-linked immune dysregulation with inflammatory bowel disease due to ELF4 deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:676125",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:676125",
+          "display": null
+        }
+      ],
+      "context": "enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, about 40% have the hypocalcified dominant type. The autosomal dominant and recessive forms of the disorder affect males and females in equal numbers. The X-linked dominant type of the disorder affects twice as many males as females. The X-linked recessive type affects only males. Diagnosis of AI is usually made by visual examination, family history and X-ray examination at the time teeth erupt. The dentist may use a simple hand instrument to distinguish the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "can",
+      "preferred_label": "CAN",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0012833",
+        "orpha": "Orphanet:93262",
+        "umls": "UMLS:C2677099",
+        "mesh": "MESH:C567382"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0012833",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111161",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:394201",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567382",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C38145",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612247",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:702361006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2677099",
+          "display": null
+        }
+      ],
+      "context": "ales. The X-linked recessive type affects only males. Diagnosis of AI is usually made by visual examination, family history and X-ray examination at the time teeth erupt. The dentist may use a simple hand instrument to distinguish the different types of AI. By one to two years of age, the diagnosis can be made.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Breast Neoplasms",
+        "Cancer Pain",
+        "Colorectal Neoplasms"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "abnormalities",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 0.7868228435516358,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Amelogenesis imperfecta (AI) refers to a group of rare, inherited disorders characterized by abnormal enamel formation. The term is typically restricted to those disorders of enamel development not associated with other abnormalities of the body. AI affects ,000 to 16,000 children in the United States. Of this number, about 40% have the hypocalcified dominant type. The autosomal dominant and recessive forms of the disorder affect males and females in equal numbers. The X-linked dominant type of the disorder affects twice as man",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

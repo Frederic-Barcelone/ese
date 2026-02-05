@@ -1,0 +1,99 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:21:44.529446",
+  "document": "Hyperlipoproteinemia-Type-III.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hyperlipoproteinemia-Type-III.pdf",
+  "total_candidates": 22,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "hyperlipoproteinemia type 3",
+      "matched_text": "Hyperlipoproteinemia type III",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:412"
+    },
+    {
+      "name": "cerebrovascular disorder",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I60-I69",
+      "orpha": null
+    },
+    {
+      "name": "cardiovascular disease",
+      "matched_text": "cardiovascular disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I00-I99",
+      "orpha": null
+    },
+    {
+      "name": "genetic disorder",
+      "matched_text": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "atherosclerosis",
+      "matched_text": "atherosclerosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I70",
+      "orpha": null
+    },
+    {
+      "name": "hyperlipidemia",
+      "matched_text": "hyperlipidemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E78.5",
+      "orpha": null
+    },
+    {
+      "name": "heart attack",
+      "matched_text": "heart attack",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I21",
+      "orpha": null
+    },
+    {
+      "name": "xanthoma",
+      "matched_text": "xanthomas",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

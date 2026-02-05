@@ -1,0 +1,30 @@
+{
+  "doc_id": "Barth-Syndrome",
+  "doc_filename": "Barth-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Barth syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1565,
+  "file_size_human": "1.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Barth Syndrome: Epidemiology and Incidence Data",
+  "short_description": "Clinical document presenting epidemiological data on Barth syndrome, including incidence rates and reported cases.",
+  "long_description": "This clinical research document provides epidemiological information about Barth syndrome, a rare genetic disorder. The document reports that the condition affects all ethnic groups with an estimated incidence of 1 in 300,000 to 1 in 400,000 in the United States. It also notes that as of 2013, there were 151 patients documented in the medical literature, highlighting the rarity of this condition and the limited scope of available clinical data for research and treatment development.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:58:57.339741"
+}

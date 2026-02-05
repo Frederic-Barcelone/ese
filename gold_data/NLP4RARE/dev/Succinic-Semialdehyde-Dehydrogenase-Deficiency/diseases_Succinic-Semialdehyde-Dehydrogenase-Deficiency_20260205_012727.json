@@ -1,0 +1,246 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:27:27.265001",
+  "document": "Succinic-Semialdehyde-Dehydrogenase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Succinic-Semialdehyde-Dehydrogenase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CSF",
+      "preferred_label": "Isolated femoral agenesis/hypoplasia",
+      "abbreviation": "CSF",
+      "confidence": 0.6,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "Q72.4",
+        "icd11": "LB9A.8",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:1987",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:1987",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "Q72.4",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "LB9A.8",
+          "display": null
+        }
+      ],
+      "context": "us system. The \"hallmark\" laboratory finding associated with SSADH deficiency is elevated levels of GHB in the urine (i.e., 4-hydroxybutyric or gamma-hydroxybutyric aciduria), the liquid portion of the blood (plasma), and the fluid that flows through the brain and spinal canal (cerebrospinal fluid [CSF)).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "inborn error of metabolism",
+      "preferred_label": "inborn error of metabolism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019052",
+        "orpha": "Orphanet:68367",
+        "umls": "UMLS:C0025521",
+        "mesh": "MESH:D008661"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019052",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:655",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22508",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008661",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062018",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100159",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34816",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68367",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86095007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025521",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733825440",
+          "display": null
+        }
+      ],
+      "context": "Succinic semialdehyde dehydrogenase (SSADH) deficiency is a rare inborn error of metabolism that is inherited as an autosomal recessive trait. In individuals with the disorder, deficient activity of the SSADH enzyme disrupts the metabolism of gamma-aminobutyric acid (GABA). GABA is a natural chemical known as a \"neurotransmitter\" that serves to inhibit the electrical activities of nerve c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amino Acid Metabolism Inborn Errors"
+      ],
+      "pubtator_normalized_name": "Metabolism Inborn Errors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "SSADH",
+      "preferred_label": "SSADH",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010083",
+        "orpha": "Orphanet:22",
+        "umls": "UMLS:C0268631",
+        "mesh": "MESH:C535803"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010083",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060175",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7695",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:124340",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535803",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200599",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1904",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:271980",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:22",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:49748000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0268631",
+          "display": null
+        }
+      ],
+      "context": "Succinic semialdehyde dehydrogenase (SSADH) deficiency is a rare inborn error of metabolism that is inherited as an autosomal recessive trait. In individuals with the disorder, deficient activity of the SSADH enzyme disrupts the metabolism of gamma-aminobutyric acid (GABA). GABA is a natural chemical known as a \"neurotransmitter\" that serve",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "succinic semialdehyde dehydrogenase deficiency",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

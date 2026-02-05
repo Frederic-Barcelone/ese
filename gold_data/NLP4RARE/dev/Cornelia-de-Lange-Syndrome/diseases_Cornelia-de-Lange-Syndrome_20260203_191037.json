@@ -1,0 +1,1412 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:10:37.444443",
+  "document": "Cornelia-de-Lange-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Cornelia-de-Lange-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 23,
+  "total_validated": 23,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Cornelia de Lange syndrome",
+      "preferred_label": "Cornelia de Lange syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016033",
+        "orpha": "Orphanet:199",
+        "umls": "UMLS:C0270972",
+        "mesh": "D003635"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016033",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11725",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10109",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78752",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10056354",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200958",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75016",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1009",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:122470",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:199",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0270972",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1801560012",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003635",
+          "display": "De Lange Syndrome"
+        }
+      ],
+      "context": "Cornelia de Lange syndrome (CdLS) is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, re",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "De Lange Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CdLS",
+      "preferred_label": "Cornelia De Lange Syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0270972",
+        "mesh": "D003635"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0270972",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003635",
+          "display": "De Lange Syndrome"
+        }
+      ],
+      "context": "Cornelia de Lange syndrome (CdLS) is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resultin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "De Lange Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare",
+      "preferred_label": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021136",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021136",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D035583",
+          "display": "Rare Diseases"
+        }
+      ],
+      "context": "Cornelia de Lange syndrome (CdLS) is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a dist",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Microvascular Rarefaction"
+      ],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "Hereditary Diseases",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0019247",
+        "mesh": "D020271"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0019247",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020271",
+          "display": "Heredodegenerative Disorders Nervous System"
+        }
+      ],
+      "context": "Cornelia de Lange syndrome (CdLS) is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial ap",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Genetic Diseases Inborn",
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Hereditary Autoinflammatory Diseases"
+      ],
+      "pubtator_normalized_name": "Heredodegenerative Disorders Nervous System",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "congenital",
+      "preferred_label": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021140",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021140",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1048408993",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "Cornelia de Lange syndrome (CdLS) is a rare genetic disorder that is apparent at birth (congenital). Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial appearance; malformations of the hands a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Congenital Hereditary and Neonatal Diseases and Abnormalities",
+        "Congenital central hypoventilation syndrome",
+        "Congenital Hemidysplasia with Ichthyosiform Erythroderma and Limb Defects"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arms",
+      "preferred_label": "arms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009994",
+        "orpha": "Orphanet:99756",
+        "umls": "UMLS:C0206655",
+        "mesh": "MESH:D018232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4051",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000248",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4701",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006779",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8920/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065867",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3749",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268220",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ARMS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99756",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404053004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206655",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1742058067",
+          "display": null
+        }
+      ],
+      "context": "Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial appearance; malformations of the hands and arms (upper limbs); and mild to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphocytic Choriomeningitis"
+      ],
+      "pubtator_normalized_name": "Arms Malformation of",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "intellectual disability",
+      "preferred_label": "intellectual disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F70-F79",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001071",
+        "orpha": "Orphanet:319658",
+        "umls": "UMLS:C3714756",
+        "mesh": "MESH:D008607"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001071",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1059",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F70-F79",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:319",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:811461",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008607",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97250",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:319658",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:91138005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C3714756",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:605267007",
+          "display": null
+        }
+      ],
+      "context": "lly include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial appearance; malformations of the hands and arms (upper limbs); and mild to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Retardation X-Linked",
+        "Birk-Barel Mental Retardation Dysmorphism Syndrome",
+        "ATR-X syndrome"
+      ],
+      "pubtator_normalized_name": "Intellectual Disability",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder",
+      "preferred_label": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial appearance; malformations of the hands and arms (upper limbs); and mild to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characterist",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Mental Disorders",
+        "Cardiovascular Diseases",
+        "COVID-19"
+      ],
+      "pubtator_normalized_name": "Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lip",
+      "preferred_label": "LIP",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:J84.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009537",
+        "orpha": "Orphanet:79128",
+        "umls": "UMLS:C0264511",
+        "mesh": "MESH:C562489"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009537",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050159",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:16700",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J84.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:516.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:82682",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562489",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062997",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200424",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27558",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:247610",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79128",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:44274007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0264511",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1140418798",
+          "display": null
+        }
+      ],
+      "context": "ial) area, resulting in a distinctive facial appearance; malformations of the hands and arms (upper limbs); and mild to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lipoma",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndactyly",
+      "preferred_label": "syndactyly",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q70",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021002",
+        "orpha": null,
+        "umls": "UMLS:C0039075",
+        "mesh": "MESH:D013576"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021002",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11193",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001159",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q70",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:755.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52619",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013576",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10042778",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039075",
+          "display": null
+        }
+      ],
+      "context": "(synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affected individuals may also have distinctive malformations of the limbs, such as unusually small hands and feet, inward deviation (clinodactyly) of the fifth fingers, and webbing (syndactyly) of certain toes. Less commonly, there may be absence of the forearms, hands, and fingers. Infants with CdLS may also have feeding and breathing difficulties; an increased susceptibility to respiratory infections; a low-pitched \"growling\" cry and low voice; heart defects; delayed skeletal maturatio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Syndactyly",
+        "Syndactyly type 3",
+        "Syndactyly type v"
+      ],
+      "pubtator_normalized_name": "Acrocephalosyndactylia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "respiratory infections",
+      "preferred_label": "Respiratory Tract Infections",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0035243",
+        "mesh": "D012141"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0035243",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D012141",
+          "display": "Respiratory Tract Infections"
+        }
+      ],
+      "context": "unusually small hands and feet, inward deviation (clinodactyly) of the fifth fingers, and webbing (syndactyly) of certain toes. Less commonly, there may be absence of the forearms, hands, and fingers. Infants with CdLS may also have feeding and breathing difficulties; an increased susceptibility to respiratory infections; a low-pitched \"growling\" cry and low voice; heart defects; delayed skeletal maturation; hearing loss; or other physical abnormalities. The range and severity of associated symptoms and findings may be extremely variable from person to person. CdLS is a very rare disorder that is apparent at birth",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Respiratory Tract Infections",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hearing loss",
+      "preferred_label": "hearing loss",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H90",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005365",
+        "orpha": null,
+        "umls": "UMLS:C1384666",
+        "mesh": "MESH:D034381"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005365",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004238",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:389.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:235586",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034381",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35731",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15188001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1384666",
+          "display": null
+        }
+      ],
+      "context": "f certain toes. Less commonly, there may be absence of the forearms, hands, and fingers. Infants with CdLS may also have feeding and breathing difficulties; an increased susceptibility to respiratory infections; a low-pitched \"growling\" cry and low voice; heart defects; delayed skeletal maturation; hearing loss; or other physical abnormalities. The range and severity of associated symptoms and findings may be extremely variable from person to person. CdLS is a very rare disorder that is apparent at birth (congenital). Males and females appear to be affected in equal numbers. It has been estimated that CdL",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Deafness",
+        "Hearing Loss Functional",
+        "Hearing Loss Sensorineural"
+      ],
+      "pubtator_normalized_name": "Hearing Loss",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare disorder",
+      "preferred_label": "rare disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "susceptibility to respiratory infections; a low-pitched \"growling\" cry and low voice; heart defects; delayed skeletal maturation; hearing loss; or other physical abnormalities. The range and severity of associated symptoms and findings may be extremely variable from person to person. CdLS is a very rare disorder that is apparent at birth (congenital). Males and females appear to be affected in equal numbers. It has been estimated that CdLS occurs in approximately one in every 10,000 live births in the United States. More than 400 cases have been reported in the medical literature, including affected indivi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "has",
+      "preferred_label": "Hinman syndrome",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "N32.8",
+        "icd11": "GC01.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:84085",
+        "umls": null,
+        "mesh": "D050031"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:84085",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "N32.8",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "GC01.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050031",
+          "display": "Hashimoto Disease"
+        }
+      ],
+      "context": "al maturation; hearing loss; or other physical abnormalities. The range and severity of associated symptoms and findings may be extremely variable from person to person. CdLS is a very rare disorder that is apparent at birth (congenital). Males and females appear to be affected in equal numbers. It has been estimated that CdLS occurs in approximately one in every 10,000 live births in the United States. More than 400 cases have been reported in the medical literature, including affected individuals within several families (kindreds). Multiple affected siblings have been reported in some families.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Histiocytosis Langerhans-Cell"
+      ],
+      "pubtator_normalized_name": "Hashimoto Disease",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malformations",
+      "preferred_label": "Congenital Abnormality",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0000768",
+        "mesh": "D000013"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0000768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000013",
+          "display": "Congenital Abnormalities"
+        }
+      ],
+      "context": "pparent at birth (congenital). Associated symptoms and findings typically include delays in physical development before and after birth (prenatal and postnatal growth retardation); characteristic abnormalities of the head and facial (craniofacial) area, resulting in a distinctive facial appearance; malformations of the hands and arms (upper limbs); and mild to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart Defects Congenital",
+        "Nervous System Malformations",
+        "Trichothiodystrophy Syndromes"
+      ],
+      "pubtator_normalized_name": "Congenital Abnormalities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "maxillary prognathism",
+      "preferred_label": "Maxillary prognathism",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0266076",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0266076",
+          "display": null
+        }
+      ],
+      "context": "to severe intellectual disability. Many infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, u",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "micrognathia",
+      "preferred_label": "Micrognathism",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0025990",
+        "mesh": "D008844"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0025990",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008844",
+          "display": "Micrognathism"
+        }
+      ],
+      "context": "infants and children with the disorder have an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affect",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hypoglossia-Hypodactylia"
+      ],
+      "pubtator_normalized_name": "Micrognathism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "facial abnormalities",
+      "preferred_label": "Abnormality of the face",
+      "abbreviation": null,
+      "confidence": 0.9263482451438904,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C4025871",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C4025871",
+          "display": null
+        }
+      ],
+      "context": "ve an unusually small, short head (microbrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affected individuals may also have distinctive malforma",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "downturned lips",
+      "preferred_label": "Downturned corners of mouth",
+      "abbreviation": null,
+      "confidence": 0.8062826752662658,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C1866195",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C1866195",
+          "display": null
+        }
+      ],
+      "context": "obrachycephaly); a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affected individuals may also have distinctive malformations of the limbs, such as unusua",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "low-set ears",
+      "preferred_label": "Low set ears",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0239234",
+        "mesh": "C537239"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0239234",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537239",
+          "display": "Mengel Konigsmark syndrome"
+        }
+      ],
+      "context": "a prominent vertical groove between the upper lip and nose (philtrum); a depressed nasal bridge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affected individuals may also have distinctive malformations of the limbs, such as unusually small hand",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Mengel Konigsmark syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "synophrys",
+      "preferred_label": "Synophrys",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0431447",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0431447",
+          "display": null
+        }
+      ],
+      "context": "dge; upturned nostrils (anteverted nares); and a protruding upper jaw (maxillary prognathism) with small chin (micrognathia). Additional characteristic facial abnormalities may include thin, downturned lips; low-set ears; arched, well-defined eyebrows that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affected individuals may also have distinctive malformations of the limbs, such as unusually small hands and feet, inward deviation (clinodactyly) of the fifth fingers, and webbing (syndactyly",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "clinodactyly",
+      "preferred_label": "Clinodactyly",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C4551485",
+        "mesh": "C537090"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C4551485",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537090",
+          "display": "Brachydactyly type A3"
+        }
+      ],
+      "context": "s that grow together across the base of the nose (synophrys); an unusually low hairline on the forehead and the back of the neck; and curly, unusually long eyelashes. Affected individuals may also have distinctive malformations of the limbs, such as unusually small hands and feet, inward deviation (clinodactyly) of the fifth fingers, and webbing (syndactyly) of certain toes. Less commonly, there may be absence of the forearms, hands, and fingers. Infants with CdLS may also have feeding and breathing difficulties; an increased susceptibility to respiratory infections; a low-pitched \"growling\" cry and low v",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Catel Manzke syndrome"
+      ],
+      "pubtator_normalized_name": "Brachydactyly type A3",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "heart defects",
+      "preferred_label": "Congenital Heart Defects",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0018798",
+        "mesh": "D006330"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0018798",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006330",
+          "display": "Heart Defects Congenital"
+        }
+      ],
+      "context": "he fifth fingers, and webbing (syndactyly) of certain toes. Less commonly, there may be absence of the forearms, hands, and fingers. Infants with CdLS may also have feeding and breathing difficulties; an increased susceptibility to respiratory infections; a low-pitched \"growling\" cry and low voice; heart defects; delayed skeletal maturation; hearing loss; or other physical abnormalities. The range and severity of associated symptoms and findings may be extremely variable from person to person. CdLS is a very rare disorder that is apparent at birth (congenital). Males and females appear to be affected in eq",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Heart defects limb shortening",
+        "Deafness Congenital Heart Defects and Posterior Embryotoxon",
+        "Noncompaction of Left Ventricular Myocardium with Congenital Heart Defects"
+      ],
+      "pubtator_normalized_name": "Heart Defects Congenital",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

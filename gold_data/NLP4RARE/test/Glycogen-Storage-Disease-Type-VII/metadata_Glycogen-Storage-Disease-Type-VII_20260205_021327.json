@@ -1,0 +1,45 @@
+{
+  "doc_id": "Glycogen-Storage-Disease-Type-VII",
+  "doc_filename": "Glycogen-Storage-Disease-Type-VII.pdf",
+  "top_entities": [
+    {
+      "name": "glycogen storage disease VII",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Hereditary combined deficiency of vitamin K-dependent clotting factors",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "glycogen",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Phosphofructokinase",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2336,
+  "file_size_human": "2.3 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.25,
+  "title": "Glycogen Storage Disease Type VII (GSD VII): Clinical Overview and Characteristics",
+  "short_description": "Clinical overview of glycogen storage disease type VII, a rare autosomal recessive disorder caused by phosphofructokinase enzyme deficiency affecting muscle energy metabolism.",
+  "long_description": "This document provides a comprehensive clinical overview of glycogen storage disease type VII (GSD VII), also known as Tarui disease. It details the pathophysiology involving phosphofructokinase enzyme deficiency due to muscle phosphofructokinase gene abnormalities, which impairs glycogen metabolism and reduces energy availability to muscles during exercise. The document covers the characteristic clinical presentations including exercise-induced weakness, pain, and stiffness, along with potential complications such as myoglobinuria and rhabdomyolysis. It describes the various forms of the disease including the typical childhood-onset form, a severe infantile variant, and a late-onset adult form. The text also addresses the genetic inheritance pattern, demographic prevalence particularly in Japanese and Ashkenazi Jewish populations, and current diagnostic approaches including muscle biopsy and molecular genetic testing.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:13:27.703819"
+}

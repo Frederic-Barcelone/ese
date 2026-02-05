@@ -1,0 +1,520 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:19:13.607789",
+  "document": "Carcinoid-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Carcinoid-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "intestinal obstruction",
+      "preferred_label": "intestinal obstruction",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004565",
+        "orpha": null,
+        "umls": "UMLS:C0021843",
+        "mesh": "MESH:D007415"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004565",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8437",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:560.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:43933",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007415",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C9175",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:81060008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021843",
+          "display": null
+        }
+      ],
+      "context": "the full spectrum of symptoms is not apparent. Other investigations that may be helpful, depending on the location of the primary tumor, include CT scan, ultrasound, MRI and endoscopy. Sometimes the diagnosis is established incidentally at the time of surgery for another suspected condition such as intestinal obstruction or appendicitis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Intestinal Pseudo-Obstruction",
+        "Visceral myopathy familial external ophthalmoplegia"
+      ],
+      "pubtator_normalized_name": "Intestinal Obstruction",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "carcinoid syndrome",
+      "preferred_label": "carcinoid syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E34.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100347",
+        "orpha": "Orphanet:100093",
+        "umls": "UMLS:C0024586",
+        "mesh": "D008303"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100347",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000852",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5994",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E34.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:259.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6191",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10007270",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3215",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:890",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:100093",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:35868009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0024586",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:111763187",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008303",
+          "display": "Malignant Carcinoid Syndrome"
+        }
+      ],
+      "context": "al substances such as serotonin, bradykinins, tachykinins and prostaglandins. If the original carcinoid cells spread (metastasize) to the liver, these substances are no longer broken down to their inactive form and are released into the systemic (main) circulation, causing the signs and symptoms of carcinoid syndrome. When tumors affect organs other than the gastrointestinal tract, such as the ovaries, carcinoid syndrome can occur in the absence of liver metastases. Carcinoid tumors are rare, with only 27 new cases per million diagnosed in the U.S. per year. Of these, only about 10% will develop carcinoid syndr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neurofibromatosis-Pheochromocytoma-Duodenal Carcinoid Syndrome"
+      ],
+      "pubtator_normalized_name": "Malignant Carcinoid Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "chronic diarrhea",
+      "preferred_label": "chronic diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044751",
+        "orpha": null,
+        "umls": "UMLS:C0401151",
+        "mesh": "C564019"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044751",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:96036",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:236071009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0401151",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C564019",
+          "display": "Diarrhea Chronic with Villous Atrophy"
+        }
+      ],
+      "context": "lmark symptoms of flushing, wheezing, and diarrhea. Diagnosis is best achieved with a multimodality approach including biochemical investigation, radiological and nuclear imaging, and finally histological (tissue biopsy) confirmation where possible. The occurrence of episodic facial flushing and/or chronic diarrhea not diagnosed by standard tests as being a result of more common causes should lead to suspicion of carcinoid syndrome. In the past, measurement of 24-hour urinary excretion of 5-hydroxyendolacetic acid (5-HIAA), a product of the breakdown (metabolism) of serotonin, in a patient on a low serotonin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Diarrhea Chronic with Villous Atrophy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "appendicitis",
+      "preferred_label": "appendicitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005649",
+        "orpha": null,
+        "umls": "UMLS:C0003615",
+        "mesh": "MESH:D001064"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005649",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8337",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007149",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:541",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1630",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001064",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35145",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:74400008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003615",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1881255733",
+          "display": null
+        }
+      ],
+      "context": "oms is not apparent. Other investigations that may be helpful, depending on the location of the primary tumor, include CT scan, ultrasound, MRI and endoscopy. Sometimes the diagnosis is established incidentally at the time of surgery for another suspected condition such as intestinal obstruction or appendicitis.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Appendicitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "carcinoid",
+      "preferred_label": "carcinoid",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005369",
+        "orpha": null,
+        "umls": "UMLS:C0007095",
+        "mesh": "MESH:D002276"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005369",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004243",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0100570",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:209.60",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8241/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2838",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002276",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200396",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2915",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:443492008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0007095",
+          "display": null
+        }
+      ],
+      "context": "factors such as smoking and dietary intake, however, further research is needed to confirm these findings. In the majority of cases tumors are slow-growing and can produce hormonal chemical substances such as serotonin, bradykinins, tachykinins and prostaglandins. If the original carcinoid cells spread (metastasize) to the liver, these substances are no longer broken down to their inactive form and are released into the systemic (main) circulation, causing the signs and symptoms of carcinoid syndrome. When tumors affect organs other than the gastrointestinal tract, such as the ovarie",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carcinoid Heart Disease",
+        "Carcinoid Tumors Intestinal",
+        "Malignant Carcinoid Syndrome"
+      ],
+      "pubtator_normalized_name": "Carcinoid Tumor",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diarrhea",
+      "preferred_label": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001673",
+        "orpha": null,
+        "umls": "UMLS:C1290807",
+        "mesh": "MESH:D003967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001673",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13250",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002014",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:009.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:713159",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2987",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128333008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290807",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:116759077",
+          "display": null
+        }
+      ],
+      "context": "hial (airway) tumors are most often seen in the fifth decade but can affect people at any age. Carcinoid syndrome may be more prevalent than suspected because diagnosis is difficult and sometimes overlooked; some patients may not exhibit all three of the hallmark symptoms of flushing, wheezing, and diarrhea. Diagnosis is best achieved with a multimodality approach including biochemical investigation, radiological and nuclear imaging, and finally histological (tissue biopsy) confirmation where possible. The occurrence of episodic facial flushing and/or chronic diarrhea not diagnosed by standard tests a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diarrhea 5 With Tufting Enteropathy Congenital",
+        "Diarrhea 3 Secretory Sodium Congenital",
+        "Dysentery"
+      ],
+      "pubtator_normalized_name": "Diarrhea",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

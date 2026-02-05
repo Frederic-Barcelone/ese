@@ -1,0 +1,35 @@
+{
+  "doc_id": "Endocarditis-Infective",
+  "doc_filename": "Endocarditis-Infective.pdf",
+  "top_entities": [
+    {
+      "name": "bacterial infectious disease",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "infective endocarditis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1762,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MED",
+  "document_type_name": "Patient Education & Advocacy",
+  "document_type_group": "Patient-Centric Documentation",
+  "classification_confidence": 0.4,
+  "title": "Infective Endocarditis: Bacterial Infection of Heart Valves",
+  "short_description": "Clinical overview of infective endocarditis, a bacterial infection affecting the heart's inner lining and valves that can lead to heart failure if untreated.",
+  "long_description": "This clinical document provides an overview of infective endocarditis, a serious bacterial infection that affects the endocardium (inner lining of the heart muscle) and primarily targets the heart valves. The document explains the pathophysiology of the condition, highlighting how untreated bacterial proliferation can lead to valve destruction and subsequent heart failure. It also describes the formation of bacterial emboli (small clots) that can travel through the bloodstream and cause blockages in small arteries throughout the body, potentially resulting in serious complications including brain damage when these clots lodge in critical organs.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:19:12.229875"
+}

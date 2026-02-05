@@ -1,0 +1,35 @@
+{
+  "doc_id": "Filippi-Syndrome",
+  "doc_filename": "Filippi-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "mental retardation",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "FILIPPI syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2051,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Filippi Syndrome: Clinical Overview and Diagnostic Characteristics",
+  "short_description": "Clinical document describing Filippi syndrome, an extremely rare autosomal recessive genetic disorder characterized by distinctive facial features, digital abnormalities, and developmental delays.",
+  "long_description": "This clinical reference document provides a comprehensive overview of Filippi syndrome, an extremely rare congenital genetic disorder transmitted through autosomal recessive inheritance. The document details the characteristic clinical manifestations including distinctive facial appearance, syndactyly (webbing or fusion of fingers and toes), clinodactyly of the fifth fingers, microcephaly, growth delays, and varying degrees of intellectual disability. It outlines the diagnostic approach which relies on thorough clinical evaluation of characteristic physical findings at birth or during early infancy, supplemented by specialized imaging techniques when necessary. This resource serves as a clinical reference for healthcare professionals involved in the diagnosis and management of this rare genetic condition.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:37:19.221517"
+}

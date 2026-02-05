@@ -1,0 +1,325 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:33:18.119005",
+  "document": "Fatal-Familial-Insomnia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fatal-Familial-Insomnia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "sporadic fatal insomnia",
+      "preferred_label": "sporadic fatal insomnia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A81.9",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0035614",
+        "orpha": "Orphanet:586130",
+        "umls": "UMLS:C5567889",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0035614",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22349",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A81.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1799312",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:586130",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5567889",
+          "display": null
+        }
+      ],
+      "context": "FFlis an extremely rare disorder. The exact incidence and prevalence of the disorder is unknown. The sporadic form of FFI, known as sporadic fatal insomnia (SFI), is extremely rare and has only been described in the medical literature in about two dozen people. Collectively, prion disorders affect about 1 in 1,000,000 million people in the general population per year. Genetic prion diseases are believed to make up about 15% of all individuals with pri",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "prion diseases",
+      "preferred_label": "prion disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005429",
+        "orpha": null,
+        "umls": "UMLS:C0162534",
+        "mesh": "MESH:D017096"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005429",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:649",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004720",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:046.19",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:56445",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017096",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200186",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128346",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230284004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0162534",
+          "display": null
+        }
+      ],
+      "context": "order is unknown. The sporadic form of FFI, known as sporadic fatal insomnia (SFI), is extremely rare and has only been described in the medical literature in about two dozen people. Collectively, prion disorders affect about 1 in 1,000,000 million people in the general population per year. Genetic prion diseases are believed to make up about 15% of all individuals with prion diseases. Because rare diseases often go undiagnosed or misdiagnosed, it is difficult to determine their true frequency in the general population. FFI affects men and women in equal numbers. The average age of onset is 45-50 years old,",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Alzheimer Disease Familial Early-Onset With Coexisting Amyloid And Prion Pathology",
+        "Huntington Disease-Like 1"
+      ],
+      "pubtator_normalized_name": "Prion Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "rare diseases",
+      "preferred_label": "rare diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021200",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D035583"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021200",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D035583",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C4873",
+          "display": null
+        }
+      ],
+      "context": "rare and has only been described in the medical literature in about two dozen people. Collectively, prion disorders affect about 1 in 1,000,000 million people in the general population per year. Genetic prion diseases are believed to make up about 15% of all individuals with prion diseases. Because rare diseases often go undiagnosed or misdiagnosed, it is difficult to determine their true frequency in the general population. FFI affects men and women in equal numbers. The average age of onset is 45-50 years old, although the disorder has been described occurring in individuals in their teens and as late as",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rare Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FFI",
+      "preferred_label": "FFI",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A81.83",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010808",
+        "orpha": "Orphanet:466",
+        "umls": "UMLS:C0206042",
+        "mesh": "MESH:D034062"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010808",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050433",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6429",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A81.83",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:046.72",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:104768",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D034062",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10072077",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200191",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84711",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1920",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:600072",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:466",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:83157008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206042",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:669154658",
+          "display": null
+        }
+      ],
+      "context": "FFlis an extremely rare disorder. The exact incidence and prevalence of the disorder is unknown. The sporadic form of FFI, known as sporadic fatal insomnia (SFI), is extremely rare and has only been described in the medical literature in about two dozen people. Collectively, prion disorders affect about 1 in 1,000,000 million people in the general population per year. Genetic prion diseases are believed to make up abo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

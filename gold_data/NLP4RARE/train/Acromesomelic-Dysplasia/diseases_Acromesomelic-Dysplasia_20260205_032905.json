@@ -1,0 +1,453 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:29:05.136938",
+  "document": "Acromesomelic-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acromesomelic-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Maroteaux type",
+      "preferred_label": "Spondyloepimetaphyseal dysplasia, Maroteaux type",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:263482",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:263482",
+          "display": null
+        }
+      ],
+      "context": "forearms and abnormal shortening of bones of the lower legs. The very short hands, fingers, feet, and toes are characteristic. These findings are apparent during the first years of life. As of 2005, there were about 10 affected individuals of Hunter-Thompson type ADM and about 40 to 50 patients of Maroteaux type AMD reported in the medical literature. The number of cases of Grebe type ADM is not known, but that type is believed to be almost entirely limited to persons living in Brazil.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Grebe type",
+      "preferred_label": "Acromesomelic dysplasia, Grebe type",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2098",
+        "umls": null,
+        "mesh": "C537915"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2098",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537915",
+          "display": "Chondrodysplasia Grebe type"
+        }
+      ],
+      "context": "ands, fingers, feet, and toes are characteristic. These findings are apparent during the first years of life. As of 2005, there were about 10 affected individuals of Hunter-Thompson type ADM and about 40 to 50 patients of Maroteaux type AMD reported in the medical literature. The number of cases of Grebe type ADM is not known, but that type is believed to be almost entirely limited to persons living in Brazil.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chondrodysplasia Grebe type",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dwarfism",
+      "preferred_label": "Schwartz-Jampel syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:800",
+        "umls": null,
+        "mesh": "D010009"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:800",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D010009",
+          "display": "Osteochondrodysplasias"
+        }
+      ],
+      "context": "Acromesomelic dysplasia is an extremely rare, inherited, progressive skeletal disorder that results in a particular form of short stature known as short-limb dwarfism. The disorder is characterized by acromelia and mesomelia. Mesomelia describes the shortening of the bones of the forearms and lower legs relative to the upper parts of those limbs. Acromelia is the shortening of the bones of the hands and feet. Thus, the short stature of affected individuals is th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Stuve-Wiedemann syndrome"
+      ],
+      "pubtator_normalized_name": "Osteochondrodysplasias",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Acromesomelic dysplasia",
+      "preferred_label": "acromesomelic dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019696",
+        "orpha": "Orphanet:93437",
+        "umls": "UMLS:C5235036",
+        "mesh": "MESH:C535658"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019696",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080049",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1710812",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535658",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:724",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:602875",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93437",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5235036",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2002361676",
+          "display": null
+        }
+      ],
+      "context": "Acromesomelic dysplasia is an extremely rare, inherited, progressive skeletal disorder that results in a particular form of short stature known as short-limb dwarfism. The disorder is characterized by acromelia and mesomelia. Mesomelia describes the shortening of the bones of the forearms and lower legs relative to the up",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Acromesomelic dysplasia Maroteaux type",
+        "Chondrodysplasia Grebe type",
+        "Acromesomelic dysplasia Campailla-Martinelli type"
+      ],
+      "pubtator_normalized_name": "Acromesomelic dysplasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "Acromesomelic dysplasia is an extremely rare, inherited, progressive skeletal disorder that results in a particular form of short stature known as short-limb dwarfism. The disorder is characterized by acromelia and mesomelia. Mesomelia describes the shortening of the bones of the forearms and lower legs relative to the upper parts of those limbs. Acromelia is the shortening of the bones of the hands and feet. Thus, the short stature",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ADM",
+      "preferred_label": "ADM",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043317",
+        "orpha": "Orphanet:645617",
+        "umls": "UMLS:C0406645",
+        "mesh": "MESH:C538250"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043317",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9907",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:96065",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538250",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200275",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:645617",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:238935002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0406645",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:727262285",
+          "display": null
+        }
+      ],
+      "context": "ls is the result of unusually short forearms and abnormal shortening of bones of the lower legs. The very short hands, fingers, feet, and toes are characteristic. These findings are apparent during the first years of life. As of 2005, there were about 10 affected individuals of Hunter-Thompson type ADM and about 40 to 50 patients of Maroteaux type AMD reported in the medical literature. The number of cases of Grebe type ADM is not known, but that type is believed to be almost entirely limited to persons living in Brazil.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "AMD",
+      "preferred_label": "AMD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005150",
+        "orpha": "Orphanet:279",
+        "umls": "UMLS:C0242383",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005150",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10871",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001365",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:362.50",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:116576",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84391",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:603075",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:279",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:267718000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0242383",
+          "display": null
+        },
+        {
+          "system": "birnlex",
+          "code": "birnlex:12812",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1514301548",
+          "display": null
+        }
+      ],
+      "context": "bnormal shortening of bones of the lower legs. The very short hands, fingers, feet, and toes are characteristic. These findings are apparent during the first years of life. As of 2005, there were about 10 affected individuals of Hunter-Thompson type ADM and about 40 to 50 patients of Maroteaux type AMD reported in the medical literature. The number of cases of Grebe type ADM is not known, but that type is believed to be almost entirely limited to persons living in Brazil.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

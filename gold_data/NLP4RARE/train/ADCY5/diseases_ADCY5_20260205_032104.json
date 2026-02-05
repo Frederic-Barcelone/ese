@@ -1,0 +1,91 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:21:04.094219",
+  "document": "ADCY5.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ADCY5.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ADCY5-related dyskinesia",
+      "preferred_label": "ADCY5-related dyskinesia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:G51.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0800028",
+        "orpha": "Orphanet:324588",
+        "umls": "UMLS:C1847627",
+        "mesh": "MESH:C564676"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0800028",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:12722",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G51.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:338280",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C564676",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:606703",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:324588",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:763352005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1847627",
+          "display": null
+        }
+      ],
+      "context": "ADCY5-related dyskinesia affects males and females in equal numbers. The exact number of people who have this disorder is unknown. Rare disorders like ADCY5-dyskinesia often go misdiagnosed or undiagnosed, making it difficult to determine their true frequency in the general population. The disorder is almost certainly unde",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

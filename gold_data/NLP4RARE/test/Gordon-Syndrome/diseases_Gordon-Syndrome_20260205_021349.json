@@ -1,0 +1,297 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:13:49.597771",
+  "document": "Gordon-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Gordon-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Gordon syndrome",
+      "preferred_label": "Gordon syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007252",
+        "orpha": "Orphanet:376",
+        "umls": "UMLS:C0220666",
+        "mesh": "MESH:C537288"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007252",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111607",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2553",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:579.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:66314",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537288",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1199",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:114300",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:376",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:237850008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0220666",
+          "display": null
+        }
+      ],
+      "context": "Gordon syndrome affects males and females in equal numbers. More than 40 people in five families (kindreds) have been reported in the medical literature. In most people, physical features associated with Gordon syndrome are obvious at birth (congenital). In most people, Gordon syndrome is diagnosed at birth by a t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Powell Venencie Gordon syndrome",
+        "Pseudohypoaldosteronism",
+        "Gordon syndrome"
+      ],
+      "pubtator_normalized_name": "Cerebellar Ataxia and Hypogonadotropic Hypogonadism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cleft palate",
+      "preferred_label": "cleft palate",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q35",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016064",
+        "orpha": "Orphanet:2014",
+        "umls": "UMLS:C2981150",
+        "mesh": "MESH:D002972"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016064",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:674",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q35",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:Q35",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:749.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:756015",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D002972",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10009269",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C87069",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2014",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:63567004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2981150",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2129534948",
+          "display": null
+        }
+      ],
+      "context": "Gordon syndrome are obvious at birth (congenital). In most people, Gordon syndrome is diagnosed at birth by a thorough clinical evaluation and the identification of characteristic physical findings. Many of the physical features associated with Gordon syndrome (e.g., camptodactyly, clubfoot, and/or cleft palate) are obvious at birth (congenital).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cleft Soft Palate",
+        "Orofacial Cleft 1",
+        "Schilbach-Rott Syndrome Ocular Hypotelorism Submucosal Cleft Palate and Hypospadias"
+      ],
+      "pubtator_normalized_name": "Cleft Palate",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "clubfoot",
+      "preferred_label": "clubfoot",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:Q66.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007342",
+        "orpha": null,
+        "umls": "UMLS:C0009081",
+        "mesh": "MESH:D003025"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007342",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11836",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:Q66.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:754.51",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3130",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003025",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84641",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:119800",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:397932003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009081",
+          "display": null
+        }
+      ],
+      "context": "associated with Gordon syndrome are obvious at birth (congenital). In most people, Gordon syndrome is diagnosed at birth by a thorough clinical evaluation and the identification of characteristic physical findings. Many of the physical features associated with Gordon syndrome (e.g., camptodactyly, clubfoot, and/or cleft palate) are obvious at birth (congenital).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Epiphyseal dysplasia multiple 4",
+        "Ehlers-Danlos Syndrome musculocontractural type 1",
+        "TARP syndrome"
+      ],
+      "pubtator_normalized_name": "Clubfoot",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

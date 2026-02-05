@@ -1,0 +1,23 @@
+{
+  "doc_id": "Cystic-Fibrosis",
+  "doc_filename": "Cystic-Fibrosis.pdf",
+  "file_size_bytes": 2116,
+  "file_size_human": "2.1 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Cystic Fibrosis Diagnostic Testing and Screening Methods",
+  "short_description": "Clinical document describing diagnostic approaches for cystic fibrosis including sweat testing, genetic testing, and newborn screening protocols.",
+  "long_description": "This clinical reference document outlines the comprehensive diagnostic framework for cystic fibrosis (CF), covering the standard sweat test procedure that measures salt concentration in sweat, FDA-approved genetic testing methods including the Tag-It Cystic Fibrosis Kit for DNA analysis, and universal newborn screening programs implemented across all 50 U.S. states. The document details the immunoreactive trypsinogen (IRT) assay used in newborn screening, explaining how elevated trypsinogen levels in dried blood spots can indicate CF, and describes the follow-up testing protocols including confirmatory sweat testing and molecular genetic analysis for definitive diagnosis.",
+  "document_date": "2005-05-01T00:00:00",
+  "document_date_source": "content",
+  "extraction_timestamp": "2026-02-03T18:20:50.241009"
+}

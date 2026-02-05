@@ -1,0 +1,229 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:37:25.972969",
+  "document": "Arteriovenous-Malformation.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Arteriovenous-Malformation.pdf",
+  "total_candidates": 63,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AVM",
+      "long_form": "Arteriovenous malformation",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "M that was treated. They occur throughout life, Arteriovenous malformation (AVM) is a vascular lesion that is a tangle of vessels of varying but the peak onset of symptoms is 35-40 years of age.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "AVMs",
+      "long_form": "arteriovenous malformations",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "sizes in which there is one or more direct connections between the arterial and venous circulations. In the lesion there is no capillary bed, which is part of normal tissue. Brain AVMs are often presumed to be congenital, but there is no direct evidence that they form in utero. The distribution of age at detection for brain AVMs is normally-distributed with the mean age in the mid-30’s. Although a small number of AVMs manifest themselves at or shortly after birth, most of them pr",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "A-V",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "veling through the abnormal fistulous connections to flow rapidly. The low resistance of the direct A-V connections, termed fistulas, results in very high flow rates in the vessels leading to and within ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "bed",
+      "matched_text": "bed",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:90001"
+    },
+    {
+      "name": "congenital",
+      "matched_text": "congenital",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.6,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "cerebrovascular disorder",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:I60-I69",
+      "orpha": null
+    },
+    {
+      "name": "Autosomal dominant optic atrophy and cataract",
+      "matched_text": "autosomal dominant",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:67036"
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hereditary hemorrhagic telangiectasia",
+      "matched_text": "hereditary hemorrhagic telangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I78.0",
+      "orpha": "Orphanet:774"
+    },
+    {
+      "name": "capillary malformation",
+      "matched_text": "capillary malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:211247"
+    },
+    {
+      "name": "Syndrome",
+      "matched_text": "syndromes",
+      "abbreviation": null,
+      "confidence": 0.7889410734176636,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "syndromic disease",
+      "matched_text": "syndromes",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Wyburn-Mason syndrome",
+      "matched_text": "Wyburn-Mason syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:53719"
+    },
+    {
+      "name": "Wiskott-Aldrich syndrome",
+      "matched_text": "was",
+      "abbreviation": "WAS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D82.0",
+      "orpha": "ORPHA:906"
+    },
+    {
+      "name": "pathologic fistula",
+      "matched_text": "fistulas",
+      "abbreviation": null,
+      "confidence": 0.9816126823425293,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Cerebrovascular accident",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 0.9585702419281006,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CAPILLARY MALFORMATION-ARTERIOVENOUS MALFORMATION (disorder)",
+      "matched_text": "capillary malformation-AVM syndrome",
+      "abbreviation": null,
+      "confidence": 0.907938814163208,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Wyburn Mason's syndrome",
+      "matched_text": "Wyburn-Mason syndrome",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "arteriovenous hemangioma/malformation",
+      "matched_text": "Arteriovenous malformation",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Congenital arteriovenous malformation",
+      "matched_text": "Arteriovenous malformation",
+      "abbreviation": null,
+      "confidence": 0.9629726409912109,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Cerebrovascular Disorders",
+      "matched_text": "vascular lesion",
+      "abbreviation": null,
+      "confidence": 0.7817403078079224,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

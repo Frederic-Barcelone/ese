@@ -1,0 +1,67 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:29:43.174393",
+  "document": "Ichthyosis-Lamellar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Ichthyosis-Lamellar.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 2,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Not specified",
+      "guideline_year": null,
+      "organization": "Not specified",
+      "target_condition": "lamellar ichthyosis",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Ichthyosis-Lamellar_1",
+          "recommendation_type": "treatment",
+          "population": "patients with lamellar ichthyosis",
+          "condition": "lamellar ichthyosis",
+          "severity": "non-severe",
+          "action": "treat topically with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and mild keratolytics",
+          "action_description": null,
+          "preferred": "skin barrier repair formulas containing ceramides or cholesterol",
+          "alternatives": [
+            "moisturizers with petrolatum or lanolin",
+            "mild keratolytics containing alpha-hydroxy acids"
+          ],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Ichthyosis-Lamellar",
+          "source_text": "Lamellar ichthyosis is treated topically with skin barrier repair formulas containing ceramides or cholesterol, moisturizers with petrolatum or lanolin, and mild keratolytics (products containing alpha-hydroxy acids",
+          "page_num": null
+        },
+        {
+          "recommendation_id": "rec_Ichthyosis-Lamellar_2",
+          "recommendation_type": "treatment",
+          "population": "patients with severe lamellar ichthyosis",
+          "condition": "severe lamellar ichthyosis",
+          "severity": "severe",
+          "action": "treat systemically with oral synthetic retinoids",
+          "action_description": null,
+          "preferred": "oral synthetic retinoids",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": null,
+          "duration": null,
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "conditional",
+          "references": [],
+          "source": "Ichthyosis-Lamellar",
+          "source_text": "Severe lamellar ichthyosis can be treated systemically with oral synthetic retinoids. Retinoids are only used in severe cases of lamellar ichthyosis due to their known bone toxicity and other complications.",
+          "page_num": null
+        }
+      ],
+      "source_document": "Ichthyosis-Lamellar",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

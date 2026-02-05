@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:34:56.819342",
+  "document": "Dentin-Dysplasia-Type-II.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Dentin-Dysplasia-Type-II.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "coronal dentin dysplasia",
+      "preferred_label": "coronal dentin dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007437",
+        "orpha": "Orphanet:99791",
+        "umls": "UMLS:C1527284",
+        "mesh": "D003784"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007437",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1806",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:520.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:315928",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:125420",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99791",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:109494000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1527284",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003784",
+          "display": "Dental Pulp Calcification"
+        }
+      ],
+      "context": "A diagnosis of coronal dentin dysplasia is made based upon identification of characteristic symptoms, a detailed patient history, and a thorough clinical evaluation. X-rays may reveal abnormal coronal pulp formation, obliteration of the pulp chambers, pulp stones or thistle-shaped deformity of the pulp chamber.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dental Pulp Calcification",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

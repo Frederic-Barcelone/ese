@@ -1,0 +1,190 @@
+{
+  "run_id": "RUN_20260204_185220_21940d8e99aa",
+  "timestamp": "2026-02-04T19:58:31.631351",
+  "document": "Adult-Neuronal-Ceroid-Lipofuscinosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Adult-Neuronal-Ceroid-Lipofuscinosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "ceroid lipofuscinoses",
+      "preferred_label": "ceroid lipofuscinoses",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E75.4",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016295",
+        "orpha": "Orphanet:216",
+        "umls": "UMLS:C0027877",
+        "mesh": "D009472"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016295",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14503",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10739",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E75.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10326",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200573",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C61257",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:256730",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:216",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42012007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027877",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1568332253",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009472",
+          "display": "Neuronal Ceroid-Lipofuscinoses"
+        }
+      ],
+      "context": "Adult neuronal ceroid lipofuscinoses are extremely rare disorders. The prevalence is estimated to be about 1.5 people per 9,000,000 in the general population. Prevalence is the total numbers of individuals with a disease at a given time. Studies into the incidence of ANCL have varied based on the country conducting the study. Estimate",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Neuronal Ceroid-Lipofuscinoses",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ANCL",
+      "preferred_label": "ANCL",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019260",
+        "orpha": "Orphanet:79262",
+        "umls": "UMLS:C0022797",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019260",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10973",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7230",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201244",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1341",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79262",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:62009002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022797",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1460031344",
+          "display": null
+        }
+      ],
+      "context": "Adult neuronal ceroid lipofuscinoses are extremely rare disorders. The prevalence is estimated to be about 1.5 people per 9,000,000 in the general population. Prevalence is the total numbers of individuals with a disease at a given time. Studies into the incidence of ANCL have varied based on the country conducting the study. Estimates range from 1.5-7 infants per 100,000 live births. Incidence is the number of new people born with a disorder in a given year.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

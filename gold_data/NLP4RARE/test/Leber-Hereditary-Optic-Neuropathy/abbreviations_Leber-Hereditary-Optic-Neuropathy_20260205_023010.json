@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:30:10.288694",
+  "document": "Leber-Hereditary-Optic-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Leber-Hereditary-Optic-Neuropathy.pdf",
+  "total_candidates": 27,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "LHON",
+      "long_form": "Leber hereditary optic neuropathy",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Leber hereditary optic neuropathy (LHON) is mainly characterized by bilateral, painless subacute loss of central vision during young adult life. In most cases, symptoms begin with one eye first, followed a few weeks later by visual failure in the other eye. Extremely rarely there may be neurologic abnormalities, such as peripheral neuropathy, postural tremor, nonspecific myopathy, and movement disorders. LHON is caused by mutations in m",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "DNA",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " tremor, nonspecific myopathy, and movement disorders. LHON is caused by mutations in mitochondrial DNA and it is transmitted by maternal inheritance. LHON affects approximately 1:50,000 people. Many car",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Leber hereditary optic neuropathy",
+      "matched_text": "Leber hereditary optic neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:104"
+    },
+    {
+      "name": "Leber hereditary optic neuropathy",
+      "matched_text": "LHON",
+      "abbreviation": "LHON",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "H47.2",
+      "orpha": "ORPHA:104"
+    },
+    {
+      "name": "Macrodactyly of toes, bilateral",
+      "matched_text": "bilateral",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:295245"
+    },
+    {
+      "name": "peripheral neuropathy",
+      "matched_text": "peripheral neuropathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "movement disorders",
+      "matched_text": "movement disorders",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "myopathy",
+      "matched_text": "myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "DNA",
+      "matched_text": "DNA",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "DISC",
+      "matched_text": "disc",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

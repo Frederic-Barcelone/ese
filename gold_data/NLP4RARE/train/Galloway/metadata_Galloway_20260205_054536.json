@@ -1,0 +1,30 @@
+{
+  "doc_id": "Galloway",
+  "doc_filename": "Galloway.pdf",
+  "top_entities": [
+    {
+      "name": "Galloway-Mowat syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1536,
+  "file_size_human": "1.5 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.75,
+  "title": "Galloway-Mowat Syndrome: Differential Diagnosis and Clinical Presentation",
+  "short_description": "Clinical document discussing the varied symptoms and differential diagnosis considerations for Galloway-Mowat syndrome.",
+  "long_description": "This clinical document addresses the diagnostic challenges associated with Galloway-Mowat syndrome, emphasizing the complexity of its clinical presentation. The document highlights how the syndrome's varied symptoms can overlap with numerous other disorders, making differential diagnosis particularly challenging for healthcare providers. It appears to focus on the heterogeneous nature of the condition's manifestations and the importance of considering multiple differential diagnoses when evaluating patients with similar symptom profiles.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:45:36.583291"
+}

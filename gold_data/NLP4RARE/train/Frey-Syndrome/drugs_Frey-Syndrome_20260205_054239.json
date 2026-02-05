@@ -1,0 +1,219 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:42:39.073629",
+  "document": "Frey-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Frey-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "parotid",
+      "preferred_name": "parotid",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "2465567",
+          "display": null
+        }
+      ],
+      "context": "The exact incidence of Frey syndrome is unknown. The disorder most often occurs as a complication of the surgical removal of a parotid gland (parotidectomy). The percentage of individuals who develop Frey syndrome after a parotidectomy is controversial and reported estimates range fr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "lodine",
+      "preferred_name": "Lodine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D017308",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "202998",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017308",
+          "display": "Etodolac"
+        }
+      ],
+      "context": "ed upon identification of characteristic symptoms, a detailed patient history, a thorough clinical evaluation and a specialized test called the Minor lodine-Starch Test. During this test, an iodine solution is applied to the affected areas of the face. Then, a starch powder such as corn starch is applied ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Etodolac",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "iodine",
+      "preferred_name": "Iodine",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D007455",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "5933",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007455",
+          "display": "Iodine"
+        }
+      ],
+      "context": "symptoms, a detailed patient history, a thorough clinical evaluation and a specialized test called the Minor lodine-Starch Test. During this test, an iodine solution is applied to the affected areas of the face. Then, a starch powder such as corn starch is applied over the iodine solution. Individuals are",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Iodine-125",
+        "Iodine-131",
+        "Iodine-123"
+      ],
+      "pubtator_normalized_name": "Iodine",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "lemon",
+      "preferred_name": "Lemon",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C052901",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "901382",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C052901",
+          "display": "lemongrass oil"
+        }
+      ],
+      "context": "ch powder such as corn starch is applied over the iodine solution. Individuals are then given an oral stimulus usually a highly acidic food such as a lemon wedge. In affected individuals, discoloration (usually purple) due to excessive sweating occurs on the affected areas.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "lemon oil",
+        "lemonomycin",
+        "lemonomycinone"
+      ],
+      "pubtator_normalized_name": "lemongrass oil",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

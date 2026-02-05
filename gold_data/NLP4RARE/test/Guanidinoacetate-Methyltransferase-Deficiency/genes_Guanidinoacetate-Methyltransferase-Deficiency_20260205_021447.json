@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:14:47.762584",
+  "document": "Guanidinoacetate-Methyltransferase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Guanidinoacetate-Methyltransferase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "GAMT",
+      "hgnc_symbol": "GAMT",
+      "full_name": "guanidinoacetate N-methyltransferase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "4136",
+        "entrez": "2593",
+        "ensembl": "ENSG00000130005",
+        "uniprot": "Q14353",
+        "omim": "601240"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "4136",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "2593",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000130005",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "601240",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q14353",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "382",
+          "disease_name": "Guanidinoacetate methyltransferase deficiency",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "The severity of GAMT varies from patient to patient. Global developmental delays affect all individuals with this disorder and may be the first sign, appearing before other symptoms.The majority of individuals with GAMT deficiency have intellectual disabilities, seizure disorders, muscle weakness, behavior disorders, a",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

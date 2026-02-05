@@ -1,0 +1,54 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:22:07.901977",
+  "document": "Hyperostosis-Frontalis-Interna.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Hyperostosis-Frontalis-Interna.pdf",
+  "total_candidates": 16,
+  "total_validated": 0,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [],
+  "diseases": [
+    {
+      "name": "hyperostosis frontalis interna",
+      "matched_text": "Hyperostosis Frontalis Interna",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:77296"
+    },
+    {
+      "name": "diabetes insipidus",
+      "matched_text": "diabetes insipidus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E23.2",
+      "orpha": null
+    },
+    {
+      "name": "obesity",
+      "matched_text": "obesity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:521399"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,280 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:08:13.629535",
+  "document": "Bowen-Hutterite-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Bowen-Hutterite-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Bowen Hutterite syndrome",
+      "preferred_label": "Bowen Hutterite syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008879",
+        "orpha": "Orphanet:1270",
+        "umls": "UMLS:C1859405",
+        "mesh": "MESH:C537081"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008879",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050684",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5950",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:349160",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537081",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:869",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:211180",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1270",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:711153001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1859405",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1713786719",
+          "display": null
+        }
+      ],
+      "context": "Bowen Hutterite syndrome is a rare genetic disorder that is apparent at birth (congenital). The disorder is characterized by growth delays before birth (intrauterine growth retardation); failure to grow and gain weight at the expected rate (failure to thrive) during infancy; malformations of the head and facial (craniofaci",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "undescended testes",
+      "preferred_label": "undescended testes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009047",
+        "orpha": null,
+        "umls": "UMLS:C0010417",
+        "mesh": "MESH:D003456"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009047",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:11383",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004562",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000028",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:752.51",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8192",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003456",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C12326",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:219050",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:204878001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0010417",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1134950387",
+          "display": null
+        }
+      ],
+      "context": "ncy; malformations of the head and facial (craniofacial) area, resulting in a distinctive appearance; and other physical abnormalities. These may include restricted joint movements, abnormal deviation (clinodactyly) or permanent flexion (camptodactyly) of the fifth fingers, foot deformities, and/or undescended testes (cryptorchidism) in affected males. Some affected infants may also have kidney (renal), brain, and/or other malformations. Bowen Hutterite syndrome is inherited as an autosomal recessive trait. Bowen Hutterite syndrome appears to affect males and females in equal numbers. Since the disorder was ori",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "genetic disorder",
+      "preferred_label": "genetic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003847",
+        "orpha": null,
+        "umls": "UMLS:C0019247",
+        "mesh": "MESH:D030342"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003847",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:630",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000508",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5527",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D030342",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3101",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:32895009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019247",
+          "display": null
+        }
+      ],
+      "context": "Bowen Hutterite syndrome is a rare genetic disorder that is apparent at birth (congenital). The disorder is characterized by growth delays before birth (intrauterine growth retardation); failure to grow and gain weight at the expected rate (failure to thrive) during infancy; malformations of the head and facial (craniofacial) area, resulting in a di",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hemochromatosis"
+      ],
+      "pubtator_normalized_name": "Genetic Diseases Inborn",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

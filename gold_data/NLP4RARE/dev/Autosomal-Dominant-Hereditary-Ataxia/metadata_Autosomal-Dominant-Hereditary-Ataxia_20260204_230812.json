@@ -1,0 +1,40 @@
+{
+  "doc_id": "Autosomal-Dominant-Hereditary-Ataxia",
+  "doc_filename": "Autosomal-Dominant-Hereditary-Ataxia.pdf",
+  "top_entities": [
+    {
+      "name": "hereditary ataxia",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Dentatorubral pallidoluysian atrophy",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "ATXN10",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 1746,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Autosomal Dominant Hereditary Ataxia",
+  "short_description": "Clinical overview of hereditary ataxias, including prevalence, demographics, and ethnic variations in specific ataxia subtypes.",
+  "long_description": "This document provides essential information about hereditary ataxias, neurological disorders that affect coordination and balance. It covers the epidemiological aspects of these conditions, noting that they affect approximately 150,000 people in the United States with equal prevalence between males and females. The document highlights the variability in age of onset among different forms of hereditary ataxia and discusses ethnic predispositions, specifically noting that SCA3 is more prevalent in Portuguese populations, SCA10 in Mexican populations, and DRPLA in Japanese populations. This information is valuable for understanding the genetic and demographic patterns of these inherited neurological conditions.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T22:08:12.917063"
+}

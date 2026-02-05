@@ -1,0 +1,117 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:41:59.814953",
+  "document": "Retroperitoneal-Fibrosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Retroperitoneal-Fibrosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "fiber",
+      "preferred_name": "fiber",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D004043",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "70727",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D004043",
+          "display": "Dietary Fiber"
+        }
+      ],
+      "context": "Retroperitoneal fibrosis is a rare inflammatory disorder in which abnormal formation of fiber-like tissue (fibrosis) occurs behind the membrane that lines the cavity of the abdomen (peritoneum). This abnormal tissue growth often spreads to aff",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Carbon Fiber"
+      ],
+      "pubtator_normalized_name": "Dietary Fiber",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "methysergide",
+      "preferred_name": "Methysergide",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D008784",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "6911",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008784",
+          "display": "Methysergide"
+        }
+      ],
+      "context": "ibrosis is not known in about two-thirds of the affected individuals (idiopathic). A drug used in the treatment and prevention of migraine headaches (methysergide) may be the cause of this rare disorder in 12 percent of cases. Malignant tumors are associated with retroperitoneal fibrosis in eight percent of aff",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Methysergide",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:51:16.096530",
+  "document": "Paroxysmal-Cold-Hemoglobinuria.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Paroxysmal-Cold-Hemoglobinuria.pdf",
+  "total_candidates": 51,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "RBCs",
+      "long_form": "red blood cells",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "toms and a variety of specialized tests such as a direct antiglobulin test (Coombs) test, which is used to detect certain antibodies that act against red blood cells. A diagnosis of PCH is confirmed by the results of a Donath-Landsteiner test, which can distinguish PCH from other forms of hemolytic anemia. The test consists of incubating a sample of the patient’s serum with normal red blood cells (RBCs) in the cold for 30 minutes and then warming the mixture to body temperature (37C). Hemolysis of the RBCs in this \"bi-phasic\" test indicates a diagnosis of PCH.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PCH",
+      "long_form": "Paroxysmal cold hemoglobinuria",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "ople per 100,000 in the general population. Both the syphilitic and non-syphilitic forms of chronic PCH are exceedingly rare. The prevalence and incidence rates are unknown. Anyone may acquire PCH, but i",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Paroxysmal cold hemoglobinuria",
+      "matched_text": "PCH",
+      "abbreviation": "PCH",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "D59.6",
+      "orpha": "ORPHA:90035"
+    },
+    {
+      "name": "autoimmune hemolytic anemia",
+      "matched_text": "Autoimmune hemolytic anemias",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:98375"
+    },
+    {
+      "name": "viral infectious disease",
+      "matched_text": "viral infection",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "hemolytic anemia",
+      "matched_text": "hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D55-D59",
+      "orpha": null
+    },
+    {
+      "name": "hemoglobinuria",
+      "matched_text": "hemoglobinuria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:R82.3",
+      "orpha": null
+    },
+    {
+      "name": "HELLP syndrome",
+      "matched_text": "Hemolysis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:244242"
+    },
+    {
+      "name": "anemia",
+      "matched_text": "anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Red blood cells",
+      "matched_text": "red blood cells",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    },
+    {
+      "name": "Cold",
+      "matched_text": "cold",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

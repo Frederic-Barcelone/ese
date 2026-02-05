@@ -1,0 +1,117 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:26:03.809358",
+  "document": "Kabuki-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Kabuki-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Kabuki syndrome",
+      "preferred_label": "Kabuki syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016512",
+        "orpha": "Orphanet:2322",
+        "umls": "UMLS:C0796004",
+        "mesh": "MESH:C537705"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016512",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060473",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6810",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:162897",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C537705",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10063935",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200956",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C124837",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1318",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:147920",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2322",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:313426007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0796004",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1104246467",
+          "display": null
+        }
+      ],
+      "context": "Kabuki syndrome affects males and females in equal numbers. The incidence of Kabuki syndrome is unknown, but has been estimated to be somewhere between 1 in 32,000-86,000 individuals in the general population. More than 400 affected individuals who have genetically proven Kabuki syndrome have been reported in the",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Kabuki syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

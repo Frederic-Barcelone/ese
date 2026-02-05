@@ -1,0 +1,131 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:17:25.267477",
+  "document": "Autosomal-Dominant-Hyper-IgE-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Autosomal-Dominant-Hyper-IgE-Syndrome.pdf",
+  "total_candidates": 31,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AD-HIES",
+      "long_form": "Autosomal dominant hyper IgE syndrome",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Autosomal dominant hyper IgE syndrome (AD-HIES) is a rare multisystem primary immunodeficiency disorder. Symptoms often become apparent early during infancy or childhood. The disorder is characterized by repeated bacterial infections of the skin and lungs (pneumonia), skeletal abnormalities, and characteristic facial features. The first symptom is often the development of a dry, red flaky skin rash (eczema) at birth or early during infancy. Re",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "IgE",
+      "long_form": "immunoglobulin E",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Autosomal dominant hyper IgE syndrome (AD-HIES) is a rare multisystem primary immunodeficiency disorder. Symptoms often become apparent early during infancy or childhood. The disorder is characterized by repeated bacterial infections of the skin and lungs (pneumonia), skeletal abnormalities, and characteristic facial features.",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HIES",
+      "long_form": "hyperimmunoglobulin E syndrome",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Autosomal dominant hyper IgE syndrome (AD-HIES) is a rare multisystem primary immunodeficiency disorder. Symptoms often become apparent early during infancy or childhood. The disorder is characterized by repeated bacterial infections of the skin and lungs (pneumonia), skeletal abnormalities, and characteristic facial features. The first symptom",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "STAT3",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "n rash (eczema) at birth or early during infancy. Researchers have discovered that mutations in the STAT3 gene cause AD-HIES in over 60% of the patients. Most cases of AD-HIES occur as the result of a new ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "bacterial infectious disease",
+      "matched_text": "bacterial infections",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "primary immunodeficiency",
+      "matched_text": "primary immunodeficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "atopic eczema",
+      "matched_text": "eczema",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:L20",
+      "orpha": null
+    },
+    {
+      "name": "pneumonia",
+      "matched_text": "pneumonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:J18.9",
+      "orpha": null
+    },
+    {
+      "name": "skin rash",
+      "matched_text": "skin rash",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "AD-HIES",
+      "matched_text": "AD-HIES",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2314"
+    },
+    {
+      "name": "IGE",
+      "matched_text": "IgE",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

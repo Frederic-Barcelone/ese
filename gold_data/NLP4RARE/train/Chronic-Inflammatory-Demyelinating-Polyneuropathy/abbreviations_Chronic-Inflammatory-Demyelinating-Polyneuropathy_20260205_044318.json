@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:43:18.276851",
+  "document": "Chronic-Inflammatory-Demyelinating-Polyneuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chronic-Inflammatory-Demyelinating-Polyneuropathy.pdf",
+  "total_candidates": 36,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CIDP",
+      "long_form": "Chronic Inflammatory Demyelinating Polyneuropathy",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "The exact cause of CIDP is unknown but there are strong indications that CIDP is an autoimmune disorder. Autoimmune disorders occur when the body’s natural defenses (antibodies and lymphocytes) against invading organisms suddenly begin to attack perfectly healthy tissue. The cause of autoimmune disorders is unknown. CIDP",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ties, lumbar puncture looking for elevated spinal fluid protein without many inflammatory cells and MRI imaging of the nerve roots looking for enlargement and signs of inflammation.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Chronic inflammatory demyelinating polyneuropathy",
+      "matched_text": "CIDP",
+      "abbreviation": "CIDP",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G61.8",
+      "orpha": "ORPHA:2932"
+    },
+    {
+      "name": "autoimmune disorder",
+      "matched_text": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

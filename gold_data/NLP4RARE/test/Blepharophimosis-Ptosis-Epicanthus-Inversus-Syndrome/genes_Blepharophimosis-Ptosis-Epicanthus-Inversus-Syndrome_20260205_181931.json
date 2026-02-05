@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:19:31.526295",
+  "document": "Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Blepharophimosis-Ptosis-Epicanthus-Inversus-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "BPES",
+      "hgnc_symbol": "FOXL2",
+      "full_name": "forkhead box L2",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "1092",
+        "entrez": "668",
+        "ensembl": "ENSG00000183770",
+        "uniprot": "P58012",
+        "omim": "605597"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "1092",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "668",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000183770",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "605597",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P58012",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "The four major features that are characteristic symptoms of BPES are present at birth: narrowing of the eye opening (blepharophimosis), droopy eyelids (ptosis), formation of an upward fold of the inner lower eyelid (epicanthus inversus) and increased distance between the eyes (telecanthus). There are two types of BPES, BPES type | and type II, which are both cha",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

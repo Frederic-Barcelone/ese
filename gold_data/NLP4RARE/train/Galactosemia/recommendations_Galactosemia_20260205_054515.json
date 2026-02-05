@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:45:15.590434",
+  "document": "Galactosemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Galactosemia.pdf",
+  "pipeline_version": "0.8",
+  "total_recommendation_sets": 1,
+  "total_recommendations": 1,
+  "recommendation_sets": [
+    {
+      "guideline_name": "Galactosemia Management Guidelines",
+      "guideline_year": null,
+      "organization": "unknown",
+      "target_condition": "galactosemia",
+      "target_population": null,
+      "recommendations": [
+        {
+          "recommendation_id": "rec_Galactosemia_1",
+          "recommendation_type": "treatment",
+          "population": "newborns with galactosemia",
+          "condition": "classic galactosemia and clinical variant galactosemia",
+          "severity": "life-threatening",
+          "action": "early diagnosis and treatment with lactose-restricted (dairy-free) diet",
+          "action_description": null,
+          "preferred": "lactose-restricted (dairy-free) diet",
+          "alternatives": [],
+          "dosing": [],
+          "taper_target": null,
+          "duration": "lifelong",
+          "stop_window": null,
+          "evidence_level": "expert_opinion",
+          "strength": "strong",
+          "references": [],
+          "source": "Galactosemia",
+          "source_text": "Early diagnosis and treatment with a lactose-restricted (dairy-free) diet is absolutely essential to avoid profound intellectual disability, liver failure and death in the newborn period",
+          "page_num": null
+        }
+      ],
+      "source_document": "Galactosemia",
+      "extraction_confidence": 0.85
+    }
+  ]
+}

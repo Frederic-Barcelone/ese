@@ -1,0 +1,40 @@
+{
+  "doc_id": "Guanidinoacetate-Methyltransferase-Deficiency",
+  "doc_filename": "Guanidinoacetate-Methyltransferase-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "movement disorders",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "seizure disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "GAMT",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 2030,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Guanidinoacetate Methyltransferase (GAMT) Deficiency: Clinical Manifestations and Diagnostic Challenges",
+  "short_description": "Clinical overview of GAMT deficiency, a rare metabolic disorder causing developmental delays, intellectual disabilities, and various neurological symptoms.",
+  "long_description": "This document provides a comprehensive clinical overview of Guanidinoacetate Methyltransferase (GAMT) deficiency, a rare inherited metabolic disorder affecting creatine biosynthesis. The content details the variable severity of symptoms across patients, including universal global developmental delays, intellectual disabilities, seizure disorders, muscle weakness, behavioral issues, and movement disorders. The document highlights diagnostic challenges, noting that patients are frequently misdiagnosed with cerebral palsy, autism, or general developmental delays. It also presents epidemiological data showing the rarity of the condition, with prevalence estimates ranging from 1 in 115,000 to 1 in 2,640,000, and only 110 diagnosed cases worldwide as of 2015.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T01:14:47.796602"
+}

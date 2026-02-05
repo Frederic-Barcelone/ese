@@ -1,0 +1,512 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:42:12.426984",
+  "document": "Myopathy-Myofibrillar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Myopathy-Myofibrillar.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Skeletal muscle",
+      "preferred_label": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:364531",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:364531",
+          "display": null
+        }
+      ],
+      "context": "Myofibrillar myopathies are a group of rare genetic neuromuscular disorders that may be diagnosed in childhood but most often appear after 40 years of age. These conditions are highly variable but are characterized by a slowly progressive muscle weakness that can involve skeletal and smooth muscle. Skeletal muscle weakness can be present in the muscles close to the center of the body (proximal) as well as the distal muscles. A weakening of the heart muscle (cardiomyopathy) is common and may manifest as arrhythmia, conduction defects or congestive heart failure. The frequency of myofibrillar myopathies has no",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "DES",
+      "preferred_label": "cerebellar ataxia, intellectual disability, and dysequilibrium",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009133",
+        "orpha": "Orphanet:1766",
+        "umls": "UMLS:C0394006",
+        "mesh": "MESH:C535731"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009133",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050997",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:1998",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:98295",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535731",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10013140",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C114781",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:224050",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:1766",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:230782004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0394006",
+          "display": null
+        }
+      ],
+      "context": "uency of myofibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "congestive heart failure",
+      "preferred_label": "congestive heart failure",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005009",
+        "orpha": null,
+        "umls": "UMLS:C0018802",
+        "mesh": "D006333"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005009",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6000",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000373",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001635",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:428.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9169",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3080",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42343007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018802",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2136808878",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006333",
+          "display": "Heart Failure"
+        }
+      ],
+      "context": "cle weakness that can involve skeletal and smooth muscle. Skeletal muscle weakness can be present in the muscles close to the center of the body (proximal) as well as the distal muscles. A weakening of the heart muscle (cardiomyopathy) is common and may manifest as arrhythmia, conduction defects or congestive heart failure. The frequency of myofibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Heart Failure",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Myofibrillar myopathies",
+      "preferred_label": "myofibrillar myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018943",
+        "orpha": "Orphanet:593",
+        "umls": "UMLS:C2678065",
+        "mesh": "MESH:C580316"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018943",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080307",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10529",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0003715",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:359.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:395532",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C580316",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C83009",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:601419",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:593",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:699269005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2678065",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:125656853",
+          "display": null
+        }
+      ],
+      "context": "Myofibrillar myopathies are a group of rare genetic neuromuscular disorders that may be diagnosed in childhood but most often appear after 40 years of age. These conditions are highly variable but are characterized by a slowly progressive muscle weakness that can involve skeletal and smooth muscle. Skeletal muscle weaknes",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Myopathy Myofibrillar Zasp-Related",
+        "Filaminopathy autosomal dominant",
+        "Myotilinopathy"
+      ],
+      "pubtator_normalized_name": "Myofibrillar Myopathy",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cardiomyopathy",
+      "preferred_label": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I42",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004994",
+        "orpha": "Orphanet:167848",
+        "umls": "UMLS:C0878544",
+        "mesh": "MESH:D009202"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050700",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000318",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I42",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:I42",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:425.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:209232",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009202",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10007636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34830",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:167848",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85898001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0878544",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:282225286",
+          "display": null
+        }
+      ],
+      "context": "conditions are highly variable but are characterized by a slowly progressive muscle weakness that can involve skeletal and smooth muscle. Skeletal muscle weakness can be present in the muscles close to the center of the body (proximal) as well as the distal muscles. A weakening of the heart muscle (cardiomyopathy) is common and may manifest as arrhythmia, conduction defects or congestive heart failure. The frequency of myofibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findin",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiomyopathy Hypertrophic",
+        "Cardiomyopathy Restrictive",
+        "Cardiomyopathies"
+      ],
+      "pubtator_normalized_name": "Cardiomyopathy Dilated",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arrhythmia",
+      "preferred_label": "arrhythmia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007263",
+        "orpha": null,
+        "umls": "UMLS:C0003811",
+        "mesh": "D001145"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007263",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:427.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2039",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2881",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:698247007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003811",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D001145",
+          "display": "Arrhythmias Cardiac"
+        }
+      ],
+      "context": "erized by a slowly progressive muscle weakness that can involve skeletal and smooth muscle. Skeletal muscle weakness can be present in the muscles close to the center of the body (proximal) as well as the distal muscles. A weakening of the heart muscle (cardiomyopathy) is common and may manifest as arrhythmia, conduction defects or congestive heart failure. The frequency of myofibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction stu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Arrhythmia Sinus",
+        "Wolff-Parkinson-White Syndrome",
+        "Cardiac Arrhythmia Ankyrin-B-Related"
+      ],
+      "pubtator_normalized_name": "Arrhythmias Cardiac",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

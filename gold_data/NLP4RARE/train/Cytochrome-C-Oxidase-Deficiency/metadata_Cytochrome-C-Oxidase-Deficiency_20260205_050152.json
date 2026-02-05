@@ -1,0 +1,40 @@
+{
+  "doc_id": "Cytochrome-C-Oxidase-Deficiency",
+  "doc_filename": "Cytochrome-C-Oxidase-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "Cytochrome C Oxidase Deficiency",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "cytochrome C oxidase",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2056,
+  "file_size_human": "2.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.25,
+  "title": "Cytochrome C Oxidase Deficiency: Clinical Overview and Classification",
+  "short_description": "Clinical document describing cytochrome C oxidase deficiency, a rare inherited metabolic disorder affecting mitochondrial energy production with multiple distinct forms.",
+  "long_description": "This clinical document provides a comprehensive overview of cytochrome C oxidase deficiency, a rare inherited metabolic disorder characterized by deficiency of Complex IV enzyme in mitochondria. The document explains how this enzyme deficiency can be localized to skeletal muscle tissues or affect multiple organ systems including heart, kidney, liver, brain, and connective tissue. It details the classification system identifying four distinct forms of the disorder, with particular focus on the benign infantile mitochondrial myopathy form that primarily affects skeletal muscle without cardiac or renal involvement, distinguishing it from more severe systemic variants.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:01:52.564086"
+}

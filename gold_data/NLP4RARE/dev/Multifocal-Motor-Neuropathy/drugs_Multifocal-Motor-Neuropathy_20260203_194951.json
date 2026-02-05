@@ -1,0 +1,58 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T19:49:51.991456",
+  "document": "Multifocal-Motor-Neuropathy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Multifocal-Motor-Neuropathy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "intravenous immunoglobulin",
+      "preferred_name": "immunoglobulins, intravenous",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": null,
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS_CUI",
+          "code": "C0085297",
+          "display": "immunoglobulins, intravenous"
+        }
+      ],
+      "context": "acquired at some point during a person’s life; a person is not born with the disorder. Multifocal motor neuropathy usually responds to treatment with intravenous immunoglobulin. Multifocal motor neuropathy affects both men and women, although men are more frequently affected than women by a ratio of about 2.7:1. Men also ten",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "ner:scispacy_umls",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

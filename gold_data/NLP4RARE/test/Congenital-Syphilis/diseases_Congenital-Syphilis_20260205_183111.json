@@ -1,0 +1,364 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:31:11.128520",
+  "document": "Congenital-Syphilis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Congenital-Syphilis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 4,
+  "total_validated": 4,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Plan",
+      "preferred_label": "Infantile neuroaxonal dystrophy",
+      "abbreviation": "PLAN",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "neurology",
+      "codes": {
+        "icd10": "G23.0",
+        "icd11": "5C64.10",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:35069",
+        "umls": null,
+        "mesh": "D019150"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:35069",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G23.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C64.10",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D019150",
+          "display": "Neuroaxonal Dystrophies"
+        }
+      ],
+      "context": "y the spirochete treponema pallidum and transmitted by an infected mother to the fetus in the womb. Adults transmit syphilis through sexual contact. (For information on syphilis in adults choose “Syphilis” as your search term in the Rare Disease Database). In 1998, the National Syphilis Elimination Plan went into effect. One of the goals of this plan was to reduce the incidence of congenital syphilis (CS) to fewer than 40 cases per 100,000 live births. The incidence of congenital syphilis in newborns under a year old rose in the United States from 180 cases in 1957 to 422 cases in 1972. More recen",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Osteopetrosis and infantile neuroaxonal dystrophy"
+      ],
+      "pubtator_normalized_name": "Neuroaxonal Dystrophies",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Congenital syphilis",
+      "preferred_label": "congenital syphilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A50",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005714",
+        "orpha": "Orphanet:499009",
+        "umls": "UMLS:C0039131",
+        "mesh": "MESH:D013590"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005714",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9856",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007219",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22036",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A50",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:A50",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:090.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:52622",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013590",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84649",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1753",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:499009",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:35742006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039131",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:587996426",
+          "display": null
+        }
+      ],
+      "context": "Congenital syphilis is a chronic infectious disease caused by the spirochete treponema pallidum and transmitted by an infected mother to the fetus in the womb. Adults transmit syphilis through sexual contact. (For information on syphilis in adults choose “Syphilis” as your search term in the Rare Disease Database). In",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Syphilis Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infectious disease",
+      "preferred_label": "infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A00-B99",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005550",
+        "orpha": null,
+        "umls": "UMLS:C0009450",
+        "mesh": "MESH:D003141"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005550",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050117",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0005741",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A00-B99",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:136.9",
+          "display": null
+        },
+        {
+          "system": "IDO",
+          "code": "IDO:0000436",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1057",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003141",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40733004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009450",
+          "display": null
+        }
+      ],
+      "context": "Congenital syphilis is a chronic infectious disease caused by the spirochete treponema pallidum and transmitted by an infected mother to the fetus in the womb. Adults transmit syphilis through sexual contact. (For information on syphilis in adults choose “Syphilis” as your search term in the Rare Disease Database). In 1998, the National Syphilis Eli",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dysentery",
+        "Post-Infectious Disorders",
+        "Travel-Related Illness"
+      ],
+      "pubtator_normalized_name": "Communicable Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syphilis",
+      "preferred_label": "syphilis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005976",
+        "orpha": null,
+        "umls": "UMLS:C0039128",
+        "mesh": "MESH:D013587"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005976",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4166",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007504",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:097.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21447",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013587",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062120",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35055",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:76272004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0039128",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:455894495",
+          "display": null
+        }
+      ],
+      "context": "Congenital syphilis is a chronic infectious disease caused by the spirochete treponema pallidum and transmitted by an infected mother to the fetus in the womb. Adults transmit syphilis through sexual contact. (For information on syphilis in adults choose “Syphilis” as your search term in the Rare Disease Database). In 1998, the National Syphilis Elimination Plan went into effect. One of the goals of this plan was to reduce the incidence of congenital syphilis (CS) to fewer than 4",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Syphilis Congenital",
+        "Syphilis secondary",
+        "Syphilis primary"
+      ],
+      "pubtator_normalized_name": "Syphilis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

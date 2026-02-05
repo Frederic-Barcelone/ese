@@ -1,0 +1,302 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:15:39.794983",
+  "document": "CLOVES-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/CLOVES-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Klippel-Trenaunay syndrome",
+      "preferred_label": "Klippel-Trenaunay syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007864",
+        "orpha": "Orphanet:90308",
+        "umls": "UMLS:C0022739",
+        "mesh": "MESH:D007715"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007864",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2926",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:3122",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9646",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007715",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10051452",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2201030",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84801",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1337",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:149000",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:90308",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:721105004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022739",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1561120378",
+          "display": null
+        }
+      ],
+      "context": "CLOVES syndrome is rare and evident at birth. It affects males and females equally regardless of their race or ethnicity. Many of the patients with CS are misdiagnosed as having other syndromes such as Klippel-Trenaunay syndrome or Proteus syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Proteus syndrome",
+      "preferred_label": "Proteus syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008318",
+        "orpha": "Orphanet:744",
+        "umls": "UMLS:C0085261",
+        "mesh": "MESH:D016715"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008318",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13482",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7475",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:39008",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016715",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85032",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1622",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:176920",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:744",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:23150001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085261",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:760267333",
+          "display": null
+        }
+      ],
+      "context": "CLOVES syndrome is rare and evident at birth. It affects males and females equally regardless of their race or ethnicity. Many of the patients with CS are misdiagnosed as having other syndromes such as Klippel-Trenaunay syndrome or Proteus syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "CLOVES syndrome",
+      "preferred_label": "CLOVES syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0013038",
+        "orpha": "Orphanet:140944",
+        "umls": "UMLS:C2752042",
+        "mesh": "MESH:C567863"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0013038",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080351",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10939",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:442876",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567863",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C177122",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:979",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:612918",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:140944",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:719475006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2752042",
+          "display": null
+        }
+      ],
+      "context": "CLOVES syndrome is rare and evident at birth. It affects males and females equally regardless of their race or ethnicity. Many of the patients with CS are misdiagnosed as having other syndromes such as Klippel-Trenaunay syndrome or Proteus syndrome.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

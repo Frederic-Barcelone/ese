@@ -1,0 +1,116 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:46:52.087040",
+  "document": "Cohen-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Cohen-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "COH1",
+      "preferred_label": "COH1",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008999",
+        "orpha": "Orphanet:193",
+        "umls": "UMLS:C0265223",
+        "mesh": "MESH:C536438"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008999",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111590",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6126",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:759.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78539",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536438",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10049066",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200750",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:986",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:216550",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:193",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:56604005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265223",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1188737383",
+          "display": null
+        }
+      ],
+      "context": "VPS13B/COH1 Cohen syndrome affects males and females in about equal numbers. It appears to occur more frequently in people of Finnish, Amish, Greek/Mediterranean and Irish ancestry. More than 150 cases have been reported in the medical literature and an estimated 500-1,000 individuals have been diagnosed with",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

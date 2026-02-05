@@ -1,0 +1,567 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:51:00.532444",
+  "document": "Giant-Cell-Arteritis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Giant-Cell-Arteritis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Polymyalgia rheumatica",
+      "preferred_label": "polymyalgia rheumatica",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:M35.3",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019735",
+        "orpha": "Orphanet:93569",
+        "umls": "UMLS:C0032533",
+        "mesh": "MESH:D011111"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019735",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:853",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0008518",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4704",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M35.3",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:725",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19393",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011111",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10068240",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C85018",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1593",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93569",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:65323003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0032533",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:103940897",
+          "display": null
+        }
+      ],
+      "context": "h skin edema and redness. It can also present with constitutional symptoms such as polymyalgia, fevers, anorexia, and weight loss, a presentation of LV-GCA. The cause of giant cell arteritis is still unknown but is thought to be from the immune system causing damage to the body’s own blood vessels. Polymyalgia rheumatica is an inflammatory disorder that is closely related to giant cell arteritis and occurs in 40% to 60% of patients with giant call arteritis. 15% to 20% of persons with polymyalgia rheumatica will have giant cell arteritis. Treatments available include steroids (corticosteroids) that will help with s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Juvenile giant cell arteritis"
+      ],
+      "pubtator_normalized_name": "Polymyalgia Rheumatica",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inflammatory disorder",
+      "preferred_label": "inflammatory disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021166",
+        "orpha": null,
+        "umls": "UMLS:C1290884",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021166",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.89",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:452939",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C93210",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128139000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290884",
+          "display": null
+        }
+      ],
+      "context": "can also present with constitutional symptoms such as polymyalgia, fevers, anorexia, and weight loss, a presentation of LV-GCA. The cause of giant cell arteritis is still unknown but is thought to be from the immune system causing damage to the body’s own blood vessels. Polymyalgia rheumatica is an inflammatory disorder that is closely related to giant cell arteritis and occurs in 40% to 60% of patients with giant call arteritis. 15% to 20% of persons with polymyalgia rheumatica will have giant cell arteritis. Treatments available include steroids (corticosteroids) that will help with symptoms and reoccurrence and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Giant cell arteritis",
+      "preferred_label": "giant cell arteritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008538",
+        "orpha": "Orphanet:397",
+        "umls": "UMLS:C1956391",
+        "mesh": "D013700"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008538",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13375",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001209",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9615",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:446.5",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:365495",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10043207",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200260",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35065",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:805",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:187360",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:397",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:400130008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1956391",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1929970386",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D013700",
+          "display": "Giant Cell Arteritis"
+        }
+      ],
+      "context": "Giant cell arteritis (GCA) is the most common blood vessel disorder in persons over 50 years old that causes inflammation of medium and large-sized arteries in the body (vasculitis). GCA causes changes in blood vessel walls leading to poor blood circulation. Arteries most affected in giant cell arteritis are the tempor",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Juvenile giant cell arteritis"
+      ],
+      "pubtator_normalized_name": "Giant Cell Arteritis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "vasculitis",
+      "preferred_label": "vasculitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018882",
+        "orpha": "Orphanet:52759",
+        "umls": "UMLS:C0042384",
+        "mesh": "MESH:D014657"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018882",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:865",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0006803",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:18844",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:12054",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014657",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10047115",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26912",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:52759",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31996006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0042384",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Vasculitis",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:572581721",
+          "display": null
+        }
+      ],
+      "context": "Giant cell arteritis (GCA) is the most common blood vessel disorder in persons over 50 years old that causes inflammation of medium and large-sized arteries in the body (vasculitis). GCA causes changes in blood vessel walls leading to poor blood circulation. Arteries most affected in giant cell arteritis are the temporal artery and other cranial arteries (now called cranial-GCA), but inflammation of the aorta and other large arteries in the body can occur as well and may pres",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Vasculitis Leukocytoclastic Cutaneous",
+        "Vasculitis Central Nervous System",
+        "Vasculitis Lymphocytic Cutaneous Small Vessel"
+      ],
+      "pubtator_normalized_name": "Vasculitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "blindness",
+      "preferred_label": "blindness",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:H54",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001941",
+        "orpha": null,
+        "umls": "UMLS:C0456909",
+        "mesh": "MESH:D001766"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001941",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1432",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:H54",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:369",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:99138",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001766",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97109",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:105597003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0456909",
+          "display": null
+        }
+      ],
+      "context": "arteritis are the temporal artery and other cranial arteries (now called cranial-GCA), but inflammation of the aorta and other large arteries in the body can occur as well and may present differently (now called large vessel-GCA). If left untreated, this can lead to a medical emergency where sudden blindness occurs without early detection and treatment. Signs and symptoms when the temporal or other cranial arteries are involved include arm pain, pulsing headaches on one side or on the back of the head, jaw pain, scalp tenderness, double vision or other visual disturbances, bulging temporal artery that",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Vision Disorders",
+        "Norrie disease",
+        "Blindness Cortical"
+      ],
+      "pubtator_normalized_name": "Blindness",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arteritis",
+      "preferred_label": "arteritis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043494",
+        "orpha": null,
+        "umls": "UMLS:C0003860",
+        "mesh": "MESH:D001167"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043494",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0009011",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0012089",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:13916",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001167",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34399",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:52089001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003860",
+          "display": null
+        }
+      ],
+      "context": "GCA. The cause of giant cell arteritis is still unknown but is thought to be from the immune system causing damage to the body’s own blood vessels. Polymyalgia rheumatica is an inflammatory disorder that is closely related to giant cell arteritis and occurs in 40% to 60% of patients with giant call arteritis. 15% to 20% of persons with polymyalgia rheumatica will have giant cell arteritis. Treatments available include steroids (corticosteroids) that will help with symptoms and reoccurrence and medications that weaken the immune system. Giant cell arteritis most commonly affects those over 50 years old",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Giant Cell Arteritis",
+        "Takayasu Arteritis",
+        "Polyarteritis Nodosa"
+      ],
+      "pubtator_normalized_name": "Arteritis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

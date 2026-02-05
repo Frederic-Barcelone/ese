@@ -1,0 +1,35 @@
+{
+  "doc_id": "Chromosome-10-Distal-Trisomy-10q",
+  "doc_filename": "Chromosome-10-Distal-Trisomy-10q.pdf",
+  "top_entities": [
+    {
+      "name": "Chromosome 10, Distal Trisomy 10q",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "chromosomal disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1722,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.25,
+  "title": "Chromosome 10, Distal Trisomy 10q: Clinical Overview",
+  "short_description": "Clinical documentation of an extremely rare chromosomal disorder affecting the distal portion of chromosome 10q, with equal prevalence in males and females.",
+  "long_description": "This document provides clinical information about chromosome 10, distal trisomy 10q, an extremely rare but well-characterized chromosomal disorder first described by J.J. Yunis in 1974. The condition affects males and females equally and has been documented in more than 35 cases in medical literature. The disorder is characterized by congenital symptoms and physical features that are apparent at birth, representing a specific type of chromosomal abnormality involving the distal portion of the long arm of chromosome 10.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T22:14:17.869776"
+}

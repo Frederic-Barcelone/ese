@@ -1,0 +1,84 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:33:18.118260",
+  "document": "Fatal-Familial-Insomnia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fatal-Familial-Insomnia.pdf",
+  "total_candidates": 31,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "SFI",
+      "long_form": "sporadic fatal insomnia",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "FFlis an extremely rare disorder. The exact incidence and prevalence of the disorder is unknown. The sporadic form of FFI, known as sporadic fatal insomnia (SFI), is extremely rare and has only been described in the medical literature in about two dozen people. Collectively, prion disorders affect about 1 in 1,000,000 million people in the general population per year. Genetic prion diseases are believed to make up about 15% of all individuals with prion dis",
+      "lexicon_source": "inline_definition",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "FFI",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " rare disorder. The exact incidence and prevalence of the disorder is unknown. The sporadic form of FFI, known as sporadic fatal insomnia (SFI), is extremely rare and has only been described in the medic",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "sporadic fatal insomnia",
+      "matched_text": "sporadic fatal insomnia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A81.9",
+      "orpha": "Orphanet:586130"
+    },
+    {
+      "name": "prion disease",
+      "matched_text": "prion diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "rare diseases",
+      "matched_text": "rare diseases",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "FFI",
+      "matched_text": "FFI",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:A81.83",
+      "orpha": "Orphanet:466"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

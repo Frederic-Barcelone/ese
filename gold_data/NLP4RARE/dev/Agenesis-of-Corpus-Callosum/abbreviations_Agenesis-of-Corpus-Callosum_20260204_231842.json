@@ -1,0 +1,111 @@
+{
+  "run_id": "RUN_20260204_221636_6f662baa7bb0",
+  "timestamp": "2026-02-04T23:18:42.924860",
+  "document": "Agenesis-of-Corpus-Callosum.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Agenesis-of-Corpus-Callosum.pdf",
+  "total_candidates": 56,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "ACC",
+      "long_form": "Agenesis of corpus callosum",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Agenesis of corpus callosum (ACC) is a rare disorder that is present at birth (congenital). It is characterized by a partial or complete absence (agenesis) of an area of the brain that connects the two cerebral hemispheres. This part of the brain is normally composed of transverse fibers. The cause of agenesis of corpus callosum is usually not known, but it can be inherited as either an autosomal recessive trait or an X-linked do",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "MRI",
+      "long_form": "magnetic resonance imaging",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "he individual bones of the spine fails to close completely, leaving a cleft or defect in the spinal canal. Part of the contents of the spine can protrude or herniate through this abnormal opening that produces a meningocele or meningomyelocele. (For more information on this disorder, choose “spina bifida” as your search term in the Rare Disease Database.) Ultrasound and magnetic resonance imaging (MRI) are imaging techniques that aid in diagnosis of agenesis of corpus callosum.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "agenesis of corpus callosum",
+      "matched_text": "Agenesis of corpus callosum",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:200"
+    },
+    {
+      "name": "fetal alcohol syndrome",
+      "matched_text": "Fetal alcohol syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:Q86.0",
+      "orpha": "Orphanet:1915"
+    },
+    {
+      "name": "mental retardation",
+      "matched_text": "mental retardation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:F70-F79",
+      "orpha": "Orphanet:319658"
+    },
+    {
+      "name": "meningomyelocele",
+      "matched_text": "meningomyelocele",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93969"
+    },
+    {
+      "name": "spina bifida",
+      "matched_text": "spina bifida",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "meningocele",
+      "matched_text": "meningocele",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93968"
+    }
+  ],
+  "drugs": [
+    {
+      "name": "alcohol",
+      "matched_text": "alcohol",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

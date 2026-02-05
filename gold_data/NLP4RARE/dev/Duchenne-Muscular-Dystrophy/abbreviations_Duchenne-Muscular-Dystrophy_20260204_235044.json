@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:50:44.080549",
+  "document": "Duchenne-Muscular-Dystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Duchenne-Muscular-Dystrophy.pdf",
+  "total_candidates": 12,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "DMD",
+      "long_form": "Duchenne muscular dystrophy",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "DMD is the most common childhood onset form of muscular dystrophy and affects males almost exclusively.",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Duchenne muscular dystrophy",
+      "matched_text": "DMD",
+      "abbreviation": "DMD",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G71.0",
+      "orpha": "ORPHA:98896"
+    },
+    {
+      "name": "muscular dystrophy",
+      "matched_text": "muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G71.0",
+      "orpha": "Orphanet:98473"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

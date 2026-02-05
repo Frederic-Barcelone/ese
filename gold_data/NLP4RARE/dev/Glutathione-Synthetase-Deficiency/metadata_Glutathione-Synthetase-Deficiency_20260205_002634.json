@@ -1,0 +1,35 @@
+{
+  "doc_id": "Glutathione-Synthetase-Deficiency",
+  "doc_filename": "Glutathione-Synthetase-Deficiency.pdf",
+  "top_entities": [
+    {
+      "name": "glutathione synthetase deficiency",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Glutathione synthetase",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1684,
+  "file_size_human": "1.6 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Glutathione Synthetase Deficiency: Epidemiology and Diagnostic Challenges",
+  "short_description": "Clinical overview of glutathione synthetase deficiency, a rare genetic disorder affecting both sexes equally with over 70 documented cases.",
+  "long_description": "This document provides epidemiological information about glutathione synthetase deficiency, a rare inherited metabolic disorder that affects the body's ability to produce glutathione, an important antioxidant. The condition shows no sex preference, affecting males and females equally. While more than 70 individuals from 50 families have been documented in medical literature, the true prevalence remains unknown due to challenges in diagnosis, including misdiagnosis and underdiagnosis. The document highlights the difficulty in determining accurate population frequency for this rare genetic condition.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T23:26:34.555575"
+}

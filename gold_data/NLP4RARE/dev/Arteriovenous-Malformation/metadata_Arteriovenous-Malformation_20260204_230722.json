@@ -1,0 +1,35 @@
+{
+  "doc_id": "Arteriovenous-Malformation",
+  "doc_filename": "Arteriovenous-Malformation.pdf",
+  "top_entities": [
+    {
+      "name": "syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "hereditary hemorrhagic telangiectasia",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2971,
+  "file_size_human": "2.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "MOA",
+  "document_type_name": "Preclinical & MOA Data",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.15,
+  "title": "Arteriovenous Malformation (AVM): Clinical Overview and Epidemiology",
+  "short_description": "Clinical document describing arteriovenous malformations (AVMs), their pathophysiology, demographics, and epidemiological characteristics in the central nervous system.",
+  "long_description": "This clinical reference document provides a comprehensive overview of arteriovenous malformations (AVMs), focusing on brain and central nervous system lesions. The document explains the pathophysiology of AVMs as direct arterial-venous connections without normal capillary beds, resulting in high-flow, low-resistance vascular tangles. It covers the clinical presentation patterns, with peak symptom onset in the mid-30s to 40s, and discusses the presumed congenital nature despite lack of direct evidence for in utero formation. The document addresses epidemiological factors including equal gender distribution, absence of ethnic predisposition, and population prevalence of approximately 10 per 100,000. It also covers genetic associations, including rare familial cases linked to hereditary hemorrhagic telangiectasia and capillary malformation-AVM syndrome, while noting that most cases are sporadic with no identified environmental risk factors.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T22:07:22.644946"
+}

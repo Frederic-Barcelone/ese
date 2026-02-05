@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:36:26.439114",
+  "document": "Fibromuscular-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fibromuscular-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "dye",
+      "preferred_name": "dye",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C085321",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "3707",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C085321",
+          "display": "cyanine dye 5"
+        }
+      ],
+      "context": "cular medicine specialist with appropriate training. It involves inserting a wire into or near the affected artery and injecting contrast material, a dye that can be detected by an X-ray machine. An X-ray of the affected area is then taken and examined. The individual is usually awake during an arterio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "CY5.5 cyanine dye",
+        "thioflavin T",
+        "Azo Compounds"
+      ],
+      "pubtator_normalized_name": "cyanine dye 5",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

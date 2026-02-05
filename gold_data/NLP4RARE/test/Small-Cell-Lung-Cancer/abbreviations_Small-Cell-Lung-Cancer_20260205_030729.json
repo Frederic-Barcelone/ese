@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:07:29.084129",
+  "document": "Small-Cell-Lung-Cancer.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Small-Cell-Lung-Cancer.pdf",
+  "total_candidates": 19,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "SCLC",
+      "long_form": "small cell lung cancer",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "The incidence of small cell lung cancer in the United States has been declining over the last two decades, which most researchers attribute to the decline in smoking in the country. Lung cancer, as a group, is the second most common form of cancer in the United States. SCLC accounts for about 10%-15% of people who have lung cancer. There are about 30,000 to 35,000 new people diagnosed with SCLC each year in the United States. Almost everyone who develops SCLC has a history of smoking. It is extremely rare in individuals who have never smoked.",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Small cell lung cancer",
+      "matched_text": "small cell lung cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:70573"
+    },
+    {
+      "name": "lung cancer",
+      "matched_text": "Lung cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cancer",
+      "matched_text": "cancer",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

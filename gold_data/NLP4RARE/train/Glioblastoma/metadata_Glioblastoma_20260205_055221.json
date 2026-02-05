@@ -1,0 +1,35 @@
+{
+  "doc_id": "Glioblastoma",
+  "doc_filename": "Glioblastoma.pdf",
+  "top_entities": [
+    {
+      "name": "cerebrovascular disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "glioma susceptibility 1",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 1966,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Glioblastoma Epidemiology and Differential Diagnosis",
+  "short_description": "Clinical overview of glioblastoma incidence rates, demographics, and differential diagnosis considerations.",
+  "long_description": "This document provides essential epidemiological data on glioblastoma, including its incidence rate of 3 per 100,000 people annually in the United States, demographic patterns showing higher prevalence in older adults (average age 64) and males, and racial disparities with Caucasians having the highest diagnosis rates. The document emphasizes the critical importance of differential diagnosis, outlining various brain tumors and conditions that must be distinguished from glioblastoma, including other CNS malignancies, lower-grade tumors, metastatic cancers, and non-neoplastic conditions such as stroke and brain abscesses.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:52:21.794420"
+}

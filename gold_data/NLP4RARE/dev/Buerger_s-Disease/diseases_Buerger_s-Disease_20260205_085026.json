@@ -1,0 +1,294 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T08:50:26.544617",
+  "document": "Buerger_s-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Buerger_s-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "peripheral vascular disease",
+      "preferred_label": "peripheral vascular disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005294",
+        "orpha": null,
+        "umls": "UMLS:C0085096",
+        "mesh": "MESH:D016491"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005294",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:341",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003875",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:443.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:38790",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D016491",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35136",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0085096",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:426429380",
+          "display": null
+        }
+      ],
+      "context": "er's disease, also known as thromboangiitis obliterans, is a rare disorder that, in most cases, affects young or middle-aged male cigarette smokers. It is characterized by narrowing or blockage (occlusion) of the veins and arteries of the extremities, resulting in reduced blood flow to these areas (peripheral vascular disease). The legs are affected more often than the arms. In most cases, the first symptom is extreme pain of the lower arms and legs while at rest. Affected individuals may also experience cramping in the legs when they walk that, in rare cases, may cause limping (claudication). In addition, affected indi",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Peripheral Vascular Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Buerger's disease",
+      "preferred_label": "Buerger's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I73.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008889",
+        "orpha": "Orphanet:36258",
+        "umls": "UMLS:C0040021",
+        "mesh": "MESH:D013919"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008889",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12918",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001211",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5969",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I73.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:443.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:21531",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013919",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10043540",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200266",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35070",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:880",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:211480",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:36258",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:52403007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040021",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1000683110",
+          "display": null
+        }
+      ],
+      "context": "Buerger's disease, also known as thromboangiitis obliterans, is a rare disorder that, in most cases, affects young or middle-aged male cigarette smokers. It is characterized by narrowing or blockage (occlusion) of the veins and arteries of the extremities, resulting in reduced blood flow to these areas (peripheral v",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Thromboangiitis Obliterans",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "thrombophlebitis",
+      "preferred_label": "thrombophlebitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:I80.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002800",
+        "orpha": null,
+        "umls": "UMLS:C0040046",
+        "mesh": "MESH:D013924"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002800",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3875",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I80.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:451.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:11799",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D013924",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3410",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:40283005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0040046",
+          "display": null
+        }
+      ],
+      "context": "y cause limping (claudication). In addition, affected individuals may have sores (ulcers) on the extremities, numbness and tingling and a lack of normal blood flow to the fingers and/or toes when exposed to cold temperatures (Raynaud's phenomenon), and/or inflammation and clotting of certain veins (thrombophlebitis). In severe cases, individuals with Buerger's disease may exhibit tissue death (gangrene) of affected limbs. The exact cause of Buerger's disease is not known; however, most affected individuals are heavy tobacco users. A diagnosis of Buerger's disease may be made based upon the identification of c",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Sinus Thrombosis Intracranial",
+        "Cavernous Sinus Thrombosis",
+        "Lateral Sinus Thrombosis"
+      ],
+      "pubtator_normalized_name": "Thrombophlebitis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

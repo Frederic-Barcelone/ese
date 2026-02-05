@@ -1,0 +1,40 @@
+{
+  "doc_id": "Freeman-Sheldon-Syndrome",
+  "doc_filename": "Freeman-Sheldon-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Duane retraction syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Freeman-Sheldon syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Thrive",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 2861,
+  "file_size_human": "2.8 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Freeman-Sheldon Syndrome: Clinical Overview and Characteristics",
+  "short_description": "Clinical description of Freeman-Sheldon syndrome, a rare inherited disorder characterized by multiple congenital contractures, distinctive craniofacial features, and skeletal malformations.",
+  "long_description": "This document provides a comprehensive clinical overview of Freeman-Sheldon syndrome, a rare genetic disorder first described in 1938. The syndrome is characterized by multiple congenital contractures affecting movement, distinctive craniofacial abnormalities that give patients a characteristic 'whistling' appearance, and various skeletal malformations. The document details the specific clinical features including microstomia, micrognathia, eye abnormalities, and hand/foot malformations. It also covers associated complications such as speech impairment, feeding difficulties, failure to thrive, and respiratory problems. The text discusses the genetic inheritance pattern (autosomal dominant), epidemiology (affecting approximately 100 reported cases since 1938), and diagnostic challenges due to overlap with other multiple congenital contracture syndromes.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:42:14.224861"
+}

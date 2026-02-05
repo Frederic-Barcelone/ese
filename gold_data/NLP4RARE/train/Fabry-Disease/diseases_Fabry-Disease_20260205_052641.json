@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:26:41.524244",
+  "document": "Fabry-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Fabry-Disease.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Fabry disease",
+      "preferred_label": "Fabry disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010526",
+        "orpha": "Orphanet:324",
+        "umls": "UMLS:C0002986",
+        "mesh": "MESH:D000795"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010526",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14499",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6400",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8083",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000795",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10016016",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200563",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84701",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1115",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:301500",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:324",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:16652001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002986",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:66996647",
+          "display": null
+        }
+      ],
+      "context": "Fabry disease is a rare pan-ethnic disorder, meaning that it occurs in all racial and ethnic populations affecting males and females. It is estimated that type 1 classic Fabry disease affects approximately one in 40,000 males. The type 2 later-onset phenotype is more frequent, than the type 1 phenotype by 3-10 f",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fabry Disease Cardiac Variant"
+      ],
+      "pubtator_normalized_name": "Fabry Disease",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

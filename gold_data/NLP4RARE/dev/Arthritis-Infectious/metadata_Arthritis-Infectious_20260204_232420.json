@@ -1,0 +1,35 @@
+{
+  "doc_id": "Arthritis-Infectious",
+  "doc_filename": "Arthritis-Infectious.pdf",
+  "top_entities": [
+    {
+      "name": "hepatitis B infection",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "infectious arthritis",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2507,
+  "file_size_human": "2.4 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Infectious Arthritis: Clinical Overview and Diagnostic Considerations",
+  "short_description": "Clinical document describing infectious arthritis, its causative agents, symptoms, epidemiology, and diagnostic approaches.",
+  "long_description": "This clinical reference document provides a comprehensive overview of infectious arthritis, an inflammatory joint condition caused by bacterial, viral, fungal, or parasitic infections. The document details the pathophysiology, common causative organisms across different age groups, clinical presentation including fever and joint swelling, epidemiological data showing higher incidence in immunocompromised patients and adults over 60, and diagnostic approaches including history, physical examination, blood tests, and synovial fluid analysis. It serves as an educational resource for healthcare professionals to understand the etiology, risk factors, and diagnostic considerations for infectious arthritis management.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T22:24:20.091860"
+}

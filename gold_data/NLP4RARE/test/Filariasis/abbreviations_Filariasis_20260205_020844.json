@@ -1,0 +1,74 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:08:44.191861",
+  "document": "Filariasis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Filariasis.pdf",
+  "total_candidates": 47,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CDC",
+      "long_form": "Centers for Disease Control and Prevention",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "cted. Most infections seen in the U.S. are in immigrants from endemic countries, according to the Centers for Disease Control and Prevention (CDC).",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "hypersensitivity reaction disease",
+      "matched_text": "hypersensitivity reactions",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Collecting duct carcinoma",
+      "matched_text": "CDC",
+      "abbreviation": "CDC",
+      "confidence": 0.6,
+      "is_rare": true,
+      "icd10": "C64",
+      "orpha": "ORPHA:247203"
+    },
+    {
+      "name": "Lymphatic filariasis",
+      "matched_text": "Lymphatic filariasis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:2035"
+    },
+    {
+      "name": "filariasis",
+      "matched_text": "Filariasis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:B74",
+      "orpha": "Orphanet:2034"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,401 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T07:20:44.802491",
+  "document": "Gottron-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Gottron-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Gottron syndrome",
+      "preferred_label": "Gottron syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008716",
+        "orpha": "Orphanet:2500",
+        "umls": "UMLS:C0406584",
+        "mesh": "MESH:C538187"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008716",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6543",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:259.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:96063",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538187",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1202",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:201200",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2500",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:238872007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0406584",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1607996977",
+          "display": null
+        }
+      ],
+      "context": "Gottron syndrome (GS) is an extremely rare inherited disorder characterized by the appearance of premature aging (progeria), especially in the form of unusually fragile, thin skin on the hands and feet (distal extremities). GS is described as a mild, nonprogressive, congenital form of skin atrophy due to the loss o",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "premature aging",
+      "preferred_label": "premature aging",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019303",
+        "orpha": "Orphanet:79389",
+        "umls": "UMLS:C0231341",
+        "mesh": "MESH:D019588"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019303",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19017",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:65416",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D019588",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10063493",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:79389",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0231341",
+          "display": null
+        }
+      ],
+      "context": "Gottron syndrome (GS) is an extremely rare inherited disorder characterized by the appearance of premature aging (progeria), especially in the form of unusually fragile, thin skin on the hands and feet (distal extremities). GS is described as a mild, nonprogressive, congenital form of skin atrophy due to the loss of the fatty tissue directly under the skin (subcutaneous atrophy). Other findings may include ab",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Werner Syndrome",
+        "Branchio-Oto-Renal Syndrome",
+        "Penttinen-Aula syndrome"
+      ],
+      "pubtator_normalized_name": "Aging Premature",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "skin atrophy",
+      "preferred_label": "skin atrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006610",
+        "orpha": null,
+        "umls": "UMLS:C0151514",
+        "mesh": "C563349"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006610",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2733",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000766",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:701.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:101793",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C35163",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:400190005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0151514",
+          "display": null
+        },
+        {
+          "system": "Wikipedia",
+          "code": "Wikipedia:Steroid_atrophy",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C563349",
+          "display": "Atrophia Maculosa Varioliformis Cutis Familial"
+        }
+      ],
+      "context": "Gottron syndrome (GS) is an extremely rare inherited disorder characterized by the appearance of premature aging (progeria), especially in the form of unusually fragile, thin skin on the hands and feet (distal extremities). GS is described as a mild, nonprogressive, congenital form of skin atrophy due to the loss of the fatty tissue directly under the skin (subcutaneous atrophy). Other findings may include abnormally small hands and feet with unusually prominent veins on the chest; small stature; and/or abnormally small jaw (micrognathia). From infancy on, children with Gottron syndrome appe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spinocerebellar ataxia autosomal recessive 5"
+      ],
+      "pubtator_normalized_name": "Atrophia Maculosa Varioliformis Cutis Familial",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "progeria",
+      "preferred_label": "progeria",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015333",
+        "orpha": "Orphanet:139033",
+        "umls": "UMLS:C5848146",
+        "mesh": "MESH:D011371"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015333",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0081332",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:19906",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1864204",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D011371",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100221",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:176670",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:139033",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5848146",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:926151882",
+          "display": null
+        }
+      ],
+      "context": "Gottron syndrome (GS) is an extremely rare inherited disorder characterized by the appearance of premature aging (progeria), especially in the form of unusually fragile, thin skin on the hands and feet (distal extremities). GS is described as a mild, nonprogressive, congenital form of skin atrophy due to the loss of the fatty tissue directly under the skin (subcutaneous atrophy). Other findings may include abnormally s",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cockayne Syndrome",
+        "Werner Syndrome",
+        "Progeria short stature pigmented nevi"
+      ],
+      "pubtator_normalized_name": "Progeria",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "and feet (distal extremities). GS is described as a mild, nonprogressive, congenital form of skin atrophy due to the loss of the fatty tissue directly under the skin (subcutaneous atrophy). Other findings may include abnormally small hands and feet with unusually prominent veins on the chest; small stature; and/or abnormally small jaw (micrognathia). From infancy on, children with Gottron syndrome appear older than their actual age. The skin is unusually thin, taut, and parchment-like on the hands and feet (distal extremities). The hands and feet remain abnormally small into adulthood. The veins on t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

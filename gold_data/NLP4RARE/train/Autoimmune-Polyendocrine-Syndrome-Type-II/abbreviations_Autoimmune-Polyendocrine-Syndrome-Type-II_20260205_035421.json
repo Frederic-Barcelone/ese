@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:54:21.520773",
+  "document": "Autoimmune-Polyendocrine-Syndrome-Type-II.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Autoimmune-Polyendocrine-Syndrome-Type-II.pdf",
+  "total_candidates": 47,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 1,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AIPS-II",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": " glands differs from patient to patient, the signs of this disorder are diverse. The exact cause of AIPS-II is not known, but it is thought to result from one or more abnormal immune responses. Autoimmune re",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Autoimmune Polyendocrine Syndrome Type II",
+      "matched_text": "Autoimmune polyendocrine syndrome type II",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:3143"
+    },
+    {
+      "name": "adrenal insufficiency",
+      "matched_text": "adrenal insufficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "thyroid insufficiency",
+      "matched_text": "thyroid insufficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hashimoto thyroiditis",
+      "matched_text": "Hashimoto's thyroiditis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E06.3",
+      "orpha": "Orphanet:855"
+    },
+    {
+      "name": "autoimmune disorder",
+      "matched_text": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Addison's disease",
+      "matched_text": "Addison's disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:85138"
+    },
+    {
+      "name": "diabetes mellitus",
+      "matched_text": "diabetes mellitus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E08-E13",
+      "orpha": null
+    },
+    {
+      "name": "malnutrition",
+      "matched_text": "malnutrition",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E40-E46",
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Insulin",
+      "matched_text": "insulin",
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "phase": "ACTIVE_NOT_RECRUITING"
+    }
+  ],
+  "pharma": []
+}

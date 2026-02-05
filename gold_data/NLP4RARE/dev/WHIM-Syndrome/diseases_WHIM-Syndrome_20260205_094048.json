@@ -1,0 +1,97 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T09:40:48.506265",
+  "document": "WHIM-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/WHIM-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "WHIM syndrome",
+      "preferred_label": "WHIM Syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_8000006",
+        "orpha": "Orphanet:51636",
+        "umls": "UMLS:C5542296",
+        "mesh": "MESH:C536697"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_8000006",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060591",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:9297",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1778124",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C536697",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1849",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:193670",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:51636",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234571003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5542296",
+          "display": null
+        }
+      ],
+      "context": "WHIM syndrome is an extremely rare disorder and its exact prevalence or incidence in the general population is unknown although it has been estimated at about 0.2 / million live births. Approximately 60 cases have been reported in the medical literature. Onset is usually in infancy or early childhood. Males and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "WHIM syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

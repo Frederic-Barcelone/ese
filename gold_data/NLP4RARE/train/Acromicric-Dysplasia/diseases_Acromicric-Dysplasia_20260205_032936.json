@@ -1,0 +1,160 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:29:36.197814",
+  "document": "Acromicric-Dysplasia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acromicric-Dysplasia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acromicric Dysplasia",
+      "preferred_label": "Acromicric dysplasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007055",
+        "orpha": "Orphanet:969",
+        "umls": "UMLS:C0265287",
+        "mesh": "MESH:C535662"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007055",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111243",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:756.59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:78549",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C535662",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:725",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:102370",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:969",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:254090007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0265287",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1006372687",
+          "display": null
+        }
+      ],
+      "context": "\"Acromicric Dysplasia is an extremely rare inherited disorder characterized by abnormally short hands and feet, growth retardation and delayed bone maturation leading to short stature, and mild facial abnormalities. Most cases have occurred randomly for no apparent reason (sporadically). However, autosomal dominant inhe",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Acromicric dysplasia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "stature",
+      "preferred_label": "stature",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0044267",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C537327"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0044267",
+          "display": null
+        },
+        {
+          "system": "HGNC",
+          "code": "HGNC:4211",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537327",
+          "display": "SHORT syndrome"
+        }
+      ],
+      "context": "\"Acromicric Dysplasia is an extremely rare inherited disorder characterized by abnormally short hands and feet, growth retardation and delayed bone maturation leading to short stature, and mild facial abnormalities. Most cases have occurred randomly for no apparent reason (sporadically). However, autosomal dominant inheritance has not been ruled out. Acromicric Dysplasia is an extremely rare disorder that, in most cases, appears to occur randomly for no apparent reason (sporadic",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Corneodermatoosseous syndrome",
+        "Trichothiodystrophy Syndromes",
+        "Miller-McKusick-Malvaux-Syndrome (3M Syndrome)"
+      ],
+      "pubtator_normalized_name": "SHORT syndrome",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

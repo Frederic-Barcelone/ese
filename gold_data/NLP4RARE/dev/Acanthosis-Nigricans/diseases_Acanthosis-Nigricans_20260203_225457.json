@@ -1,0 +1,755 @@
+{
+  "run_id": "RUN_20260203_214853_2393b7f6eeb9",
+  "timestamp": "2026-02-03T22:54:57.036808",
+  "document": "Acanthosis-Nigricans.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Acanthosis-Nigricans.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 11,
+  "total_validated": 11,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Acanthosis nigricans",
+      "preferred_label": "acanthosis nigricans",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0043003",
+        "orpha": null,
+        "umls": "UMLS:C2930792",
+        "mesh": "MESH:C531598"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0043003",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:419638",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C531598",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:100600",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2930792",
+          "display": null
+        }
+      ],
+      "context": "Acanthosis nigricans (AN) is a skin condition characterized by abnormally increased coloration (hyperpigmentation) and \"velvety\" thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been id",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "HAIR-AN syndrome",
+        "Achondroplasia",
+        "Acanthosis nigricans muscle cramps acral enlargement"
+      ],
+      "pubtator_normalized_name": "Acanthosis Nigricans",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "condition",
+      "preferred_label": "condition",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Acanthosis nigricans (AN) is a skin condition characterized by abnormally increased coloration (hyperpigmentation) and \"velvety\" thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the dis",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Chronic Disease",
+        "Precancerous Conditions",
+        "Muscular Diseases"
+      ],
+      "pubtator_normalized_name": "Neurodegenerative Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "arms",
+      "preferred_label": "arms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009994",
+        "orpha": "Orphanet:99756",
+        "umls": "UMLS:C0206655",
+        "mesh": "MESH:D018232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4051",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000248",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:4701",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0006779",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:171.9",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:8920/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:61651",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D018232",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10065867",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3749",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:268220",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:ARMS",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:99756",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:404053004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0206655",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1742058067",
+          "display": null
+        }
+      ],
+      "context": "Acanthosis nigricans (AN) is a skin condition characterized by abnormally increased coloration (hyperpigmentation) and \"velvety\" thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphocytic Choriomeningitis"
+      ],
+      "pubtator_normalized_name": "Arms Malformation of",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inherited",
+      "preferred_label": "inherited",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021152",
+        "orpha": null,
+        "umls": null,
+        "mesh": "D017096"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021152",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D017096",
+          "display": "Prion Diseases"
+        }
+      ],
+      "context": "d by abnormally increased coloration (hyperpigmentation) and \"velvety\" thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association with an underlying cancerous tumor (i.e., malignant AN).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polyneuropathies",
+        "Primary Immunodeficiency Diseases",
+        "Spinocerebellar Ataxias"
+      ],
+      "pubtator_normalized_name": "Prion Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "syndromes",
+      "preferred_label": "Syndrome",
+      "abbreviation": null,
+      "confidence": 0.7889410734176636,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0039082",
+        "mesh": "D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0039082",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D003866",
+          "display": "Depressive Disorder"
+        }
+      ],
+      "context": "thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association with an underlying cancerous tumor (i.e., malignant AN).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COVID-19",
+        "Syndrome",
+        "Alzheimer Disease"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "obesity",
+      "preferred_label": "obesity",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0011122",
+        "orpha": "Orphanet:521399",
+        "umls": "UMLS:C0028754",
+        "mesh": "D009765"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0011122",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9970",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0001073",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001513",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:278.00",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:18127",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3283",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:521399",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:414916001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0028754",
+          "display": null
+        },
+        {
+          "system": "nlxdys",
+          "code": "nlxdys:20090302",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D009765",
+          "display": "Obesity"
+        }
+      ],
+      "context": "ularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association with an underlying cancerous tumor (i.e., malignant AN).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Obesity Maternal",
+        "Obesity Abdominal",
+        "Obesity Metabolically Benign"
+      ],
+      "pubtator_normalized_name": "Obesity",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "tumor",
+      "preferred_label": "neoplasm",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": "ICD10CM:C7B-C7B",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005070",
+        "orpha": null,
+        "umls": "UMLS:C0027651",
+        "mesh": "MESH:D009369"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005070",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14566",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000616",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002664",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:C7B-C7B",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:239.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:10294",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009369",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3262",
+          "display": null
+        },
+        {
+          "system": "ONCOTREE",
+          "code": "ONCOTREE:OTHER",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:55342001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0027651",
+          "display": null
+        }
+      ],
+      "context": "tified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association with an underlying cancerous tumor (i.e., malignant AN).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Neoplasm Metastasis",
+        "Breast Neoplasms",
+        "Neoplasms Adipose Tissue"
+      ],
+      "pubtator_normalized_name": "Neoplasms",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hyperkeratosis",
+      "preferred_label": "Keratosis",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0022593",
+        "mesh": "D055623"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0022593",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D055623",
+          "display": "Keratosis Actinic"
+        }
+      ],
+      "context": "Acanthosis nigricans (AN) is a skin condition characterized by abnormally increased coloration (hyperpigmentation) and \"velvety\" thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accum",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Keratosis",
+        "Keratosis Seborrheic",
+        "Keratoderma Palmoplantar"
+      ],
+      "pubtator_normalized_name": "Keratosis Actinic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "non-cancerous",
+      "preferred_label": "Benign digestive system neoplasms",
+      "abbreviation": null,
+      "confidence": 0.8134706974029541,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0497538",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0497538",
+          "display": null
+        }
+      ],
+      "context": "Acanthosis nigricans (AN) is a skin condition characterized by abnormally increased coloration (hyperpigmentation) and \"velvety\" thickening (hyperkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association w",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "excess",
+      "preferred_label": "Hypernatremia",
+      "abbreviation": null,
+      "confidence": 0.9756760954856872,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0020488",
+        "mesh": "D006955"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0020488",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D006955",
+          "display": "Hypernatremia"
+        }
+      ],
+      "context": "perkeratosis) of the skin, particularly of skin fold regions, such as of the neck and groin and under the arms (axillae). Various benign (non-cancerous) forms of AN have been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association with an underlying cancerous tumor (i.e., malignant AN).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypernatremia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cancerous tumor",
+      "preferred_label": "Papilloma",
+      "abbreviation": null,
+      "confidence": 0.9014621138572693,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": null,
+        "umls": "C0030354",
+        "mesh": "D030361"
+      },
+      "all_identifiers": [
+        {
+          "system": "UMLS",
+          "code": "C0030354",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D030361",
+          "display": "Papillomavirus Infections"
+        }
+      ],
+      "context": "been identified in which the disorder may be inherited as a primary condition or associated with various underlying syndromes, an excess accumulation of body fat (obesity), or the use of certain medications (i.e., drug-induced AN). In other instances, AN may occur in association with an underlying cancerous tumor (i.e., malignant AN).",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "scispacy_ner",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Papilloma",
+        "Papilloma Choroid Plexus",
+        "Papilloma Inverted"
+      ],
+      "pubtator_normalized_name": "Papillomavirus Infections",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

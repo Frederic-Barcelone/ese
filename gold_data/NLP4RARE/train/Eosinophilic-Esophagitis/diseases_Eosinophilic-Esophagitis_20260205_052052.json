@@ -1,0 +1,774 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:20:52.211903",
+  "document": "Eosinophilic-Esophagitis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Eosinophilic-Esophagitis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "PPI-REE",
+      "preferred_label": "Proton-pump inhibitor-responsive esophageal eosinophilia",
+      "abbreviation": "PPI-REE",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "K20",
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:411696",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:411696",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "K20",
+          "display": null
+        }
+      ],
+      "context": "ave GERD upon diagnostic workup. Recently, it has been appreciated that some patients with pronounced esophageal eosinophilia can have complete responses to proton pump inhibitor (PPI) therapy, typically used for the treatment of GERD, but these patients with PPI responsive esophageal eosinophilia (PPI-REE) do not typically have GERD but rather a disease variant similar to EoE; the PPI appears to exert its effects by direct action rather than blockade of stomach acid alone. Individuals with eosinophilic esophagitis often have allergic diseases such as asthma or eczema. The frequency of eosinophilic e",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "gastroesophageal reflux disease",
+      "preferred_label": "gastroesophageal reflux disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0007186",
+        "orpha": null,
+        "umls": "UMLS:C0017168",
+        "mesh": "MESH:D005764"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0007186",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8534",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003948",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:530.81",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6553",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D005764",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26781",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:109350",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235595009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0017168",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1391387859",
+          "display": null
+        }
+      ],
+      "context": "itis are variable, especially in people of different ages. Common symptoms include difficulty swallowing (dysphagia); food getting stuck in the throat (impaction); nausea; vomiting; poor growth; weight loss; stomach pain; poor appetite; and malnutrition. Because of an overlap of these symptoms with gastroesophageal reflux disease (GERD), many patients are initially thought to have GERD, but EoE patients do not typically respond to anti-GERD therapy and can be found not to have GERD upon diagnostic workup. Recently, it has been appreciated that some patients with pronounced esophageal eosinophilia can have complete responses",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Gastroesophageal Reflux",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "EoE",
+      "preferred_label": "Extraskeletal Ewing sarcoma",
+      "abbreviation": "EOE",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "oncology",
+      "codes": {
+        "icd10": "C49.9",
+        "icd11": "2B52.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:370334",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:370334",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "C49.9",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "2B52.Y",
+          "display": null
+        }
+      ],
+      "context": "Eosinophilic esophagitis (EoE) is a chronic disorder of the digestive system in which large numbers of a particular type of white blood cell called eosinophils are present in the esophagus. The esophagus is the tube that carries food from the mouth to the stomach. Eosinophils are an important part of the immune system and play",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Eosinophilic esophagitis",
+      "preferred_label": "eosinophilic esophagitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K20.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005361",
+        "orpha": "Orphanet:73247",
+        "umls": "UMLS:C0341106",
+        "mesh": "MESH:D057765"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005361",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13922",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0004232",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K20.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:530.13",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:83318",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D057765",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10064212",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200456",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27105",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:73247",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:235599003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0341106",
+          "display": null
+        }
+      ],
+      "context": "Eosinophilic esophagitis (EoE) is a chronic disorder of the digestive system in which large numbers of a particular type of white blood cell called eosinophils are present in the esophagus. The esophagus is the tube that carries food from the mouth to the stomach. Eosinophils are an important part of the immune system and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Eosinophilic Esophagitis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "allergic diseases",
+      "preferred_label": "allergic disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005271",
+        "orpha": null,
+        "umls": "UMLS:C0020517",
+        "mesh": "MESH:D006967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005271",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1205",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:V15.09",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9370",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C114476",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:609328004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020517",
+          "display": null
+        }
+      ],
+      "context": "blood cell called eosinophils are present in the esophagus. The esophagus is the tube that carries food from the mouth to the stomach. Eosinophils are an important part of the immune system and play a role in immune regulation and fighting certain infection, and their accumulation is a hallmark of allergic diseases. This condition is characterized by vomiting, stomach or chest pain, failure to thrive (particularly in children), difficulty swallowing, and food getting stuck in the throat. The symptoms of eosinophilic esophagitis are variable, especially in people of different ages. Common symptoms include diff",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Transfusion Reaction",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eczema",
+      "preferred_label": "atopic eczema",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:L20",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004980",
+        "orpha": null,
+        "umls": "UMLS:C0011615",
+        "mesh": "MESH:D003876"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004980",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:3310",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000274",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001047",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:L20",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:691.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:41502",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003876",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3001",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:603165",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:24079001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011615",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:215767047",
+          "display": null
+        }
+      ],
+      "context": "onsive esophageal eosinophilia (PPI-REE) do not typically have GERD but rather a disease variant similar to EoE; the PPI appears to exert its effects by direct action rather than blockade of stomach acid alone. Individuals with eosinophilic esophagitis often have allergic diseases such as asthma or eczema. The frequency of eosinophilic esophagitis has been estimated to be approximately 1 in 1,000 children. This condition has been reported in multiple continents including Europe, Australia, and America.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dermatitis Atopic",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "malnutrition",
+      "preferred_label": "malnutrition",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:E40-E46",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006873",
+        "orpha": null,
+        "umls": "UMLS:C4761312",
+        "mesh": "MESH:D003677"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006873",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:5113",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001067",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E40-E46",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:269.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1677627",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003677",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10046058",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3669",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:70241007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4761312",
+          "display": null
+        }
+      ],
+      "context": "g stuck in the throat. The symptoms of eosinophilic esophagitis are variable, especially in people of different ages. Common symptoms include difficulty swallowing (dysphagia); food getting stuck in the throat (impaction); nausea; vomiting; poor growth; weight loss; stomach pain; poor appetite; and malnutrition. Because of an overlap of these symptoms with gastroesophageal reflux disease (GERD), many patients are initially thought to have GERD, but EoE patients do not typically respond to anti-GERD therapy and can be found not to have GERD upon diagnostic workup. Recently, it has been appreciated that som",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Protein-Energy Malnutrition",
+        "Child Nutrition Disorders",
+        "Severe Acute Malnutrition"
+      ],
+      "pubtator_normalized_name": "Malnutrition",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "eosinophilia",
+      "preferred_label": "eosinophilia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D72.11",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015691",
+        "orpha": "Orphanet:168956",
+        "umls": "UMLS:C1540912",
+        "mesh": "MESH:D017681"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015691",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:999",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001467",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2804",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D72.11",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:288.3",
+          "display": null
+        },
+        {
+          "system": "ICDO",
+          "code": "ICDO:9964/3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:280990",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D017681",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10048643",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200806",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27038",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:168956",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:419455006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1540912",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:110429919",
+          "display": null
+        }
+      ],
+      "context": "oms with gastroesophageal reflux disease (GERD), many patients are initially thought to have GERD, but EoE patients do not typically respond to anti-GERD therapy and can be found not to have GERD upon diagnostic workup. Recently, it has been appreciated that some patients with pronounced esophageal eosinophilia can have complete responses to proton pump inhibitor (PPI) therapy, typically used for the treatment of GERD, but these patients with PPI responsive esophageal eosinophilia (PPI-REE) do not typically have GERD but rather a disease variant similar to EoE; the PPI appears to exert its effects by dire",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Drug Hypersensitivity Syndrome",
+        "Eosinophilia-Myalgia Syndrome",
+        "Wells syndrome"
+      ],
+      "pubtator_normalized_name": "Eosinophilia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "asthma",
+      "preferred_label": "asthma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "pulmonology",
+      "codes": {
+        "icd10": "ICD10CM:J45",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004979",
+        "orpha": null,
+        "umls": "UMLS:C0004096",
+        "mesh": "MESH:D001249"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004979",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2841",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002099",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J45",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:J45",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:493.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:2109",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D001249",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C28397",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:31387002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0004096",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1656445230",
+          "display": null
+        }
+      ],
+      "context": "h PPI responsive esophageal eosinophilia (PPI-REE) do not typically have GERD but rather a disease variant similar to EoE; the PPI appears to exert its effects by direct action rather than blockade of stomach acid alone. Individuals with eosinophilic esophagitis often have allergic diseases such as asthma or eczema. The frequency of eosinophilic esophagitis has been estimated to be approximately 1 in 1,000 children. This condition has been reported in multiple continents including Europe, Australia, and America.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Status Asthmaticus",
+        "Asthma-Chronic Obstructive Pulmonary Disease Overlap Syndrome",
+        "Ige Responsiveness Atopic"
+      ],
+      "pubtator_normalized_name": "Asthma",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T20:07:05.122756",
+  "document": "VACTERL-Association.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/VACTERL-Association.pdf",
+  "total_candidates": 33,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "VACTERL",
+      "long_form": "VACTERL Association",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "One estimate places the incidence of VACTERL association at 1.6 per 10,000 live births. The true frequency of may be difficult to determine because many cases may be misdiagnosed or undiagnosed, especially children with fewer problems. Although many features of VACTERL association are apparent at birth, some features will not be apparent for",
+      "lexicon_source": "scispacy+umls",
+      "lexicon_ids": [
+        {
+          "source": "UMLS",
+          "id": "C1735591"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "VACTERL association",
+      "matched_text": "VACTERL association",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:887"
+    },
+    {
+      "name": "cHILD",
+      "matched_text": "child",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:264665"
+    },
+    {
+      "name": "SCAN",
+      "matched_text": "scan",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "leukemia, acute lymphocytic, susceptibility to, 1",
+      "matched_text": "all",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "complete",
+      "matched_text": "complete",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "VACTERL Association",
+      "matched_text": "VACTERL",
+      "abbreviation": null,
+      "confidence": 0.8004958391189575,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Prenatal",
+      "matched_text": "prenatal",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

@@ -1,0 +1,233 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:03:10.619029",
+  "document": "Dermatomyositis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Dermatomyositis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "juvenile dermatomyositis",
+      "preferred_label": "juvenile dermatomyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:M33.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0008054",
+        "orpha": "Orphanet:93672",
+        "umls": "UMLS:C0263666",
+        "mesh": "MESH:C538250"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0008054",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:14203",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000557",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6805",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:120486",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538250",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10008521",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200418",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C27576",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:93672",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1212005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0263666",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1428089375",
+          "display": null
+        }
+      ],
+      "context": "ancy through approximately age 80, but most commonly it occurs between ages 40 to 60. The estimated incidence of dermatomyositis is 9.63 cases per million people. In children, the symptoms usually appear between the ages of five to 15 years. Approximately three in 1,000,000 children are affected by juvenile dermatomyositis. Females are affected by dermatomyositis twice as often as males.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Dermatomyositis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Dermatomyositis",
+      "preferred_label": "dermatomyositis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:M33",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016367",
+        "orpha": "Orphanet:221",
+        "umls": "UMLS:C0011633",
+        "mesh": "MESH:D003882"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016367",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10223",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000398",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6263",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:M33",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:710.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8331",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003882",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10012503",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200274",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26744",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1048",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:221",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:396230008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011633",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:739030149",
+          "display": null
+        }
+      ],
+      "context": "Dermatomyositis may occur at any time from infancy through approximately age 80, but most commonly it occurs between ages 40 to 60. The estimated incidence of dermatomyositis is 9.63 cases per million people. In children, the symptoms usually appear between the ages of five to 15 years. Approximately three in 1,00",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amyopathic dermatomyositis"
+      ],
+      "pubtator_normalized_name": "Dermatomyositis",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

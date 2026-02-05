@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:20:37.469475",
+  "document": "ACTH-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/ACTH-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "ACTH",
+      "hgnc_symbol": "POMC",
+      "full_name": "proopiomelanocortin",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "9201",
+        "entrez": "5443",
+        "ensembl": "ENSG00000115138",
+        "uniprot": "P01189",
+        "omim": "176830"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "9201",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "5443",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000115138",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "176830",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P01189",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "ACTH deficiency arises as a result of decreased or absent production of adrenocorticotropic hormone (ACTH) by the pituitary gland. A decline in the concentration of ACTH in the blood leads to a reduction in the secretion of adrenal hormones, resulting in adrenal insufficiency (hypoadrenalism). Adrenal i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

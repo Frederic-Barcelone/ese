@@ -1,0 +1,190 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:52:43.317739",
+  "document": "Phosphoglycerate-Kinase-Deficiency.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Phosphoglycerate-Kinase-Deficiency.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Phosphoglycerate kinase deficiency",
+      "preferred_label": "Phosphoglycerate Kinase Deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010392",
+        "orpha": "Orphanet:713",
+        "umls": "UMLS:C1970848",
+        "mesh": "MESH:C567067"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010392",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111933",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7389",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:410166",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C567067",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200831",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C126738",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1577",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:300653",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:713",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1970848",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1396572570",
+          "display": null
+        }
+      ],
+      "context": "Phosphoglycerate kinase deficiency is a very rare disorder that is fully expressed in males only. However, females who carry a single copy of the disease gene (heterozygous carriers) may exhibit some symptoms associated with the disorder (i.e., hemolytic anemia). The disorder can be diagnosed at birth when enzymatic testing is done.",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Phosphoglycerate Kinase 1 Deficiency",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hemolytic anemia",
+      "preferred_label": "hemolytic anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": "ICD10CM:D55-D59",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003664",
+        "orpha": null,
+        "umls": "UMLS:C0002878",
+        "mesh": "MESH:D000743"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003664",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:583",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D55-D59",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1916",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000743",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34376",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61261009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0002878",
+          "display": null
+        }
+      ],
+      "context": "Phosphoglycerate kinase deficiency is a very rare disorder that is fully expressed in males only. However, females who carry a single copy of the disease gene (heterozygous carriers) may exhibit some symptoms associated with the disorder (i.e., hemolytic anemia). The disorder can be diagnosed at birth when enzymatic testing is done. More than 30 cases of PGK deficiency have been written up in the medical literature. It is thought that there are people with the disease who do not receive a diagnosis. The diagnosis is made on the basis of a thorough physica",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Hemolytic Autoimmune",
+        "Anemia Hemolytic Congenital",
+        "Immuno-hemolytic anemia"
+      ],
+      "pubtator_normalized_name": "Anemia Hemolytic",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "run_id": "RUN_20260204_230110_9f1c77e23c88",
+  "timestamp": "2026-02-05T00:38:46.992080",
+  "document": "Primary-Central-Nervous-System-Lymphoma.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Primary-Central-Nervous-System-Lymphoma.pdf",
+  "total_candidates": 43,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AIDS",
+      "long_form": "acquired immunodeficiency syndrome",
+      "confidence": 0.9,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "year, for a total of approximately 1,500 new cases per year in the United States. PCNSL is slightly more common in males. The most common risk factor for the development of a primary CNS lymphoma is an impaired immune system (immunosuppression). This is notably the case of patients living with HIV/ AIDS, especially those who are not treated who have a high viral load and low CD4+ cell count. Other immunosuppressed groups include organ transplant recipients and individuals with congenital immunodeficiency syndromes. In fact, primary CNS lymphoma is the most common brain tumor in immunosuppressed pa",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CNS",
+      "long_form": "Central nervous system",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "nervous system lymphoma constitutes 4% of all brain tumors and develops in around five individuals per million each year, for a total of approximately 1,500 new cases per year in the United States. PCNSL is slightly more common in males. The most common risk factor for the development of a primary CNS lymphoma is an impaired immune system (immunosuppression). This is notably the case of patients living with HIV/ AIDS, especially those who are not treated who have a high viral load and low CD4+ cell count. Other immunosuppressed groups include organ transplant recipients and individuals with cong",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PCNSL",
+      "long_form": "primary central nervous system lymphoma",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Primary central nervous system lymphoma constitutes 4% of all brain tumors and develops in around five individuals per million each year, for a total of approximately 1,500 new cases per year in the United States. PCNSL is slightly more common in males. The most common risk factor for the development of a primary CNS lymphoma is an impaired immune system (immunosuppression). This is notably the case of patients living with HIV/ AIDS, especially those who are not treated who have a high viral load and low CD4+ cell",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "HIV",
+      "long_form": "HIV infection",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " is an impaired immune system (immunosuppression). This is notably the case of patients living with HIV/ AIDS, especially those who are not treated who have a high viral load and low CD4+ cell count. Oth",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "CD4",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "ents living with HIV/ AIDS, especially those who are not treated who have a high viral load and low CD4+ cell count. Other immunosuppressed groups include organ transplant recipients and individuals with",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "primary central nervous system lymphoma",
+      "matched_text": "primary CNS lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:46135"
+    },
+    {
+      "name": "Primary central nervous system lymphoma",
+      "matched_text": "PCNSL",
+      "abbreviation": "PCNSL",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C83.3",
+      "orpha": "ORPHA:46135"
+    },
+    {
+      "name": "immunodeficiency syndrome",
+      "matched_text": "immunodeficiency syndromes",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "HIV infection",
+      "matched_text": "HIV",
+      "abbreviation": "HIV",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "B20",
+      "orpha": null
+    },
+    {
+      "name": "brain tumor",
+      "matched_text": "brain tumor",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "AIDS",
+      "matched_text": "AIDS",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

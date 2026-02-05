@@ -1,0 +1,260 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:13:15.098722",
+  "document": "Tardive-Dyskinesia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Tardive-Dyskinesia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 3,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Tardive dyskinesia",
+      "preferred_label": "tardive dyskinesia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010096",
+        "orpha": null,
+        "umls": "UMLS:C0686347",
+        "mesh": "MESH:D000071057"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010096",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0040141",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:151939",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000071057",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:272620",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:102449007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0686347",
+          "display": null
+        }
+      ],
+      "context": "Tardive dyskinesia is characterized by involuntary and abnormal movements of the jaw, lips and tongue. Typical symptoms include facial grimacing, sticking out the tongue, sucking or fish-like movements of the mouth. In some cases, the arms and/or legs may also be affected by involuntary rapid, jerking movements (chor",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Tardive Dyskinesia"
+      ],
+      "pubtator_normalized_name": "Dyskinesias",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "depression",
+      "preferred_label": "depression",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:F32",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002050",
+        "orpha": null,
+        "umls": "UMLS:C0011581",
+        "mesh": "MESH:D003866"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002050",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1596",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:F32",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:311",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4229",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003866",
+          "display": null
+        },
+        {
+          "system": "MFOMD",
+          "code": "MFOMD:0000013",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2982",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:35489007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0011581",
+          "display": null
+        }
+      ],
+      "context": "ptic drugs. Tardive dyskinesia affects individuals who have been taking neuroleptic drugs for a long period of time. A high percentage of schizophrenic people who have spent long periods of time taking these drugs have a high risk of developing TD. However, neuroleptic drugs are also prescribed for depression, some digestive disorders, and other neurologic illnesses.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Respiratory Insufficiency",
+        "Depression Postpartum",
+        "Bipolar Disorder"
+      ],
+      "pubtator_normalized_name": "Depressive Disorder",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dystonia",
+      "preferred_label": "dystonia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:G24",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003441",
+        "orpha": null,
+        "umls": "UMLS:C0013421",
+        "mesh": "MESH:D020821"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003441",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:543",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001332",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:G24",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:333.90",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3940",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D020821",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34563",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:15802004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0013421",
+          "display": null
+        }
+      ],
+      "context": ", lips and tongue. Typical symptoms include facial grimacing, sticking out the tongue, sucking or fish-like movements of the mouth. In some cases, the arms and/or legs may also be affected by involuntary rapid, jerking movements (chorea), or slow, writhing movements (athetosis). Symptoms of tardive dystonia include slower, twisting movements of larger muscles of the neck and trunk as well as the face. Tardive dyskinesia is caused by long-term use of a class of drugs known as neuroleptics. Neuroleptic drugs are often prescribed for management of certain mental, neurological, or gastrointestinal disorde",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Dystonia Focal Task-Specific",
+        "Dystonia 18",
+        "Dystonia 16"
+      ],
+      "pubtator_normalized_name": "Dystonia",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

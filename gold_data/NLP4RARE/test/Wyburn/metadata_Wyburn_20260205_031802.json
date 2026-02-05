@@ -1,0 +1,35 @@
+{
+  "doc_id": "Wyburn",
+  "doc_filename": "Wyburn.pdf",
+  "top_entities": [
+    {
+      "name": "arteriovenous hemangioma/malformation",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Wyburn-Mason syndrome",
+      "mention_count": 1,
+      "entity_type": "disease"
+    }
+  ],
+  "file_size_bytes": 2249,
+  "file_size_human": "2.2 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Wyburn-Mason Syndrome: Clinical Overview and Diagnostic Approaches",
+  "short_description": "Clinical document describing Wyburn-Mason syndrome, a rare developmental disorder characterized by arteriovenous malformations affecting males and females equally.",
+  "long_description": "This clinical document provides a comprehensive overview of Wyburn-Mason syndrome, an extremely rare developmental abnormality of unknown etiology characterized by arteriovenous malformations. The document discusses the unclear underlying mechanisms, noting that no specific genetic abnormalities or hereditary patterns have been identified, though the condition is believed to result from abnormal blood vessel development during embryonic or fetal growth. It outlines diagnostic approaches including thorough clinical evaluation, patient history assessment, identification of characteristic ocular findings, and advanced imaging techniques such as CT scans and MRI to detect potentially dangerous central nervous system malformations. The document emphasizes the rarity of the condition and notes that incidence and prevalence rates in the general population remain unknown.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T02:18:02.707459"
+}

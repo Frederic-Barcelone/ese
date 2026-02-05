@@ -1,0 +1,196 @@
+{
+  "run_id": "RUN_20260203_174258_0a58abccb18d",
+  "timestamp": "2026-02-03T22:30:41.846894",
+  "document": "Central-Core-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Central-Core-Disease.pdf",
+  "total_candidates": 34,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CCD",
+      "long_form": "Central Core Myopathy (disorder)",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Central core disease (CCD) is a rare genetic neuromuscular disorder that is classified as a congenital myopathy, meaning that it is a muscle disorder (myopathy) that is present at birth (congenital). Affected infants have diminished muscle tone (hypotonia) resulting in abnormal \"floppiness\", muscle weakness, and a variety o",
+      "lexicon_source": "scispacy+umls",
+      "lexicon_ids": [
+        {
+          "source": "UMLS",
+          "id": "C0751951"
+        }
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Central Core Myopathy (disorder)",
+      "matched_text": "Central core disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CCD",
+      "matched_text": "CCD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:1452"
+    },
+    {
+      "name": "rare",
+      "matched_text": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "genetic",
+      "matched_text": "genetic",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "disease",
+      "matched_text": "disorder",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "Congenital myopathy (disorder)",
+      "matched_text": "congenital myopathy",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "myopathy",
+      "matched_text": "myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "congenital",
+      "matched_text": "congenital",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "scoliosis",
+      "matched_text": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M41",
+      "orpha": null
+    },
+    {
+      "name": "arms",
+      "matched_text": "arms",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:99756"
+    },
+    {
+      "name": "malignant hyperthermia of anesthesia",
+      "matched_text": "malignant hyperthermia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:423"
+    },
+    {
+      "name": "Autosomal dominant optic atrophy and cataract",
+      "matched_text": "autosomal dominant",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": null,
+      "orpha": "ORPHA:67036"
+    },
+    {
+      "name": "Neuromuscular Diseases",
+      "matched_text": "genetic neuromuscular disorder",
+      "abbreviation": null,
+      "confidence": 0.9562796711921692,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Myopathy",
+      "matched_text": "muscle disorder",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Paresis",
+      "matched_text": "muscle weakness",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Abnormality of the skeletal system",
+      "matched_text": "skeletal abnormalities",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "Anesthetics",
+      "matched_text": "anesthetic drugs",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

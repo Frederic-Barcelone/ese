@@ -1,0 +1,797 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:52:00.323105",
+  "document": "Congenital-Hepatic-Fibrosis.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Hepatic-Fibrosis.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 9,
+  "total_validated": 9,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Congenital hepatic fibrosis",
+      "preferred_label": "congenital hepatic fibrosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0018840",
+        "orpha": "Orphanet:485426",
+        "umls": "UMLS:C0009714",
+        "mesh": "MESH:C562378"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0018840",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21995",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:777.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:40449",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C562378",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200936",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C97071",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1225",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:485426",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:79607001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009714",
+          "display": null
+        }
+      ],
+      "context": "Congenital hepatic fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronop",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "COACH syndrome",
+        "Congenital disorder of glycosylation type 1B"
+      ],
+      "pubtator_normalized_name": "Hepatic Fibrosis Congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "polycystic kidney disease",
+      "preferred_label": "polycystic kidney disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0020642",
+        "orpha": null,
+        "umls": "UMLS:C0022680",
+        "mesh": "MESH:D007690"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0020642",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0080322",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0008620",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:7419",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9639",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007690",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200152",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C75464",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:173900",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:82525005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0022680",
+          "display": null
+        }
+      ],
+      "context": "Congenital hepatic fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronophthisis (NPHP) chronic tubulointerstitial disease, and others. Typical liver abnormalities include an enlarged liver (hepatomegaly), increased pressure in the venous system that carries blood from different organs to the liver (portal hypertension), and fiber-like connective tissue",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Polycystic Kidney Autosomal Dominant",
+        "Polycystic Kidney Autosomal Recessive",
+        "Medullary cystic kidney disease 1"
+      ],
+      "pubtator_normalized_name": "Polycystic Kidney Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "FCD",
+      "preferred_label": "Fleck corneal dystrophy",
+      "abbreviation": "FCD",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "H18.5",
+        "icd11": "9A70.Y",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:98970",
+        "umls": null,
+        "mesh": "C563256"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:98970",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "H18.5",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "9A70.Y",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C563256",
+          "display": "Corneal Dystrophy Fleck"
+        }
+      ],
+      "context": "Congenital hepatic fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronophthisis (NPHP) chronic tubulointerstitial disease, and others. Typical liver abnormalities include an enlarged liver (hepatomegaly), increased pressure in the venous system that carries blood from different organs to the liver (portal hypert",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Corneal Dystrophy Fleck",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "portal hypertension",
+      "preferred_label": "portal hypertension",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:K76.6",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005080",
+        "orpha": null,
+        "umls": "UMLS:C0020541",
+        "mesh": "MESH:D006975"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005080",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10762",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000666",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:K76.6",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:572.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9375",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006975",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3119",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:34742003",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020541",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1506184775",
+          "display": null
+        }
+      ],
+      "context": "diseases (FCD). These include polycystic kidney disease (PKD), nephronophthisis (NPHP) chronic tubulointerstitial disease, and others. Typical liver abnormalities include an enlarged liver (hepatomegaly), increased pressure in the venous system that carries blood from different organs to the liver (portal hypertension), and fiber-like connective tissue that spreads over and through the liver (hepatic fibrosis). Gastrointestinal (stomach and intestine) bleeding, splenomegaly (enlarged spleen) and hypersplenism (decreased platelet and other blood counts due to enlarged spleen) may be early signs of this condition.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Idiopathic Noncirrhotic Portal Hypertension",
+        "Sinistral Portal Hypertension",
+        "Colonic Varices without Portal Hypertension"
+      ],
+      "pubtator_normalized_name": "Hypertension Portal",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "nephronophthisis",
+      "preferred_label": "nephronophthisis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "nephrology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019005",
+        "orpha": "Orphanet:655",
+        "umls": "UMLS:C0687120",
+        "mesh": "C537699"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019005",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:12712",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:206",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0000090",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:146912",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200170",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C123200",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:256100",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:655",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0687120",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:158151813",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C537699",
+          "display": "Nephronophthisis familial juvenile"
+        }
+      ],
+      "context": "fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronophthisis (NPHP) chronic tubulointerstitial disease, and others. Typical liver abnormalities include an enlarged liver (hepatomegaly), increased pressure in the venous system that carries blood from different organs to the liver (portal hypertension), and fiber-like connective tissue that spreads over and th",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Senior Loken Syndrome",
+        "Nephronophthisis 2",
+        "RHYNS syndrome"
+      ],
+      "pubtator_normalized_name": "Nephronophthisis familial juvenile",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypersplenism",
+      "preferred_label": "hypersplenism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:D73.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0006795",
+        "orpha": null,
+        "umls": "UMLS:C0020532",
+        "mesh": "MESH:D006971"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0006795",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6376",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1000975",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001971",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:D73.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:289.4",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9372",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006971",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10020769",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200637",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34714",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:58381000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0020532",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2093549625",
+          "display": null
+        }
+      ],
+      "context": "y), increased pressure in the venous system that carries blood from different organs to the liver (portal hypertension), and fiber-like connective tissue that spreads over and through the liver (hepatic fibrosis). Gastrointestinal (stomach and intestine) bleeding, splenomegaly (enlarged spleen) and hypersplenism (decreased platelet and other blood counts due to enlarged spleen) may be early signs of this condition. The frequency of CHF is not known. The prevalence has been estimated to be 1/10,000-20,000 based on the prevalence of ciliopathies that are associated with CHF. CHF is diagnosed by ultrasound ex",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Hypersplenism",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "ciliopathies",
+      "preferred_label": "ciliopathies",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005308",
+        "orpha": "Orphanet:363250",
+        "umls": "UMLS:C4277690",
+        "mesh": "D000072661"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005308",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060340",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0003900",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:21544",
+          "display": null
+        },
+        {
+          "system": "GTR",
+          "code": "GTR:AN0966173",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:908923",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:363250",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C4277690",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000072661",
+          "display": "Ciliopathies"
+        }
+      ],
+      "context": "Congenital hepatic fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronophthisis (NPHP) chronic tubulointerstitial disease, and others. Typical liver abnormalities include an enlarged liver (hepatomegaly), increased pressure in the venous syste",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Ciliopathies",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Congenital hepatic fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronophthisis (NPHP) chronic tubulointerstitial disease, and others. Typical liver abnormalities include an enlarged liver (hepatomegaly), increased pressure in the venous system that carries blood from different organs to the liver (portal h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "CHF",
+      "preferred_label": "CHF",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005009",
+        "orpha": null,
+        "umls": "UMLS:C0018802",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005009",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:6000",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000373",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0001635",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:428.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9169",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3080",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:42343007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0018802",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2136808878",
+          "display": null
+        }
+      ],
+      "context": "Congenital hepatic fibrosis (CHF) is a rare disease that is present at birth (congenital) and affects the liver. CHF rarely occurs as an isolated problem, and is usually associated with ciliopathies that affect the kidneys, called hepatorenal fibrocystic diseases (FCD). These include polycystic kidney disease (PKD), nephronophthis",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    }
+  ]
+}

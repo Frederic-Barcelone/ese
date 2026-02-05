@@ -1,0 +1,175 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:19:56.207799",
+  "document": "Ovotesticular-Disorder-of-Sex-Development.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Ovotesticular-Disorder-of-Sex-Development.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Ovotesticular disorder of sex development",
+      "preferred_label": "ovotesticular disorder of sex development",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0100250",
+        "orpha": null,
+        "umls": "UMLS:C2748895",
+        "mesh": "D050090"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0100250",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111761",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:411324",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C179867",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:400045",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2748895",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D050090",
+          "display": "Ovotesticular Disorders of Sex Development"
+        }
+      ],
+      "context": "Ovotesticular disorder of sex development (ovotesticular DSD) is a very rare disorder in which an infant is born with the internal reproductive organs (gonads) of both sexes (female ovaries and male testes). The gonads can be any combination of ovary, testes or combined ovary and testes (ovotestes). The external genitalia are usually ambig",
+      "page": 1,
+      "mention_count": 2,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Ovotesticular Disorders of Sex Development",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "disorder of sex development",
+      "preferred_label": "disorder of sex development",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002145",
+        "orpha": "Orphanet:90771",
+        "umls": "UMLS:C2930619",
+        "mesh": "MESH:D012734"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002145",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1923",
+          "display": null
+        },
+        {
+          "system": "GTR",
+          "code": "GTR:AN1172969",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:415936",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012734",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10070597",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100140",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C103186",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:90771",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:39179006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C2930619",
+          "display": null
+        }
+      ],
+      "context": "nal reproductive organs (gonads) of both sexes (female ovaries and male testes). The gonads can be any combination of ovary, testes or combined ovary and testes (ovotestes). The external genitalia are usually ambiguous but can range from normal male to normal female. Ovotesticular DSD is the rarest disorder of sex development in humans and has an approximate incidence of less than 1/20,000. At least 500 affected individuals have been reported. Ovotesticular DSD is diagnosed by a combination of tests including chromosome and genetic analysis, hormone testing, ultrasound or MRI and gonadal biopsy.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "46 XX Testicular Disorders of Sex Development",
+        "Disorder of Sex Development 46 XY",
+        "Leydig Cell Hypoplasia"
+      ],
+      "pubtator_normalized_name": "Disorders of Sex Development",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:42:12.427817",
+  "document": "Myopathy-Myofibrillar.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Myopathy-Myofibrillar.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 5,
+  "total_validated": 5,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "DES",
+      "hgnc_symbol": "DES",
+      "full_name": "desmin",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2770",
+        "entrez": "1674",
+        "ensembl": "ENSG00000175084",
+        "uniprot": "P17661",
+        "omim": "125660"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2770",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "1674",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000175084",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "125660",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P17661",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "154",
+          "disease_name": "Familial isolated dilated cardiomyopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "85146",
+          "disease_name": "Neurogenic scapuloperoneal syndrome, Kaeser type",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "98909",
+          "disease_name": "Desminopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "uency of myofibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "CRYAB",
+      "hgnc_symbol": "CRYAB",
+      "full_name": "crystallin alpha B",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "2389",
+        "entrez": "1410",
+        "ensembl": "ENSG00000109846",
+        "uniprot": "P02511",
+        "omim": "123590"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "2389",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "1410",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000109846",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "123590",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "P02511",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "154",
+          "disease_name": "Familial isolated dilated cardiomyopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "280553",
+          "disease_name": "Fatal infantile hypertonic myofibrillar myopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "399058",
+          "disease_name": "Alpha-B crystallin-related late-onset myopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "441452",
+          "disease_name": "Early-onset lamellar cataract",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "98991",
+          "disease_name": "Early-onset nuclear cataract",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "98993",
+          "disease_name": "Early-onset posterior polar cataract",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "of myofibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "MYOT",
+      "hgnc_symbol": "MYOT",
+      "full_name": "myotilin",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "12399",
+        "entrez": "9499",
+        "ensembl": "ENSG00000120729",
+        "uniprot": "Q9UBF9",
+        "omim": "604103"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "12399",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "9499",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000120729",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "604103",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9UBF9",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "268129",
+          "disease_name": "Spheroid body myopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "98911",
+          "disease_name": "Distal myotilinopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "fibrillar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "LDB3",
+      "hgnc_symbol": "LDB3",
+      "full_name": "LIM domain binding 3",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "15710",
+        "entrez": "11155",
+        "ensembl": "ENSG00000122367",
+        "uniprot": "O75112",
+        "omim": "605906"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "15710",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "11155",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000122367",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "605906",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "O75112",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "154",
+          "disease_name": "Familial isolated dilated cardiomyopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "293910",
+          "disease_name": "Inherited isolated arrhythmogenic cardiomyopathy, dominant-right variant",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "293899",
+          "disease_name": "Inherited isolated arrhythmogenic ventricular dysplasia, biventricular variant",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "293888",
+          "disease_name": "Inherited isolated arrhythmogenic cardiomyopathy, dominant-left variant",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "54260",
+          "disease_name": "Left ventricular noncompaction",
+          "association_type": "Major susceptibility factor in"
+        },
+        {
+          "orphacode": "98912",
+          "disease_name": "Late-onset distal myopathy, Markesbery-Griggs type",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "lar myopathies has not been estimated. It is likely that these conditions are unrecognized and underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "BAG3",
+      "hgnc_symbol": "BAG3",
+      "full_name": "BAG cochaperone 3",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "939",
+        "entrez": "9531",
+        "ensembl": "ENSG00000151929",
+        "uniprot": "O95817",
+        "omim": "603883"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "939",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "9531",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000151929",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "603883",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "O95817",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "154",
+          "disease_name": "Familial isolated dilated cardiomyopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "199340",
+          "disease_name": "BAG3-related myofibrillar myopathy",
+          "association_type": "Disease-causing germline mutation(s) in"
+        }
+      ],
+      "context": "d underdiagnosed. A diagnosis of myofibrillar myopathies is made based on clinical findings, electromyography, nerve conduction studies and muscle biopsy. Molecular genetic testing for the DES, CRYAB, MYOT, LDB3 and ZASP genes is available to confirm the diagnosis. Molecular genetic testing for the BAG3 gene is available on a research basis only.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

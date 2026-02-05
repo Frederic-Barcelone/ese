@@ -1,0 +1,120 @@
+{
+  "run_id": "RUN_20260204_160637_0362f8dd8546",
+  "timestamp": "2026-02-04T17:09:56.388118",
+  "document": "Acquired-Lipodystrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Acquired-Lipodystrophy.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_investigational": 1,
+  "drugs": [
+    {
+      "matched_text": "insulin",
+      "preferred_name": "Insulin",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.85,
+      "is_investigational": true,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": "ACTIVE_NOT_RECRUITING",
+      "sponsor": null,
+      "conditions": [
+        "Pancretic Cancer",
+        "Diabete Mellitus"
+      ],
+      "nct_id": "NCT05306028",
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D007328",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "NCT",
+          "code": "NCT05306028",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D007328",
+          "display": "Insulin"
+        }
+      ],
+      "context": "cific areas of the body, especially the arms, legs, face, neck, and chest or thoracic regions. In some cases, metabolic complications associated with insulin resistance can develop. Such complications include an inability to break down glucose (glucose intolerance), elevated levels of triglycerides (a type",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_investigational_drugs.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Insulin",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "triglycerides",
+      "preferred_name": "TRIGLYCERIDES",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "D014280",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "10808",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D014280",
+          "display": "Triglycerides"
+        }
+      ],
+      "context": "sociated with insulin resistance can develop. Such complications include an inability to break down glucose (glucose intolerance), elevated levels of triglycerides (a type of fat) in the blood (hypertriglyceridemia), and diabetes. Additional symptoms such as fat accumulation in the liver (fatty liver or hepatic ",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "fish oil triglycerides"
+      ],
+      "pubtator_normalized_name": "Triglycerides",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

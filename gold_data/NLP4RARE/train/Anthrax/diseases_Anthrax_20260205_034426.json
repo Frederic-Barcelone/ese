@@ -1,0 +1,666 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:44:26.264762",
+  "document": "Anthrax.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Anthrax.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "viral disease",
+      "preferred_label": "viral infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005108",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014777"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005108",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:934",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000763",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:079.99",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014777",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3439",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:34014006",
+          "display": null
+        }
+      ],
+      "context": "Influenza is a common infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other viruses do not. Cutaneous anthrax may be",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Gastrointestinal anthrax",
+      "preferred_label": "gastrointestinal anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": "ICD10CM:A22.2",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001701",
+        "orpha": null,
+        "umls": "UMLS:C0152945",
+        "mesh": "MESH:C571911"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001701",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13386",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A22.2",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:022.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:102256",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C571911",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:111798006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0152945",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1800193089",
+          "display": null
+        }
+      ],
+      "context": "th flu and other viruses do not. Cutaneous anthrax may be diagnosed by the characteristic signs, such as the raised area on the skin and detection of the presence of the anthrax bacilli in the area of the lesion. A history of exposure to livestock or other possible animal sources also is important. Gastrointestinal anthrax is more difficult to diagnose. In the first, mild phase of inhalational anthrax, symptoms resemble a common cold or upper respiratory infection. With the sudden onset of the more severe symptoms of the second phase, radiographic examination of the chest may show characteristic changes.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Gastrointestinal anthrax",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inhalational anthrax",
+      "preferred_label": "inhalational anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A22.1",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016595",
+        "orpha": "Orphanet:247257",
+        "umls": "UMLS:C0155866",
+        "mesh": "MESH:C571912"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016595",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050160",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20657",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A22.1",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:022.1",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:57841",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C571912",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10035667",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:247257",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:11389007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0155866",
+          "display": null
+        }
+      ],
+      "context": "Influenza is a common infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other viruses do not. Cutaneous anthrax may be diagnosed by the characteristic signs, such as the raised are",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Cutaneous anthrax",
+      "preferred_label": "cutaneous anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "dermatology",
+      "codes": {
+        "icd10": "ICD10CM:A22.0",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004215",
+        "orpha": null,
+        "umls": "UMLS:C0003177",
+        "mesh": "MESH:C531621"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004215",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:7426",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A22.0",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:022.0",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1959",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C531621",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:84980006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003177",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:2057984300",
+          "display": null
+        }
+      ],
+      "context": "infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other viruses do not. Cutaneous anthrax may be diagnosed by the characteristic signs, such as the raised area on the skin and detection of the presence of the anthrax bacilli in the area of the lesion. A history of exposure to livestock or other possible animal sources also is important. Gastrointestinal anthrax is more difficult to diag",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Cutaneous anthrax",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "common cold",
+      "preferred_label": "common cold",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:J00",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005709",
+        "orpha": null,
+        "umls": "UMLS:C0009443",
+        "mesh": "MESH:D003139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005709",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:10459",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007214",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J00",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:460",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3179",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003139",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34500",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:82272006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0009443",
+          "display": null
+        }
+      ],
+      "context": "Influenza is a common infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other viruses do not. Cutaneous anthrax may be diagnosed by the characteristic signs, such as the raised area on the skin and detection of the presence of the anthrax bacilli in the area of the lesio",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Common Cold",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "runny nose",
+      "preferred_label": "runny nose",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:J30",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0003014",
+        "orpha": null,
+        "umls": "UMLS:C0035455",
+        "mesh": "MESH:D012220"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0003014",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4483",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0008521",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:J30",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:19782",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D012220",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34986",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:70076002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0035455",
+          "display": null
+        }
+      ],
+      "context": "Influenza is a common infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other viruses do not. Cutaneous anthrax may be diagnosed by the characteristic signs, such as the raised area on the skin and detection of the presence",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Rhinorrhea",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Influenza",
+      "preferred_label": "influenza",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005812",
+        "orpha": null,
+        "umls": "UMLS:C0021400",
+        "mesh": "MESH:D009976"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005812",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8469",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007328",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:487.8",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:9466",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009976",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C53482",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:61700007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021400",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:145723401",
+          "display": null
+        }
+      ],
+      "context": "Influenza is a common infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other vir",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Influenza in Birds",
+        "Haemophilus Infections",
+        "Meningitis Haemophilus"
+      ],
+      "pubtator_normalized_name": "Influenza Human",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "anthrax",
+      "preferred_label": "anthrax",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": "ICD10CM:A22",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005119",
+        "orpha": null,
+        "umls": "UMLS:C0003175",
+        "mesh": "MESH:D000881"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005119",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:7427",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000778",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:A22",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:022.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:8110",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D000881",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84565",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:409498004",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0003175",
+          "display": null
+        }
+      ],
+      "context": "Influenza is a common infectious viral disease with symptoms that may appear similar to inhalational anthrax. However, anthrax does not cause runny nose, which is a typical symptom of the common cold and influenza. Also, patients with anthrax appear to have abnormal X-rays, while those with flu and other viruses do not. Cutaneous anthrax may be diagnosed by the characteristic signs, such as the raised area on the skin and",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cutaneous anthrax",
+        "Gastrointestinal anthrax",
+        "Inhalation anthrax"
+      ],
+      "pubtator_normalized_name": "Anthrax",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "doc_id": "Mixed-Cryoglobulinemia",
+  "doc_filename": "Mixed-Cryoglobulinemia.pdf",
+  "file_size_bytes": 1772,
+  "file_size_human": "1.7 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "DLA",
+  "document_type_name": "Disease Landscape Analysis",
+  "document_type_group": "Disease Landscape Analysis",
+  "classification_confidence": 0.85,
+  "title": "Mixed Cryoglobulinemia: Epidemiology and Clinical Characteristics",
+  "short_description": "Clinical overview of mixed cryoglobulinemia, a rare disorder primarily associated with hepatitis C virus infection, affecting middle-aged females more frequently.",
+  "long_description": "This document provides epidemiological data and clinical characteristics of mixed cryoglobulinemia, a rare hematological disorder with unknown exact prevalence in the general population. The content details geographic variations in incidence among HCV-infected patients, with lower rates in Northern Europe and North America (less than 1%) compared to Southern Europe (2-5%). The document highlights key demographic patterns, including peak occurrence in individuals aged 40-60 years, a 3:1 female predominance, and the strong association with hepatitis C virus infection in approximately 90% of cases.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-03T08:50:48.972546"
+}

@@ -1,0 +1,92 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T01:57:59.009484",
+  "document": "Congenital-Fiber-Type-Disproportion.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Congenital-Fiber-Type-Disproportion.pdf",
+  "total_candidates": 25,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "CFTD",
+      "long_form": "Congenital fiber type disproportion",
+      "confidence": 1.0,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Congenital fiber type disproportion (CFTD) is a rare genetic muscle disease that is usually apparent at birth (congenital myopathy). It belongs to a group of muscle conditions called the congenital myopathies that tend to affect people in a similar pattern. Major symptoms may include loss of muscle tone (hypotonia) and generalized muscle weakness. Delays in motor development are common and people with more marked muscle weakness also have",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "congenital fiber type disproportion",
+      "matched_text": "Congenital fiber type disproportion",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:2020"
+    },
+    {
+      "name": "genetic muscle disease",
+      "matched_text": "genetic muscle disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "congenital myopathy",
+      "matched_text": "congenital myopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:97245"
+    },
+    {
+      "name": "scoliosis",
+      "matched_text": "scoliosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M41",
+      "orpha": null
+    },
+    {
+      "name": "CFTD",
+      "matched_text": "CFTD",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "fiber",
+      "matched_text": "fiber",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

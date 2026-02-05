@@ -1,0 +1,119 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T13:05:55.545542",
+  "document": "Pediatric-Crohns-Disease.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Pediatric-Crohns-Disease.pdf",
+  "total_candidates": 19,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "VEO",
+      "long_form": "very early onset",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "es. The disorder is most common in individuals between 15-35, with approximately 25% diagnosed by age 20. There is another increase in frequency among individuals between 60-80 years of age. The frequency of pediatric Crohn’s disease is increasing; in particular, there has been a recent increase in the incidence of Crohn’s disease in children less than 6 years old; this is called very early onset (VEO) inflammatory bowel disease. Although more women are affected by Crohn’s disease than men, pediatric Crohn’s disease is more common in boys than girls. Pediatric Crohn’s disease is more common in Caucasians than in people of African descent. It is rare in people of Asian and Hispanic descent. Generally, Crohn’s disease is more severe among children and adolescents than in adults.",
+      "lexicon_source": null,
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "disease",
+      "matched_text": "disease",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:377788"
+    },
+    {
+      "name": "common",
+      "matched_text": "common",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Hinman syndrome",
+      "matched_text": "has",
+      "abbreviation": "HAS",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "N32.8",
+      "orpha": "ORPHA:84085"
+    },
+    {
+      "name": "inflammatory bowel disease",
+      "matched_text": "inflammatory bowel disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "MEN",
+      "matched_text": "men",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:E31.2",
+      "orpha": "Orphanet:276161"
+    },
+    {
+      "name": "rare",
+      "matched_text": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Crohn Disease",
+      "matched_text": "Crohn’s disease",
+      "abbreviation": null,
+      "confidence": 0.9573019504547119,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Inflammatory Bowel Diseases",
+      "matched_text": "inflammatory bowel disease",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Pediatric Disorder",
+      "matched_text": "Pediatric Crohn’s disease",
+      "abbreviation": null,
+      "confidence": 0.9799578547477722,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

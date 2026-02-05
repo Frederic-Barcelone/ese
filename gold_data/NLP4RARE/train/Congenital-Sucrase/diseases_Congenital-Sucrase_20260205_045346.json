@@ -1,0 +1,513 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:53:46.354670",
+  "document": "Congenital-Sucrase.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Congenital-Sucrase.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 6,
+  "total_validated": 6,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "CSID",
+      "preferred_label": "Congenital sucrase-isomaltase deficiency",
+      "abbreviation": "CSID",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "E74.3",
+        "icd11": "5C61.2",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:35122",
+        "umls": null,
+        "mesh": "C538139"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:35122",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "E74.3",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "5C61.2",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538139",
+          "display": "Sucrase-isomaltase deficiency congenital"
+        }
+      ],
+      "context": "are variable among affected individuals but usually include watery diarrhea, abdominal swelling (distension) and/or discomfort, among others. Intolerance to starch often disappears within the first few years of life and the symptoms of sucrose intolerance usually improve as the affected child ages. CSID is inherited as an autosomal recessive genetic trait. CSID is a metabolic disorder that affects males and females in equal numbers and is diagnosed in approximately 0.2 percent of North Americans. This disorder has a higher frequency among Greenland and Canadian Inuit populations, with a reported i",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sucrase-isomaltase deficiency congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Congenital sucrase-isomaltase deficiency",
+      "preferred_label": "congenital sucrase-isomaltase deficiency",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0009114",
+        "orpha": "Orphanet:35122",
+        "umls": "UMLS:C1283620",
+        "mesh": "MESH:C538139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0009114",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0111633",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6183",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:271.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:220924",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C538139",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10066387",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200908",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128190",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1056",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:222900",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:35122",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:78373000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1283620",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:1817406536",
+          "display": null
+        }
+      ],
+      "context": "Congenital sucrase-isomaltase deficiency (CSID) is a rare inherited metabolic disorder characterized by the deficiency or absence of the enzymes sucrase and isomaltase. This",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sucrase-isomaltase deficiency congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "inherited metabolic disorder",
+      "preferred_label": "inborn errors of metabolism",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0019052",
+        "orpha": "Orphanet:68367",
+        "umls": "UMLS:C0025521",
+        "mesh": "MESH:D008661"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0019052",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:655",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:22508",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:6323",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008661",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062018",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100159",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34816",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:68367",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:86095007",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025521",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:733825440",
+          "display": null
+        }
+      ],
+      "context": "Congenital sucrase-isomaltase deficiency (CSID) is a rare inherited metabolic disorder characterized by the deficiency or absence of the enzymes sucrase and isomaltase. This",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Amino Acid Metabolism Inborn Errors",
+        "Steroid Metabolism Inborn Errors",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Metabolism Inborn Errors",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "sucrose intolerance",
+      "preferred_label": "sucrose intolerance",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0045021",
+        "orpha": null,
+        "umls": null,
+        "mesh": "C538139"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0045021",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:271.3",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:190753003",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C538139",
+          "display": "Sucrase-isomaltase deficiency congenital"
+        }
+      ],
+      "context": "and/or some medications) is introduced into the diet. Symptoms are variable among affected individuals but usually include watery diarrhea, abdominal swelling (distension) and/or discomfort, among others. Intolerance to starch often disappears within the first few years of life and the symptoms of sucrose intolerance usually improve as the affected child ages. CSID is inherited as an autosomal recessive genetic trait. CSID is a metabolic disorder that affects males and females in equal numbers and is diagnosed in approximately 0.2 percent of North Americans. This disorder has a higher frequency among Greenland",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Sucrase-isomaltase deficiency congenital",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "metabolic disorder",
+      "preferred_label": "metabolic disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "endocrinology",
+      "codes": {
+        "icd10": "ICD10CM:E70-E88",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005066",
+        "orpha": null,
+        "umls": "UMLS:C0025517",
+        "mesh": "MESH:D008659"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005066",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0014667",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000589",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:E70-E88",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:E70-E90",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:277.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:44376",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D008659",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1100002",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3235",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:75934005",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0025517",
+          "display": null
+        }
+      ],
+      "context": "arrhea, abdominal swelling (distension) and/or discomfort, among others. Intolerance to starch often disappears within the first few years of life and the symptoms of sucrose intolerance usually improve as the affected child ages. CSID is inherited as an autosomal recessive genetic trait. CSID is a metabolic disorder that affects males and females in equal numbers and is diagnosed in approximately 0.2 percent of North Americans. This disorder has a higher frequency among Greenland and Canadian Inuit populations, with a reported incidence of approximately 10 percent. In addition, researchers report a higher degr",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Brain Diseases Metabolic",
+        "Brain Diseases Metabolic Inborn"
+      ],
+      "pubtator_normalized_name": "Glucose Metabolism Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diarrhea",
+      "preferred_label": "diarrhea",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0001673",
+        "orpha": null,
+        "umls": "UMLS:C1290807",
+        "mesh": "MESH:D003967"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0001673",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:13250",
+          "display": null
+        },
+        {
+          "system": "HP",
+          "code": "HP:0002014",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:009.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:713159",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D003967",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2987",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:128333008",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1290807",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:116759077",
+          "display": null
+        }
+      ],
+      "context": "ingested by an affected infant. Breast-fed infants or those on lactose-only formula manifest no symptoms until such time as sucrose (found in fruit juices, solid foods, and/or some medications) is introduced into the diet. Symptoms are variable among affected individuals but usually include watery diarrhea, abdominal swelling (distension) and/or discomfort, among others. Intolerance to starch often disappears within the first few years of life and the symptoms of sucrose intolerance usually improve as the affected child ages. CSID is inherited as an autosomal recessive genetic trait. CSID is a metabo",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Diarrhea 5 With Tufting Enteropathy Congenital",
+        "Diarrhea 3 Secretory Sodium Congenital",
+        "Dysentery"
+      ],
+      "pubtator_normalized_name": "Diarrhea",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

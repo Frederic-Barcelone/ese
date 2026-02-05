@@ -1,0 +1,566 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:18:50.900991",
+  "document": "X-linked-Lymphoproliferative-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/X-linked-Lymphoproliferative-Syndrome.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 7,
+  "total_validated": 7,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "X-linked lymphoproliferative syndrome",
+      "preferred_label": "X-linked lymphoproliferative syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010627",
+        "orpha": "Orphanet:2442",
+        "umls": "UMLS:C0549463",
+        "mesh": "D008232"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010627",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0060705",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:10915",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:238.79",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:107498",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10068348",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200725",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C61246",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:1865",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:2442",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:77121009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0549463",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008232",
+          "display": "Lymphoproliferative Disorders"
+        }
+      ],
+      "context": "The range of symptoms and findings associated with XLP may vary considerably from case to case. In addition, the range of effects may change in an affected individual over time. In most cases, individuals with XLP experience an onset of symptoms anytime from ages about 6 months to 10 years of age. X-linked lymphoproliferative syndrome is an extremely rare disorder that is usually fully expressed in males only. About 400+ cases affecting males in more than 80 multigenerational families (kindreds) from several different countries have been reported in the medical literature. Researchers estimate that approximately one to two in ev",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoproliferative Syndrome X-Linked 2"
+      ],
+      "pubtator_normalized_name": "Lymphoproliferative Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "XLP",
+      "preferred_label": "X-linked lymphoproliferative disease",
+      "abbreviation": "XLP",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": null,
+        "icd11": "4A01.22",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:2442",
+        "umls": null,
+        "mesh": "D008232"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:2442",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "4A01.22",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D008232",
+          "display": "Lymphoproliferative Disorders"
+        }
+      ],
+      "context": "X-linked lymphoproliferative (XLP) syndrome is an extremely rare inherited (primary) immunodeficiency disorder characterized by a defective immune system that is powerfully responsive to infection with the Epstein-Barr virus (EBV). This virus is common among the general population and is relatively well-known because it is the caus",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Lymphoproliferative Disorders",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "immunodeficiency disorder",
+      "preferred_label": "immunodeficiency disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "immunology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0021094",
+        "orpha": null,
+        "umls": "UMLS:C0021051",
+        "mesh": "D000081207"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0021094",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:279.3",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7034",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2100204",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3131",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:300755",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:234532001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021051",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000081207",
+          "display": "Primary Immunodeficiency Diseases"
+        }
+      ],
+      "context": "X-linked lymphoproliferative (XLP) syndrome is an extremely rare inherited (primary) immunodeficiency disorder characterized by a defective immune system that is powerfully responsive to infection with the Epstein-Barr virus (EBV). This virus is common among the general population and is relatively well-known because it is the cause of infectious mononucleosis (IM), usually with no long-lasting effects. How",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoproliferative Disorders",
+        "T cell immunodeficiency primary",
+        "Kotzot-Richter syndrome"
+      ],
+      "pubtator_normalized_name": "Primary Immunodeficiency Diseases",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "infectious mononucleosis",
+      "preferred_label": "infectious mononucleosis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005810",
+        "orpha": null,
+        "umls": "UMLS:C0021345",
+        "mesh": "MESH:D007244"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005810",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8568",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0007326",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:B27",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:075",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:7069",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007244",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200976",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34726",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:186668002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0021345",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:760139952",
+          "display": null
+        }
+      ],
+      "context": "drome is an extremely rare inherited (primary) immunodeficiency disorder characterized by a defective immune system that is powerfully responsive to infection with the Epstein-Barr virus (EBV). This virus is common among the general population and is relatively well-known because it is the cause of infectious mononucleosis (IM), usually with no long-lasting effects. However, in individuals with XLP, exposure to EBV may result in severe, life-threatening fulminant hepatitis; abnormally low levels of antibodies in the blood and body secretions (hypogammaglobulinemia), resulting in increased susceptibility to various in",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Fatigue Syndrome Chronic"
+      ],
+      "pubtator_normalized_name": "Infectious Mononucleosis",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hypogammaglobulinemia",
+      "preferred_label": "hypogammaglobulinemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016463",
+        "orpha": "Orphanet:229720",
+        "umls": "UMLS:C5680904",
+        "mesh": "D000361"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016463",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20596",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1843258",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C26931",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:229720",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5680904",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D000361",
+          "display": "Agammaglobulinemia"
+        }
+      ],
+      "context": "s relatively well-known because it is the cause of infectious mononucleosis (IM), usually with no long-lasting effects. However, in individuals with XLP, exposure to EBV may result in severe, life-threatening fulminant hepatitis; abnormally low levels of antibodies in the blood and body secretions (hypogammaglobulinemia), resulting in increased susceptibility to various infections; malignancies of certain types of lymphoid tissue (B-cell lymphomas); and/or other abnormalities. The range of symptoms and findings associated with XLP may vary considerably from case to case. In addition, the range of effects may chang",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Common Variable Immunodeficiency",
+        "Hypogammaglobulinemia and Isolated growth hormone deficiency X-linked",
+        "WHIM syndrome"
+      ],
+      "pubtator_normalized_name": "Agammaglobulinemia",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "B-cell lymphomas",
+      "preferred_label": "B-cell lymphoma",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "oncology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015759",
+        "orpha": "Orphanet:171915",
+        "umls": null,
+        "mesh": "D016393"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015759",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:1001938",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:20132",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200020",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3457",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:171915",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D016393",
+          "display": "Lymphoma B-Cell"
+        }
+      ],
+      "context": "ividuals with XLP, exposure to EBV may result in severe, life-threatening fulminant hepatitis; abnormally low levels of antibodies in the blood and body secretions (hypogammaglobulinemia), resulting in increased susceptibility to various infections; malignancies of certain types of lymphoid tissue (B-cell lymphomas); and/or other abnormalities. The range of symptoms and findings associated with XLP may vary considerably from case to case. In addition, the range of effects may change in an affected individual over time. In most cases, individuals with XLP experience an onset of symptoms anytime from ages about",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Lymphoma Large B-Cell Diffuse",
+        "Lymphoma B-Cell Marginal Zone",
+        "Leukemia Lymphocytic Chronic B-Cell"
+      ],
+      "pubtator_normalized_name": "Lymphoma B-Cell",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "hepatitis",
+      "preferred_label": "Hepatitis",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "gastroenterology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0002251",
+        "orpha": null,
+        "umls": "UMLS:C0019158",
+        "mesh": "MESH:D006505"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0002251",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:2237",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:571.41",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:5515",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D006505",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3095",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:197268000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0019158",
+          "display": null
+        }
+      ],
+      "context": "Epstein-Barr virus (EBV). This virus is common among the general population and is relatively well-known because it is the cause of infectious mononucleosis (IM), usually with no long-lasting effects. However, in individuals with XLP, exposure to EBV may result in severe, life-threatening fulminant hepatitis; abnormally low levels of antibodies in the blood and body secretions (hypogammaglobulinemia), resulting in increased susceptibility to various infections; malignancies of certain types of lymphoid tissue (B-cell lymphomas); and/or other abnormalities. The range of symptoms and findings associated",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Hepatitis C Chronic",
+        "Hepatitis C",
+        "Hepatitis E"
+      ],
+      "pubtator_normalized_name": "Hepatitis B",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

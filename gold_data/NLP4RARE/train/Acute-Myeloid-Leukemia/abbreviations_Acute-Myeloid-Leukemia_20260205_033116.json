@@ -1,0 +1,65 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T03:31:16.835580",
+  "document": "Acute-Myeloid-Leukemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Acute-Myeloid-Leukemia.pdf",
+  "total_candidates": 20,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AML",
+      "long_form": "Acute myeloid leukemia",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": " 100,000 people in the general population has the disease. More than half the people diagnosed with AML are 65 years of age or older. Slightly more men than women are affected by the disease, and it occu",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "acute myeloid leukemia",
+      "matched_text": "Acute myeloid leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:C92.0",
+      "orpha": "Orphanet:519"
+    },
+    {
+      "name": "Acute myeloid leukemia",
+      "matched_text": "AML",
+      "abbreviation": "AML",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "C92.0",
+      "orpha": "ORPHA:519"
+    },
+    {
+      "name": "acute leukemia",
+      "matched_text": "acute leukemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

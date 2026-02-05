@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:41:04.226394",
+  "document": "Multiple-System-Atrophy.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Multiple-System-Atrophy.pdf",
+  "total_candidates": 28,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 2,
+    "blacklisted_fp_count": 2,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "MSA",
+      "long_form": "Multiple system atrophy",
+      "confidence": 0.85,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "MSA appears to affect males and females in equal numbers. The peak onset of MSA is between 55-60 years ",
+      "lexicon_source": "orchestrator:llm_extraction:lexicon_fallback",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "PD",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "pulation for every 40 cases of Parkinson’s disease, but because survival in MSA is shorter than for PD, about 1 new MSA case presents every year for about every 20 who present with PD.",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Multiple system atrophy",
+      "matched_text": "MSA",
+      "abbreviation": "MSA",
+      "confidence": 0.95,
+      "is_rare": true,
+      "icd10": "G23.3",
+      "orpha": "ORPHA:102"
+    },
+    {
+      "name": "Parkinson's disease",
+      "matched_text": "Parkinson’s disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:G20",
+      "orpha": "Orphanet:319705"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

@@ -1,0 +1,173 @@
+{
+  "run_id": "RUN_20260203_072040_a0aea931a61c",
+  "timestamp": "2026-02-03T08:33:29.495483",
+  "document": "Antiphospholipid-Syndrome.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Antiphospholipid-Syndrome.pdf",
+  "total_candidates": 37,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 0,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 0,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "APS",
+      "long_form": "Antiphospholipid syndrome",
+      "confidence": 0.95,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "Antiphospholipid syndrome (APS) is a rare autoimmune disorder characterized by recurring blood clots (thromboses). Blood clots can form in any blood vessel of the body. The specific symptoms and severity of APS vary greatly from person to person depending upon the exact location of a blood clot and the organ system affected. APS",
+      "lexicon_source": "scispacy",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "antiphospholipid syndrome",
+      "matched_text": "Antiphospholipid syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:D68.61",
+      "orpha": "Orphanet:80"
+    },
+    {
+      "name": "rare",
+      "matched_text": "rare",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "autoimmune disorder",
+      "matched_text": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "blood Clots",
+      "matched_text": "blood clots",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "CAN",
+      "matched_text": "can",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:93262"
+    },
+    {
+      "name": "Disease",
+      "matched_text": "isolated disorder",
+      "abbreviation": null,
+      "confidence": 0.848388409614563,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "primary antiphospholipid syndrome",
+      "matched_text": "primary antiphospholipid syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "systemic lupus erythematosus",
+      "matched_text": "systemic lupus erythematosus",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:M32",
+      "orpha": "Orphanet:536"
+    },
+    {
+      "name": "secondary antiphospholipid syndrome",
+      "matched_text": "secondary antiphospholipid syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cerebrovascular disorder",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I60-I69",
+      "orpha": null
+    },
+    {
+      "name": "Autoimmune Diseases",
+      "matched_text": "autoimmune disorder",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Lupus Erythematosus, Systemic",
+      "matched_text": "systemic lupus erythematosus",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Cerebrovascular accident",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "Lupus Vulgaris",
+      "matched_text": "lupus",
+      "abbreviation": null,
+      "confidence": 1.0,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    }
+  ],
+  "drugs": [
+    {
+      "name": "APS",
+      "matched_text": "APS",
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "phase": null
+    }
+  ],
+  "pharma": []
+}

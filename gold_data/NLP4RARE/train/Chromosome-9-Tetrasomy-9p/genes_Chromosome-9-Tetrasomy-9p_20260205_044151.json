@@ -1,0 +1,124 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:41:51.132165",
+  "document": "Chromosome-9-Tetrasomy-9p.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chromosome-9-Tetrasomy-9p.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "arm",
+      "hgnc_symbol": "ARMC9",
+      "full_name": "armadillo repeat containing 9",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "20730",
+        "entrez": "80210",
+        "ensembl": "ENSG00000135931",
+        "uniprot": "Q7Z3E5",
+        "omim": "617612"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "20730",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "80210",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000135931",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "617612",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q7Z3E5",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "\"Chromosome 9, Tetrasomy 9p is a very rare chromosomal disorder in which the short arm the ninth chromosome (9p) appears four times (tetrasomy) rather than twice in all or some cells of the body. Individuals with a normal chromosomal make-up (karyotype) have two 9th chromosomes, both of which have a short arm (\"\"9p\"\") and a long arm (\"\"9q'\"). However, in individuals with Chromosome 9",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "arms",
+      "hgnc_symbol": "KIDINS220",
+      "full_name": "kinase D interacting substrate 220",
+      "confidence": 0.8,
+      "is_alias": true,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "29508",
+        "entrez": "57498",
+        "ensembl": "ENSG00000134313",
+        "uniprot": "Q9ULH0",
+        "omim": "615759"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "29508",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "57498",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000134313",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "615759",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "Q9ULH0",
+          "display": null
+        }
+      ],
+      "associated_diseases": [],
+      "context": "appears four times (tetrasomy) rather than twice in all or some cells of the body. Individuals with a normal chromosomal make-up (karyotype) have two 9th chromosomes, both of which have a short arm (\"\"9p\"\") and a long arm (\"\"9q'\"). However, in individuals with Chromosome 9, Tetrasomy 9p, four short arms (9ps) are present in cells rather than the normal two. Chromosome 9, Tetrasomy 9p is a very rare chromosomal disorder that appears to affect males slightly more often than females. Approximately 30 cases have been reported in the medical literature.\"\n\nof",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}

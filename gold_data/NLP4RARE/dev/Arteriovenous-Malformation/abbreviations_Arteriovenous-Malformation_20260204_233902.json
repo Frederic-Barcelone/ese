@@ -1,0 +1,103 @@
+{
+  "run_id": "RUN_20260204_223144_6427d2c2596f",
+  "timestamp": "2026-02-04T23:39:02.749495",
+  "document": "Arteriovenous-Malformation.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/dev/Arteriovenous-Malformation.pdf",
+  "total_candidates": 60,
+  "total_validated": 3,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "heuristics_counters": {
+    "recovered_by_stats_whitelist": 0,
+    "recovered_by_country_code": 0,
+    "recovered_by_hyphen": 0,
+    "recovered_by_direct_search": 0,
+    "recovered_by_llm_sf_only": 1,
+    "blacklisted_fp_count": 0,
+    "common_word_rejected": 0,
+    "context_rejected": 0,
+    "form_filter_rejected": 1,
+    "trial_id_excluded": 0
+  },
+  "abbreviations": [
+    {
+      "short_form": "AVM",
+      "long_form": "Arteriovenous malformation",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "y, form and progress during the later years of life. The lack of capillaries allows blood traveling through the abnormal fistulous connections to flow rapidly. The low resistance of the direct A-V connections, termed fistulas, results in very high flow rates in the vessels leading to and within the AVM. These high flow rates can lower the pressure in the arteries leading to the AVM and to surrounding relatively normal brain tissue. Further, because of the direct A-V connections, the pressure in the arteries, even if somewhat reduced, are transmitted to the veins draining the AVM and surrounding b",
+      "lexicon_source": "2025_08_abbreviation_general.json",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "AVMs",
+      "long_form": "arteriovenous malformations",
+      "confidence": 0.8,
+      "field_type": "DEFINITION_PAIR",
+      "page": 1,
+      "context_text": "sizes in which there is one or more direct connections between the arterial and venous circulations. In the lesion there is no capillary bed, which is part of normal tissue. Brain AVMs are often presumed to be congenital, but there is no direct evidence that they form in utero. The distribution of age at detection for brain AVMs is normally-distributed with the mean age in the mid-30’s. Although a small number of AVMs manifest themselves at or shortly after birth, most of them pr",
+      "lexicon_source": "meta-inventory",
+      "lexicon_ids": null
+    },
+    {
+      "short_form": "A-V",
+      "long_form": null,
+      "confidence": 0.75,
+      "field_type": "SHORT_FORM_ONLY",
+      "page": 1,
+      "context_text": "veling through the abnormal fistulous connections to flow rapidly. The low resistance of the direct A-V connections, termed fistulas, results in very high flow rates in the vessels leading to and within ",
+      "lexicon_source": "orchestrator:llm_extraction",
+      "lexicon_ids": null
+    }
+  ],
+  "diseases": [
+    {
+      "name": "hereditary hemorrhagic telangiectasia",
+      "matched_text": "hereditary hemorrhagic telangiectasia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": "ICD10CM:I78.0",
+      "orpha": "Orphanet:774"
+    },
+    {
+      "name": "arteriovenous hemangioma/malformation",
+      "matched_text": "Arteriovenous malformation",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": null
+    },
+    {
+      "name": "cerebrovascular disorder",
+      "matched_text": "stroke",
+      "abbreviation": null,
+      "confidence": 0.85,
+      "is_rare": false,
+      "icd10": "ICD10CM:I60-I69",
+      "orpha": null
+    },
+    {
+      "name": "capillary malformation",
+      "matched_text": "capillary malformation",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:211247"
+    },
+    {
+      "name": "Wyburn-Mason syndrome",
+      "matched_text": "Wyburn-Mason syndrome",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare": false,
+      "icd10": null,
+      "orpha": "Orphanet:53719"
+    }
+  ],
+  "drugs": [],
+  "pharma": []
+}

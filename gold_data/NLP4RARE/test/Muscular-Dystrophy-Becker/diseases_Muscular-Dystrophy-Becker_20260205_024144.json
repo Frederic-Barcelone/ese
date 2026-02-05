@@ -1,0 +1,614 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T02:41:44.471597",
+  "document": "Muscular-Dystrophy-Becker.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Muscular-Dystrophy-Becker.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 8,
+  "total_validated": 8,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "skeletal muscle",
+      "preferred_label": "Primary bone dysplasia with progressive ossification of skin, skeletal muscle, fascia, tendons and ligaments",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "dermatology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:364531",
+        "umls": null,
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:364531",
+          "display": null
+        }
+      ],
+      "context": "r muscular dystrophy and many different types of DMD gene mutations have been identified in individuals with this condition. Identification of a DMD gene mutation from molecular genetic testing confirms the diagnosis. If molecular genetic testing is performed and a DMD gene mutation is not found, a skeletal muscle biopsy is recommended to examine the appearance of the dystrophin protein.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphanet_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "DMD",
+      "preferred_label": "Duchenne muscular dystrophy",
+      "abbreviation": "DMD",
+      "confidence": 0.95,
+      "is_rare_disease": true,
+      "category": "rare_disease",
+      "codes": {
+        "icd10": "G71.0",
+        "icd11": "8C70.1",
+        "snomed": null,
+        "mondo": null,
+        "orpha": "ORPHA:98896",
+        "umls": null,
+        "mesh": "D020388"
+      },
+      "all_identifiers": [
+        {
+          "system": "ORPHA",
+          "code": "ORPHA:98896",
+          "display": null
+        },
+        {
+          "system": "ICD-10",
+          "code": "G71.0",
+          "display": null
+        },
+        {
+          "system": "ICD-11",
+          "code": "8C70.1",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "D020388",
+          "display": "Muscular Dystrophy Duchenne"
+        }
+      ],
+      "context": "Becker muscular dystrophy is in the category of inherited muscle wasting diseases caused by a gene abnormality (mutation) that results in deficient or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-linked recessive inheritance so it mostly affects males, but some females are affected. Becker muscular dystrophy usually begins in the teens or early twenties and symptoms vary greatly between affected individuals. Muscle dete",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_rare_disease_acronyms.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Limb-girdle muscular dystrophy type 2C",
+        "Sarcoglycanopathies"
+      ],
+      "pubtator_normalized_name": "Muscular Dystrophy Duchenne",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Becker muscular dystrophy",
+      "preferred_label": "Becker muscular dystrophy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0010311",
+        "orpha": "Orphanet:98895",
+        "umls": "UMLS:C0917713",
+        "mesh": "MESH:C570377"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0010311",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:9883",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:5900",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:182959",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:C570377",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10059117",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200865",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C84587",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "OMIM:300376",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:98895",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:387732009",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0917713",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:690532643",
+          "display": null
+        }
+      ],
+      "context": "Becker muscular dystrophy is in the category of inherited muscle wasting diseases caused by a gene abnormality (mutation) that results in deficient or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-li",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Muscular Dystrophy Duchenne",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "Learning disabilities",
+      "preferred_label": "learning disability",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004681",
+        "orpha": null,
+        "umls": "UMLS:C0751265",
+        "mesh": "MESH:D007859"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004681",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:8927",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:315.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:199623",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D007859",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C89334",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:1855002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0751265",
+          "display": null
+        }
+      ],
+      "context": "the teens or early twenties and symptoms vary greatly between affected individuals. Muscle deterioration progresses slowly but usually results in the need for a wheel chair. Muscles of the heart deteriorate (cardiomyopathy) in some affected individuals, and this process can become life-threatening. Learning disabilities involving visual abilities may be present. Becker muscular dystrophy occurs in approximately 1 in 30,000 male births. The diagnosis of Becker muscular dystrophy is based on physical symptoms, family history, an elevated concentration of creatine kinase (Ck) in the blood indicating destruction of mu",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "non-verbal learning disabilities"
+      ],
+      "pubtator_normalized_name": "Learning Disabilities",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "dystrophinopathies",
+      "preferred_label": "dystrophinopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0016147",
+        "orpha": "Orphanet:207085",
+        "umls": "UMLS:C5679787",
+        "mesh": null
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0016147",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:2031",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:1826053",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:1200487",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:207085",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C5679787",
+          "display": null
+        }
+      ],
+      "context": "Becker muscular dystrophy is in the category of inherited muscle wasting diseases caused by a gene abnormality (mutation) that results in deficient or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-linked recessive inheritance so it mostly affects males, but some females are affected. Becker muscular dystrophy usually begins in the teens or early twenties and symptoms vary greatly between",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "muscle wasting",
+      "preferred_label": "muscle wasting",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004323",
+        "orpha": null,
+        "umls": "UMLS:C0541794",
+        "mesh": "MESH:D009133"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004323",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:767",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:728.2",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:892680",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009133",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:88092000",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0541794",
+          "display": null
+        }
+      ],
+      "context": "Becker muscular dystrophy is in the category of inherited muscle wasting diseases caused by a gene abnormality (mutation) that results in deficient or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-linked recessive inheritance so it mostly affects",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Spastic paraplegia 20 autosomal recessive",
+        "Mental Retardation X-Linked With Brachydactyly And Macroglossia"
+      ],
+      "pubtator_normalized_name": "Isaacs Syndrome",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "cardiomyopathy",
+      "preferred_label": "cardiomyopathy",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "cardiology",
+      "codes": {
+        "icd10": "ICD10CM:I42",
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0004994",
+        "orpha": "Orphanet:167848",
+        "umls": "UMLS:C0878544",
+        "mesh": "MESH:D009202"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0004994",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050700",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000318",
+          "display": null
+        },
+        {
+          "system": "ICD-10-CM",
+          "code": "ICD10CM:I42",
+          "display": null
+        },
+        {
+          "system": "ICD10WHO",
+          "code": "ICD10WHO:I42",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:425.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:209232",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D009202",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10007636",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C34830",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:167848",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:85898001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0878544",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:282225286",
+          "display": null
+        }
+      ],
+      "context": "y affects males, but some females are affected. Becker muscular dystrophy usually begins in the teens or early twenties and symptoms vary greatly between affected individuals. Muscle deterioration progresses slowly but usually results in the need for a wheel chair. Muscles of the heart deteriorate (cardiomyopathy) in some affected individuals, and this process can become life-threatening. Learning disabilities involving visual abilities may be present. Becker muscular dystrophy occurs in approximately 1 in 30,000 male births. The diagnosis of Becker muscular dystrophy is based on physical symptoms, family h",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiomyopathy Hypertrophic",
+        "Cardiomyopathy Restrictive",
+        "Cardiomyopathies"
+      ],
+      "pubtator_normalized_name": "Cardiomyopathy Dilated",
+      "enrichment_source": "pubtator3"
+    },
+    {
+      "matched_text": "diseases",
+      "preferred_label": "diseases",
+      "abbreviation": null,
+      "confidence": 0.65,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0000001",
+        "orpha": "Orphanet:377788",
+        "umls": "UMLS:C0012634",
+        "mesh": "MESH:D004194"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0000001",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:4",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:799.9",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:4347",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D004194",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C2991",
+          "display": null
+        },
+        {
+          "system": "OGMS",
+          "code": "OGMS:0000031",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:377788",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:64572001",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0012634",
+          "display": null
+        }
+      ],
+      "context": "Becker muscular dystrophy is in the category of inherited muscle wasting diseases caused by a gene abnormality (mutation) that results in deficient or abnormal production of the dystrophin protein (dystrophinopathies). The abnormal gene is called DMD and is located on the X chromosome. Becker muscular dystrophy follows x-linked recessive inheritance so it mostly affects males, b",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Cardiovascular Diseases",
+        "COVID-19",
+        "Heart Diseases"
+      ],
+      "pubtator_normalized_name": "Mental Disorders",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

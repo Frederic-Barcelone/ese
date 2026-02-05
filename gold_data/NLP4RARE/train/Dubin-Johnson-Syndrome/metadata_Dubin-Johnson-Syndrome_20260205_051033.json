@@ -1,0 +1,40 @@
+{
+  "doc_id": "Dubin-Johnson-Syndrome",
+  "doc_filename": "Dubin-Johnson-Syndrome.pdf",
+  "top_entities": [
+    {
+      "name": "Dubin Johnson syndrome",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "Hereditary combined deficiency of vitamin K-dependent clotting factors",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "CBLIF",
+      "mention_count": 1,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 3061,
+  "file_size_human": "3.0 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:18",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Dubin-Johnson Syndrome: A Rare Genetic Liver Disorder",
+  "short_description": "Clinical overview of Dubin-Johnson Syndrome, a rare autosomal recessive genetic liver disorder characterized by jaundice and elevated bilirubin levels.",
+  "long_description": "This document provides a comprehensive clinical overview of Dubin-Johnson Syndrome, a rare genetic liver disorder that predominantly affects individuals of Middle Eastern Jewish heritage. The text covers the syndrome's clinical presentation, including jaundice as the primary symptom, its autosomal recessive inheritance pattern, epidemiology showing higher incidence rates in specific populations (1 in 1300 among Iranian, Iraqi, and Moroccan Jews), and management approaches. The document explains the genetic mechanisms underlying the condition, discusses risk factors such as pregnancy and oral contraceptive use that may trigger symptom onset, and emphasizes the importance of careful medication supervision due to altered drug metabolism. It serves as an educational resource for healthcare providers and families affected by this condition.",
+  "document_date": "2026-01-07T22:25:18",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T04:10:33.666672"
+}

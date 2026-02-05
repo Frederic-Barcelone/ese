@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T05:05:08.607169",
+  "document": "Dentinogenesis-Imperfecta-Type-III.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Dentinogenesis-Imperfecta-Type-III.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_investigational": 0,
+  "drugs": [
+    {
+      "matched_text": "amber",
+      "preferred_name": "amber",
+      "brand_name": null,
+      "compound_id": null,
+      "confidence": 0.7,
+      "is_investigational": false,
+      "drug_class": null,
+      "mechanism": null,
+      "development_phase": null,
+      "sponsor": null,
+      "conditions": [],
+      "nct_id": null,
+      "dosage_form": null,
+      "route": null,
+      "marketing_status": null,
+      "codes": {
+        "rxcui": null,
+        "mesh": "C003771",
+        "ndc": null,
+        "drugbank": null,
+        "unii": null
+      },
+      "all_identifiers": [
+        {
+          "system": "RxCUI",
+          "code": "1311393",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "C003771",
+          "display": "Amberlite XAD-2 resin"
+        }
+      ],
+      "context": "by rapid erosion of the crowns in baby and permanent teeth. Dental pulp inside several teeth may be exposed. This pulp may be opalescent, smooth, and amber colored. Pulp chambers and root canals may appear very large on X-ray photos of baby teeth. Permanent teeth may have a reduction or even complete los",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_lexicon_drug.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "amberlyst-15",
+        "amberlite",
+        "amberlite XAD 7"
+      ],
+      "pubtator_normalized_name": "Amberlite XAD-2 resin",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

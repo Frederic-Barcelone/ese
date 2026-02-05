@@ -1,0 +1,170 @@
+{
+  "run_id": "RUN_20260204_234342_996d5a3920e1",
+  "timestamp": "2026-02-05T04:30:14.708999",
+  "document": "Chikungunya.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/train/Chikungunya.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "viral infection",
+      "preferred_label": "viral infectious disease",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0005108",
+        "orpha": null,
+        "umls": null,
+        "mesh": "MESH:D014777"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0005108",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:934",
+          "display": null
+        },
+        {
+          "system": "EFO",
+          "code": "EFO:0000763",
+          "display": null
+        },
+        {
+          "system": "ICD9",
+          "code": "ICD9:079.99",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D014777",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C3439",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:34014006",
+          "display": null
+        }
+      ],
+      "context": "Chikungunya is a rare viral infection transmitted by the bite of an infected mosquito. It is characterized by a rash, fever, and severe joint pain (arthralgias) that usually lasts for three to seven days. Because of its effect on the joints, Chikungunya has been classified among the Arthritic Viruses. It primarily occurs in tropical ar",
+      "page": 1,
+      "mention_count": 3,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": null,
+      "enrichment_source": null
+    },
+    {
+      "matched_text": "Chikungunya",
+      "preferred_label": "chikungunya",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": null,
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0017941",
+        "orpha": "Orphanet:324625",
+        "umls": "UMLS:C0008055",
+        "mesh": "MESH:D065632"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0017941",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:0050012",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6038",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:3362",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D065632",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C128422",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:924",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:324625",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:111864006",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C0008055",
+          "display": null
+        },
+        {
+          "system": "icd11.foundation",
+          "code": "icd11.foundation:900389391",
+          "display": null
+        }
+      ],
+      "context": "Chikungunya is a rare viral infection transmitted by the bite of an infected mosquito. It is characterized by a rash, fever, and severe joint pain (arthralgias) that usually lasts for three to seven days. Because of its effect on the joints, Chikungunya has been classified among the Arthritic Viruses. It prima",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [],
+      "pubtator_normalized_name": "Chikungunya Fever",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}
