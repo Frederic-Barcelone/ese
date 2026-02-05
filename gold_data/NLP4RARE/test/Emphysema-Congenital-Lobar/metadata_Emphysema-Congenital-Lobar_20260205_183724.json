@@ -1,0 +1,40 @@
+{
+  "doc_id": "Emphysema-Congenital-Lobar",
+  "doc_filename": "Emphysema-Congenital-Lobar.pdf",
+  "top_entities": [
+    {
+      "name": "congenital lobar emphysema",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "respiratory disorder",
+      "mention_count": 1,
+      "entity_type": "disease"
+    },
+    {
+      "name": "air",
+      "mention_count": 1,
+      "entity_type": "drug"
+    }
+  ],
+  "file_size_bytes": 1930,
+  "file_size_human": "1.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "(anonymous)",
+  "pdf_author": "(anonymous)",
+  "pdf_page_count": 1,
+  "pdf_creation_date": "2026-01-07T22:25:17",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "CRM",
+  "document_type_name": "Clinical Research Materials",
+  "document_type_group": "Clinical Research Materials",
+  "classification_confidence": 0.15,
+  "title": "Congenital Lobar Emphysema: Clinical Overview and Characteristics",
+  "short_description": "A rare respiratory disorder causing lung overinflation due to trapped air, primarily affecting newborns and infants.",
+  "long_description": "This clinical document provides a comprehensive overview of congenital lobar emphysema, a rare respiratory condition characterized by air trapping that leads to hyperinflation of lung lobes. The document details the disorder's presentation timeline, noting that while most cases are detected in newborns and young infants, some may not become apparent until adulthood. It covers the variable severity of the condition, ranging from mild cases that may never be diagnosed to severe presentations causing cardiac complications in 15% of patients. The document also addresses the epidemiological aspects, including the higher prevalence in males, genetic factors involving autosomal dominant inheritance patterns, and the temporal distribution of diagnoses with 50% occurring within the first month of life and 75% within six months.",
+  "document_date": "2026-01-07T22:25:17",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-05T17:37:24.733159"
+}

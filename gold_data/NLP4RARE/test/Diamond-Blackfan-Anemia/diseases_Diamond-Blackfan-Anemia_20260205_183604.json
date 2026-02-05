@@ -1,0 +1,116 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:36:04.200231",
+  "document": "Diamond-Blackfan-Anemia.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Diamond-Blackfan-Anemia.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 1,
+  "total_validated": 1,
+  "total_rejected": 0,
+  "total_ambiguous": 0,
+  "diseases": [
+    {
+      "matched_text": "Diamond Blackfan anemia",
+      "preferred_label": "Diamond-Blackfan anemia",
+      "abbreviation": null,
+      "confidence": 0.95,
+      "is_rare_disease": false,
+      "category": "hematology",
+      "codes": {
+        "icd10": null,
+        "icd11": null,
+        "snomed": null,
+        "mondo": "MONDO:MONDO_0015253",
+        "orpha": "Orphanet:124",
+        "umls": "UMLS:C1260899",
+        "mesh": "MESH:D029503"
+      },
+      "all_identifiers": [
+        {
+          "system": "MONDO",
+          "code": "MONDO_0015253",
+          "display": null
+        },
+        {
+          "system": "DOID",
+          "code": "DOID:1339",
+          "display": null
+        },
+        {
+          "system": "GARD",
+          "code": "GARD:6274",
+          "display": null
+        },
+        {
+          "system": "MEDGEN",
+          "code": "MEDGEN:266045",
+          "display": null
+        },
+        {
+          "system": "MeSH",
+          "code": "MESH:D029503",
+          "display": null
+        },
+        {
+          "system": "MedDRA",
+          "code": "MedDRA:10062989",
+          "display": null
+        },
+        {
+          "system": "NANDO",
+          "code": "NANDO:2200614",
+          "display": null
+        },
+        {
+          "system": "NCIT",
+          "code": "NCIT:C61236",
+          "display": null
+        },
+        {
+          "system": "NORD",
+          "code": "NORD:773",
+          "display": null
+        },
+        {
+          "system": "OMIMPS",
+          "code": "OMIMPS:105650",
+          "display": null
+        },
+        {
+          "system": "Orphanet",
+          "code": "Orphanet:124",
+          "display": null
+        },
+        {
+          "system": "SCTID",
+          "code": "SCTID:88854002",
+          "display": null
+        },
+        {
+          "system": "UMLS",
+          "code": "UMLS:C1260899",
+          "display": null
+        }
+      ],
+      "context": "Diamond Blackfan anemia affects approximately 5 to 7 people per million live births per year. Thus in the United States, with 4 million livebirths per year, there are approximately 25-35 new patients born per year. There are several approximately 5000 cases world-wide. There are an equal number of males and females with t",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_mondo_diseases.json",
+      "validation_flags": [
+        "lexicon_match",
+        "pubtator_enriched",
+        "deduplicated"
+      ],
+      "mesh_aliases": [
+        "Anemia Diamond-Blackfan 2",
+        "Anemia Diamond-Blackfan 3",
+        "Diamond-Blackfan Anemia 1"
+      ],
+      "pubtator_normalized_name": "Anemia Diamond-Blackfan",
+      "enrichment_source": "pubtator3"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "run_id": "RUN_20260205_073751_f71574fffb78",
+  "timestamp": "2026-02-05T18:37:00.209011",
+  "document": "Dyskeratosis-Congenita.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/NLP4RARE/test/Dyskeratosis-Congenita.pdf",
+  "pipeline_version": "0.8",
+  "total_candidates": 2,
+  "total_validated": 2,
+  "total_rejected": 0,
+  "genes": [
+    {
+      "matched_text": "TERC",
+      "hgnc_symbol": "TERC",
+      "full_name": "telomerase RNA component",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "RNA, long non-coding",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "11727",
+        "entrez": "7012",
+        "ensembl": "ENSG00000270141",
+        "uniprot": null,
+        "omim": "602322"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "11727",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "7012",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000270141",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "602322",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "1775",
+          "disease_name": "Dyskeratosis congenita",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "2032",
+          "disease_name": "Idiopathic pulmonary fibrosis",
+          "association_type": "Major susceptibility factor in"
+        },
+        {
+          "orphacode": "88",
+          "disease_name": "Idiopathic aplastic anemia",
+          "association_type": "Major susceptibility factor in"
+        }
+      ],
+      "context": "The prevalence or incidence of dyskeratosis congenita is difficult to assess. In a population of patients with bone marrow failure about 2-5% of patients have bone marrow failure due to dyskeratosis congenita. In patients with pulmonary fibrosis similarly 2-5% are thought to be due to mutations in TERC or TERT. In families with an increased frequency of bone marrow failure and/or lung disease, dyskeratosis congenita should be excluded as a possible cause of their disease.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    },
+    {
+      "matched_text": "TERT",
+      "hgnc_symbol": "TERT",
+      "full_name": "telomerase reverse transcriptase",
+      "confidence": 0.85,
+      "is_alias": false,
+      "locus_type": "gene with protein product",
+      "chromosome": null,
+      "codes": {
+        "hgnc_id": "11730",
+        "entrez": "7015",
+        "ensembl": "ENSG00000164362",
+        "uniprot": "O14746",
+        "omim": "187270"
+      },
+      "all_identifiers": [
+        {
+          "system": "HGNC",
+          "code": "11730",
+          "display": null
+        },
+        {
+          "system": "ENTREZ",
+          "code": "7015",
+          "display": null
+        },
+        {
+          "system": "ENSEMBL",
+          "code": "ENSG00000164362",
+          "display": null
+        },
+        {
+          "system": "OMIM",
+          "code": "187270",
+          "display": null
+        },
+        {
+          "system": "UNIPROT",
+          "code": "O14746",
+          "display": null
+        }
+      ],
+      "associated_diseases": [
+        {
+          "orphacode": "1775",
+          "disease_name": "Dyskeratosis congenita",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "146",
+          "disease_name": "Differentiated thyroid carcinoma",
+          "association_type": "Disease-causing somatic mutation(s) in"
+        },
+        {
+          "orphacode": "2495",
+          "disease_name": "Meningioma",
+          "association_type": "Disease-causing somatic mutation(s) in"
+        },
+        {
+          "orphacode": "3322",
+          "disease_name": "Hoyeraal-Hreidarsson syndrome",
+          "association_type": "Disease-causing germline mutation(s) in"
+        },
+        {
+          "orphacode": "618",
+          "disease_name": "Familial melanoma",
+          "association_type": "Major susceptibility factor in"
+        },
+        {
+          "orphacode": "1501",
+          "disease_name": "Adrenocortical carcinoma",
+          "association_type": "Disease-causing somatic mutation(s) in"
+        },
+        {
+          "orphacode": "457246",
+          "disease_name": "Clear cell sarcoma of kidney",
+          "association_type": "Part of a fusion gene in"
+        },
+        {
+          "orphacode": "2032",
+          "disease_name": "Idiopathic pulmonary fibrosis",
+          "association_type": "Major susceptibility factor in"
+        },
+        {
+          "orphacode": "88",
+          "disease_name": "Idiopathic aplastic anemia",
+          "association_type": "Major susceptibility factor in"
+        }
+      ],
+      "context": "valence or incidence of dyskeratosis congenita is difficult to assess. In a population of patients with bone marrow failure about 2-5% of patients have bone marrow failure due to dyskeratosis congenita. In patients with pulmonary fibrosis similarly 2-5% are thought to be due to mutations in TERC or TERT. In families with an increased frequency of bone marrow failure and/or lung disease, dyskeratosis congenita should be excluded as a possible cause of their disease.",
+      "page": 1,
+      "mention_count": 1,
+      "pages_mentioned": [
+        1
+      ],
+      "lexicon_source": "2025_08_orphadata_genes.json",
+      "validation_flags": [
+        "auto_validated_lexicon",
+        "pubtator_enriched",
+        "deduplicated"
+      ]
+    }
+  ]
+}
