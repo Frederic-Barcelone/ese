@@ -13,7 +13,7 @@ The evaluation framework in `F_evaluation/` compares pipeline output against hum
 
 The F03 runner does **not** use F01/F02 internally — it has its own comparison functions optimized for multi-entity evaluation.
 
-> **Note**: Evaluation is currently supported for abbreviations, diseases, and genes only. Other entity types (drugs, pharma, authors, citations, care pathways, recommendations) do not yet have gold standard evaluation support.
+> **Note**: Evaluation is currently supported for abbreviations, diseases, genes, and drugs. Other entity types (pharma, authors, citations, care pathways, recommendations) do not yet have gold standard evaluation support.
 
 ## Gold Standard Data
 
@@ -25,11 +25,19 @@ Gold standard annotations are stored in the `gold_data/` directory:
 gold_data/
   papers_gold_v2.json        # Papers dataset (abbreviations)
   nlp4rare_gold.json         # NLP4RARE dataset (abbreviations, diseases, genes)
+  golden_bc2gm.json          # BioCreative II GM dataset (genes)
   PAPERS/                    # PDF files for the papers dataset
   NLP4RARE/                  # PDF files for NLP4RARE (dev/test/train splits)
     dev/
     test/
     train/
+  bc2gm/                     # BioCreative II GM gene mention corpus
+    generate_bc2gm_gold.py   # Gold generation script
+    corpus/                  # Downloaded corpus (gitignored)
+    pdfs/                    # Generated PDFs (gitignored)
+  CADEC/                     # CADEC drug adverse event corpus
+    generate_cadec_gold.py   # Gold generation script
+    evaluate_cadec_drugs.py  # CADEC-specific drug evaluation
 ```
 
 ### Gold Standard Format
@@ -105,11 +113,13 @@ Edit the configuration section at the top of `F03_evaluation_runner.py`:
 # Which datasets to run
 RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = True      # Papers in gold_data/PAPERS/
+RUN_BC2GM = False       # BioCreative II GM gene mention corpus
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True
 EVAL_DISEASES = True
 EVAL_GENES = True
+EVAL_DRUGS = True
 
 # NLP4RARE splits to include
 NLP4RARE_SPLITS = ["dev", "test", "train"]
@@ -176,7 +186,7 @@ scorer.print_corpus_summary(corpus_report)
 
 **Disease matching** compares against both `matched_text` (raw document text) and `preferred_label` (normalized ontology name) for better coverage. Supports exact, substring, and fuzzy matching.
 
-**Gene matching** compares gene symbols with exact uppercase matching.
+**Gene matching** uses multi-step comparison: exact symbol match (uppercase), matched text vs gold symbol, substring match (min 3 chars), and name-based matching. See [Gene Evaluation](06_gene_evaluation.md) for details.
 
 ## Score Report
 
@@ -247,5 +257,6 @@ To create gold annotations for new documents:
 
 ## Related Documentation
 
+- [Gene Evaluation](06_gene_evaluation.md) for BC2GM gene benchmark details and results
 - [Architecture Data Flow](../architecture/02_data_flow.md) for understanding how entities flow through pipeline stages
 - [Configuration Guide](03_configuration.md) for adjusting extraction parameters
