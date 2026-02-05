@@ -235,10 +235,8 @@ BIOLOGICAL_ENTITIES: Set[str] = {
     "bilirubin",
     "urea",
     "creatinine",
-    "potassium",
     "sodium",
     "calcium",
-    "magnesium",
     "phosphate",
     "chloride",
     "bicarbonate",
@@ -404,7 +402,6 @@ COMMON_WORDS: Set[str] = {
     "excel",
     "nasal",
     "pediatric",
-    "tums",
     "induction",
     # Medical equipment/supplies (not drugs)
     "pregnancy test",
@@ -732,6 +729,13 @@ ALWAYS_FILTER: Set[str] = {
     "test product",
     "active comparator",
     "sham comparator",
+    # Non-drug terms that bypass specialized lexicon exemptions
+    "switch",
+    "tip",
+    "at 10",
+    "arthritis pain",
+    "cholesterol management",
+    "stress",
 }
 
 # NER-specific false positives (commonly returned by scispacy UMLS)
@@ -974,8 +978,6 @@ NER_FALSE_POSITIVES: Set[str] = {
     "methamphetamine",
     "cannabis",
     "marijuana",
-    "morphine",  # Unless specific formulation
-    "fentanyl",  # Unless specific formulation
     # Muscle-specific kinase variants (often confused with animal product)
     "musk",
     "musk secretion",
@@ -1278,6 +1280,13 @@ CONSUMER_DRUG_VARIANTS: Dict[str, str] = {
     "panadeine forte": "paracetamol",
     "mypaid forte": "paracetamol",
     "pamprin": "pamabrom",
+    # Additional misspellings from CADEC social media
+    "vitimin c": "vitamin c",
+    "percocette": "percocet",
+    "cyclobenzoprene": "cyclobenzaprine",
+    "lipior": "atorvastatin",
+    "provastatin": "pravastatin",
+    "benedryl": "benadryl",
 }
 
 # Multi-word consumer drug patterns not typically in clinical lexicons
@@ -1296,6 +1305,11 @@ CONSUMER_DRUG_PATTERNS: List[str] = [
     "fish oil",
     "red yeast rice",
     "cider vinegar",
+    # Supplements and OTC brands
+    "tums",
+    "gas x",
+    "potassium",
+    "magnesium",
 ]
 
 

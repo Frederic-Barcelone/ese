@@ -45,7 +45,8 @@ FUZZY_THRESHOLD = 0.8
 # Both directions are checked: if extracted=acetaminophen and gold=tylenol, match.
 BRAND_GENERIC_EQUIVALENCES: dict[str, set[str]] = {
     "acetaminophen": {"tylenol", "paracetamol", "panadol", "tylenol 3",
-                      "tylenol extra", "arthritis strength tylenol"},
+                      "tylenol extra", "arthritis strength tylenol",
+                      "propain", "mypaid forte", "panadeine", "panadeine forte"},
     "rofecoxib": {"vioxx"},
     "valdecoxib": {"bextra"},
     "celecoxib": {"celebrex"},
@@ -53,8 +54,8 @@ BRAND_GENERIC_EQUIVALENCES: dict[str, set[str]] = {
     "furosemide": {"lasix"},
     "naproxen": {"aleve", "alleve", "naprosyn"},
     "simvastatin": {"zocor", "zocar", "zorcor"},
-    "atorvastatin": {"lipitor", "liptor", "lipitors"},
-    "pravastatin": {"pravachol", "pravochol"},
+    "atorvastatin": {"lipitor", "liptor", "lipitors", "lipior"},
+    "pravastatin": {"pravachol", "pravochol", "provastatin"},
     "lovastatin": {"mevacor", "mevacore"},
     "rosuvastatin": {"crestor"},
     "fluvastatin": {"lescol"},
@@ -69,6 +70,10 @@ BRAND_GENERIC_EQUIVALENCES: dict[str, set[str]] = {
     "trazodone": {"desyrel", "trazadone"},
     "hydrocodone": {"vicodin", "hydrocodine"},
     "capsaicin": {"capsacian", "zostrix"},
+    "pamabrom": {"pamprin"},
+    "percocet": {"percocette"},
+    "cyclobenzaprine": {"cyclobenzoprene"},
+    "vitamin c": {"vitimin c", "vit c", "vit . c"},
 }
 
 

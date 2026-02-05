@@ -243,7 +243,6 @@ class DrugFalsePositiveFilter:
             author_indicators = [
                 f"by {text_lower},",
                 f"by {text_lower}.",
-                f"by {text_lower} ",
                 f"{text_lower} et al",
                 f", {text_lower},",
                 f", {text_lower}.",
