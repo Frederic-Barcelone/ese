@@ -101,6 +101,11 @@ class DiseaseFalsePositiveFilter:
         "malignancy", "pituitary", "autoimmunity",
         # Overly broad oncology/pathology terms
         "tumor", "tumors", "neoplasm",
+        # Generic plurals of disease categories
+        "syndrome", "syndromes", "disorder", "disorders", "child",
+        # Common clinical terms that are not specific diseases
+        "familial", "dental", "ulcers", "ulcer",
+        "thromboses", "deafness",
     }
 
     # Multi-word generic terms that are not specific diseases
@@ -108,6 +113,11 @@ class DiseaseFalsePositiveFilter:
         "rare disorder", "autosomal dominant", "autosomal recessive",
         "x-linked", "rare disease",
         "birth defect", "birth defects",
+        "skin condition", "blood disorder", "blood clots", "blood clot",
+        "loose stools", "intellectual disabilities",
+        "the syndrome", "increased blood pressure",
+        "genetically transmitted blood disorders",
+        "congenital anomalies of the kidney and urinary tract",
     }
 
     # Short match threshold
