@@ -84,7 +84,7 @@ BC2GM_GOLD = BASE_PATH / "gold_data" / "golden_bc2gm.json"
 # Which datasets to run (set to False to skip)
 RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
-RUN_BC2GM = False      # BioCreative II GM corpus (gene/protein name recognition)
+RUN_BC2GM = True       # BioCreative II GM corpus (gene/protein name recognition)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
@@ -896,9 +896,25 @@ def compare_drugs(
 
 
 def create_orchestrator():
-    """Create and initialize orchestrator."""
+    """Create and initialize orchestrator with entities_only preset for speed.
+
+    Uses entities_only preset to skip non-entity steps (feasibility, recommendations,
+    visual extraction, document metadata) which saves ~70% of processing time per doc.
+    """
+    import yaml
     from orchestrator import Orchestrator
-    return Orchestrator(config_path=str(CONFIG_PATH))
+
+    with open(CONFIG_PATH) as f:
+        config = yaml.safe_load(f)
+
+    config.setdefault("extraction_pipeline", {})["preset"] = "entities_only"
+
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as tmp:
+        yaml.dump(config, tmp)
+        tmp_path = tmp.name
+
+    return Orchestrator(config_path=tmp_path)
 
 
 def run_extraction(orch, pdf_path: Path) -> dict:
