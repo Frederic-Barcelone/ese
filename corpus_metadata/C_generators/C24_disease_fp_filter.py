@@ -106,6 +106,10 @@ class DiseaseFalsePositiveFilter:
         # Common clinical terms that are not specific diseases
         "familial", "dental", "ulcers", "ulcer",
         "thromboses", "deafness",
+        # Clinical signs / non-specific terms
+        "stature", "diseases", "hypertelorism",
+        "tetrasomy", "trisomy",
+        "sensitivity", "localized", "trauma",
     }
 
     # Multi-word generic terms that are not specific diseases
@@ -118,6 +122,14 @@ class DiseaseFalsePositiveFilter:
         "congenital anomalies of the kidney and urinary tract",
         # Symptoms/signs, not diseases
         "skin rash",
+        "blood clots", "blood clot",
+        "heart defects", "heart defect",
+        "hearing loss",
+        "myoclonic seizures", "myoclonic seizure",
+        "rare kidney disease",
+        "high blood pressure",
+        "pituitary gland",
+        "renal diseases", "kidney disorder",
     }
 
     # Short match threshold

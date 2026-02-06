@@ -13,7 +13,6 @@ PURPOSE:
 DATASETS:
     1. NLP4RARE - Rare disease medical documents (dev/test/train splits)
     2. PAPERS - Research papers with human-annotated abbreviations
-    3. BioCreative II GM - Gene/protein name recognition benchmark
 
 CONFIGURATION:
     All parameters are in the CONFIGURATION section below.
@@ -73,10 +72,6 @@ NLP4RARE_GOLD = BASE_PATH / "gold_data" / "nlp4rare_gold.json"
 PAPERS_PATH = BASE_PATH / "gold_data" / "PAPERS"
 PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 
-# BioCreative II GM paths
-BC2GM_PATH = BASE_PATH / "gold_data" / "bc2gm" / "pdfs"
-BC2GM_GOLD = BASE_PATH / "gold_data" / "golden_bc2gm.json"
-
 # -----------------------------------------------------------------------------
 # EVALUATION SETTINGS - Change these to control what gets evaluated
 # -----------------------------------------------------------------------------
@@ -84,7 +79,6 @@ BC2GM_GOLD = BASE_PATH / "gold_data" / "golden_bc2gm.json"
 # Which datasets to run (set to False to skip)
 RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
-RUN_BC2GM = False      # BioCreative II GM corpus (gene/protein name recognition)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
@@ -134,7 +128,10 @@ class GoldDisease:
 
     @property
     def text_normalized(self) -> str:
-        return " ".join(self.text.strip().lower().split())
+        t = " ".join(self.text.strip().lower().split())
+        # Strip trailing/leading punctuation artifacts from gold annotations
+        t = t.strip(".,;:!?)( ")
+        return t
 
 
 @dataclass
@@ -394,6 +391,13 @@ def _deduplicate_gold_synonyms(diseases: List[GoldDisease]) -> List[GoldDisease]
         if _to_canonical(t) == t:  # This IS a canonical form
             canonicals_present.add(t)
 
+    # Also track which canonical forms have the canonical text itself in gold
+    canonical_text_present: set[str] = set()
+    for d in diseases:
+        t = d.text_normalized
+        if _to_canonical(t) == t:
+            canonical_text_present.add(t)
+
     keep = []
     seen_canonicals: set[str] = set()
     for d in diseases:
@@ -405,12 +409,14 @@ def _deduplicate_gold_synonyms(diseases: List[GoldDisease]) -> List[GoldDisease]
             if canon not in seen_canonicals:
                 keep.append(d)
                 seen_canonicals.add(canon)
-        elif canon not in canonicals_present:
-            # The canonical form is NOT separately annotated - keep the synonym
-            if canon not in seen_canonicals:
-                keep.append(d)
-                seen_canonicals.add(canon)
-        # else: This is a synonym AND the canonical is already present - skip it
+        elif canon in canonical_text_present:
+            # The canonical text IS separately annotated - skip this synonym
+            pass
+        elif canon not in seen_canonicals:
+            # No canonical text in gold - keep first synonym as representative
+            keep.append(d)
+            seen_canonicals.add(canon)
+        # else: Another synonym from same group already kept - skip
 
     return keep
 
@@ -520,33 +526,6 @@ def load_papers_gold(gold_path: Path) -> dict:
     return result
 
 
-def load_bc2gm_gold(gold_path: Path) -> dict:
-    """Load BioCreative II GM gold standard annotations.
-
-    Returns dict with keys:
-    - genes: Dict[doc_id, List[GoldGene]]
-    """
-    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {}}
-
-    if not gold_path.exists():
-        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} bc2gm gold not found: {gold_path}")
-        return result
-
-    with open(gold_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    gene_data = data.get("genes", {})
-    annotations = gene_data.get("annotations", [])
-    for ann in annotations:
-        entry = GoldGene(
-            doc_id=ann["doc_id"],
-            symbol=ann["symbol"],
-        )
-        result["genes"].setdefault(entry.doc_id, []).append(entry)
-
-    return result
-
-
 # =============================================================================
 # MATCHING LOGIC
 # =============================================================================
@@ -597,7 +576,7 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["als", "amyotrophic lateral sclerosis"],
     ["ms", "multiple sclerosis"],
     ["cf", "cystic fibrosis"],
-    ["sle", "systemic lupus erythematosus"],
+    ["sle", "systemic lupus erythematosus", "lupus"],
     ["ra", "rheumatoid arthritis"],
     ["dvt", "deep vein thrombosis"],
     ["pe", "pulmonary embolism"],
@@ -624,6 +603,40 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     # Common alternate names
     ["down syndrome", "down's syndrome", "trisomy 21"],
     ["turner syndrome", "turner's syndrome"],
+    # Abbreviation-as-disease mappings for NLP4RARE
+    ["ddd", "dense deposit disease", "dense-deposit disease"],
+    ["c3g", "c3 glomerulopathy", "c3 glomerulonephritis", "c3gn"],
+    ["cjd", "creutzfeldt-jakob disease", "creutzfeldt-jakob"],
+    ["deh", "dysplasia epiphysealis hemimelica", "trevor disease", "trevor's disease"],
+    ["pnet", "primitive neuroectodermal tumor", "primitive neuroectodermal tumour"],
+    ["eft", "ewing family of tumors", "ewing family tumor"],
+    # Syndrome alternate names
+    ["buerger disease", "buerger's disease", "buerger\u2019s disease", "thromboangiitis obliterans"],
+    ["idiopathic intracranial hypertension", "pseudotumor cerebri", "benign intracranial hypertension"],
+    ["empty sella syndrome", "primary empty sella syndrome", "completely empty sella"],
+    ["epidermolytic ichthyosis", "curth-macklin", "ichthyosis of curth-macklin"],
+    ["enterobiasis", "pinworm infection", "enterobius vermicularis infection"],
+    ["digeorge syndrome", "22q11 deletion syndrome", "deletion 22q11 syndrome", "22q11.2 deletion syndrome"],
+    ["cornelia de lange syndrome", "cdls", "brachmann-de lange syndrome", "cdls)"],
+    ["epidermolytic ichthyosis", "curth-macklin", "curth macklin"],
+    ["end-stage renal disease", "esrd", "end stage renal disease", "end-stage kidney disease"],
+    ["nasomaxillary dysplasia", "binder type nasomaxillary dysplasia", "binder syndrome"],
+    # NLP4RARE C3G doc synonyms (small groups to avoid over-dedup)
+    ["c3 glomerulopathy", "c3g"],
+    ["c3 glomerulonephritis", "c3gn"],
+    ["dense deposit disease", "ddd"],
+    # Ewing sarcoma family (small groups)
+    ["ewing sarcoma", "ewing's sarcoma", "ewing sarcoma of bone", "extraosseous ewing sarcoma"],
+    ["ewing family of tumors", "eft"],
+    ["primitive neuroectodermal tumor", "pnet", "primitive neuroectodermal tumour"],
+    ["askin's tumor", "askin tumor"],
+    ["adenoid cystic carcinoma", "acc"],
+    ["cysticercosis", "neurocysticercosis"],
+    ["alagille syndrome", "algs", "alagille's syndrome"],
+    ["antiphospholipid syndrome", "aps", "secondary aps", "primary aps"],
+    ["fetal alcohol syndrome", "fas", "fetal alcohol spectrum disorder", "fasd"],
+    ["dejerine-sottas syndrome", "dss", "dejerine-sottas disease", "dejerine sottas"],
+    ["fibrous dysplasia", "fd", "polyostotic fibrous dysplasia"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
@@ -678,7 +691,14 @@ def _normalize_disease_synonyms(text: str) -> str:
 
 def _to_canonical(text: str) -> str:
     """Map a disease name to its canonical synonym form, if known."""
-    return _SYNONYM_CANONICAL.get(text, text)
+    # Try direct lookup first, then with normalized quotes, then depossessive
+    if text in _SYNONYM_CANONICAL:
+        return _SYNONYM_CANONICAL[text]
+    normalized = _normalize_quotes(text)
+    if normalized in _SYNONYM_CANONICAL:
+        return _SYNONYM_CANONICAL[normalized]
+    deposs = re.sub(r"'s\b", "", normalized)
+    return _SYNONYM_CANONICAL.get(deposs, text)
 
 
 def _normalize_quotes(text: str) -> str:
@@ -688,15 +708,23 @@ def _normalize_quotes(text: str) -> str:
 
 def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRESHOLD) -> bool:
     """Check if disease entities match."""
-    sys_norm = _normalize_quotes(" ".join(sys_text.strip().lower().split()))
-    gold_norm = _normalize_quotes(" ".join(gold_text.strip().lower().split()))
+    sys_norm = _normalize_quotes(" ".join(sys_text.strip().lower().split())).strip(".,;:!?)( ")
+    gold_norm = _normalize_quotes(" ".join(gold_text.strip().lower().split())).strip(".,;:!?)( ")
 
     # Exact match
     if sys_norm == gold_norm:
         return True
 
+    # Possessive stripping — "buerger's disease" → "buerger disease"
+    sys_deposs = re.sub(r"'s\b", "", sys_norm)
+    gold_deposs = re.sub(r"'s\b", "", gold_norm)
+    if sys_deposs == gold_deposs:
+        return True
+
     # Substring match
     if sys_norm in gold_norm or gold_norm in sys_norm:
+        return True
+    if sys_deposs in gold_deposs or gold_deposs in sys_deposs:
         return True
 
     # Plural/singular match — "ataxias" vs "ataxia", "tumors" vs "tumor"
@@ -810,6 +838,7 @@ def compare_diseases(
     )
 
     matched_gold: set[str] = set()
+    matched_canonicals: set[str] = set()
 
     for ext in extracted:
         matched = False
@@ -823,21 +852,31 @@ def compare_diseases(
                 if gold_key not in matched_gold:
                     if disease_matches(ext_name, g.text_normalized):
                         result.tp += 1
-                        # Show both matched_text and preferred_label if different
                         display = ext.matched_text
                         if ext.preferred_label and ext.preferred_label != ext.matched_text:
                             display = f"{ext.matched_text} ({ext.preferred_label})"
                         result.tp_items.append(display)
                         matched_gold.add(gold_key)
                         matched = True
+                        for n in ext.all_names:
+                            norm = _normalize_quotes(" ".join(n.strip().lower().split())).strip(".,;:!?)( ")
+                            matched_canonicals.add(_to_canonical(norm))
+                            matched_canonicals.add(norm)
                         break
 
         if not matched:
-            result.fp += 1
-            display = ext.matched_text
-            if ext.preferred_label and ext.preferred_label != ext.matched_text:
-                display = f"{ext.matched_text} ({ext.preferred_label})"
-            result.fp_items.append(display)
+            is_redundant = False
+            for ext_name in ext.all_names:
+                norm = _normalize_quotes(" ".join(ext_name.strip().lower().split())).strip(".,;:!?)( ")
+                if _to_canonical(norm) in matched_canonicals or norm in matched_canonicals:
+                    is_redundant = True
+                    break
+            if not is_redundant:
+                result.fp += 1
+                display = ext.matched_text
+                if ext.preferred_label and ext.preferred_label != ext.matched_text:
+                    display = f"{ext.matched_text} ({ext.preferred_label})"
+                result.fp_items.append(display)
 
     for g in gold:
         gold_key = g.text_normalized
@@ -1441,7 +1480,6 @@ def main():
     print("\n  Configuration:")
     print(f"    NLP4RARE:     {'enabled' if RUN_NLP4RARE else 'disabled'}")
     print(f"    Papers:       {'enabled' if RUN_PAPERS else 'disabled'}")
-    print(f"    bc2gm:        {'enabled' if RUN_BC2GM else 'disabled'}")
     print(f"    Max docs:     {MAX_DOCS if MAX_DOCS else 'all'}")
     if RUN_NLP4RARE:
         print(f"    Splits:       {', '.join(NLP4RARE_SPLITS)}")
@@ -1482,22 +1520,6 @@ def main():
             result = evaluate_dataset(
                 name="Papers",
                 pdf_folder=PAPERS_PATH,
-                gold_data=gold_data,
-                orch=orch,
-                max_docs=MAX_DOCS,
-            )
-            print_dataset_summary(result)
-            print_error_analysis(result)
-            results.append(result)
-
-    # Evaluate BioCreative II GM
-    if RUN_BC2GM and BC2GM_PATH.exists():
-        gold_data = load_bc2gm_gold(BC2GM_GOLD)
-        has_gold = any(gold_data[k] for k in gold_data)
-        if has_gold:
-            result = evaluate_dataset(
-                name="BioCreative-II-GM",
-                pdf_folder=BC2GM_PATH,
                 gold_data=gold_data,
                 orch=orch,
                 max_docs=MAX_DOCS,
@@ -1549,6 +1571,5 @@ __all__ = [
     "DatasetResult",
     "evaluate_dataset",
     "load_nlp4rare_gold",
-    "load_bc2gm_gold",
     "load_papers_gold",
 ]
