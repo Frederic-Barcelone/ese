@@ -186,6 +186,7 @@ class ExtractedDisease:
     preferred_label: str = ""  # Normalized ontology label
     confidence: float = 0.0
     abbreviation: Optional[str] = None  # Disease abbreviation if available
+    synonyms: List[str] = field(default_factory=list)  # Known synonyms from ontology
 
     @property
     def matched_text_normalized(self) -> str:
@@ -197,7 +198,13 @@ class ExtractedDisease:
 
     @property
     def all_names(self) -> List[str]:
-        """Return all possible names for matching (normalized)."""
+        """Return all possible names for matching (normalized).
+
+        Includes matched_text, preferred_label, abbreviation, and all synonyms
+        to ensure proper matching against gold annotations that may use any
+        known variant (e.g., gold 'Lawrence syndrome' matches extracted
+        'acquired generalized lipodystrophy' if they're synonyms in MONDO).
+        """
         names = [self.matched_text_normalized]
         if self.preferred_label and self.preferred_label_normalized != self.matched_text_normalized:
             names.append(self.preferred_label_normalized)
@@ -205,6 +212,11 @@ class ExtractedDisease:
             abbr_norm = self.abbreviation.strip().lower()
             if abbr_norm not in names:
                 names.append(abbr_norm)
+        # Include synonyms for matching against gold annotations
+        for syn in self.synonyms:
+            syn_norm = " ".join(syn.strip().lower().split())
+            if syn_norm and syn_norm not in names:
+                names.append(syn_norm)
         return names
 
 
@@ -360,6 +372,49 @@ def _deduplicate_gold_plurals(diseases: List[GoldDisease]) -> List[GoldDisease]:
     return keep
 
 
+def _deduplicate_gold_synonyms(diseases: List[GoldDisease]) -> List[GoldDisease]:
+    """Remove synonym variants when canonical form also exists in gold for same doc.
+
+    NLP4RARE sometimes annotates both a disease name and its synonym separately
+    (e.g., both "acquired generalized lipodystrophy" AND "Lawrence syndrome").
+    When the pipeline extracts the canonical form, the synonym annotation becomes
+    a false negative. This function keeps only one representative per synonym group.
+    """
+    # Build set of canonical forms present in gold
+    canonicals_present: set[str] = set()
+    for d in diseases:
+        canon = _to_canonical(d.text_normalized)
+        if canon != d.text_normalized:
+            # This is a synonym, check if canonical is also present
+            canonicals_present.add(canon)
+
+    # Also add the canonical forms that ARE present as-is
+    for d in diseases:
+        t = d.text_normalized
+        if _to_canonical(t) == t:  # This IS a canonical form
+            canonicals_present.add(t)
+
+    keep = []
+    seen_canonicals: set[str] = set()
+    for d in diseases:
+        t = d.text_normalized
+        canon = _to_canonical(t)
+
+        if canon == t:
+            # This IS the canonical form - always keep
+            if canon not in seen_canonicals:
+                keep.append(d)
+                seen_canonicals.add(canon)
+        elif canon not in canonicals_present:
+            # The canonical form is NOT separately annotated - keep the synonym
+            if canon not in seen_canonicals:
+                keep.append(d)
+                seen_canonicals.add(canon)
+        # else: This is a synonym AND the canonical is already present - skip it
+
+    return keep
+
+
 def load_nlp4rare_gold(gold_path: Path) -> dict:
     """
     Load NLP4RARE gold standard annotations.
@@ -404,6 +459,11 @@ def load_nlp4rare_gold(gold_path: Path) -> dict:
     # Deduplicate plural variants per document
     for doc_id in result["diseases"]:
         result["diseases"][doc_id] = _deduplicate_gold_plurals(result["diseases"][doc_id])
+
+    # Deduplicate synonym variants per document (e.g., "Lawrence syndrome" when
+    # "acquired generalized lipodystrophy" is also annotated)
+    for doc_id in result["diseases"]:
+        result["diseases"][doc_id] = _deduplicate_gold_synonyms(result["diseases"][doc_id])
 
     # Load genes (when available)
     gene_data = data.get("genes", {})
@@ -545,6 +605,9 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["hf", "heart failure", "congestive heart failure", "chf"],
     ["dm", "diabetes mellitus"],
     ["intellectual disability", "mental retardation"],
+    # Lipodystrophy syndromes (MONDO:0019193)
+    ["acquired generalized lipodystrophy", "lawrence syndrome", "lawrence-seip syndrome"],
+    ["acquired partial lipodystrophy", "barraquer-simons syndrome"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
@@ -945,11 +1008,13 @@ def run_extraction(orch, pdf_path: Path) -> dict:
             matched_text = getattr(disease, 'matched_text', '')
             preferred_label = getattr(disease, 'preferred_label', '')
             abbreviation = getattr(disease, 'abbreviation', None)
+            synonyms = getattr(disease, 'synonyms', []) or []
             extracted["diseases"].append(ExtractedDisease(
                 matched_text=matched_text,
                 preferred_label=preferred_label,
                 confidence=getattr(disease, 'confidence_score', 0.0),
                 abbreviation=abbreviation,
+                synonyms=synonyms,
             ))
 
     # Extract genes
