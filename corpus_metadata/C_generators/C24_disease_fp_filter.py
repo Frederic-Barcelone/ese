@@ -118,6 +118,8 @@ class DiseaseFalsePositiveFilter:
         "the syndrome", "increased blood pressure",
         "genetically transmitted blood disorders",
         "congenital anomalies of the kidney and urinary tract",
+        # Symptoms/signs, not diseases
+        "skin rash",
     }
 
     # Short match threshold
