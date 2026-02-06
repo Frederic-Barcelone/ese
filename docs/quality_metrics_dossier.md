@@ -25,7 +25,7 @@ The ESE (Entity & Structure Extraction) pipeline v0.8 is a production-grade syst
 - **2 gold standard corpora** with 4,365+ human-annotated disease entities and 297 annotated abbreviation pairs
 - **NLP4RARE-CM-UC3M evaluation** on 2,311 rare disease PDFs with BRAT standoff annotations
 - **Multi-entity evaluation** framework computing precision, recall, and F1 per entity type
-- **Latest results**: Disease extraction at 91% precision and 80% F1 on the NLP4RARE test set
+- **Latest results**: Disease extraction at 75.1% precision, 74.0% recall, F1=74.6% on NLP4RARE (all splits); Drug extraction at F1=93.2% on CADEC test
 
 ---
 
@@ -331,13 +331,13 @@ Full evaluation results across all four gold standard corpora:
 
 | Metric | Value |
 |--------|-------|
-| True Positives | 2,994 |
-| False Positives | 894 |
-| False Negatives | 1,032 |
-| **Precision** | **77.0%** |
-| **Recall** | **74.4%** |
-| **F1 Score** | **75.7%** |
-| Perfect documents | 315/1,040 (30.3%) |
+| True Positives | 2,915 |
+| False Positives | 965 |
+| False Negatives | 1,023 |
+| **Precision** | **75.1%** |
+| **Recall** | **74.0%** |
+| **F1 Score** | **74.6%** |
+| Gold annotations | 3,938 (after synonym deduplication) |
 
 **FP sources:** symptoms (ataxia, hypocalcemia), clinical signs, related medical terms
 **FN sources:** abbreviation-as-disease (AVM, BGS), generic terms (skin condition), qualified names (Secondary APS)
@@ -346,12 +346,12 @@ Full evaluation results across all four gold standard corpora:
 
 | Metric | Value |
 |--------|-------|
-| True Positives | 213 |
-| False Positives | 242 |
-| False Negatives | 29 |
-| **Precision** | **46.8%** |
-| **Recall** | **88.0%** |
-| **F1 Score** | **61.1%** |
+| True Positives | 215 |
+| False Positives | 238 |
+| False Negatives | 27 |
+| **Precision** | **47.5%** |
+| **Recall** | **88.8%** |
+| **F1 Score** | **61.9%** |
 
 **FP sources:** gene symbols (JAG1, NOTCH2), common non-abbreviation acronyms (DNA, OMIM)
 **FN sources:** complex patterns (CdLS, LD-HIV), single-letter abbreviations (AI)
@@ -391,8 +391,8 @@ Full evaluation results across all four gold standard corpora:
 |-----------|--------|------|-----------|--------|-----|---------|--------|
 | **CADEC** | Drugs | 311 | 93.5% | 92.9% | **93.2%** | 91.3% | Production-ready |
 | **BC2GM** | Genes | 100 | 90.3% | 12.3% | 21.7% | 4.0% | Validated methodology |
-| **NLP4RARE** | Diseases | 1,040 | 77.0% | 74.4% | **75.7%** | 30.3% | Active improvement |
-| **NLP4RARE** | Abbreviations | 1,040 | 46.8% | 88.0% | **61.1%** | -- | Active improvement |
+| **NLP4RARE** | Diseases | 1,040 | 75.1% | 74.0% | **74.6%** | -- | Active improvement |
+| **NLP4RARE** | Abbreviations | 1,040 | 47.5% | 88.8% | **61.9%** | -- | Active improvement |
 
 ### 8.2 Improvement Trajectory
 
@@ -416,7 +416,7 @@ Key drug improvements:
 2. **Author pattern bug fix**: Removed `re.IGNORECASE` on author initials regex causing false drug-as-author matches
 3. **Consumer drug variants** (79.6% → 93.2%): Added CONSUMER_DRUG_VARIANTS + CONSUMER_DRUG_PATTERNS, brand/generic equivalences
 
-Disease precision improved from 69% to 77% through FP filter expansion (COMMON_ENGLISH_FP_TERMS, GENERIC_MULTIWORD_FP_TERMS, plural forms).
+Disease precision improved from 69% to 75.1% through FP filter expansion (COMMON_ENGLISH_FP_TERMS, GENERIC_MULTIWORD_FP_TERMS, plural forms) and synonym deduplication in the gold standard.
 
 ### 8.3 Evaluation Configuration
 
@@ -690,7 +690,7 @@ The quality improvement cycle follows a data-driven pattern:
 4. **Run tests** to ensure no regressions
 5. **Re-evaluate** to measure improvement
 
-This cycle is evidenced by the recent commit history showing iterative precision improvements from 69% to 91% on disease extraction.
+This cycle is evidenced by the recent commit history showing iterative precision improvements from 69% to 75.1% on disease extraction.
 
 ---
 
@@ -698,8 +698,8 @@ This cycle is evidenced by the recent commit history showing iterative precision
 
 | Entity Type        | Gold Data Available | Evaluation Supported | Gold Count | Current Results | Status |
 |--------------------|--------------------|-----------------------|------------|-----------------|--------|
-| Abbreviations      | NLP4RARE + PAPERS  | Yes                   | 297        | P=46.8%, R=88.0%, F1=61.1% | Active evaluation |
-| Diseases           | NLP4RARE + PAPERS  | Yes                   | 4,135      | P=77.0%, R=74.4%, F1=75.7% | Active evaluation |
+| Abbreviations      | NLP4RARE + PAPERS  | Yes                   | 297        | P=47.5%, R=88.8%, F1=61.9% | Active evaluation |
+| Diseases           | NLP4RARE + PAPERS  | Yes                   | 4,135      | P=75.1%, R=74.0%, F1=74.6% | Active evaluation |
 | Drugs              | CADEC + PAPERS     | Yes                   | 1,208      | P=93.5%, R=92.9%, F1=93.2% | Production-ready |
 | Genes              | BC2GM              | Yes                   | 6,331      | P=90.3%, R=12.3%, F1=21.7% | Validated methodology |
 | Authors            | None               | Not yet               | --         | -- | Extraction only |
