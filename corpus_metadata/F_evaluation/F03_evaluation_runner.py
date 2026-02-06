@@ -84,7 +84,7 @@ BC2GM_GOLD = BASE_PATH / "gold_data" / "golden_bc2gm.json"
 # Which datasets to run (set to False to skip)
 RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
-RUN_BC2GM = True       # BioCreative II GM corpus (gene/protein name recognition)
+RUN_BC2GM = False      # BioCreative II GM corpus (gene/protein name recognition)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs

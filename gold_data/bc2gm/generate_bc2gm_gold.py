@@ -132,6 +132,8 @@ def main():
     parser = argparse.ArgumentParser(description="Generate BioCreative II GM gold standard")
     parser.add_argument("--max", type=int, default=None,
                         help="Max sentences to process")
+    parser.add_argument("--skip", type=int, default=0,
+                        help="Skip first N annotated sentences")
     args = parser.parse_args()
 
     print("=" * 60)
@@ -154,6 +156,8 @@ def main():
 
     # Only process sentences that have gene annotations
     annotated_ids = sorted(annotations.keys())
+    if args.skip:
+        annotated_ids = annotated_ids[args.skip:]
     if args.max:
         annotated_ids = annotated_ids[:args.max]
 
