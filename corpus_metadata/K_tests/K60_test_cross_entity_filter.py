@@ -114,7 +114,7 @@ class TestCrossEntityFilterLogic:
 
     def test_drug_kept_when_no_abbreviation(self):
         """Drug with no matching abbreviation should be kept."""
-        abbrevs = []
+        abbrevs: list[MagicMock] = []
         drugs = [_make_drug("aspirin")]
 
         abbrev_map: dict[str, str] = {}
