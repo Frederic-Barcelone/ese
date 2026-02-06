@@ -159,6 +159,27 @@ class AbbreviationPipeline:
         self.use_vlm_tables = use_vlm_tables
         self.use_normalization = use_normalization
         self.model = model
+        self._gene_symbols: set[str] = self._load_gene_symbols()
+
+    @staticmethod
+    def _load_gene_symbols() -> set[str]:
+        """Load HGNC gene symbols for cross-referencing against abbreviations."""
+        gene_path = Path("ouput_datasources/2025_08_orphadata_genes.json")
+        if not gene_path.exists():
+            return set()
+        try:
+            import json as _json
+            with open(gene_path, "r", encoding="utf-8") as f:
+                data = _json.load(f)
+            symbols: set[str] = set()
+            for entry in data:
+                if entry.get("source") == "orphadata_hgnc":
+                    symbol = entry.get("term", "").strip().upper()
+                    if symbol and len(symbol) >= 2:
+                        symbols.add(symbol)
+            return symbols
+        except Exception:
+            return set()
 
     def parse_pdf(self, pdf_path: Path, output_dir: Path) -> "DocumentGraph":
         """Stage 1: Parse PDF into DocumentGraph."""
@@ -461,6 +482,20 @@ class AbbreviationPipeline:
                 )
                 auto_results.append((c, entity))
                 counters.common_word_rejected += 1
+                continue
+
+            # Auto-reject gene symbols (already captured as gene entities)
+            if self._gene_symbols and sf_upper in self._gene_symbols:
+                entity = self._create_entity_from_candidate(
+                    c,
+                    ValidationStatus.REJECTED,
+                    0.90,
+                    "Gene symbol, not an abbreviation",
+                    ["auto_rejected_gene_symbol"],
+                    {"auto": "gene_symbol"},
+                )
+                auto_results.append((c, entity))
+                counters.form_filter_rejected += 1
                 continue
 
             # Auto-reject malformed long forms
@@ -801,6 +836,10 @@ Return ONLY the JSON array, nothing else."""
             sf_upper = sf_candidate.upper()
 
             if sf_upper in found_sfs or sf_upper in blacklist:
+                continue
+
+            # Skip gene symbols
+            if self._gene_symbols and sf_upper in self._gene_symbols:
                 continue
 
             # Verify SF exists in text

@@ -113,10 +113,8 @@ class DiseaseFalsePositiveFilter:
         "rare disorder", "autosomal dominant", "autosomal recessive",
         "x-linked", "rare disease",
         "birth defect", "birth defects",
-        "skin condition", "blood disorder", "blood clots", "blood clot",
         "loose stools", "intellectual disabilities",
         "the syndrome", "increased blood pressure",
-        "genetically transmitted blood disorders",
         "congenital anomalies of the kidney and urinary tract",
         # Symptoms/signs, not diseases
         "skin rash",

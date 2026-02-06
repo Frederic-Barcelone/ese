@@ -427,6 +427,55 @@ heuristics:
     - "Dx"      # Diagnosis (not standardized abbreviation)
     - "Tx"      # Treatment (not standardized abbreviation)
     # ----------------------------------------
+    # Database identifiers (references, not abbreviations)
+    # ----------------------------------------
+    - "OMIM"    # Online Mendelian Inheritance in Man
+    - "MIM"     # Alternative OMIM prefix
+    - "ORPHA"   # Orphanet database
+    - "ORPHANET" # Orphanet database
+    - "PMID"    # PubMed ID
+    - "PMC"     # PubMed Central
+    - "MESH"    # Medical Subject Headings
+    - "SNOMED"  # SNOMED CT
+    - "MONDO"   # Mondo Disease Ontology
+    - "ORCID"   # Researcher ID
+    - "ISRCTN"  # Trial registry
+    # ----------------------------------------
+    # Journal names (references, not abbreviations)
+    # ----------------------------------------
+    - "BMJ"     # British Medical Journal
+    - "NEJM"    # New England Journal of Medicine
+    - "JAMA"    # Journal of the American Medical Association
+    - "NAT"     # Nature journal prefix
+    - "LANCET"  # The Lancet journal
+    - "ANN"     # Annals (journal prefix)
+    - "PLOS"    # PLOS journals
+    - "JCI"     # Journal of Clinical Investigation
+    # ----------------------------------------
+    # DOI and URL artifacts
+    # ----------------------------------------
+    - "DOI"     # Digital Object Identifier
+    - "HTTPS"   # URL protocol artifacts
+    - "HTTP"    # URL protocol artifacts
+    - "WWW"     # URL artifacts
+    - "ORG"     # Domain suffix artifacts
+    - "COM"     # Domain suffix artifacts
+    # ----------------------------------------
+    # Molecular biology / lab technique terms (ubiquitous, not abbreviations)
+    # ----------------------------------------
+    - "DNA"     # Deoxyribonucleic acid
+    - "RNA"     # Ribonucleic acid
+    - "mRNA"    # Messenger RNA
+    - "PCR"     # Polymerase chain reaction
+    - "ELISA"   # Enzyme-linked immunosorbent assay
+    # ----------------------------------------
+    # Institutional / regulatory body names (references, not abbreviations)
+    # ----------------------------------------
+    - "NCBI"    # National Center for Biotechnology Information
+    - "ICD"     # International Classification of Diseases
+    - "WHO"     # World Health Organization
+    - "NIH"     # National Institutes of Health
+    # ----------------------------------------
     # Units and common terms (not medical abbreviations)
     # ----------------------------------------
     - "IU"      # International Unit (unit)

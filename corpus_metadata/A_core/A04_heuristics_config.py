@@ -280,6 +280,23 @@ class HeuristicsConfig:
             "WWW",      # URL artifacts
             "ORG",      # Domain suffix artifacts
             "COM",      # Domain suffix artifacts
+            # ----------------------------------------
+            # Molecular biology / lab technique terms (ubiquitous, not abbreviations)
+            # ----------------------------------------
+            "DNA",      # Deoxyribonucleic acid
+            "RNA",      # Ribonucleic acid
+            "mRNA",     # Messenger RNA
+            "PCR",      # Polymerase chain reaction
+            "ELISA",    # Enzyme-linked immunosorbent assay
+            # ----------------------------------------
+            # Institutional / regulatory body names (references, not abbreviations)
+            # ----------------------------------------
+            "NCBI",     # National Center for Biotechnology Information
+            "ICD",      # International Classification of Diseases
+            "WHO",      # World Health Organization
+            "FDA",      # Food and Drug Administration
+            "EMA",      # European Medicines Agency
+            "NIH",      # National Institutes of Health
         }
     )
 
