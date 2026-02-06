@@ -7,7 +7,7 @@
 
 ## 1. Motivation
 
-During development, the pipeline was iteratively improved by analyzing errors on the same data used to report metrics. FP filter lists (C24, C25, C34), synonym groups in F03, threshold values, and evaluation matching logic were all calibrated against development-set outputs. This creates a methodological risk: reported metrics may overestimate generalization. This report applies the standard NLP protocol — develop on one split, report final numbers on a held-out split never used during tuning — to quantify any gap.
+During development, the pipeline was iteratively improved by analyzing errors on the same data used to report metrics. FP filter lists (C24, C25/C26, C34), synonym groups in F03, threshold values, and evaluation matching logic were all calibrated against development-set outputs. This creates a methodological risk: reported metrics may overestimate generalization. This report applies the standard NLP protocol — develop on one split, report final numbers on a held-out split never used during tuning — to quantify any gap.
 
 ---
 
@@ -77,7 +77,9 @@ The difference is real: between the dossier and the freeze, synonym deduplicatio
 
 ### 4.1 CADEC Drugs: FP Filter Overfitting, but Cross-Corpus Performance Exceeds Baselines
 
-The CADEC drug benchmark shows the largest generalization gap: **-10.6pp F1**. The cause is clear — the FP filter (C25/C26) and consumer drug variant lists were explicitly tuned on the test split during development. FPs increased from 19 to 152, and FNs from 21 to 161. The train split covers more diverse drug names and consumer spelling variants, and contains noisier gold annotations (misspellings like "ibruprofen", "vicodine", "cq10") that exact-match lexicon lookup does not handle.
+The CADEC drug benchmark shows the largest generalization gap: **-10.6pp F1**. The cause is clear — the FP filter (C25/C26) and consumer drug variant lists were explicitly tuned on the test split during development. FPs increased from 19 to 152, and FNs from 21 to 161. The train split covers more diverse drug names and consumer spelling variants, and contains noisier gold annotations that exact-match lexicon lookup does not handle.
+
+The recall drop (-10.7pp, FNs from 21 to 161) has distinct causes from the precision drop. The additional FNs fall into three categories: (1) misspelled brand names absent from lexicons — "lipitol", "Liptior", "vicodine", "oxycotin", "provacal", "Simvistatin" — where FlashText's exact matching cannot recover the intended drug; (2) spacing and formatting variants — "Co Q 10", "tylenol # 3", "slo - naicin" — that break exact keyword boundaries; and (3) noisy gold annotations in the train split where non-drug words ("stopped", "me", "the") are tagged as drugs, inflating the FN count by ~10-15 spurious entries. The test split has cleaner annotations and fewer spelling variants, which is why the 21 test-split FNs were largely addressable through consumer variant lists while the train-split FNs reflect a harder long-tail problem.
 
 The -10.6pp delta is real overfitting to the test split. The held-out F1 of **82.6%** is the honest generalization estimate.
 
