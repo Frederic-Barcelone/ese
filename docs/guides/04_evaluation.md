@@ -113,7 +113,7 @@ Edit the configuration section at the top of `F03_evaluation_runner.py`:
 # Which datasets to run
 RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = True      # Papers in gold_data/PAPERS/
-RUN_BC2GM = False       # BioCreative II GM gene mention corpus
+RUN_BC2GM = True        # BioCreative II GM gene mention corpus
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True
@@ -186,6 +186,8 @@ scorer.print_corpus_summary(corpus_report)
 
 **Disease matching** compares against both `matched_text` (raw document text) and `preferred_label` (normalized ontology name) for better coverage. Supports exact, substring, and fuzzy matching.
 
+**Drug matching** compares drug names via exact, substring, fuzzy (0.8 threshold), and brand/generic equivalence (e.g., acetaminophen ↔ Tylenol). CADEC uses a standalone evaluator (`evaluate_cadec_drugs.py`) with the same matching logic.
+
 **Gene matching** uses multi-step comparison: exact symbol match (uppercase), matched text vs gold symbol, substring match (min 3 chars), and name-based matching. See [Gene Evaluation](06_gene_evaluation.md) for details.
 
 ## Score Report
@@ -241,6 +243,21 @@ The evaluation runner reports metrics separately for abbreviations, diseases, an
 - **Abbreviation issues** likely involve `C_generators/C01_strategy_abbrev.py` (syntax), `C04_strategy_flashtext.py` (lexicon), or `D_validation/` (LLM validation).
 - **Disease issues** likely involve `C_generators/C06_strategy_disease.py` (detection), `C24_disease_fp_filter.py` (filtering), or `E_normalization/E03_disease_normalizer.py` (normalization).
 - **Gene issues** likely involve `C_generators/C16_strategy_gene.py` (detection) or `C34_gene_fp_filter.py` (filtering).
+- **Drug issues** likely involve `C_generators/C07_strategy_drug.py` (detection), `C25_drug_fp_filter.py` (filtering), or `C26_drug_fp_constants.py` (filter term lists).
+
+## Benchmark Results
+
+| Benchmark | Entity | Docs | P | R | F1 | Status |
+|-----------|--------|------|---|---|----|--------|
+| CADEC (social media) | Drugs | 311 | 93.5% | 92.9% | 93.2% | Production-ready |
+| BC2GM (PubMed) | Genes | 100 | 90.3% | 12.3% | 21.7% | Validated methodology |
+| NLP4RARE (rare disease) | Diseases | 1,040 | 77.0% | 74.4% | 75.7% | In progress |
+
+**CADEC**: Social media adverse drug event corpus (AskaPatient forums). 1,248 documents, 1,198 drug annotations. Evaluated via standalone script: `cd corpus_metadata && python ../gold_data/CADEC/evaluate_cadec_drugs.py --split=test`
+
+**BC2GM**: BioCreative II Gene Mention benchmark. 5,000 PubMed sentences, 6,331 gene annotations. The 12.3% recall reflects deliberate scope — the pipeline targets HGNC symbols, not all gene/protein mentions. See [Gene Evaluation](06_gene_evaluation.md) for details.
+
+**NLP4RARE**: Rare disease corpus with BRAT annotations. 1,040+ PDFs across dev/test/train splits. Evaluates abbreviations, diseases, and genes.
 
 ## Creating Gold Standard Annotations
 
@@ -258,5 +275,6 @@ To create gold annotations for new documents:
 ## Related Documentation
 
 - [Gene Evaluation](06_gene_evaluation.md) for BC2GM gene benchmark details and results
+- [Drug Evaluation](07_drug_evaluation.md) for CADEC drug benchmark details and results
 - [Architecture Data Flow](../architecture/02_data_flow.md) for understanding how entities flow through pipeline stages
 - [Configuration Guide](03_configuration.md) for adjusting extraction parameters
