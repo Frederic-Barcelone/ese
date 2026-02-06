@@ -4,6 +4,20 @@
 
 ---
 
+## Performance & Benchmarks
+
+| Document | Description |
+|----------|-------------|
+| [Performance & Benchmarks](performance_benchmarks.md) | Test suite health (1,474 tests), all gold standard results (CADEC F1=93.2%, BC2GM P=90.3%, NLP4RARE F1=75.7%), throughput, cost profile, SOTA comparison |
+
+## Future Work
+
+| Document | Description |
+|----------|-------------|
+| [Future Work & Roadmap](future_work.md) | Short/medium/long-term improvements: accuracy targets, cost optimization, scalability, testing infrastructure, new entity types, research directions |
+
+---
+
 ## Architecture
 
 Foundational design, data flow, and type system.
@@ -43,6 +57,8 @@ Step-by-step guides for common tasks.
 | [Configuration](guides/03_configuration.md) | config.yaml reference, extraction presets, API settings |
 | [Evaluation](guides/04_evaluation.md) | Gold standard format, scoring methodology, interpreting results |
 | [Cost Optimization](guides/05_cost_optimization.md) | Model tier routing, prompt caching, usage tracking, adding new LLM call sites |
+| [Gene Evaluation](guides/06_gene_evaluation.md) | BC2GM gene benchmark: setup, results (P=90.3%), FP/FN analysis, methodology |
+| [Drug Evaluation](guides/07_drug_evaluation.md) | CADEC drug benchmark: setup, results (F1=93.2%), improvement trajectory, error patterns |
 
 ## Reference
 
@@ -60,9 +76,10 @@ Analysis reports and quality assessments.
 
 | Document | Description |
 |----------|-------------|
-| [Quality Metrics Dossier](quality_metrics_dossier.md) | Full dossier: test suite (1,474 tests), gold standards (NLP4RARE + PAPERS), evaluation results, coverage by layer |
+| [Quality Metrics Dossier](quality_metrics_dossier.md) | Full dossier: test suite (1,474 tests), 4 gold standards, evaluation results, coverage by layer |
 | [Performance Analysis](performance_analysis.md) | Processing bottlenecks, throughput measurements, cost breakdown |
 | [Error Handling Analysis](error_handling_analysis.md) | Exception hierarchy, resilience patterns, identified gaps |
+| [Testing Strategy Analysis](testing_strategy_analysis.md) | Test suite structure, coverage gaps, SOTA comparison, recommendations |
 
 ## Plans
 

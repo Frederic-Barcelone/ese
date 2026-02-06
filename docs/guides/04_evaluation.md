@@ -247,17 +247,45 @@ The evaluation runner reports metrics separately for abbreviations, diseases, an
 
 ## Benchmark Results
 
-| Benchmark | Entity | Docs | P | R | F1 | Status |
-|-----------|--------|------|---|---|----|--------|
-| CADEC (social media) | Drugs | 311 | 93.5% | 92.9% | 93.2% | Production-ready |
-| BC2GM (PubMed) | Genes | 100 | 90.3% | 12.3% | 21.7% | Validated methodology |
-| NLP4RARE (rare disease) | Diseases | 1,040 | 77.0% | 74.4% | 75.7% | In progress |
+| Benchmark | Entity | Docs | P | R | F1 | Perfect | Status |
+|-----------|--------|------|---|---|----|---------|--------|
+| CADEC (social media) | Drugs | 311 | 93.5% | 92.9% | 93.2% | 91.3% | Production-ready |
+| BC2GM (PubMed) | Genes | 100 | 90.3% | 12.3% | 21.7% | 4.0% | Validated methodology |
+| NLP4RARE (rare disease) | Diseases | 1,040 | 77.0% | 74.4% | 75.7% | 30.3% | Active improvement |
+| NLP4RARE (rare disease) | Abbreviations | 1,040 | 46.8% | 88.0% | 61.1% | -- | Active improvement |
 
-**CADEC**: Social media adverse drug event corpus (AskaPatient forums). 1,248 documents, 1,198 drug annotations. Evaluated via standalone script: `cd corpus_metadata && python ../gold_data/CADEC/evaluate_cadec_drugs.py --split=test`
+### Running Each Benchmark
+
+**NLP4RARE** (diseases + abbreviations + genes):
+```bash
+cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
+# Configure: RUN_NLP4RARE=True, NLP4RARE_SPLITS=["dev","test","train"]
+```
+
+**BC2GM** (genes):
+```bash
+cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
+# Configure: RUN_BC2GM=True
+# Requires: gold_data/bc2gm/corpus/ and gold_data/bc2gm/pdfs/ (see Gene Evaluation guide)
+```
+
+**CADEC** (drugs — standalone evaluator):
+```bash
+cd corpus_metadata && python ../gold_data/CADEC/evaluate_cadec_drugs.py --split=test
+# Options: --split=test|train|all, --max-docs=N, --seqeval
+```
+
+### Benchmark Details
+
+**CADEC**: Social media adverse drug event corpus (AskaPatient forums). 1,248 documents (937 train, 311 test), 1,198 drug annotations. Evaluates drug detection with brand/generic equivalence mapping (30+ pairs: acetaminophen/Tylenol, atorvastatin/Lipitor, etc.).
 
 **BC2GM**: BioCreative II Gene Mention benchmark. 5,000 PubMed sentences, 6,331 gene annotations. The 12.3% recall reflects deliberate scope — the pipeline targets HGNC symbols, not all gene/protein mentions. See [Gene Evaluation](06_gene_evaluation.md) for details.
 
-**NLP4RARE**: Rare disease corpus with BRAT annotations. 1,040+ PDFs across dev/test/train splits. Evaluates abbreviations, diseases, and genes.
+**NLP4RARE**: Rare disease corpus with BRAT annotations (UC3M). 2,311 PDFs across dev/test/train splits. Evaluates abbreviations (242 gold pairs), diseases (4,123 gold annotations across RAREDISEASE, DISEASE, SKINRAREDISEASE types), and genes (not annotated in this corpus).
+
+For detailed per-benchmark analysis, see:
+- [Gene Evaluation](06_gene_evaluation.md) for BC2GM methodology and FP/FN analysis
+- [Drug Evaluation](07_drug_evaluation.md) for CADEC improvement trajectory and error patterns
 
 ## Creating Gold Standard Annotations
 

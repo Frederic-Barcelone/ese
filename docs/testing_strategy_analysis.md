@@ -1,7 +1,7 @@
 # ESE Pipeline v0.8 — Testing Strategy Analysis
 
 > **Date**: February 4, 2026
-> **Based on**: Exhaustive analysis of 60 test files (16,073 lines, 1,266 test functions), 13 key modules, and SOTA research
+> **Based on**: Exhaustive analysis of 60 test files (16,073 lines, 1,474 test functions), 13 key modules, and SOTA research
 
 ---
 
@@ -27,7 +27,7 @@
 |--------|-------|
 | Total test files | 60 (59 in K_tests/ + conftest.py) |
 | Total lines of test code | 16,073 |
-| Total test functions | 1,266 |
+| Total test functions | 1,474 |
 | Total production files | ~140 |
 | Files with behavioral tests | 54 (39%) |
 | Files with import-only tests | 44 (31%) |

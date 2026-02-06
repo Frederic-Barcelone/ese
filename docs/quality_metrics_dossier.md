@@ -110,20 +110,35 @@ The pipeline enforces quality through a deliberately asymmetric three-layer para
 
 ## 4. Gold Standard Datasets
 
-The evaluation framework uses two human-annotated gold standard corpora stored in the `gold_data/` directory:
+The evaluation framework uses four gold standard corpora stored in the `gold_data/` directory:
 
 ```
 gold_data/
   nlp4rare_gold.json          30,330 lines  (abbreviations + diseases)
   papers_gold_v2.json          3,204 lines  (abbreviations + diseases + drugs)
+  golden_bc2gm.json                         (genes)
+  cadec_gold.json                           (drugs)
   NLP4RARE/
-    dev/                       317 PDFs
+    dev/                       317 PDFs     (rare disease documents)
     test/                      536 PDFs
     train/                   1,458 PDFs
-  PAPERS/                       10 PDFs
+  PAPERS/                       10 PDFs     (clinical research articles)
+  bc2gm/
+    corpus/                  5,000 sentences (PubMed gene mentions)
+    pdfs/                      100 PDFs     (generated from sentences)
+  CADEC/
+    corpus/                  1,248 docs     (social media drug reports)
+    pdfs/                      311 PDFs     (test split)
 ```
 
-**Total annotated documents:** 2,321 PDFs across both corpora.
+**Total annotated documents:** ~3,569 documents across four corpora.
+
+| Corpus | Documents | Entity Types | Source |
+|--------|-----------|-------------|--------|
+| NLP4RARE | 2,311 | Abbreviations, Diseases | UC3M BRAT annotations |
+| PAPERS | 10 | Abbreviations, Diseases, Drugs | Manual annotation |
+| BC2GM | 5,000 sentences | Genes | BioCreative II Gene Mention |
+| CADEC | 1,248 | Drugs | CSIRO adverse drug events |
 
 ---
 
@@ -310,65 +325,118 @@ When a document has no gold annotations, the framework marks it as `is_scored=Fa
 
 ### 8.1 Latest Results (February 2026)
 
-The most recent evaluation run on the NLP4RARE test split (20 documents):
+Full evaluation results across all four gold standard corpora:
 
-| Entity Type    | Precision | Recall | F1    |
-|----------------|-----------|--------|-------|
-| **Diseases**   | **91.4%** | 71.6%  | **80.3%** |
-| Abbreviations  | (evaluated, results in runner output) | | |
-| Genes          | N/A (no gold annotations in NLP4RARE) | | |
-| Drugs          | N/A (no gold annotations in NLP4RARE) | | |
+#### NLP4RARE Disease Detection (1,040 documents, all splits)
+
+| Metric | Value |
+|--------|-------|
+| True Positives | 2,994 |
+| False Positives | 894 |
+| False Negatives | 1,032 |
+| **Precision** | **77.0%** |
+| **Recall** | **74.4%** |
+| **F1 Score** | **75.7%** |
+| Perfect documents | 315/1,040 (30.3%) |
+
+**FP sources:** symptoms (ataxia, hypocalcemia), clinical signs, related medical terms
+**FN sources:** abbreviation-as-disease (AVM, BGS), generic terms (skin condition), qualified names (Secondary APS)
+
+#### NLP4RARE Abbreviation Detection (1,040 documents, all splits)
+
+| Metric | Value |
+|--------|-------|
+| True Positives | 213 |
+| False Positives | 242 |
+| False Negatives | 29 |
+| **Precision** | **46.8%** |
+| **Recall** | **88.0%** |
+| **F1 Score** | **61.1%** |
+
+**FP sources:** gene symbols (JAG1, NOTCH2), common non-abbreviation acronyms (DNA, OMIM)
+**FN sources:** complex patterns (CdLS, LD-HIV), single-letter abbreviations (AI)
+
+#### CADEC Drug Detection (311 test documents)
+
+| Metric | Value |
+|--------|-------|
+| True Positives | 273 |
+| False Positives | 19 |
+| False Negatives | 21 |
+| **Precision** | **93.5%** |
+| **Recall** | **92.9%** |
+| **F1 Score** | **93.2%** |
+| Perfect documents | 284/311 (91.3%) |
+
+**FP sources:** mostly correct detections not present in gold (Lipitor, Zocor, ezetimibe, CoQ10)
+**FN sources:** noisy gold annotations (Stopped, SATIN), extreme misspellings, spacing variants (Gas - X, CoQ 10)
+
+#### BC2GM Gene Detection (100 documents)
+
+| Metric | Value |
+|--------|-------|
+| True Positives | 28 |
+| False Positives | 3 |
+| False Negatives | 199 |
+| **Precision** | **90.3%** |
+| **Recall** | **12.3%** |
+| **F1 Score** | **21.7%** |
+| Perfect documents | 4/100 (4.0%) |
+
+**Note:** The low recall is by design. BC2GM annotates broad protein/gene names (hemoglobin, DNA-PK, procollagen) while the ESE pipeline extracts HGNC gene symbols. The 90.3% precision confirms the pipeline rarely hallucinates gene symbols.
+
+#### Cross-Benchmark Summary
+
+| Benchmark | Entity | Docs | Precision | Recall | F1 | Perfect | Status |
+|-----------|--------|------|-----------|--------|-----|---------|--------|
+| **CADEC** | Drugs | 311 | 93.5% | 92.9% | **93.2%** | 91.3% | Production-ready |
+| **BC2GM** | Genes | 100 | 90.3% | 12.3% | 21.7% | 4.0% | Validated methodology |
+| **NLP4RARE** | Diseases | 1,040 | 77.0% | 74.4% | **75.7%** | 30.3% | Active improvement |
+| **NLP4RARE** | Abbreviations | 1,040 | 46.8% | 88.0% | **61.1%** | -- | Active improvement |
 
 ### 8.2 Improvement Trajectory
 
-The disease extraction metrics have improved significantly through targeted false-positive reduction:
+The drug detection metrics show the most dramatic improvement through iterative refinement:
 
 ```
-    Disease Precision                    Disease F1
+    CADEC Drug F1 Progression
 
-    100% |                               100% |
-     90% |          * 91%                  90% |
-     80% |                                 80% |          * 80%
-     70% |  * 69%                          70% |  * 73%
-     60% |                                 60% |
-     50% |                                 50% |
-         +-----------+                         +-----------+
-          Before  After                         Before  After
+    100% |                    * 93.2%
+     90% |          * 79.6%
+     80% |
+     70% |
+     60% |
+     50% |  * 55.2%
+         +----------+----------+
+          Baseline  FP Filter  All Fixes
 ```
 
-Key improvements from recent commits:
+Key drug improvements:
+1. **FP filter expansion** (55.2% → 79.6%): Added biological entities, body parts, equipment, common words to filter
+2. **Author pattern bug fix**: Removed `re.IGNORECASE` on author initials regex causing false drug-as-author matches
+3. **Consumer drug variants** (79.6% → 93.2%): Added CONSUMER_DRUG_VARIANTS + CONSUMER_DRUG_PATTERNS, brand/generic equivalences
 
-1. **c02eb44** -- Disease precision 69% to 91%, F1 73% to 80%
-   - Added 16 single-word generic false positive terms (hereditary, inherited, idiopathic, genetic, congenital, tumor, neoplasm, etc.)
-   - Added 7 multi-word generic false positive terms (rare disorder, autosomal dominant, x-linked, birth defect, etc.)
-   - Added plural form generation for FlashText disease lexicons
-
-2. **2bdd09a** -- Reduced false positives across disease, drug, and gene extraction
-   - Expanded false positive filter sets for all three entity types
-
-3. **c850c2b** -- Expanded false positive filter sets
-   - Broader filtering for generic medical terminology
-
-4. **879521a** -- Improved deduplication and synonym matching
-   - Plural deduplication for disease entities
-   - Synonym group matching in evaluation
+Disease precision improved from 69% to 77% through FP filter expansion (COMMON_ENGLISH_FP_TERMS, GENERIC_MULTIWORD_FP_TERMS, plural forms).
 
 ### 8.3 Evaluation Configuration
 
-Current evaluation settings:
+Default evaluation settings in `F03_evaluation_runner.py`:
 
-| Parameter          | Value     | Description                          |
+| Parameter          | Default   | Description                          |
 |--------------------|-----------|--------------------------------------|
 | RUN_NLP4RARE       | True      | Evaluate against NLP4RARE corpus     |
-| RUN_PAPERS         | False     | PAPERS evaluation disabled           |
-| NLP4RARE_SPLITS    | ["test"]  | Evaluate on test split only          |
-| MAX_DOCS           | 20        | Process 20 documents per run         |
+| RUN_PAPERS         | False     | PAPERS evaluation (secondary)        |
+| RUN_BC2GM          | True      | Evaluate against BC2GM gene corpus   |
+| NLP4RARE_SPLITS    | ["dev", "test", "train"] | All splits evaluated      |
+| MAX_DOCS           | None      | Process all documents                |
 | FUZZY_THRESHOLD    | 0.8       | 80% similarity for fuzzy matching    |
 | TARGET_ACCURACY    | 1.0       | Ultimate target: 100%                |
 | EVAL_ABBREVIATIONS | True      | Abbreviation evaluation enabled      |
 | EVAL_DISEASES      | True      | Disease evaluation enabled           |
 | EVAL_GENES         | True      | Gene evaluation enabled              |
 | EVAL_DRUGS         | True      | Drug evaluation enabled              |
+
+CADEC drug evaluation is run via a standalone script: `python ../gold_data/CADEC/evaluate_cadec_drugs.py --split=test`
 
 ---
 
@@ -628,24 +696,24 @@ This cycle is evidenced by the recent commit history showing iterative precision
 
 ## 12. Appendix: Entity Type Status Matrix
 
-| Entity Type        | Gold Data Available | Evaluation Supported | Gold Count | Current Status |
-|--------------------|--------------------|-----------------------|------------|----------------|
-| Abbreviations      | NLP4RARE + PAPERS  | Yes                   | 297        | Active evaluation |
-| Diseases           | NLP4RARE + PAPERS  | Yes                   | 4,135      | P=91%, F1=80% |
-| Drugs              | PAPERS only        | Yes                   | 10         | Early evaluation |
-| Genes              | None               | Framework ready       | 0          | Awaiting gold data |
-| Authors            | None               | Not yet               | --         | Extraction only |
-| Citations          | None               | Not yet               | --         | Extraction only |
-| Feasibility        | None               | Not yet               | --         | Extraction only |
-| Recommendations    | None               | Not yet               | --         | Extraction only |
-| Care Pathways      | None               | Not yet               | --         | Extraction only |
-| Figures            | None               | Not yet               | --         | Extraction only |
-| Tables             | None               | Not yet               | --         | Extraction only |
-| Document Metadata  | None               | Not yet               | --         | Extraction only |
+| Entity Type        | Gold Data Available | Evaluation Supported | Gold Count | Current Results | Status |
+|--------------------|--------------------|-----------------------|------------|-----------------|--------|
+| Abbreviations      | NLP4RARE + PAPERS  | Yes                   | 297        | P=46.8%, R=88.0%, F1=61.1% | Active evaluation |
+| Diseases           | NLP4RARE + PAPERS  | Yes                   | 4,135      | P=77.0%, R=74.4%, F1=75.7% | Active evaluation |
+| Drugs              | CADEC + PAPERS     | Yes                   | 1,208      | P=93.5%, R=92.9%, F1=93.2% | Production-ready |
+| Genes              | BC2GM              | Yes                   | 6,331      | P=90.3%, R=12.3%, F1=21.7% | Validated methodology |
+| Authors            | None               | Not yet               | --         | -- | Extraction only |
+| Citations          | None               | Not yet               | --         | -- | Extraction only |
+| Feasibility        | None               | Not yet               | --         | -- | Extraction only |
+| Recommendations    | None               | Not yet               | --         | -- | Extraction only |
+| Care Pathways      | None               | Not yet               | --         | -- | Extraction only |
+| Figures            | None               | Not yet               | --         | -- | Extraction only |
+| Tables             | None               | Not yet               | --         | -- | Extraction only |
+| Document Metadata  | None               | Not yet               | --         | -- | Extraction only |
 
 ---
 
 *Generated: February 2026*
 *Pipeline version: v0.8*
 *Test suite: 1,474 tests across 60 files*
-*Gold standard: 2,321 annotated documents, 4,432+ entity annotations*
+*Gold standard: ~3,569 annotated documents across 4 corpora, 11,700+ entity annotations*
