@@ -18,6 +18,20 @@
 
 ---
 
+## Deep Dives
+
+In-depth technical documentation on key pipeline subsystems.
+
+| Document | Description |
+|----------|-------------|
+| [Entity Detection](entity_detection_deep_dive.md) | How every entity type is detected: abbreviations (Schwartz-Hearst, FlashText, PASO), diseases (4 lexicons, scispacy, C24 FP filter), drugs (5 lexicons, C25 FP filter), genes (HGNC, C34 FP filter), authors, citations, feasibility, recommendations, care pathways |
+| [Visual Extraction](visual_extraction_deep_dive.md) | Tables & figures pipeline: PDF parsing, DocLayout-YOLO detection, visual triage (SKIP/CHEAP/VLM), Docling TableFormer, VLM analysis, caption management, flowchart extraction |
+| [LLM Usage Strategy](llm_usage_deep_dive.md) | Model routing & cost optimization: 17 call sites, 2-tier architecture (Haiku/Sonnet), prompt caching, cost tracking infrastructure, MODEL_PRICING, optimization strategies |
+| [Claude Code Setup](claude_code_setup.md) | Project configuration for Claude Code: CLAUDE.md manifest, permissions (52 bash commands, 24 WebFetch domains), 5 plugins, development workflows, persistent memory, verification checklist |
+| [Extracted Entities Reference](extracted_entities_reference.md) | Complete field guide: all 14+ entity types with every field, enum, identifier code, provenance model, and JSON output format |
+
+---
+
 ## Architecture
 
 Foundational design, data flow, and type system.
