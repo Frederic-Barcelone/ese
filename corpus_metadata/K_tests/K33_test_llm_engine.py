@@ -347,3 +347,66 @@ class TestModelTierRouting:
             assert "haiku" in actual_model.lower(), (
                 f"API call for fast_reject should use Haiku model, got '{actual_model}'"
             )
+
+    def test_model_ids_are_valid(self):
+        """All model IDs in config.yaml must be from the known valid set."""
+        from pathlib import Path
+        import yaml
+
+        # Known valid Anthropic model IDs (update when new models are released)
+        VALID_MODEL_IDS = {
+            # Haiku
+            "claude-3-5-haiku-20241022",
+            "claude-haiku-4-5-20251001",
+            # Sonnet
+            "claude-sonnet-4-20250514",
+            "claude-sonnet-4-5-20250929",
+            # Opus
+            "claude-opus-4-20250514",
+        }
+
+        config_path = Path(__file__).parent.parent / "G_config" / "config.yaml"
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+
+        model_tiers = config.get("api", {}).get("claude", {}).get("model_tiers", {})
+        assert len(model_tiers) > 0, "model_tiers should not be empty"
+
+        for call_type, model_id in model_tiers.items():
+            assert model_id in VALID_MODEL_IDS, (
+                f"model_tiers['{call_type}'] = '{model_id}' is not a valid model ID. "
+                f"Valid IDs: {sorted(VALID_MODEL_IDS)}"
+            )
+
+    def test_haiku_call_does_not_pass_both_temperature_and_top_p(self):
+        """Haiku 4.5 rejects temperature + top_p together. Verify we don't send both."""
+        from pathlib import Path
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_messages = MagicMock()
+            mock_response = MagicMock()
+            mock_response.content = [MagicMock(text='{"result": "ok"}')]
+            mock_response.usage = MagicMock(
+                input_tokens=10, output_tokens=5,
+                cache_read_input_tokens=0, cache_creation_input_tokens=0,
+            )
+            mock_messages.create.return_value = mock_response
+            mock_anthropic.Anthropic.return_value = MagicMock(
+                messages=mock_messages
+            )
+
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+            # Call with default top_p=1.0 (the normal case)
+            client._call_claude(
+                "system", "user", None, None, None, 1.0,
+                call_type="fast_reject",
+            )
+            call_kwargs = mock_messages.create.call_args.kwargs
+            has_temp = "temperature" in call_kwargs
+            has_top_p = "top_p" in call_kwargs
+            assert not (has_temp and has_top_p), (
+                f"API call must not pass both temperature and top_p. "
+                f"Got temperature={has_temp}, top_p={has_top_p}"
+            )

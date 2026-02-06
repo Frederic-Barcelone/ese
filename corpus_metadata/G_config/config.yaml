@@ -723,16 +723,16 @@ api:
     # "simple" tasks use cheaper Haiku, "complex" tasks use Sonnet
     model_tiers:
       # Simple tasks -> Haiku 4.5 ($1/$5 per MTok) — 3x cheaper than Sonnet
-      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
-      abbreviation_single_validation: "claude-haiku-4-5-20250901"
-      fast_reject: "claude-haiku-4-5-20250901"
-      document_classification: "claude-haiku-4-5-20250901"
-      image_classification: "claude-haiku-4-5-20250901"
-      sf_only_extraction: "claude-haiku-4-5-20250901"
-      layout_analysis: "claude-haiku-4-5-20250901"
-      vlm_visual_enrichment: "claude-haiku-4-5-20250901"
-      description_extraction: "claude-haiku-4-5-20250901"
-      ocr_text_fallback: "claude-haiku-4-5-20250901"
+      abbreviation_batch_validation: "claude-haiku-4-5-20251001"
+      abbreviation_single_validation: "claude-haiku-4-5-20251001"
+      fast_reject: "claude-haiku-4-5-20251001"
+      document_classification: "claude-haiku-4-5-20251001"
+      image_classification: "claude-haiku-4-5-20251001"
+      sf_only_extraction: "claude-haiku-4-5-20251001"
+      layout_analysis: "claude-haiku-4-5-20251001"
+      vlm_visual_enrichment: "claude-haiku-4-5-20251001"
+      description_extraction: "claude-haiku-4-5-20251001"
+      ocr_text_fallback: "claude-haiku-4-5-20251001"
 
       # Complex tasks -> Sonnet 4 ($3/$15 per MTok) — best reasoning
       feasibility_extraction: "claude-sonnet-4-20250514"

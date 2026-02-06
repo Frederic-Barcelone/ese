@@ -74,7 +74,7 @@ MODEL_PRICING: Dict[str, Tuple[float, float]] = {
     "claude-sonnet-4-20250514": (3.0, 15.0),
     "claude-sonnet-4-5-20250929": (3.0, 15.0),
     "claude-3-5-haiku-20241022": (0.80, 4.0),
-    "claude-haiku-4-5-20250901": (1.0, 5.0),
+    "claude-haiku-4-5-20251001": (1.0, 5.0),
 }
 
 
@@ -544,14 +544,19 @@ class ClaudeClient:
             }
         ]
 
-        message = self.client.messages.create(
-            model=use_model,
-            max_tokens=use_max_tokens,
-            temperature=use_temperature,
-            top_p=top_p,
-            system=system_messages,
-            messages=[{"role": "user", "content": user_prompt}],
-        )
+        # Build API kwargs — Haiku 4.5 rejects temperature + top_p together
+        api_kwargs: Dict[str, Any] = {
+            "model": use_model,
+            "max_tokens": use_max_tokens,
+            "temperature": use_temperature,
+            "system": system_messages,
+            "messages": [{"role": "user", "content": user_prompt}],
+        }
+        if top_p != 1.0:
+            api_kwargs.pop("temperature", None)
+            api_kwargs["top_p"] = top_p
+
+        message = self.client.messages.create(**api_kwargs)
 
         # Track token usage
         self._record_usage(message, use_model, call_type)

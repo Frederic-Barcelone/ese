@@ -568,7 +568,7 @@ class AbbreviationPipeline:
         # Fast-reject pre-screening for lexicon candidates (skip explicit pairs — they're high trust)
         fast_rejected_count = 0
         if use_fast_reject and lexicon_candidates:
-            haiku_model = "claude-haiku-4-5-20250901"
+            haiku_model = "claude-haiku-4-5-20251001"
             # Use model tier if configured
             if self.claude_client and hasattr(self.claude_client, "resolve_model"):
                 haiku_model = self.claude_client.resolve_model("fast_reject")
