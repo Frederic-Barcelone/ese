@@ -204,3 +204,146 @@ class TestClaudeClientInit:
             mock_anthropic.Anthropic.return_value = MagicMock()
             client = ClaudeClient(api_key="test-key")
             assert "claude" in client.default_model.lower()
+
+
+class TestModelTierRouting:
+    """Tests for model tier routing — ensures Haiku call types use Haiku, not Sonnet."""
+
+    HAIKU_CALL_TYPES = [
+        "abbreviation_batch_validation",
+        "abbreviation_single_validation",
+        "fast_reject",
+        "document_classification",
+        "image_classification",
+        "sf_only_extraction",
+        "layout_analysis",
+        "vlm_visual_enrichment",
+        "description_extraction",
+        "ocr_text_fallback",
+    ]
+
+    SONNET_CALL_TYPES = [
+        "feasibility_extraction",
+        "recommendation_extraction",
+        "recommendation_vlm",
+        "vlm_table_extraction",
+        "flowchart_analysis",
+        "chart_analysis",
+        "vlm_detection",
+    ]
+
+    def test_no_config_path_means_empty_model_tiers(self):
+        """ClaudeClient with config_path=None has no model tier routing."""
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            client = ClaudeClient(api_key="test-key", config_path=None)
+            assert client._model_tiers == {}
+
+    def test_config_path_loads_model_tiers(self):
+        """ClaudeClient with real config.yaml path loads model_tiers."""
+        from pathlib import Path
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+            assert len(client._model_tiers) > 0, (
+                "model_tiers should be populated from config.yaml"
+            )
+
+    def test_haiku_call_types_resolve_to_haiku(self):
+        """All Haiku-designated call types must resolve to a Haiku model."""
+        from pathlib import Path
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+
+            for call_type in self.HAIKU_CALL_TYPES:
+                resolved = client.resolve_model(call_type)
+                assert "haiku" in resolved.lower(), (
+                    f"call_type '{call_type}' should route to Haiku, "
+                    f"got '{resolved}'"
+                )
+
+    def test_sonnet_call_types_resolve_to_sonnet(self):
+        """All Sonnet-designated call types must resolve to a Sonnet model."""
+        from pathlib import Path
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+
+            for call_type in self.SONNET_CALL_TYPES:
+                resolved = client.resolve_model(call_type)
+                assert "sonnet" in resolved.lower(), (
+                    f"call_type '{call_type}' should route to Sonnet, "
+                    f"got '{resolved}'"
+                )
+
+    def test_factory_creates_client_with_model_tiers(self):
+        """ComponentFactory.create_claude_client() must produce a client with model_tiers."""
+        from pathlib import Path
+        from H_pipeline.H01_component_factory import ComponentFactory
+        import yaml
+
+        config_path = Path(__file__).parent.parent / "G_config" / "config.yaml"
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            factory = ComponentFactory(
+                config=config,
+                run_id="TEST",
+                pipeline_version="0.8",
+                log_dir=Path("/tmp"),
+                api_key="test-key",
+            )
+            client = factory.create_claude_client()
+            assert client is not None
+            assert len(client._model_tiers) > 0, (
+                "ComponentFactory must pass config_path so model_tiers are loaded"
+            )
+            # Verify a Haiku call type actually routes to Haiku
+            resolved = client.resolve_model("fast_reject")
+            assert "haiku" in resolved.lower(), (
+                f"fast_reject should route to Haiku via factory client, got '{resolved}'"
+            )
+
+    def test_call_claude_uses_tier_model(self):
+        """_call_claude must use the tier-mapped model, not the default."""
+        from pathlib import Path
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_messages = MagicMock()
+            mock_response = MagicMock()
+            mock_response.content = [MagicMock(text='{"result": "ok"}')]
+            mock_response.usage = MagicMock(
+                input_tokens=10, output_tokens=5,
+                cache_read_input_tokens=0, cache_creation_input_tokens=0,
+            )
+            mock_messages.create.return_value = mock_response
+            mock_anthropic.Anthropic.return_value = MagicMock(
+                messages=mock_messages
+            )
+
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+            # Call with a Haiku call_type
+            client._call_claude(
+                "system", "user", None, None, None, 1.0,
+                call_type="fast_reject",
+            )
+            # Verify the actual model passed to the API
+            call_args = mock_messages.create.call_args
+            actual_model = call_args.kwargs.get("model", call_args[1].get("model", ""))
+            assert "haiku" in actual_model.lower(), (
+                f"API call for fast_reject should use Haiku model, got '{actual_model}'"
+            )

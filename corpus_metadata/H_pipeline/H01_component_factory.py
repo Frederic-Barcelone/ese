@@ -250,10 +250,11 @@ class ComponentFactory:
             return None
 
         from D_validation.D02_llm_engine import ClaudeClient
+        config_path = str(Path(__file__).parent.parent / "G_config" / "config.yaml")
         return ClaudeClient(
             api_key=self.api_key,
             model=model or self.default_model,
-            config_path=None,  # Config already loaded
+            config_path=config_path,
         )
 
     def create_llm_engine(
