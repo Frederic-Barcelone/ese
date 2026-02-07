@@ -1,0 +1,141 @@
+{
+  "run_id": "RUN_20260204_132700_1fed028ce5fb",
+  "timestamp": "2026-02-04T14:36:04.889170",
+  "document": "01_Article_Iptacopan C3G Trial.pdf",
+  "document_path": "/Users/frederictetard/Projects/ese/gold_data/PAPERS/01_Article_Iptacopan C3G Trial.pdf",
+  "pipeline_version": "0.8",
+  "total_detected": 13,
+  "unique_authors": 13,
+  "authors": [
+    {
+      "full_name": "Summary David Kavanagh",
+      "role": "corresponding_author",
+      "affiliation": "on behalf of APPEAR-C3G investigators",
+      "email": null,
+      "orcid": null,
+      "context": "Summary David Kavanagh",
+      "page": 1,
+      "confidence": 0.9
+    },
+    {
+      "full_name": "Andrew S Bomback",
+      "role": "corresponding_author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Andrew S Bomback",
+      "page": 1,
+      "confidence": 0.9
+    },
+    {
+      "full_name": "Carla M Nester",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Carla M Nester",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Giuseppe Remuzzi",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Giuseppe Remuzzi",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Ming-Hui Zhao",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Ming-Hui Zhao",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Edwin K S Wong",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Edwin K S Wong",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Yaqin Wang",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Yaqin Wang",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Induja Krishnan",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Induja Krishnan",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Imelda Schuhmann",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Imelda Schuhmann",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Angelo J Trapani",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Angelo J Trapani",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Nicholas J A Webb",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Nicholas J A Webb",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Ruben K Israni",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Ruben K Israni",
+      "page": 1,
+      "confidence": 0.85
+    },
+    {
+      "full_name": "Richard J H Smith",
+      "role": "author",
+      "affiliation": null,
+      "email": null,
+      "orcid": null,
+      "context": "Richard J H Smith",
+      "page": 1,
+      "confidence": 0.85
+    }
+  ]
+}

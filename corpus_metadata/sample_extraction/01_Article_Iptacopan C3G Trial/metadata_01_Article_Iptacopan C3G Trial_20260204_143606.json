@@ -1,0 +1,55 @@
+{
+  "doc_id": "01_Article_Iptacopan C3G Trial",
+  "doc_filename": "01_Article_Iptacopan C3G Trial.pdf",
+  "top_entities": [
+    {
+      "name": "Immune complex membranoproliferative glomerulonephritis",
+      "mention_count": 3,
+      "entity_type": "disease"
+    },
+    {
+      "name": "membranoproliferative glomerulonephritis",
+      "mention_count": 2,
+      "entity_type": "disease"
+    },
+    {
+      "name": "LNP023",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "Iptacopan",
+      "mention_count": 1,
+      "entity_type": "drug"
+    },
+    {
+      "name": "C3",
+      "mention_count": 2,
+      "entity_type": "gene"
+    },
+    {
+      "name": "C5",
+      "mention_count": 2,
+      "entity_type": "gene"
+    }
+  ],
+  "file_size_bytes": 750450,
+  "file_size_human": "732.9 KB",
+  "file_extension": ".pdf",
+  "pdf_title": "Oral iptacopan therapy in patients with C3 glomerulopathy: a randomised, double-blind, parallel group, multicentre, placebo-controlled, phase 3 study",
+  "pdf_author": "Prof David Kavanagh FRCP",
+  "pdf_page_count": 12,
+  "pdf_creation_date": "2025-10-05T04:34:09",
+  "doi": null,
+  "doi_url": null,
+  "document_type_code": "EFF",
+  "document_type_name": "Efficacy & Outcomes Reports",
+  "document_type_group": "Scientific Communications",
+  "classification_confidence": 0.25,
+  "title": "Oral iptacopan therapy in patients with C3 glomerulopathy: a randomised, double-blind, parallel group, multicentre, placebo-controlled, phase 3 study",
+  "short_description": "A phase 3 clinical trial evaluating the efficacy and safety of oral iptacopan (LNP023) versus placebo in treating C3 glomerulopathy, an ultra-rare form of glomerulonephritis.",
+  "long_description": "This multicentre, randomised, double-blind, placebo-controlled phase 3 study (APPEAR-C3G) investigated iptacopan, an oral complement inhibitor targeting factor B to selectively inhibit the alternative complement pathway, in 74 adult patients with biopsy-confirmed C3 glomerulopathy. The study was conducted across 35 hospitals in 18 countries and included a 6-month double-blind treatment period followed by a 6-month open-label extension. The primary endpoint was relative reduction in proteinuria measured by 24-hour urine protein-creatinine ratio at 6 months. Results demonstrated a significant 35.1% relative reduction in proteinuria with iptacopan compared to placebo (p=0.0014), with the treatment showing a favorable safety profile and no meningococcal infections reported.",
+  "document_date": "2025-10-05T04:34:09",
+  "document_date_source": "pdf_metadata",
+  "extraction_timestamp": "2026-02-04T13:36:06.611932"
+}
