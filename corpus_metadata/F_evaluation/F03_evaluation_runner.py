@@ -33,6 +33,7 @@ import json
 import re
 import sys
 import time
+import unicodedata
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -97,14 +98,14 @@ EVAL_GENES = True           # Gene entities (when gold available)
 EVAL_DRUGS = True           # Drug entities (when gold available)
 
 # NLP4RARE subfolders to include (all by default)
-NLP4RARE_SPLITS = ["test"]
+NLP4RARE_SPLITS = ["dev", "test", "train"]
 
 # NLM-Gene / RareDisGene splits
 NLM_GENE_SPLITS = ["test"]
 RAREDIS_GENE_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = 100  # All documents (set to small number for testing)
+MAX_DOCS = None  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -845,8 +846,11 @@ def _to_canonical(text: str) -> str:
 
 
 def _normalize_quotes(text: str) -> str:
-    """Normalize curly quotes and apostrophes to ASCII equivalents."""
-    return text.replace("\u2018", "'").replace("\u2019", "'").replace("\u201c", '"').replace("\u201d", '"')
+    """Normalize curly quotes, apostrophes, and accented characters to ASCII."""
+    text = text.replace("\u2018", "'").replace("\u2019", "'").replace("\u201c", '"').replace("\u201d", '"')
+    # Strip accents: é→e, ü→u, etc.
+    nfkd = unicodedata.normalize("NFKD", text)
+    return "".join(c for c in nfkd if not unicodedata.combining(c))
 
 
 def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRESHOLD) -> bool:
