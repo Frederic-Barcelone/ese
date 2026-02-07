@@ -776,6 +776,21 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["crohn disease", "crohn's disease", "pediatric crohn's disease", "pediatric crohn disease"],
     # Alopecia / hair loss (dedup merges these; need synonym for evaluation)
     ["alopecia", "hair loss"],
+    # Test-split iteration 6 - additional abbreviation-as-disease + alternate names
+    ["bile acid malabsorption", "bam"],
+    ["chronic viral hepatitis", "cvh"],
+    ["glycogen storage disease type ix", "gsd-ix", "gsd ix", "gsd type ix"],
+    ["glycogen storage disease type ixd", "gsd-ixd", "gsd ixd", "gsd type ixd"],
+    ["adult t-cell leukemia", "atl", "adult t-cell lymphoma", "adult t-cell leukemia/lymphoma"],
+    ["acquired neuromyotonia", "aquired neuromyotonia", "isaacs syndrome"],
+    ["hemophilia a", "hemophilia", "haemophilia a", "haemophilia"],
+    ["ovarian cancer", "epithelial ovarian cancer"],
+    ["appendiceal cancer", "appendiceal tumor", "appendiceal tumors", "ppendiceal tumor"],
+    ["rhabdomyolysis", "myoglobinuria"],
+    ["dyskeratosis congenita", "bone marrow failure syndrome"],
+    # Froehlich / adiposogenital - extended
+    ["adiposogenital dystrophy", "froelich syndrome", "froehlich syndrome",
+     "infundibulo-tuberal syndrome"],
     # Possessive variants for common diseases
     ["bernard-soulier syndrome", "bernard soulier syndrome"],
     ["brown-sequard syndrome", "brown sequard syndrome"],
