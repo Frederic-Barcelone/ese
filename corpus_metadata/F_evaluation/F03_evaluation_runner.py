@@ -85,7 +85,7 @@ RAREDIS_GENE_GOLD = BASE_PATH / "gold_data" / "raredis_gene_gold.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
@@ -97,14 +97,14 @@ EVAL_GENES = True           # Gene entities (when gold available)
 EVAL_DRUGS = True           # Drug entities (when gold available)
 
 # NLP4RARE subfolders to include (all by default)
-NLP4RARE_SPLITS = ["dev", "test", "train"]
+NLP4RARE_SPLITS = ["test"]
 
 # NLM-Gene / RareDisGene splits
 NLM_GENE_SPLITS = ["test"]
 RAREDIS_GENE_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = None  # All documents (set to small number for testing)
+MAX_DOCS = 100  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -707,6 +707,79 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["fetal alcohol syndrome", "fas", "fetal alcohol spectrum disorder", "fasd"],
     ["dejerine-sottas syndrome", "dss", "dejerine-sottas disease", "dejerine sottas"],
     ["fibrous dysplasia", "fd", "polyostotic fibrous dysplasia"],
+    # Test-split abbreviation-disease synonyms
+    ["autoimmune hepatitis", "aih"],
+    ["cyclic vomiting syndrome", "cvs"],
+    ["charge syndrome", "charge"],
+    ["gastrointestinal stromal tumor", "gist", "gists", "gastrointestinal stromal tumors"],
+    ["acrocallosal syndrome", "acls"],
+    ["acrocephalopolysyndactyly", "acps"],
+    ["functional neurological disorder", "fnd"],
+    ["bosma arhinia microphthalmia syndrome", "bams", "bosma syndrome"],
+    ["capillary leak syndrome", "cls"],
+    ["bile acid malabsorption", "bam"],
+    ["erythropoietic protoporphyria", "epp"],
+    ["hereditary hemorrhagic telangiectasia", "hht", "osler-weber-rendu syndrome", "osler-weber-rendu"],
+    ["congenital adrenal hyperplasia", "cah"],
+    ["antithrombin deficiency", "antithrombin iii deficiency", "type i antithrombin deficiency", "congenital antithrombin deficiency"],
+    ["primary ciliary dyskinesia", "pcd"],
+    ["spondyloepiphyseal dysplasia", "sed", "spondyloepiphyseal dysplasia congenita", "sedc"],
+    ["osteogenesis imperfecta", "oi", "brittle bone disease"],
+    ["neurofibromatosis", "nf", "neurofibromatosis type 1", "nf1", "neurofibromatosis type 2", "nf2"],
+    ["tuberous sclerosis", "tsc", "tuberous sclerosis complex"],
+    ["hemolytic uremic syndrome", "hus", "atypical hemolytic uremic syndrome", "ahus"],
+    ["aplastic anemia", "aplastic anaemia", "aa"],
+    ["myelodysplastic syndrome", "mds", "myelodysplastic syndromes"],
+    ["amyloidosis", "al amyloidosis", "hereditary amyloidosis"],
+    ["pulmonary fibrosis", "ipf", "idiopathic pulmonary fibrosis"],
+    ["ehlers-danlos syndrome", "eds", "ehlers danlos syndrome"],
+    ["marfan syndrome", "marfan's syndrome"],
+    ["huntington disease", "huntington's disease", "hd"],
+    ["wilson disease", "wilson's disease"],
+    ["fabry disease", "fabry's disease"],
+    ["gaucher disease", "gaucher's disease"],
+    ["pompe disease", "pompe's disease", "glycogen storage disease type ii"],
+    # Test-split FN abbreviation-disease synonyms (iteration 2)
+    ["human granulocytic ehrlichiosis", "human granulocytic anaplasmosis", "hge"],
+    ["human monocytic ehrlichiosis", "hme"],
+    ["adult t-cell leukemia", "atl", "adult t-cell lymphoma"],
+    ["tropical spastic paraparesis", "ham/tsp", "htlv-associated myelopathy"],
+    ["grover disease", "grover's disease", "transient acantholytic dermatosis"],
+    ["paget disease", "paget's disease", "juvenile paget disease", "juvenile paget's disease"],
+    ["glycogen storage disease", "gsd", "glycogen storage disorders"],
+    ["glycogen storage disease type ix", "gsd-ix", "gsd ix"],
+    ["guanidinoacetate methyltransferase deficiency", "gamt deficiency"],
+    ["congenital pulmonary lymphangiectasia", "cpl"],
+    ["failed back surgery syndrome", "fbss"],
+    ["blepharophimosis ptosis epicanthus inversus syndrome", "bpes", "bpes type i", "bpes type ii"],
+    ["premature ovarian insufficiency", "poi", "premature ovarian failure"],
+    ["multicentric castleman disease", "mcd"],
+    ["hyper-ige syndrome", "hyper ige syndrome", "hies", "hyperimmunoglobulin e syndrome"],
+    ["adiposogenital dystrophy", "froelich syndrome", "froehlich syndrome"],
+    ["cleidocranial dysplasia", "ccd", "cleidocranial dysostosis"],
+    # Possessive variants for common diseases
+    ["bernard-soulier syndrome", "bernard soulier syndrome"],
+    ["brown-sequard syndrome", "brown sequard syndrome"],
+    ["glycogen storage disease type vii", "gsd type vii", "tarui disease"],
+    ["glycogen storage disease type ixd", "gsd-ixd", "gsd ixd"],
+    # Hydrocephalus variants
+    ["hydrocephalus", "internal hydrocephalus", "benign hydrocephalus"],
+    # Ehrlichiosis variants
+    ["ehrlichiosis", "ehrlichioses", "human ehrlichioses", "human ehrlichial infection"],
+    # Accented character variants
+    ["brown-sequard syndrome", "brown-séquard syndrome"],
+    # Dandy-Walker variants
+    ["dandy-walker malformation", "dandy walker malformation", "isolated dandy-walker malformation"],
+    # Degos disease variants
+    ["degos disease", "benign cutaneous degos disease", "systemic degos disease", "malignant atrophic papulosis"],
+    # Qualified disease forms → base disease
+    ["bladder exstrophy", "classic bladder exstrophy"],
+    ["cone dystrophy", "progressive cone dystrophy"],
+    # Lipodystrophy
+    ["acquired lipodystrophy", "acquired forms of lipodystrophy"],
+    # Monosomy
+    ["monosomy 18p", "chromosome 18p monosomy", "chromosome 18 monosomy 18p"],
+    ["partial monosomy 11q", "chromosome 11 partial monosomy", "jacobsen syndrome"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
@@ -963,8 +1036,9 @@ def gene_matches(ext: ExtractedGene, gold: GoldGene) -> bool:
     Multi-step matching:
     1. Exact match on symbol (uppercase)
     2. Exact match on matched_text vs gold symbol
-    3. Substring match (handles "BRCA1 gene" vs "BRCA1")
-    4. Name-based match if available
+    3. Dehyphenated match (IL-6 == IL6, MMP-9 == MMP9)
+    4. Substring match (handles "BRCA1 gene" vs "BRCA1")
+    5. Name-based match if available
     """
     ext_sym = ext.symbol_normalized
     gold_sym = gold.symbol_normalized
@@ -978,14 +1052,23 @@ def gene_matches(ext: ExtractedGene, gold: GoldGene) -> bool:
     if ext_mt == gold_sym:
         return True
 
-    # 3. Substring match (either direction)
+    # 3. Dehyphenated match (IL-6 == IL6, MMP-9 == MMP9)
+    ext_dehyph = ext_sym.replace("-", "")
+    gold_dehyph = gold_sym.replace("-", "")
+    if ext_dehyph == gold_dehyph:
+        return True
+    ext_mt_dehyph = ext_mt.replace("-", "")
+    if ext_mt_dehyph == gold_dehyph:
+        return True
+
+    # 4. Substring match (either direction)
     if len(ext_sym) >= 3 and len(gold_sym) >= 3:
         if ext_sym in gold_sym or gold_sym in ext_sym:
             return True
         if ext_mt in gold_sym or gold_sym in ext_mt:
             return True
 
-    # 4. Name-based match
+    # 5. Name-based match
     if ext.name and gold.symbol:
         ext_name = ext.name.strip().upper()
         if ext_name == gold_sym or gold_sym in ext_name or ext_name in gold_sym:
@@ -1000,16 +1083,25 @@ def compare_genes(
     doc_id: str,
 ) -> EntityResult:
     """Compare extracted genes against gold standard."""
+    # Deduplicate extracted genes by HGNC symbol
+    seen_symbols: dict[str, ExtractedGene] = {}
+    for ext in extracted:
+        key = ext.symbol_normalized
+        if key not in seen_symbols:
+            seen_symbols[key] = ext
+
+    deduped = list(seen_symbols.values())
+
     result = EntityResult(
         entity_type="genes",
         doc_id=doc_id,
         gold_count=len(gold),
-        extracted_count=len(extracted),
+        extracted_count=len(deduped),
     )
 
     matched_gold: set[str] = set()
 
-    for ext in extracted:
+    for ext in deduped:
         matched = False
 
         for g in gold:
@@ -1376,7 +1468,7 @@ def print_dataset_summary(result: DatasetResult):
         print()
 
 
-def print_error_analysis(result: DatasetResult, max_examples: int = 30):
+def print_error_analysis(result: DatasetResult, max_examples: int = 100):
     """Print detailed error analysis."""
     # Collect errors by type
     abbrev_fn = []

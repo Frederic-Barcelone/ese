@@ -110,6 +110,23 @@ class DiseaseFalsePositiveFilter:
         "stature", "diseases", "hypertelorism",
         "tetrasomy", "trisomy",
         "sensitivity", "localized", "trauma",
+        # Symptoms / signs (not diseases themselves)
+        "photosensitivity", "myokymia", "telangiectasia",
+        "dependence", "spasticity", "contractures",
+        "atrophy", "malformation", "malformations",
+        "anomaly", "anomalies", "deformity",
+        # Non-disease single words
+        "wound", "inborn", "monosomy", "telecanthus",
+        "arteriopathy", "fractures", "fracture",
+        "predisposition",
+        # Common abbreviations that map to diseases in lexicons but aren't diseases
+        "plan", "cgh", "csf", "cdc",
+        # Qualifiers / modifiers (not diseases themselves)
+        "unilateral", "bilateral", "inversion",
+        # Clinical signs that are too generic alone
+        "cyclopia", "trigonocephaly",
+        # Qualifiers that get expanded to diseases via lexicon
+        "late-onset",
     }
 
     # Multi-word generic terms that are not specific diseases
@@ -130,6 +147,21 @@ class DiseaseFalsePositiveFilter:
         "high blood pressure",
         "pituitary gland",
         "renal diseases", "kidney disorder",
+        # Clinical findings / malformations (not specific diseases)
+        "eyelid malformation", "facial malformation",
+        "joint contractures", "muscle atrophy",
+        "inborn errors", "inborn error",
+        # Non-disease generic phrases (confirmed FPs, not gold annotations)
+        "not rare", "crossed eyes",
+        "genetic predisposition",
+        "severe form", "severe forms",
+        "congenital defects", "congenital defect",
+        "heart malformation", "heart malformations",
+        "platelet abnormalities", "platelet abnormality",
+        "bacterial infections", "bacterial infection",
+        "hypersensitivity reactions", "hypersensitivity reaction",
+        "absence of sweating",
+        "glycogen storage diseases",
     }
 
     # Short match threshold

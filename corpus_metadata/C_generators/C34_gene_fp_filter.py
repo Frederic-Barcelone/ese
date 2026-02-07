@@ -28,6 +28,7 @@ Dependencies:
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, Optional, Set, Tuple
 
@@ -181,7 +182,7 @@ class GeneFalsePositiveFilter:
     COMMON_ENGLISH_WORDS: Set[str] = {
         # Articles, prepositions, conjunctions
         "of", "an", "as", "on", "at", "by", "to", "in", "is", "it",
-        "be", "we", "me", "he", "or", "so", "do", "go", "no", "up",
+        "be", "we", "me", "he", "or", "so", "do", "go", "no", "up", "if", "am",
         # Common verbs/nouns
         "was", "set", "can", "not", "for", "had", "has", "get", "let",
         "put", "run", "use", "see", "may", "day", "way", "say", "new",
@@ -432,8 +433,15 @@ class GeneFalsePositiveFilter:
                 return True, "common_abbreviation"
 
         # For short gene symbols (2-3 chars), require context validation
+        # Lexicon aliases (is_from_lexicon=True, is_alias=True) are curated HGNC
+        # aliases so they're trusted — only validate if in SHORT_GENES_NEED_CONTEXT
         if len(text_lower) <= 3:
-            if text_lower in self.short_genes_lower or not is_from_lexicon or is_alias:
+            needs_context = (
+                text_lower in self.short_genes_lower
+                or not is_from_lexicon
+                or (is_alias and not is_from_lexicon)
+            )
+            if needs_context:
                 is_valid, reason = self._validate_short_gene_context(text_lower, context)
                 if not is_valid:
                     return True, reason
@@ -479,15 +487,24 @@ class GeneFalsePositiveFilter:
 
         return True, ""
 
+    _KIDNEY_GFR_RE = re.compile(r"\b(?:e?gfr)\b", re.IGNORECASE)
+    _GENE_SYMBOL_RE = re.compile(r"\b[A-Z][A-Z0-9]{2,6}\b")
+
     def _is_kidney_egfr_context(self, context: str) -> bool:
         """Check if EGFR is being used as kidney function marker (eGFR)."""
         ctx_lower = context.lower()
+        # Definitive kidney context markers (not ambiguous)
         kidney_keywords = [
             "ml/min", "renal", "kidney", "creatinine", "ckd",
-            "gfr", "glomerular", "filtration", "stage",
+            "glomerular", "filtration",
             "chronic kidney", "kidney disease", "renal function",
         ]
-        return any(kw in ctx_lower for kw in kidney_keywords)
+        if any(kw in ctx_lower for kw in kidney_keywords):
+            return True
+        # Check for standalone "gfr" or "egfr" not part of gene symbols
+        # Remove all gene-like symbols (e.g. EGFR, FGFR2) before checking
+        ctx_no_genes = self._GENE_SYMBOL_RE.sub("", context)
+        return bool(self._KIDNEY_GFR_RE.search(ctx_no_genes))
 
     def _has_strong_gene_context(self, context: str) -> bool:
         """Check if context has strong gene evidence (2+ gene keywords)."""

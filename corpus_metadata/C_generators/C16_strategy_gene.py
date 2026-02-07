@@ -114,6 +114,27 @@ class GeneDetector:
         "ent", "mpo", "pr3",
         # Common English words that are gene aliases (filter at load time)
         "type", "face", "fritz", "act", "alpha", "beta", "gamma", "delta",
+        "if", "am", "minor", "impacts", "fate", "ash", "storm",
+        "of", "on", "an", "as", "can", "for", "go", "not",  # Definite articles/prepositions
+        "ii", "iii", "iv", "vi",  # Roman numerals
+        "nude", "pi", "d1",  # Common words/symbols mismatched as genes
+        "emt",  # Epithelial-mesenchymal transition (process, not gene)
+        "sma",  # Spinal muscular atrophy (disease, not gene SMN1)
+        "lca",  # Leber congenital amaurosis (disease, not gene)
+        "b1", "b2", "b3",  # Vitamin B designations
+        "cac",  # Coronary artery calcification
+        "mcp",  # Monocyte chemoattractant protein / medical abbreviation
+        "th",   # T-helper cells
+        "tf",   # Transcription factor
+        "tap",  # Various medical uses
+        "rds",  # Respiratory distress syndrome
+        # Amino acid abbreviations confused with genes
+        "arg", "his", "pro", "val", "met",
+        # Medical abbreviations commonly confused with genes
+        "cox",  # Cyclooxygenase (COX-1, COX-2) — not gene COX8A
+        "aa",   # Amino acid — not gene TEAD1
+        "inf",  # Inflammation/infinity — not gene CBLIF
+        "lqt",  # Long QT syndrome (disease) — not gene KCNQ1
         # Journal names and other common terms
         "acta",  # Journal name (Acta Otorhinolaryngol, etc.)
         # PDF line-break fragments that match gene symbols
@@ -144,10 +165,12 @@ class GeneDetector:
         # Initialize FlashText processors
         self.orphadata_processor: Optional[KeywordProcessor] = None
         self.alias_processor: Optional[KeywordProcessor] = None
+        self.name_processor: Optional[KeywordProcessor] = None
 
         # Gene metadata dictionaries
         self.orphadata_genes: Dict[str, Dict] = {}
         self.alias_genes: Dict[str, Dict] = {}
+        self.name_genes: Dict[str, Dict] = {}
 
         # Lexicon loading stats
         self._lexicon_stats: List[Tuple[str, int, str]] = []
@@ -189,7 +212,7 @@ class GeneDetector:
             skipped = 0
 
             for entry in data:
-                term = entry.get("term", "").strip()
+                term = entry.get("term", "").strip().strip('"')
                 if not term or len(term) < 2:
                     continue
 
@@ -204,7 +227,7 @@ class GeneDetector:
 
                 if source == "orphadata_hgnc":
                     # Primary gene entry
-                    self.orphadata_genes[term_key] = {
+                    gene_info = {
                         "symbol": entry.get("hgnc_symbol", term),
                         "full_name": entry.get("full_name"),
                         "hgnc_id": entry.get("hgnc_id"),
@@ -216,8 +239,29 @@ class GeneDetector:
                         "associated_diseases": entry.get("associated_diseases", []),
                         "source": "orphadata",
                     }
+                    self.orphadata_genes[term_key] = gene_info
                     orphadata_proc.add_keyword(term, term_key)
                     primary_count += 1
+
+                    # Auto-add hyphenated form for symbols like IL6→IL-6
+                    hyphen_form = self._make_hyphenated(term)
+                    if hyphen_form:
+                        hf_key = hyphen_form.lower()
+                        if hf_key not in self.alias_genes and hf_key != term_key:
+                            self.alias_genes[hf_key] = {
+                                "symbol": gene_info["symbol"],
+                                "alias_term": hyphen_form,
+                                "full_name": gene_info.get("full_name"),
+                                "hgnc_id": gene_info.get("hgnc_id"),
+                                "entrez_id": gene_info.get("entrez_id"),
+                                "ensembl_id": gene_info.get("ensembl_id"),
+                                "omim_id": gene_info.get("omim_id"),
+                                "uniprot_id": gene_info.get("uniprot_id"),
+                                "locus_type": gene_info.get("locus_type"),
+                                "source": "hgnc_alias",
+                            }
+                            alias_proc.add_keyword(hyphen_form, hf_key)
+                            alias_count += 1
 
                 elif source == "hgnc_alias":
                     # Alias entry
@@ -237,14 +281,85 @@ class GeneDetector:
                     alias_proc.add_keyword(term, term_key)
                     alias_count += 1
 
+            # Add common protein name aliases not in HGNC data
+            EXTRA_ALIASES = {
+                "E-cadherin": "CDH1",
+                "N-cadherin": "CDH2",
+                "P-cadherin": "CDH3",
+                "TGF-beta1": "TGFB1",
+                "TGF-beta2": "TGFB2",
+                "TGF-beta 1": "TGFB1",
+                "TGF-beta 2": "TGFB2",
+                "interferon-gamma": "IFNG",
+                "interferon gamma": "IFNG",
+                "IFN-gamma": "IFNG",
+            }
+            for alias_term, symbol in EXTRA_ALIASES.items():
+                alias_key = alias_term.lower()
+                if alias_key not in self.alias_genes:
+                    gene_info_ref = self.orphadata_genes.get(symbol.lower(), {})
+                    if gene_info_ref:
+                        self.alias_genes[alias_key] = {
+                            "symbol": symbol,
+                            "alias_term": alias_term,
+                            "full_name": gene_info_ref.get("full_name"),
+                            "hgnc_id": gene_info_ref.get("hgnc_id"),
+                            "entrez_id": gene_info_ref.get("entrez_id"),
+                            "ensembl_id": gene_info_ref.get("ensembl_id"),
+                            "omim_id": gene_info_ref.get("omim_id"),
+                            "uniprot_id": gene_info_ref.get("uniprot_id"),
+                            "locus_type": gene_info_ref.get("locus_type"),
+                            "source": "hgnc_alias",
+                        }
+                        alias_proc.add_keyword(alias_term, alias_key)
+                        alias_count += 1
+
             if skipped > 0:
                 logger.debug("Skipped %d blacklisted gene terms", skipped)
+
+            # Build gene full name processor (Layer 3)
+            name_proc = KeywordProcessor(case_sensitive=False)
+            name_count = 0
+            for entry in data:
+                if entry.get("source") != "orphadata_hgnc":
+                    continue
+                full_name = entry.get("full_name", "").strip()
+                symbol = entry.get("hgnc_symbol", "")
+                if not full_name or not symbol:
+                    continue
+                # Skip if name is same as symbol (already matched by primary)
+                if full_name.upper() == symbol.upper():
+                    continue
+                # Skip very short names (< 6 chars) to avoid FPs
+                if len(full_name) < 6:
+                    continue
+                name_key = full_name.lower()
+                if name_key not in self.name_genes:
+                    gene_info_ref = self.orphadata_genes.get(symbol.lower(), {})
+                    self.name_genes[name_key] = {
+                        "symbol": symbol,
+                        "full_name": full_name,
+                        "hgnc_id": entry.get("hgnc_id"),
+                        "entrez_id": entry.get("entrez_id"),
+                        "ensembl_id": entry.get("ensembl_id"),
+                        "omim_id": entry.get("omim_id"),
+                        "uniprot_id": entry.get("uniprot_id"),
+                        "locus_type": entry.get("locus_type"),
+                        "associated_diseases": gene_info_ref.get("associated_diseases", []),
+                        "source": "gene_full_name",
+                    }
+                    name_proc.add_keyword(full_name, name_key)
+                    name_count += 1
+            self.name_processor = name_proc
 
             self._lexicon_stats.append(
                 ("Orphadata genes", primary_count, "2025_08_orphadata_genes.json")
             )
             self._lexicon_stats.append(
                 ("HGNC aliases", alias_count, "2025_08_orphadata_genes.json")
+            )
+            self._lexicon_stats.append(
+                ("Gene full names", name_count, "2025_08_orphadata_genes.json")
             )
 
         except Exception as e:
@@ -338,7 +453,22 @@ class GeneDetector:
                 )
             )
 
-        # Layer 3: Gene symbol patterns with context validation
+        # Layer 3: Gene full name matching (e.g. "interleukin 6" → IL6)
+        if self.name_processor:
+            candidates.extend(
+                self._detect_with_lexicon(
+                    full_text,
+                    doc_graph,
+                    doc_fingerprint,
+                    self.name_processor,
+                    self.name_genes,
+                    GeneGeneratorType.LEXICON_HGNC_ALIAS,
+                    "2025_08_orphadata_genes.json",
+                    is_primary=False,
+                )
+            )
+
+        # Layer 4: Gene symbol patterns with context validation
         # DISABLED: Causes too many false positives - the lexicon coverage is sufficient
         # for rare disease genes. Uncomment if you need pattern-based detection.
         # candidates.extend(
@@ -589,6 +719,17 @@ class GeneDetector:
 
         return candidates
 
+    # Regex for gene symbols that benefit from hyphenated forms (e.g. IL6→IL-6)
+    _HYPHEN_PATTERN = re.compile(r"^([A-Z]{1,4})(\d+)([A-Z]?)$")
+
+    def _make_hyphenated(self, symbol: str) -> Optional[str]:
+        """Generate hyphenated form for gene symbols like IL6→IL-6, MMP9→MMP-9."""
+        m = self._HYPHEN_PATTERN.match(symbol)
+        if m:
+            prefix, digits, suffix = m.groups()
+            return f"{prefix}-{digits}{suffix}"
+        return None
+
     def _extract_context(self, text: str, start: int, end: int) -> str:
         """Extract context window around match."""
         ctx_start = max(0, start - self.context_window // 2)
@@ -635,7 +776,8 @@ class GeneDetector:
         seen: Dict[str, GeneCandidate] = {}
 
         for candidate in candidates:
-            key = candidate.matched_text.lower()
+            # Deduplicate by HGNC symbol to avoid duplicates from aliases
+            key = candidate.hgnc_symbol.upper() if candidate.hgnc_symbol else candidate.matched_text.lower()
 
             if key not in seen:
                 seen[key] = candidate
