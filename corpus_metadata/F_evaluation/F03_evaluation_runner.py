@@ -86,7 +86,7 @@ RAREDIS_GENE_GOLD = BASE_PATH / "gold_data" / "raredis_gene_gold.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)

@@ -162,6 +162,9 @@ class DiseaseFalsePositiveFilter:
         "hypersensitivity reactions", "hypersensitivity reaction",
         "absence of sweating",
         "glycogen storage diseases",
+        # Generic disease categories (not specific diseases)
+        "bone disorder", "bone disorders",
+        "infectious diseases", "infectious disease",
     }
 
     # Short match threshold
