@@ -25,16 +25,11 @@ Gold standard annotations are stored in the `gold_data/` directory:
 gold_data/
   papers_gold_v2.json        # Papers dataset (abbreviations)
   nlp4rare_gold.json         # NLP4RARE dataset (abbreviations, diseases, genes)
-  golden_bc2gm.json          # BioCreative II GM dataset (genes)
   PAPERS/                    # PDF files for the papers dataset
   NLP4RARE/                  # PDF files for NLP4RARE (dev/test/train splits)
     dev/
     test/
     train/
-  bc2gm/                     # BioCreative II GM gene mention corpus
-    generate_bc2gm_gold.py   # Gold generation script
-    corpus/                  # Downloaded corpus (gitignored)
-    pdfs/                    # Generated PDFs (gitignored)
   CADEC/                     # CADEC drug adverse event corpus
     generate_cadec_gold.py   # Gold generation script
     evaluate_cadec_drugs.py  # CADEC-specific drug evaluation
@@ -111,9 +106,10 @@ Edit the configuration section at the top of `F03_evaluation_runner.py`:
 
 ```python
 # Which datasets to run
-RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
-RUN_PAPERS = True      # Papers in gold_data/PAPERS/
-RUN_BC2GM = True        # BioCreative II GM gene mention corpus
+RUN_NLP4RARE = True        # NLP4RARE annotated rare disease corpus
+RUN_PAPERS = True          # Papers in gold_data/PAPERS/
+RUN_NLM_GENE = False       # NLM-Gene corpus (PubMed gene annotations)
+RUN_RAREDIS_GENE = False   # RareDisGene (rare disease gene-disease associations)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True
@@ -121,8 +117,10 @@ EVAL_DISEASES = True
 EVAL_GENES = True
 EVAL_DRUGS = True
 
-# NLP4RARE splits to include
+# Splits to include
 NLP4RARE_SPLITS = ["dev", "test", "train"]
+NLM_GENE_SPLITS = ["test"]
+RAREDIS_GENE_SPLITS = ["test"]
 
 # Limit documents (None = all)
 MAX_DOCS = None
@@ -188,7 +186,7 @@ scorer.print_corpus_summary(corpus_report)
 
 **Drug matching** compares drug names via exact, substring, fuzzy (0.8 threshold), and brand/generic equivalence (e.g., acetaminophen ↔ Tylenol). CADEC uses a standalone evaluator (`evaluate_cadec_drugs.py`) with the same matching logic.
 
-**Gene matching** uses multi-step comparison: exact symbol match (uppercase), matched text vs gold symbol, substring match (min 3 chars), and name-based matching. See [Gene Evaluation](06_gene_evaluation.md) for details.
+**Gene matching** uses multi-step comparison: exact symbol match (uppercase), matched text vs gold symbol, substring match (min 3 chars), and name-based matching.
 
 ## Score Report
 
@@ -250,9 +248,10 @@ The evaluation runner reports metrics separately for abbreviations, diseases, an
 | Benchmark | Entity | Docs | P | R | F1 | Perfect | Status |
 |-----------|--------|------|---|---|----|---------|--------|
 | CADEC (social media) | Drugs | 311 | 93.5% | 92.9% | 93.2% | 91.3% | Production-ready |
-| BC2GM (PubMed) | Genes | 100 | 90.3% | 12.3% | 21.7% | 4.0% | Validated methodology |
 | NLP4RARE (rare disease) | Diseases | 1,040 | 77.0% | 74.4% | 75.7% | 30.3% | Active improvement |
 | NLP4RARE (rare disease) | Abbreviations | 1,040 | 46.8% | 88.0% | 61.1% | -- | Active improvement |
+| NLM-Gene (PubMed) | Genes | 290 | -- | -- | -- | -- | New benchmark |
+| RareDisGene (rare disease) | Genes | 3,976 | -- | -- | -- | -- | New benchmark |
 
 ### Running Each Benchmark
 
@@ -262,30 +261,37 @@ cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
 # Configure: RUN_NLP4RARE=True, NLP4RARE_SPLITS=["dev","test","train"]
 ```
 
-**BC2GM** (genes):
-```bash
-cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
-# Configure: RUN_BC2GM=True
-# Requires: gold_data/bc2gm/corpus/ and gold_data/bc2gm/pdfs/ (see Gene Evaluation guide)
-```
-
-**CADEC** (drugs — standalone evaluator):
+**CADEC** (drugs -- standalone evaluator):
 ```bash
 cd corpus_metadata && python ../gold_data/CADEC/evaluate_cadec_drugs.py --split=test
 # Options: --split=test|train|all, --max-docs=N, --seqeval
+```
+
+**NLM-Gene** (genes from PubMed abstracts):
+```bash
+cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
+# Configure: RUN_NLM_GENE=True, NLM_GENE_SPLITS=["test"], MAX_DOCS=10
+```
+
+**RareDisGene** (genes from rare disease associations):
+```bash
+cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
+# Configure: RUN_RAREDIS_GENE=True, RAREDIS_GENE_SPLITS=["test"], MAX_DOCS=10
 ```
 
 ### Benchmark Details
 
 **CADEC**: Social media adverse drug event corpus (AskaPatient forums). 1,248 documents (937 train, 311 test), 1,198 drug annotations. Evaluates drug detection with brand/generic equivalence mapping (30+ pairs: acetaminophen/Tylenol, atorvastatin/Lipitor, etc.).
 
-**BC2GM**: BioCreative II Gene Mention benchmark. 5,000 PubMed sentences, 6,331 gene annotations. The 12.3% recall reflects deliberate scope — the pipeline targets HGNC symbols, not all gene/protein mentions. See [Gene Evaluation](06_gene_evaluation.md) for details.
-
 **NLP4RARE**: Rare disease corpus with BRAT annotations (UC3M). 2,311 PDFs across dev/test/train splits. Evaluates abbreviations (242 gold pairs), diseases (4,123 gold annotations across RAREDISEASE, DISEASE, SKINRAREDISEASE types), and genes (not annotated in this corpus).
 
+**NLM-Gene**: NLM-Gene BioC XML corpus filtered to annotations matching the pipeline's Entrez-HGNC mapping. 550 PubMed abstracts (100 test, 450 train), 1,266 gene annotations across 290 documents with genes.
+
+**RareDisGene**: Gene-RD-Provenance V2 from Figshare (CC0). 4,725 gene-disease associations filtered to pipeline lexicon. 3,976 PMIDs (796 test, 3,181 train), 4,117 annotations. Perfect domain fit for rare disease gene discovery.
+
 For detailed per-benchmark analysis, see:
-- [Gene Evaluation](06_gene_evaluation.md) for BC2GM methodology and FP/FN analysis
 - [Drug Evaluation](07_drug_evaluation.md) for CADEC improvement trajectory and error patterns
+- [Gene Evaluation](06_gene_evaluation.md) for NLM-Gene and RareDisGene benchmark details
 
 ## Creating Gold Standard Annotations
 

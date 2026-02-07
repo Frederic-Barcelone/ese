@@ -1,15 +1,69 @@
 # Gene Detection Evaluation
 
-## Current Status: Rock Solid Foundation
+## Benchmarks
 
-The gene detection pipeline has been validated against the BioCreative II Gene Mention (BC2GM) benchmark, confirming the design intent: strict HGNC symbol extraction with perfect precision.
+Two gene benchmarks evaluate the pipeline's HGNC symbol extraction:
 
-| Benchmark | Docs | P | R | F1 | Status |
-|-----------|------|---|---|----|----|
-| CADEC drugs (social media) | 311 | 93.5% | 92.9% | 93.2% | Production-ready |
-| BC2GM genes (PubMed) | 100 | 90.3% | 12.3% | 21.7% | Validated methodology |
+| Benchmark | Source | Annotations | Docs | Domain |
+|-----------|--------|-------------|------|--------|
+| **NLM-Gene** | NLM-Gene BioC XML corpus | 1,266 | 290 | General biomedical (PubMed) |
+| **RareDisGene** | Figshare Gene-RD-Provenance V2 | 4,117 | 3,976 | Rare disease gene-disease associations |
 
-The 12.3% recall is not a bug -- it reflects the deliberate scope of the pipeline. BC2GM annotates all gene/protein mentions (e.g. "hemoglobin", "DNA-PK", "plasma insulin"), while the ESE pipeline focuses on HGNC-approved gene symbols. The 90.3% precision confirms near-zero false positives: when the pipeline says something is a gene, it is almost always correct (3 FPs across 100 docs, all short ambiguous symbols).
+Both benchmarks use HGNC symbols as the gold standard, matching the pipeline's extraction target. The previous benchmark (BioCreative II GM) was removed because it annotated broad gene/protein names rather than HGNC symbols (only 6.3% schema match).
+
+### Benchmark A: NLM-Gene
+
+**Source:** NLM-Gene corpus (550 BioC XML files from PubMed abstracts)
+
+**Filtering:**
+- Only `type=Gene` annotations (excludes GENERIF, STARGENE, Other, Domain)
+- Excludes `code=222` (family names: "cytokine", "transcription factor")
+- Excludes `code=333` (non-specific: "IFN")
+- Only annotations with NCBI Gene IDs mapping to HGNC via Orphadata
+- Deduplicated: unique (doc_id, HGNC symbol) pairs per document
+
+**Splits:** 100 test / 450 train PMIDs (pre-defined by corpus)
+
+**Gold generation:**
+```bash
+python gold_data/nlm_gene/generate_nlm_gene_gold.py
+python gold_data/nlm_gene/generate_nlm_gene_gold.py --split=test --no-pdf
+```
+
+### Benchmark B: RareDisGene
+
+**Source:** Gene-RD-Provenance V2 from Figshare (CC0 license)
+- 4,725 gene-disease associations with HGNC symbols linked to rare diseases via PubMed IDs
+- Filtered to symbols in pipeline lexicon (~4,100 Orphadata genes)
+
+**Gold standard:** For PMID X, the pipeline should find gene Y (HGNC symbol from TSV).
+
+**Splits:** 80/20 train/test (seed=42), ~796 test / ~3,181 train PMIDs
+
+**Gold generation:**
+```bash
+python gold_data/raredis_gene/generate_raredis_gene_gold.py
+python gold_data/raredis_gene/generate_raredis_gene_gold.py --max-docs=50 --no-pdf
+```
+
+## Running Evaluation
+
+Edit `F_evaluation/F03_evaluation_runner.py` configuration:
+
+```python
+RUN_NLM_GENE = True       # Enable NLM-Gene benchmark
+RUN_RAREDIS_GENE = True   # Enable RareDisGene benchmark
+NLM_GENE_SPLITS = ["test"]
+RAREDIS_GENE_SPLITS = ["test"]
+MAX_DOCS = 10             # Small batch for testing
+```
+
+Then run:
+```bash
+cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
+```
+
+**Important:** Revert `RUN_NLM_GENE` and `RUN_RAREDIS_GENE` to `False` and `MAX_DOCS` to `None` after evaluation.
 
 ## Pipeline Architecture
 
@@ -21,107 +75,21 @@ C_generators/C34_gene_fp_filter.py   -> False positive filtering
 E_normalization/                     -> HGNC symbol normalization
 ```
 
-The gene generator uses FlashText lexicon matching against HGNC-approved symbols and names, supplemented by scispaCy biomedical NER. Candidates are filtered through the gene FP filter and validated via LLM before export.
+The gene generator uses FlashText lexicon matching against HGNC-approved symbols and names from the Orphadata gene-disease association dataset. Candidates are filtered through the gene FP filter (context-aware short symbol handling, common abbreviation filtering) and validated via LLM before export.
 
-## Gold Standard: BioCreative II GM
+### FlashText Layers
 
-### Why BC2GM
+| Layer | Terms | Source |
+|-------|-------|--------|
+| Orphadata genes | ~4,100 | `ouput_datasources/2025_08_orphadata_genes.json` |
+| HGNC aliases | ~9,000 | Same file (hgnc_alias entries) |
 
-BC2GM replaced NLM-Gene as the gene evaluation benchmark. NLM-Gene annotated broad multi-species gene mentions (proteins, cytokines, immune cell types, CD markers) which had a fundamental schema mismatch with the HGNC-focused pipeline -- yielding P=100%, R=23.4%.
+### Gene FP Filter (C34)
 
-BC2GM annotates gene/protein names and symbols from PubMed abstracts, which aligns better with what the pipeline extracts.
-
-| Aspect | NLM-Gene (removed) | BioCreative II GM (current) |
-|--------|--------------------|-----------------------------|
-| Focus | Broad multi-species gene mentions | Gene/protein names and symbols |
-| Entities | Proteins, cytokines, cell types | Gene names, protein names, symbols |
-| Format | BioC XML (required `bioc` library) | Pipe-delimited text (no dependencies) |
-| Size | 550 abstracts | 5,000 test sentences |
-| Schema fit | Poor (23% recall) | Better (25% recall, cleaner signal) |
-
-### Corpus Details
-
-- **Source**: [spyysalo/bc2gm-corpus](https://github.com/spyysalo/bc2gm-corpus) (BioCreative II Gene Mention task)
-- **Test set**: 5,000 PubMed sentences with 6,331 gene annotations
-- **Format**: `test.in` (sentences) + `GENE.eval` (character-offset annotations)
-- **Deduplication**: Gene mentions are deduplicated per sentence by lowercased text
-- **PDFs**: Each sentence is rendered as a single-page PDF for pipeline processing
-
-### File Layout
-
-```
-gold_data/
-  golden_bc2gm.json              # Generated gold standard (F03 format)
-  bc2gm/
-    generate_bc2gm_gold.py       # Gold generation script
-    corpus/                      # Downloaded corpus (gitignored)
-      test.in                    # 5,000 test sentences
-      GENE.eval                  # 6,331 gene annotations
-    pdfs/                        # Generated PDFs (gitignored)
-```
-
-### Gold Generation
-
-```bash
-# Generate gold for all annotated sentences
-python gold_data/bc2gm/generate_bc2gm_gold.py
-
-# Generate gold for first 100 sentences (quick testing)
-python gold_data/bc2gm/generate_bc2gm_gold.py --max 100
-```
-
-This parses the corpus files, generates single-page PDFs, and outputs `golden_bc2gm.json` in F03's expected format.
-
-### Running Evaluation
-
-Edit `F03_evaluation_runner.py` configuration:
-
-```python
-RUN_NLP4RARE = False
-RUN_BC2GM = True
-MAX_DOCS = 3       # Start small, then increase
-```
-
-Then run:
-
-```bash
-cd corpus_metadata && python F_evaluation/F03_evaluation_runner.py
-```
-
-Remember to revert config to defaults after evaluation runs.
-
-## Full Run Results (100 docs)
-
-| Metric | Value |
-|--------|-------|
-| Precision | 90.3% |
-| Recall | 12.3% |
-| F1 | 21.7% |
-| TP | 28 |
-| FP | 3 |
-| FN | 199 |
-| Perfect docs | 4/100 |
-
-### FN Analysis (199 missed)
-
-The vast majority of false negatives are gene/protein mentions outside the HGNC symbol scope:
-
-| Category | Examples | Count |
-|----------|----------|-------|
-| Protein names | hemoglobin, procollagen, haptoglobin | ~60% |
-| Gene family names | MAPK, SMADs, Raf-1 | ~15% |
-| Receptor/enzyme names | GnRH, DNA-PK, hyaluronidase | ~15% |
-| Short symbols | Abl, COR, C1q | ~10% |
-
-### FP Analysis (3 false positives)
-
-| FP Gene | Reason |
-|---------|--------|
-| CAT | HGNC symbol for catalase, but used as common abbreviation in context |
-| BCR | HGNC symbol for breakpoint cluster region, ambiguous in context |
-| C3 | HGNC symbol for complement C3, ambiguous in context |
-
-All 3 FPs are legitimate HGNC symbols that happen to appear in non-gene contexts. This is the expected failure mode for a lexicon-based approach with short symbols.
+The filter handles gene symbol ambiguity:
+- **Always-filter terms**: Statistical (OR, HR, CI), units (MM, KG), clinical (IV, ICU, CT), countries (US, UK), credentials (MD, PhD), drug terms (ACE, NSAID)
+- **Short gene context**: Genes <= 3 characters require gene context keywords (mutation, variants, genetic)
+- **Special handling**: EGFR/eGFR disambiguation, antibody terms (ANA, ACPA), disease abbreviation overlap
 
 ## Gene Matching in F03
 
@@ -131,52 +99,6 @@ The evaluation uses multi-step matching via `gene_matches()`:
 2. **Matched text vs gold symbol** -- Raw extracted text against gold
 3. **Substring match** -- Handles "BRCA1 gene" vs "BRCA1" (min 3 chars)
 4. **Name-based match** -- Full gene name vs gold symbol
-
-## Interpretation
-
-The 90.3% precision / 12.3% recall profile tells us:
-
-1. **The pipeline rarely hallucinates genes.** 90%+ precision with only 3 FPs across 100 docs.
-2. **Recall is bounded by design scope.** The pipeline targets HGNC symbols, not all gene/protein mentions in biomedical text.
-3. **The evaluation workflow works.** The clone-gold-evaluate-iterate cycle is validated.
-4. **The schema mismatch is confirmed at scale.** BC2GM annotates protein names (hemoglobin, DNA-PK, procollagen) while the pipeline extracts HGNC symbols -- these are fundamentally different tasks.
-
-### What 12.3% Recall Means in Practice
-
-On rare disease clinical documents (the actual target), recall is likely much higher because:
-- Clinical documents mention genes by their HGNC symbols (BRCA1, CFTR, DMD)
-- BC2GM includes many informal protein names that clinical docs don't use
-- The HGNC lexicon covers the gene symbols that matter for rare disease research
-
-## Paths Forward
-
-### Path 1: Accept and Document (recommended)
-
-The gene pipeline is validated: strict HGNC extraction with 90.3% precision at scale. The 12.3% recall on BC2GM reflects deliberate scope, not a deficiency. This is the right profile for a pipeline that feeds into clinical decision support, where false positives are far more costly than missed mentions.
-
-### Path 2: Schema-Aligned Gold
-
-Create a custom gold set by re-annotating 50 BC2GM sentences with only HGNC symbols. This would give a true recall measurement for the pipeline's intended scope, likely yielding 85-95% F1.
-
-### Path 3: Short Symbol FP Filter
-
-The 3 FPs (CAT, BCR, C3) are all short HGNC symbols used as common abbreviations. A context-aware filter for 2-3 character gene symbols could push precision back to ~100%.
-
-## Replicating the Gold Standard Workflow
-
-The BC2GM setup demonstrates the reusable pattern for adding benchmarks to any entity type:
-
-```
-1. Find public annotated corpus
-2. Write generate_*_gold.py (parse corpus → PDFs + gold JSON)
-3. Wire into F03 (load function + evaluation block)
-4. Run baseline → analyze FN/FP → iterate
-```
-
-This same workflow was used for:
-- **NLP4RARE** (diseases): BRAT annotations from rare disease corpus
-- **CADEC** (drugs): Social media adverse drug event corpus
-- **BC2GM** (genes): PubMed gene mention corpus
 
 ## Related Documentation
 

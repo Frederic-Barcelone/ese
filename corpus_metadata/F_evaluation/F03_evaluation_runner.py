@@ -72,6 +72,14 @@ NLP4RARE_GOLD = BASE_PATH / "gold_data" / "nlp4rare_gold.json"
 PAPERS_PATH = BASE_PATH / "gold_data" / "PAPERS"
 PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 
+# NLM-Gene paths
+NLM_GENE_PATH = BASE_PATH / "gold_data" / "nlm_gene" / "pdfs"
+NLM_GENE_GOLD = BASE_PATH / "gold_data" / "nlm_gene_gold.json"
+
+# RareDisGene paths
+RAREDIS_GENE_PATH = BASE_PATH / "gold_data" / "raredis_gene" / "pdfs"
+RAREDIS_GENE_GOLD = BASE_PATH / "gold_data" / "raredis_gene_gold.json"
+
 # -----------------------------------------------------------------------------
 # EVALUATION SETTINGS - Change these to control what gets evaluated
 # -----------------------------------------------------------------------------
@@ -79,6 +87,8 @@ PAPERS_GOLD = BASE_PATH / "gold_data" / "papers_gold_v2.json"
 # Which datasets to run (set to False to skip)
 RUN_NLP4RARE = True   # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
+RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
+RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
@@ -88,6 +98,10 @@ EVAL_DRUGS = True           # Drug entities (when gold available)
 
 # NLP4RARE subfolders to include (all by default)
 NLP4RARE_SPLITS = ["dev", "test", "train"]
+
+# NLM-Gene / RareDisGene splits
+NLM_GENE_SPLITS = ["test"]
+RAREDIS_GENE_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
 MAX_DOCS = None  # All documents (set to small number for testing)
@@ -522,6 +536,62 @@ def load_papers_gold(gold_path: Path) -> dict:
             name=ann["name"],
         )
         result["drugs"].setdefault(entry_dr.doc_id, []).append(entry_dr)
+
+    return result
+
+
+def load_nlm_gene_gold(gold_path: Path, splits: Optional[List[str]] = None) -> dict:
+    """Load NLM-Gene gold standard (gene annotations only).
+
+    If splits is provided, only include annotations from those splits.
+    """
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {}}
+
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} NLM-Gene gold not found: {gold_path}")
+        return result
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    gene_data = data.get("genes", {})
+    for ann in gene_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry = GoldGene(
+            doc_id=ann["doc_id"],
+            symbol=ann["symbol"],
+            name=ann.get("name"),
+            ncbi_gene_id=ann.get("ncbi_gene_id"),
+        )
+        result["genes"].setdefault(entry.doc_id, []).append(entry)
+
+    return result
+
+
+def load_raredis_gene_gold(gold_path: Path, splits: Optional[List[str]] = None) -> dict:
+    """Load RareDisGene gold standard (gene annotations only).
+
+    If splits is provided, only include annotations from those splits.
+    """
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {}}
+
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} RareDisGene gold not found: {gold_path}")
+        return result
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    gene_data = data.get("genes", {})
+    for ann in gene_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry = GoldGene(
+            doc_id=ann["doc_id"],
+            symbol=ann["symbol"],
+        )
+        result["genes"].setdefault(entry.doc_id, []).append(entry)
 
     return result
 
@@ -1480,9 +1550,15 @@ def main():
     print("\n  Configuration:")
     print(f"    NLP4RARE:     {'enabled' if RUN_NLP4RARE else 'disabled'}")
     print(f"    Papers:       {'enabled' if RUN_PAPERS else 'disabled'}")
+    print(f"    NLM-Gene:     {'enabled' if RUN_NLM_GENE else 'disabled'}")
+    print(f"    RareDisGene:  {'enabled' if RUN_RAREDIS_GENE else 'disabled'}")
     print(f"    Max docs:     {MAX_DOCS if MAX_DOCS else 'all'}")
     if RUN_NLP4RARE:
-        print(f"    Splits:       {', '.join(NLP4RARE_SPLITS)}")
+        print(f"    NLP4RARE splits: {', '.join(NLP4RARE_SPLITS)}")
+    if RUN_NLM_GENE:
+        print(f"    NLM-Gene splits: {', '.join(NLM_GENE_SPLITS)}")
+    if RUN_RAREDIS_GENE:
+        print(f"    RareDisGene splits: {', '.join(RAREDIS_GENE_SPLITS)}")
     print("\n  Entity types:")
     print(f"    Abbreviations: {'enabled' if EVAL_ABBREVIATIONS else 'disabled'}")
     print(f"    Diseases:      {'enabled' if EVAL_DISEASES else 'disabled'}")
@@ -1523,6 +1599,40 @@ def main():
                 gold_data=gold_data,
                 orch=orch,
                 max_docs=MAX_DOCS,
+            )
+            print_dataset_summary(result)
+            print_error_analysis(result)
+            results.append(result)
+
+    # Evaluate NLM-Gene
+    if RUN_NLM_GENE and NLM_GENE_PATH.exists():
+        gold_data = load_nlm_gene_gold(NLM_GENE_GOLD, splits=NLM_GENE_SPLITS)
+        has_gold = any(gold_data[k] for k in gold_data)
+        if has_gold:
+            result = evaluate_dataset(
+                name="NLM-Gene",
+                pdf_folder=NLM_GENE_PATH,
+                gold_data=gold_data,
+                orch=orch,
+                max_docs=MAX_DOCS,
+                splits=NLM_GENE_SPLITS,
+            )
+            print_dataset_summary(result)
+            print_error_analysis(result)
+            results.append(result)
+
+    # Evaluate RareDisGene
+    if RUN_RAREDIS_GENE and RAREDIS_GENE_PATH.exists():
+        gold_data = load_raredis_gene_gold(RAREDIS_GENE_GOLD, splits=RAREDIS_GENE_SPLITS)
+        has_gold = any(gold_data[k] for k in gold_data)
+        if has_gold:
+            result = evaluate_dataset(
+                name="RareDisGene",
+                pdf_folder=RAREDIS_GENE_PATH,
+                gold_data=gold_data,
+                orch=orch,
+                max_docs=MAX_DOCS,
+                splits=RAREDIS_GENE_SPLITS,
             )
             print_dataset_summary(result)
             print_error_analysis(result)
@@ -1572,4 +1682,6 @@ __all__ = [
     "evaluate_dataset",
     "load_nlp4rare_gold",
     "load_papers_gold",
+    "load_nlm_gene_gold",
+    "load_raredis_gene_gold",
 ]
