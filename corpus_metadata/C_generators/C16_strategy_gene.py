@@ -128,6 +128,9 @@ class GeneDetector:
         "tf",   # Transcription factor
         "tap",  # Various medical uses
         "rds",  # Respiratory distress syndrome
+        "hk2",  # Hexokinase 2 (different gene, not alias for KCNA5)
+        "gata",  # GATA transcription factor family
+        "iap",  # Inhibitor of apoptosis proteins (ambiguous)
         # Amino acid abbreviations confused with genes
         "arg", "his", "pro", "val", "met",
         # Medical abbreviations commonly confused with genes
@@ -293,6 +296,8 @@ class GeneDetector:
                 "interferon-gamma": "IFNG",
                 "interferon gamma": "IFNG",
                 "IFN-gamma": "IFNG",
+                "alpha-SMA": "ACTA2",
+                "alpha-smooth muscle actin": "ACTA2",
             }
             for alias_term, symbol in EXTRA_ALIASES.items():
                 alias_key = alias_term.lower()
