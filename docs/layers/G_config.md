@@ -1,111 +1,76 @@
-# G_config -- Pipeline Configuration
+# Layer G: Pipeline Configuration
 
 ## Purpose
 
-Layer G centralizes all pipeline parameters in a single YAML configuration file and provides type-safe configuration key enums that prevent typos, enable IDE autocomplete, and document defaults.
+Centralizes all pipeline parameters in a single YAML file with type-safe config key enums. 2 modules (`G01_config_keys.py`, `config.yaml`).
+
+---
 
 ## Modules
 
 ### G01_config_keys.py
 
-Type-safe configuration key enums with default values and descriptions.
+Type-safe enums inheriting from `ConfigKeyBase` with `.default` and `.description` properties.
 
-**Base class:**
-
-- `ConfigKeyBase(str, Enum)` -- Inherits from `str` for direct use as dictionary keys. Each member has `.default` and `.description` properties.
-
-**Enum classes:**
-
-| Class | Scope | Example keys |
-|-------|-------|-------------|
-| `ConfigKey` | Top-level keys | `RUN_ID`, `CONTEXT_WINDOW(300)`, `TIMEOUT_SECONDS(30)`, `PATHS`, `API`, `HEURISTICS`, `GENERATORS` |
-| `CacheConfig` | Cache section | `ENABLED(True)`, `DIRECTORY("cache")`, `TTL_HOURS(24)`, `TTL_DAYS(30)` |
-| `ParserConfig` | PDF parsing | `EXTRACTION_METHOD("unstructured")`, `HI_RES_MODEL_NAME("yolox")`, `INFER_TABLE_STRUCTURE(True)` |
-| `GeneratorConfig` | Candidate generation | `MIN_SF_LENGTH(2)`, `MAX_SF_LENGTH(10)`, `CONTEXT_WINDOW_CHARS(400)`, `MAX_CANDIDATES_PER_BLOCK(200)` |
-| `EnricherConfig` | Normalization | `FUZZY_CUTOFF(0.90)`, `FILL_LONG_FORM_FOR_ORPHANS(True)`, `ENRICH_MISSING_MESH(True)` |
-| `PipelineConfig` | Extraction pipeline | `USE_LLM_VALIDATION(True)`, `USE_VLM_TABLES(False)`, `USE_NORMALIZATION(True)` |
-| `LLMConfig` | LLM settings | `MODEL("claude-sonnet-4-20250514")`, `TEMPERATURE(0.0)`, `MAX_TOKENS(4096)` |
-
-**Helper functions:**
+| Class | Example keys |
+|-------|-------------|
+| `ConfigKey` | `RUN_ID`, `CONTEXT_WINDOW(300)`, `TIMEOUT_SECONDS(30)`, `PATHS`, `API` |
+| `CacheConfig` | `ENABLED(True)`, `DIRECTORY("cache")`, `TTL_HOURS(24)` |
+| `ParserConfig` | `EXTRACTION_METHOD("unstructured")`, `HI_RES_MODEL_NAME("yolox")` |
+| `GeneratorConfig` | `MIN_SF_LENGTH(2)`, `MAX_SF_LENGTH(10)`, `CONTEXT_WINDOW_CHARS(400)` |
+| `EnricherConfig` | `FUZZY_CUTOFF(0.90)`, `ENRICH_MISSING_MESH(True)` |
+| `PipelineConfig` | `USE_LLM_VALIDATION(True)`, `USE_VLM_TABLES(False)` |
+| `LLMConfig` | `MODEL("claude-sonnet-4-20250514")`, `TEMPERATURE(0.0)`, `MAX_TOKENS(4096)` |
 
 ```python
 from G_config.G01_config_keys import get_config, get_nested_config, ConfigKey, CacheConfig
-
 value = get_config(config, ConfigKey.TIMEOUT_SECONDS)
 ttl = get_nested_config(config, ConfigKey.CACHE, CacheConfig.TTL_HOURS)
 ```
 
 ### config.yaml
 
-Complete pipeline configuration (v15.0, ~1041 lines). All parameters read from this file; no hardcoded values in scripts.
-
-**Major sections:**
+Complete pipeline configuration.
 
 | Section | Content |
 |---------|---------|
-| `system` | Name, version (`15.0`), pipeline version (`0.8`) |
-| `paths` | Base paths, dictionaries, databases, logs, cache, PDF input, gold data |
-| `lexicons` | 20+ lexicon file mappings (abbreviation, disease, drug, UMLS, MONDO, ChEMBL, trial acronyms, PRO scales) |
-| `databases` | SQLite databases (disease_ontology.db, orphanet_nlp.db) |
+| `system` | Name, version, pipeline version |
+| `paths` | Base paths, dictionaries, databases, logs, cache, PDFs, gold data |
+| `lexicons` | 20+ lexicon file mappings |
 | `defaults` | confidence_threshold (0.75), fuzzy_match_threshold (85), context_window (300) |
-| `features` | Feature flags: drug_detection, disease_detection, classification, pubtator_enrichment, ai_validation |
-| `generators` | Per-generator config: syntax_pattern, glossary_table, regex_pattern, layout, lexicon (with obvious_noise list) |
-| `heuristics` | PASO rules: stats_abbrevs (PASO A), sf_blacklist (PASO B, 70+ entries), common_words, hyphenated_abbrevs (PASO C), LLM SF extractor (PASO D), context_required_sfs |
-| `api` | PubTator3 (base_url, rate_limit, cache TTL), Claude (fast/validation models, batch_delay_ms, model_tiers) |
-| `nct_enricher` | ClinicalTrials.gov cache settings |
-| `validation` | Per-entity validation: abbreviation, drug (stages), disease (stages, enrichment_mode) |
-| `normalization` | term_mapper (fuzzy matching), disambiguator (min_context_score, whitelist_unexpanded) |
-| `disease_detection` | Lexicon toggles, scispacy enable, FP filter config, confidence thresholds |
-| `drug_detection` | Lexicon priorities (alexion, investigational, FDA, RxNorm), compound ID patterns |
-| `deduplication` | priority_order, remove_expansion_matches |
-| `extraction_pipeline` | Preset selection, extractor toggles, processing options, visual extraction pipeline, page limits |
-| `table_extraction` | Docling TableFormer mode, cell matching, validation thresholds, definition table salvage |
-| `vision` | Max image size (5MB), compression settings, OCR fallback |
-| `logging` | Level (INFO), console (ERROR), file rotation |
-| `runtime` | batch_size (10), timeout (300s), max_file_size (100MB), on_error policy |
+| `features` | Feature flags: drug/disease detection, classification, enrichment, validation |
+| `generators` | Per-generator config with obvious_noise list |
+| `heuristics` | PASO rules: stats_abbrevs (A), sf_blacklist (B, 70+ entries), hyphenated (C), LLM SF (D) |
+| `api` | PubTator3, Claude (models, batch_delay_ms, model_tiers) |
+| `validation` | Per-entity validation stages |
+| `disease_detection` | Lexicon toggles, scispacy, FP filter, thresholds |
+| `drug_detection` | Lexicon priorities, compound ID patterns |
+| `extraction_pipeline` | Presets, extractor toggles, visual pipeline, page limits |
+| `table_extraction` | Docling TableFormer mode, validation thresholds |
 
-**Environment variables:**
+**Environment variables:** `CORPUS_BASE_PATH`, `ANTHROPIC_API_KEY`
 
-- `CORPUS_BASE_PATH` -- Base path for all resources (auto-detected if unset)
-- `ANTHROPIC_API_KEY` -- API key for Claude validation
-
-**Extraction presets:**
-
-| Preset | Extractors |
-|--------|-----------|
-| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
-| `all` | Everything including authors, citations, tables, figures, metadata |
-| `minimal` | Abbreviations only |
-| `drugs_only` | Drug detection only |
-| `diseases_only` | Disease detection only |
-| `genes_only` | Gene detection only |
-| `abbreviations_only` | Abbreviation extraction only |
-| `feasibility_only` | Feasibility extraction only |
-| `entities_only` | Drugs, diseases, genes, abbreviations |
-| `clinical_entities` | Drugs, diseases only |
-| `metadata_only` | Authors, citations, document metadata |
-| `images_only` | Tables + figures/visuals |
-| `tables_only` | Table extraction only (no figures) |
+---
 
 ## Model Tier Routing
 
-The `model_tiers` section under `api.claude` maps each `call_type` to a specific Claude model. Simple tasks route to cheaper Haiku; complex reasoning stays on Sonnet:
+Maps `call_type` to model in `api.claude.model_tiers`. Resolved via `D02_llm_engine.resolve_model_tier(call_type)`.
 
 ```yaml
 api:
   claude:
     model_tiers:
       # Haiku tier ($1/$5 per MTok)
-      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
-      abbreviation_single_validation: "claude-haiku-4-5-20250901"
-      fast_reject: "claude-haiku-4-5-20250901"
-      document_classification: "claude-haiku-4-5-20250901"
-      description_extraction: "claude-haiku-4-5-20250901"
-      image_classification: "claude-haiku-4-5-20250901"
-      sf_only_extraction: "claude-haiku-4-5-20250901"
-      layout_analysis: "claude-haiku-4-5-20250901"
-      vlm_visual_enrichment: "claude-haiku-4-5-20250901"
-      ocr_text_fallback: "claude-haiku-4-5-20250901"
+      abbreviation_batch_validation: "claude-haiku-4-5-20251001"
+      abbreviation_single_validation: "claude-haiku-4-5-20251001"
+      fast_reject: "claude-haiku-4-5-20251001"
+      document_classification: "claude-haiku-4-5-20251001"
+      description_extraction: "claude-haiku-4-5-20251001"
+      image_classification: "claude-haiku-4-5-20251001"
+      sf_only_extraction: "claude-haiku-4-5-20251001"
+      layout_analysis: "claude-haiku-4-5-20251001"
+      vlm_visual_enrichment: "claude-haiku-4-5-20251001"
+      ocr_text_fallback: "claude-haiku-4-5-20251001"
       # Sonnet tier ($3/$15 per MTok)
       feasibility_extraction: "claude-sonnet-4-20250514"
       recommendation_extraction: "claude-sonnet-4-20250514"
@@ -116,27 +81,33 @@ api:
       vlm_detection: "claude-sonnet-4-20250514"
 ```
 
-Resolved at runtime via `D02_llm_engine.resolve_model_tier(call_type)`. See [Cost Optimization Guide](../guides/05_cost_optimization.md) for details.
+---
 
-## Usage Patterns
+## Extraction Presets
+
+| Preset | Extractors |
+|--------|-----------|
+| `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
+| `all` | Everything including authors, citations, metadata |
+| `minimal` | Abbreviations only |
+| `entities_only` | Drugs, diseases, genes, abbreviations |
+| `clinical_entities` | Drugs, diseases only |
+| `metadata_only` | Authors, citations, document metadata |
+| `images_only` | Tables + figures |
+
+Single-entity presets: `drugs_only`, `diseases_only`, `genes_only`, `abbreviations_only`, `feasibility_only`, `tables_only`.
+
+## Usage
 
 ```yaml
-# Switch preset
 extraction_pipeline:
   preset: "standard"
 
-# Or customize individual extractors
+# Or customize individually
 extraction_pipeline:
   preset: null
   extractors:
     drugs: true
     diseases: true
     genes: false
-    abbreviations: true
-
-# Adjust API model
-api:
-  claude:
-    validation:
-      model: "claude-sonnet-4-20250514"
 ```

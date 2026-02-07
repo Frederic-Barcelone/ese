@@ -1,6 +1,6 @@
 # ESE Documentation
 
-**ESE (Entity & Structure Extraction)** is a production-grade 6-layer pipeline for extracting structured metadata from clinical trial and medical PDF documents, with a focus on rare disease research.
+**ESE (Entity & Structure Extraction)** -- Production-grade pipeline for extracting structured metadata from clinical trial and rare disease PDFs. Pipeline v0.8.
 
 ---
 
@@ -8,101 +8,79 @@
 
 | Document | Description |
 |----------|-------------|
-| [Performance & Benchmarks](performance_benchmarks.md) | Test suite health (1,474 tests), all gold standard results (CADEC F1=93.2%, BC2GM P=90.3%, NLP4RARE F1=75.7%), throughput, cost profile, SOTA comparison |
-
-## Future Work
-
-| Document | Description |
-|----------|-------------|
-| [Future Work & Roadmap](future_work.md) | Short/medium/long-term improvements: accuracy targets, cost optimization, scalability, testing infrastructure, new entity types, research directions |
-
----
+| [Performance & Benchmarks](performance_benchmarks.md) | 1,482 tests, gold standard results (CADEC F1=93.2%, NLP4RARE F1=74.6%), throughput, cost |
+| [Held-Out Evaluation](evaluation/held_out_evaluation_report.md) | Generalization: CADEC 82.6%, NLP4RARE diseases 76.4%, abbreviations 61.6% |
+| [Quality Metrics Dossier](quality_metrics_dossier.md) | 4 gold standards, evaluation results, test coverage by layer |
+| [Future Work](future_work.md) | Accuracy targets, cost optimization, new entity types |
 
 ## Deep Dives
 
-In-depth technical documentation on key pipeline subsystems.
-
 | Document | Description |
 |----------|-------------|
-| [Entity Detection](entity_detection_deep_dive.md) | How every entity type is detected: abbreviations (Schwartz-Hearst, FlashText, PASO), diseases (4 lexicons, scispacy, C24 FP filter), drugs (5 lexicons, C25 FP filter), genes (HGNC, C34 FP filter), authors, citations, feasibility, recommendations, care pathways |
-| [Visual Extraction](visual_extraction_deep_dive.md) | Tables & figures pipeline: PDF parsing, DocLayout-YOLO detection, visual triage (SKIP/CHEAP/VLM), Docling TableFormer, VLM analysis, caption management, flowchart extraction |
-| [LLM Usage Strategy](llm_usage_deep_dive.md) | Model routing & cost optimization: 17 call sites, 2-tier architecture (Haiku/Sonnet), prompt caching, cost tracking infrastructure, MODEL_PRICING, optimization strategies |
-| [Claude Code Setup](claude_code_setup.md) | Project configuration for Claude Code: CLAUDE.md manifest, permissions (52 bash commands, 24 WebFetch domains), 5 plugins, development workflows, persistent memory, verification checklist |
-| [Extracted Entities Reference](extracted_entities_reference.md) | Complete field guide: all 14+ entity types with every field, enum, identifier code, provenance model, and JSON output format |
-
----
+| [Entity Detection](entity_detection_deep_dive.md) | Detection strategies per entity type |
+| [Visual Extraction](visual_extraction_deep_dive.md) | Tables & figures: DocLayout-YOLO, Docling TableFormer, VLM analysis |
+| [LLM Usage Strategy](llm_usage_deep_dive.md) | 17 call sites, 2-tier routing (Haiku/Sonnet), cost tracking |
+| [Extracted Entities Reference](extracted_entities_reference.md) | All 14+ entity types with fields, enums, JSON output format |
+| [Claude Code Setup](claude_code_setup.md) | CLAUDE.md manifest, plugins, development workflows |
 
 ## Architecture
 
-Foundational design, data flow, and type system.
-
 | Document | Description |
 |----------|-------------|
-| [Pipeline Overview](architecture/01_overview.md) | Layer philosophy, directory structure, technology stack, orchestrator stages |
-| [Data Flow](architecture/02_data_flow.md) | Entity lifecycle, PASO heuristics, extraction flows per entity type, presets |
-| [Domain Models](architecture/03_domain_models.md) | Pydantic models from A_core: Candidate, ExtractedEntity, enums, provenance |
+| [Pipeline Overview](architecture/01_overview.md) | Layer philosophy, directory structure, technology stack |
+| [Data Flow](architecture/02_data_flow.md) | Entity lifecycle, PASO heuristics, extraction flows |
+| [Domain Models](architecture/03_domain_models.md) | Pydantic models: Candidate, ExtractedEntity, provenance |
 
 ## Layers
 
-Per-layer documentation for each directory in `corpus_metadata/`.
-
 | Document | Description |
 |----------|-------------|
-| [A_core](layers/A_core.md) | Domain models, interfaces, provenance utilities, exceptions |
+| [A_core](layers/A_core.md) | Domain models, interfaces, provenance, exceptions |
 | [B_parsing](layers/B_parsing.md) | PDF to DocumentGraph, table/figure extraction, layout detection |
-| [C_generators](layers/C_generators.md) | Candidate generation strategies (syntax, lexicon, regex, LLM) |
-| [D_validation](layers/D_validation.md) | LLM-based verification, prompt registry, quote verifier |
+| [C_generators](layers/C_generators.md) | Candidate generation (syntax, lexicon, regex, LLM) |
+| [D_validation](layers/D_validation.md) | LLM verification, prompt registry, quote verifier |
 | [E_normalization](layers/E_normalization.md) | Term mapping, PubTator/NCT enrichment, deduplication |
 | [F_evaluation](layers/F_evaluation.md) | Gold standard loading, precision/recall/F1 scoring |
-| [G_config](layers/G_config.md) | Pipeline configuration (config.yaml, config keys) |
-| [H_pipeline](layers/H_pipeline.md) | Pipeline orchestration, abbreviation pipeline, component factory |
+| [G_config](layers/G_config.md) | config.yaml reference |
+| [H_pipeline](layers/H_pipeline.md) | Abbreviation pipeline, component factory |
 | [I_extraction](layers/I_extraction.md) | Entity and feasibility processors |
-| [J_export](layers/J_export.md) | JSON export handlers for all entity types |
-| [Z_utils](layers/Z_utils.md) | API client, text helpers, image utilities, download scripts |
+| [J_export](layers/J_export.md) | JSON export handlers |
+| [Z_utils](layers/Z_utils.md) | API client, text helpers, image utilities |
 
 ## Guides
 
-Step-by-step guides for common tasks.
-
 | Document | Description |
 |----------|-------------|
-| [Getting Started](guides/01_getting_started.md) | Environment setup, dependencies, first pipeline run |
-| [Adding an Entity Type](guides/02_adding_entity_type.md) | End-to-end walkthrough: model, generator, validator, exporter |
+| [Getting Started](guides/01_getting_started.md) | Environment setup, dependencies, first run |
+| [Adding an Entity Type](guides/02_adding_entity_type.md) | End-to-end: model, generator, validator, exporter |
 | [Configuration](guides/03_configuration.md) | config.yaml reference, extraction presets, API settings |
-| [Evaluation](guides/04_evaluation.md) | Gold standard format, scoring methodology, interpreting results |
-| [Cost Optimization](guides/05_cost_optimization.md) | Model tier routing, prompt caching, usage tracking, adding new LLM call sites |
-| [Gene Evaluation](guides/06_gene_evaluation.md) | BC2GM gene benchmark: setup, results (P=90.3%), FP/FN analysis, methodology |
-| [Drug Evaluation](guides/07_drug_evaluation.md) | CADEC drug benchmark: setup, results (F1=93.2%), improvement trajectory, error patterns |
+| [Evaluation](guides/04_evaluation.md) | Gold standard format, scoring methodology |
+| [Cost Optimization](guides/05_cost_optimization.md) | Model tier routing, prompt caching, usage tracking |
+| [Gene Evaluation](guides/06_gene_evaluation.md) | NLM-Gene + RareDisGene benchmarks |
+| [Drug Evaluation](guides/07_drug_evaluation.md) | CADEC benchmark (F1=93.2%) |
 
 ## Reference
 
-Detailed reference material for external integrations and output formats.
-
 | Document | Description |
 |----------|-------------|
-| [Lexicons](reference/01_lexicons.md) | Loaded lexicon sources, term counts, file formats |
-| [External APIs](reference/02_external_apis.md) | Claude API, PubTator3, ClinicalTrials.gov, Unstructured.io |
-| [Output Format](reference/03_output_format.md) | JSON output schema per entity type, directory structure |
+| [Lexicons](reference/01_lexicons.md) | Lexicon sources, term counts, file formats |
+| [External APIs](reference/02_external_apis.md) | Claude API, PubTator3, ClinicalTrials.gov |
+| [Output Format](reference/03_output_format.md) | JSON output schema per entity type |
 
 ## Reports
 
-Analysis reports and quality assessments.
-
 | Document | Description |
 |----------|-------------|
-| [Quality Metrics Dossier](quality_metrics_dossier.md) | Full dossier: test suite (1,474 tests), 4 gold standards, evaluation results, coverage by layer |
-| [Performance Analysis](performance_analysis.md) | Processing bottlenecks, throughput measurements, cost breakdown |
-| [Error Handling Analysis](error_handling_analysis.md) | Exception hierarchy, resilience patterns, identified gaps |
-| [Testing Strategy Analysis](testing_strategy_analysis.md) | Test suite structure, coverage gaps, SOTA comparison, recommendations |
+| [Performance Analysis](performance_analysis.md) | Bottlenecks, throughput, cost breakdown |
+| [Error Handling Analysis](error_handling_analysis.md) | Exception hierarchy, resilience patterns |
+| [Testing Strategy Analysis](testing_strategy_analysis.md) | Test suite structure, coverage gaps |
 
 ## Plans
 
-Design documents and architectural plans for pipeline improvements.
-
 | Document | Description |
 |----------|-------------|
-| [Visual Extraction Redesign](plans/2026-01-31-visual-extraction-redesign.md) | Redesign of the visual extraction pipeline |
-| [Layout-Aware Visual Extraction](plans/2026-02-02-layout-aware-visual-extraction.md) | Layout-aware approach for visual detection |
-| [A_core Refactoring](plans/2026-02-02-a-core-refactoring.md) | Refactoring plan for core domain models |
-| [B_parsing Refactoring](plans/2026-02-02-b-parsing-refactoring.md) | Refactoring plan for PDF parsing layer |
-| [Z_utils Refactor Design](plans/2026-02-02-z-utils-refactor-design.md) | Refactoring plan for utilities layer |
+| [Visual Extraction Redesign](plans/2026-01-31-visual-extraction-redesign.md) | Visual extraction pipeline redesign |
+| [Layout-Aware Visual Extraction](plans/2026-02-02-layout-aware-visual-extraction.md) | Layout-aware visual detection |
+| [A_core Refactoring](plans/2026-02-02-a-core-refactoring.md) | Core domain models refactoring |
+| [B_parsing Refactoring](plans/2026-02-02-b-parsing-refactoring.md) | PDF parsing layer refactoring |
+| [Z_utils Refactor Design](plans/2026-02-02-z-utils-refactor-design.md) | Utilities layer refactoring |

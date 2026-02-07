@@ -1,10 +1,10 @@
 # Configuration Guide
 
-All pipeline parameters are centralized in `corpus_metadata/G_config/config.yaml`. No parameters are hardcoded in scripts.
+All parameters in `corpus_metadata/G_config/config.yaml`.
 
 ## Extraction Presets
 
-Presets control which extractors run. When a preset is set, it overrides the individual extractor flags.
+Presets override individual extractor flags.
 
 ```yaml
 extraction_pipeline:
@@ -17,24 +17,18 @@ extraction_pipeline:
 | Preset | Extractors Enabled |
 |--------|-------------------|
 | `standard` | Drugs, diseases, genes, abbreviations, feasibility, tables, figures, care pathways, recommendations |
-| `all` | All entity types including authors, citations, tables, figures, metadata |
+| `all` | All entity types + figures, tables, metadata |
 | `minimal` | Abbreviations only |
-| `drugs_only` | Drug detection only |
-| `diseases_only` | Disease detection only |
-| `genes_only` | Gene detection only |
-| `abbreviations_only` | Abbreviation extraction only |
-| `feasibility_only` | Feasibility extraction only |
 | `entities_only` | Drugs, diseases, genes, abbreviations |
 | `clinical_entities` | Drugs, diseases only |
 | `metadata_only` | Authors, citations, document metadata |
 | `images_only` | Tables + figures/visuals |
-| `tables_only` | Table extraction only (no figures) |
 
-Set `preset: null` to use individual extractor flags instead.
+Set `preset: null` to use individual extractor flags.
 
 ## Entity Toggles
 
-When `preset` is `null`, individual extractors are controlled here:
+Active when `preset: null`:
 
 ```yaml
 extraction_pipeline:
@@ -55,21 +49,19 @@ extraction_pipeline:
 
 ## Processing Options
 
-Fine-grained control over pipeline behavior:
-
 ```yaml
 extraction_pipeline:
   options:
-    use_llm_validation: true       # LLM validation for abbreviations
-    use_llm_feasibility: true      # LLM-based feasibility extraction
-    use_vlm_tables: true           # Vision model for table extraction
-    use_normalization: true        # Entity normalization/enrichment (RxNorm, MONDO)
-    use_epi_enricher: true         # EpiExtract4GARD-v2 for epidemiology NER
-    use_zeroshot_bioner: true      # ZeroShotBioNER for ADE, dosage, frequency, route
-    use_biomedical_ner: true       # d4data/biomedical-ner-all for 84 entity types
-    use_patient_journey: true      # Patient journey extraction
-    use_registry_extraction: true  # Registry extraction
-    parallel_extraction: true      # Run independent extractors in parallel
+    use_llm_validation: true
+    use_llm_feasibility: true
+    use_vlm_tables: true
+    use_normalization: true
+    use_epi_enricher: true
+    use_zeroshot_bioner: true
+    use_biomedical_ner: true
+    use_patient_journey: true
+    use_registry_extraction: true
+    parallel_extraction: true
 ```
 
 ## Page Limits
@@ -77,30 +69,8 @@ extraction_pipeline:
 ```yaml
 extraction_pipeline:
   page_limits:
-    max_pages: null              # null = no limit, or integer to cap pages processed
-    page_range: null             # null = all pages, or [start, end] for specific range
-```
-
-## Deduplication
-
-```yaml
-deduplication:
-  enabled: true
-  priority_order: ["drug", "disease"]  # Entity type priority for resolving duplicates
-  remove_expansion_matches: true  # Remove candidates where SF matches an LF of another
-```
-
-## Output Format
-
-```yaml
-output:
-  format: "json"
-  json_indent: 2
-  include:
-    statistics: true
-    confidence: true
-    context: true
-    identifiers: true
+    max_pages: null        # null = no limit
+    page_range: null       # null = all, or [start, end]
 ```
 
 ## API Configuration
@@ -122,29 +92,26 @@ api:
     batch_delay_ms: 100
 ```
 
-- `fast`: Used for basic tasks (cheaper, faster).
-- `validation`: Used for final validation and enrichment (best quality).
+### Model Tier Routing
 
-### Model Tier Routing (LLM Cost Optimization)
-
-Routes LLM calls to different models based on task complexity. Simple tasks use cheaper Haiku; complex reasoning stays on Sonnet.
+Routes LLM calls by task complexity. Simple tasks use Haiku; complex reasoning uses Sonnet.
 
 ```yaml
 api:
   claude:
     model_tiers:
-      # Haiku tier ($1/$5 per MTok) — simple tasks
-      abbreviation_batch_validation: "claude-haiku-4-5-20250901"
-      document_classification: "claude-haiku-4-5-20250901"
-      layout_analysis: "claude-haiku-4-5-20250901"
-      image_classification: "claude-haiku-4-5-20250901"
-      # Sonnet tier ($3/$15 per MTok) — complex reasoning
+      # Haiku ($1/$5 per MTok)
+      abbreviation_batch_validation: "claude-haiku-4-5-20251001"
+      document_classification: "claude-haiku-4-5-20251001"
+      layout_analysis: "claude-haiku-4-5-20251001"
+      image_classification: "claude-haiku-4-5-20251001"
+      # Sonnet ($3/$15 per MTok)
       feasibility_extraction: "claude-sonnet-4-20250514"
       flowchart_analysis: "claude-sonnet-4-20250514"
       vlm_table_extraction: "claude-sonnet-4-20250514"
 ```
 
-To change a task's model, update its value in this mapping. To add a new LLM call site, add a new entry here. See [Cost Optimization Guide](05_cost_optimization.md) for the full call_type table and implementation details.
+See [Cost Optimization Guide](05_cost_optimization.md) for the full call_type table.
 
 ### PubTator3 API
 
@@ -159,12 +126,9 @@ api:
       enabled: true
       directory: "cache/pubtator"
       ttl_hours: 168    # 7 days
-    enrichment:
-      enrich_missing_mesh: true
-      add_aliases: true
 ```
 
-### NCT Enricher (ClinicalTrials.gov)
+### NCT Enricher
 
 ```yaml
 nct_enricher:
@@ -190,61 +154,36 @@ paths:
   gold_json: "gold_data/papers_gold_v2.json"
 ```
 
-When `base` is `null`, the pipeline auto-detects from the `CORPUS_BASE_PATH` environment variable or the location of `corpus_metadata/`.
-
-## PASO Heuristics (Abbreviation Extraction)
-
-PASO heuristics provide deterministic rules that run before LLM validation for abbreviations.
+## PASO Heuristics (Abbreviations)
 
 ### PASO A: Stats Whitelist (Auto-Approve)
-
-Statistical abbreviations with well-known definitions are auto-approved when found with numeric evidence:
 
 ```yaml
 heuristics:
   stats_abbrevs:
     CI: "confidence interval"
     SD: "standard deviation"
-    SE: "standard error"
-    OR: "odds ratio"
     HR: "hazard ratio"
-    IQR: "interquartile range"
-    AUC: "area under the curve"
-    ROC: "receiver operating characteristic"
+    OR: "odds ratio"
+    # ... (full list in config.yaml)
 ```
 
 ### PASO B: Blacklist (Auto-Reject)
 
-Non-domain terms that should never be extracted as abbreviations:
-
-```yaml
-heuristics:
-  sf_blacklist:
-    - "US"       # Country codes
-    - "UK"
-    - "EU"
-    - "FDA"      # Regulatory agencies
-    - "EMA"
-    - "MD"       # Credentials
-    - "PHD"
-    # ... (full list in config.yaml)
-```
+Country codes (US, UK, EU), regulatory agencies (FDA, EMA), credentials (MD, PHD), etc. Full list in `config.yaml` under `heuristics.sf_blacklist`.
 
 ### PASO C: Hyphenated Abbreviations
 
-Pre-defined hyphenated terms with known expansions. Entries with `"trial name"` as the value are auto-enriched at runtime from ClinicalTrials.gov:
+Entries with `"trial name"` are auto-enriched from ClinicalTrials.gov:
 
 ```yaml
 heuristics:
   hyphenated_abbrevs:
-    APPEAR-C3G: "trial name"    # Auto-enriched from ClinicalTrials.gov
+    APPEAR-C3G: "trial name"
     CKD-EPI: "Chronic Kidney Disease Epidemiology Collaboration"
-    IL-6: "interleukin-6"
 ```
 
 ### PASO D: LLM SF-Only Extraction
-
-LLM-based extractor for finding abbreviations that other generators missed:
 
 ```yaml
 heuristics:
@@ -256,8 +195,6 @@ heuristics:
 
 ## Feature Flags
 
-Global switches for pipeline capabilities:
-
 ```yaml
 features:
   drug_detection: true
@@ -268,22 +205,26 @@ features:
   table_extraction: true
   title_extraction: true
   date_extraction: true
+  description_extraction: true
   citation_extraction: true
   person_extraction: true
+  reference_extraction: true
   pubtator_enrichment: true
   ai_validation: true
   intelligent_rename: true
   caching: true
 ```
 
-## Disease Detection Settings
+## Disease Detection
 
 ```yaml
 disease_detection:
   enabled: true
-  enable_general_lexicon: true    # 29K+ diseases
-  enable_orphanet: true           # 9.6K rare diseases
-  enable_scispacy: true           # scispacy NER with UMLS linking
+  enable_general_lexicon: true          # 29K+
+  enable_orphanet: true                 # 9.6K rare diseases
+  enable_mondo: true                    # 97K MONDO ontology
+  enable_rare_disease_acronyms: true    # 1.6K acronyms
+  enable_scispacy: true
   context_window: 300
   fp_filter:
     enabled: true
@@ -292,26 +233,26 @@ disease_detection:
     short_match_threshold: 4
     min_confidence_after_adjustment: 0.35
   validation:
-    enabled: false                # Set to true for LLM validation
+    enabled: false
     batch_size: 10
     confidence_threshold: 0.75
 ```
 
-## Drug Detection Settings
+## Drug Detection
 
 ```yaml
 drug_detection:
   enabled: true
-  enable_alexion_lexicon: true           # Specialized pipeline drugs
-  enable_investigational_lexicon: true   # ClinicalTrials.gov drugs (32K)
-  enable_fda_lexicon: true               # FDA approved drugs (50K)
-  enable_rxnorm_lexicon: true            # RxNorm general terms (133K)
-  enable_scispacy: true                  # scispacy NER with UMLS
-  enable_patterns: true                  # Compound ID patterns (LNP023, ALXN1720)
+  enable_alexion_lexicon: true
+  enable_investigational_lexicon: true   # 32K
+  enable_fda_lexicon: true               # 50K
+  enable_rxnorm_lexicon: true            # 133K
+  enable_scispacy: true
+  enable_patterns: true                  # Compound IDs (LNP023, ALXN1720)
   context_window: 300
 ```
 
-## Validation Settings
+## Validation
 
 ```yaml
 validation:
@@ -330,7 +271,7 @@ validation:
     stages: ["pattern_detection", "lexicon_matching", "claude_ai"]
 ```
 
-## Normalization Settings
+## Normalization
 
 ```yaml
 normalization:
@@ -342,20 +283,36 @@ normalization:
     enabled: true
     min_context_score: 2
     min_margin: 1
-    whitelist_unexpanded:
-      - "CI"
-      - "SD"
-      - "HR"
-      - "BMI"
-      - "DNA"
-      - "IV"
+    whitelist_unexpanded: ["CI", "SD", "HR", "OR", "IQR", "BMI", "DNA", "RNA", "IV", "IM", "SC", "PO"]
 ```
 
-## Table Extraction Settings
+## Deduplication
+
+```yaml
+deduplication:
+  enabled: true
+  priority_order: ["drug", "disease"]
+  remove_expansion_matches: true
+```
+
+## Output Format
+
+```yaml
+output:
+  format: "json"
+  json_indent: 2
+  include:
+    statistics: true
+    confidence: true
+    context: true
+    identifiers: true
+```
+
+## Table Extraction
 
 ```yaml
 table_extraction:
-  mode: "accurate"          # "accurate" or "fast" (TableFormer mode)
+  mode: "accurate"          # "accurate" or "fast"
   do_cell_matching: true
   ocr_enabled: true
   max_avg_cell_length: 150
@@ -365,7 +322,7 @@ table_extraction:
     min_data_rows: 2
 ```
 
-## Visual Extraction Pipeline
+## Visual Extraction
 
 ```yaml
 extraction_pipeline:
@@ -374,28 +331,13 @@ extraction_pipeline:
     visual_detection:
       mode: "layout-aware"     # layout-aware, vlm-only, hybrid, heuristic
       model: "claude-sonnet-4-20250514"
-    rendering:
-      default_dpi: 300
     vlm:
       enabled: true
       model: "claude-sonnet-4-20250514"
       validate_tables: true
 ```
 
-## Vision LLM Settings
-
-```yaml
-vision:
-  max_image_size_bytes: 5242880  # 5MB
-  compression:
-    enabled: true
-    quality: 85
-    max_dimension: 2048
-  fallback_to_ocr: true
-  delay_between_calls_ms: 100
-```
-
-## Logging
+## Logging and Runtime
 
 ```yaml
 logging:
@@ -405,11 +347,7 @@ logging:
   file: "corpus.log"
   max_size_mb: 10
   backup_count: 5
-```
 
-## Runtime
-
-```yaml
 runtime:
   batch_size: 10
   timeout_seconds: 300
@@ -417,20 +355,9 @@ runtime:
   on_error: "log_and_continue"
 ```
 
-## Global Defaults
-
-```yaml
-defaults:
-  confidence_threshold: 0.75
-  fuzzy_match_threshold: 85
-  context_window: 300
-  min_term_length: 2
-```
-
 ## Environment Variables
 
-| Variable | Purpose | Default |
-|----------|---------|---------|
-| `CORPUS_BASE_PATH` | Base directory for all resources | Auto-detected from `corpus_metadata/` location |
-| `ANTHROPIC_API_KEY` | Claude API key | Required for LLM features |
-| `CLAUDE_API_KEY` | Mentioned in config comments as alternative | Not used in pipeline code; use `ANTHROPIC_API_KEY` |
+| Variable | Purpose |
+|----------|---------|
+| `CORPUS_BASE_PATH` | Base directory (auto-detected from `corpus_metadata/`) |
+| `ANTHROPIC_API_KEY` | Claude API key (required for LLM features) |
