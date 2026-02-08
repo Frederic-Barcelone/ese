@@ -1092,6 +1092,25 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     # Mental retardation / intellectual disability synonyms
     ["mental retardation", "mentally retarded", "intellectual disability"],
     ["myotonic dystrophy", "dm", "dm1", "dm2"],
+    # NCBI Disease abbreviation-only gold entries
+    ["cowden disease", "cowden syndrome", "cd",
+     "bannayan-zonana syndrome", "bzs",
+     "pten hamartoma tumor syndrome"],
+    ["denys-drash syndrome", "dds"],
+    ["prader-willi syndrome", "pws", "prader willi syndrome"],
+    ["pendred syndrome", "pds", "pendred disease", "pendred"],
+    ["familial neurohypophyseal diabetes insipidus", "fndi"],
+    ["angelman syndrome", "as", "angelman"],
+    ["adenomatous polyposis coli", "apc",
+     "familial adenomatous polyposis", "fap",
+     "aapc"],
+    ["x-linked dilated cardiomyopathy", "xldcm",
+     "dilated cardiomyopathy"],
+    ["von willebrand disease", "vwd",
+     "vwf-deficient", "von willebrand"],
+    ["insulin-dependent diabetes mellitus", "iddm",
+     "type 1 diabetes", "type i diabetes"],
+    ["c9 deficiency", "c9-deficient"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
