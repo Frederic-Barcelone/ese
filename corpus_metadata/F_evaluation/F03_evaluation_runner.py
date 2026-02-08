@@ -97,7 +97,7 @@ PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
@@ -126,7 +126,7 @@ BC5CDR_SPLITS = ["test"]
 PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = 20  # All documents (set to small number for testing)
+MAX_DOCS = None  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -720,6 +720,10 @@ def load_ncbi_disease_gold(gold_path: Path, splits: Optional[List[str]] = None) 
         )
         result["diseases"].setdefault(entry.doc_id, []).append(entry)
 
+    # Deduplicate gold synonyms per document (e.g., "A-T" + "ataxia-telangiectasia")
+    for doc_id in result["diseases"]:
+        result["diseases"][doc_id] = _deduplicate_gold_synonyms(result["diseases"][doc_id])
+
     return result
 
 
@@ -1076,6 +1080,18 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["prostate cancer", "prostate carcinoma", "prostate neoplasm"],
     ["colorectal cancer", "colorectal carcinoma", "colon cancer"],
     ["lung cancer", "lung carcinoma", "lung neoplasm"],
+    # British/American spelling synonyms + ontology merges
+    ["tumor", "tumour", "tumors", "tumours", "neoplasm", "neoplasia", "neoplasms"],
+    ["leukemia", "leukaemia"],
+    ["anemia", "anaemia"],
+    ["edema", "oedema"],
+    # Compound/qualified NCBI disease forms
+    ["breast-ovarian cancer", "breast cancer", "hereditary breast-ovarian cancer"],
+    ["von hippel-lindau tumor", "von hippel-lindau disease", "von hippel-lindau"],
+    ["rcc cancer", "renal cell carcinoma", "rcc"],
+    # Mental retardation / intellectual disability synonyms
+    ["mental retardation", "mentally retarded", "intellectual disability"],
+    ["myotonic dystrophy", "dm", "dm1", "dm2"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)

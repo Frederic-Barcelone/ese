@@ -10,6 +10,7 @@ Key Components:
     - load_term_list: Load a List[str] from a YAML key
     - load_mapping: Load a Dict[str, str] from a YAML key
     - load_pair_list: Load a Set[Tuple[str, str]] from a YAML key
+    - load_list_mapping: Load a Dict[str, List[str]] from a YAML key
 
 Example:
     >>> from Z_utils.Z12_data_loader import load_term_set
@@ -87,3 +88,21 @@ def load_pair_list(filename: str, key: str) -> Set[Tuple[str, str]]:
             raise ValueError(f"{filename}:{key} contains non-pair {pair!r}")
         _check_strings(pair, filename, key)
     return {tuple(pair) for pair in pairs}
+
+
+def load_list_mapping(filename: str, key: str) -> Dict[str, List[str]]:
+    """Load a Dict[str, List[str]] from a YAML file."""
+    data = _load_yaml(filename)
+    mapping = data[key]
+    for k, v in mapping.items():
+        if not isinstance(k, str):
+            raise TypeError(
+                f"{filename}:{key} contains non-string key {k!r} — "
+                f"quote it in YAML"
+            )
+        if not isinstance(v, list):
+            raise TypeError(
+                f"{filename}:{key}:{k} value is not a list: {type(v).__name__}"
+            )
+        _check_strings(v, filename, f"{key}.{k}")
+    return dict(mapping)

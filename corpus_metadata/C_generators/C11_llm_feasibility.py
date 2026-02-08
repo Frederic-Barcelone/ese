@@ -51,7 +51,7 @@ from A_core.A07_feasibility_models import (
 )
 from A_core.A23_doc_graph_models import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
-from D_validation.D04_quote_verifier import (
+from Z_utils.Z14_quote_verifier import (
     ExtractionVerifier,
     QuoteVerifier,
     NumericalVerifier,

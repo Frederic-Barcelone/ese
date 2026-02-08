@@ -1,0 +1,106 @@
+# Biomedical NER data constants.
+#
+# Curated entity categories and garbage tokens used by BiomedicalNEREnricher (E10).
+#
+# Extracted from E_normalization/E10_biomedical_ner_all.py.
+
+# Entity categories for grouping results from d4data/biomedical-ner-all model
+entity_categories:
+  clinical:
+    - "Disease_disorder"
+    - "Sign_symptom"
+    - "Diagnostic_procedure"
+    - "Therapeutic_procedure"
+    - "Medication"
+    - "Lab_value"
+    - "Clinical_event"
+    - "Outcome"
+  drug_admin:
+    - "Dosage"
+    - "Administration"
+    - "Frequency"
+  demographics:
+    - "Age"
+    - "Sex"
+    - "Height"
+    - "Weight"
+    - "Mass"
+    - "Occupation"
+    - "Personal_background"
+    - "Family_history"
+  anatomical:
+    - "Biological_structure"
+    - "Biological_attribute"
+    - "Body_part"
+  descriptive:
+    - "Color"
+    - "Shape"
+    - "Texture"
+    - "Severity"
+    - "Qualitative_concept"
+    - "Quantitative_concept"
+    - "Detailed_description"
+  temporal:
+    - "Date"
+    - "Time"
+    - "Duration"
+    - "History"
+  other:
+    - "Area"
+    - "Distance"
+    - "Volume"
+    - "Nonbiological_location"
+    - "Activity"
+    - "Subject"
+    - "Coreference"
+    - "Other_entity"
+    - "Other_event"
+
+# Stopwords/garbage tokens to filter out
+# These are common BERT artifacts or non-informative fragments
+garbage_tokens:
+  # Common fragments
+  - "rate"
+  - "reduced"
+  - "crea"
+  - "min"
+  - "per"
+  - "the"
+  - "and"
+  - "for"
+  - "with"
+  - "from"
+  - "that"
+  - "this"
+  - "were"
+  - "was"
+  - "are"
+  - "has"
+  - "had"
+  - "have"
+  - "been"
+  - "being"
+  - "will"
+  - "would"
+  - "could"
+  - "should"
+  - "may"
+  - "might"
+  # Partial units/measurements
+  - "mg"
+  - "ml"
+  - "dl"
+  - "kg"
+  - "cm"
+  - "mm"
+  - "hr"
+  - "hrs"
+  - "day"
+  - "days"
+  # Common partial lab values
+  - "higher"
+  - "lower"
+  - "normal"
+  - "above"
+  - "below"
+  - "within"

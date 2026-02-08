@@ -36,6 +36,7 @@ from A_core.A07_feasibility_models import (
     FeasibilityFieldType,
     PatientJourneyPhaseType,
 )
+from Z_utils.Z12_data_loader import load_mapping, load_term_list, load_term_set
 
 
 # =============================================================================
@@ -317,11 +318,7 @@ VACCINATION_PATTERNS = [
     r"(?:no|without)\s*(?:live|attenuated)\s*vaccine",
 ]
 
-VACCINE_TYPES = [
-    "covid-19", "sars-cov-2", "influenza", "hepatitis a", "hepatitis b",
-    "pneumococcal", "meningococcal", "mmr", "varicella", "zoster",
-    "yellow fever", "bcg", "live attenuated",
-]
+VACCINE_TYPES = load_term_list("feasibility_data.yaml", "vaccine_types")
 
 
 # =============================================================================
@@ -381,39 +378,17 @@ LAB_CRITERION_PATTERNS = [
 # SITE/COUNTRY PATTERNS (with disambiguation)
 # =============================================================================
 
-# Countries that need context validation (P0)
-AMBIGUOUS_COUNTRIES = {"georgia", "jordan", "turkey", "chad", "china", "guinea", "mali"}
+# Countries that need context validation (loaded from YAML)
+AMBIGUOUS_COUNTRIES = load_term_set("feasibility_data.yaml", "ambiguous_countries")
 
-# Context cues that indicate site/country discussion
-COUNTRY_CONTEXT_CUES = {
-    "sites", "centers", "countries", "enrolled", "conducted",
-    "multicenter", "international", "patients from", "study in",
-    "recruitment", "participating", "locations",
-}
+# Context cues that indicate site/country discussion (loaded from YAML)
+COUNTRY_CONTEXT_CUES = load_term_set("feasibility_data.yaml", "country_context_cues")
 
-COUNTRIES = {
-    "united states", "usa", "us", "germany", "france", "uk", "united kingdom",
-    "italy", "spain", "canada", "australia", "japan", "china", "brazil",
-    "netherlands", "belgium", "switzerland", "austria", "sweden", "norway",
-    "denmark", "finland", "poland", "czech republic", "hungary", "israel",
-    "south korea", "korea", "taiwan", "india", "russia", "mexico", "argentina",
-    "turkey", "greece", "portugal", "ireland", "new zealand", "singapore",
-    "hong kong", "thailand", "malaysia", "south africa", "egypt", "chile",
-    "colombia", "peru", "ukraine", "romania", "bulgaria",
-}
+# Countries for site/country identification (loaded from YAML)
+COUNTRIES = load_term_set("feasibility_data.yaml", "countries")
 
-# ISO country codes for validation
-COUNTRY_CODES = {
-    "united states": "US", "usa": "US", "us": "US",
-    "germany": "DE", "france": "FR", "uk": "GB", "united kingdom": "GB",
-    "italy": "IT", "spain": "ES", "canada": "CA", "australia": "AU",
-    "japan": "JP", "china": "CN", "brazil": "BR", "netherlands": "NL",
-    "belgium": "BE", "switzerland": "CH", "austria": "AT", "sweden": "SE",
-    "norway": "NO", "denmark": "DK", "finland": "FI", "poland": "PL",
-    "czech republic": "CZ", "hungary": "HU", "israel": "IL",
-    "south korea": "KR", "korea": "KR", "taiwan": "TW", "india": "IN",
-    "russia": "RU", "mexico": "MX", "argentina": "AR", "turkey": "TR",
-}
+# ISO country codes for validation (loaded from YAML)
+COUNTRY_CODES = load_mapping("feasibility_data.yaml", "country_codes")
 
 
 # =============================================================================

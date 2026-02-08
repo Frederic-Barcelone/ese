@@ -55,6 +55,7 @@ from A_core.A01_domain_models import (
 from A_core.A02_interfaces import BaseCandidateGenerator
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A23_doc_graph_models import DocumentGraph
+from Z_utils.Z12_data_loader import load_term_set
 
 
 class IdentifierType(str, Enum):
@@ -160,48 +161,8 @@ GENE_PATTERN = re.compile(
     r"\b([A-Z][A-Z0-9]{1,5}(?:-[A-Z0-9]+)?)\b"  # e.g., JAG1, NOTCH2, BRCA1
 )
 
-# Known gene symbols to validate against (subset of common ones)
-KNOWN_GENES = {
-    "JAG1",
-    "NOTCH2",
-    "BRCA1",
-    "BRCA2",
-    "TP53",
-    "EGFR",
-    "KRAS",
-    "BRAF",
-    "PIK3CA",
-    "PTEN",
-    "APC",
-    "MLH1",
-    "MSH2",
-    "MSH6",
-    "PMS2",
-    "CFTR",
-    "HBB",
-    "HBA1",
-    "HBA2",
-    "DMD",
-    "FBN1",
-    "COL1A1",
-    "COL1A2",
-    "NF1",
-    "NF2",
-    "TSC1",
-    "TSC2",
-    "VHL",
-    "RB1",
-    "WT1",
-    "MEN1",
-    "RET",
-    "FGFR1",
-    "FGFR2",
-    "FGFR3",
-    "ACVRL1",
-    "ENG",
-    "SMAD4",
-    "GDF2",  # HHT genes
-}
+# Known gene symbols to validate against (loaded from YAML)
+KNOWN_GENES = load_term_set("identifier_data.yaml", "known_genes")
 
 
 class IdentifierExtractor(BaseCandidateGenerator):

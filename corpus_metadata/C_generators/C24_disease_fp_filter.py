@@ -32,6 +32,7 @@ import re
 from typing import Optional, Tuple
 
 from A_core.A15_domain_profile import DomainProfile, load_domain_profile
+from Z_utils.Z12_data_loader import load_term_list, load_term_set
 
 
 class DiseaseFalsePositiveFilter:
@@ -64,110 +65,19 @@ class DiseaseFalsePositiveFilter:
         r"^-\d{1,2}$",  # -7, -5 (monosomy notation)
     ]
 
-    # Context keywords for disambiguation
-    CHROMOSOME_CONTEXT_KEYWORDS = [
-        "chromosome", "karyotype", "cytogenetic", "translocation",
-        "deletion", "duplication", "trisomy", "monosomy", "band",
-        "breakpoint", "FISH", "CGH", "array", "copy number",
-        "ploidy", "aneuploidy", "mosaicism",
-    ]
-
-    DISEASE_CONTEXT_KEYWORDS = [
-        "syndrome", "disease", "disorder", "condition", "patient",
-        "diagnosis", "diagnosed", "treatment", "therapy", "symptom",
-        "clinical", "prognosis", "affected", "prevalence", "incidence",
-        "rare", "orphan", "trial", "study",
-    ]
+    # Context keywords for disambiguation (loaded from YAML)
+    CHROMOSOME_CONTEXT_KEYWORDS = load_term_list("disease_fp_terms.yaml", "chromosome_context_keywords")
+    DISEASE_CONTEXT_KEYWORDS = load_term_list("disease_fp_terms.yaml", "disease_context_keywords")
 
     # Gene context (for disambiguation)
     GENE_PATTERN = r"^[A-Z][A-Z0-9]{1,6}$"  # BRCA1, TP53, EGFR, etc.
-    GENE_CONTEXT_KEYWORDS = [
-        "mutation", "variant", "expression", "gene", "protein",
-        "encoded", "pathway", "receptor", "kinase", "transcription",
-        "allele", "polymorphism", "genotype",
-    ]
+    GENE_CONTEXT_KEYWORDS = load_term_list("disease_fp_terms.yaml", "gene_context_keywords")
 
-    # Common English words that collide with disease names
-    # Single-word matches of these should be hard-filtered
-    COMMON_ENGLISH_FP_TERMS: set[str] = {
-        "common", "complete", "sensitive", "normal", "simple", "complex",
-        "general", "specific", "active", "passive", "positive", "negative",
-        "progressive", "stable", "mobile", "rigid", "dense", "men", "can",
-        "was", "has", "all", "mg", "iva", "ibm", "ae", "rmd",
-        "transition", "disease", "median",
-        # Generic descriptors that collide with disease ontology entries
-        "hereditary", "inherited", "idiopathic", "genetic", "congenital",
-        "infectious", "acquired", "condition", "infection", "injury",
-        "malignancy", "pituitary", "autoimmunity",
-        # Overly broad oncology/pathology terms
-        "tumor", "tumors", "neoplasm",
-        # Generic plurals of disease categories
-        "syndrome", "syndromes", "disorder", "disorders", "child",
-        # Common clinical terms that are not specific diseases
-        "familial", "dental", "ulcers", "ulcer",
-        "thromboses", "deafness",
-        # Clinical signs / non-specific terms
-        "stature", "diseases", "hypertelorism",
-        "tetrasomy", "trisomy",
-        "sensitivity", "localized", "trauma",
-        # Symptoms / signs (not diseases themselves)
-        "photosensitivity", "myokymia", "telangiectasia",
-        "dependence", "spasticity", "contractures",
-        "atrophy", "malformation", "malformations",
-        "anomaly", "anomalies", "deformity",
-        # Non-disease single words
-        "wound", "inborn", "monosomy", "telecanthus",
-        "arteriopathy", "fractures", "fracture",
-        "predisposition",
-        # Common abbreviations that map to diseases in lexicons but aren't diseases
-        "plan", "cgh", "csf", "cdc",
-        # Immunoglobulins (not diseases)
-        "ige",
-        # Qualifiers / modifiers (not diseases themselves)
-        "unilateral", "bilateral", "inversion",
-        # Clinical signs that are too generic alone
-        "cyclopia", "trigonocephaly",
-        # Qualifiers that get expanded to diseases via lexicon
-        "late-onset",
-    }
+    # Common English words that collide with disease names (loaded from YAML)
+    COMMON_ENGLISH_FP_TERMS: set[str] = load_term_set("disease_fp_terms.yaml", "common_english_fp_terms")
 
-    # Multi-word generic terms that are not specific diseases
-    GENERIC_MULTIWORD_FP_TERMS: set[str] = {
-        "rare disorder", "autosomal dominant", "autosomal recessive",
-        "x-linked", "rare disease",
-        "birth defect", "birth defects",
-        "loose stools",
-        "the syndrome", "increased blood pressure",
-        "congenital anomalies of the kidney and urinary tract",
-        # Symptoms/signs, not diseases
-        "skin rash",
-        "blood clots", "blood clot",
-        "heart defects", "heart defect",
-        "hearing loss",
-        "myoclonic seizures", "myoclonic seizure",
-        "rare kidney disease",
-        "high blood pressure",
-        "pituitary gland",
-        "renal diseases", "kidney disorder",
-        # Clinical findings / malformations (not specific diseases)
-        "eyelid malformation", "facial malformation",
-        "joint contractures", "muscle atrophy",
-        "inborn errors", "inborn error",
-        # Non-disease generic phrases (confirmed FPs, not gold annotations)
-        "not rare", "crossed eyes",
-        "genetic predisposition",
-        "severe form", "severe forms",
-        "congenital defects", "congenital defect",
-        "heart malformation", "heart malformations",
-        "platelet abnormalities", "platelet abnormality",
-        "bacterial infections", "bacterial infection",
-        "hypersensitivity reactions", "hypersensitivity reaction",
-        "absence of sweating",
-        "glycogen storage diseases",
-        # Generic disease categories (not specific diseases)
-        "bone disorder", "bone disorders",
-        "infectious diseases", "infectious disease",
-    }
+    # Multi-word generic terms that are not specific diseases (loaded from YAML)
+    GENERIC_MULTIWORD_FP_TERMS: set[str] = load_term_set("disease_fp_terms.yaml", "generic_multiword_fp_terms")
 
     # Short match threshold
     SHORT_MATCH_THRESHOLD = 4

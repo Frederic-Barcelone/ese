@@ -38,6 +38,8 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+from Z_utils.Z12_data_loader import load_list_mapping, load_term_set
+
 logger = logging.getLogger(__name__)
 
 # Lazy load transformers
@@ -45,94 +47,19 @@ _pipeline = None
 _model_loaded = False
 
 
-# Entity categories for grouping results
-ENTITY_CATEGORIES = {
-    # Clinical entities
-    "clinical": [
-        "Disease_disorder",
-        "Sign_symptom",
-        "Diagnostic_procedure",
-        "Therapeutic_procedure",
-        "Medication",
-        "Lab_value",
-        "Clinical_event",
-        "Outcome",
-    ],
-    # Drug administration (may overlap with ZeroShotBioNER)
-    "drug_admin": [
-        "Dosage",
-        "Administration",
-        "Frequency",
-    ],
-    # Demographics
-    "demographics": [
-        "Age",
-        "Sex",
-        "Height",
-        "Weight",
-        "Mass",
-        "Occupation",
-        "Personal_background",
-        "Family_history",
-    ],
-    # Anatomical
-    "anatomical": [
-        "Biological_structure",
-        "Biological_attribute",
-        "Body_part",
-    ],
-    # Descriptive
-    "descriptive": [
-        "Color",
-        "Shape",
-        "Texture",
-        "Severity",
-        "Qualitative_concept",
-        "Quantitative_concept",
-        "Detailed_description",
-    ],
-    # Temporal
-    "temporal": [
-        "Date",
-        "Time",
-        "Duration",
-        "History",
-    ],
-    # Spatial/Other
-    "other": [
-        "Area",
-        "Distance",
-        "Volume",
-        "Nonbiological_location",
-        "Activity",
-        "Subject",
-        "Coreference",
-        "Other_entity",
-        "Other_event",
-    ],
-}
+# Entity categories for grouping results (loaded from YAML)
+ENTITY_CATEGORIES = load_list_mapping("biomedical_ner_data.yaml", "entity_categories")
 
 # Flatten for quick lookup
-ALL_ENTITY_TYPES = []
-ENTITY_TO_CATEGORY = {}
-for category, entities in ENTITY_CATEGORIES.items():
-    ALL_ENTITY_TYPES.extend(entities)
-    for entity in entities:
-        ENTITY_TO_CATEGORY[entity] = category
+ALL_ENTITY_TYPES: List[str] = []
+ENTITY_TO_CATEGORY: Dict[str, str] = {}
+for _category, _entities in ENTITY_CATEGORIES.items():
+    ALL_ENTITY_TYPES.extend(_entities)
+    for _entity in _entities:
+        ENTITY_TO_CATEGORY[_entity] = _category
 
-
-# Stopwords/garbage tokens to filter out
-# These are common BERT artifacts or non-informative fragments
-GARBAGE_TOKENS = {
-    # Common fragments
-    "rate", "reduced", "crea", "min", "per", "the", "and", "for", "with",
-    "from", "that", "this", "were", "was", "are", "has", "had", "have",
-    "been", "being", "will", "would", "could", "should", "may", "might",
-    # Partial units/measurements
-    "mg", "ml", "dl", "kg", "cm", "mm", "hr", "hrs", "day", "days",
-    # Common partial lab values
-    "higher", "lower", "normal", "above", "below", "within",
-}
+# Stopwords/garbage tokens to filter out (loaded from YAML)
+GARBAGE_TOKENS = load_term_set("biomedical_ner_data.yaml", "garbage_tokens")
 
 
 @dataclass

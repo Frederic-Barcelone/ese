@@ -15,4 +15,5 @@ Provides:
 - Z11: Entity helpers
 - Z12: Data loader for YAML configuration files
 - Z13: LLM usage tracking, cost calculation, and model tier routing
+- Z14: Quote/numerical verification for anti-hallucination checks
 """

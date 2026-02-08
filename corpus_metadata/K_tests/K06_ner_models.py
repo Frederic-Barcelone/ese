@@ -1,8 +1,8 @@
 # corpus_metadata/K_tests/K06_ner_models.py
-"""Tests for A_core/A13_ner_models.py - Unified NER data models."""
+"""Tests for A_core/A25_ner_models.py - Unified NER data models."""
 
 
-from A_core.A13_ner_models import (
+from A_core.A25_ner_models import (
     EntityCategory,
     NEREntity,
     NERResult,

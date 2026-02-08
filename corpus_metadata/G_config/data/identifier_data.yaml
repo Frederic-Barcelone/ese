@@ -1,0 +1,47 @@
+# Identifier extraction data constants.
+#
+# Curated sets used by IdentifierExtractor (C00) for gene symbol validation.
+#
+# Extracted from C_generators/C00_strategy_identifiers.py.
+
+# Known gene symbols to validate against (subset of common ones)
+known_genes:
+  - "JAG1"
+  - "NOTCH2"
+  - "BRCA1"
+  - "BRCA2"
+  - "TP53"
+  - "EGFR"
+  - "KRAS"
+  - "BRAF"
+  - "PIK3CA"
+  - "PTEN"
+  - "APC"
+  - "MLH1"
+  - "MSH2"
+  - "MSH6"
+  - "PMS2"
+  - "CFTR"
+  - "HBB"
+  - "HBA1"
+  - "HBA2"
+  - "DMD"
+  - "FBN1"
+  - "COL1A1"
+  - "COL1A2"
+  - "NF1"
+  - "NF2"
+  - "TSC1"
+  - "TSC2"
+  - "VHL"
+  - "RB1"
+  - "WT1"
+  - "MEN1"
+  - "RET"
+  - "FGFR1"
+  - "FGFR2"
+  - "FGFR3"
+  - "ACVRL1"
+  - "ENG"
+  - "SMAD4"
+  - "GDF2"

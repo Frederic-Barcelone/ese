@@ -71,6 +71,7 @@ from C_generators.C26_drug_fp_constants import (
     CONSUMER_DRUG_PATTERNS,
     CONSUMER_DRUG_VARIANTS,
 )
+from Z_utils.Z12_data_loader import load_term_set
 
 # Optional scispacy import
 try:
@@ -102,36 +103,8 @@ class DrugDetector:
 
     # Terms to skip when loading lexicons (prevent indexing obvious false positives)
     # These are filtered at load time for efficiency - no runtime overhead
-    LEXICON_LOAD_BLACKLIST: Set[str] = {
-        # Country names (often appear as study sites)
-        "turkey", "china", "india", "jordan", "guinea", "chile", "mali",
-        "niger", "chad", "togo", "peru", "cuba", "iran", "iraq", "oman",
-        # Common English words that appear in RxNorm
-        "genesis", "urban", "promote", "vital", "complete", "balance",
-        "comfort", "relief", "choice", "nature", "natural", "pure",
-        "basic", "simple", "clear", "fresh", "bright", "calm", "gentle",
-        "precise", "dimension", "filter", "essence", "revolution", "metric",
-        "metrics", "optimal", "standard", "ideal", "normal", "advanced",
-        "select", "prime", "premier", "elite", "ultra", "supreme", "max",
-        # Statistical/ML terms (not drugs)
-        "lasso", "mcc", "correlation", "coefficient", "regression",
-        # Equipment/brand names (not drugs)
-        "siemens", "philips", "toshiba", "aquilion", "somatom",
-        # Biological terms (not drugs)
-        "cartilage", "bone marrow", "lymphocytes", "plasma", "serum",
-        # Organizations/misc
-        "arthritis foundation", "no data", "not available", "unknown",
-        # Antibody markers (diagnostic, not therapeutic)
-        "anca",
-        # Disease abbreviations that are ambiguous with drug names
-        "mpa",  # Microscopic polyangiitis (disease) vs mycophenolic acid (drug)
-        # Common author surnames that match drug names
-        "cai", "lewis", "sun", "chen", "wang", "li", "zhang", "liu",
-        # Generic clinical terms (not drugs)
-        "therapeutic intervention", "induction", "intervention",
-        # Enzymes/proteins commonly misidentified as drugs
-        "alkaline phosphatase", "myeloperoxidase", "proteinase 3",
-    }
+    # Loaded from G_config/data/drug_fp_terms.yaml
+    LEXICON_LOAD_BLACKLIST: Set[str] = load_term_set("drug_fp_terms.yaml", "lexicon_load_blacklist")
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}

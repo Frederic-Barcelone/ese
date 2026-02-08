@@ -2,10 +2,11 @@
 Tests for Z_utils.Z12_data_loader and YAML data file integrity.
 
 Validates:
-    - All 4 YAML files load without error
+    - All 9 YAML files load without error
     - Type-safety assertions catch YAML boolean coercion
     - Spot-checks known values from each data file
     - Pair list loading works for WRONG_EXPANSION_BLACKLIST
+    - List mapping loading works for ENTITY_CATEGORIES
     - Refactored modules still export the same values
 """
 
@@ -45,6 +46,48 @@ class TestDataLoaderFunctions:
         result = load_pair_list("noise_filters.yaml", "wrong_expansion_blacklist")
         assert isinstance(result, set)
         assert all(isinstance(pair, tuple) and len(pair) == 2 for pair in result)
+
+    def test_load_list_mapping_returns_dict_of_lists(self) -> None:
+        from Z_utils.Z12_data_loader import load_list_mapping
+        result = load_list_mapping("biomedical_ner_data.yaml", "entity_categories")
+        assert isinstance(result, dict)
+        assert len(result) > 0
+        for k, v in result.items():
+            assert isinstance(k, str)
+            assert isinstance(v, list)
+            assert all(isinstance(item, str) for item in v)
+
+    def test_load_list_mapping_non_string_key_guard(self) -> None:
+        """Verify that non-string keys in list mappings are caught."""
+        from Z_utils.Z12_data_loader import load_list_mapping, _load_yaml
+        bad_yaml = {"test_mapping": {123: ["a", "b"]}}
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
+            yaml.dump(bad_yaml, f)
+            temp_path = Path(f.name)
+        try:
+            with patch("Z_utils.Z12_data_loader._DATA_DIR", temp_path.parent):
+                _load_yaml.cache_clear()
+                with pytest.raises(TypeError, match="non-string key"):
+                    load_list_mapping(temp_path.name, "test_mapping")
+        finally:
+            temp_path.unlink()
+            _load_yaml.cache_clear()
+
+    def test_load_list_mapping_non_list_value_guard(self) -> None:
+        """Verify that non-list values in list mappings are caught."""
+        from Z_utils.Z12_data_loader import load_list_mapping, _load_yaml
+        bad_yaml = {"test_mapping": {"key": "not_a_list"}}
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
+            yaml.dump(bad_yaml, f)
+            temp_path = Path(f.name)
+        try:
+            with patch("Z_utils.Z12_data_loader._DATA_DIR", temp_path.parent):
+                _load_yaml.cache_clear()
+                with pytest.raises(TypeError, match="not a list"):
+                    load_list_mapping(temp_path.name, "test_mapping")
+        finally:
+            temp_path.unlink()
+            _load_yaml.cache_clear()
 
     def test_boolean_coercion_guard(self) -> None:
         """Verify that unquoted YAML booleans are caught by the loader."""
@@ -170,14 +213,153 @@ class TestGeneFpTermsYaml:
         assert reason == "common_english_word"
 
 
+class TestDiseaseFpTermsYaml:
+    """Spot-check disease_fp_terms.yaml values."""
+
+    def test_common_english_fp_terms(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        terms = DiseaseFalsePositiveFilter.COMMON_ENGLISH_FP_TERMS
+        assert isinstance(terms, set)
+        assert "complex" in terms
+        assert "syndrome" in terms
+        assert "ige" in terms
+
+    def test_generic_multiword_fp_terms(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        terms = DiseaseFalsePositiveFilter.GENERIC_MULTIWORD_FP_TERMS
+        assert isinstance(terms, set)
+        assert "rare disease" in terms
+        assert "hearing loss" in terms
+
+    def test_chromosome_context_keywords(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        kw = DiseaseFalsePositiveFilter.CHROMOSOME_CONTEXT_KEYWORDS
+        assert isinstance(kw, list)
+        assert "chromosome" in kw
+        assert "karyotype" in kw
+
+    def test_disease_context_keywords(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        kw = DiseaseFalsePositiveFilter.DISEASE_CONTEXT_KEYWORDS
+        assert isinstance(kw, list)
+        assert "syndrome" in kw
+        assert "patient" in kw
+
+    def test_gene_context_keywords(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        kw = DiseaseFalsePositiveFilter.GENE_CONTEXT_KEYWORDS
+        assert isinstance(kw, list)
+        assert "mutation" in kw
+        assert "gene" in kw
+
+    def test_filter_instance_works(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        f = DiseaseFalsePositiveFilter()
+        # Common English word should be hard-filtered
+        should_filter, reason = f.should_filter("complex", "some context")
+        assert should_filter
+        assert reason == "common_english_word"
+
+
+class TestLexiconLoadBlacklistYaml:
+    """Spot-check lexicon_load_blacklist in drug_fp_terms.yaml."""
+
+    def test_lexicon_load_blacklist(self) -> None:
+        from C_generators.C07_strategy_drug import DrugDetector
+        bl = DrugDetector.LEXICON_LOAD_BLACKLIST
+        assert isinstance(bl, set)
+        assert "turkey" in bl
+        assert "lasso" in bl
+        assert "alkaline phosphatase" in bl
+
+
+class TestIdentifierDataYaml:
+    """Spot-check identifier_data.yaml values."""
+
+    def test_known_genes(self) -> None:
+        from C_generators.C00_strategy_identifiers import KNOWN_GENES
+        assert isinstance(KNOWN_GENES, set)
+        assert "BRCA1" in KNOWN_GENES
+        assert "JAG1" in KNOWN_GENES
+        assert "GDF2" in KNOWN_GENES
+        assert len(KNOWN_GENES) == 39
+
+
+class TestFeasibilityDataYaml:
+    """Spot-check feasibility_data.yaml values."""
+
+    def test_vaccine_types(self) -> None:
+        from C_generators.C27_feasibility_patterns import VACCINE_TYPES
+        assert isinstance(VACCINE_TYPES, list)
+        assert "covid-19" in VACCINE_TYPES
+        assert "bcg" in VACCINE_TYPES
+
+    def test_countries(self) -> None:
+        from C_generators.C27_feasibility_patterns import COUNTRIES
+        assert isinstance(COUNTRIES, set)
+        assert "united states" in COUNTRIES
+        assert "japan" in COUNTRIES
+
+    def test_country_codes_no_boolean(self) -> None:
+        """Verify 'NO' for Norway is a string, not a boolean."""
+        from C_generators.C27_feasibility_patterns import COUNTRY_CODES
+        assert isinstance(COUNTRY_CODES, dict)
+        assert COUNTRY_CODES["norway"] == "NO"
+        assert isinstance(COUNTRY_CODES["norway"], str)
+
+    def test_ambiguous_countries(self) -> None:
+        from C_generators.C27_feasibility_patterns import AMBIGUOUS_COUNTRIES
+        assert isinstance(AMBIGUOUS_COUNTRIES, set)
+        assert "georgia" in AMBIGUOUS_COUNTRIES
+
+    def test_country_context_cues(self) -> None:
+        from C_generators.C27_feasibility_patterns import COUNTRY_CONTEXT_CUES
+        assert isinstance(COUNTRY_CONTEXT_CUES, set)
+        assert "sites" in COUNTRY_CONTEXT_CUES
+
+
+class TestBiomedicalNerDataYaml:
+    """Spot-check biomedical_ner_data.yaml values."""
+
+    def test_entity_categories(self) -> None:
+        from E_normalization.E10_biomedical_ner_all import ENTITY_CATEGORIES
+        assert isinstance(ENTITY_CATEGORIES, dict)
+        assert "clinical" in ENTITY_CATEGORIES
+        assert "Disease_disorder" in ENTITY_CATEGORIES["clinical"]
+        assert "temporal" in ENTITY_CATEGORIES
+        assert "Date" in ENTITY_CATEGORIES["temporal"]
+
+    def test_all_entity_types_computed(self) -> None:
+        from E_normalization.E10_biomedical_ner_all import ALL_ENTITY_TYPES
+        assert isinstance(ALL_ENTITY_TYPES, list)
+        assert "Disease_disorder" in ALL_ENTITY_TYPES
+        assert "Age" in ALL_ENTITY_TYPES
+
+    def test_entity_to_category_computed(self) -> None:
+        from E_normalization.E10_biomedical_ner_all import ENTITY_TO_CATEGORY
+        assert isinstance(ENTITY_TO_CATEGORY, dict)
+        assert ENTITY_TO_CATEGORY["Disease_disorder"] == "clinical"
+        assert ENTITY_TO_CATEGORY["Age"] == "demographics"
+
+    def test_garbage_tokens(self) -> None:
+        from E_normalization.E10_biomedical_ner_all import GARBAGE_TOKENS
+        assert isinstance(GARBAGE_TOKENS, set)
+        assert "the" in GARBAGE_TOKENS
+        assert "mg" in GARBAGE_TOKENS
+
+
 class TestAllYamlFilesLoad:
-    """Verify all 4 YAML files load without error."""
+    """Verify all 9 YAML files load without error."""
 
     @pytest.mark.parametrize("filename", [
         "drug_fp_terms.yaml",
         "drug_mappings.yaml",
         "noise_filters.yaml",
         "gene_fp_terms.yaml",
+        "disease_fp_terms.yaml",
+        "identifier_data.yaml",
+        "feasibility_data.yaml",
+        "biomedical_ner_data.yaml",
     ])
     def test_yaml_file_loads(self, filename: str) -> None:
         from Z_utils.Z12_data_loader import _load_yaml

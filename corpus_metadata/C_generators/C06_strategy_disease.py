@@ -184,6 +184,38 @@ class DiseaseDetector:
                 result.append(base)
         return "".join(result)
 
+    # American→British spelling pairs for bidirectional lexicon matching.
+    # Each (american, british) pair is applied with re.sub (case-insensitive).
+    _SPELLING_VARIANTS: list[tuple[str, str]] = [
+        ("tumor", "tumour"),
+        ("leukemia", "leukaemia"),
+        ("anemia", "anaemia"),
+        ("edema", "oedema"),
+        ("hemophilia", "haemophilia"),
+        ("hemorrhag", "haemorrhag"),
+        ("pediatric", "paediatric"),
+        ("estrogen", "oestrogen"),
+        ("fetal", "foetal"),
+        ("diarrhea", "diarrhoea"),
+        ("orthopedic", "orthopaedic"),
+        ("gynecolog", "gynaecolog"),
+        ("hematolog", "haematolog"),
+    ]
+
+    @classmethod
+    def _british_variant(cls, text: str) -> Optional[str]:
+        """Return British spelling variant if text contains American medical terms."""
+        result = text
+        for american, british in cls._SPELLING_VARIANTS:
+            pattern = re.compile(re.escape(american), re.IGNORECASE)
+            if pattern.search(result):
+                result = pattern.sub(
+                    lambda m: british.upper() if m.group().isupper()
+                    else (british.capitalize() if m.group()[0].isupper() else british),
+                    result,
+                )
+        return result if result != text else None
+
     def __init__(self, config: Optional[dict] = None):
         self.config = config or {}
 
@@ -370,6 +402,10 @@ class DiseaseDetector:
             label_stripped = self._strip_accents(label)
             if label_stripped != label:
                 self.general_kp.add_keyword(label_stripped, key)
+            # Add British spelling variant (tumour, leukaemia, etc.)
+            british = self._british_variant(label)
+            if british:
+                self.general_kp.add_keyword(british, key)
             plural = self._generate_plural(label)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -428,6 +464,10 @@ class DiseaseDetector:
             name_stripped = self._strip_accents(name)
             if name_stripped != name:
                 self.general_kp.add_keyword(name_stripped, key)
+            # Add British spelling variant
+            british = self._british_variant(name)
+            if british:
+                self.general_kp.add_keyword(british, key)
             plural = self._generate_plural(name)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -442,6 +482,10 @@ class DiseaseDetector:
                     syn_stripped = self._strip_accents(syn)
                     if syn_stripped != syn:
                         self.general_kp.add_keyword(syn_stripped, key)
+                    # Add British spelling variant for synonyms
+                    syn_british = self._british_variant(syn)
+                    if syn_british:
+                        self.general_kp.add_keyword(syn_british, key)
                     syn_plural = self._generate_plural(syn)
                     if syn_plural:
                         self.general_kp.add_keyword(syn_plural, key)
@@ -516,6 +560,10 @@ class DiseaseDetector:
             label_stripped = self._strip_accents(label)
             if label_stripped != label:
                 self.general_kp.add_keyword(label_stripped, key)
+            # Add British spelling variant
+            british = self._british_variant(label)
+            if british:
+                self.general_kp.add_keyword(british, key)
             plural = self._generate_plural(label)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -529,6 +577,10 @@ class DiseaseDetector:
                 syn_stripped = self._strip_accents(syn)
                 if syn_stripped != syn:
                     self.general_kp.add_keyword(syn_stripped, key)
+                # Add British spelling variant for synonyms
+                syn_british = self._british_variant(syn)
+                if syn_british:
+                    self.general_kp.add_keyword(syn_british, key)
                 syn_plural = self._generate_plural(syn)
                 if syn_plural:
                     self.general_kp.add_keyword(syn_plural, key)

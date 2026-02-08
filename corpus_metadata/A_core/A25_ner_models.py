@@ -1,4 +1,4 @@
-# corpus_metadata/A_core/A13_ner_models.py
+# corpus_metadata/A_core/A25_ner_models.py
 """
 Unified data models for Named Entity Recognition (NER) results.
 
@@ -16,7 +16,7 @@ Key Components:
     - DEFAULT_TYPE_TO_CATEGORY: Mapping from entity types to categories
 
 Example:
-    >>> from A_core.A13_ner_models import NEREntity, NERResult
+    >>> from A_core.A25_ner_models import NEREntity, NERResult
     >>> entity = NEREntity(text="diabetes", entity_type="Disease", score=0.95)
     >>> result = NERResult(source="biomedical_ner")
     >>> result.add_entity(entity)
