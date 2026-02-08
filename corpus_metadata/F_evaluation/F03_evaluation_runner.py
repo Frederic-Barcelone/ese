@@ -97,7 +97,7 @@ PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
@@ -126,7 +126,7 @@ BC5CDR_SPLITS = ["test"]
 PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = None  # All documents (set to small number for testing)
+MAX_DOCS = 20  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -1063,6 +1063,19 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["amyoplasia", "amyoplasia congenita"],
     # Embolism
     ["embolism", "thromboembolism"],
+    # NCBI Disease abbreviation-disease synonyms
+    ["ataxia-telangiectasia", "ataxia telangiectasia", "a-t"],
+    ["tay-sachs disease", "tay sachs disease", "tsd"],
+    ["b-cell non-hodgkin lymphoma", "b-nhl", "non-hodgkin lymphoma", "nhl"],
+    ["c5 deficiency", "c5d", "c5-deficient"],
+    ["renal cell carcinoma", "rcc"],
+    ["von hippel-lindau", "von hippel-lindau disease", "vhl", "vhl disease"],
+    ["retinoblastoma", "rb"],
+    ["breast cancer", "breast carcinoma", "breast neoplasm"],
+    ["ovarian cancer", "ovarian carcinoma", "ovarian neoplasm"],
+    ["prostate cancer", "prostate carcinoma", "prostate neoplasm"],
+    ["colorectal cancer", "colorectal carcinoma", "colon cancer"],
+    ["lung cancer", "lung carcinoma", "lung neoplasm"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
