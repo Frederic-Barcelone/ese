@@ -81,21 +81,37 @@ NLM_GENE_GOLD = BASE_PATH / "gold_data" / "nlm_gene_gold.json"
 RAREDIS_GENE_PATH = BASE_PATH / "gold_data" / "raredis_gene" / "pdfs"
 RAREDIS_GENE_GOLD = BASE_PATH / "gold_data" / "raredis_gene_gold.json"
 
+# NCBI Disease paths
+NCBI_DISEASE_PATH = BASE_PATH / "gold_data" / "ncbi_disease" / "pdfs"
+NCBI_DISEASE_GOLD = BASE_PATH / "gold_data" / "ncbi_disease_gold.json"
+
+# BC5CDR paths
+BC5CDR_PATH = BASE_PATH / "gold_data" / "bc5cdr" / "pdfs"
+BC5CDR_GOLD = BASE_PATH / "gold_data" / "bc5cdr_gold.json"
+
+# PubMed Authors paths (reuses gene corpus PDFs)
+PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
+
 # -----------------------------------------------------------------------------
 # EVALUATION SETTINGS - Change these to control what gets evaluated
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
+RUN_NCBI_DISEASE = False  # NCBI Disease corpus (PubMed abstracts, disease annotations)
+RUN_BC5CDR = False        # BC5CDR corpus (PubMed articles, disease + drug annotations)
+RUN_PUBMED_AUTHORS = False  # PubMed author/citation evaluation (reuses gene corpus PDFs)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
 EVAL_DISEASES = True        # Disease entities
 EVAL_GENES = True           # Gene entities (when gold available)
 EVAL_DRUGS = True           # Drug entities (when gold available)
+EVAL_AUTHORS = True         # Author entities (when gold available)
+EVAL_CITATIONS = True       # Citation entities (when gold available)
 
 # NLP4RARE subfolders to include (all by default)
 NLP4RARE_SPLITS = ["dev", "test", "train"]
@@ -103,6 +119,11 @@ NLP4RARE_SPLITS = ["dev", "test", "train"]
 # NLM-Gene / RareDisGene splits
 NLM_GENE_SPLITS = ["test"]
 RAREDIS_GENE_SPLITS = ["test"]
+
+# NCBI Disease / BC5CDR / PubMed Authors splits
+NCBI_DISEASE_SPLITS = ["test"]
+BC5CDR_SPLITS = ["test"]
+PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
 MAX_DOCS = None  # All documents (set to small number for testing)
@@ -171,6 +192,37 @@ class GoldGene:
     @property
     def symbol_normalized(self) -> str:
         return self.symbol.strip().upper()
+
+
+@dataclass
+class GoldAuthor:
+    """A single gold standard author entity."""
+    doc_id: str
+    last_name: str
+    first_name: Optional[str] = None
+    initials: Optional[str] = None
+
+    @property
+    def last_name_normalized(self) -> str:
+        return self.last_name.strip().lower()
+
+    @property
+    def first_initial(self) -> str:
+        """Return first initial from first_name or initials field."""
+        if self.initials:
+            return self.initials[0].lower()
+        if self.first_name:
+            return self.first_name[0].lower()
+        return ""
+
+
+@dataclass
+class GoldCitation:
+    """A single gold standard citation entity."""
+    doc_id: str
+    pmid: Optional[str] = None
+    doi: Optional[str] = None
+    pmcid: Optional[str] = None
 
 
 @dataclass
@@ -263,6 +315,34 @@ class ExtractedDrugEval:
 
 
 @dataclass
+class ExtractedAuthorEval:
+    """A single extracted author entity for evaluation."""
+    full_name: str
+    confidence: float = 0.0
+
+    @property
+    def last_name(self) -> str:
+        """Extract last name (last word of full_name)."""
+        parts = self.full_name.strip().split()
+        return parts[-1].lower() if parts else ""
+
+    @property
+    def first_initial(self) -> str:
+        """Extract first initial from full_name."""
+        parts = self.full_name.strip().split()
+        return parts[0][0].lower() if parts and parts[0] else ""
+
+
+@dataclass
+class ExtractedCitationEval:
+    """A single extracted citation entity for evaluation."""
+    pmid: Optional[str] = None
+    doi: Optional[str] = None
+    pmcid: Optional[str] = None
+    confidence: float = 0.0
+
+
+@dataclass
 class EntityResult:
     """Evaluation results for a single entity type."""
     entity_type: str  # "abbreviations", "diseases", "genes"
@@ -298,12 +378,15 @@ class DocumentResult:
     diseases: Optional[EntityResult] = None
     genes: Optional[EntityResult] = None
     drugs: Optional[EntityResult] = None
+    authors: Optional[EntityResult] = None
+    citations: Optional[EntityResult] = None
     processing_time: float = 0.0
     error: Optional[str] = None
 
     @property
     def is_perfect(self) -> bool:
-        results = [self.abbreviations, self.diseases, self.genes, self.drugs]
+        results = [self.abbreviations, self.diseases, self.genes, self.drugs,
+                   self.authors, self.citations]
         for r in results:
             if r and (r.fp > 0 or r.fn > 0):
                 return False
@@ -334,6 +417,12 @@ class DatasetResult:
     drug_tp: int = 0
     drug_fp: int = 0
     drug_fn: int = 0
+    author_tp: int = 0
+    author_fp: int = 0
+    author_fn: int = 0
+    citation_tp: int = 0
+    citation_fp: int = 0
+    citation_fn: int = 0
 
     def precision(self, entity_type: str) -> float:
         if entity_type == "abbreviations":
@@ -342,6 +431,10 @@ class DatasetResult:
             tp, fp = self.disease_tp, self.disease_fp
         elif entity_type == "drugs":
             tp, fp = self.drug_tp, self.drug_fp
+        elif entity_type == "authors":
+            tp, fp = self.author_tp, self.author_fp
+        elif entity_type == "citations":
+            tp, fp = self.citation_tp, self.citation_fp
         else:
             tp, fp = self.gene_tp, self.gene_fp
         return tp / (tp + fp) if (tp + fp) > 0 else 1.0
@@ -353,6 +446,10 @@ class DatasetResult:
             tp, fn = self.disease_tp, self.disease_fn
         elif entity_type == "drugs":
             tp, fn = self.drug_tp, self.drug_fn
+        elif entity_type == "authors":
+            tp, fn = self.author_tp, self.author_fn
+        elif entity_type == "citations":
+            tp, fn = self.citation_tp, self.citation_fn
         else:
             tp, fn = self.gene_tp, self.gene_fn
         return tp / (tp + fn) if (tp + fn) > 0 else 1.0
@@ -593,6 +690,120 @@ def load_raredis_gene_gold(gold_path: Path, splits: Optional[List[str]] = None) 
             symbol=ann["symbol"],
         )
         result["genes"].setdefault(entry.doc_id, []).append(entry)
+
+    return result
+
+
+def load_ncbi_disease_gold(gold_path: Path, splits: Optional[List[str]] = None) -> dict:
+    """Load NCBI Disease gold standard (disease annotations only).
+
+    If splits is provided, only include annotations from those splits.
+    """
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {},
+                               "authors": {}, "citations": {}}
+
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} NCBI Disease gold not found: {gold_path}")
+        return result
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    disease_data = data.get("diseases", {})
+    for ann in disease_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry = GoldDisease(
+            doc_id=ann["doc_id"],
+            text=ann["text"],
+            entity_type=ann.get("type", "DISEASE"),
+        )
+        result["diseases"].setdefault(entry.doc_id, []).append(entry)
+
+    return result
+
+
+def load_bc5cdr_gold(gold_path: Path, splits: Optional[List[str]] = None) -> dict:
+    """Load BC5CDR gold standard (disease + drug annotations).
+
+    If splits is provided, only include annotations from those splits.
+    """
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {},
+                               "authors": {}, "citations": {}}
+
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} BC5CDR gold not found: {gold_path}")
+        return result
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Load diseases
+    disease_data = data.get("diseases", {})
+    for ann in disease_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry = GoldDisease(
+            doc_id=ann["doc_id"],
+            text=ann["text"],
+            entity_type=ann.get("type", "DISEASE"),
+        )
+        result["diseases"].setdefault(entry.doc_id, []).append(entry)
+
+    # Load drugs
+    drug_data = data.get("drugs", {})
+    for ann in drug_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry_dr = GoldDrug(
+            doc_id=ann["doc_id"],
+            name=ann["name"],
+        )
+        result["drugs"].setdefault(entry_dr.doc_id, []).append(entry_dr)
+
+    return result
+
+
+def load_pubmed_author_gold(gold_path: Path, splits: Optional[List[str]] = None) -> dict:
+    """Load PubMed Author/Citation gold standard.
+
+    If splits is provided, only include annotations from those splits.
+    """
+    result: dict[str, Any] = {"abbreviations": {}, "diseases": {}, "genes": {}, "drugs": {},
+                               "authors": {}, "citations": {}}
+
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} PubMed Author gold not found: {gold_path}")
+        return result
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Load authors
+    author_data = data.get("authors", {})
+    for ann in author_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry = GoldAuthor(
+            doc_id=ann["doc_id"],
+            last_name=ann["last_name"],
+            first_name=ann.get("first_name"),
+            initials=ann.get("initials"),
+        )
+        result["authors"].setdefault(entry.doc_id, []).append(entry)
+
+    # Load citations
+    citation_data = data.get("citations", {})
+    for ann in citation_data.get("annotations", []):
+        if splits and ann.get("split") not in splits:
+            continue
+        entry_c = GoldCitation(
+            doc_id=ann["doc_id"],
+            pmid=ann.get("pmid"),
+            doi=ann.get("doi"),
+            pmcid=ann.get("pmcid"),
+        )
+        result["citations"].setdefault(entry_c.doc_id, []).append(entry_c)
 
     return result
 
@@ -1346,16 +1557,190 @@ def compare_drugs(
     return result
 
 
+def author_matches(ext: ExtractedAuthorEval, gold: GoldAuthor) -> bool:
+    """Check if extracted author matches gold standard author.
+
+    Match by last name (case-insensitive) + first initial.
+    """
+    ext_last = ext.last_name
+    gold_last = gold.last_name_normalized
+
+    # Exact last name match
+    if ext_last != gold_last:
+        return False
+
+    # First initial match (if available)
+    ext_init = ext.first_initial
+    gold_init = gold.first_initial
+    if ext_init and gold_init:
+        return ext_init == gold_init
+
+    # If no initials available, last name match is sufficient
+    return True
+
+
+def compare_authors(
+    extracted: List[ExtractedAuthorEval],
+    gold: List[GoldAuthor],
+    doc_id: str,
+) -> EntityResult:
+    """Compare extracted authors against gold standard."""
+    result = EntityResult(
+        entity_type="authors",
+        doc_id=doc_id,
+        gold_count=len(gold),
+        extracted_count=len(extracted),
+    )
+
+    matched_gold: set[int] = set()
+
+    for ext in extracted:
+        matched = False
+
+        for g_idx, g in enumerate(gold):
+            if g_idx not in matched_gold:
+                if author_matches(ext, g):
+                    result.tp += 1
+                    result.tp_items.append(ext.full_name)
+                    matched_gold.add(g_idx)
+                    matched = True
+                    break
+
+        if not matched:
+            result.fp += 1
+            result.fp_items.append(ext.full_name)
+
+    for g_idx, g in enumerate(gold):
+        if g_idx not in matched_gold:
+            result.fn += 1
+            name = f"{g.first_name or ''} {g.last_name}".strip()
+            result.fn_items.append(name)
+
+    return result
+
+
+def citation_matches(ext: ExtractedCitationEval, gold: GoldCitation) -> bool:
+    """Check if extracted citation matches gold standard citation.
+
+    Match by PMID, DOI, or PMCID (exact match on any identifier).
+    """
+    if ext.pmid and gold.pmid and ext.pmid.strip() == gold.pmid.strip():
+        return True
+    if ext.doi and gold.doi:
+        # Normalize DOI (case-insensitive, strip trailing punctuation)
+        ext_doi = ext.doi.strip().lower().rstrip(".")
+        gold_doi = gold.doi.strip().lower().rstrip(".")
+        if ext_doi == gold_doi:
+            return True
+    if ext.pmcid and gold.pmcid:
+        ext_pmc = ext.pmcid.strip().upper()
+        gold_pmc = gold.pmcid.strip().upper()
+        if ext_pmc == gold_pmc:
+            return True
+    return False
+
+
+def compare_citations(
+    extracted: List[ExtractedCitationEval],
+    gold: List[GoldCitation],
+    doc_id: str,
+) -> EntityResult:
+    """Compare extracted citations against gold standard."""
+    result = EntityResult(
+        entity_type="citations",
+        doc_id=doc_id,
+        gold_count=len(gold),
+        extracted_count=len(extracted),
+    )
+
+    matched_gold: set[int] = set()
+
+    for ext in extracted:
+        matched = False
+
+        for g_idx, g in enumerate(gold):
+            if g_idx not in matched_gold:
+                if citation_matches(ext, g):
+                    result.tp += 1
+                    label = ext.pmid or ext.doi or ext.pmcid or "unknown"
+                    result.tp_items.append(label)
+                    matched_gold.add(g_idx)
+                    matched = True
+                    break
+
+        if not matched:
+            label = ext.pmid or ext.doi or ext.pmcid or "unknown"
+            result.fp += 1
+            result.fp_items.append(label)
+
+    for g_idx, g in enumerate(gold):
+        if g_idx not in matched_gold:
+            result.fn += 1
+            label = g.pmid or g.doi or g.pmcid or "unknown"
+            result.fn_items.append(label)
+
+    return result
+
+
 # =============================================================================
 # ORCHESTRATOR RUNNER
 # =============================================================================
 
 
-def create_orchestrator():
-    """Create and initialize orchestrator with entities_only preset for speed.
+# Per-dataset extraction presets.  Abbreviations are always included because
+# they feed into disease/drug detection.  Keeping only the extractors that
+# each benchmark actually needs avoids running expensive, unneeded steps.
+DATASET_PRESETS: dict[str, dict[str, bool]] = {
+    # NLP4RARE: diseases + abbreviations + genes (all entity types evaluated)
+    "NLP4RARE": {
+        "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
+    # NLM-Gene / RareDisGene: genes + abbreviations (abbreviations expand gene aliases)
+    "NLM-Gene": {
+        "drugs": False, "diseases": False, "genes": True, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
+    "RareDisGene": {
+        "drugs": False, "diseases": False, "genes": True, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
+    # NCBI Disease: diseases + abbreviations
+    "NCBI-Disease": {
+        "drugs": False, "diseases": True, "genes": False, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
+    # BC5CDR: diseases + drugs + abbreviations
+    "BC5CDR": {
+        "drugs": True, "diseases": True, "genes": False, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
+    # PubMed Authors: authors + citations + abbreviations
+    "PubMed-Authors": {
+        "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": True,
+        "citations": True, "document_metadata": False, "tables": False,
+    },
+    # Papers: abbreviations + diseases + drugs
+    "Papers": {
+        "drugs": True, "diseases": True, "genes": False, "abbreviations": True,
+        "feasibility": False, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
+}
 
-    Uses entities_only preset to skip non-entity steps (feasibility, recommendations,
-    visual extraction, document metadata) which saves ~70% of processing time per doc.
+
+def create_orchestrator(preset: Optional[str] = None,
+                        extractors: Optional[dict[str, bool]] = None):
+    """Create and initialize orchestrator with a specific preset or extractor config.
+
+    If extractors dict is provided, it overrides the preset with per-extractor flags.
+    Otherwise falls back to the named preset (default: entities_only).
     """
     import yaml
     from orchestrator import Orchestrator
@@ -1363,7 +1748,12 @@ def create_orchestrator():
     with open(CONFIG_PATH) as f:
         config = yaml.safe_load(f)
 
-    config.setdefault("extraction_pipeline", {})["preset"] = "entities_only"
+    if extractors:
+        # Use custom extractor flags — set preset to null so flags take effect
+        config.setdefault("extraction_pipeline", {})["preset"] = None
+        config["extraction_pipeline"].setdefault("extractors", {}).update(extractors)
+    else:
+        config.setdefault("extraction_pipeline", {})["preset"] = preset or "entities_only"
 
     import tempfile
     with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as tmp:
@@ -1371,6 +1761,25 @@ def create_orchestrator():
         tmp_path = tmp.name
 
     return Orchestrator(config_path=tmp_path)
+
+
+# Cache orchestrators by config key to avoid re-initialization
+_orchestrator_cache: dict[str, Any] = {}
+
+
+def get_orchestrator(dataset_name: str):
+    """Get or create an orchestrator for the given dataset."""
+    if dataset_name not in _orchestrator_cache:
+        extractors = DATASET_PRESETS.get(dataset_name)
+        if extractors:
+            print(f"\n  Initializing orchestrator for {dataset_name}...")
+            enabled = [k for k, v in extractors.items() if v]
+            print(f"    Extractors: {', '.join(enabled)}")
+            _orchestrator_cache[dataset_name] = create_orchestrator(extractors=extractors)
+        else:
+            print("\n  Initializing orchestrator (entities_only)...")
+            _orchestrator_cache[dataset_name] = create_orchestrator(preset="entities_only")
+    return _orchestrator_cache[dataset_name]
 
 
 def run_extraction(orch, pdf_path: Path) -> dict:
@@ -1384,7 +1793,8 @@ def run_extraction(orch, pdf_path: Path) -> dict:
     """
     result = orch.process_pdf(str(pdf_path))
 
-    extracted: dict[str, list[Any]] = {"abbreviations": [], "diseases": [], "genes": [], "drugs": []}
+    extracted: dict[str, list[Any]] = {"abbreviations": [], "diseases": [], "genes": [], "drugs": [],
+                                       "authors": [], "citations": []}
 
     # Extract abbreviations
     for entity in result.abbreviations:
@@ -1429,6 +1839,24 @@ def run_extraction(orch, pdf_path: Path) -> dict:
                 confidence=getattr(drug, 'confidence_score', 0.0),
             ))
 
+    # Extract authors
+    for author in result.authors:
+        if author.status == ValidationStatus.VALIDATED:
+            extracted["authors"].append(ExtractedAuthorEval(
+                full_name=getattr(author, 'full_name', ''),
+                confidence=getattr(author, 'confidence_score', 0.0),
+            ))
+
+    # Extract citations
+    for citation in result.citations:
+        if citation.status == ValidationStatus.VALIDATED:
+            extracted["citations"].append(ExtractedCitationEval(
+                pmid=getattr(citation, 'pmid', None),
+                doi=getattr(citation, 'doi', None),
+                pmcid=getattr(citation, 'pmcid', None),
+                confidence=getattr(citation, 'confidence_score', 0.0),
+            ))
+
     return extracted
 
 
@@ -1464,7 +1892,7 @@ def evaluate_dataset(
 
     # Collect all doc_ids with gold data
     all_gold_docs = set()
-    for entity_type in ["abbreviations", "diseases", "genes", "drugs"]:
+    for entity_type in ["abbreviations", "diseases", "genes", "drugs", "authors", "citations"]:
         all_gold_docs.update(gold_data.get(entity_type, {}).keys())
 
     # Filter to PDFs with gold annotations
@@ -1480,6 +1908,8 @@ def evaluate_dataset(
     disease_docs = len(gold_data.get("diseases", {}))
     gene_docs = len(gold_data.get("genes", {}))
     drug_docs = len(gold_data.get("drugs", {}))
+    author_docs = len(gold_data.get("authors", {}))
+    citation_docs = len(gold_data.get("citations", {}))
 
     print(f"  PDFs in folder:     {len(pdf_files)}")
     print(f"  PDFs with gold:     {len(pdf_with_gold)}")
@@ -1487,6 +1917,10 @@ def evaluate_dataset(
     print(f"    - Diseases:       {disease_docs} docs")
     print(f"    - Genes:          {gene_docs} docs")
     print(f"    - Drugs:          {drug_docs} docs")
+    if author_docs:
+        print(f"    - Authors:        {author_docs} docs")
+    if citation_docs:
+        print(f"    - Citations:      {citation_docs} docs")
     print(f"  PDFs to process:    {len(pdf_with_gold)}")
 
     for i, pdf_path in enumerate(pdf_with_gold, 1):
@@ -1497,8 +1931,16 @@ def evaluate_dataset(
         disease_gold = gold_data.get("diseases", {}).get(pdf_path.name, [])
         gene_gold = gold_data.get("genes", {}).get(pdf_path.name, [])
         drug_gold = gold_data.get("drugs", {}).get(pdf_path.name, [])
+        author_gold = gold_data.get("authors", {}).get(pdf_path.name, [])
+        citation_gold = gold_data.get("citations", {}).get(pdf_path.name, [])
 
-        print(f"      Gold: abbrev={len(abbrev_gold)}, disease={len(disease_gold)}, gene={len(gene_gold)}, drug={len(drug_gold)}")
+        gold_parts = [f"abbrev={len(abbrev_gold)}", f"disease={len(disease_gold)}",
+                       f"gene={len(gene_gold)}", f"drug={len(drug_gold)}"]
+        if author_gold:
+            gold_parts.append(f"author={len(author_gold)}")
+        if citation_gold:
+            gold_parts.append(f"citation={len(citation_gold)}")
+        print(f"      Gold: {', '.join(gold_parts)}")
 
         start_time = time.time()
 
@@ -1506,7 +1948,13 @@ def evaluate_dataset(
             extracted = run_extraction(orch, pdf_path)
             elapsed = time.time() - start_time
 
-            print(f"      Extracted: abbrev={len(extracted['abbreviations'])}, disease={len(extracted['diseases'])}, gene={len(extracted['genes'])}, drug={len(extracted['drugs'])}")
+            ext_parts = [f"abbrev={len(extracted['abbreviations'])}", f"disease={len(extracted['diseases'])}",
+                         f"gene={len(extracted['genes'])}", f"drug={len(extracted['drugs'])}"]
+            if author_gold:
+                ext_parts.append(f"author={len(extracted['authors'])}")
+            if citation_gold:
+                ext_parts.append(f"citation={len(extracted['citations'])}")
+            print(f"      Extracted: {', '.join(ext_parts)}")
             print(f"      Time: {elapsed:.1f}s")
 
             doc_result = DocumentResult(doc_id=pdf_path.name, processing_time=elapsed)
@@ -1543,6 +1991,22 @@ def evaluate_dataset(
                 result.drug_fp += drug_result.fp
                 result.drug_fn += drug_result.fn
 
+            # Compare authors
+            if EVAL_AUTHORS and author_gold:
+                author_result = compare_authors(extracted["authors"], author_gold, pdf_path.name)
+                doc_result.authors = author_result
+                result.author_tp += author_result.tp
+                result.author_fp += author_result.fp
+                result.author_fn += author_result.fn
+
+            # Compare citations
+            if EVAL_CITATIONS and citation_gold:
+                citation_result = compare_citations(extracted["citations"], citation_gold, pdf_path.name)
+                doc_result.citations = citation_result
+                result.citation_tp += citation_result.tp
+                result.citation_fp += citation_result.fp
+                result.citation_fn += citation_result.fn
+
             result.doc_results.append(doc_result)
             result.docs_processed += 1
             result.total_time += elapsed
@@ -1560,6 +2024,10 @@ def evaluate_dataset(
                     issues.append(f"gene-{doc_result.genes.fn}")
                 if doc_result.drugs and doc_result.drugs.fn > 0:
                     issues.append(f"drug-{doc_result.drugs.fn}")
+                if doc_result.authors and doc_result.authors.fn > 0:
+                    issues.append(f"author-{doc_result.authors.fn}")
+                if doc_result.citations and doc_result.citations.fn > 0:
+                    issues.append(f"citation-{doc_result.citations.fn}")
                 status = _c(C.BRIGHT_YELLOW, f"MISSED: {', '.join(issues)}")
 
             print(f"      Status: {status}")
@@ -1626,6 +2094,14 @@ def print_dataset_summary(result: DatasetResult):
         print_entity_metrics("Drugs", result.drug_tp, result.drug_fp, result.drug_fn)
         print()
 
+    if EVAL_AUTHORS and (result.author_tp + result.author_fp + result.author_fn > 0):
+        print_entity_metrics("Authors", result.author_tp, result.author_fp, result.author_fn)
+        print()
+
+    if EVAL_CITATIONS and (result.citation_tp + result.citation_fp + result.citation_fn > 0):
+        print_entity_metrics("Citations", result.citation_tp, result.citation_fp, result.citation_fn)
+        print()
+
 
 def print_error_analysis(result: DatasetResult, max_examples: int = 100):
     """Print detailed error analysis."""
@@ -1638,6 +2114,10 @@ def print_error_analysis(result: DatasetResult, max_examples: int = 100):
     gene_fp = []
     drug_fn = []
     drug_fp = []
+    author_fn = []
+    author_fp = []
+    citation_fn = []
+    citation_fp = []
 
     for doc in result.doc_results:
         if doc.abbreviations:
@@ -1660,8 +2140,19 @@ def print_error_analysis(result: DatasetResult, max_examples: int = 100):
                 drug_fn.append((doc.doc_id, item))
             for item in doc.drugs.fp_items:
                 drug_fp.append((doc.doc_id, item))
+        if doc.authors:
+            for item in doc.authors.fn_items:
+                author_fn.append((doc.doc_id, item))
+            for item in doc.authors.fp_items:
+                author_fp.append((doc.doc_id, item))
+        if doc.citations:
+            for item in doc.citations.fn_items:
+                citation_fn.append((doc.doc_id, item))
+            for item in doc.citations.fp_items:
+                citation_fp.append((doc.doc_id, item))
 
-    has_errors = abbrev_fn or abbrev_fp or disease_fn or disease_fp or gene_fn or gene_fp or drug_fn or drug_fp
+    has_errors = (abbrev_fn or abbrev_fp or disease_fn or disease_fp or gene_fn or gene_fp
+                  or drug_fn or drug_fp or author_fn or author_fp or citation_fn or citation_fp)
     if not has_errors:
         print(f"\n  {_c(C.BRIGHT_GREEN, '✓ No errors - all extractions correct!')}")
         return
@@ -1691,6 +2182,10 @@ def print_error_analysis(result: DatasetResult, max_examples: int = 100):
         print_errors("DISEASES", disease_fn, disease_fp)
     if EVAL_GENES:
         print_errors("GENES", gene_fn, gene_fp)
+    if EVAL_AUTHORS:
+        print_errors("AUTHORS", author_fn, author_fp)
+    if EVAL_CITATIONS:
+        print_errors("CITATIONS", citation_fn, citation_fp)
     if EVAL_DRUGS:
         print_errors("DRUGS", drug_fn, drug_fp)
 
@@ -1717,6 +2212,14 @@ def print_final_summary(results: List[DatasetResult]):
     total_drug_tp = sum(r.drug_tp for r in results)
     total_drug_fp = sum(r.drug_fp for r in results)
     total_drug_fn = sum(r.drug_fn for r in results)
+
+    total_author_tp = sum(r.author_tp for r in results)
+    total_author_fp = sum(r.author_fp for r in results)
+    total_author_fn = sum(r.author_fn for r in results)
+
+    total_citation_tp = sum(r.citation_tp for r in results)
+    total_citation_fp = sum(r.citation_fp for r in results)
+    total_citation_fn = sum(r.citation_fn for r in results)
 
     total_docs = sum(r.docs_processed for r in results)
     total_perfect = sum(r.docs_perfect for r in results)
@@ -1755,6 +2258,18 @@ def print_final_summary(results: List[DatasetResult]):
             target_met = False
         print()
 
+    if EVAL_AUTHORS and (total_author_tp + total_author_fp + total_author_fn > 0):
+        print_entity_metrics("AUTHORS (Overall)", total_author_tp, total_author_fp, total_author_fn)
+        if _compute_f1(total_author_tp, total_author_fp, total_author_fn) < TARGET_ACCURACY:
+            target_met = False
+        print()
+
+    if EVAL_CITATIONS and (total_citation_tp + total_citation_fp + total_citation_fn > 0):
+        print_entity_metrics("CITATIONS (Overall)", total_citation_tp, total_citation_fp, total_citation_fn)
+        if _compute_f1(total_citation_tp, total_citation_fp, total_citation_fn) < TARGET_ACCURACY:
+            target_met = False
+        print()
+
     if target_met:
         print(f"  {_c(C.BOLD + C.BRIGHT_GREEN, '████████████████████████████████████████')}")
         print(f"  {_c(C.BOLD + C.BRIGHT_GREEN, '█                                      █')}")
@@ -1781,6 +2296,14 @@ def print_final_summary(results: List[DatasetResult]):
             print(f"  {_c(C.BRIGHT_YELLOW, f'Drugs: Fix {total_drug_fn} missed')}")
         if total_drug_fp > 0:
             print(f"  {_c(C.BRIGHT_RED, f'Drugs: Remove {total_drug_fp} false positives')}")
+        if total_author_fn > 0:
+            print(f"  {_c(C.BRIGHT_YELLOW, f'Authors: Fix {total_author_fn} missed')}")
+        if total_author_fp > 0:
+            print(f"  {_c(C.BRIGHT_RED, f'Authors: Remove {total_author_fp} false positives')}")
+        if total_citation_fn > 0:
+            print(f"  {_c(C.BRIGHT_YELLOW, f'Citations: Fix {total_citation_fn} missed')}")
+        if total_citation_fp > 0:
+            print(f"  {_c(C.BRIGHT_RED, f'Citations: Remove {total_citation_fp} false positives')}")
 
     print()
 
@@ -1799,26 +2322,33 @@ def main():
 
     # Show configuration
     print("\n  Configuration:")
-    print(f"    NLP4RARE:     {'enabled' if RUN_NLP4RARE else 'disabled'}")
-    print(f"    Papers:       {'enabled' if RUN_PAPERS else 'disabled'}")
-    print(f"    NLM-Gene:     {'enabled' if RUN_NLM_GENE else 'disabled'}")
-    print(f"    RareDisGene:  {'enabled' if RUN_RAREDIS_GENE else 'disabled'}")
-    print(f"    Max docs:     {MAX_DOCS if MAX_DOCS else 'all'}")
+    print(f"    NLP4RARE:       {'enabled' if RUN_NLP4RARE else 'disabled'}")
+    print(f"    Papers:         {'enabled' if RUN_PAPERS else 'disabled'}")
+    print(f"    NLM-Gene:       {'enabled' if RUN_NLM_GENE else 'disabled'}")
+    print(f"    RareDisGene:    {'enabled' if RUN_RAREDIS_GENE else 'disabled'}")
+    print(f"    NCBI Disease:   {'enabled' if RUN_NCBI_DISEASE else 'disabled'}")
+    print(f"    BC5CDR:         {'enabled' if RUN_BC5CDR else 'disabled'}")
+    print(f"    PubMed Authors: {'enabled' if RUN_PUBMED_AUTHORS else 'disabled'}")
+    print(f"    Max docs:       {MAX_DOCS if MAX_DOCS else 'all'}")
     if RUN_NLP4RARE:
         print(f"    NLP4RARE splits: {', '.join(NLP4RARE_SPLITS)}")
     if RUN_NLM_GENE:
         print(f"    NLM-Gene splits: {', '.join(NLM_GENE_SPLITS)}")
     if RUN_RAREDIS_GENE:
         print(f"    RareDisGene splits: {', '.join(RAREDIS_GENE_SPLITS)}")
+    if RUN_NCBI_DISEASE:
+        print(f"    NCBI Disease splits: {', '.join(NCBI_DISEASE_SPLITS)}")
+    if RUN_BC5CDR:
+        print(f"    BC5CDR splits: {', '.join(BC5CDR_SPLITS)}")
+    if RUN_PUBMED_AUTHORS:
+        print(f"    PubMed Author splits: {', '.join(PUBMED_AUTHOR_SPLITS)}")
     print("\n  Entity types:")
     print(f"    Abbreviations: {'enabled' if EVAL_ABBREVIATIONS else 'disabled'}")
     print(f"    Diseases:      {'enabled' if EVAL_DISEASES else 'disabled'}")
     print(f"    Genes:         {'enabled' if EVAL_GENES else 'disabled'}")
     print(f"    Drugs:         {'enabled' if EVAL_DRUGS else 'disabled'}")
-
-    # Initialize orchestrator once
-    print("\n  Initializing orchestrator...")
-    orch = create_orchestrator()
+    print(f"    Authors:       {'enabled' if EVAL_AUTHORS else 'disabled'}")
+    print(f"    Citations:     {'enabled' if EVAL_CITATIONS else 'disabled'}")
 
     results = []
 
@@ -1827,6 +2357,7 @@ def main():
         gold_data = load_nlp4rare_gold(NLP4RARE_GOLD)
         has_gold = any(gold_data[k] for k in gold_data)
         if has_gold:
+            orch = get_orchestrator("NLP4RARE")
             result = evaluate_dataset(
                 name="NLP4RARE",
                 pdf_folder=NLP4RARE_PATH,
@@ -1844,6 +2375,7 @@ def main():
         gold_data = load_papers_gold(PAPERS_GOLD)
         has_gold = any(gold_data[k] for k in gold_data)
         if has_gold:
+            orch = get_orchestrator("Papers")
             result = evaluate_dataset(
                 name="Papers",
                 pdf_folder=PAPERS_PATH,
@@ -1860,6 +2392,7 @@ def main():
         gold_data = load_nlm_gene_gold(NLM_GENE_GOLD, splits=NLM_GENE_SPLITS)
         has_gold = any(gold_data[k] for k in gold_data)
         if has_gold:
+            orch = get_orchestrator("NLM-Gene")
             result = evaluate_dataset(
                 name="NLM-Gene",
                 pdf_folder=NLM_GENE_PATH,
@@ -1877,6 +2410,7 @@ def main():
         gold_data = load_raredis_gene_gold(RAREDIS_GENE_GOLD, splits=RAREDIS_GENE_SPLITS)
         has_gold = any(gold_data[k] for k in gold_data)
         if has_gold:
+            orch = get_orchestrator("RareDisGene")
             result = evaluate_dataset(
                 name="RareDisGene",
                 pdf_folder=RAREDIS_GENE_PATH,
@@ -1888,6 +2422,93 @@ def main():
             print_dataset_summary(result)
             print_error_analysis(result)
             results.append(result)
+
+    # Evaluate NCBI Disease
+    if RUN_NCBI_DISEASE and NCBI_DISEASE_PATH.exists():
+        gold_data = load_ncbi_disease_gold(NCBI_DISEASE_GOLD, splits=NCBI_DISEASE_SPLITS)
+        has_gold = any(gold_data[k] for k in gold_data)
+        if has_gold:
+            orch = get_orchestrator("NCBI-Disease")
+            result = evaluate_dataset(
+                name="NCBI-Disease",
+                pdf_folder=NCBI_DISEASE_PATH,
+                gold_data=gold_data,
+                orch=orch,
+                max_docs=MAX_DOCS,
+                splits=NCBI_DISEASE_SPLITS,
+            )
+            print_dataset_summary(result)
+            print_error_analysis(result)
+            results.append(result)
+
+    # Evaluate BC5CDR
+    if RUN_BC5CDR and BC5CDR_PATH.exists():
+        gold_data = load_bc5cdr_gold(BC5CDR_GOLD, splits=BC5CDR_SPLITS)
+        has_gold = any(gold_data[k] for k in gold_data)
+        if has_gold:
+            orch = get_orchestrator("BC5CDR")
+            result = evaluate_dataset(
+                name="BC5CDR",
+                pdf_folder=BC5CDR_PATH,
+                gold_data=gold_data,
+                orch=orch,
+                max_docs=MAX_DOCS,
+                splits=BC5CDR_SPLITS,
+            )
+            print_dataset_summary(result)
+            print_error_analysis(result)
+            results.append(result)
+
+    # Evaluate PubMed Authors/Citations
+    if RUN_PUBMED_AUTHORS:
+        gold_data = load_pubmed_author_gold(PUBMED_AUTHOR_GOLD, splits=PUBMED_AUTHOR_SPLITS)
+        has_gold = any(gold_data[k] for k in gold_data)
+        if has_gold:
+            orch = get_orchestrator("PubMed-Authors")
+            # Use gene corpus PDF folders (NLM-Gene + RareDisGene)
+            pdf_folders = []
+            if NLM_GENE_PATH.exists():
+                pdf_folders.append(NLM_GENE_PATH)
+            if RAREDIS_GENE_PATH.exists():
+                pdf_folders.append(RAREDIS_GENE_PATH)
+
+            if pdf_folders:
+                result = evaluate_dataset(
+                    name="PubMed-Authors",
+                    pdf_folder=pdf_folders[0],
+                    gold_data=gold_data,
+                    orch=orch,
+                    max_docs=MAX_DOCS,
+                    splits=PUBMED_AUTHOR_SPLITS,
+                )
+                # If there's a second folder, run it too and merge
+                if len(pdf_folders) > 1:
+                    result2 = evaluate_dataset(
+                        name="PubMed-Authors (RareDisGene)",
+                        pdf_folder=pdf_folders[1],
+                        gold_data=gold_data,
+                        orch=orch,
+                        max_docs=MAX_DOCS,
+                        splits=PUBMED_AUTHOR_SPLITS,
+                    )
+                    # Merge results
+                    result.doc_results.extend(result2.doc_results)
+                    result.docs_total += result2.docs_total
+                    result.docs_processed += result2.docs_processed
+                    result.docs_failed += result2.docs_failed
+                    result.docs_perfect += result2.docs_perfect
+                    result.total_time += result2.total_time
+                    result.author_tp += result2.author_tp
+                    result.author_fp += result2.author_fp
+                    result.author_fn += result2.author_fn
+                    result.citation_tp += result2.citation_tp
+                    result.citation_fp += result2.citation_fp
+                    result.citation_fn += result2.citation_fn
+                    result.name = "PubMed-Authors"
+
+                print_dataset_summary(result)
+                print_error_analysis(result)
+                results.append(result)
 
     # Final summary
     if results:
@@ -1904,6 +2525,8 @@ def main():
         (sum(r.disease_tp for r in results), sum(r.disease_fp for r in results), sum(r.disease_fn for r in results)),
         (sum(r.gene_tp for r in results), sum(r.gene_fp for r in results), sum(r.gene_fn for r in results)),
         (sum(r.drug_tp for r in results), sum(r.drug_fp for r in results), sum(r.drug_fn for r in results)),
+        (sum(r.author_tp for r in results), sum(r.author_fp for r in results), sum(r.author_fn for r in results)),
+        (sum(r.citation_tp for r in results), sum(r.citation_fp for r in results), sum(r.citation_fn for r in results)),
     ]
     target_met = all(
         _f1(tp, fp, fn) >= TARGET_ACCURACY
@@ -1923,10 +2546,14 @@ __all__ = [
     "GoldDisease",
     "GoldDrug",
     "GoldGene",
+    "GoldAuthor",
+    "GoldCitation",
     "ExtractedAbbreviation",
     "ExtractedDisease",
     "ExtractedDrugEval",
     "ExtractedGene",
+    "ExtractedAuthorEval",
+    "ExtractedCitationEval",
     "EntityResult",
     "DocumentResult",
     "DatasetResult",
@@ -1935,4 +2562,7 @@ __all__ = [
     "load_papers_gold",
     "load_nlm_gene_gold",
     "load_raredis_gene_gold",
+    "load_ncbi_disease_gold",
+    "load_bc5cdr_gold",
+    "load_pubmed_author_gold",
 ]
