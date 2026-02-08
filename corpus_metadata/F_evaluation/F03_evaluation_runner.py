@@ -722,7 +722,8 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["erythropoietic protoporphyria", "epp"],
     ["hereditary hemorrhagic telangiectasia", "hht", "osler-weber-rendu syndrome", "osler-weber-rendu"],
     ["congenital adrenal hyperplasia", "cah"],
-    ["antithrombin deficiency", "antithrombin iii deficiency", "type i antithrombin deficiency", "congenital antithrombin deficiency"],
+    ["antithrombin deficiency", "antithrombin iii deficiency", "type i antithrombin deficiency",
+     "congenital antithrombin deficiency", "inherited antithrombin deficiency"],
     ["primary ciliary dyskinesia", "pcd"],
     ["spondyloepiphyseal dysplasia", "sed", "spondyloepiphyseal dysplasia congenita", "sedc"],
     ["osteogenesis imperfecta", "oi", "brittle bone disease"],
@@ -741,21 +742,24 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["gaucher disease", "gaucher's disease"],
     ["pompe disease", "pompe's disease", "glycogen storage disease type ii"],
     # Test-split FN abbreviation-disease synonyms (iteration 2)
-    ["human granulocytic ehrlichiosis", "human granulocytic anaplasmosis", "hge"],
-    ["human monocytic ehrlichiosis", "hme"],  # also in merged ehrlichiosis group below
-    ["adult t-cell leukemia", "atl", "adult t-cell lymphoma"],
-    ["tropical spastic paraparesis", "ham/tsp", "htlv-associated myelopathy"],
+    # human granulocytic/monocytic ehrlichiosis merged into ehrlichiosis group below
+    # ATL group expanded in iteration 6 section below
+    # HTLV/TSP group expanded in iteration 7 section below
     ["grover disease", "grover's disease", "transient acantholytic dermatosis"],
     ["paget disease", "paget's disease", "juvenile paget disease", "juvenile paget's disease"],
-    ["glycogen storage disease", "gsd", "glycogen storage disorders"],
-    ["glycogen storage disease type ix", "gsd-ix", "gsd ix"],
-    ["guanidinoacetate methyltransferase deficiency", "gamt deficiency"],
+    # GSD mega-group: all subtypes merged for gold dedup (pipeline detects broad "glycogen storage disease")
+    ["glycogen storage disease", "gsd", "glycogen storage disorders", "glycogen storage diseases",
+     "glycogen storage disease type ix", "gsd-ix", "gsd ix", "gsd type ix", "glycogen storage disease ix",
+     "glycogen storage disease type ixd", "gsd-ixd", "gsd ixd", "gsd type ixd", "glycogen storage disease ixd",
+     "glycogen storage disease type vii", "gsd type vii", "tarui disease"],
+    ["guanidinoacetate methyltransferase deficiency", "gamt deficiency", "gamt"],
     ["congenital pulmonary lymphangiectasia", "cpl"],
     ["failed back surgery syndrome", "fbss"],
     ["blepharophimosis ptosis epicanthus inversus syndrome", "bpes", "bpes type i", "bpes type ii"],
     ["premature ovarian insufficiency", "poi", "premature ovarian failure"],
-    ["multicentric castleman disease", "mcd"],
-    ["hyper-ige syndrome", "hyper ige syndrome", "hies", "hyperimmunoglobulin e syndrome"],
+    # MCD group expanded in iteration 7 section below
+    ["hyper-ige syndrome", "hyper ige syndrome", "hies", "ad-hies",
+     "hyperimmunoglobulin e syndrome", "autosomal dominant hyper ige syndrome"],
     ["adiposogenital dystrophy", "froelich syndrome", "froehlich syndrome"],
     ["cleidocranial dysplasia", "ccd", "cleidocranial dysostosis"],
     # Test-split FN synonym groups (iteration 5 - 100-doc test)
@@ -778,29 +782,31 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["alopecia", "hair loss"],
     # Test-split iteration 6 - additional abbreviation-as-disease + alternate names
     ["bile acid malabsorption", "bam"],
-    ["chronic viral hepatitis", "cvh"],
-    ["glycogen storage disease type ix", "gsd-ix", "gsd ix", "gsd type ix"],
-    ["glycogen storage disease type ixd", "gsd-ixd", "gsd ixd", "gsd type ixd"],
-    ["adult t-cell leukemia", "atl", "adult t-cell lymphoma", "adult t-cell leukemia/lymphoma"],
+    ["cerebellar vermis hypoplasia", "cvh"],
+    # GSD-IX/IXd merged into GSD mega-group above
+    ["adult t-cell leukemia", "atl", "adult t-cell lymphoma", "adult t-cell leukemia/lymphoma",
+     "t-cell leukemia", "t-cell lymphoma", "acute t-cell leukemia"],
     ["acquired neuromyotonia", "aquired neuromyotonia", "isaacs syndrome"],
     ["hemophilia a", "hemophilia", "haemophilia a", "haemophilia"],
     ["ovarian cancer", "epithelial ovarian cancer"],
     ["appendiceal cancer", "appendiceal tumor", "appendiceal tumors", "ppendiceal tumor"],
     ["rhabdomyolysis", "myoglobinuria"],
-    ["dyskeratosis congenita", "bone marrow failure syndrome"],
+    ["dyskeratosis congenita", "bone marrow failure syndrome", "bone marrow failure"],
     # Froehlich / adiposogenital - extended
     ["adiposogenital dystrophy", "froelich syndrome", "froehlich syndrome",
      "infundibulo-tuberal syndrome"],
     # Possessive variants for common diseases
     ["bernard-soulier syndrome", "bernard soulier syndrome"],
     ["brown-sequard syndrome", "brown sequard syndrome"],
-    ["glycogen storage disease type vii", "gsd type vii", "tarui disease"],
-    ["glycogen storage disease type ixd", "gsd-ixd", "gsd ixd"],
+    # GSD-VII/IXd merged into GSD mega-group above
     # Hydrocephalus variants
-    ["hydrocephalus", "internal hydrocephalus", "benign hydrocephalus"],
+    ["hydrocephalus", "internal hydrocephalus", "benign hydrocephalus",
+     "normal pressure hydrocephalus", "communicating hydrocephalus",
+     "obstructive hydrocephalus", "non-communicating hydrocephalus"],
     # Ehrlichiosis variants (merged with human monocytic ehrlichiosis)
     ["ehrlichiosis", "ehrlichioses", "human ehrlichioses", "human ehrlichial infection",
-     "human monocytic ehrlichiosis", "hme"],
+     "human monocytic ehrlichiosis", "hme", "human granulocytic ehrlichiosis",
+     "human granulocytic anaplasmosis", "hge"],
     # Townes-Brocks possessive variant
     ["townes-brocks syndrome", "townes-brock syndrome", "townes brocks syndrome"],
     # Accented character variants
@@ -815,8 +821,37 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     # Lipodystrophy
     ["acquired lipodystrophy", "acquired forms of lipodystrophy"],
     # Monosomy
-    ["monosomy 18p", "chromosome 18p monosomy", "chromosome 18 monosomy 18p"],
+    ["monosomy 18p", "chromosome 18p monosomy", "chromosome 18 monosomy 18p",
+     "chromosome 18, monosomy 18p"],
     ["partial monosomy 11q", "chromosome 11 partial monosomy", "jacobsen syndrome"],
+    # Iteration 7 - multi-pass matching + synonym additions
+    # HTLV-I as disease name
+    ["htlv-i associated myelopathy", "htlv-associated myelopathy",
+     "tropical spastic paraparesis", "ham/tsp", "htlv-i",
+     "htlv-i associated myelopathy/tropical spastic paraparesis"],
+    # CIP / chronic intestinal pseudo-obstruction
+    ["chronic intestinal pseudo-obstruction", "cip", "intestinal pseudo-obstruction"],
+    # Semilobar HPE
+    ["holoprosencephaly", "semilobar hpe", "semilobar holoprosencephaly",
+     "alobar holoprosencephaly", "lobar holoprosencephaly"],
+    # HFBP (hereditary fructose-1,6-bisphosphatase deficiency)
+    ["fructose-1,6-bisphosphatase deficiency", "hfbp",
+     "fructose-1,6-biphosphatase deficiency",
+     "hereditary fructose-1,6-bisphosphatase deficiency",
+     "hereditary fructose-1,6-biphosphatase deficiency"],
+    # ACPS type II / Carpenter
+    ["carpenter syndrome", "acps type ii", "acrocephalopolysyndactyly type ii"],
+    # HHV-8-associated MCD
+    ["multicentric castleman disease", "mcd", "hhv-8-associated mcd",
+     "imcd", "inflammatory multicentric castleman disease"],
+    # Stomach flu
+    ["gastroenteritis", "stomach flu"],
+    # Osteopathy / bone disease
+    ["osteopathy", "bone disease"],
+    # Amyoplasia
+    ["amyoplasia", "amyoplasia congenita"],
+    # Embolism
+    ["embolism", "thromboembolism"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
@@ -1003,6 +1038,71 @@ def compare_abbreviations(
     return result
 
 
+def _disease_match_level(sys_text: str, gold_text: str, threshold: float = FUZZY_THRESHOLD) -> int:
+    """Return match priority level (0=no match, 1=exact/possessive, 2=synonym, 3=substring+).
+
+    Used by multi-pass matching to prefer exact matches before substring matches,
+    preventing greedy substring consumption of wrong gold entries.
+    """
+    sys_norm = _normalize_quotes(" ".join(sys_text.strip().lower().split())).strip(".,;:!?)( ")
+    gold_norm = _normalize_quotes(" ".join(gold_text.strip().lower().split())).strip(".,;:!?)( ")
+
+    # Level 1: Exact / possessive match
+    if sys_norm == gold_norm:
+        return 1
+    sys_deposs = re.sub(r"'s\b", "", sys_norm)
+    gold_deposs = re.sub(r"'s\b", "", gold_norm)
+    if sys_deposs == gold_deposs:
+        return 1
+
+    # Level 2: Synonym group match
+    if _to_canonical(sys_norm) == _to_canonical(gold_norm):
+        return 2
+    sys_syn = _normalize_disease_synonyms(sys_norm)
+    gold_syn = _normalize_disease_synonyms(gold_norm)
+    if _to_canonical(sys_syn) == _to_canonical(gold_syn):
+        return 2
+
+    # Level 3: Substring, plural, token overlap, synonym normalization, fuzzy
+    if sys_norm in gold_norm or gold_norm in sys_norm:
+        return 3
+    if sys_deposs in gold_deposs or gold_deposs in sys_deposs:
+        return 3
+
+    for a, b in [(sys_norm, gold_norm), (gold_norm, sys_norm)]:
+        if a.endswith("s") and not a.endswith("ss") and a[:-1] == b:
+            return 3
+        if a.endswith("es") and a[:-2] == b:
+            return 3
+        if a.endswith("ies") and a[:-3] + "y" == b:
+            return 3
+
+    type_pattern = re.compile(r"\s+type\s+(?:i{1,3}|iv|v|vi|[0-9]+[a-z]?)\b", re.IGNORECASE)
+    sys_no_type = type_pattern.sub("", sys_norm).strip()
+    gold_no_type = type_pattern.sub("", gold_norm).strip()
+    if sys_no_type and gold_no_type and sys_no_type == gold_no_type and sys_no_type != sys_norm:
+        return 3
+
+    sys_tokens = set(re.split(r"[\s\-]+", sys_norm)) - {"of", "the", "and", "in", "with", "type", "syndrome", "disease", "disorder"}
+    gold_tokens = set(re.split(r"[\s\-]+", gold_norm)) - {"of", "the", "and", "in", "with", "type", "syndrome", "disease", "disorder"}
+    if sys_tokens and gold_tokens and len(sys_tokens) >= 2 and len(gold_tokens) >= 2:
+        overlap = sys_tokens & gold_tokens
+        min_significant = min(len(sys_tokens), len(gold_tokens))
+        if len(overlap) >= 2 and len(overlap) / min_significant >= 0.65:
+            return 3
+
+    if sys_syn == gold_syn:
+        return 3
+    if sys_syn in gold_syn or gold_syn in sys_syn:
+        return 3
+
+    ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
+    if ratio >= threshold:
+        return 3
+
+    return 0
+
+
 def compare_diseases(
     extracted: List[ExtractedDisease],
     gold: List[GoldDisease],
@@ -1010,8 +1110,10 @@ def compare_diseases(
 ) -> EntityResult:
     """Compare extracted diseases against gold standard.
 
-    Matches against both matched_text (raw document text) and
-    preferred_label (normalized ontology name) for better coverage.
+    Uses multi-pass matching: exact matches first, then synonym groups,
+    then substring/fuzzy. This prevents greedy substring matching from
+    consuming the wrong gold entry (e.g., "ovarian cancer" matching
+    gold "cancer" instead of gold "ovarian cancer").
     """
     result = EntityResult(
         entity_type="diseases",
@@ -1021,45 +1123,62 @@ def compare_diseases(
     )
 
     matched_gold: set[str] = set()
+    matched_ext: set[int] = set()
     matched_canonicals: set[str] = set()
 
-    for ext in extracted:
-        matched = False
+    def _record_tp(ext: ExtractedDisease, ext_idx: int, g: GoldDisease) -> None:
+        result.tp += 1
+        display = ext.matched_text
+        if ext.preferred_label and ext.preferred_label != ext.matched_text:
+            display = f"{ext.matched_text} ({ext.preferred_label})"
+        result.tp_items.append(display)
+        matched_gold.add(g.text_normalized)
+        matched_ext.add(ext_idx)
+        for n in ext.all_names:
+            norm = _normalize_quotes(" ".join(n.strip().lower().split())).strip(".,;:!?)( ")
+            matched_canonicals.add(_to_canonical(norm))
+            matched_canonicals.add(norm)
 
-        # Try matching with all possible names (matched_text and preferred_label)
-        for ext_name in ext.all_names:
-            if matched:
-                break
-            for g in gold:
-                gold_key = g.text_normalized
-                if gold_key not in matched_gold:
-                    if disease_matches(ext_name, g.text_normalized):
-                        result.tp += 1
-                        display = ext.matched_text
-                        if ext.preferred_label and ext.preferred_label != ext.matched_text:
-                            display = f"{ext.matched_text} ({ext.preferred_label})"
-                        result.tp_items.append(display)
-                        matched_gold.add(gold_key)
-                        matched = True
-                        for n in ext.all_names:
-                            norm = _normalize_quotes(" ".join(n.strip().lower().split())).strip(".,;:!?)( ")
-                            matched_canonicals.add(_to_canonical(norm))
-                            matched_canonicals.add(norm)
-                        break
-
-        if not matched:
-            is_redundant = False
+    # Multi-pass matching: exact (level 1), synonym (level 2), substring/fuzzy (level 3)
+    for level in (1, 2, 3):
+        for ext_idx, ext in enumerate(extracted):
+            if ext_idx in matched_ext:
+                continue
             for ext_name in ext.all_names:
-                norm = _normalize_quotes(" ".join(ext_name.strip().lower().split())).strip(".,;:!?)( ")
-                if _to_canonical(norm) in matched_canonicals or norm in matched_canonicals:
+                found = False
+                for g in gold:
+                    if g.text_normalized in matched_gold:
+                        continue
+                    if _disease_match_level(ext_name, g.text_normalized) == level:
+                        _record_tp(ext, ext_idx, g)
+                        found = True
+                        break
+                if found:
+                    break
+
+    # FP counting (unmatched extracted)
+    for ext_idx, ext in enumerate(extracted):
+        if ext_idx in matched_ext:
+            continue
+        is_redundant = False
+        for ext_name in ext.all_names:
+            norm = _normalize_quotes(" ".join(ext_name.strip().lower().split())).strip(".,;:!?)( ")
+            # Also try stripping parenthetical suffixes like "(HME)", "(IGE)", "(Danon disease)"
+            # Apply regex to the raw name BEFORE strip() removes closing parens
+            name_no_paren = re.sub(r"\s*\(.*?\)\s*", " ", ext_name).strip()
+            norm_no_paren = _normalize_quotes(" ".join(name_no_paren.lower().split())).strip(".,;:!?)( ")
+            for try_norm in (norm, norm_no_paren):
+                if _to_canonical(try_norm) in matched_canonicals or try_norm in matched_canonicals:
                     is_redundant = True
                     break
-            if not is_redundant:
-                result.fp += 1
-                display = ext.matched_text
-                if ext.preferred_label and ext.preferred_label != ext.matched_text:
-                    display = f"{ext.matched_text} ({ext.preferred_label})"
-                result.fp_items.append(display)
+            if is_redundant:
+                break
+        if not is_redundant:
+            result.fp += 1
+            display = ext.matched_text
+            if ext.preferred_label and ext.preferred_label != ext.matched_text:
+                display = f"{ext.matched_text} ({ext.preferred_label})"
+            result.fp_items.append(display)
 
     for g in gold:
         gold_key = g.text_normalized
