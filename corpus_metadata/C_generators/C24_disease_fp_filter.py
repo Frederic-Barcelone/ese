@@ -121,6 +121,8 @@ class DiseaseFalsePositiveFilter:
         "predisposition",
         # Common abbreviations that map to diseases in lexicons but aren't diseases
         "plan", "cgh", "csf", "cdc",
+        # Immunoglobulins (not diseases)
+        "ige",
         # Qualifiers / modifiers (not diseases themselves)
         "unilateral", "bilateral", "inversion",
         # Clinical signs that are too generic alone
