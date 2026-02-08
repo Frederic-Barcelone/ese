@@ -22,6 +22,7 @@ Example:
 
 Dependencies:
     - A_core.A19_gene_models: GeneGeneratorType
+    - Z_utils.Z12_data_loader: YAML data loading
     - json, pathlib: For loading external gene data
 """
 
@@ -33,6 +34,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional, Set, Tuple
 
 from A_core.A19_gene_models import GeneGeneratorType
+from Z_utils.Z12_data_loader import load_term_set
 
 
 class GeneFalsePositiveFilter:
@@ -45,236 +47,21 @@ class GeneFalsePositiveFilter:
 
     MIN_LENGTH = 2  # Minimum gene symbol length
 
-    # Statistical terms that look like gene symbols
-    STATISTICAL_TERMS: Set[str] = {
-        "or",   # Odds ratio (also olfactory receptor genes)
-        "hr",   # Hazard ratio
-        "ci",   # Confidence interval
-        "sd",   # Standard deviation
-        "se",   # Standard error
-        "rr",   # Relative risk
-        "mr",   # Mendelian randomization / MR imaging
-        "md",   # Mean difference
-        "smd",  # Standardized mean difference
-        "bmi",  # Body mass index
-        "auc",  # Area under curve
-        "roc",  # ROC curve
-        "icc",  # Intraclass correlation
-        "cv",   # Coefficient of variation
-        "iqr",  # Interquartile range
-        "hr",   # Heart rate (also hazard ratio)
-        "bp",   # Blood pressure / base pairs
-        "ns",   # Not significant
-        "na",   # Not available / Not applicable
-        "nd",   # Not detected
-        "vs",   # Versus
-    }
-
-    # Units and measurements
-    UNITS: Set[str] = {
-        "mm",   # Millimeters
-        "cm",   # Centimeters
-        "kg",   # Kilograms
-        "mg",   # Milligrams
-        "ml",   # Milliliters
-        "dl",   # Deciliters
-        "ul",   # Microliters
-        "ng",   # Nanograms
-        "pg",   # Picograms
-        "hz",   # Hertz
-        "kd",   # Kilodaltons
-        "da",   # Daltons
-        "ph",   # pH
-        "min",  # Minutes
-        "sec",  # Seconds
-        "hr",   # Hours
-        "mo",   # Months
-        "yr",   # Years
-        "wk",   # Weeks
-    }
-
-    # Medical/clinical abbreviations
-    CLINICAL_TERMS: Set[str] = {
-        "iv",   # Intravenous
-        "po",   # Per os (oral)
-        "im",   # Intramuscular
-        "sc",   # Subcutaneous
-        "bid",  # Twice daily
-        "tid",  # Three times daily
-        "qd",   # Once daily
-        "prn",  # As needed
-        "er",   # Emergency room / Extended release
-        "icu",  # Intensive care unit
-        "ed",   # Emergency department
-        "or",   # Operating room
-        "ct",   # CT scan
-        "mri",  # MRI
-        "ecg",  # Electrocardiogram
-        "ekg",  # Electrocardiogram
-        "eeg",  # Electroencephalogram
-        "gfr",  # Glomerular filtration rate
-        "egfr", # eGFR (kidney function) - conflicts with EGFR gene
-        "hba1c",
-        "ldl",  # LDL cholesterol
-        "hdl",  # HDL cholesterol
-        "ast",  # Liver enzyme
-        "alt",  # Liver enzyme
-        "bnp",  # B-type natriuretic peptide
-        "crp",  # C-reactive protein
-        "esr",  # Erythrocyte sedimentation rate
-        "wbc",  # White blood cells
-        "rbc",  # Red blood cells
-        "hgb",  # Hemoglobin
-        "hct",  # Hematocrit
-        "plt",  # Platelets
-        "inr",  # International normalized ratio
-        "ptt",  # Partial thromboplastin time
-        "pt",   # Prothrombin time / Physical therapy
-    }
-
-    # Countries and regions
-    COUNTRIES: Set[str] = {
-        "us", "uk", "eu", "ca", "au", "de", "fr", "jp", "cn", "in",
-        "it", "es", "nl", "be", "ch", "at", "se", "no", "dk", "fi",
-        "pl", "cz", "hu", "ro", "bg", "gr", "pt", "ie", "nz", "sg",
-        "hk", "tw", "kr", "mx", "br", "ar", "cl", "co", "za", "eg",
-    }
-
-    # Credentials and titles
-    CREDENTIALS: Set[str] = {
-        "md", "phd", "mph", "do", "rn", "np", "pa", "pharmd",
-        "dds", "dmd", "dpt", "od", "dvm", "dc", "ms", "ma",
-        "msc", "bsc", "ba", "mba", "jd", "llm",
-    }
-
-    # Drug-related terms that might look like genes
-    DRUG_TERMS: Set[str] = {
-        "ace",  # ACE inhibitors (also ACE gene)
-        "arb",  # ARB drugs
-        "nsaid",
-        "ssri",
-        "snri",
-        "maoi",
-        "ppi",  # Proton pump inhibitors
-        "h2",   # H2 blockers
-        "bb",   # Beta blockers
-        "ccb",  # Calcium channel blockers
-    }
-
-    # Trial and study terms
-    STUDY_TERMS: Set[str] = {
-        "rct",  # Randomized controlled trial
-        "itt",  # Intention to treat
-        "pp",   # Per protocol
-        "sae",  # Serious adverse event
-        "ae",   # Adverse event
-        "dmc",  # Data monitoring committee
-        "dsmb", # Data safety monitoring board
-        "irb",  # Institutional review board
-        "fda",  # Food and Drug Administration
-        "ema",  # European Medicines Agency
-        "ich",  # International Council for Harmonisation
-        "gcp",  # Good Clinical Practice
-    }
-
-    # Common English words that happen to be gene aliases
-    # These should ALWAYS be filtered unless there's strong gene context
-    COMMON_ENGLISH_WORDS: Set[str] = {
-        # Articles, prepositions, conjunctions
-        "of", "an", "as", "on", "at", "by", "to", "in", "is", "it",
-        "be", "we", "me", "he", "or", "so", "do", "go", "no", "up", "if", "am",
-        # Common verbs/nouns
-        "was", "set", "can", "not", "for", "had", "has", "get", "let",
-        "put", "run", "use", "see", "may", "day", "way", "say", "new",
-        "now", "old", "man", "men", "one", "two", "few", "all", "any",
-        "end", "big", "bad", "red", "hot", "cut", "hit", "bit", "fit",
-        "sit", "got", "put", "yet", "met", "net", "wet", "bet", "pet",
-        # Common words that are gene aliases
-        "large", "small", "long", "short", "high", "low", "fast", "slow",
-        "simple", "fix", "max", "min", "med", "per", "pre", "pro",
-        "cox", "age", "lar", "van", "lee", "kim", "li", "wu", "liu",
-        "wang", "chen", "yang", "zhang", "lin", "sun", "ma",
-        # Abbreviations commonly mistaken
-        "ge", "et", "ds", "wr", "uk", "us",
-        # Additional common words that are gene aliases
-        "son", "best", "ren", "rest", "last", "most", "near", "well", "good",
-        "part", "step", "mark", "ring", "pair", "map", "gap", "cap", "tip",
-        "bar", "tag", "tan", "dim",
-        # Section headers and document structure
-        "methods", "results", "discussion", "conclusion", "abstract",
-        "introduction", "background", "references", "table", "figure",
-    }
-
-    # Context keywords that suggest gene usage
-    GENE_CONTEXT_KEYWORDS: Set[str] = {
-        "gene", "genes", "genetic", "genomic", "genome",
-        "mutation", "mutations", "mutant", "mutated",
-        "variant", "variants", "variation", "polymorphism", "snp", "snps",
-        "allele", "alleles", "allelic",
-        "genotype", "genotypes", "genotyping",
-        "expression", "expressed", "overexpression", "downregulation",
-        "mrna", "transcript", "transcription", "transcriptional",
-        "protein", "proteins", "polypeptide",
-        "heterozygous", "homozygous", "carrier", "carriers",
-        "pathogenic", "benign", "vus", "likely pathogenic",
-        "exon", "exons", "intron", "introns",
-        "locus", "loci", "chromosome", "chromosomal",
-        "knockout", "knockdown", "transgenic",
-        "splicing", "splice", "frameshift", "missense", "nonsense",
-        "deletion", "insertion", "duplication",
-        "hgnc", "entrez", "ensembl", "omim",
-        "encode", "encodes", "encoding",
-    }
-
-    # Context keywords that suggest non-gene usage
-    NON_GENE_CONTEXT_KEYWORDS: Set[str] = {
-        "odds ratio", "hazard ratio", "confidence interval",
-        "p-value", "p value", "p =", "p<", "p >",
-        "statistically", "significant", "significance",
-        "administered", "dosage", "dose", "doses", "dosing",
-        "mg/kg", "mg/day", "mg/ml",
-        "intravenous", "subcutaneous", "intramuscular", "oral",
-        "treatment arm", "placebo", "control group",
-        "mmhg", "mm hg", "beats per minute", "bpm",
-        "ml/min", "l/min", "kg/m2",
-        "median", "mean", "average", "range",
-    }
-
-    # Clinical questionnaire/instrument abbreviations confused with genes
-    QUESTIONNAIRE_TERMS: Set[str] = {
-        "maf",   # Multidimensional Assessment of Fatigue
-        "haq",   # Health Assessment Questionnaire
-        "das",   # Disease Activity Score
-        "bdi",   # Beck Depression Inventory
-        "gad",   # Generalized Anxiety Disorder scale
-        "phq",   # Patient Health Questionnaire
-    }
-
-    # Antibody abbreviations confused with genes
-    ANTIBODY_ABBREVIATIONS: Set[str] = {
-        "acpa",  # Anti-Citrullinated Protein Antibody
-        "ana",   # Antinuclear Antibody
-        "asca",  # Anti-Saccharomyces cerevisiae Antibodies
-    }
-
-    # Context keywords indicating antibody usage (not gene)
-    ANTIBODY_CONTEXT_KEYWORDS: Set[str] = {
-        "antibod", "titer", "seropositive", "seronegative",
-        "autoantibod", "immunoassay", "elisa", "positivity",
-        "serolog", "reactiv",
-    }
-
-    # Short genes that ALWAYS need context validation (2-3 chars)
-    SHORT_GENES_NEED_CONTEXT: Set[str] = {
-        "ar", "vr", "hr", "mr", "or", "nr", "er", "pr", "gr",
-        "ca", "cb", "cd", "ce", "cf", "cg", "ch", "ci", "ck", "cl", "cm", "cn", "co", "cp", "cr", "cs", "ct", "cu", "cv", "cx", "cy",
-        "il", "in", "ir", "is", "it",
-        "no", "np", "nr", "ns", "nt",
-        "pa", "pb", "pc", "pd", "pe", "pf", "pg", "ph", "pi", "pk", "pl", "pm", "pn", "po", "pp", "pr", "ps", "pt", "pu", "pv", "px", "py",
-        "ra", "rb", "rc", "rd", "re", "rf", "rg", "rh", "ri", "rn", "ro", "rp", "rr", "rs", "rt", "ru", "rv", "rx", "ry",
-        "sa", "sb", "sc", "sd", "se", "sf", "sg", "sh", "si", "sk", "sl", "sm", "sn", "so", "sp", "sr", "ss", "st", "su", "sv", "sx", "sy",
-        "ta", "tb", "tc", "td", "te", "tf", "tg", "th", "ti", "tk", "tl", "tm", "tn", "to", "tp", "tr", "ts", "tt", "tu", "tv", "tx", "ty",
-    }
+    # All term sets loaded from G_config/data/gene_fp_terms.yaml
+    STATISTICAL_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "statistical_terms")
+    UNITS: Set[str] = load_term_set("gene_fp_terms.yaml", "units")
+    CLINICAL_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "clinical_terms")
+    COUNTRIES: Set[str] = load_term_set("gene_fp_terms.yaml", "countries")
+    CREDENTIALS: Set[str] = load_term_set("gene_fp_terms.yaml", "credentials")
+    DRUG_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "drug_terms")
+    STUDY_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "study_terms")
+    COMMON_ENGLISH_WORDS: Set[str] = load_term_set("gene_fp_terms.yaml", "common_english_words")
+    GENE_CONTEXT_KEYWORDS: Set[str] = load_term_set("gene_fp_terms.yaml", "gene_context_keywords")
+    NON_GENE_CONTEXT_KEYWORDS: Set[str] = load_term_set("gene_fp_terms.yaml", "non_gene_context_keywords")
+    QUESTIONNAIRE_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "questionnaire_terms")
+    ANTIBODY_ABBREVIATIONS: Set[str] = load_term_set("gene_fp_terms.yaml", "antibody_abbreviations")
+    ANTIBODY_CONTEXT_KEYWORDS: Set[str] = load_term_set("gene_fp_terms.yaml", "antibody_context_keywords")
+    SHORT_GENES_NEED_CONTEXT: Set[str] = load_term_set("gene_fp_terms.yaml", "short_genes_need_context")
 
     def __init__(self, lexicon_base_path: Optional[Path] = None):
         self.statistical_lower = {w.lower() for w in self.STATISTICAL_TERMS}

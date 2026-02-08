@@ -1,0 +1,594 @@
+# Gene false positive filter terms
+# Extracted from C_generators/C34_gene_fp_filter.py GeneFalsePositiveFilter class constants
+# All values are lowercased strings used for filtering ambiguous gene symbols
+
+# Statistical terms that look like gene symbols
+statistical_terms:
+  - "or"    # Odds ratio (also olfactory receptor genes)
+  - "hr"    # Hazard ratio
+  - "ci"    # Confidence interval
+  - "sd"    # Standard deviation
+  - "se"    # Standard error
+  - "rr"    # Relative risk
+  - "mr"    # Mendelian randomization / MR imaging
+  - "md"    # Mean difference
+  - "smd"   # Standardized mean difference
+  - "bmi"   # Body mass index
+  - "auc"   # Area under curve
+  - "roc"   # ROC curve
+  - "icc"   # Intraclass correlation
+  - "cv"    # Coefficient of variation
+  - "iqr"   # Interquartile range
+  - "bp"    # Blood pressure / base pairs
+  - "ns"    # Not significant
+  - "na"    # Not available / Not applicable
+  - "nd"    # Not detected
+  - "vs"    # Versus
+
+# Units and measurements
+units:
+  - "mm"    # Millimeters
+  - "cm"    # Centimeters
+  - "kg"    # Kilograms
+  - "mg"    # Milligrams
+  - "ml"    # Milliliters
+  - "dl"    # Deciliters
+  - "ul"    # Microliters
+  - "ng"    # Nanograms
+  - "pg"    # Picograms
+  - "hz"    # Hertz
+  - "kd"    # Kilodaltons
+  - "da"    # Daltons
+  - "ph"    # pH
+  - "min"   # Minutes
+  - "sec"   # Seconds
+  - "hr"    # Hours
+  - "mo"    # Months
+  - "yr"    # Years
+  - "wk"    # Weeks
+
+# Medical/clinical abbreviations
+clinical_terms:
+  - "iv"    # Intravenous
+  - "po"    # Per os (oral)
+  - "im"    # Intramuscular
+  - "sc"    # Subcutaneous
+  - "bid"   # Twice daily
+  - "tid"   # Three times daily
+  - "qd"    # Once daily
+  - "prn"   # As needed
+  - "er"    # Emergency room / Extended release
+  - "icu"   # Intensive care unit
+  - "ed"    # Emergency department
+  - "or"    # Operating room
+  - "ct"    # CT scan
+  - "mri"   # MRI
+  - "ecg"   # Electrocardiogram
+  - "ekg"   # Electrocardiogram
+  - "eeg"   # Electroencephalogram
+  - "gfr"   # Glomerular filtration rate
+  - "egfr"  # eGFR (kidney function) - conflicts with EGFR gene
+  - "hba1c"
+  - "ldl"   # LDL cholesterol
+  - "hdl"   # HDL cholesterol
+  - "ast"   # Liver enzyme
+  - "alt"   # Liver enzyme
+  - "bnp"   # B-type natriuretic peptide
+  - "crp"   # C-reactive protein
+  - "esr"   # Erythrocyte sedimentation rate
+  - "wbc"   # White blood cells
+  - "rbc"   # Red blood cells
+  - "hgb"   # Hemoglobin
+  - "hct"   # Hematocrit
+  - "plt"   # Platelets
+  - "inr"   # International normalized ratio
+  - "ptt"   # Partial thromboplastin time
+  - "pt"    # Prothrombin time / Physical therapy
+
+# Countries and regions
+countries:
+  - "us"
+  - "uk"
+  - "eu"
+  - "ca"
+  - "au"
+  - "de"
+  - "fr"
+  - "jp"
+  - "cn"
+  - "in"
+  - "it"
+  - "es"
+  - "nl"
+  - "be"
+  - "ch"
+  - "at"
+  - "se"
+  - "no"
+  - "dk"
+  - "fi"
+  - "pl"
+  - "cz"
+  - "hu"
+  - "ro"
+  - "bg"
+  - "gr"
+  - "pt"
+  - "ie"
+  - "nz"
+  - "sg"
+  - "hk"
+  - "tw"
+  - "kr"
+  - "mx"
+  - "br"
+  - "ar"
+  - "cl"
+  - "co"
+  - "za"
+  - "eg"
+
+# Credentials and titles
+credentials:
+  - "md"
+  - "phd"
+  - "mph"
+  - "do"
+  - "rn"
+  - "np"
+  - "pa"
+  - "pharmd"
+  - "dds"
+  - "dmd"
+  - "dpt"
+  - "od"
+  - "dvm"
+  - "dc"
+  - "ms"
+  - "ma"
+  - "msc"
+  - "bsc"
+  - "ba"
+  - "mba"
+  - "jd"
+  - "llm"
+
+# Drug-related terms that might look like genes
+drug_terms:
+  - "ace"   # ACE inhibitors (also ACE gene)
+  - "arb"   # ARB drugs
+  - "nsaid"
+  - "ssri"
+  - "snri"
+  - "maoi"
+  - "ppi"   # Proton pump inhibitors
+  - "h2"    # H2 blockers
+  - "bb"    # Beta blockers
+  - "ccb"   # Calcium channel blockers
+
+# Trial and study terms
+study_terms:
+  - "rct"   # Randomized controlled trial
+  - "itt"   # Intention to treat
+  - "pp"    # Per protocol
+  - "sae"   # Serious adverse event
+  - "ae"    # Adverse event
+  - "dmc"   # Data monitoring committee
+  - "dsmb"  # Data safety monitoring board
+  - "irb"   # Institutional review board
+  - "fda"   # Food and Drug Administration
+  - "ema"   # European Medicines Agency
+  - "ich"   # International Council for Harmonisation
+  - "gcp"   # Good Clinical Practice
+
+# Common English words that happen to be gene aliases
+# These should ALWAYS be filtered unless there's strong gene context
+common_english_words:
+  # Articles, prepositions, conjunctions
+  - "of"
+  - "an"
+  - "as"
+  - "on"
+  - "at"
+  - "by"
+  - "to"
+  - "in"
+  - "is"
+  - "it"
+  - "be"
+  - "we"
+  - "me"
+  - "he"
+  - "or"
+  - "so"
+  - "do"
+  - "go"
+  - "no"
+  - "up"
+  - "if"
+  - "am"
+  # Common verbs/nouns
+  - "was"
+  - "set"
+  - "can"
+  - "not"
+  - "for"
+  - "had"
+  - "has"
+  - "get"
+  - "let"
+  - "put"
+  - "run"
+  - "use"
+  - "see"
+  - "may"
+  - "day"
+  - "way"
+  - "say"
+  - "new"
+  - "now"
+  - "old"
+  - "man"
+  - "men"
+  - "one"
+  - "two"
+  - "few"
+  - "all"
+  - "any"
+  - "end"
+  - "big"
+  - "bad"
+  - "red"
+  - "hot"
+  - "cut"
+  - "hit"
+  - "bit"
+  - "fit"
+  - "sit"
+  - "got"
+  - "put"
+  - "yet"
+  - "met"
+  - "net"
+  - "wet"
+  - "bet"
+  - "pet"
+  # Common words that are gene aliases
+  - "large"
+  - "small"
+  - "long"
+  - "short"
+  - "high"
+  - "low"
+  - "fast"
+  - "slow"
+  - "simple"
+  - "fix"
+  - "max"
+  - "min"
+  - "med"
+  - "per"
+  - "pre"
+  - "pro"
+  - "cox"
+  - "age"
+  - "lar"
+  - "van"
+  - "lee"
+  - "kim"
+  - "li"
+  - "wu"
+  - "liu"
+  - "wang"
+  - "chen"
+  - "yang"
+  - "zhang"
+  - "lin"
+  - "sun"
+  - "ma"
+  # Abbreviations commonly mistaken
+  - "ge"
+  - "et"
+  - "ds"
+  - "wr"
+  - "uk"
+  - "us"
+  # Additional common words that are gene aliases
+  - "son"
+  - "best"
+  - "ren"
+  - "rest"
+  - "last"
+  - "most"
+  - "near"
+  - "well"
+  - "good"
+  - "part"
+  - "step"
+  - "mark"
+  - "ring"
+  - "pair"
+  - "map"
+  - "gap"
+  - "cap"
+  - "tip"
+  - "bar"
+  - "tag"
+  - "tan"
+  - "dim"
+  # Section headers and document structure
+  - "methods"
+  - "results"
+  - "discussion"
+  - "conclusion"
+  - "abstract"
+  - "introduction"
+  - "background"
+  - "references"
+  - "table"
+  - "figure"
+
+# Context keywords that suggest gene usage
+gene_context_keywords:
+  - "gene"
+  - "genes"
+  - "genetic"
+  - "genomic"
+  - "genome"
+  - "mutation"
+  - "mutations"
+  - "mutant"
+  - "mutated"
+  - "variant"
+  - "variants"
+  - "variation"
+  - "polymorphism"
+  - "snp"
+  - "snps"
+  - "allele"
+  - "alleles"
+  - "allelic"
+  - "genotype"
+  - "genotypes"
+  - "genotyping"
+  - "expression"
+  - "expressed"
+  - "overexpression"
+  - "downregulation"
+  - "mrna"
+  - "transcript"
+  - "transcription"
+  - "transcriptional"
+  - "protein"
+  - "proteins"
+  - "polypeptide"
+  - "heterozygous"
+  - "homozygous"
+  - "carrier"
+  - "carriers"
+  - "pathogenic"
+  - "benign"
+  - "vus"
+  - "likely pathogenic"
+  - "exon"
+  - "exons"
+  - "intron"
+  - "introns"
+  - "locus"
+  - "loci"
+  - "chromosome"
+  - "chromosomal"
+  - "knockout"
+  - "knockdown"
+  - "transgenic"
+  - "splicing"
+  - "splice"
+  - "frameshift"
+  - "missense"
+  - "nonsense"
+  - "deletion"
+  - "insertion"
+  - "duplication"
+  - "hgnc"
+  - "entrez"
+  - "ensembl"
+  - "omim"
+  - "encode"
+  - "encodes"
+  - "encoding"
+
+# Context keywords that suggest non-gene usage
+non_gene_context_keywords:
+  - "odds ratio"
+  - "hazard ratio"
+  - "confidence interval"
+  - "p-value"
+  - "p value"
+  - "p ="
+  - "p<"
+  - "p >"
+  - "statistically"
+  - "significant"
+  - "significance"
+  - "administered"
+  - "dosage"
+  - "dose"
+  - "doses"
+  - "dosing"
+  - "mg/kg"
+  - "mg/day"
+  - "mg/ml"
+  - "intravenous"
+  - "subcutaneous"
+  - "intramuscular"
+  - "oral"
+  - "treatment arm"
+  - "placebo"
+  - "control group"
+  - "mmhg"
+  - "mm hg"
+  - "beats per minute"
+  - "bpm"
+  - "ml/min"
+  - "l/min"
+  - "kg/m2"
+  - "median"
+  - "mean"
+  - "average"
+  - "range"
+
+# Clinical questionnaire/instrument abbreviations confused with genes
+questionnaire_terms:
+  - "maf"   # Multidimensional Assessment of Fatigue
+  - "haq"   # Health Assessment Questionnaire
+  - "das"   # Disease Activity Score
+  - "bdi"   # Beck Depression Inventory
+  - "gad"   # Generalized Anxiety Disorder scale
+  - "phq"   # Patient Health Questionnaire
+
+# Antibody abbreviations confused with genes
+antibody_abbreviations:
+  - "acpa"  # Anti-Citrullinated Protein Antibody
+  - "ana"   # Antinuclear Antibody
+  - "asca"  # Anti-Saccharomyces cerevisiae Antibodies
+
+# Context keywords indicating antibody usage (not gene)
+antibody_context_keywords:
+  - "antibod"
+  - "titer"
+  - "seropositive"
+  - "seronegative"
+  - "autoantibod"
+  - "immunoassay"
+  - "elisa"
+  - "positivity"
+  - "serolog"
+  - "reactiv"
+
+# Short genes that ALWAYS need context validation (2-3 chars)
+short_genes_need_context:
+  - "ar"
+  - "vr"
+  - "hr"
+  - "mr"
+  - "or"
+  - "nr"
+  - "er"
+  - "pr"
+  - "gr"
+  - "ca"
+  - "cb"
+  - "cd"
+  - "ce"
+  - "cf"
+  - "cg"
+  - "ch"
+  - "ci"
+  - "ck"
+  - "cl"
+  - "cm"
+  - "cn"
+  - "co"
+  - "cp"
+  - "cr"
+  - "cs"
+  - "ct"
+  - "cu"
+  - "cv"
+  - "cx"
+  - "cy"
+  - "il"
+  - "in"
+  - "ir"
+  - "is"
+  - "it"
+  - "no"
+  - "np"
+  - "nr"
+  - "ns"
+  - "nt"
+  - "pa"
+  - "pb"
+  - "pc"
+  - "pd"
+  - "pe"
+  - "pf"
+  - "pg"
+  - "ph"
+  - "pi"
+  - "pk"
+  - "pl"
+  - "pm"
+  - "pn"
+  - "po"
+  - "pp"
+  - "pr"
+  - "ps"
+  - "pt"
+  - "pu"
+  - "pv"
+  - "px"
+  - "py"
+  - "ra"
+  - "rb"
+  - "rc"
+  - "rd"
+  - "re"
+  - "rf"
+  - "rg"
+  - "rh"
+  - "ri"
+  - "rn"
+  - "ro"
+  - "rp"
+  - "rr"
+  - "rs"
+  - "rt"
+  - "ru"
+  - "rv"
+  - "rx"
+  - "ry"
+  - "sa"
+  - "sb"
+  - "sc"
+  - "sd"
+  - "se"
+  - "sf"
+  - "sg"
+  - "sh"
+  - "si"
+  - "sk"
+  - "sl"
+  - "sm"
+  - "sn"
+  - "so"
+  - "sp"
+  - "sr"
+  - "ss"
+  - "st"
+  - "su"
+  - "sv"
+  - "sx"
+  - "sy"
+  - "ta"
+  - "tb"
+  - "tc"
+  - "td"
+  - "te"
+  - "tf"
+  - "tg"
+  - "th"
+  - "ti"
+  - "tk"
+  - "tl"
+  - "tm"
+  - "tn"
+  - "to"
+  - "tp"
+  - "tr"
+  - "ts"
+  - "tt"
+  - "tu"
+  - "tv"
+  - "tx"
+  - "ty"

@@ -1,0 +1,97 @@
+# Common drug abbreviations mapped to their canonical full names
+drug_abbreviations:
+  # Immunosuppressants
+  "mtx": "methotrexate"
+  "aza": "azathioprine"
+  "mmf": "mycophenolate mofetil"
+  "cspa": "cyclosporine"
+  "csa": "cyclosporine"
+  "cyc": "cyclophosphamide"
+  "ctx": "cyclophosphamide"
+  "rtx": "rituximab"
+  # Corticosteroids
+  "pred": "prednisolone"
+  "mpd": "methylprednisolone"
+  "dex": "dexamethasone"
+  "hc": "hydrocortisone"
+  # Common chemotherapy
+  "5-fu": "fluorouracil"
+  "5fu": "fluorouracil"
+  "dox": "doxorubicin"
+  "cis": "cisplatin"
+  "carbo": "carboplatin"
+  "pacl": "paclitaxel"
+  "vcr": "vincristine"
+  "vbl": "vinblastine"
+  # Antibiotics
+  "amox": "amoxicillin"
+  "augmentin": "amoxicillin clavulanate"
+  "vanco": "vancomycin"
+  "gent": "gentamicin"
+  "ceftx": "ceftriaxone"
+  "tmp-smx": "trimethoprim sulfamethoxazole"
+  "bactrim": "trimethoprim sulfamethoxazole"
+  # Anticoagulants
+  "ufh": "unfractionated heparin"
+  "lmwh": "low molecular weight heparin"
+  # Biologics
+  "ivig": "intravenous immunoglobulin"
+  "scig": "subcutaneous immunoglobulin"
+  "tnfi": "tumor necrosis factor inhibitor"
+  # Partial name to full name mappings
+  "mycophenolate": "mycophenolate mofetil"
+  # Cardiovascular
+  "asa": "aspirin"
+  "atenol": "atenolol"
+  "ntg": "nitroglycerin"
+  "acei": "angiotensin converting enzyme inhibitor"
+  "arb": "angiotensin receptor blocker"
+  # Pain management
+  "apap": "acetaminophen"
+  "nsaid": "nonsteroidal anti-inflammatory drug"
+  # Diabetes
+  "met": "metformin"
+  # Other common
+  "ppi": "proton pump inhibitor"
+  "h2ra": "h2 receptor antagonist"
+
+# Consumer drug misspellings and regional brand variants -> canonical names
+# Used by DrugDetector to expand FlashText matching for social media/patient text
+consumer_drug_variants:
+  # Statin misspellings
+  "sinivastatin": "simvastatin"
+  "zocar": "simvastatin"
+  "zorcor": "simvastatin"
+  "liptor": "atorvastatin"
+  "lipitors": "atorvastatin"
+  "pravochol": "pravastatin"
+  "mevacore": "lovastatin"
+  # NSAID/analgesic misspellings
+  "asprin": "aspirin"
+  "alleve": "naproxen"
+  "relefen": "nabumetone"
+  "artrotec": "diclofenac"
+  "capsacian": "capsaicin"
+  "hydrocodine": "hydrocodone"
+  "propain": "paracetamol"
+  # Other common misspellings
+  "insalin": "insulin"
+  "trazadone": "trazodone"
+  "testonrone": "testosterone"
+  "ezetimbe": "ezetimibe"
+  "naicin": "niacin"
+  "actose": "pioglitazone"
+  "capiten": "captopril"
+  "glcotrol": "glipizide"
+  # AU/NZ consumer brand names
+  "panadeine": "paracetamol"
+  "panadeine forte": "paracetamol"
+  "mypaid forte": "paracetamol"
+  "pamprin": "pamabrom"
+  # Additional misspellings from CADEC social media
+  "vitimin c": "vitamin c"
+  "percocette": "percocet"
+  "cyclobenzoprene": "cyclobenzaprine"
+  "lipior": "atorvastatin"
+  "provastatin": "pravastatin"
+  "benedryl": "benadryl"
