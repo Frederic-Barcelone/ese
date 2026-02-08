@@ -134,7 +134,7 @@ class DiseaseFalsePositiveFilter:
         "rare disorder", "autosomal dominant", "autosomal recessive",
         "x-linked", "rare disease",
         "birth defect", "birth defects",
-        "loose stools", "intellectual disabilities",
+        "loose stools",
         "the syndrome", "increased blood pressure",
         "congenital anomalies of the kidney and urinary tract",
         # Symptoms/signs, not diseases

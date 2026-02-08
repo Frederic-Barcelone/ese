@@ -40,6 +40,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import unicodedata
 import warnings
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
@@ -165,6 +166,23 @@ class DiseaseDetector:
     def _to_curly_apostrophes(text: str) -> str:
         """Convert ASCII apostrophes to curly for matching PDF text."""
         return text.replace("'", "\u2019")
+
+    @staticmethod
+    def _strip_accents(text: str) -> str:
+        """Strip accents while preserving string length (1-to-1 char mapping).
+
+        Processes char-by-char so each input character maps to exactly one
+        output character, keeping FlashText span positions valid.
+        """
+        result: list[str] = []
+        for char in text:
+            nfkd = unicodedata.normalize("NFKD", char)
+            base = nfkd[0] if nfkd else char
+            if unicodedata.category(base).startswith("M"):
+                result.append(char)
+            else:
+                result.append(base)
+        return "".join(result)
 
     def __init__(self, config: Optional[dict] = None):
         self.config = config or {}
@@ -348,6 +366,10 @@ class DiseaseDetector:
                 self.general_kp.add_keyword(self._to_curly_apostrophes(label), key)
             elif "\u2019" in label:
                 self.general_kp.add_keyword(self._normalize_apostrophes(label), key)
+            # Add accent-stripped variant for matching accented PDF text
+            label_stripped = self._strip_accents(label)
+            if label_stripped != label:
+                self.general_kp.add_keyword(label_stripped, key)
             plural = self._generate_plural(label)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -402,6 +424,10 @@ class DiseaseDetector:
                 self.general_kp.add_keyword(self._to_curly_apostrophes(name), key)
             elif "\u2019" in name:
                 self.general_kp.add_keyword(self._normalize_apostrophes(name), key)
+            # Add accent-stripped variant
+            name_stripped = self._strip_accents(name)
+            if name_stripped != name:
+                self.general_kp.add_keyword(name_stripped, key)
             plural = self._generate_plural(name)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -412,6 +438,10 @@ class DiseaseDetector:
                         self.general_kp.add_keyword(self._to_curly_apostrophes(syn), key)
                     elif "\u2019" in syn:
                         self.general_kp.add_keyword(self._normalize_apostrophes(syn), key)
+                    # Add accent-stripped variant for synonyms
+                    syn_stripped = self._strip_accents(syn)
+                    if syn_stripped != syn:
+                        self.general_kp.add_keyword(syn_stripped, key)
                     syn_plural = self._generate_plural(syn)
                     if syn_plural:
                         self.general_kp.add_keyword(syn_plural, key)
@@ -482,6 +512,10 @@ class DiseaseDetector:
                 self.general_kp.add_keyword(self._to_curly_apostrophes(label), key)
             elif "\u2019" in label:
                 self.general_kp.add_keyword(self._normalize_apostrophes(label), key)
+            # Add accent-stripped variant
+            label_stripped = self._strip_accents(label)
+            if label_stripped != label:
+                self.general_kp.add_keyword(label_stripped, key)
             plural = self._generate_plural(label)
             if plural:
                 self.general_kp.add_keyword(plural, key)
@@ -491,6 +525,10 @@ class DiseaseDetector:
                     self.general_kp.add_keyword(self._to_curly_apostrophes(syn), key)
                 elif "\u2019" in syn:
                     self.general_kp.add_keyword(self._normalize_apostrophes(syn), key)
+                # Add accent-stripped variant for synonyms
+                syn_stripped = self._strip_accents(syn)
+                if syn_stripped != syn:
+                    self.general_kp.add_keyword(syn_stripped, key)
                 syn_plural = self._generate_plural(syn)
                 if syn_plural:
                     self.general_kp.add_keyword(syn_plural, key)
@@ -762,6 +800,19 @@ class DiseaseDetector:
 
         # FlashText returns (key, start, end), not (matched_text, start, end)
         hits = self.general_kp.extract_keywords(text, span_info=True)
+
+        # Also match on accent-stripped text to catch accented characters in PDFs
+        # (e.g., "Brown-Séquard" matches lexicon "Brown-Sequard")
+        # _strip_accents preserves string length so positions map to original text
+        text_stripped = self._strip_accents(text)
+        if text_stripped != text:
+            existing_spans = {(s, e) for _, s, e in hits}
+            for key, start, end in self.general_kp.extract_keywords(
+                text_stripped, span_info=True
+            ):
+                if (start, end) not in existing_spans:
+                    hits.append((key, start, end))
+
         for key, start, end in hits:
             if not key or key not in self.general_entries:
                 continue
