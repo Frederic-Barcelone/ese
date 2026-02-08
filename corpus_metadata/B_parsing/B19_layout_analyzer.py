@@ -41,9 +41,9 @@ import anthropic
 import fitz  # PyMuPDF
 from PIL import Image, ImageDraw, ImageFont
 
-from D_validation.D02_llm_engine import record_api_usage, resolve_model_tier
+from Z_utils.Z13_llm_tracking import record_api_usage, resolve_model_tier
 
-from B_parsing.B18_layout_models import (
+from A_core.A24_layout_models import (
     LayoutPattern,
     PageLayout,
     VisualPosition,

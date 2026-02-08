@@ -35,7 +35,7 @@ if str(CORPUS_METADATA) not in sys.path:
     sys.path.insert(0, str(CORPUS_METADATA))
 
 from A_core.A01_domain_models import BoundingBox
-from B_parsing.B02_doc_graph import ContentRole, DocumentGraph, Page, TextBlock
+from A_core.A23_doc_graph_models import ContentRole, DocumentGraph, Page, TextBlock
 
 # Reuse F03 matching logic
 FUZZY_THRESHOLD = 0.8

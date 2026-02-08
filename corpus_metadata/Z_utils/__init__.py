@@ -12,4 +12,7 @@ Provides:
 - Z08: Download utilities for lexicons
 - Z09: Gene lexicon download script
 - Z10: General lexicon download scripts
+- Z11: Entity helpers
+- Z12: Data loader for YAML configuration files
+- Z13: LLM usage tracking, cost calculation, and model tier routing
 """

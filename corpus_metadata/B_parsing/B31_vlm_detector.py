@@ -40,7 +40,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import anthropic
 import fitz  # PyMuPDF
 
-from D_validation.D02_llm_engine import record_api_usage, resolve_model_tier
+from Z_utils.Z13_llm_tracking import record_api_usage, resolve_model_tier
 
 logger = logging.getLogger(__name__)
 

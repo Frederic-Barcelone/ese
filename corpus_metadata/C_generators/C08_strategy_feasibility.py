@@ -61,7 +61,7 @@ from A_core.A07_feasibility_models import (
     StudySite,
     VaccinationRequirement,
 )
-from B_parsing.B02_doc_graph import DocumentGraph
+from A_core.A23_doc_graph_models import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
 from B_parsing.B06_confidence import ConfidenceFeatures, ConfidenceCalculator
 from B_parsing.B07_negation import NegationDetector, EXCEPTION_CUES

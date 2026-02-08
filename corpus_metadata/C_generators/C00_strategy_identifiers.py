@@ -54,7 +54,7 @@ from A_core.A01_domain_models import (
 )
 from A_core.A02_interfaces import BaseCandidateGenerator
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
-from B_parsing.B02_doc_graph import DocumentGraph
+from A_core.A23_doc_graph_models import DocumentGraph
 
 
 class IdentifierType(str, Enum):

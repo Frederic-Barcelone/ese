@@ -35,7 +35,7 @@ from typing import Any, Dict, List, Optional
 logger = logging.getLogger(__name__)
 
 from A_core.A01_domain_models import BoundingBox
-from B_parsing.B02_doc_graph import DocumentGraph, Table, TableCell, TableType
+from A_core.A23_doc_graph_models import DocumentGraph, Table, TableCell, TableType
 from B_parsing.B28_docling_backend import DoclingTableExtractor
 
 # Rendering module (B14) - visual rendering functions

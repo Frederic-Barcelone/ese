@@ -45,7 +45,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from B_parsing.B02_doc_graph import DocumentGraph
+    from A_core.A23_doc_graph_models import DocumentGraph
     from A_core.A01_domain_models import (
         Candidate,
         ExtractedEntity,

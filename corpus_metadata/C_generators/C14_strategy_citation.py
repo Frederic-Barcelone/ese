@@ -55,7 +55,7 @@ from A_core.A11_citation_models import (
 )
 
 if TYPE_CHECKING:
-    from B_parsing.B02_doc_graph import DocumentGraph
+    from A_core.A23_doc_graph_models import DocumentGraph
 
 # Module logger
 logger = get_logger(__name__)

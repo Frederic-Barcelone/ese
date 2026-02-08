@@ -39,7 +39,7 @@ import yaml
 from Z_utils.Z05_path_utils import get_base_path
 from Z_utils.Z06_usage_tracker import UsageTracker
 from Z_utils.Z07_console_output import get_printer, reset_printer
-from D_validation.D02_llm_engine import get_usage_tracker, calc_record_cost
+from Z_utils.Z13_llm_tracking import get_usage_tracker, calc_record_cost
 # =============================================================================
 
 # Ensure imports work
@@ -1221,7 +1221,7 @@ class Orchestrator:
         self, doc, pdf_path: Path
     ) -> List[CarePathway]:
         """Extract care pathways from flowchart/algorithm figures."""
-        from B_parsing.B02_doc_graph import ImageType
+        from A_core.A23_doc_graph_models import ImageType
 
         if not self.flowchart_extractor:
             return []

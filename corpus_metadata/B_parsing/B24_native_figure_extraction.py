@@ -41,7 +41,7 @@ logger = logging.getLogger(__name__)
 import fitz  # PyMuPDF
 
 from A_core.A01_domain_models import BoundingBox
-from B_parsing.B02_doc_graph import ImageBlock, ImageType
+from A_core.A23_doc_graph_models import ImageBlock, ImageType
 
 from B_parsing.B23_text_helpers import PERCENTAGE_PATTERN
 
@@ -65,7 +65,7 @@ from B_parsing.B11_extraction_resolver import (
 )
 
 if TYPE_CHECKING:
-    from B_parsing.B02_doc_graph import DocumentGraph
+    from A_core.A23_doc_graph_models import DocumentGraph
 
 
 def classify_image_type(

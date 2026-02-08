@@ -30,7 +30,7 @@ import logging
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
-from B_parsing.B18_layout_models import (
+from A_core.A24_layout_models import (
     PageLayout,
     VisualPosition,
     VisualZone,

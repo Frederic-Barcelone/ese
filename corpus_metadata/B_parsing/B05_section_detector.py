@@ -32,7 +32,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from B_parsing.B02_doc_graph import ContentRole
+from A_core.A23_doc_graph_models import ContentRole
 
 
 # =============================================================================

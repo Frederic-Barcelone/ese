@@ -52,7 +52,7 @@ from unstructured.partition.pdf import partition_pdf
 
 from A_core.A02_interfaces import BaseParser
 from A_core.A01_domain_models import BoundingBox
-from B_parsing.B02_doc_graph import DocumentGraph, Page, TextBlock, ContentRole, ImageBlock, ImageType
+from A_core.A23_doc_graph_models import DocumentGraph, Page, TextBlock, ContentRole, ImageBlock, ImageType
 
 # Text helpers (B23)
 from B_parsing.B23_text_helpers import (

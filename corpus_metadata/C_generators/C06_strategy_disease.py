@@ -59,7 +59,7 @@ from A_core.A05_disease_models import (
     DiseaseProvenanceMetadata,
 )
 from A_core.A15_domain_profile import load_domain_profile
-from B_parsing.B02_doc_graph import DocumentGraph
+from A_core.A23_doc_graph_models import DocumentGraph
 from B_parsing.B05_section_detector import SectionDetector
 from B_parsing.B06_confidence import ConfidenceCalculator
 from B_parsing.B07_negation import NegationDetector

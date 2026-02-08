@@ -47,7 +47,7 @@ from A_core.A09_pharma_models import (
     PharmaGeneratorType,
     PharmaProvenanceMetadata,
 )
-from B_parsing.B02_doc_graph import DocumentGraph
+from A_core.A23_doc_graph_models import DocumentGraph
 
 
 class PharmaCompanyDetector:

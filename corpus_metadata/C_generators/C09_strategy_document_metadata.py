@@ -56,7 +56,7 @@ from A_core.A08_document_metadata_models import (
     FileMetadata,
     PDFMetadata,
 )
-from B_parsing.B02_doc_graph import DocumentGraph
+from A_core.A23_doc_graph_models import DocumentGraph
 
 # PDF parsing - optional
 try:

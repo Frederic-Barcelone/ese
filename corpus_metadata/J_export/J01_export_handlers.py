@@ -67,7 +67,7 @@ from J_export.J01b_metadata_exporters import (
 )
 
 if TYPE_CHECKING:
-    from B_parsing.B02_doc_graph import DocumentGraph
+    from A_core.A23_doc_graph_models import DocumentGraph
     from A_core.A01_domain_models import Candidate, ExtractedEntity
     from A_core.A04_heuristics_config import HeuristicsCounters
     from A_core.A05_disease_models import ExtractedDisease
@@ -686,7 +686,7 @@ class ExportManager:
         self, pdf_path: Path, doc: "DocumentGraph"
     ) -> None:
         """Export extracted images to JSON file with Vision LLM analysis."""
-        from B_parsing.B02_doc_graph import ImageType
+        from A_core.A23_doc_graph_models import ImageType
         from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
 
         # Collect all images

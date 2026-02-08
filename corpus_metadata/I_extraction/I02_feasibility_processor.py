@@ -42,7 +42,7 @@ from pathlib import Path
 from typing import Any, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from B_parsing.B02_doc_graph import DocumentGraph
+    from A_core.A23_doc_graph_models import DocumentGraph
     from C_generators.C08_strategy_feasibility import FeasibilityDetector
     from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
     from E_normalization.E08_epi_extract_enricher import EpiExtractEnricher

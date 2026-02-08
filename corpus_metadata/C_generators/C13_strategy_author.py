@@ -47,7 +47,7 @@ from A_core.A10_author_models import (
     AuthorRoleType,
     ExtractedAuthor,
 )
-from B_parsing.B02_doc_graph import DocumentGraph
+from A_core.A23_doc_graph_models import DocumentGraph
 
 
 class AuthorDetector:
