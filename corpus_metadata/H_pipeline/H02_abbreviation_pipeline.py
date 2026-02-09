@@ -161,10 +161,38 @@ class AbbreviationPipeline:
         self.model = model
         self._gene_symbols: set[str] = self._load_gene_symbols()
 
+    # Universally-known biomedical acronyms that should never be treated as
+    # document-level abbreviations (they are standard vocabulary, not abbreviations
+    # that need definition for the reader).
+    _UNIVERSAL_BIOMEDICAL_ACRONYMS: set[str] = {
+        "DNA", "RNA", "MRNA", "TRNA", "RRNA", "CDNA", "SIRNA", "MIRNA", "LNCRNA",
+        "ATP", "ADP", "GTP", "GDP", "NAD", "NADH", "NADP", "NADPH", "FAD", "FADH2",
+        "PCR", "QPCR", "RTPCR", "ELISA", "FISH", "CGH", "SNP", "GWAS",
+        "OMIM", "MONDO", "ORPHA", "HGNC", "NCBI", "PUBMED", "MEDLINE",
+        "ICD", "SNOMED", "MESH", "UMLS", "LOINC", "RX", "NLM",
+        "WHO", "FDA", "EMA", "NIH", "CDC", "CMS",
+        "HIPAA", "IRB", "GCP", "GMP", "GLP", "ICH",
+        "CNS", "PNS", "CSF", "BBB",
+        "WBC", "RBC", "PLT", "HGB", "HCT", "MCV", "MCH", "MCHC",
+        "BUN", "ALT", "AST", "GGT", "LDH", "CRP", "ESR",
+        "MRI", "CT", "PET", "SPECT", "ECG", "EKG", "EEG", "EMG",
+        "UTI", "DVT", "PE", "MI", "CHF", "COPD", "ARDS", "DIC",
+        "NSAID", "SSRI", "SNRI", "MAOI", "ACEI", "ARB", "CCB",
+        "QOL", "DALY", "QALY", "NNT", "NNH",
+        "AUC", "ROC", "PPV", "NPV", "SN", "SP",
+        "URL", "PDF", "HTML", "XML", "CSV", "JSON",
+    }
+
     @staticmethod
     def _load_gene_symbols() -> set[str]:
-        """Load HGNC gene symbols for cross-referencing against abbreviations."""
-        gene_path = Path("ouput_datasources/2025_08_orphadata_genes.json")
+        """Load HGNC gene symbols for cross-referencing against abbreviations.
+
+        Loads both primary symbols (orphadata_hgnc) and aliases (hgnc_alias)
+        to maximize gene-abbreviation disambiguation coverage.
+        """
+        # Resolve path relative to project root (parent of corpus_metadata)
+        project_root = Path(__file__).resolve().parent.parent.parent
+        gene_path = project_root / "ouput_datasources" / "2025_08_orphadata_genes.json"
         if not gene_path.exists():
             return set()
         try:
@@ -173,8 +201,9 @@ class AbbreviationPipeline:
                 data = _json.load(f)
             symbols: set[str] = set()
             for entry in data:
-                if entry.get("source") == "orphadata_hgnc":
-                    symbol = entry.get("term", "").strip().upper()
+                source = entry.get("source", "")
+                if source == "orphadata_hgnc":
+                    symbol = entry.get("term", "").strip().strip('"').upper()
                     if symbol and len(symbol) >= 2:
                         symbols.add(symbol)
             return symbols
@@ -484,19 +513,37 @@ class AbbreviationPipeline:
                 counters.common_word_rejected += 1
                 continue
 
-            # Auto-reject gene symbols (already captured as gene entities)
-            if self._gene_symbols and sf_upper in self._gene_symbols:
+            # Auto-reject universally-known biomedical acronyms
+            if sf_upper in self._UNIVERSAL_BIOMEDICAL_ACRONYMS:
                 entity = self._create_entity_from_candidate(
                     c,
                     ValidationStatus.REJECTED,
-                    0.90,
-                    "Gene symbol, not an abbreviation",
-                    ["auto_rejected_gene_symbol"],
-                    {"auto": "gene_symbol"},
+                    0.95,
+                    "Universal biomedical acronym, not a document-level abbreviation",
+                    ["auto_rejected_universal"],
+                    {"auto": "universal_biomedical"},
                 )
                 auto_results.append((c, entity))
                 counters.form_filter_rejected += 1
                 continue
+
+            # Auto-reject gene symbols WITHOUT explicit long forms
+            # (gene symbols with definitions like "FAS, Fetal Alcohol Syndrome"
+            # are legitimate abbreviations and should go to LLM validation)
+            if self._gene_symbols and sf_upper in self._gene_symbols:
+                candidate_lf = (c.long_form or "").strip()
+                if not candidate_lf:
+                    entity = self._create_entity_from_candidate(
+                        c,
+                        ValidationStatus.REJECTED,
+                        0.90,
+                        "Gene symbol without definition, not an abbreviation",
+                        ["auto_rejected_gene_symbol"],
+                        {"auto": "gene_symbol"},
+                    )
+                    auto_results.append((c, entity))
+                    counters.form_filter_rejected += 1
+                    continue
 
             # Auto-reject malformed long forms
             lf = c.long_form or ""
@@ -838,8 +885,8 @@ Return ONLY the JSON array, nothing else."""
             if sf_upper in found_sfs or sf_upper in blacklist:
                 continue
 
-            # Skip gene symbols
-            if self._gene_symbols and sf_upper in self._gene_symbols:
+            # Skip gene symbols without long forms
+            if self._gene_symbols and sf_upper in self._gene_symbols and not lf_candidate:
                 continue
 
             # Verify SF exists in text

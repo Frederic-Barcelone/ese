@@ -97,7 +97,7 @@ PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
@@ -126,7 +126,7 @@ BC5CDR_SPLITS = ["test"]
 PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = None  # All documents (set to small number for testing)
+MAX_DOCS = 20  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -148,7 +148,7 @@ class GoldAbbreviation:
 
     @property
     def sf_normalized(self) -> str:
-        return self.short_form.strip().upper()
+        return self.short_form.strip().strip(".,;:!?)( ").upper()
 
     @property
     def lf_normalized(self) -> str:
