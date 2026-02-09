@@ -1058,6 +1058,13 @@ Return ONLY the JSON array, nothing else."""
             printer.detail_highlight("Re-disambiguated", str(re_disambiguated_count))
         printer.detail_highlight("Deduplicated", f"{dedup_removed} duplicates merged")
 
+        # Step 4: Remove validated entities that still have no long form
+        before_lf_filter = len(results)
+        results = [r for r in results if r.long_form]
+        no_lf_removed = before_lf_filter - len(results)
+        if no_lf_removed > 0:
+            printer.detail_highlight("No long form removed", str(no_lf_removed))
+
         return results
 
     def _enrich_nct_entities(self, results: List["ExtractedEntity"]) -> int:

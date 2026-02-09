@@ -924,6 +924,9 @@ class Orchestrator:
             author_results,
         )
 
+        # Cross-entity correction: use disease abbreviations to fix abbreviation long forms
+        results = self._correct_abbrev_from_diseases(results, disease_results)
+
         # Stage 11: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
@@ -1564,6 +1567,74 @@ class Orchestrator:
             filtered_genes.append(g)
 
         return filtered_diseases, filtered_drugs, filtered_genes
+
+    def _correct_abbrev_from_diseases(
+        self,
+        abbrev_results: List[ExtractedEntity],
+        disease_results: List[ExtractedDisease],
+    ) -> List[ExtractedEntity]:
+        """Correct abbreviation long forms using disease abbreviation mappings.
+
+        When a disease entity has an abbreviation field (e.g., DSS for Dejerine-Sottas
+        syndrome), and an abbreviation entity has the same SF but a different LF from a
+        lexicon lookup, prefer the disease-contextual expansion.
+
+        Only uses diseases found by their full name (not abbreviation-only matches) to
+        avoid propagating incorrect lexicon expansions (e.g., GBM → Glioblastoma when
+        the document discusses glomerular basement membrane).
+        """
+        # Build set of disease names confirmed by full-name match in the document
+        confirmed_diseases: set[str] = set()
+        for d in disease_results:
+            if d.status == ValidationStatus.VALIDATED:
+                name_lower = d.preferred_label.strip().lower()
+                matched_lower = d.matched_text.strip().lower()
+                # Disease is confirmed if matched by full name (not just abbreviation)
+                if len(matched_lower) > 5 and matched_lower != (d.abbreviation or "").strip().lower():
+                    confirmed_diseases.add(name_lower)
+
+        # Build disease abbreviation map: SF (upper) -> disease preferred_label
+        # Only include diseases whose full name is confirmed in the document
+        disease_abbrev_map: dict[str, str] = {}
+        for d in disease_results:
+            if d.status == ValidationStatus.VALIDATED and d.abbreviation:
+                sf_upper = d.abbreviation.upper().strip()
+                name_lower = d.preferred_label.strip().lower()
+                if sf_upper and name_lower in confirmed_diseases:
+                    disease_abbrev_map[sf_upper] = d.preferred_label
+
+        if not disease_abbrev_map:
+            return abbrev_results
+
+        corrected: List[ExtractedEntity] = []
+        for entity in abbrev_results:
+            sf_upper = (entity.short_form or "").upper().strip()
+            if (
+                sf_upper in disease_abbrev_map
+                and entity.status == ValidationStatus.VALIDATED
+                and entity.long_form
+            ):
+                disease_name = disease_abbrev_map[sf_upper]
+                current_lf = entity.long_form.strip().lower()
+                disease_lf = disease_name.strip().lower()
+                # Only correct if the long forms differ
+                if current_lf != disease_lf:
+                    flags = list(entity.validation_flags or [])
+                    if "disease_cross_corrected" not in flags:
+                        flags.append("disease_cross_corrected")
+                    corrected.append(entity.model_copy(update={
+                        "long_form": disease_name,
+                        "validation_flags": flags,
+                    }))
+                    logger.debug(
+                        "Cross-entity correction: abbreviation '%s' LF changed "
+                        "from '%s' to '%s' (disease context)",
+                        sf_upper, entity.long_form, disease_name,
+                    )
+                    continue
+            corrected.append(entity)
+
+        return corrected
 
     def _log_usage_stats(
         self,

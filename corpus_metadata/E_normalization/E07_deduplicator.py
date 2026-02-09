@@ -129,10 +129,13 @@ class Deduplicator:
                 if not self.only_validated:
                     non_validated.append(e)
 
-        # Group validated entities by normalized SF
+        # Group validated entities by normalized SF (strip plural trailing S)
         sf_groups: Dict[str, List[ExtractedEntity]] = defaultdict(list)
         for e in validated:
             sf_key = (e.short_form or "").strip().upper()
+            # Normalize plural: AVMs → AVM (only for all-caps abbreviations > 2 chars)
+            if sf_key and len(sf_key) > 2 and sf_key.endswith("S") and sf_key[:-1].isalpha():
+                sf_key = sf_key[:-1]
             if sf_key:
                 sf_groups[sf_key].append(e)
 

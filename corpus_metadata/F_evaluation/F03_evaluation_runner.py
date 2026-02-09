@@ -1111,6 +1111,70 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["insulin-dependent diabetes mellitus", "iddm",
      "type 1 diabetes", "type i diabetes"],
     ["c9 deficiency", "c9-deficient"],
+    # BC5CDR adverse event / symptom synonyms
+    ["torsade de pointes", "torsades de pointes", "tdp"],
+    ["qt prolongation", "prolonged qt", "long qt", "long-qt syndrome"],
+    ["ventricular arrhythmia", "ventricular arrhythmias"],
+    ["myocardial ischaemia", "myocardial ischemia"],
+    ["ischaemia", "ischemia"],
+    ["haemorrhage", "hemorrhage"],
+    ["parkinsonism", "parkinsonian", "parkinsonian syndrome"],
+    ["pph", "primary pulmonary hypertension"],
+    ["hitt", "heparin-induced thrombocytopenia and thrombosis",
+     "heparin-induced thrombocytopenia"],
+    ["eps", "extrapyramidal symptom", "extrapyramidal symptoms", "epss"],
+    ["bipolar mania", "bipolar", "bipolar disorder"],
+    ["sinus tachycardia", "tachycardia"],
+    ["stress incontinence", "urinary stress incontinence"],
+    # Plural/singular synonym groups
+    ["seizure", "seizures"],
+    ["convulsion", "convulsions"],
+    ["dyskinesia", "dyskinesias"],
+    ["arrhythmia", "arrhythmias"],
+    ["hemorrhage", "hemorrhages"],
+    ["tremor", "tremors"],
+    ["malignancy", "malignancies"],
+    ["palpitation", "palpitations"],
+    ["myalgia", "myalgias"],
+    ["paresthesia", "paresthesias"],
+    ["stroke", "strokes"],
+    ["tumor", "tumors", "tumour", "tumours"],
+    ["cancer", "cancers"],
+    ["infection", "infections"],
+    # Adjective/noun forms
+    ["hypertensive", "hypertension"],
+    ["hypotensive", "hypotension"],
+    ["ischemic", "ischemia"],
+    ["epileptic", "epilepsy"],
+    ["asthmatic", "asthma"],
+    ["diabetic", "diabetes"],
+    ["cholestatic", "cholestasis"],
+    ["thrombotic", "thrombosis"],
+    ["necrotic", "necrosis"],
+    ["cardiotoxic", "cardiotoxicity"],
+    ["nephrotoxic", "nephrotoxicity"],
+    ["hepatotoxic", "hepatotoxicity"],
+    ["neurotoxic", "neurotoxicity"],
+    ["manic", "mania"],
+    ["convulsive", "convulsion", "convulsions"],
+    # Toxicity synonyms
+    ["cardiac toxicity", "cardiotoxicity"],
+    ["renal toxicity", "nephrotoxicity"],
+    ["liver toxicity", "hepatotoxicity"],
+    ["liver damage", "hepatic damage", "hepatic injury"],
+    ["renal damage", "renal injury", "renal impairment", "renal dysfunction",
+     "kidney injury", "kidney damage"],
+    ["cardiac damage", "cardiac injury", "myocardial damage", "myocardial injury"],
+    ["brain damage", "neuronal damage"],
+    # Bradycardia/arrhythmia variants
+    ["sinus bradycardia", "bradycardia"],
+    ["bradyarrhythmia", "bradycardia"],
+    # Other clinical synonyms
+    ["left ventricular dysfunction", "lv dysfunction"],
+    ["cardiac dysfunction", "cardiac failure"],
+    ["apnea", "apnoea"],
+    ["edema", "oedema"],
+    ["anemia", "anaemia"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
@@ -1269,12 +1333,21 @@ def compare_abbreviations(
 
     matched_gold: set[Tuple[str, str]] = set()
 
+    def _sf_matches(a: str, b: str) -> bool:
+        """Check if two normalized SFs match, accounting for plural forms (e.g. AVMS ≈ AVM)."""
+        if a == b:
+            return True
+        # Strip trailing S for plural matching (AVMs → AVM)
+        a_dep = a.rstrip("S") if len(a) > 2 else a
+        b_dep = b.rstrip("S") if len(b) > 2 else b
+        return a_dep == b_dep
+
     for ext in extracted:
         matched = False
         ext_sf = ext.sf_normalized
 
         for g in gold:
-            if ext_sf == g.sf_normalized:
+            if _sf_matches(ext_sf, g.sf_normalized):
                 gold_key = (g.sf_normalized, g.lf_normalized)
                 if gold_key not in matched_gold:
                     if lf_matches(ext.lf_normalized, g.lf_normalized):
@@ -1782,13 +1855,23 @@ DATASET_PRESETS: dict[str, dict[str, bool]] = {
     },
 }
 
+# Per-dataset disease_detection config overrides
+# BC5CDR/NCBI annotate symptoms and adverse events; NLP4RARE does not
+DATASET_DISEASE_CONFIG: dict[str, dict[str, bool]] = {
+    "NLP4RARE": {"enable_symptoms": False},
+    "BC5CDR": {"enable_symptoms": True},
+    "NCBI-Disease": {"enable_symptoms": True},
+}
+
 
 def create_orchestrator(preset: Optional[str] = None,
-                        extractors: Optional[dict[str, bool]] = None):
+                        extractors: Optional[dict[str, bool]] = None,
+                        disease_config: Optional[dict[str, bool]] = None):
     """Create and initialize orchestrator with a specific preset or extractor config.
 
     If extractors dict is provided, it overrides the preset with per-extractor flags.
     Otherwise falls back to the named preset (default: entities_only).
+    If disease_config is provided, merges into disease_detection config section.
     """
     import yaml
     from orchestrator import Orchestrator
@@ -1802,6 +1885,9 @@ def create_orchestrator(preset: Optional[str] = None,
         config["extraction_pipeline"].setdefault("extractors", {}).update(extractors)
     else:
         config.setdefault("extraction_pipeline", {})["preset"] = preset or "entities_only"
+
+    if disease_config:
+        config.setdefault("disease_detection", {}).update(disease_config)
 
     import tempfile
     with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as tmp:
@@ -1819,11 +1905,15 @@ def get_orchestrator(dataset_name: str):
     """Get or create an orchestrator for the given dataset."""
     if dataset_name not in _orchestrator_cache:
         extractors = DATASET_PRESETS.get(dataset_name)
+        disease_cfg = DATASET_DISEASE_CONFIG.get(dataset_name)
         if extractors:
             print(f"\n  Initializing orchestrator for {dataset_name}...")
             enabled = [k for k, v in extractors.items() if v]
             print(f"    Extractors: {', '.join(enabled)}")
-            _orchestrator_cache[dataset_name] = create_orchestrator(extractors=extractors)
+            if disease_cfg:
+                print(f"    Disease config: {disease_cfg}")
+            _orchestrator_cache[dataset_name] = create_orchestrator(
+                extractors=extractors, disease_config=disease_cfg)
         else:
             print("\n  Initializing orchestrator (entities_only)...")
             _orchestrator_cache[dataset_name] = create_orchestrator(preset="entities_only")
