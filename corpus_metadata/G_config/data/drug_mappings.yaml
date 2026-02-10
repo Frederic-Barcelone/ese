@@ -95,3 +95,10 @@ consumer_drug_variants:
   "lipior": "atorvastatin"
   "provastatin": "pravastatin"
   "benedryl": "benadryl"
+  # BC5CDR gold misspellings and variants
+  "dubutamine": "dobutamine"
+  "olanzipine": "olanzapine"
+  "fenfluramines": "fenfluramine"
+  "cotrimoxazole": "co-trimoxazole"
+  "sermion": "nicergoline"
+  "cocaethylene": "cocaethylene"

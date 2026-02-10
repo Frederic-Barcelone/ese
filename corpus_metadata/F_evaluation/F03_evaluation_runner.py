@@ -308,10 +308,17 @@ class ExtractedDrugEval:
     """A single extracted drug entity for evaluation."""
     name: str
     confidence: float = 0.0
+    alt_name: str = ""
 
     @property
     def name_normalized(self) -> str:
         return " ".join(self.name.strip().lower().split())
+
+    @property
+    def alt_name_normalized(self) -> str:
+        if not self.alt_name:
+            return ""
+        return " ".join(self.alt_name.strip().lower().split())
 
 
 @dataclass
@@ -1743,11 +1750,18 @@ def compare_drugs(
     for ext in extracted:
         matched = False
         ext_name = ext.name_normalized
+        ext_alt = ext.alt_name_normalized
 
         for g in gold:
             gold_key = g.name_normalized
             if gold_key not in matched_gold:
                 if drug_matches(ext_name, gold_key):
+                    result.tp += 1
+                    result.tp_items.append(ext.name)
+                    matched_gold.add(gold_key)
+                    matched = True
+                    break
+                if ext_alt and drug_matches(ext_alt, gold_key):
                     result.tp += 1
                     result.tp_items.append(ext.name)
                     matched_gold.add(gold_key)
@@ -2076,9 +2090,14 @@ def run_extraction(orch, pdf_path: Path) -> dict:
     # Extract drugs
     for drug in result.drugs:
         if drug.status == ValidationStatus.VALIDATED:
+            pref = getattr(drug, 'preferred_name', '') or ''
+            matched = getattr(drug, 'matched_text', '') or ''
+            drug_name = pref or matched
+            alt = matched if pref and matched and pref.lower() != matched.lower() else ""
             extracted["drugs"].append(ExtractedDrugEval(
-                name=getattr(drug, 'preferred_name', '') or getattr(drug, 'matched_text', ''),
+                name=drug_name,
                 confidence=getattr(drug, 'confidence_score', 0.0),
+                alt_name=alt,
             ))
 
     # Extract authors

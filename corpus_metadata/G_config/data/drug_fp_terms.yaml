@@ -696,6 +696,9 @@ always_filter:
   - "arthritis pain"
   - "cholesterol management"
   - "stress"
+  # Drug class terms (not specific drugs)
+  - "opioid"
+  - "opioids"
 
 # NER-specific false positives (commonly returned by scispacy UMLS)
 ner_false_positives:
