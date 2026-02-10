@@ -878,6 +878,43 @@ class DrugDetector:
 
         return identifiers
 
+    def _get_lexicon_processors(
+        self,
+    ) -> List[Tuple[KeywordProcessor, DrugGeneratorType]]:
+        """Return loaded FlashText processors in priority order."""
+        processors: List[Tuple[KeywordProcessor, DrugGeneratorType]] = []
+        if self.alexion_processor:
+            processors.append((self.alexion_processor, DrugGeneratorType.LEXICON_ALEXION))
+        if self.investigational_processor:
+            processors.append((self.investigational_processor, DrugGeneratorType.LEXICON_INVESTIGATIONAL))
+        if self.fda_processor:
+            processors.append((self.fda_processor, DrugGeneratorType.LEXICON_FDA))
+        if self.rxnorm_processor:
+            processors.append((self.rxnorm_processor, DrugGeneratorType.LEXICON_RXNORM))
+        if self.consumer_processor:
+            processors.append((self.consumer_processor, DrugGeneratorType.LEXICON_RXNORM))
+        if self.bioactive_processor:
+            processors.append((self.bioactive_processor, DrugGeneratorType.LEXICON_RXNORM))
+        return processors
+
+    def is_known_drug(self, term: str) -> Optional[Tuple[str, DrugGeneratorType]]:
+        """Check if a term matches any drug lexicon as a full-term match.
+
+        Only returns a match when the lexicon keyword covers the entire term
+        (not just a substring). Returns (matched_name, generator_type) or None.
+        """
+        term_lower = term.lower().strip()
+        if not term_lower or len(term_lower) < 3:
+            return None
+        term_len = len(term_lower)
+        for processor, gen_type in self._get_lexicon_processors():
+            matches = processor.extract_keywords(term_lower, span_info=True)
+            for keyword, start, end in matches:
+                # Require the match to cover the entire term
+                if start == 0 and end == term_len:
+                    return (keyword, gen_type)
+        return None
+
     def _deduplicate(self, candidates: List[DrugCandidate]) -> List[DrugCandidate]:
         """
         Deduplicate candidates, preferring specialized sources.

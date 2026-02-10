@@ -61,6 +61,8 @@ print("Starting pipeline... (loading NLP models, this may take a moment)")
 
 from A_core.A01_domain_models import (
     Candidate,
+    Coordinate,
+    EvidenceSpan,
     ExtractedEntity,
     ValidationStatus,
 )
@@ -71,7 +73,10 @@ from A_core.A04_heuristics_config import (
 )
 from A_core.A16_pipeline_metrics import PipelineMetrics
 from A_core.A05_disease_models import ExtractedDisease
-from A_core.A06_drug_models import ExtractedDrug
+from A_core.A06_drug_models import (
+    DrugProvenanceMetadata,
+    ExtractedDrug,
+)
 from A_core.A19_gene_models import ExtractedGene
 from A_core.A09_pharma_models import ExtractedPharma
 from A_core.A10_author_models import ExtractedAuthor
@@ -927,6 +932,10 @@ class Orchestrator:
         # Cross-entity correction: use disease abbreviations to fix abbreviation long forms
         results = self._correct_abbrev_from_diseases(results, disease_results)
 
+        # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only drugs
+        if self.extract_drugs:
+            drug_results = self._recover_drugs_from_abbreviations(results, drug_results)
+
         # Stage 11: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
@@ -1635,6 +1644,85 @@ class Orchestrator:
             corrected.append(entity)
 
         return corrected
+
+    def _recover_drugs_from_abbreviations(
+        self,
+        abbrev_results: List[ExtractedEntity],
+        drug_results: List[ExtractedDrug],
+    ) -> List[ExtractedDrug]:
+        """Recover drugs mentioned only by abbreviation using abbreviation expansions.
+
+        When a validated abbreviation's long_form matches a drug lexicon entry but
+        the drug wasn't detected directly (because only the abbreviation appears in
+        text), create an ExtractedDrug for it.
+        """
+        if not self.drug_detector:
+            return drug_results
+
+        # Build set of already-detected drug names (lowercase)
+        detected_drugs: set[str] = set()
+        for d in drug_results:
+            detected_drugs.add(d.matched_text.lower().strip())
+            detected_drugs.add(d.preferred_name.lower().strip())
+
+        recovered: List[ExtractedDrug] = []
+        for entity in abbrev_results:
+            if entity.status != ValidationStatus.VALIDATED or not entity.long_form:
+                continue
+
+            long_form = entity.long_form.strip()
+            if long_form.lower() in detected_drugs:
+                continue
+
+            # Check if the long form is a known drug
+            match = self.drug_detector.is_known_drug(long_form)
+            if match is None:
+                continue
+
+            _matched_name, gen_type = match
+
+            short_form = (entity.short_form or "").strip()
+            if not short_form:
+                continue
+
+            drug = ExtractedDrug(
+                candidate_id=entity.id,
+                doc_id=entity.doc_id,
+                matched_text=short_form,
+                preferred_name=long_form,
+                identifiers=[],
+                primary_evidence=EvidenceSpan(
+                    text=f"{short_form} = {long_form}",
+                    location=Coordinate(page_num=1),
+                    scope_ref="abbrev_cross_ref",
+                    start_char_offset=0,
+                    end_char_offset=len(short_form) + len(long_form) + 3,
+                ),
+                status=ValidationStatus.VALIDATED,
+                confidence_score=0.75,
+                validation_flags=["abbrev_cross_referenced"],
+                provenance=DrugProvenanceMetadata(
+                    pipeline_version=PIPELINE_VERSION,
+                    run_id=self.run_id,
+                    doc_fingerprint="abbrev_cross_ref",
+                    generator_name=gen_type,
+                    lexicon_source="abbrev_cross_reference",
+                ),
+            )
+            recovered.append(drug)
+            # Mark as detected to avoid duplicates within recovered set
+            detected_drugs.add(long_form.lower())
+            detected_drugs.add(short_form.lower())
+            logger.debug(
+                "Drug recovered from abbreviation: %s → %s (via %s)",
+                short_form, long_form, gen_type.value,
+            )
+
+        if recovered:
+            logger.info(
+                "Recovered %d drug(s) from abbreviation cross-referencing", len(recovered),
+            )
+        return drug_results + recovered
 
     def _log_usage_stats(
         self,
