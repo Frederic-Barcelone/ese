@@ -72,7 +72,34 @@ class DrugFalsePositiveFilter:
     # Minimum drug name length
     MIN_LENGTH = 3
 
-    def __init__(self) -> None:
+    # Bioactive compounds that are also valid pharmaceutical drugs.
+    # When allow_bioactive_compounds=True, these bypass biological_entities
+    # and ner_false_positives filters.
+    BIOACTIVE_DRUG_COMPOUNDS: set[str] = {
+        # Neurotransmitters / hormones
+        "dopamine", "epinephrine", "norepinephrine", "serotonin",
+        "acetylcholine", "histamine", "glutamate", "angiotensin",
+        "adrenaline", "aldosterone", "renin", "melatonin",
+        "prostaglandins", "prostaglandin", "nitric oxide",
+        # Lab markers / metabolites
+        "creatinine", "creatine", "glucose", "cholesterol", "urea",
+        "triglyceride", "triglycerides",
+        # Electrolytes / minerals
+        "calcium", "sodium", "potassium", "zinc", "iron",
+        "copper", "oxygen",
+        # Amino acids / biological compounds
+        "glutathione", "adenosine", "glycine", "taurine",
+        "methionine", "leucine", "isoleucine",
+        "norvaline", "oleic acid",
+        # Biochemical agents
+        "superoxide", "androgen",
+        # Drugs of abuse (valid pharmacological agents)
+        "cocaine", "amphetamines",
+    }
+
+    def __init__(self, allow_bioactive_compounds: bool = False) -> None:
+        self.allow_bioactive_compounds = allow_bioactive_compounds
+        self._bioactive_lower = {t.lower() for t in self.BIOACTIVE_DRUG_COMPOUNDS}
         self.common_words_lower = {w.lower() for w in COMMON_WORDS}
         self.body_parts_lower = {w.lower() for w in BODY_PARTS}
         self.trial_status_lower = {w.lower() for w in TRIAL_STATUS_TERMS}
@@ -177,9 +204,10 @@ class DrugFalsePositiveFilter:
         if text_lower in self.credentials_lower:
             return True
 
-        # Always filter biological entities
+        # Always filter biological entities (unless bioactive compounds allowed)
         if text_lower in self.biological_entities_lower:
-            return True
+            if not (self.allow_bioactive_compounds and text_lower in self._bioactive_lower):
+                return True
 
         # Always filter pharmaceutical company names
         if text_lower in self.pharma_company_names_lower:
@@ -195,9 +223,10 @@ class DrugFalsePositiveFilter:
             if org in text_lower:
                 return True
 
-        # Filter NER-specific false positives
+        # Filter NER-specific false positives (unless bioactive compounds allowed)
         if text_lower in self.ner_false_positives_lower:
-            return True
+            if not (self.allow_bioactive_compounds and text_lower in self._bioactive_lower):
+                return True
 
         # Substring-based filtering
         for fp_substr in self.fp_substrings_lower:
@@ -227,13 +256,14 @@ class DrugFalsePositiveFilter:
             if text_lower in self.gene_symbols_lower:
                 return True
 
-        # Skip common words (unless from specialized lexicon)
+        # Skip common words (unless from specialized lexicon or bioactive)
         if generator_type not in {
             DGT.LEXICON_ALEXION,
             DGT.LEXICON_INVESTIGATIONAL,
         }:
             if text_lower in self.common_words_lower:
-                return True
+                if not (self.allow_bioactive_compounds and text_lower in self._bioactive_lower):
+                    return True
             if text_lower in self.non_drug_allcaps_lower:
                 return True
 

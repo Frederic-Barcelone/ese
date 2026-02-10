@@ -1023,6 +1023,18 @@ ner_false_positives:
   - "induction"
   - "intervention"
   - "interventions"
+  # BC5CDR observed false positives (non-drug terms)
+  - "m cells"
+  - "prenatal"
+  - "erythrocytes"
+  - "erythrocyte"
+  - "retinal"
+  - "aromatic"
+  - "diaphorase"
+  - "nicotinamide adenine dinucleotide"
+  - "antipsychotic agent"
+  - "medical treatment"
+  - "sutures"
   # Enzymes/proteins commonly misidentified as drugs
   - "alkaline phosphatase"
   - "myeloperoxidase"

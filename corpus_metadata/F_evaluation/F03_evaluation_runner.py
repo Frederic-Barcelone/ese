@@ -1175,6 +1175,29 @@ _DISEASE_SYNONYM_GROUPS: List[List[str]] = [
     ["apnea", "apnoea"],
     ["edema", "oedema"],
     ["anemia", "anaemia"],
+    # BC5CDR additional abbreviation-disease synonyms
+    ["myocardial infarction", "mi"],
+    ["acute interstitial nephritis", "ain"],
+    ["atypical glandular cells", "agc"],
+    ["hypercalcemia", "hypercalcaemia"],
+    ["vasculitis", "vasculitic disorders", "vasculitic"],
+    ["neuropathy", "peripheral neuropathy", "peripheral neuropathies"],
+    ["rash", "skin rash", "cutaneous rash", "maculopapular rash", "macro-papular rash"],
+    ["cardiotoxity", "cardiotoxicity"],  # misspelling in gold
+    ["nephrotic", "neprotic"],  # misspelling in gold
+    ["toxicity", "toxicities"],
+    ["cyst", "cysts", "subependymal cyst", "subependymal cysts"],
+    ["hearing impairment", "hearing loss"],
+    ["squamous cell carcinoma", "squamous cell cervical carcinoma"],
+    ["siadh", "syndrome of inappropriate antidiuretic hormone",
+     "syndrome of inappropriate anti-diuretic hormone",
+     "syndrome of inappropriate secretion of antidiuretic hormone",
+     "syndrome of inappropriate secretion of anti-diuretic hormone"],
+    ["torsade de pointes", "tdp"],
+    ["extrapyramidal symptoms", "epss"],
+    ["primary pulmonary hypertension", "pph"],
+    ["acute interstitial nephritis", "ain"],
+    ["atypical glandular cells", "agc"],
 ]
 
 # Pre-build a lookup: normalised term → canonical (first entry in the group)
@@ -1618,13 +1641,79 @@ def compare_genes(
     return result
 
 
+# Drug synonym groups for evaluation matching
+DRUG_SYNONYM_GROUPS: list[list[str]] = [
+    # Adrenaline variants
+    ["epinephrine", "adrenaline"],
+    ["norepinephrine", "noradrenaline"],
+    # Common drug name variants
+    ["acetaminophen", "paracetamol"],
+    ["albuterol", "salbutamol"],
+    # Salt forms vs base drug
+    ["morphine", "morphine sulfate"],
+    ["methotrexate", "methotrexate sodium"],
+    ["cisplatin", "cis-platinum", "cis-diamminedichloroplatinum"],
+    ["5-fluorouracil", "fluorouracil", "5-fu"],
+    ["6-mercaptopurine", "mercaptopurine"],
+    ["cyclosporine", "ciclosporin", "cyclosporin"],
+    ["doxorubicin", "adriamycin"],
+    ["vincristine", "vincristine sulfate"],
+    # Common abbreviation-drug pairs
+    ["mtx", "methotrexate"],
+    ["csa", "cyclosporine"],
+    ["ara-c", "cytarabine"],
+    ["dex", "dexamethasone"],
+    # BC5CDR additional drug synonym groups
+    ["tacrolimus", "fk 506", "fk506", "prograf"],
+    ["nelfinavir", "viracept", "nelfinavir mesylate"],
+    ["amphotericin b", "amphotericin", "d-amb"],
+    ["propylthiouracil", "ptu"],
+    ["heparin", "heparins", "unfractionated heparin"],
+    ["olanzapine", "olanzipine"],  # misspelling in gold
+    ["dobutamine", "dubutamine"],  # misspelling in gold
+    ["cotrimoxazole", "co-trimoxazole", "trimethoprim-sulfamethoxazole"],
+    ["nitric oxide", "no"],
+    ["aminoglycoside", "aminoglycosides"],
+    ["oleic acid", "oleate"],
+    ["cocaine", "cocaethylene"],
+    ["prostaglandin", "prostaglandins"],
+    ["angiotensin", "angiotensin ii"],
+    ["puromycin", "puromycin aminonucleoside", "pan"],
+    ["cyclophosphamide", "cy"],
+    ["prednisolone", "pdn"],
+    ["fenfluramine", "fenfluramines"],
+    ["diclofenac", "dcf"],
+    ["cocaethylene", "ce"],
+    ["nicergoline", "sermion"],
+    ["copper", "cu"],
+    ["zinc", "zn"],
+    ["potassium", "k"],
+    ["nociceptin", "orphanin fq"],
+    ["superoxide dismutase", "sod1", "h-sod1"],
+]
+
+# Build synonym lookup
+_drug_synonym_map: dict[str, set[str]] = {}
+for _group in DRUG_SYNONYM_GROUPS:
+    _norm_group = {" ".join(t.strip().lower().split()) for t in _group}
+    for _term in _norm_group:
+        if _term not in _drug_synonym_map:
+            _drug_synonym_map[_term] = set()
+        _drug_synonym_map[_term].update(_norm_group - {_term})
+
+
 def drug_matches(sys_name: str, gold_name: str, threshold: float = FUZZY_THRESHOLD) -> bool:
-    """Check if drug names match (exact, substring, or fuzzy)."""
+    """Check if drug names match (exact, substring, synonym, or fuzzy)."""
     sys_norm = " ".join(sys_name.strip().lower().split())
     gold_norm = " ".join(gold_name.strip().lower().split())
 
     # Exact match
     if sys_norm == gold_norm:
+        return True
+
+    # Synonym group match
+    sys_synonyms = _drug_synonym_map.get(sys_norm, set())
+    if gold_norm in sys_synonyms:
         return True
 
     # Substring match (either direction)
@@ -1860,18 +1949,26 @@ DATASET_PRESETS: dict[str, dict[str, bool]] = {
 DATASET_DISEASE_CONFIG: dict[str, dict[str, bool]] = {
     "NLP4RARE": {"enable_symptoms": False},
     "BC5CDR": {"enable_symptoms": True},
-    "NCBI-Disease": {"enable_symptoms": True},
+    "NCBI-Disease": {"enable_symptoms": False},  # gold only annotates topic diseases
+}
+
+# Per-dataset drug_detection config overrides
+# BC5CDR annotates bioactive compounds (dopamine, calcium, etc.) as drugs
+DATASET_DRUG_CONFIG: dict[str, dict[str, bool]] = {
+    "BC5CDR": {"allow_bioactive_compounds": True},
 }
 
 
 def create_orchestrator(preset: Optional[str] = None,
                         extractors: Optional[dict[str, bool]] = None,
-                        disease_config: Optional[dict[str, bool]] = None):
+                        disease_config: Optional[dict[str, bool]] = None,
+                        drug_config: Optional[dict[str, bool]] = None):
     """Create and initialize orchestrator with a specific preset or extractor config.
 
     If extractors dict is provided, it overrides the preset with per-extractor flags.
     Otherwise falls back to the named preset (default: entities_only).
     If disease_config is provided, merges into disease_detection config section.
+    If drug_config is provided, merges into drug_detection config section.
     """
     import yaml
     from orchestrator import Orchestrator
@@ -1888,6 +1985,9 @@ def create_orchestrator(preset: Optional[str] = None,
 
     if disease_config:
         config.setdefault("disease_detection", {}).update(disease_config)
+
+    if drug_config:
+        config.setdefault("drug_detection", {}).update(drug_config)
 
     import tempfile
     with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as tmp:
@@ -1906,14 +2006,18 @@ def get_orchestrator(dataset_name: str):
     if dataset_name not in _orchestrator_cache:
         extractors = DATASET_PRESETS.get(dataset_name)
         disease_cfg = DATASET_DISEASE_CONFIG.get(dataset_name)
+        drug_cfg = DATASET_DRUG_CONFIG.get(dataset_name)
         if extractors:
             print(f"\n  Initializing orchestrator for {dataset_name}...")
             enabled = [k for k, v in extractors.items() if v]
             print(f"    Extractors: {', '.join(enabled)}")
             if disease_cfg:
                 print(f"    Disease config: {disease_cfg}")
+            if drug_cfg:
+                print(f"    Drug config: {drug_cfg}")
             _orchestrator_cache[dataset_name] = create_orchestrator(
-                extractors=extractors, disease_config=disease_cfg)
+                extractors=extractors, disease_config=disease_cfg,
+                drug_config=drug_cfg)
         else:
             print("\n  Initializing orchestrator (entities_only)...")
             _orchestrator_cache[dataset_name] = create_orchestrator(preset="entities_only")

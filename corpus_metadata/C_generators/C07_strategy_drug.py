@@ -135,6 +135,7 @@ class DrugDetector:
         self.fda_processor: Optional[KeywordProcessor] = None
         self.rxnorm_processor: Optional[KeywordProcessor] = None
         self.consumer_processor: Optional[KeywordProcessor] = None
+        self.bioactive_processor: Optional[KeywordProcessor] = None
 
         # Drug metadata dictionaries
         self.alexion_drugs: Dict[str, Dict] = {}
@@ -142,6 +143,7 @@ class DrugDetector:
         self.fda_drugs: Dict[str, Dict] = {}
         self.rxnorm_drugs: Dict[str, Dict] = {}
         self.consumer_drugs: Dict[str, Dict] = {}
+        self.bioactive_drugs: Dict[str, Dict] = {}
 
         # Lexicon loading stats (for summary output)
         self._lexicon_stats: List[Tuple[str, int, str]] = []
@@ -157,7 +159,10 @@ class DrugDetector:
         ]
 
         # False positive filter
-        self.fp_filter = DrugFalsePositiveFilter()
+        allow_bioactive = bool(self.config.get("allow_bioactive_compounds", False))
+        self.fp_filter = DrugFalsePositiveFilter(
+            allow_bioactive_compounds=allow_bioactive,
+        )
 
         # scispacy NER model
         self.nlp = None
@@ -171,6 +176,8 @@ class DrugDetector:
         self._load_fda_lexicon()
         self._load_rxnorm_lexicon()
         self._load_consumer_variants()
+        if self.config.get("allow_bioactive_compounds", False):
+            self._load_bioactive_compounds()
 
     def _load_alexion_lexicon(self) -> None:
         """Load Alexion specialized drug lexicon."""
@@ -404,6 +411,32 @@ class DrugDetector:
             ("Consumer variants", count, "C26_drug_fp_constants.py")
         )
 
+    def _load_bioactive_compounds(self) -> None:
+        """Load bioactive compounds as detectable drug keywords.
+
+        Only loaded when allow_bioactive_compounds=True (e.g., for BC5CDR).
+        These compounds (dopamine, calcium, etc.) are valid pharmaceutical
+        agents that are normally filtered as biological entities.
+        """
+        from C_generators.C25_drug_fp_filter import DrugFalsePositiveFilter
+
+        bio_proc = KeywordProcessor(case_sensitive=False)
+        count = 0
+        for compound in DrugFalsePositiveFilter.BIOACTIVE_DRUG_COMPOUNDS:
+            key = compound.lower()
+            if key not in self.bioactive_drugs:
+                self.bioactive_drugs[key] = {
+                    "preferred_name": compound.title(),
+                    "source": "bioactive_compound",
+                }
+            bio_proc.add_keyword(compound, key)
+            count += 1
+
+        self.bioactive_processor = bio_proc
+        self._lexicon_stats.append(
+            ("Bioactive compounds", count, "C25_drug_fp_filter.py")
+        )
+
     def _init_scispacy(self) -> None:
         """Initialize scispacy NER model."""
         if not SCISPACY_AVAILABLE or spacy is None:
@@ -542,7 +575,21 @@ class DrugDetector:
                 )
             )
 
-        # Layer 7: scispacy NER fallback
+        # Layer 7: Bioactive compounds (only when enabled)
+        if self.bioactive_processor:
+            candidates.extend(
+                self._detect_with_lexicon(
+                    full_text,
+                    doc_graph,
+                    doc_fingerprint,
+                    self.bioactive_processor,
+                    self.bioactive_drugs,
+                    DrugGeneratorType.LEXICON_RXNORM,  # Treat as general lexicon
+                    "bioactive_compounds",
+                )
+            )
+
+        # Layer 8: scispacy NER fallback
         if self.nlp:
             candidates.extend(
                 self._detect_with_ner(full_text, doc_graph, doc_fingerprint)

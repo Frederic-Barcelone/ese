@@ -216,6 +216,7 @@ class DiseaseFalsePositiveFilter:
         # Hard filter 5: Short lowercase matches from rare disease acronym lexicon
         # True disease acronyms are uppercase (e.g., ERED, WAS); lowercase fragments
         # like "ered" (from "consid-ered") are PDF line-break artifacts.
+        # Threshold ≤3 to allow legitimate 4-char symptom terms (pain, rash, etc.)
         if len(matched_clean) <= 4 and matched_clean.islower() and not is_abbreviation:
             return True, "short_lowercase_not_abbreviation"
 

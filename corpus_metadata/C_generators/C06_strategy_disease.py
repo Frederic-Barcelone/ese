@@ -200,6 +200,7 @@ class DiseaseDetector:
         ("orthopedic", "orthopaedic"),
         ("gynecolog", "gynaecolog"),
         ("hematolog", "haematolog"),
+        ("ischemi", "ischaemi"),
     ]
 
     @classmethod
@@ -240,6 +241,7 @@ class DiseaseDetector:
         self.rare_disease_acronyms_path = (
             lexicon_base / "2025_08_rare_disease_acronyms.json"
         )
+        self.symptoms_path = lexicon_base / "2025_symptoms_adverse_events.json"
 
         # Context window for snippets
         self.context_window = int(self.config.get("context_window", 300))
@@ -288,6 +290,7 @@ class DiseaseDetector:
         self._enable_mondo = bool(self.config.get("enable_mondo", True))
         self._enable_acronyms = bool(self.config.get("enable_rare_disease_acronyms", True))
         self._enable_scispacy = bool(self.config.get("enable_scispacy", True))
+        self._enable_symptoms = bool(self.config.get("enable_symptoms", True))
 
         # Stats: (name, count, filename)
         self._lexicon_stats: List[Tuple[str, int, str]] = []
@@ -302,6 +305,8 @@ class DiseaseDetector:
             self._load_mondo_lexicon()
         if self._enable_acronyms:
             self._load_rare_disease_acronyms()
+        if self._enable_symptoms:
+            self._load_symptom_lexicon()
 
         # Initialize scispacy
         self.scispacy_nlp = None
@@ -648,6 +653,50 @@ class DiseaseDetector:
             ("Rare disease acronyms", loaded, self.rare_disease_acronyms_path.name)
         )
 
+    def _load_symptom_lexicon(self) -> None:
+        """Load symptom and adverse event lexicon into general keyword processor."""
+        if not self.symptoms_path.exists():
+            return
+        data = json.loads(self.symptoms_path.read_text(encoding="utf-8"))
+        loaded = 0
+        for entry_data in data:
+            if not isinstance(entry_data, dict):
+                continue
+            label = (entry_data.get("label") or "").strip()
+            if not label or len(label) < 3:
+                continue
+            key = f"symptom_{loaded}"
+            identifiers: Dict[str, str] = {}
+            sources = entry_data.get("sources", [])
+            for src in sources:
+                if isinstance(src, dict):
+                    src_name = src.get("source", "")
+                    src_id = src.get("id", "")
+                    if src_name and src_id:
+                        identifiers[src_name] = src_id
+            entry = DiseaseEntry(
+                key=key,
+                preferred_label=label,
+                identifiers=identifiers,
+                is_rare_disease=False,
+                source=self.symptoms_path.name,
+            )
+            self.general_entries[key] = entry
+            self.general_kp.add_keyword(label, key)
+            # Add apostrophe variant
+            if "\u2019" in label:
+                self.general_kp.add_keyword(label.replace("\u2019", "'"), key)
+            elif "'" in label:
+                self.general_kp.add_keyword(label.replace("'", "\u2019"), key)
+            # Add plural variant
+            plural = self._generate_plural(label)
+            if plural:
+                self.general_kp.add_keyword(plural, key)
+            loaded += 1
+        self._lexicon_stats.append(
+            ("Symptoms/adverse events", loaded, self.symptoms_path.name)
+        )
+
     @staticmethod
     def _generate_plural(label: str) -> Optional[str]:
         """Generate plural form of a disease label for FlashText matching.
@@ -992,6 +1041,9 @@ class DiseaseDetector:
                 "T019",  # Congenital Abnormality
                 "T190",  # Anatomical Abnormality
                 "T049",  # Cell or Molecular Dysfunction
+                "T184",  # Sign or Symptom
+                "T046",  # Pathologic Function
+                "T037",  # Injury or Poisoning
             }
 
             for ent in spacy_doc.ents:

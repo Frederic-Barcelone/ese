@@ -363,6 +363,7 @@ class ComponentFactory:
                 "enable_mondo": disease_cfg.get("enable_mondo", True),
                 "enable_rare_disease_acronyms": disease_cfg.get("enable_rare_disease_acronyms", True),
                 "enable_scispacy": disease_cfg.get("enable_scispacy", True),
+                "enable_symptoms": disease_cfg.get("enable_symptoms", True),
                 "context_window": disease_cfg.get("context_window", 300),
             }
         )
@@ -375,10 +376,14 @@ class ComponentFactory:
     def create_drug_detector(self) -> "DrugDetector":
         """Create drug detection component."""
         from C_generators.C07_strategy_drug import DrugDetector
+        drug_cfg = self.config.get("drug_detection", {})
         return DrugDetector(
             config={
                 "run_id": self.run_id,
                 "lexicon_base_path": str(self.dict_path),
+                "allow_bioactive_compounds": drug_cfg.get(
+                    "allow_bioactive_compounds", False
+                ),
             }
         )
 
