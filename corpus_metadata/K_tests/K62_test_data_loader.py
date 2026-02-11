@@ -229,7 +229,16 @@ class TestDiseaseFpTermsYaml:
         terms = DiseaseFalsePositiveFilter.GENERIC_MULTIWORD_FP_TERMS
         assert isinstance(terms, set)
         assert "rare disease" in terms
+        # "hearing loss" moved to symptom_disease_fp_terms (dataset-aware filtering)
+        assert "hearing loss" not in terms
+
+    def test_symptom_disease_fp_terms(self) -> None:
+        from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter
+        terms = DiseaseFalsePositiveFilter.SYMPTOM_DISEASE_FP_TERMS
+        assert isinstance(terms, set)
         assert "hearing loss" in terms
+        assert "skin rash" in terms
+        assert "bacterial infections" in terms
 
     def test_chromosome_context_keywords(self) -> None:
         from C_generators.C24_disease_fp_filter import DiseaseFalsePositiveFilter

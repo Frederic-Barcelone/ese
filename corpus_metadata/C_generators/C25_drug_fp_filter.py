@@ -91,6 +91,11 @@ class DrugFalsePositiveFilter:
         "glutathione", "adenosine", "glycine", "taurine",
         "methionine", "leucine", "isoleucine",
         "norvaline", "oleic acid",
+        # Additional amino acids (annotated as drugs in BC5CDR)
+        "alanine", "tyrosine", "proline", "histidine",
+        "aspartate", "serine", "threonine", "phenylalanine",
+        "tryptophan", "cysteine", "asparagine", "glutamine",
+        "arginine", "lysine", "valine",
         # Biochemical agents
         "superoxide", "androgen",
         # Drugs of abuse (valid pharmacological agents)

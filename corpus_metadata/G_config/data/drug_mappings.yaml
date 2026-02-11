@@ -54,6 +54,12 @@ drug_abbreviations:
   # Other common
   "ppi": "proton pump inhibitor"
   "h2ra": "h2 receptor antagonist"
+  # BC5CDR common abbreviations
+  "li": "lithium"
+  "dap": "dapsone"
+  "ptz": "pentylenetetrazol"
+  "cpp": "3-(2-carboxypiperazin-4-yl)propyl-1-phosphonic acid"
+  "oa": "oleic acid"
 
 # Consumer drug misspellings and regional brand variants -> canonical names
 # Used by DrugDetector to expand FlashText matching for social media/patient text
@@ -102,3 +108,14 @@ consumer_drug_variants:
   "cotrimoxazole": "co-trimoxazole"
   "sermion": "nicergoline"
   "cocaethylene": "cocaethylene"
+  # Additional BC5CDR drug name variants
+  "d-penicillamine": "penicillamine"
+  "pentylenetetrazole": "pentylenetetrazol"
+  "methyl mercury": "methylmercury"
+  "methylmercuric chloride": "methylmercury"
+  "doxorubicine": "doxorubicin"
+  "gentamycin": "gentamicin"
+  "phenobarbitone": "phenobarbital"
+  "6-mercaptopurine": "mercaptopurine"
+  "l-dopa": "levodopa"
+  "5-fluorouracil": "fluorouracil"

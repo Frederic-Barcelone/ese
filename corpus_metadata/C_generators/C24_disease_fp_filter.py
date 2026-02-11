@@ -79,16 +79,28 @@ class DiseaseFalsePositiveFilter:
     # Multi-word generic terms that are not specific diseases (loaded from YAML)
     GENERIC_MULTIWORD_FP_TERMS: set[str] = load_term_set("disease_fp_terms.yaml", "generic_multiword_fp_terms")
 
+    # Symptom/sign terms filtered by default but skipped for datasets that
+    # annotate symptoms as diseases (e.g., BC5CDR).
+    SYMPTOM_DISEASE_FP_TERMS: set[str] = load_term_set("disease_fp_terms.yaml", "symptom_disease_fp_terms")
+
     # Short match threshold
     SHORT_MATCH_THRESHOLD = 4
 
-    def __init__(self, domain_profile: Optional[DomainProfile] = None):
+    def __init__(
+        self,
+        domain_profile: Optional[DomainProfile] = None,
+        filter_symptom_diseases: bool = True,
+    ):
         """
         Initialize filter with optional domain profile.
 
         Args:
             domain_profile: Domain-specific configuration. If None, uses generic.
+            filter_symptom_diseases: If True (default), symptom/sign terms are
+                hard-filtered. Set to False for datasets like BC5CDR that annotate
+                symptoms as diseases.
         """
+        self._filter_symptom_diseases = filter_symptom_diseases
         self._compiled_chr_patterns = [
             re.compile(p, re.IGNORECASE) for p in self.CHROMOSOME_PATTERNS
         ]
@@ -208,6 +220,15 @@ class DiseaseFalsePositiveFilter:
         if matched_clean.lower() in self.GENERIC_MULTIWORD_FP_TERMS:
             return True, "generic_multiword_term"
 
+        # Hard filter 3c: Symptom/sign terms (gated by filter_symptom_diseases)
+        if self._filter_symptom_diseases:
+            if matched_clean.lower() in self.SYMPTOM_DISEASE_FP_TERMS:
+                return True, "symptom_disease_fp_term"
+
+        # Hard filter 3d: Grade/stage patterns (e.g., "grade 2", "grade 3")
+        if re.match(r"^grade\s+\d+$", matched_clean, re.IGNORECASE):
+            return True, "grade_pattern"
+
         # Hard filter 4: Author name context (e.g., "Greenfield S,")
         if len(matched_clean.split()) <= 2 and not is_abbreviation:
             if self._is_author_name_context(matched_clean, ctx_lower):
@@ -216,9 +237,11 @@ class DiseaseFalsePositiveFilter:
         # Hard filter 5: Short lowercase matches from rare disease acronym lexicon
         # True disease acronyms are uppercase (e.g., ERED, WAS); lowercase fragments
         # like "ered" (from "consid-ered") are PDF line-break artifacts.
-        # Threshold ≤3 to allow legitimate 4-char symptom terms (pain, rash, etc.)
-        if len(matched_clean) <= 4 and matched_clean.islower() and not is_abbreviation:
-            return True, "short_lowercase_not_abbreviation"
+        # Skipped when filter_symptom_diseases=False (e.g., BC5CDR abstracts have
+        # no PDF line-break artifacts, and short symptom terms are valid).
+        if self._filter_symptom_diseases:
+            if len(matched_clean) <= 4 and matched_clean.islower() and not is_abbreviation:
+                return True, "short_lowercase_not_abbreviation"
 
         # Hard filter 6: Domain profile catastrophic FPs
         should_filter, reason = self.domain_profile.should_hard_filter(

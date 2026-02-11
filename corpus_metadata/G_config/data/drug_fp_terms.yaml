@@ -699,6 +699,19 @@ always_filter:
   # Drug class terms (not specific drugs)
   - "opioid"
   - "opioids"
+  - "analgesic"
+  - "analgesics"
+  - "antidepressant"
+  - "antidepressants"
+  - "anticonvulsant"
+  - "anticonvulsants"
+  - "antibiotic"
+  - "antineoplastic"
+  - "antineoplastics"
+  - "diuretic"
+  - "sedative"
+  - "anesthetic"
+  - "anesthetics"
 
 # NER-specific false positives (commonly returned by scispacy UMLS)
 ner_false_positives:

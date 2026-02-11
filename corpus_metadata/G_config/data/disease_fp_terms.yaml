@@ -46,7 +46,6 @@ common_english_fp_terms:
   - "infectious"
   - "acquired"
   - "condition"
-  - "infection"
   - "injury"
   - "malignancy"
   - "pituitary"
@@ -111,8 +110,31 @@ common_english_fp_terms:
   - "trigonocephaly"
   # Qualifiers that get expanded to diseases via lexicon
   - "late-onset"
+  # Chemistry/biology abbreviations colliding with rare disease acronyms
+  - "ph"
+  - "hcl"
+  - "fa"
+  - "psa"
+  - "map"
+  - "ace"
+  - "pan"
+  - "aps"
+  - "cat"
+  - "mat"
+  - "mars"
+  - "fad"
+  - "gbs"
+  # Clinical/statistics abbreviations colliding with rare disease acronyms
+  - "nos"
+  - "sem"
+  - "ns"
+  - "fs"
+  - "mrs"
+  # Generic clinical process terms (not diseases)
+  - "immunosuppression"
+  - "analgesia"
 
-# Multi-word generic terms that are not specific diseases
+# Multi-word generic terms that are not specific diseases (always filtered)
 generic_multiword_fp_terms:
   - "rare disorder"
   - "autosomal dominant"
@@ -124,16 +146,6 @@ generic_multiword_fp_terms:
   - "loose stools"
   - "the syndrome"
   - "increased blood pressure"
-  - "congenital anomalies of the kidney and urinary tract"
-  # Symptoms/signs, not diseases
-  - "skin rash"
-  - "blood clots"
-  - "blood clot"
-  - "heart defects"
-  - "heart defect"
-  - "hearing loss"
-  - "myoclonic seizures"
-  - "myoclonic seizure"
   - "rare kidney disease"
   - "high blood pressure"
   - "pituitary gland"
@@ -142,8 +154,6 @@ generic_multiword_fp_terms:
   # Clinical findings / malformations (not specific diseases)
   - "eyelid malformation"
   - "facial malformation"
-  - "joint contractures"
-  - "muscle atrophy"
   - "inborn errors"
   - "inborn error"
   # Non-disease generic phrases (confirmed FPs, not gold annotations)
@@ -152,10 +162,20 @@ generic_multiword_fp_terms:
   - "genetic predisposition"
   - "severe form"
   - "severe forms"
-  - "congenital defects"
-  - "congenital defect"
-  - "heart malformation"
-  - "heart malformations"
+
+# Symptom/sign terms that some benchmarks annotate as diseases (BC5CDR) but
+# others do not (NLP4RARE).  Filtered by default; disabled via
+# filter_symptom_diseases=False for datasets that annotate symptoms.
+symptom_disease_fp_terms:
+  - "skin rash"
+  - "blood clots"
+  - "blood clot"
+  - "heart defects"
+  - "heart defect"
+  - "hearing loss"
+  - "myoclonic seizures"
+  - "myoclonic seizure"
+  - "congenital anomalies of the kidney and urinary tract"
   - "platelet abnormalities"
   - "platelet abnormality"
   - "bacterial infections"
@@ -164,11 +184,18 @@ generic_multiword_fp_terms:
   - "hypersensitivity reaction"
   - "absence of sweating"
   - "glycogen storage diseases"
-  # Generic disease categories (not specific diseases)
   - "bone disorder"
   - "bone disorders"
   - "infectious diseases"
   - "infectious disease"
+  - "joint contractures"
+  - "muscle atrophy"
+  - "heart malformation"
+  - "heart malformations"
+  - "congenital defects"
+  - "congenital defect"
+  # Single-word symptom/clinical terms that some datasets annotate
+  - "infection"
 
 # Context keywords for chromosome/cytogenetic disambiguation
 chromosome_context_keywords:

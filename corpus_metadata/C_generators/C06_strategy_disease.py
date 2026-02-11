@@ -261,7 +261,11 @@ class DiseaseDetector:
         self.domain_profile = load_domain_profile(profile_name, self.config)
 
         # FP filter with domain profile
-        self.fp_filter = DiseaseFalsePositiveFilter(domain_profile=self.domain_profile)
+        self._filter_symptom_diseases = bool(self.config.get("filter_symptom_diseases", True))
+        self.fp_filter = DiseaseFalsePositiveFilter(
+            domain_profile=self.domain_profile,
+            filter_symptom_diseases=self._filter_symptom_diseases,
+        )
 
         # Disease entries storage
         self.specialized_entries: Dict[str, DiseaseEntry] = {}  # key -> DiseaseEntry
@@ -1238,6 +1242,25 @@ class DiseaseDetector:
             return False
         ctx_lower = context.lower()
         return any(exc.lower() in ctx_lower for exc in exclude_contexts)
+
+    def is_known_disease(self, term: str) -> Optional[Tuple[str, str]]:
+        """Check if a term matches any disease lexicon as a full-term match.
+
+        Returns (matched_key, lexicon_source) or None.
+        """
+        term_lower = term.lower().strip()
+        if not term_lower or len(term_lower) < 3:
+            return None
+        term_len = len(term_lower)
+        for kp, source in [
+            (self.specialized_kp, "specialized"),
+            (self.general_kp, "general"),
+        ]:
+            matches = kp.extract_keywords(term_lower, span_info=True)
+            for keyword, start, end in matches:
+                if start == 0 and end == term_len:
+                    return (keyword, source)
+        return None
 
     def _deduplicate_by_name(
         self, candidates: List[DiseaseCandidate]
