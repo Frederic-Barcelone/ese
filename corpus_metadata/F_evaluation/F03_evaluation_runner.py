@@ -94,7 +94,7 @@ PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
 
 # Feasibility paths
 FEASIBILITY_PATH = BASE_PATH / "gold_data" / "feasibility" / "pdfs"
-FEASIBILITY_GOLD = BASE_PATH / "gold_data" / "feasibility" / "feasibility_gold.json"
+FEASIBILITY_GOLD = BASE_PATH / "gold_data" / "feasibility_gold.json"
 
 # -----------------------------------------------------------------------------
 # EVALUATION SETTINGS - Change these to control what gets evaluated

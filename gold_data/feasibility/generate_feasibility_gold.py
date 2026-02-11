@@ -25,7 +25,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent
 DOCS_DIR = SCRIPT_DIR / "docs"
 PDF_DIR = SCRIPT_DIR / "pdfs"
-GOLD_FILE = SCRIPT_DIR / "feasibility_gold.json"
+GOLD_FILE = SCRIPT_DIR.parent / "feasibility_gold.json"
 
 
 def generate_pdf(text_path: Path, output_path: Path) -> None:
