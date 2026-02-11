@@ -69,8 +69,8 @@ class DrugFalsePositiveFilter:
         r"^(?:KY|IRB|EC|REC|IEC|ERB|REB)\d{4}$", re.IGNORECASE
     )
 
-    # Internal compound/ligand ID pattern (e.g., NCR181, FLA873, NCMO001)
-    COMPOUND_ID_PATTERN = re.compile(r"^[A-Z]{2,5}\d{2,4}$")
+    # Internal compound/ligand ID pattern (e.g., NCR181, FLA873, NCMO001, NS-718)
+    COMPOUND_ID_PATTERN = re.compile(r"^[A-Z]{2,5}-?\d{2,4}$")
 
     # Minimum drug name length
     MIN_LENGTH = 3
@@ -299,17 +299,12 @@ class DrugFalsePositiveFilter:
         # Context-based author name detection
         if context:
             ctx_lower = context.lower()
-            # Only use specific author patterns — avoid ", name," which
-            # matches any word in comma-separated lists (very common in
-            # biomedical text for enumerating chemicals/drugs).
-            author_indicators = [
-                f"by {text_lower},",
-                f"by {text_lower}.",
-                f"{text_lower} et al",
-            ]
-            for indicator in author_indicators:
-                if indicator in ctx_lower:
-                    return True
+            # Only use "et al" — the most reliable author signal.
+            # Avoid "by name," / "by name." which match pharmacological
+            # contexts like "potentiated by epinephrine." or
+            # "inhibited by metronidazole,".
+            if f"{text_lower} et al" in ctx_lower:
+                return True
 
             # Check for author initials pattern (uppercase only — not IGNORECASE
             # to avoid matching drug + common 1-2 letter words like "to", "at", "i")

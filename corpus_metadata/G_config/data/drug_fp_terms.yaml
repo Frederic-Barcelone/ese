@@ -237,6 +237,14 @@ biological_entities:
   # Blood cells / hematological terms (biological, not drugs)
   - "leukocytes"
   - "leukocyte"
+  # Proteins / neuropeptides (biological, not drugs)
+  - "myelin basic protein"
+  - "mbp"
+  - "corticotropin-releasing factor"
+  - "corticotropin releasing factor"
+  - "crf"
+  - "angiotensin converting enzyme"
+  - "angiotensin-converting enzyme"
 
 # Pharmaceutical company names (not drugs)
 pharma_company_names:

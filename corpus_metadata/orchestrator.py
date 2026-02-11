@@ -1697,6 +1697,17 @@ class Orchestrator:
             if not short_form:
                 continue
 
+            # Check FP filter on the long form (catches biological entities
+            # like "basic fibroblast growth factor" or "interleukin-6")
+            if self.drug_detector.fp_filter.is_false_positive(
+                long_form, "", gen_type,
+            ):
+                logger.debug(
+                    "Drug abbreviation cross-ref filtered: %s → %s (FP)",
+                    short_form, long_form,
+                )
+                continue
+
             drug = ExtractedDrug(
                 candidate_id=entity.id,
                 doc_id=entity.doc_id,

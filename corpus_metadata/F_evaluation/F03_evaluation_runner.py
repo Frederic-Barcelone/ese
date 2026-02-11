@@ -89,7 +89,8 @@ NCBI_DISEASE_GOLD = BASE_PATH / "gold_data" / "ncbi_disease_gold.json"
 BC5CDR_PATH = BASE_PATH / "gold_data" / "bc5cdr" / "pdfs"
 BC5CDR_GOLD = BASE_PATH / "gold_data" / "bc5cdr_gold.json"
 
-# PubMed Authors paths (reuses gene corpus PDFs)
+# PubMed Authors paths
+PUBMED_AUTHOR_PATH = BASE_PATH / "gold_data" / "pubmed_authors" / "PDFs"
 PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
 
 # Feasibility paths
@@ -101,7 +102,7 @@ FEASIBILITY_GOLD = BASE_PATH / "gold_data" / "feasibility_gold.json"
 # -----------------------------------------------------------------------------
 
 # Which datasets to run (set to False to skip)
-RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
+RUN_NLP4RARE = True    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
@@ -131,7 +132,7 @@ BC5CDR_SPLITS = ["test"]
 PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = 100  # All documents (set to small number for testing)
+MAX_DOCS = 20  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -1756,6 +1757,14 @@ DRUG_SYNONYM_GROUPS: list[list[str]] = [
     ["potassium", "k"],
     ["nociceptin", "orphanin fq"],
     ["superoxide dismutase", "sod1", "h-sod1"],
+    ["propofol", "disoprivan"],
+    ["isoniazid", "isoniazide"],
+    ["peroxide", "peroxides"],
+    ["phenol", "phenols"],
+    ["deferoxamine", "dfx", "desferrioxamine"],
+    ["vinorelbine", "vnr"],
+    ["vindesine", "vds"],
+    ["gemcitabine", "gem"],
 ]
 
 # Build synonym lookup
@@ -1791,12 +1800,23 @@ def drug_matches(sys_name: str, gold_name: str, threshold: float = FUZZY_THRESHO
     return ratio >= threshold
 
 
+def _drug_name_exact(sys_name: str, gold_name: str) -> bool:
+    """Check for exact (case-insensitive, whitespace-normalized) drug name match."""
+    return " ".join(sys_name.strip().lower().split()) == " ".join(gold_name.strip().lower().split())
+
+
 def compare_drugs(
     extracted: List[ExtractedDrugEval],
     gold: List[GoldDrug],
     doc_id: str,
 ) -> EntityResult:
-    """Compare extracted drugs against gold standard."""
+    """Compare extracted drugs against gold standard.
+
+    Uses two-pass matching to prefer exact matches over fuzzy/substring:
+    Pass 1: Only exact matches (prevents "phenol" consuming gold "phenols"
+            when gold "phenol" is available).
+    Pass 2: Fuzzy/substring matches on remaining unmatched.
+    """
     result = EntityResult(
         entity_type="drugs",
         doc_id=doc_id,
@@ -1805,12 +1825,31 @@ def compare_drugs(
     )
 
     matched_gold: set[str] = set()
+    matched_ext: set[int] = set()
 
-    for ext in extracted:
+    # Pass 1: Exact matches only
+    for i, ext in enumerate(extracted):
+        ext_name = ext.name_normalized
+        ext_alt = ext.alt_name_normalized
+        for g in gold:
+            gold_key = g.name_normalized
+            if gold_key not in matched_gold:
+                if _drug_name_exact(ext_name, gold_key) or (
+                    ext_alt and _drug_name_exact(ext_alt, gold_key)
+                ):
+                    result.tp += 1
+                    result.tp_items.append(ext.name)
+                    matched_gold.add(gold_key)
+                    matched_ext.add(i)
+                    break
+
+    # Pass 2: Fuzzy/substring matches on remaining
+    for i, ext in enumerate(extracted):
+        if i in matched_ext:
+            continue
         matched = False
         ext_name = ext.name_normalized
         ext_alt = ext.alt_name_normalized
-
         for g in gold:
             gold_key = g.name_normalized
             if gold_key not in matched_gold:
@@ -1826,7 +1865,6 @@ def compare_drugs(
                     matched_gold.add(gold_key)
                     matched = True
                     break
-
         if not matched:
             result.fp += 1
             result.fp_items.append(ext.name)
@@ -3152,55 +3190,22 @@ def main():
             results.append(result)
 
     # Evaluate PubMed Authors/Citations
-    if RUN_PUBMED_AUTHORS:
+    if RUN_PUBMED_AUTHORS and PUBMED_AUTHOR_PATH.exists():
         gold_data = load_pubmed_author_gold(PUBMED_AUTHOR_GOLD, splits=PUBMED_AUTHOR_SPLITS)
         has_gold = any(gold_data[k] for k in gold_data)
         if has_gold:
             orch = get_orchestrator("PubMed-Authors")
-            # Use gene corpus PDF folders (NLM-Gene + RareDisGene)
-            pdf_folders = []
-            if NLM_GENE_PATH.exists():
-                pdf_folders.append(NLM_GENE_PATH)
-            if RAREDIS_GENE_PATH.exists():
-                pdf_folders.append(RAREDIS_GENE_PATH)
-
-            if pdf_folders:
-                result = evaluate_dataset(
-                    name="PubMed-Authors",
-                    pdf_folder=pdf_folders[0],
-                    gold_data=gold_data,
-                    orch=orch,
-                    max_docs=MAX_DOCS,
-                    splits=PUBMED_AUTHOR_SPLITS,
-                )
-                # If there's a second folder, run it too and merge
-                if len(pdf_folders) > 1:
-                    result2 = evaluate_dataset(
-                        name="PubMed-Authors (RareDisGene)",
-                        pdf_folder=pdf_folders[1],
-                        gold_data=gold_data,
-                        orch=orch,
-                        max_docs=MAX_DOCS,
-                        splits=PUBMED_AUTHOR_SPLITS,
-                    )
-                    # Merge results
-                    result.doc_results.extend(result2.doc_results)
-                    result.docs_total += result2.docs_total
-                    result.docs_processed += result2.docs_processed
-                    result.docs_failed += result2.docs_failed
-                    result.docs_perfect += result2.docs_perfect
-                    result.total_time += result2.total_time
-                    result.author_tp += result2.author_tp
-                    result.author_fp += result2.author_fp
-                    result.author_fn += result2.author_fn
-                    result.citation_tp += result2.citation_tp
-                    result.citation_fp += result2.citation_fp
-                    result.citation_fn += result2.citation_fn
-                    result.name = "PubMed-Authors"
-
-                print_dataset_summary(result)
-                print_error_analysis(result)
-                results.append(result)
+            result = evaluate_dataset(
+                name="PubMed-Authors",
+                pdf_folder=PUBMED_AUTHOR_PATH,
+                gold_data=gold_data,
+                orch=orch,
+                max_docs=MAX_DOCS,
+                splits=PUBMED_AUTHOR_SPLITS,
+            )
+            print_dataset_summary(result)
+            print_error_analysis(result)
+            results.append(result)
 
     # Evaluate Feasibility (separate evaluation — structured data, not entity matching)
     if RUN_FEASIBILITY and FEASIBILITY_PATH.exists():
