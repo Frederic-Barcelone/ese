@@ -4,8 +4,8 @@
 
 | Entity | Benchmark | Docs | TP | FP | FN | Precision | Recall | F1 | Delta | Perfect |
 |--------|-----------|------|----|----|----|-----------|--------|----|-------|---------|
-| Disease | BC5CDR | 100 | 383 | 18 | 99 | 95.5% | 79.5% | 86.7% | +3.3 | 21/100 |
-| Drug | BC5CDR | 100 | 272 | 25 | 69 | 91.6% | 79.8% | 85.3% | +6.3 | 21/100 |
+| Disease | BC5CDR | 100 | 383 | 18 | 99 | 95.5% | 79.5% | 86.7% | +0.0 | 21/100 |
+| Drug | BC5CDR | 100 | 272 | 25 | 69 | 91.6% | 79.8% | 85.3% | -0.9 | 21/100 |
 | Drug | CADEC | 311 | — | — | — | — | — | 93.0% | — | 91.0% |
 | Gene | NLM-Gene | 46 | — | — | — | — | — | 78.3% | — | 6/46 |
 | Gene | RareDisGene | 100 | — | — | — | — | — | 65.5% | — | 44/100 |
@@ -22,7 +22,7 @@
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
 | Feasibility (design) | Synthetic | 20 | — | — | — | — | — | — | — | 97% |
 
-> **Delta** = F1 change since first baseline measurement. BC5CDR Disease baseline 83.4%, Drug baseline 79.0%.
+> **Delta** = F1 change since last evaluation run.
 > Rows with — need a fresh evaluation run to fill in.
 
 ## Changelog
