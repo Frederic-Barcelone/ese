@@ -222,6 +222,21 @@ biological_entities:
   - "proteinuria"
   - "microalbuminuria"
   - "macroalbuminuria"
+  # Growth factors and cytokines (biological signaling, not drugs)
+  - "bfgf"
+  - "basic fibroblast growth factor"
+  - "fibroblast growth factor"
+  - "interleukin-6"
+  - "interleukin 6"
+  # Enzymes (biological, not drugs)
+  - "reverse transcriptase"
+  - "nadh"
+  - "nadph"
+  # Hormones (endogenous, not drugs unless exogenous)
+  - "antidiuretic hormone"
+  # Blood cells / hematological terms (biological, not drugs)
+  - "leukocytes"
+  - "leukocyte"
 
 # Pharmaceutical company names (not drugs)
 pharma_company_names:
@@ -290,6 +305,7 @@ common_words:
   - "kit"
   # Generic substances
   - "water"
+  - "air"
   - "salt"
   - "acid"
   - "base"
@@ -696,6 +712,10 @@ always_filter:
   - "arthritis pain"
   - "cholesterol management"
   - "stress"
+  # Treatment modalities (not specific drugs)
+  - "systemic chemotherapy"
+  - "general anesthesia"
+  - "electrolytes"
   # Drug class terms (not specific drugs)
   - "opioid"
   - "opioids"
@@ -1104,6 +1124,9 @@ non_drug_allcaps:
   - "hads"
   - "maf"
   - "pro"
+  - "rose"
+  - "react"
+  - "pad"
 
 # Pattern suffixes that indicate biological entities, not specific drugs
 biological_suffixes:

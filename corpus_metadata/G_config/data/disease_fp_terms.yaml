@@ -130,9 +130,25 @@ common_english_fp_terms:
   - "ns"
   - "fs"
   - "mrs"
+  # Rare disease acronym collisions with biology/clinical terms
+  - "sph"
+  - "anca"
+  - "ead"
+  - "ncs"
+  - "mmc"
+  - "cpa"
+  - "fas"
+  - "eye"
+  - "mrd"
+  - "rns"
+  - "gtn"
   # Generic clinical process terms (not diseases)
   - "immunosuppression"
   - "analgesia"
+  # Adjectival/modifier terms (not standalone diseases)
+  - "drug-induced"
+  - "ischemic"
+  - "sterile"
 
 # Multi-word generic terms that are not specific diseases (always filtered)
 generic_multiword_fp_terms:

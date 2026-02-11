@@ -1770,10 +1770,28 @@ class Orchestrator:
             if match is None:
                 continue
 
-            _matched_key, lexicon_source = match
+            matched_key, lexicon_source = match
+
+            # Also check if the lexicon keyword is already detected
+            # (e.g., "HIV infection" detected directly but long_form is
+            # "Human Immunodeficiency Virus" — different string, same disease)
+            if matched_key.lower() in detected_diseases:
+                continue
 
             short_form = (entity.short_form or "").strip()
             if not short_form:
+                continue
+
+            # Apply FP filter on short_form to prevent false positives
+            # (e.g., pH→Pulmonary hypertension, HIV→HIV infection)
+            should_filter, filter_reason = self.disease_detector.fp_filter.should_filter(
+                short_form, f"{short_form} = {long_form}", is_abbreviation=True,
+            )
+            if should_filter:
+                logger.debug(
+                    "Disease abbrev cross-ref filtered: %s → %s (%s)",
+                    short_form, long_form, filter_reason,
+                )
                 continue
 
             disease = ExtractedDisease(

@@ -69,6 +69,9 @@ class DrugFalsePositiveFilter:
         r"^(?:KY|IRB|EC|REC|IEC|ERB|REB)\d{4}$", re.IGNORECASE
     )
 
+    # Internal compound/ligand ID pattern (e.g., NCR181, FLA873, NCMO001)
+    COMPOUND_ID_PATTERN = re.compile(r"^[A-Z]{2,5}\d{2,4}$")
+
     # Minimum drug name length
     MIN_LENGTH = 3
 
@@ -99,7 +102,24 @@ class DrugFalsePositiveFilter:
         # Biochemical agents
         "superoxide", "androgen",
         # Drugs of abuse (valid pharmacological agents)
-        "cocaine", "amphetamines",
+        "cocaine", "amphetamines", "methamphetamine",
+        # Metabolites / biochemicals annotated as chemicals in BC5CDR
+        "bilirubin", "catecholamines", "catecholamine",
+        "gamma-aminobutyric acid",
+        # Drug classes annotated as chemicals in BC5CDR
+        "corticosteroid", "corticosteroids",
+        "aminoglycoside", "aminoglycosides",
+        "neuroleptic", "neuroleptics",
+        "steroid", "steroids",
+        # Chemicals blocked by biological_entities or ner_false_positives
+        "fluorouracil", "chloride",
+        "peroxide", "peroxides",
+        "niacin", "nifekalant",
+        "anthracycline", "anthracyclines",
+        "metronidazole", "isoniazid",
+        "epinephrine",  # also in Neurotransmitters section above
+        "caproate", "epsilon-aminocaproate",
+        "beta-carboline", "triphenyltetrazolium",
     }
 
     def __init__(self, allow_bioactive_compounds: bool = False) -> None:
@@ -165,6 +185,10 @@ class DrugFalsePositiveFilter:
 
         # Filter ethics committee approval codes (e.g., KY2022, IRB2023)
         if self.ETHICS_CODE_PATTERN.match(text_stripped):
+            return True
+
+        # Filter internal compound/ligand IDs (e.g., NCR181, FLA873, NCMO001)
+        if self.COMPOUND_ID_PATTERN.match(text_stripped):
             return True
 
         # Always filter generic placeholder terms
@@ -275,12 +299,13 @@ class DrugFalsePositiveFilter:
         # Context-based author name detection
         if context:
             ctx_lower = context.lower()
+            # Only use specific author patterns — avoid ", name," which
+            # matches any word in comma-separated lists (very common in
+            # biomedical text for enumerating chemicals/drugs).
             author_indicators = [
                 f"by {text_lower},",
                 f"by {text_lower}.",
                 f"{text_lower} et al",
-                f", {text_lower},",
-                f", {text_lower}.",
             ]
             for indicator in author_indicators:
                 if indicator in ctx_lower:
