@@ -1,0 +1,90 @@
+Clinical Practice Guidelines for Wilson Disease: Diagnosis, Treatment, and Monitoring
+
+Issued by: Japan Society of Hepatology, in collaboration with the Japan Society for Inherited Metabolic Diseases
+Publication Date: January 2024
+Guideline Version: 2.0
+
+1. Introduction
+
+Wilson disease is a rare autosomal recessive disorder of copper metabolism caused by pathogenic variants in the ATP7B gene. The estimated prevalence of Wilson disease in Japan is 1 in 30,000, corresponding to approximately 4,200 affected individuals nationwide. The incidence is approximately 1 in 35,000 live births. These figures are derived from the nationwide survey conducted by the Ministry of Health, Labour and Welfare Research Group on Wilson Disease (2020-2023), which identified 3,800 patients through a comprehensive hospital-based survey covering 847 medical institutions.
+
+In Japan, Wilson disease is designated as a specified intractable disease (Nanbyo No. 171), providing patients with access to the national subsidy program covering medical expenses. The average diagnostic delay is 4.8 years from initial symptom presentation, though this has improved from 7.2 years reported in the 2015 survey, attributed to increased awareness and expanded newborn screening programs in select prefectures.
+
+2. Diagnostic Pathway
+
+2.1 Initial Assessment
+The diagnosis of Wilson disease should be suspected in any patient presenting with unexplained liver disease, neuropsychiatric symptoms, Kayser-Fleischer rings, or Coombs-negative hemolytic anemia between ages 3 and 55. The Leipzig scoring system should be used for diagnostic evaluation.
+
+2.2 Laboratory Testing
+Essential laboratory investigations include:
+- Serum ceruloplasmin (low: < 20 mg/dL in 85% of patients)
+- 24-hour urinary copper excretion (elevated: > 100 mcg/day diagnostic; > 40 mcg/day suggestive)
+- Serum free copper (non-ceruloplasmin-bound copper > 25 mcg/dL)
+- Hepatic copper content by liver biopsy (> 250 mcg/g dry weight diagnostic)
+- Genetic testing for ATP7B pathogenic variants
+
+2.3 Specialist Referral
+Patients with suspected Wilson disease should be referred to a hepatologist or neurologist at a designated Wilson disease expert centre. Japan currently has 23 designated expert centres for Wilson disease, with the largest centres at the University of Tokyo Hospital, Tohoku University Hospital, and Osaka University Hospital. The Japanese Wilson Disease Patient Registry enrolls 2,100 patients across these 23 centres.
+
+3. Treatment Recommendations
+
+3.1 First-Line Chelation Therapy
+D-penicillamine is recommended as first-line chelation therapy, initiated at 250 mg daily and gradually increased to 750-1000 mg daily in divided doses. Monitoring of complete blood count, urinalysis, and liver function tests is required every 2 weeks for the first 3 months, then monthly.
+
+Trientine (triethylenetetramine dihydrochloride) is recommended as an alternative first-line agent for patients intolerant to D-penicillamine. The recommended dose is 750-1500 mg daily in divided doses.
+
+3.2 Zinc Therapy
+Zinc acetate is recommended as maintenance therapy after initial decoppering or as monotherapy for pre-symptomatic patients identified through family screening. The recommended dose is 150 mg elemental zinc daily in divided doses.
+
+3.3 Monitoring Schedule
+All patients on chelation therapy require:
+- Serum copper and ceruloplasmin: every 3 months
+- 24-hour urinary copper: every 3 months for the first year, then every 6 months
+- Complete blood count and liver function tests: monthly for the first 6 months, then every 3 months
+- Ophthalmologic slit-lamp examination for Kayser-Fleischer rings: every 6 months
+- Neurological assessment (UWDRS score): every 6 months for patients with neurological involvement
+- Brain MRI: annually for patients with neurological involvement
+- Abdominal ultrasound and liver elastography: every 6 months
+
+4. Special Populations
+
+4.1 Pediatric Patients
+Chelation therapy should be initiated as soon as the diagnosis is confirmed. Dose adjustments should be based on body weight. D-penicillamine dose: 20 mg/kg/day in children.
+
+4.2 Pregnancy
+D-penicillamine and trientine should be continued during pregnancy at the lowest effective dose. Zinc therapy is a safer alternative during pregnancy and breastfeeding.
+
+4.3 Liver Transplantation
+Liver transplantation is indicated for patients with fulminant hepatic failure or decompensated cirrhosis unresponsive to chelation therapy. The modified Nazer score > 7 or revised King's College Hospital criteria for Wilson disease should guide transplant listing.
+
+5. Expert Centre Infrastructure
+
+5.1 Centre Requirements
+Designated Wilson disease expert centres must have:
+- A hepatologist with at least 3 years of experience managing Wilson disease
+- Access to 24-hour urinary copper testing with rapid turnaround (within 72 hours)
+- Liver biopsy capability with quantitative copper measurement
+- Genetic testing for ATP7B (in-house or through partnership with certified genetics laboratory)
+- Neuroimaging (MRI 3T) and neuropsychological assessment capability
+- Multidisciplinary team: hepatology, neurology, ophthalmology, genetics, nutrition, psychology
+
+5.2 Geographic Distribution
+The 23 designated centres are distributed across Japan with at least one centre per geographic region. Major centres include: Hokkaido University (Sapporo), Tohoku University (Sendai), University of Tokyo (Tokyo), Nagoya University (Nagoya), Osaka University (Osaka), Kyushu University (Fukuoka). Rural and island prefectures rely on telemedicine links to regional expert centres.
+
+6. Clinical Trial Feasibility Considerations
+
+6.1 Patient Pool
+Of the estimated 4,200 diagnosed patients in Japan, approximately 2,100 are enrolled in the Japanese Wilson Disease Patient Registry. Based on registry data, approximately 1,400 patients are on stable chelation therapy, and approximately 680 patients have neurological involvement. An estimated 480 patients would meet typical clinical trial eligibility criteria (age 18-65, stable therapy, adequate hepatic function, Leipzig score >= 4).
+
+6.2 Screening Expectations
+Japanese experience in recent Wilson disease trials shows a screening-to-randomization ratio of approximately 2.8:1. Common screen failure reasons include inadequate hepatic function (Child-Pugh B or C), unstable chelation therapy dose within prior 6 months, and concomitant medications affecting copper metabolism. The average screen failure rate in Japanese Wilson disease trials is approximately 35%.
+
+6.3 Investigator Network
+The Japanese Wilson Disease Study Group includes 38 investigators across the 23 expert centres, with 15 investigators having previous clinical trial experience as principal investigators in hepatology or metabolic disease trials.
+
+6.4 Operational Considerations
+Trials requiring 24-hour urinary copper collection face compliance challenges, particularly in elderly patients and those with neurological disability. Central laboratory analysis is feasible through established partnerships between Japanese academic centres and international central laboratory providers (LSI Medience, BML Inc.). Liver biopsy is generally well-accepted in Japan for diagnostic purposes but may reduce enrollment if required at multiple timepoints.
+
+7. Registry and Data Resources
+
+The Japanese Wilson Disease Patient Registry (JWDPR) is maintained by the Ministry of Health, Labour and Welfare Research Group. Data includes demographics, genotype, phenotype (hepatic/neurological/mixed), treatment history, and longitudinal outcome data. Access for trial feasibility analysis requires approval from the JWDPR Data Access Committee (typical turnaround: 6-8 weeks).

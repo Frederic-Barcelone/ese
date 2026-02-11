@@ -1,0 +1,69 @@
+Clinical Practice Guidelines for the Management of Huntington Disease in the United Kingdom
+
+Issued by: British Neurological Association and Huntington's Disease Association UK
+Publication Date: March 2024
+Guideline Version: 3.0
+
+1. Introduction and Scope
+
+Huntington disease (HD) is a progressive neurodegenerative disorder caused by an expanded CAG trinucleotide repeat in the HTT gene on chromosome 4. The prevalence of Huntington disease in the United Kingdom is estimated at 12.3 per 100,000 population, corresponding to approximately 8,000 affected individuals. The incidence is 0.7 per 100,000 person-years. The UK has one of the highest prevalence rates globally, with regional variation showing higher rates in Scotland (14.6 per 100,000) and Wales (13.1 per 100,000).
+
+The European Huntington's Disease Network (EHDN) Registry enrolls approximately 21,000 participants across Europe, with the UK contributing 3,200 participants from 16 specialist centres. The average diagnostic delay from motor symptom onset to formal diagnosis is 3.2 years in the UK.
+
+This guideline provides recommendations for diagnostic evaluation, treatment initiation, monitoring, and referral pathways for adults with Huntington disease, with attention to clinical trial eligibility considerations and specialist centre infrastructure.
+
+2. Diagnostic Pathway
+
+2.1 Genetic Testing
+Predictive genetic testing for HD should be performed only within the framework of established genetic counselling protocols, following International Huntington Association and World Federation of Neurology guidelines. A CAG repeat length of 36 or more is considered diagnostic. Intermediate alleles (27-35 CAG repeats) require careful counselling regarding reduced penetrance.
+
+2.2 Clinical Assessment
+Motor assessment using the Unified Huntington's Disease Rating Scale Total Motor Score (UHDRS-TMS) should be performed at baseline and every 6 months. Cognitive assessment using the Montreal Cognitive Assessment (MoCA) and Symbol Digit Modalities Test (SDMT) is recommended annually. Psychiatric evaluation for depression, irritability, and apathy should be conducted at every clinical visit using the Problem Behaviours Assessment-short (PBA-s).
+
+2.3 Neuroimaging
+Brain MRI should be performed at baseline and every 2 years to assess caudate atrophy. Volumetric MRI is recommended for patients enrolled in observational or interventional research studies.
+
+3. Treatment Recommendations
+
+3.1 Chorea Management
+First-line treatment for disabling chorea is tetrabenazine, initiated at 12.5 mg daily and titrated to a maximum of 75 mg daily in divided doses. Second-line options include deutetrabenazine (available through the Early Access Scheme) and olanzapine for patients with concurrent psychiatric symptoms.
+
+3.2 Psychiatric Management
+Depression should be treated with selective serotonin reuptake inhibitors (SSRIs) as first line. Citalopram 20 mg daily or sertraline 50-100 mg daily are preferred. Irritability and aggression may respond to SSRIs or low-dose antipsychotics.
+
+3.3 Supportive Care
+Multidisciplinary team involvement is essential, including neurology, psychiatry, speech therapy, physiotherapy, occupational therapy, and genetic counselling. Nutritional assessment with attention to weight loss and dysphagia is recommended at every visit.
+
+4. Specialist Centre Requirements
+
+4.1 Centre Designation
+Specialist HD centres in the UK should be designated by the National Neuroscience Advisory Group. Each centre must have a consultant neurologist with at least 5 years of HD experience, access to neuropsychiatric services, a dedicated HD nurse specialist, and established links with genetic counselling services.
+
+Currently, 16 specialist centres across the UK are designated for HD care. These centres collectively manage approximately 6,500 diagnosed patients. Centres are distributed across England (10), Scotland (3), Wales (2), and Northern Ireland (1). Key centres include the National Hospital for Neurology and Neurosurgery in London, the Birmingham HD Clinic, the Leeds Multidisciplinary HD Service, and the Cardiff HD Centre.
+
+4.2 Research Infrastructure
+Centres participating in HD clinical trials must maintain Good Clinical Practice certification, have access to MRI facilities capable of volumetric imaging, and demonstrate capacity for biomarker sample collection, processing, and shipment (cerebrospinal fluid, blood for neurofilament light chain assays). A minimum patient panel of 50 diagnosed HD patients is recommended for centres seeking to participate in interventional trials.
+
+5. Clinical Trial Feasibility Considerations
+
+5.1 Patient Population
+Of the estimated 8,000 diagnosed patients in the UK, approximately 4,200 are in early to moderate disease stages (Total Functional Capacity score of 7-13) suitable for interventional trials. Predictive gene carriers who are pre-manifest (estimated 2,400 individuals in the HD registry who have not yet developed motor symptoms) represent an additional recruitment pool for prevention trials.
+
+5.2 Screening and Enrollment
+Based on UK experience in recent multi-centre trials, screening-to-randomization ratios typically range from 2.5:1 to 3.5:1 for HD trials. Common screen failure reasons include CAG repeat length below trial threshold (typically 40+), concomitant medication conflicts (especially antipsychotics that affect motor scores), inability to undergo MRI (claustrophobia, implants), and cognitive impairment precluding informed consent. The average screen failure rate across recent UK HD trials is 38%.
+
+5.3 Retention
+Dropout rates in 12-month HD trials average 12-18% in the UK, driven primarily by disease progression, caregiver burden, and travel distance to sites. Trials requiring lumbar puncture for cerebrospinal fluid collection report higher dropout (20-25%).
+
+5.4 Investigator Network
+The EHDN Investigator Network identifies 42 experienced HD investigators across the 16 UK centres. Principal investigators should have at least 3 completed HD trials as PI or sub-investigator.
+
+6. Monitoring and Follow-up
+
+Patients on tetrabenazine or deutetrabenazine require assessment of depression and suicidality at each visit (PHQ-9 recommended). QTc monitoring with ECG is recommended at baseline and after dose changes. Hepatic function tests should be performed at baseline and every 6 months for patients on valproate or other hepatotoxic medications.
+
+7. Patient Registry and Data
+
+The ENROLL-HD observational study serves as the primary global registry for HD. In the UK, 3,200 participants are enrolled across 16 sites. Data collected includes annual clinical assessments (UHDRS), genetic data, biosamples, and patient-reported outcomes. Registry data supports trial feasibility assessment and site selection.
+
+Access to ENROLL-HD data for trial planning is available through the CHDI Foundation data governance process. De-identified datasets for feasibility modelling can be requested with a 4-6 week turnaround.

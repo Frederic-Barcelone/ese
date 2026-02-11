@@ -1,0 +1,71 @@
+Iptacopan Versus Placebo as Add-On to Eculizumab in Paroxysmal Nocturnal Hemoglobinuria: Results of the APPLY-PNH Phase 3 Trial
+
+Authors: Erik Hellström-Lindberg, Jan Astermark, Stig Lenhoff, et al.
+Journal: New England Journal of Medicine, 2024
+
+Abstract
+
+Background: Paroxysmal nocturnal hemoglobinuria (PNH) is a rare acquired clonal hematopoietic stem cell disorder with a prevalence of 13 per million in Sweden, affecting approximately 135 patients. Despite complement C5 inhibition with eculizumab, many patients continue to experience clinically significant anemia due to extravascular hemolysis mediated by C3 opsonization. This phase 3 trial evaluated iptacopan, an oral complement factor B inhibitor, as add-on to eculizumab in PNH patients with residual anemia.
+
+Methods: Adults aged 18-75 years with PNH confirmed by high-sensitivity flow cytometry (GPI-deficient granulocyte clone >= 10%) and hemoglobin < 10 g/dL despite stable eculizumab therapy for >= 6 months were enrolled across 48 sites in 10 countries. Patients were randomized 1:1 to iptacopan 200 mg twice daily or placebo, both as add-on to continued eculizumab, for 24 weeks. The primary endpoint was change from baseline in hemoglobin at Week 24.
+
+Results: Of 218 patients screened, 150 were randomized (75 per arm). Screen failure rate was 31.2%. Screen failure reasons included: hemoglobin >= 10 g/dL at screening (28 patients, 41.2% of failures), GPI-deficient clone < 10% (12 patients, 17.6%), eculizumab dose not stable for 6 months (10 patients, 14.7%), active thrombosis or anticoagulation changes within 3 months (8 patients, 11.8%), and withdrawal of consent (6 patients, 8.8%). Of 150 randomized patients, 148 received study drug and 138 completed the study.
+
+Introduction
+
+Paroxysmal nocturnal hemoglobinuria is caused by somatic mutations in the PIGA gene in hematopoietic stem cells, resulting in deficiency of glycosylphosphatidylinositol (GPI)-anchored complement regulatory proteins (CD55 and CD59) on blood cells. In Sweden, the estimated prevalence of PNH is 13 per million, corresponding to approximately 135 diagnosed patients. The Swedish PNH Registry, maintained by the Swedish Hematology Association, enrolls 98 patients across 7 university hospital haematology centres. The incidence is 1.3 per million per year.
+
+Sweden has a well-organized rare hematology disease infrastructure through the national healthcare system (Sjukvårdsregioner). PNH care is centralized in 7 university hospitals: Karolinska University Hospital (Stockholm), Sahlgrenska University Hospital (Gothenburg), Skåne University Hospital (Malmö/Lund), Uppsala University Hospital, Linköping University Hospital, Umeå University Hospital, and Örebro University Hospital.
+
+Swedish Society of Hematology PNH guidelines (2023 update) recommend complement inhibitor therapy (eculizumab or ravulizumab) for patients with symptomatic intravascular hemolysis (LDH > 1.5x ULN with anemia or thrombotic risk). Meningococcal vaccination is mandatory before complement inhibitor initiation, with booster every 3 years. Blood monitoring every 4 weeks on eculizumab, with trough complement activity confirmation and LDH tracking. High-sensitivity flow cytometry (GPI-deficient granulocyte and monocyte analysis) is performed at diagnosis and annually.
+
+Methods
+
+Study Design
+This was a phase 3, randomized, double-blind, placebo-controlled, parallel-group trial conducted at 48 sites in 10 countries (Sweden, Denmark, Norway, Finland, Germany, France, United Kingdom, United States, Japan, and Australia). The study included a screening period of up to 28 days, a 24-week treatment period, and a 4-week safety follow-up with open-label extension option.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 75 years
+2. PNH confirmed by high-sensitivity flow cytometry: GPI-deficient granulocyte clone size >= 10%
+3. Hemoglobin < 10 g/dL at screening (mean of 2 measurements at least 7 days apart)
+4. On stable eculizumab dose and schedule for >= 6 months prior to screening
+5. LDH < 1.5x ULN (confirming adequate complement C5 inhibition)
+6. Reticulocyte count > upper limit of normal (evidence of ongoing hemolysis)
+7. Meningococcal vaccination current per local guidelines
+
+Exclusion criteria:
+1. Active or recent Neisseria meningitidis infection
+2. Active thrombosis or change in anticoagulation therapy within 3 months
+3. Bone marrow failure syndrome requiring regular transfusion support (>= 4 RBC transfusions in the 12 weeks prior to screening)
+4. Prior or concurrent complement inhibitor other than eculizumab
+5. History of bone marrow transplantation
+6. eGFR < 30 mL/min/1.73m2
+
+Endpoints
+The primary endpoint was change from baseline in hemoglobin concentration (g/dL) at Week 24. Key secondary endpoints included proportion of patients achieving hemoglobin >= 12 g/dL at Week 24, change in reticulocyte count, change in indirect bilirubin, transfusion avoidance rate, change in FACIT-Fatigue score, and change in haptoglobin levels. Safety endpoints included breakthrough hemolysis events, Neisseria meningitidis surveillance, hepatic function, and injection-site/GI tolerability.
+
+Operational Procedures
+Iptacopan 200 mg or matching placebo was administered orally twice daily. Eculizumab infusions continued per standard schedule (900 mg IV every 2 weeks) at study sites. This dual treatment created a complex visit schedule with eculizumab infusion visits (every 2 weeks) and study assessment visits at screening, baseline, Weeks 2, 4, 8, 12, 16, 20, 24, and Week 28 (follow-up). Total distinct visits: 18 over 24 weeks (some assessment visits aligned with infusion visits).
+
+All laboratory assessments were performed by a central laboratory (Covance Central Lab). Analytes included complete blood count with reticulocyte count, LDH, indirect bilirubin, haptoglobin, free hemoglobin, complement CH50, C3d on erythrocytes (marker of C3 opsonization), liver function panel, and iptacopan drug levels.
+
+Meningococcal vaccination status was verified at screening. Patients with expired vaccination required booster before randomization. Prophylactic antibiotics (ciprofloxacin 500 mg daily or penicillin V 250 mg twice daily) were required for all patients during the study.
+
+Blood samples for high-sensitivity flow cytometry (GPI-deficient clone quantification) were sent to a central reference laboratory at diagnosis confirmation and at Weeks 12 and 24.
+
+Sites required a hematologist with at least 2 years of PNH management experience, eculizumab infusion capability, and access to high-sensitivity flow cytometry.
+
+Results
+
+Patient Disposition
+Between May 2022 and February 2023, 218 patients were screened at 48 sites. Screen failure rate was 31.2% (68 patients). Screen failure reasons included: hemoglobin >= 10 g/dL at screening in 28 patients (41.2% of failures), GPI-deficient granulocyte clone < 10% in 12 patients (17.6%), eculizumab dose not stable for 6 months in 10 patients (14.7%), active thrombosis or anticoagulation change within 3 months in 8 patients (11.8%), withdrawal of consent in 6 patients (8.8%), and other reasons (renal impairment, active infection) in 4 patients (5.9%).
+
+Of 150 randomized patients, 148 received study drug. Twelve patients discontinued during treatment: 7 in the iptacopan arm and 5 in the placebo arm. Discontinuation reasons: adverse events (4), breakthrough hemolysis requiring alternative treatment (3), withdrawal of consent (3), and protocol violation (2). A total of 138 patients completed the 24-week treatment period.
+
+Sweden contributed 18 patients (12.0% of enrollment), Denmark 12 (8.0%), Norway 8 (5.3%), Finland 6 (4.0%), Germany 28 (18.7%), France 22 (14.7%), United Kingdom 18 (12.0%), United States 24 (16.0%), Japan 10 (6.7%), and Australia 4 (2.7%).
+
+Discussion
+
+The Nordic countries collectively contributed 44 patients (29.3% of enrollment), with Sweden's centralized PNH care model enabling efficient screening through the Swedish PNH Registry. Among the approximately 135 PNH patients in Sweden, 82 were on eculizumab, approximately 48 had hemoglobin < 10 g/dL despite treatment, and approximately 32 were estimated eligible after all criteria. The complex visit schedule (eculizumab infusions plus study visits) was the primary operational challenge. Prophylactic antibiotics and meningococcal monitoring represented ongoing safety requirements. The requirement for high-sensitivity flow cytometry with central reference laboratory confirmation was a hard gate that required adequate sample handling and shipment logistics across international sites.

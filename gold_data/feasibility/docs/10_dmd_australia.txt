@@ -1,0 +1,66 @@
+Casimersen for the Treatment of Amenable Exon 45 Skipping in Duchenne Muscular Dystrophy: A Phase 2, Randomized, Double-Blind, Placebo-Controlled Trial
+
+Authors: Monique Ryan, Richard Finkel, Craig Campbell, et al.
+Journal: Annals of Neurology, 2024
+
+Abstract
+
+Background: Duchenne muscular dystrophy (DMD) is a severe X-linked neuromuscular disorder with a prevalence of 1 in 5,000 male live births, affecting approximately 600 males in Australia. Exon-skipping antisense oligonucleotides offer mutation-specific therapy. This phase 2 trial evaluated casimersen, an exon 45 skipping therapy, in ambulatory boys with DMD.
+
+Methods: Ambulatory males aged 6-12 years with genetically confirmed DMD amenable to exon 45 skipping were enrolled across 22 sites in 6 countries. Patients were randomized 2:1 to casimersen 30 mg/kg IV weekly or placebo for 48 weeks. The primary endpoint was change in dystrophin protein as measured by Western blot on muscle biopsy at Week 48.
+
+Results: Of 84 patients screened, 54 were randomized (36 casimersen, 18 placebo). Screen failure rate was 35.7%. Screen failure reasons included: non-ambulatory status at screening (loss of ambulation between genetic testing and screening visit) in 10 patients (33.3% of failures), mutation not amenable to exon 45 skipping on central genetic confirmation in 8 patients (26.7%), corticosteroid dose not stable for 6 months in 6 patients (20.0%), and inability to complete the 6-minute walk test in 4 patients (13.3%). Of 54 randomized patients, 52 received study drug and 48 completed the study.
+
+Introduction
+
+Duchenne muscular dystrophy (DMD) is the most common inherited neuromuscular disorder, caused by mutations in the DMD gene leading to absent or deficient dystrophin protein in skeletal and cardiac muscle. In Australia, the prevalence is approximately 1 in 5,000 male live births, with approximately 600 males currently living with DMD. The Australian National Neuromuscular Disease Registry estimates that 125 patients have mutations amenable to exon 45 skipping (approximately 8% of the DMD population).
+
+The Australasian Neuromuscular Network (ANN) coordinates DMD care through 8 designated neuromuscular centres across Australia and New Zealand. Key centres include the Royal Children's Hospital Melbourne, The Children's Hospital at Westmead Sydney, Queensland Children's Hospital Brisbane, and Perth Children's Hospital. The TREAT-NMD Global Database contributes Australian DMD patient data to international feasibility assessments.
+
+Australian treatment guidelines from the Muscular Dystrophy Australia Clinical Guidelines Committee (2023 update) recommend corticosteroid therapy (deflazacort or prednisone) for all boys with DMD from symptom onset. The guidelines mandate cardiac monitoring with echocardiography annually starting at diagnosis, pulmonary function testing starting at age 6, and bone health monitoring with DXA annually on corticosteroid therapy. The guidelines support access to approved exon-skipping therapies through the Therapeutic Goods Administration (TGA) Special Access Scheme.
+
+Methods
+
+Study Design
+This was a phase 2, randomized, double-blind, placebo-controlled, parallel-group trial conducted at 22 sites in 6 countries (Australia, United States, Canada, United Kingdom, Germany, and Italy). The study included a screening period of up to 35 days, a 48-week treatment period, and a 12-week safety follow-up.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Males aged 6 to 12 years
+2. Genetically confirmed DMD with a mutation amenable to exon 45 skipping (confirmed by central genetic laboratory)
+3. Ambulatory: able to walk independently >= 300 meters on the 6-minute walk test (6MWT) at screening
+4. Stable corticosteroid regimen (deflazacort or prednisone/prednisolone) for at least 6 months prior to screening, with no dose change > 20%
+5. Able to perform North Star Ambulatory Assessment (NSAA) with score >= 15
+
+Exclusion criteria:
+1. Non-ambulatory or use of wheelchair for community mobility
+2. Previous or current treatment with any exon-skipping therapy or gene therapy
+3. Forced vital capacity (FVC) < 50% predicted
+4. Left ventricular ejection fraction (LVEF) < 50% by echocardiography
+5. Severe scoliosis (Cobb angle > 20 degrees) interfering with pulmonary function testing
+6. Surgery planned within the study period
+7. Current use of any other investigational treatment
+
+Endpoints
+The primary endpoint was change from baseline in dystrophin protein expression measured by Western blot on muscle biopsy at Week 48, expressed as percentage of normal dystrophin. Key secondary endpoints included change from baseline in 6MWT distance at Week 48, change in NSAA total score, change in rise-from-floor time, and pharmacokinetics. Safety endpoints included adverse events, renal function (cystatin C, urine protein-to-creatinine ratio), platelet counts, and complement activation markers.
+
+Operational Procedures
+Casimersen 30 mg/kg or placebo was administered by intravenous infusion over 35-60 minutes weekly at study sites. Two muscle biopsies were required: one at baseline (biceps brachii) and one at Week 48 (contralateral biceps brachii). Muscle biopsy samples were shipped frozen to a central pathology laboratory for Western blot, immunofluorescence, and RT-PCR analysis. The biopsy requirement was a key operational burden and represented a hard gate for enrollment.
+
+The 6-minute walk test was performed at screening, baseline, and Weeks 12, 24, 36, and 48 by certified physiotherapists following a standardized protocol. The NSAA was assessed at the same timepoints. All efficacy assessments were performed by evaluators who were blinded to treatment assignment and had completed NSAA and 6MWT certification training.
+
+Total study visits numbered 52 (weekly infusion visits) plus 7 assessment visits (screening, baseline, Weeks 12, 24, 36, 48, and follow-up Week 60). All laboratory samples were processed by a central laboratory (ICON Central Laboratories). Analytes included complete blood count, renal function panel (BUN, creatinine, cystatin C), liver function tests, creatine kinase, and complement C3/C4.
+
+Sites required a pediatric neurologist with at least 2 years of DMD trial experience, physiotherapy team certified in 6MWT and NSAA, and access to pediatric anesthesia services for muscle biopsy procedures.
+
+Results
+
+Patient Disposition
+Between February 2022 and January 2023, 84 patients were screened across 22 sites. Screen failure rate was 35.7% (30 patients). Screen failure reasons included: loss of ambulation between initial assessment and screening (non-ambulatory at screening visit) in 10 patients (33.3% of failures), mutation not confirmed as amenable to exon 45 skipping on central genetic testing in 8 patients (26.7%), corticosteroid dose not stable for 6 months in 6 patients (20.0%), inability to complete 6MWT with >= 300 meters in 4 patients (13.3%), and LVEF < 50% on echocardiography in 2 patients (6.7%). Of 54 randomized patients, 52 received at least one dose (2 withdrew consent before first infusion). Six patients discontinued during the 48-week treatment period (4 in the casimersen group, 2 in the placebo group). Discontinuation reasons included disease progression with loss of ambulation (3 patients), withdrawal of consent (2 patients), and adverse event (1 patient). Forty-eight patients completed the study.
+
+Australia contributed 14 patients (25.9% of enrollment), followed by the United States (16, 29.6%), United Kingdom (10, 18.5%), Canada (6, 11.1%), Germany (5, 9.3%), and Italy (3, 5.6%).
+
+Discussion
+
+The small eligible patient population (approximately 8% of DMD patients have mutations amenable to exon 45 skipping) was the primary feasibility challenge. Globally, approximately 3,500 patients have amenable mutations, of whom approximately 2,000 meet the ambulatory and age criteria. In Australia, only 125 patients have amenable mutations, and approximately 50 met all eligibility criteria. The requirement for two muscle biopsies was the most significant barrier to enrollment, with parental concern about anesthesia and biopsy-related pain cited as the primary reason for declining participation. The high screen failure rate (35.7%) partly reflects the progressive nature of DMD, where boys may lose ambulation between identification and screening. Weekly IV infusions over 48 weeks imposed a substantial attendance burden, particularly for families in regional areas of Australia who required travel of 200-400 km to metropolitan neuromuscular centres.

@@ -1,0 +1,60 @@
+Selexipag Plus Standard of Care Versus Standard of Care Alone in Treatment-Naive Pulmonary Arterial Hypertension: Results of the PROGRESS Phase 2/3 Trial
+
+Authors: Marc Humbert, Olivier Sitbon, Laurent Savale, et al.
+Journal: European Respiratory Journal, 2024
+
+Abstract
+
+Background: Pulmonary arterial hypertension (PAH) is a rare, progressive disease with a prevalence of 15 per million adults in France. Despite advances in targeted therapies, long-term outcomes remain poor. This phase 2/3, randomized, double-blind, placebo-controlled trial evaluated the efficacy and safety of selexipag added to standard of care in treatment-naive PAH patients.
+
+Methods: Treatment-naive patients aged 18-75 years with confirmed PAH by right heart catheterization (mPAP >= 25 mmHg, PCWP <= 15 mmHg, PVR > 3 Wood units) were enrolled across 35 sites in 8 countries. Patients were randomized 2:1 to receive selexipag (titrated to maximum 1600 mcg twice daily) or placebo, in addition to initial dual combination therapy with ambrisentan and tadalafil. The primary endpoint was time to first morbidity/mortality event over 24 months.
+
+Results: Of 312 patients screened, 88 failed screening (screen failure rate 28.2%). A total of 224 patients were randomized (150 selexipag, 74 placebo), 218 received at least one dose, and 189 completed the 24-month treatment period. The most frequent screen failure reasons were hemodynamic criteria not met at right heart catheterization (31 patients, 35.2% of failures), WHO functional class I or IV (19 patients, 21.6%), concomitant significant left heart disease (15 patients, 17.0%), and withdrawal of consent (12 patients, 13.6%).
+
+Introduction
+
+Pulmonary arterial hypertension (PAH) is a rare, progressive disease of the pulmonary vasculature leading to right heart failure and death. In France, the national PAH registry at the French Referral Centre for Pulmonary Hypertension (Hôpital Bicêtre, Université Paris-Saclay) has systematically collected data since 2002. The estimated prevalence of PAH in France is 15 per million adults, with an incidence of 2.4 per million per year. Approximately 2,500 patients are currently followed in the French PAH network.
+
+The French national plan for rare diseases (Plan National Maladies Rares) designates pulmonary hypertension as a priority rare disease, with organized care through a network of 26 expert centres coordinated by the national referral centre. The 2022 updated French guidelines from the Société de Pneumologie de Langue Française recommend initial risk stratification using the ESC/ERS 4-strata risk model and initiation of upfront dual or triple combination therapy for patients at intermediate or high risk. Right heart catheterization is mandatory for PAH diagnosis and is recommended at 3-6 month intervals for treatment response assessment.
+
+Methods
+
+Study Design
+This was a phase 2/3, randomized, double-blind, placebo-controlled, parallel-group trial conducted at 35 sites in 8 countries (France, Germany, United Kingdom, Italy, Spain, United States, Canada, and Australia). The study included a screening period of up to 42 days (to allow for scheduling of right heart catheterization), a 24-month treatment period, and a 30-day safety follow-up.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 75 years
+2. PAH confirmed by right heart catheterization within 180 days of screening: mean pulmonary artery pressure >= 25 mmHg, pulmonary capillary wedge pressure <= 15 mmHg, pulmonary vascular resistance > 3 Wood units
+3. WHO functional class II or III
+4. Six-minute walk distance (6MWD) >= 150 meters and <= 500 meters
+5. Treatment-naive (no prior PAH-specific therapy)
+6. No significant left heart disease (LVEF > 50%)
+
+Exclusion criteria:
+1. PAH associated with portal hypertension, HIV infection, or congenital heart disease with Eisenmenger physiology
+2. Significant obstructive lung disease (FEV1 < 60% predicted)
+3. Severe hepatic impairment (Child-Pugh class C)
+4. Systolic blood pressure < 90 mmHg at screening
+5. Recent pulmonary embolism within 12 months
+6. Planned or listed for lung transplantation
+
+Endpoints
+The primary endpoint was time to first morbidity/mortality event, defined as a composite of death, hospitalization for PAH worsening, initiation of parenteral prostacyclin, lung transplantation, or disease progression (defined as a >= 15% decrease in 6MWD from baseline combined with worsening WHO functional class). Key secondary endpoints included change from baseline in 6MWD at Week 24, change from baseline in pulmonary vascular resistance by right heart catheterization at Week 24, and change in N-terminal pro-brain natriuretic peptide (NT-proBNP). Safety endpoints included adverse events, liver function tests, and systemic blood pressure.
+
+Operational Procedures
+Right heart catheterization was performed at screening and at Week 24 (Month 6) at each investigational site. This invasive procedure required experienced interventional cardiologists and catheterization laboratory facilities. Six-minute walk tests were conducted at baseline and at Weeks 4, 12, 24, 36, 48, 72, and 96. All blood samples were analyzed by a central laboratory (ICON Central Laboratories). Analytes included NT-proBNP, liver function panel, complete blood count, and selexipag metabolite levels. Total study visits were 16 over 24 months, with visits at Weeks 0, 1, 2, 4, 8, 12, 16, 20, 24, 30, 36, 48, 60, 72, 84, and 96.
+
+Background therapy: All patients initiated dual combination therapy with ambrisentan 10 mg daily and tadalafil 40 mg daily at randomization as standard of care.
+
+Sites required pulmonary hypertension board certification, catheterization laboratory access, and a patient panel of at least 20 active PAH patients.
+
+Results
+
+Patient Disposition
+Between January 2022 and December 2023, 312 patients were screened across 35 sites. Of these, 88 failed screening (screen failure rate 28.2%). Screen failure reasons included: hemodynamic criteria not met at right heart catheterization in 31 patients (35.2% of failures), WHO functional class I or IV in 19 patients (21.6%), significant concomitant left heart disease in 15 patients (17.0%), withdrawal of consent in 12 patients (13.6%), and 6MWD outside range in 11 patients (12.5%). Of 224 randomized patients, 218 received at least one dose of study medication. Thirty-five patients discontinued during the study (23 in the selexipag group, 12 in the placebo group), and 189 completed the 24-month treatment period. Discontinuation reasons included adverse events (18 patients), death (7 patients), withdrawal of consent (6 patients), and loss to follow-up (4 patients).
+
+Discussion
+
+This trial demonstrated the feasibility of enrolling treatment-naive PAH patients in a combination therapy trial, though several challenges were encountered. The requirement for right heart catheterization both at screening and during treatment was a significant operational burden that limited site selection to centres with catheterization facilities. France contributed the largest number of patients (68, representing 30% of enrollment), leveraging its established national PAH network. The screen failure rate of 28.2% was within expected range for PAH trials. Among the estimated 2,500 PAH patients in France, approximately 600 met the treatment-naive criterion, and approximately 320 met all eligibility criteria including hemodynamic thresholds and functional class requirements.

@@ -768,12 +768,17 @@ class TestDatasetPresets:
         assert preset["genes"] is True
 
     def test_all_presets_disable_feasibility(self):
-        """Feasibility is not evaluated in any gold standard."""
+        """Feasibility is disabled in entity-evaluation presets (except Feasibility preset)."""
         from F_evaluation.F03_evaluation_runner import DATASET_PRESETS
         for dataset_name, preset in DATASET_PRESETS.items():
-            assert preset.get("feasibility") is False, (
-                f"DATASET_PRESETS['{dataset_name}'] should have feasibility=False"
-            )
+            if dataset_name == "Feasibility":
+                assert preset.get("feasibility") is True, (
+                    "DATASET_PRESETS['Feasibility'] should have feasibility=True"
+                )
+            else:
+                assert preset.get("feasibility") is False, (
+                    f"DATASET_PRESETS['{dataset_name}'] should have feasibility=False"
+                )
 
 
 # ---------------------------------------------------------------------------

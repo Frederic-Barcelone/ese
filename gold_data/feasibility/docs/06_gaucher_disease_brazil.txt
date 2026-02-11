@@ -1,0 +1,88 @@
+Clinical Guidelines for the Diagnosis and Management of Gaucher Disease in Brazil
+
+Issued by: Brazilian Society of Medical Genetics and Genomics (SBGM), in collaboration with the Brazilian Gaucher Disease Reference Network
+Publication Date: June 2024
+Guideline Version: 4.0
+
+1. Introduction and Epidemiology
+
+Gaucher disease (GD) is the most common lysosomal storage disorder, caused by deficiency of the enzyme glucocerebrosidase (GBA1 gene). In Brazil, the estimated prevalence is 1 in 57,000 based on the International Collaborative Gaucher Group (ICGG) Gaucher Registry data, corresponding to approximately 3,700 diagnosed patients. However, due to significant underdiagnosis in northern and northeastern regions, the true prevalence may be as high as 1 in 40,000. The incidence is estimated at 1 in 60,000 live births.
+
+Brazil has the third-largest Gaucher disease population in the world after the United States and Israel. Regional distribution is uneven: the Southeast region (São Paulo, Rio de Janeiro, Minas Gerais) accounts for 58% of diagnosed patients, the South (Rio Grande do Sul, Paraná) 22%, the Northeast 12%, and the North and Central-West combined only 8%. The average diagnostic delay in Brazil is 7.4 years, ranging from 4.2 years in the Southeast to 12.8 years in the North.
+
+The ICGG Gaucher Registry enrolls 2,200 Brazilian patients across 32 participating centres, making it the largest Latin American contribution to the registry.
+
+2. Disease Classification
+
+Type 1 (non-neuronopathic): 94% of Brazilian patients. Characterized by hepatosplenomegaly, cytopenias, and bone disease without primary neurological involvement.
+Type 2 (acute neuronopathic): 1% of Brazilian patients. Severe neurological involvement with onset before age 2 years.
+Type 3 (chronic neuronopathic): 5% of Brazilian patients. Variable neurological involvement with chronic progressive course.
+
+3. Diagnostic Pathway
+
+3.1 Initial Screening
+Gaucher disease should be suspected in patients presenting with unexplained splenomegaly, thrombocytopenia, bone pain/crisis, or hepatomegaly. Initial screening includes dried blood spot (DBS) glucocerebrosidase enzyme activity assay, which is available through the Brazilian Newborn Screening Network in 8 states.
+
+3.2 Confirmatory Testing
+Confirmatory diagnosis requires glucocerebrosidase enzyme activity in leukocytes or fibroblasts below 15% of normal, or identification of two pathogenic variants in the GBA1 gene. In Brazil, the most common pathogenic variants are N370S (76% of alleles) and L444P (18% of alleles).
+
+3.3 Specialist Referral
+Patients with confirmed Gaucher disease should be referred to one of the 32 designated Gaucher disease reference centres. These centres are predominantly located in university hospitals and provide comprehensive multidisciplinary care including hematology, hepatology, orthopedics, genetics, and physiotherapy.
+
+4. Treatment Recommendations
+
+4.1 Enzyme Replacement Therapy (ERT)
+ERT with imiglucerase is the standard of care for symptomatic type 1 Gaucher disease in Brazil. Imiglucerase is available through the Brazilian Unified Health System (SUS) high-cost medication program. The recommended starting dose is 60 units/kg intravenously every 2 weeks.
+
+Treatment initiation criteria per SUS protocol:
+- Symptomatic splenomegaly (spleen volume > 5x normal)
+- Thrombocytopenia (platelets < 60,000/mm3)
+- Hemoglobin < 10 g/dL (children) or < 11 g/dL (women) or < 12 g/dL (men)
+- Hepatomegaly > 2.5x normal
+- Bone disease (Erlenmeyer flask deformity, avascular necrosis, pathologic fracture, bone crisis)
+- Growth retardation in children (height < 3rd percentile)
+
+4.2 Substrate Reduction Therapy (SRT)
+Eliglusib is approved for type 1 GD in adults who are CYP2D6 extensive, intermediate, or poor metabolizers. Available through the SUS program as second-line treatment for patients intolerant to or with contraindications to ERT. Dose: 84 mg twice daily.
+
+Miglustat is available for patients unable to receive ERT or eliglustat. Dose: 100 mg three times daily.
+
+4.3 Monitoring Schedule
+Patients on ERT require monitoring:
+- Complete blood count: every 3 months
+- Liver and spleen volume (MRI or ultrasound): every 12 months
+- Bone assessment (DXA and MRI of femur/spine): every 24 months
+- Biomarkers (chitotriosidase, CCL18, lyso-Gb1): every 6 months
+- Growth assessment in children: every 6 months
+
+5. Centre of Expertise Requirements
+
+5.1 Designation Criteria
+Gaucher disease reference centres must:
+- Have a clinical geneticist or hematologist with at least 3 years of Gaucher disease management experience
+- Maintain an active patient panel of at least 20 Gaucher disease patients
+- Provide ERT infusion services (every 2 weeks per patient)
+- Have access to DBS and leukocyte enzyme assay testing
+- Perform genetic testing for GBA1 variants (in-house or through partnership)
+- Offer multidisciplinary evaluation: hematology, hepatology, orthopedics, genetics, nutrition
+
+5.2 Geographic Access Challenges
+In the North and Northeast regions, patients may travel up to 800 km to reach the nearest reference centre. Telemedicine consultations were expanded during the COVID-19 pandemic and are now integrated into standard care for follow-up visits. Mobile ERT infusion units operate in 5 states (Amazonas, Pará, Bahia, Ceará, Maranhão) to improve access for remote patients.
+
+6. Clinical Trial Feasibility Considerations
+
+6.1 Patient Population
+Of the estimated 3,700 diagnosed patients, approximately 2,200 are enrolled in the ICGG Gaucher Registry. Registry analysis suggests approximately 1,600 patients are on stable ERT (minimum 12 months), 480 have never received ERT or are treatment-naive, and 320 have been switched to SRT. For a typical ERT switch trial, approximately 800 patients would meet broad eligibility criteria (age 18-65, stable ERT, adequate hematological parameters). After applying typical clinical trial inclusion/exclusion criteria, an estimated 340 patients would be eligible.
+
+6.2 Screening Considerations
+The average screen failure rate in Brazilian Gaucher disease trials is 30-40%. Common reasons include inadequate bone marrow response (platelet count not meeting threshold), unstable ERT dose, concomitant medications, and patient refusal due to travel burden. The screening-to-randomization ratio is typically 2.5:1.
+
+6.3 Investigator Network
+The Brazilian Gaucher Disease Investigators Consortium (BGDIC) includes 28 investigators across 18 centres with clinical trial experience. Ten investigators have served as principal investigators in industry-sponsored Gaucher disease trials. Key trial-experienced sites include Hospital de Clínicas de Porto Alegre, UNIFESP São Paulo, UNICAMP Campinas, and Hospital das Clínicas UFMG Belo Horizonte.
+
+6.4 Regulatory Considerations
+Clinical trials in Brazil require approval from ANVISA (Agência Nacional de Vigilância Sanitária) and institutional ethics committees (CEP/CONEP system). Typical regulatory timeline: 4-6 months from submission to approval. Import licenses for investigational medicinal products require additional 30-60 days.
+
+7. Patient Registry and Resources
+
+The ICGG Gaucher Registry (managed by Takeda/Shire) is the primary global registry, with 2,200 Brazilian participants. The Brazilian National Rare Disease Registry (Registro Nacional de Doenças Raras) maintained by the Ministry of Health also captures Gaucher disease patients through mandatory notification since 2022. Access to registry data for feasibility requires Takeda Data Sharing agreement (8-12 week process) or Ministry of Health data request (12-16 weeks).

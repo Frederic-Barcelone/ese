@@ -1,0 +1,66 @@
+A Phase 2, Randomized, Double-Blind, Placebo-Controlled Study of VX-121/Tezacaftor/VX-561 Triple Combination in Patients with Cystic Fibrosis Homozygous for F508del-CFTR
+
+Authors: Elizabeth Tullis, Peter Bhatt, Nancy McDonald, et al.
+Journal: The Lancet Respiratory Medicine, 2024
+
+Abstract
+
+Background: Cystic fibrosis (CF) is the most common life-limiting autosomal recessive disease in Caucasian populations, with a prevalence of approximately 1 in 3,600 live births in Canada. Approximately 4,300 Canadians live with CF according to the Canadian Cystic Fibrosis Registry. CFTR modulators have transformed CF care, but next-generation triple combinations may offer improved efficacy. This phase 2 trial evaluated the novel triple combination VX-121/tezacaftor/VX-561 in CF patients homozygous for the F508del mutation.
+
+Methods: Adults aged 18-55 with CF confirmed by sweat chloride >= 60 mmol/L and homozygous F508del genotype were enrolled across 18 sites in 4 countries. Patients were randomized 3:1 to receive VX-121/tezacaftor/VX-561 or placebo for 12 weeks. The primary endpoint was absolute change in percent predicted forced expiratory volume in 1 second (ppFEV1) from baseline at Week 12.
+
+Results: Of 136 patients screened, 96 were randomized (72 triple combination, 24 placebo). Screen failure rate was 29.4%. A total of 40 patients failed screening; the most common reasons were ppFEV1 outside required range (14 patients, 35.0% of failures), positive sputum culture for Burkholderia cepacia complex (8 patients, 20.0%), unstable pulmonary status within 28 days (7 patients, 17.5%), and abnormal liver function tests (6 patients, 15.0%). Of 96 randomized patients, 94 received study drug and 88 completed the 12-week treatment period.
+
+Introduction
+
+Cystic fibrosis is caused by pathogenic variants in the CFTR gene, leading to defective chloride and bicarbonate transport across epithelial surfaces. Canada has one of the highest CF prevalence rates globally, with approximately 4,300 individuals currently living with CF. The Canadian Cystic Fibrosis Registry, maintained by Cystic Fibrosis Canada, captures data on 98% of Canadian CF patients through 42 accredited CF clinics nationwide.
+
+The F508del variant is the most common CFTR mutation, present on at least one allele in 90% of Canadian CF patients and in homozygous form in approximately 47% (2,020 patients). The median predicted survival for Canadians born with CF in 2023 is 57.1 years, reflecting significant improvements with CFTR modulator therapy.
+
+Canadian clinical practice guidelines from Cystic Fibrosis Canada (2023 update) recommend elexacaftor/tezacaftor/ivacaftor (ETI) for all patients aged 2 years and older with at least one F508del allele. Approximately 82% of eligible Canadian CF patients are currently receiving CFTR modulator therapy through provincial drug programs. The guidelines recommend quarterly clinic visits with spirometry, sputum cultures, and nutritional assessment, and annual comprehensive assessments including chest imaging and oral glucose tolerance testing.
+
+Methods
+
+Study Design
+This was a phase 2, randomized, double-blind, placebo-controlled, parallel-group study conducted at 18 sites in 4 countries (Canada, United States, Australia, and United Kingdom). The study comprised a 28-day screening period, a 4-week washout period for patients currently on CFTR modulators, a 12-week treatment period, and a 4-week safety follow-up.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 55 years
+2. Confirmed CF diagnosis with sweat chloride >= 60 mmol/L
+3. Homozygous for the F508del-CFTR mutation (confirmed by central genotyping)
+4. Percent predicted FEV1 (ppFEV1) >= 40% and <= 90% at screening
+5. Stable pulmonary status with no significant changes in CF therapy for at least 28 days prior to screening
+6. Willing to undergo washout of current CFTR modulator therapy for 28 days
+
+Exclusion criteria:
+1. Sputum culture positive for Burkholderia cepacia complex within 24 months
+2. History of solid organ transplantation
+3. ALT or AST > 3x upper limit of normal or total bilirubin > 2x upper limit of normal
+4. Pregnancy or breastfeeding
+5. Use of strong CYP3A inducers or inhibitors within 14 days of screening
+6. Pulmonary exacerbation requiring IV antibiotics within 28 days of screening
+
+Endpoints
+The primary endpoint was absolute change in ppFEV1 from baseline through Week 12. Key secondary endpoints included change in sweat chloride concentration at Week 12, change in Cystic Fibrosis Questionnaire-Revised (CFQ-R) respiratory domain score, rate of pulmonary exacerbations, and change in body mass index (BMI). Safety endpoints included adverse events, liver function tests, ophthalmologic examinations (for cataracts), and ECG parameters.
+
+Operational Procedures
+Spirometry was performed at every study visit following ATS/ERS guidelines by certified technicians. Sweat chloride testing was conducted at screening, baseline, Weeks 4, 8, and 12 using the quantitative pilocarpine iontophoresis method (Gibson-Cooke or Macroduct). Sputum samples were collected at screening and Weeks 4, 8, and 12 for microbiology culture and sensitivity.
+
+Total study visits numbered 10 over the 12-week treatment period: screening, baseline (Day 1), Weeks 1, 2, 4, 6, 8, 10, 12 (end of treatment), and Week 16 (follow-up). All laboratory assessments were processed by a central laboratory (Eurofins Central Laboratory). Analytes included liver function panel (ALT, AST, total bilirubin, alkaline phosphatase), complete blood count, renal function, and fasting glucose.
+
+The 4-week CFTR modulator washout period required intensive monitoring: patients were contacted by telephone weekly and had in-clinic spirometry at Week 2 of washout. Any decline in ppFEV1 > 15% from pre-washout baseline triggered a safety review by the independent Data Safety Monitoring Board (DSMB).
+
+Sites were required to be accredited CF care centres with a pulmonologist having at least 2 years of CF clinical trial experience and a patient panel of at least 30 CF patients.
+
+Results
+
+Patient Disposition
+Between September 2022 and March 2023, 136 patients were screened at 18 sites. Of these, 40 failed screening (screen failure rate 29.4%). Screen failure reasons included: ppFEV1 outside the required range (< 40% or > 90%) in 14 patients (35.0% of failures), positive sputum culture for Burkholderia cepacia complex in 8 patients (20.0%), unstable pulmonary status (exacerbation) within 28 days in 7 patients (17.5%), abnormal liver function tests in 6 patients (15.0%), and withdrawal of consent in 5 patients (12.5%). Of the 96 randomized patients, 94 received at least one dose of study drug (2 withdrew consent before dosing). Six patients discontinued during the treatment period (4 in the active arm, 2 in the placebo arm), and 88 completed the 12-week treatment period.
+
+Canada contributed 42 patients (43.8% of randomized patients), United States 30 (31.3%), Australia 14 (14.6%), and United Kingdom 10 (10.4%).
+
+Discussion
+
+This trial leveraged the well-established Canadian CF clinical trial infrastructure, with Canada contributing nearly half of enrolled patients. The screen failure rate of 29.4% was lower than typical for CF trials, reflecting the well-characterized patient population available through the Canadian CF Registry. The CFTR modulator washout requirement was a significant ethical and operational challenge, requiring enhanced monitoring and DSMB oversight. Among the approximately 2,020 F508del homozygous patients in Canada, an estimated 1,200 met the age and lung function criteria, and approximately 680 were estimated eligible after applying all inclusion and exclusion criteria.

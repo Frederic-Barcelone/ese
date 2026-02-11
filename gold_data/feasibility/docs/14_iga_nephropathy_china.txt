@@ -1,0 +1,69 @@
+Sparsentan Versus Irbesartan in IgA Nephropathy: Results of the PROTECT-2 Phase 3, Randomized, Double-Blind Trial
+
+Authors: Jicheng Lv, Haifeng Zhang, Hong Zhang, et al.
+Journal: Kidney International, 2024
+
+Abstract
+
+Background: IgA nephropathy (IgAN) is the most common primary glomerulonephritis worldwide, with the highest prevalence in East Asia. In China, IgAN accounts for approximately 40% of all renal biopsy diagnoses, with an estimated 5 million affected individuals. This phase 3 trial evaluated sparsentan, a dual endothelin/angiotensin receptor antagonist, versus irbesartan in patients with biopsy-proven IgAN and persistent proteinuria.
+
+Methods: Adults aged 18-65 years with biopsy-proven IgAN within 24 months and urine protein-to-creatinine ratio (UPCR) >= 1.0 g/g despite maximally tolerated RAS inhibitor therapy were enrolled across 65 sites in 8 countries. Patients were randomized 1:1 to sparsentan 400 mg daily or irbesartan 300 mg daily for 36 weeks. The primary endpoint was change from baseline in UPCR at Week 36.
+
+Results: Of 520 patients screened, 360 were randomized (180 per arm). Screen failure rate was 30.8%. Screen failure reasons included: UPCR below 1.0 g/g on repeat testing (62 patients, 38.8% of failures), eGFR below 30 mL/min/1.73m2 (28 patients, 17.5%), renal biopsy not within 24-month window or showing >= 50% glomerulosclerosis (24 patients, 15.0%), uncontrolled hypertension (18 patients, 11.3%), and withdrawal of consent (16 patients, 10.0%). Of 360 randomized patients, 354 received study drug and 328 completed the study.
+
+Introduction
+
+IgA nephropathy is the most common form of primary glomerulonephritis globally, characterized by IgA1-dominant deposits in the glomerular mesangium. The disease has a particularly high prevalence in East Asia, with China having the largest IgAN population worldwide. The estimated prevalence in China is 3.5 per 1,000 adults based on renal biopsy registries, corresponding to approximately 5 million affected individuals. IgAN accounts for 40-45% of all renal biopsy diagnoses in China versus 20-25% in Europe and 10-15% in North America.
+
+The Chinese IgA Nephropathy Registry, maintained by the Chinese Society of Nephrology, enrolls 180,000 biopsy-confirmed patients across 320 participating nephrology centres. The registry is the world's largest IgAN cohort and provides critical natural history data. The mean age at diagnosis is 34.2 years, and the male-to-female ratio is 1.2:1 in China.
+
+Chinese Clinical Practice Guidelines for IgA Nephropathy (Chinese Society of Nephrology, 2023 update) recommend maximal renin-angiotensin system (RAS) inhibition with ACEi or ARB as first-line therapy for patients with proteinuria > 0.5 g/day and eGFR > 30 mL/min/1.73m2. The guidelines recommend targeting UPCR < 0.5 g/g. Corticosteroid therapy (methylprednisolone pulse or oral prednisone) is recommended for patients with persistent proteinuria > 1.0 g/day despite 3-6 months of optimized RAS inhibition. Mycophenolate mofetil is recommended for patients with proliferative histological lesions. Renal biopsy is mandatory for diagnosis and is widely performed across Chinese nephrology centres.
+
+Methods
+
+Study Design
+This was a phase 3, randomized, double-blind, active-controlled, parallel-group trial conducted at 65 sites in 8 countries (China, Japan, South Korea, United States, Germany, France, United Kingdom, and Australia). The study included a 6-week screening and RAS inhibitor optimization period, a 36-week treatment period, and a 4-week safety follow-up. An open-label extension study was available for eligible patients.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 65 years
+2. Biopsy-proven IgAN (IgA-dominant or co-dominant mesangial deposits confirmed by immunofluorescence) with biopsy performed within 24 months of screening
+3. UPCR >= 1.0 g/g on two separate measurements during screening (at least 7 days apart) despite maximally tolerated RAS inhibitor therapy (ACEi or ARB at maximum tolerated dose for >= 12 weeks)
+4. eGFR >= 30 mL/min/1.73m2 by CKD-EPI equation
+5. Less than 50% of glomeruli showing global sclerosis on renal biopsy
+
+Exclusion criteria:
+1. Secondary IgAN (IgA vasculitis/Henoch-Schonlein purpura, lupus nephritis, liver cirrhosis)
+2. Rapidly progressive glomerulonephritis (> 50% crescentic glomeruli)
+3. Current or planned pregnancy (sparsentan is teratogenic)
+4. Use of systemic corticosteroids or immunosuppressants within 3 months of screening
+5. History of kidney transplant
+6. Uncontrolled hypertension (SBP > 150 mmHg or DBP > 95 mmHg) at screening
+
+Endpoints
+The primary endpoint was change from baseline in UPCR (log-transformed) at Week 36. Key secondary endpoints included proportion of patients achieving UPCR < 0.5 g/g at Week 36, rate of eGFR decline (eGFR slope), change in serum albumin, and IgAN Disease Activity Score by histological classification (Oxford MEST-C). Safety endpoints included adverse events, hepatic function (ALT, AST, bilirubin), edema, and fluid retention.
+
+Operational Procedures
+Renal biopsy was required within 24 months of screening. For patients without a qualifying biopsy, a screening biopsy could be performed. All biopsy slides were reviewed by a central pathologist for confirmation of IgAN diagnosis and Oxford MEST-C scoring. Biopsy slides were shipped to the central pathology laboratory (Arkana Laboratories, USA).
+
+UPCR was measured from first-morning void urine samples at screening (2 measurements), baseline, and Weeks 4, 12, 24, 36, and follow-up. eGFR was calculated at each visit. All laboratory samples were analyzed by a central laboratory (ICON Central Laboratories, with regional hubs in Shanghai, Tokyo, and Dublin). Analytes included UPCR, serum creatinine, eGFR, serum albumin, complete blood count, liver function panel, and serum IgA levels.
+
+Total study visits numbered 11: screening (2 visits for UPCR confirmation), baseline, Weeks 2, 4, 8, 12, 18, 24, 36, and Week 40 (follow-up).
+
+Stable RAS inhibitor therapy at maximum tolerated dose was required for >= 12 weeks prior to randomization and maintained throughout the study. Dose modifications were not permitted during the treatment period.
+
+Sites required a nephrologist with at least 3 years of glomerulonephritis clinical experience, renal biopsy capability, and a patient panel of at least 50 IgAN patients.
+
+Results
+
+Patient Disposition
+Between March 2022 and September 2023, 520 patients were screened at 65 sites. Screen failure rate was 30.8% (160 patients). Screen failure reasons included: UPCR below 1.0 g/g on repeat testing in 62 patients (38.8% of failures), eGFR below 30 mL/min/1.73m2 in 28 patients (17.5%), renal biopsy not performed within 24 months or showing >= 50% global glomerulosclerosis in 24 patients (15.0%), uncontrolled hypertension in 18 patients (11.3%), withdrawal of consent in 16 patients (10.0%), and other reasons in 12 patients (7.5%).
+
+Of 360 randomized patients, 354 received study drug. Thirty-two patients discontinued during treatment: 16 per arm. Discontinuation reasons included adverse events (12 patients, primarily edema and fluid retention), withdrawal of consent (8 patients), pregnancy (4 patients), protocol violation (4 patients), and loss to follow-up (4 patients). A total of 328 patients completed the 36-week treatment period.
+
+China contributed the largest number of patients (186, 51.7% of enrollment), followed by Japan (48, 13.3%), South Korea (36, 10.0%), United States (32, 8.9%), Germany (24, 6.7%), France (16, 4.4%), United Kingdom (12, 3.3%), and Australia (6, 1.7%).
+
+Discussion
+
+China's dominant contribution (>50% of enrollment) reflects both the high IgAN prevalence and the extensive nephrology infrastructure. The Chinese IgAN Registry enabled efficient pre-screening and site selection. The screen failure rate of 30.8% was driven primarily by proteinuria variability, a well-known challenge in IgAN trials where UPCR can fluctuate significantly between measurements. Among the estimated 5 million IgAN patients in China, approximately 180,000 are in the registry, approximately 45,000 have UPCR > 1.0 g/g on stable RAS inhibition, and approximately 18,000 were estimated eligible for this trial. The renal biopsy time window (within 24 months) was a practical barrier, as many Chinese patients had biopsies performed years earlier at diagnosis.

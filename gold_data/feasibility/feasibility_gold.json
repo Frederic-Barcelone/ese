@@ -1,0 +1,3326 @@
+{
+  "corpus": "RareDis-Feasibility",
+  "description": "20 synthetic documents for rare disease clinical trial feasibility evaluation covering patient funnel, local guidelines, investigator presence, and patient populations across 20 countries",
+  "version": "1.0",
+  "documents": [
+    {
+      "doc_id": "01_fabry_disease_germany.pdf",
+      "disease": "Fabry Disease",
+      "country": "Germany",
+      "study_design": {
+        "phase": "3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "1:1",
+        "sample_size": 120,
+        "actual_enrollment": 112,
+        "duration_months": 18,
+        "treatment_arms": [
+          {
+            "name": "Pegunigalsidase alfa",
+            "n": 56,
+            "dose": "1 mg/kg",
+            "frequency": "every 2 weeks",
+            "route": "IV"
+          },
+          {
+            "name": "Agalsidase beta",
+            "n": 56,
+            "dose": "1 mg/kg",
+            "frequency": "every 2 weeks",
+            "route": "IV"
+          }
+        ],
+        "control_type": "active_comparator",
+        "setting": "multi-centre",
+        "sites_total": 28,
+        "countries_total": 12
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 65 years",
+          "category": "age"
+        },
+        {
+          "text": "Confirmed Fabry disease by alpha-galactosidase A enzyme assay or documented pathogenic GLA gene variant",
+          "category": "disease_definition"
+        },
+        {
+          "text": "eGFR >= 40 mL/min/1.73m2 by CKD-EPI equation",
+          "category": "lab_value"
+        },
+        {
+          "text": "UPCR < 1.0 g/g",
+          "category": "lab_value"
+        },
+        {
+          "text": "Stable dose of ACEi or ARB for at least 90 days prior to screening",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "If currently on ERT, stable dose for at least 12 months",
+          "category": "prior_therapy"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Dialysis or prior renal transplant",
+          "category": "organ_function"
+        },
+        {
+          "text": "History of severe anaphylactic reaction to ERT",
+          "category": "medical_history"
+        },
+        {
+          "text": "Uncontrolled hypertension (systolic BP > 160 mmHg or diastolic > 100 mmHg)",
+          "category": "vital_signs"
+        },
+        {
+          "text": "Pregnancy or breastfeeding",
+          "category": "pregnancy"
+        },
+        {
+          "text": "Participation in another interventional trial within 30 days",
+          "category": "other_trial"
+        },
+        {
+          "text": "Clinically significant cardiac arrhythmia requiring antiarrhythmic therapy",
+          "category": "cardiac"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 40,000",
+          "geography": "Germany",
+          "source": "population-based screening studies"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1 in 80,000 live births",
+          "geography": "worldwide"
+        }
+      ],
+      "screening_flow": {
+        "screened": 198,
+        "screen_failures": 86,
+        "randomized": 112,
+        "treated": 110,
+        "completed": 101,
+        "discontinued": 9,
+        "screen_failure_rate": 43.4,
+        "screen_fail_reasons": [
+          {
+            "reason": "eGFR below threshold",
+            "count": 32,
+            "percentage": 37.2
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 18,
+            "percentage": 20.9
+          },
+          {
+            "reason": "Prior renal transplant",
+            "count": 14,
+            "percentage": 16.3
+          },
+          {
+            "reason": "Unstable ACEi/ARB dose",
+            "count": 12,
+            "percentage": 14.0
+          },
+          {
+            "reason": "Other reasons",
+            "count": 10,
+            "percentage": 11.6
+          }
+        ],
+        "reasons_can_overlap": true
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "renal biopsy",
+            "timing": ["screening"],
+            "purpose": "diagnosis_confirmation",
+            "is_eligibility_requirement": true
+          },
+          {
+            "name": "IV infusion",
+            "timing": ["every 2 weeks"],
+            "purpose": "treatment_administration"
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 22,
+          "frequency": "every 2 weeks for infusion, every 3 months for assessment"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "alpha-galactosidase A activity",
+          "plasma Gb3",
+          "lyso-Gb3",
+          "eGFR",
+          "proteinuria"
+        ],
+        "background_therapy": [
+          {
+            "therapy_class": "ACEi/ARB",
+            "requirement_type": "required_stable",
+            "stable_duration_days": 90
+          }
+        ],
+        "hard_gates": [
+          "confirmed Fabry genotype",
+          "renal biopsy",
+          "eGFR threshold"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Annualized rate of change in eGFR",
+          "measure": "eGFR (CKD-EPI)",
+          "timepoint": "18 months"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in plasma lyso-Gb3",
+          "timepoint": "18 months"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in left ventricular mass index by cardiac MRI",
+          "timepoint": "18 months"
+        },
+        {
+          "type": "safety",
+          "name": "Infusion-associated reactions",
+          "timepoint": "18 months"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 28,
+        "total_countries": 12,
+        "countries": [
+          "Germany",
+          "France",
+          "United Kingdom",
+          "Italy",
+          "Spain",
+          "Netherlands",
+          "United States",
+          "Canada",
+          "Brazil",
+          "Japan",
+          "Australia",
+          "South Korea"
+        ],
+        "investigator_requirements": "Board-certified nephrologist or metabolic disease specialist with >= 3 years Fabry disease experience"
+      },
+      "local_guidelines": {
+        "guideline_name": "German Society for Nephrology Fabry Disease Guidelines 2023",
+        "key_recommendations": [
+          "ERT initiation recommended when eGFR < 90 or proteinuria > 300 mg/day",
+          "Genetic confirmation mandatory before ERT start",
+          "Monitoring every 6 months with cardiac MRI annually"
+        ],
+        "impact_on_feasibility": "Guideline-mandated genetic testing aligns with trial eligibility; existing monitoring infrastructure supports trial visit schedule"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 1200,
+        "estimated_eligible_patients": 340,
+        "registry_name": "Fabry Registry (Sanofi Genzyme)",
+        "registry_size": 4800,
+        "diagnostic_delay_years": 13.7,
+        "referral_centres": 18,
+        "geographic_distribution": "Concentrated in university hospitals in Berlin, Munich, Hamburg, Cologne"
+      }
+    },
+    {
+      "doc_id": "02_huntington_disease_uk.pdf",
+      "disease": "Huntington Disease",
+      "country": "United Kingdom",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "12.3 per 100,000",
+          "geography": "United Kingdom"
+        },
+        {
+          "data_type": "incidence",
+          "value": "0.7 per 100,000 person-years",
+          "geography": "United Kingdom"
+        },
+        {
+          "data_type": "prevalence",
+          "value": "14.6 per 100,000",
+          "geography": "Scotland"
+        },
+        {
+          "data_type": "prevalence",
+          "value": "13.1 per 100,000",
+          "geography": "Wales"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": 38,
+        "screening_to_randomization_ratio": "2.5:1 to 3.5:1",
+        "dropout_rate": "12-18% in 12-month trials"
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "lumbar puncture",
+            "timing": ["as per protocol"],
+            "purpose": "biomarker_collection",
+            "note": "trials requiring lumbar puncture report 20-25% dropout"
+          }
+        ],
+        "visit_schedule": {
+          "frequency": "UHDRS-TMS every 6 months, cognitive assessment annually"
+        }
+      },
+      "endpoints": [],
+      "sites_and_investigators": {
+        "total_sites": 16,
+        "total_countries": 1,
+        "countries": [
+          "United Kingdom"
+        ],
+        "investigator_count": 42,
+        "investigator_requirements": "at least 3 completed HD trials as PI or sub-investigator"
+      },
+      "local_guidelines": {
+        "guideline_name": "British Neurological Association and Huntington's Disease Association UK Clinical Practice Guidelines 2024",
+        "key_recommendations": [
+          "Tetrabenazine first-line for chorea",
+          "SSRIs first-line for depression",
+          "Multidisciplinary team essential",
+          "Volumetric MRI for research participants"
+        ],
+        "impact_on_feasibility": "Established specialist centre network with 16 sites and > 50 patient panel per site supports trial infrastructure"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 8000,
+        "estimated_eligible_early_moderate": 4200,
+        "pre_manifest_carriers": 2400,
+        "registry_name": "ENROLL-HD / EHDN Registry",
+        "registry_size": 3200,
+        "diagnostic_delay_years": 3.2,
+        "referral_centres": 16,
+        "geographic_distribution": "England 10, Scotland 3, Wales 2, Northern Ireland 1"
+      }
+    },
+    {
+      "doc_id": "03_pah_france.pdf",
+      "disease": "Pulmonary Arterial Hypertension",
+      "country": "France",
+      "study_design": {
+        "phase": "2/3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "2:1",
+        "sample_size": null,
+        "actual_enrollment": 224,
+        "duration_months": 24,
+        "treatment_arms": [
+          {
+            "name": "Selexipag + ambrisentan + tadalafil",
+            "n": 150,
+            "dose": "up to 1600 mcg twice daily",
+            "frequency": "twice daily",
+            "route": "oral"
+          },
+          {
+            "name": "Placebo + ambrisentan + tadalafil",
+            "n": 74
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 35,
+        "countries_total": 8
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 75 years",
+          "category": "age"
+        },
+        {
+          "text": "PAH confirmed by right heart catheterization: mPAP >= 25 mmHg, PCWP <= 15 mmHg, PVR > 3 Wood units",
+          "category": "disease_definition"
+        },
+        {
+          "text": "WHO functional class II or III",
+          "category": "disease_severity"
+        },
+        {
+          "text": "6MWD >= 150 meters and <= 500 meters",
+          "category": "functional_status"
+        },
+        {
+          "text": "Treatment-naive (no prior PAH-specific therapy)",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "No significant left heart disease (LVEF > 50%)",
+          "category": "organ_function"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "PAH associated with portal hypertension, HIV infection, or congenital heart disease with Eisenmenger physiology",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Significant obstructive lung disease (FEV1 < 60% predicted)",
+          "category": "organ_function"
+        },
+        {
+          "text": "Severe hepatic impairment (Child-Pugh class C)",
+          "category": "organ_function"
+        },
+        {
+          "text": "Systolic blood pressure < 90 mmHg at screening",
+          "category": "vital_signs"
+        },
+        {
+          "text": "Recent pulmonary embolism within 12 months",
+          "category": "medical_history"
+        },
+        {
+          "text": "Planned or listed for lung transplantation",
+          "category": "medical_history"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "15 per million adults",
+          "geography": "France",
+          "source": "French National PAH Registry"
+        },
+        {
+          "data_type": "incidence",
+          "value": "2.4 per million per year",
+          "geography": "France"
+        }
+      ],
+      "screening_flow": {
+        "screened": 312,
+        "screen_failures": 88,
+        "randomized": 224,
+        "treated": 218,
+        "completed": 189,
+        "discontinued": 35,
+        "screen_failure_rate": 28.2,
+        "screen_fail_reasons": [
+          {
+            "reason": "Hemodynamic criteria not met at right heart catheterization",
+            "count": 31,
+            "percentage": 35.2
+          },
+          {
+            "reason": "WHO functional class I or IV",
+            "count": 19,
+            "percentage": 21.6
+          },
+          {
+            "reason": "Concomitant significant left heart disease",
+            "count": 15,
+            "percentage": 17.0
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 12,
+            "percentage": 13.6
+          },
+          {
+            "reason": "6MWD outside range",
+            "count": 11,
+            "percentage": 12.5
+          }
+        ]
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "right heart catheterization",
+            "timing": ["screening", "Week 24"],
+            "purpose": "diagnosis_confirmation and efficacy_assessment",
+            "is_eligibility_requirement": true
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 16,
+          "frequency": "variable intervals over 24 months"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "NT-proBNP",
+          "liver function panel",
+          "complete blood count",
+          "selexipag metabolite levels"
+        ],
+        "background_therapy": [
+          {
+            "therapy_class": "ambrisentan",
+            "requirement_type": "required",
+            "dose": "10 mg daily"
+          },
+          {
+            "therapy_class": "tadalafil",
+            "requirement_type": "required",
+            "dose": "40 mg daily"
+          }
+        ],
+        "hard_gates": [
+          "right heart catheterization",
+          "hemodynamic criteria",
+          "treatment-naive status"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Time to first morbidity/mortality event",
+          "timepoint": "24 months"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in 6MWD",
+          "timepoint": "Week 24"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in PVR by right heart catheterization",
+          "timepoint": "Week 24"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in NT-proBNP",
+          "timepoint": "24 months"
+        },
+        {
+          "type": "safety",
+          "name": "Adverse events, liver function tests, systemic blood pressure",
+          "timepoint": "24 months"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 35,
+        "total_countries": 8,
+        "countries": [
+          "France",
+          "Germany",
+          "United Kingdom",
+          "Italy",
+          "Spain",
+          "United States",
+          "Canada",
+          "Australia"
+        ],
+        "investigator_requirements": "pulmonary hypertension board certification, catheterization laboratory access, patient panel >= 20 active PAH patients"
+      },
+      "local_guidelines": {
+        "guideline_name": "Société de Pneumologie de Langue Française guidelines 2022",
+        "key_recommendations": [
+          "ESC/ERS 4-strata risk stratification",
+          "Upfront dual or triple combination therapy for intermediate/high risk",
+          "Right heart catheterization mandatory for diagnosis",
+          "RHC at 3-6 month intervals for treatment response"
+        ],
+        "impact_on_feasibility": "National PAH network of 26 expert centres coordinated by Hôpital Bicêtre enables efficient recruitment"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 2500,
+        "estimated_treatment_naive": 600,
+        "estimated_eligible_patients": 320,
+        "registry_name": "French National PAH Registry (Hôpital Bicêtre)",
+        "registry_size": 2500,
+        "referral_centres": 26
+      }
+    },
+    {
+      "doc_id": "04_wilson_disease_japan.pdf",
+      "disease": "Wilson Disease",
+      "country": "Japan",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 30,000",
+          "geography": "Japan",
+          "source": "Ministry of Health nationwide survey"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1 in 35,000 live births",
+          "geography": "Japan"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": 35,
+        "screening_to_randomization_ratio": "2.8:1"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "total_sites": 23,
+        "total_countries": 1,
+        "countries": [
+          "Japan"
+        ],
+        "investigator_count": 38,
+        "investigator_requirements": "15 investigators with previous PI experience"
+      },
+      "local_guidelines": {
+        "guideline_name": "Japan Society of Hepatology Wilson Disease Guidelines 2024",
+        "key_recommendations": [
+          "D-penicillamine first-line chelation",
+          "Trientine alternative for D-penicillamine intolerance",
+          "Zinc acetate for maintenance",
+          "Leipzig scoring system for diagnosis",
+          "Monitoring every 3 months on chelation"
+        ],
+        "impact_on_feasibility": "Wilson disease designated as Nanbyo No. 171, providing subsidy program access; 23 expert centres with established monitoring infrastructure"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 4200,
+        "registry_name": "Japanese Wilson Disease Patient Registry",
+        "registry_size": 2100,
+        "stable_chelation": 1400,
+        "neurological_involvement": 680,
+        "estimated_eligible_patients": 480,
+        "diagnostic_delay_years": 4.8,
+        "referral_centres": 23
+      }
+    },
+    {
+      "doc_id": "05_hae_usa.pdf",
+      "disease": "Hereditary Angioedema",
+      "country": "United States",
+      "study_design": {
+        "phase": "3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "2:1",
+        "sample_size": null,
+        "actual_enrollment": 180,
+        "duration_months": 6,
+        "treatment_arms": [
+          {
+            "name": "Donidalorsen",
+            "n": 120,
+            "dose": "80 mg",
+            "frequency": "every 4 weeks",
+            "route": "subcutaneous"
+          },
+          {
+            "name": "Placebo",
+            "n": 60
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 42,
+        "countries_total": 6
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 12 to 75 years",
+          "category": "age"
+        },
+        {
+          "text": "Documented diagnosis of HAE type I or II: low C4, C1-INH functional activity below 50%",
+          "category": "disease_definition"
+        },
+        {
+          "text": "At least 3 investigator-confirmed HAE attacks per month during 3-month run-in",
+          "category": "disease_severity"
+        },
+        {
+          "text": "Stable prophylactic therapy or no prophylactic therapy for at least 3 months",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "Access to and ability to use acute rescue medication",
+          "category": "concomitant_therapy"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "HAE with normal C1-INH (formerly HAE type III)",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Acquired angioedema (AAE)",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Current use of long-term systemic corticosteroids > 10 mg prednisone daily",
+          "category": "concomitant_therapy"
+        },
+        {
+          "text": "Use of attenuated androgens within 3 months",
+          "category": "washout"
+        },
+        {
+          "text": "Severe hepatic impairment (ALT or AST > 3x ULN)",
+          "category": "organ_function"
+        },
+        {
+          "text": "History of thrombotic events within 12 months",
+          "category": "medical_history"
+        },
+        {
+          "text": "Pregnant or breastfeeding",
+          "category": "pregnancy"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 50,000",
+          "geography": "United States",
+          "source": "US HAEA registry"
+        }
+      ],
+      "screening_flow": {
+        "screened": 267,
+        "screen_failures": 87,
+        "randomized": 180,
+        "treated": 176,
+        "completed": 165,
+        "discontinued": 15,
+        "screen_failure_rate": 32.6,
+        "screen_fail_reasons": [
+          {
+            "reason": "Fewer than 3 attacks per month during run-in",
+            "count": 38,
+            "percentage": 43.7
+          },
+          {
+            "reason": "C1-INH functional activity within normal range",
+            "count": 16,
+            "percentage": 18.4
+          },
+          {
+            "reason": "Unstable prophylactic therapy",
+            "count": 14,
+            "percentage": 16.1
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 9,
+            "percentage": 10.3
+          },
+          {
+            "reason": "Other reasons",
+            "count": 10,
+            "percentage": 11.5
+          }
+        ],
+        "reasons_can_overlap": true
+      },
+      "operational_burden": {
+        "visit_schedule": {
+          "total_visits": 12,
+          "frequency": "Weeks 0,2,4,8,12,16,20,24,28,32"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "C4 levels",
+          "C1-INH functional and antigenic levels",
+          "prekallikrein levels",
+          "aPTT",
+          "liver function panel",
+          "CBC with platelets"
+        ],
+        "hard_gates": [
+          "attack frequency threshold",
+          "complement testing confirmation"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Monthly rate of investigator-confirmed HAE attacks",
+          "timepoint": "6 months"
+        },
+        {
+          "type": "secondary",
+          "name": "Proportion achieving zero attacks",
+          "timepoint": "6 months"
+        },
+        {
+          "type": "secondary",
+          "name": "Time to first HAE attack"
+        },
+        {
+          "type": "secondary",
+          "name": "AE-QoL change from baseline",
+          "timepoint": "6 months"
+        },
+        {
+          "type": "safety",
+          "name": "Injection site reactions, liver function, coagulation, platelets",
+          "timepoint": "6 months"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 42,
+        "total_countries": 6,
+        "countries": [
+          "United States",
+          "Canada",
+          "Germany",
+          "France",
+          "United Kingdom",
+          "Australia"
+        ],
+        "investigator_requirements": "at least 15 active HAE patients and allergist/immunologist with HAE trial experience",
+        "country_enrollment": [
+          {
+            "country": "United States",
+            "n": 108,
+            "percentage": 60.0
+          },
+          {
+            "country": "Canada",
+            "n": 27,
+            "percentage": 15.0
+          },
+          {
+            "country": "Germany",
+            "n": 18,
+            "percentage": 10.0
+          },
+          {
+            "country": "France",
+            "n": 13,
+            "percentage": 7.2
+          },
+          {
+            "country": "United Kingdom",
+            "n": 9,
+            "percentage": 5.0
+          },
+          {
+            "country": "Australia",
+            "n": 5,
+            "percentage": 2.8
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "AAAAI/WAO HAE Guidelines 2023",
+        "key_recommendations": [
+          "Long-term prophylaxis for >= 2 attacks per month",
+          "Target of zero attacks",
+          "Approved agents: SC C1-INH, lanadelumab, berotralstat"
+        ],
+        "impact_on_feasibility": "Large registry (4,800 patients) with 180 clinical sites provides extensive characterized patient pool"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 6600,
+        "registry_name": "US HAEA Patient Registry",
+        "registry_size": 4800,
+        "attack_freq_2plus": 2400,
+        "attack_freq_3plus": 1800,
+        "estimated_eligible_patients": 1100,
+        "diagnostic_delay_years": 8.3
+      }
+    },
+    {
+      "doc_id": "06_gaucher_disease_brazil.pdf",
+      "disease": "Gaucher Disease",
+      "country": "Brazil",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 57,000",
+          "geography": "Brazil",
+          "source": "ICGG Gaucher Registry"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1 in 60,000 live births",
+          "geography": "Brazil"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "30-40%",
+        "screening_to_randomization_ratio": "2.5:1"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "investigator_count": 28,
+        "centres_with_trial_experience": 18,
+        "pi_experienced": 10
+      },
+      "local_guidelines": {
+        "guideline_name": "Brazilian Society of Medical Genetics and Genomics Gaucher Disease Guidelines 2024",
+        "key_recommendations": [
+          "Imiglucerase 60 U/kg IV every 2 weeks (first-line ERT)",
+          "Eliglustat as second-line SRT",
+          "Treatment via SUS high-cost medication program",
+          "CBC monitoring every 3 months"
+        ],
+        "impact_on_feasibility": "SUS coverage enables treatment access; 32 reference centres but regional disparity (58% in Southeast); supply chain disruptions in 40% of pharmacies"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 3700,
+        "registry_name": "ICGG Gaucher Registry",
+        "registry_size": 2200,
+        "stable_ert": 1600,
+        "treatment_naive": 480,
+        "estimated_eligible_trial": 340,
+        "diagnostic_delay_years": 7.4,
+        "referral_centres": 32
+      }
+    },
+    {
+      "doc_id": "07_cf_canada.pdf",
+      "disease": "Cystic Fibrosis",
+      "country": "Canada",
+      "study_design": {
+        "phase": "2",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "3:1",
+        "sample_size": null,
+        "actual_enrollment": 96,
+        "duration_months": 3,
+        "treatment_arms": [
+          {
+            "name": "VX-121/tezacaftor/VX-561",
+            "n": 72
+          },
+          {
+            "name": "Placebo",
+            "n": 24
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 18,
+        "countries_total": 4
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 55 years",
+          "category": "age"
+        },
+        {
+          "text": "Confirmed CF with sweat chloride >= 60 mmol/L",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Homozygous for F508del-CFTR mutation",
+          "category": "biomarker"
+        },
+        {
+          "text": "ppFEV1 >= 40% and <= 90% at screening",
+          "category": "functional_status"
+        },
+        {
+          "text": "Stable pulmonary status for at least 28 days",
+          "category": "disease_stability"
+        },
+        {
+          "text": "Willing to undergo washout of current CFTR modulator for 28 days",
+          "category": "washout"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Sputum culture positive for Burkholderia cepacia complex within 24 months",
+          "category": "infection"
+        },
+        {
+          "text": "History of solid organ transplantation",
+          "category": "medical_history"
+        },
+        {
+          "text": "ALT or AST > 3x ULN or total bilirubin > 2x ULN",
+          "category": "organ_function"
+        },
+        {
+          "text": "Pregnancy or breastfeeding",
+          "category": "pregnancy"
+        },
+        {
+          "text": "Use of strong CYP3A inducers or inhibitors within 14 days",
+          "category": "concomitant_therapy"
+        },
+        {
+          "text": "Pulmonary exacerbation requiring IV antibiotics within 28 days",
+          "category": "disease_stability"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 3,600 live births",
+          "geography": "Canada"
+        },
+        {
+          "data_type": "population",
+          "value": "4,300 Canadians with CF",
+          "geography": "Canada"
+        }
+      ],
+      "screening_flow": {
+        "screened": 136,
+        "screen_failures": 40,
+        "randomized": 96,
+        "treated": 94,
+        "completed": 88,
+        "screen_failure_rate": 29.4,
+        "screen_fail_reasons": [
+          {
+            "reason": "ppFEV1 outside required range",
+            "count": 14,
+            "percentage": 35.0
+          },
+          {
+            "reason": "Positive Burkholderia cepacia complex culture",
+            "count": 8,
+            "percentage": 20.0
+          },
+          {
+            "reason": "Unstable pulmonary status within 28 days",
+            "count": 7,
+            "percentage": 17.5
+          },
+          {
+            "reason": "Abnormal liver function tests",
+            "count": 6,
+            "percentage": 15.0
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 5,
+            "percentage": 12.5
+          }
+        ]
+      },
+      "operational_burden": {
+        "visit_schedule": {
+          "total_visits": 10,
+          "frequency": "screening, baseline, Weeks 1,2,4,6,8,10,12,16"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "liver function panel",
+          "CBC",
+          "renal function",
+          "fasting glucose"
+        ],
+        "hard_gates": [
+          "F508del homozygous genotype",
+          "CFTR modulator washout"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Absolute change in ppFEV1",
+          "timepoint": "Week 12"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in sweat chloride",
+          "timepoint": "Week 12"
+        },
+        {
+          "type": "secondary",
+          "name": "CFQ-R respiratory domain score change"
+        },
+        {
+          "type": "secondary",
+          "name": "Rate of pulmonary exacerbations"
+        },
+        {
+          "type": "safety",
+          "name": "Liver function, ophthalmologic, ECG",
+          "timepoint": "12 weeks"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 18,
+        "total_countries": 4,
+        "countries": [
+          "Canada",
+          "United States",
+          "Australia",
+          "United Kingdom"
+        ],
+        "investigator_requirements": "accredited CF care centre with pulmonologist having >= 2 years CF trial experience, patient panel >= 30",
+        "country_enrollment": [
+          {
+            "country": "Canada",
+            "n": 42,
+            "percentage": 43.8
+          },
+          {
+            "country": "United States",
+            "n": 30,
+            "percentage": 31.3
+          },
+          {
+            "country": "Australia",
+            "n": 14,
+            "percentage": 14.6
+          },
+          {
+            "country": "United Kingdom",
+            "n": 10,
+            "percentage": 10.4
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Cystic Fibrosis Canada Clinical Guidelines 2023",
+        "key_recommendations": [
+          "ETI for all patients >= 2 years with at least one F508del allele",
+          "82% of eligible patients on CFTR modulator therapy",
+          "Quarterly clinic visits with spirometry",
+          "Annual comprehensive assessment"
+        ],
+        "impact_on_feasibility": "98% of CF patients captured in Canadian CF Registry; 42 accredited clinics nationwide"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 4300,
+        "f508del_homozygous": 2020,
+        "age_lung_eligible": 1200,
+        "estimated_eligible_patients": 680,
+        "registry_name": "Canadian Cystic Fibrosis Registry",
+        "registry_size": 4300
+      }
+    },
+    {
+      "doc_id": "08_myasthenia_gravis_south_korea.pdf",
+      "disease": "Myasthenia Gravis",
+      "country": "South Korea",
+      "study_design": {
+        "phase": "3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "1:1",
+        "sample_size": null,
+        "actual_enrollment": 282,
+        "duration_months": 3,
+        "treatment_arms": [
+          {
+            "name": "Zilucoplan",
+            "n": 141,
+            "dose": "0.3 mg/kg",
+            "frequency": "daily",
+            "route": "subcutaneous"
+          },
+          {
+            "name": "Placebo",
+            "n": 141
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 52,
+        "countries_total": 9
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 80 years",
+          "category": "age"
+        },
+        {
+          "text": "Confirmed gMG (MGFA class II, III, or IV)",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Positive anti-AChR antibody (titer > 0.5 nmol/L)",
+          "category": "biomarker"
+        },
+        {
+          "text": "MG-ADL score >= 6, with at least 50% from non-ocular items",
+          "category": "disease_severity"
+        },
+        {
+          "text": "Stable MG treatment for at least 30 days",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "Meningococcal vaccination at least 14 days before first dose",
+          "category": "vaccination"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "MGFA class I (ocular only) or class V (intubated)",
+          "category": "disease_severity"
+        },
+        {
+          "text": "Thymectomy within 12 months",
+          "category": "medical_history"
+        },
+        {
+          "text": "Plasma exchange or IVIg within 4 weeks",
+          "category": "washout"
+        },
+        {
+          "text": "Active infection at screening",
+          "category": "infection"
+        },
+        {
+          "text": "History of meningococcal infection",
+          "category": "medical_history"
+        },
+        {
+          "text": "Prior complement inhibitor therapy",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "Severe renal impairment (eGFR < 30)",
+          "category": "organ_function"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "22.8 per 100,000",
+          "geography": "South Korea",
+          "source": "National Health Insurance Service database"
+        },
+        {
+          "data_type": "incidence",
+          "value": "2.1 per 100,000 person-years",
+          "geography": "South Korea"
+        }
+      ],
+      "screening_flow": {
+        "screened": 410,
+        "screen_failures": 128,
+        "randomized": 282,
+        "treated": 278,
+        "completed": 256,
+        "discontinued": 26,
+        "screen_failure_rate": 31.2,
+        "screen_fail_reasons": [
+          {
+            "reason": "MG-ADL score below threshold",
+            "count": 48,
+            "percentage": 37.5
+          },
+          {
+            "reason": "Anti-AChR antibody negative",
+            "count": 28,
+            "percentage": 21.9
+          },
+          {
+            "reason": "Inadequate meningococcal vaccination status",
+            "count": 22,
+            "percentage": 17.2
+          },
+          {
+            "reason": "Unstable immunosuppressive therapy",
+            "count": 16,
+            "percentage": 12.5
+          },
+          {
+            "reason": "Other reasons",
+            "count": 14,
+            "percentage": 10.9
+          }
+        ],
+        "reasons_can_overlap": true
+      },
+      "operational_burden": {
+        "vaccination_requirements": [
+          {
+            "vaccine_type": "meningococcal tetravalent conjugate and serogroup B",
+            "requirement_type": "required",
+            "timing": "at least 14 days before first dose"
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 10,
+          "frequency": "screening, baseline, Weeks 1,2,4,6,8,10,12,20"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "anti-AChR antibody titers",
+          "complement levels (CH50, C3, C4, sC5b-9)",
+          "liver function panel",
+          "CBC"
+        ],
+        "hard_gates": [
+          "meningococcal vaccination",
+          "anti-AChR antibody positivity"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Change in MG-ADL score",
+          "timepoint": "Week 12"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in QMG score",
+          "timepoint": "Week 12"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in MG-Composite score"
+        },
+        {
+          "type": "secondary",
+          "name": "Proportion achieving minimal symptom expression (MG-ADL <= 1)"
+        },
+        {
+          "type": "secondary",
+          "name": "MG-QoL15r change"
+        },
+        {
+          "type": "safety",
+          "name": "Meningococcal monitoring, injection site reactions, liver function"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 52,
+        "total_countries": 9,
+        "countries": [
+          "South Korea",
+          "Japan",
+          "United States",
+          "Canada",
+          "Germany",
+          "France",
+          "United Kingdom",
+          "Italy",
+          "Australia"
+        ],
+        "investigator_requirements": "board-certified neurologist with neuromuscular experience, QMG scoring proficiency",
+        "country_enrollment": [
+          {
+            "country": "South Korea",
+            "n": 72,
+            "percentage": 25.5
+          },
+          {
+            "country": "United States",
+            "n": 58,
+            "percentage": 20.6
+          },
+          {
+            "country": "Japan",
+            "n": 42,
+            "percentage": 14.9
+          },
+          {
+            "country": "Germany",
+            "n": 32,
+            "percentage": 11.3
+          },
+          {
+            "country": "France",
+            "n": 24,
+            "percentage": 8.5
+          },
+          {
+            "country": "United Kingdom",
+            "n": 20,
+            "percentage": 7.1
+          },
+          {
+            "country": "Canada",
+            "n": 16,
+            "percentage": 5.7
+          },
+          {
+            "country": "Italy",
+            "n": 12,
+            "percentage": 4.3
+          },
+          {
+            "country": "Australia",
+            "n": 6,
+            "percentage": 2.1
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Korean Neurological Association MG Treatment Guidelines 2023",
+        "key_recommendations": [
+          "Pyridostigmine first-line",
+          "Corticosteroids and steroid-sparing agents for inadequate response",
+          "Rituximab for refractory gMG",
+          "Meningococcal vaccination mandatory before complement inhibitors"
+        ],
+        "impact_on_feasibility": "Korean MG Registry (6,500 patients) enables efficient pre-screening; 38 neuromuscular centres; diagnostic delay 2.1 years (below global average)"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 11800,
+        "anti_achr_positive": 9400,
+        "mg_adl_6plus": 4200,
+        "estimated_eligible_patients": 2800,
+        "registry_name": "Korean MG Registry",
+        "registry_size": 6500,
+        "diagnostic_delay_years": 2.1,
+        "referral_centres": 38
+      }
+    },
+    {
+      "doc_id": "09_pbc_italy.pdf",
+      "disease": "Primary Biliary Cholangitis",
+      "country": "Italy",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "27.6 per 100,000",
+          "geography": "Italy"
+        },
+        {
+          "data_type": "incidence",
+          "value": "3.4 per 100,000 person-years",
+          "geography": "Italy"
+        },
+        {
+          "data_type": "prevalence",
+          "value": "34.2 per 100,000",
+          "geography": "Veneto, Italy"
+        },
+        {
+          "data_type": "prevalence",
+          "value": "18.5 per 100,000",
+          "geography": "Sicily, Italy"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "25-30%"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "investigator_count": 52,
+        "centres_with_experience": 35,
+        "pi_experienced": 22
+      },
+      "local_guidelines": {
+        "guideline_name": "AISF/SIGE PBC Clinical Practice Guidelines 2024",
+        "key_recommendations": [
+          "UDCA 13-15 mg/kg/day first-line for all patients",
+          "Obeticholic acid add-on for non-responders",
+          "Paris II or Barcelona response criteria at 12 months",
+          "Transient elastography annually",
+          "Seladelpar and elafibranor for OCA-intolerant patients"
+        ],
+        "impact_on_feasibility": "48 hepatology centres in registry, Italy top-3 enrolling country in global PBC phase 3 trials; large UDCA non-responder pool"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 16300,
+        "registry_name": "Italian PBC Registry (AISF)",
+        "registry_size": 9200,
+        "on_udca": 6800,
+        "udca_non_responders": 2400,
+        "estimated_eligible_patients": 1600,
+        "diagnostic_delay_years": 3.8,
+        "referral_centres": 48
+      }
+    },
+    {
+      "doc_id": "10_dmd_australia.pdf",
+      "disease": "Duchenne Muscular Dystrophy",
+      "country": "Australia",
+      "study_design": {
+        "phase": "2",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "2:1",
+        "sample_size": null,
+        "actual_enrollment": 54,
+        "duration_months": 12,
+        "treatment_arms": [
+          {
+            "name": "Casimersen",
+            "n": 36,
+            "dose": "30 mg/kg",
+            "frequency": "weekly",
+            "route": "IV"
+          },
+          {
+            "name": "Placebo",
+            "n": 18
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 22,
+        "countries_total": 6
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Males aged 6 to 12 years",
+          "category": "age"
+        },
+        {
+          "text": "Genetically confirmed DMD amenable to exon 45 skipping",
+          "category": "biomarker"
+        },
+        {
+          "text": "Ambulatory: >= 300 meters on 6MWT",
+          "category": "functional_status"
+        },
+        {
+          "text": "Stable corticosteroid regimen for at least 6 months, no dose change > 20%",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "NSAA score >= 15",
+          "category": "functional_status"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Non-ambulatory or wheelchair for community mobility",
+          "category": "functional_status"
+        },
+        {
+          "text": "Previous exon-skipping or gene therapy",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "FVC < 50% predicted",
+          "category": "organ_function"
+        },
+        {
+          "text": "LVEF < 50%",
+          "category": "cardiac"
+        },
+        {
+          "text": "Severe scoliosis (Cobb angle > 20 degrees)",
+          "category": "medical_history"
+        },
+        {
+          "text": "Surgery planned within study period",
+          "category": "other"
+        },
+        {
+          "text": "Current use of other investigational treatment",
+          "category": "other_trial"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 5,000 male live births",
+          "geography": "Australia"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 600 males in Australia",
+          "geography": "Australia"
+        }
+      ],
+      "screening_flow": {
+        "screened": 84,
+        "screen_failures": 30,
+        "randomized": 54,
+        "treated": 52,
+        "completed": 48,
+        "screen_failure_rate": 35.7,
+        "screen_fail_reasons": [
+          {
+            "reason": "Non-ambulatory at screening",
+            "count": 10,
+            "percentage": 33.3
+          },
+          {
+            "reason": "Mutation not amenable to exon 45 skipping on central genetic confirmation",
+            "count": 8,
+            "percentage": 26.7
+          },
+          {
+            "reason": "Corticosteroid dose not stable for 6 months",
+            "count": 6,
+            "percentage": 20.0
+          },
+          {
+            "reason": "Unable to complete 6MWT >= 300 meters",
+            "count": 4,
+            "percentage": 13.3
+          },
+          {
+            "reason": "LVEF < 50%",
+            "count": 2,
+            "percentage": 6.7
+          }
+        ]
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "muscle biopsy (biceps brachii)",
+            "timing": ["baseline", "Week 48"],
+            "purpose": "efficacy_assessment",
+            "is_eligibility_requirement": false
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 59,
+          "frequency": "weekly IV infusions (52) plus 7 assessment visits"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "CBC",
+          "renal function",
+          "liver function",
+          "creatine kinase",
+          "complement C3/C4"
+        ],
+        "hard_gates": [
+          "exon 45 skipping amenable mutation",
+          "ambulatory status",
+          "muscle biopsy"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Change in dystrophin protein by Western blot on muscle biopsy",
+          "timepoint": "Week 48"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in 6MWT distance",
+          "timepoint": "Week 48"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in NSAA total score"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in rise-from-floor time"
+        },
+        {
+          "type": "safety",
+          "name": "Renal function, platelet counts, complement markers",
+          "timepoint": "48 weeks"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 22,
+        "total_countries": 6,
+        "countries": [
+          "Australia",
+          "United States",
+          "United Kingdom",
+          "Canada",
+          "Germany",
+          "Italy"
+        ],
+        "investigator_requirements": "pediatric neurologist with >= 2 years DMD trial experience, certified 6MWT/NSAA physiotherapy team, pediatric anesthesia for biopsy",
+        "country_enrollment": [
+          {
+            "country": "Australia",
+            "n": 14,
+            "percentage": 25.9
+          },
+          {
+            "country": "United States",
+            "n": 16,
+            "percentage": 29.6
+          },
+          {
+            "country": "United Kingdom",
+            "n": 10,
+            "percentage": 18.5
+          },
+          {
+            "country": "Canada",
+            "n": 6,
+            "percentage": 11.1
+          },
+          {
+            "country": "Germany",
+            "n": 5,
+            "percentage": 9.3
+          },
+          {
+            "country": "Italy",
+            "n": 3,
+            "percentage": 5.6
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Muscular Dystrophy Australia Clinical Guidelines 2023",
+        "key_recommendations": [
+          "Corticosteroid therapy from symptom onset",
+          "Annual echocardiography from diagnosis",
+          "Pulmonary function testing from age 6",
+          "Bone health DXA annually on steroids",
+          "Access to exon-skipping via TGA Special Access Scheme"
+        ]
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 600,
+        "exon_45_amenable": 125,
+        "ambulatory_age_eligible": 50,
+        "registry_name": "TREAT-NMD / Australian National Neuromuscular Disease Registry",
+        "referral_centres": 8
+      }
+    },
+    {
+      "doc_id": "11_sickle_cell_nigeria.pdf",
+      "disease": "Sickle Cell Disease",
+      "country": "Nigeria",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "2-3% of population (HbSS genotype)",
+          "geography": "Nigeria"
+        },
+        {
+          "data_type": "population",
+          "value": "4-6 million affected individuals",
+          "geography": "Nigeria"
+        },
+        {
+          "data_type": "incidence",
+          "value": "150,000 newborns with SCD annually",
+          "geography": "Nigeria"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "45-55%",
+        "screening_to_randomization_ratio": "3.5:1 to 5:1"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "investigator_count": 32,
+        "centres_with_trial_experience": 18,
+        "pi_experienced": 12
+      },
+      "local_guidelines": {
+        "guideline_name": "Federal Ministry of Health Nigeria SCD Guidelines 2024",
+        "key_recommendations": [
+          "Hydroxyurea for all SCD >= 9 months (HbSS/HbS-beta-zero)",
+          "Start 15 mg/kg/day, titrate to 25-35 mg/kg/day",
+          "Chronic exchange transfusion for stroke prevention",
+          "TCD ultrasonography annually ages 2-16"
+        ],
+        "impact_on_feasibility": "Massive patient pool but < 500,000 under active follow-up; infrastructure challenges: unreliable electricity (65% of centres), limited internet (60%), extended regulatory timeline (6-8 months NAFDAC)"
+      },
+      "patient_population": {
+        "estimated_affected": 5000000,
+        "under_active_followup": 500000,
+        "age_eligible_hbss": 280000,
+        "on_stable_hydroxyurea": 120000,
+        "estimated_eligible_broad": 60000,
+        "registry_name": "National SCD Registry",
+        "registry_size": 85000,
+        "diagnostic_delay_years": 4.6,
+        "referral_centres": 52
+      }
+    },
+    {
+      "doc_id": "12_systemic_mastocytosis_spain.pdf",
+      "disease": "Advanced Systemic Mastocytosis",
+      "country": "Spain",
+      "study_design": {
+        "phase": "2",
+        "design_type": "parallel",
+        "blinding": "open-label",
+        "randomization_ratio": "2:1",
+        "sample_size": null,
+        "actual_enrollment": 66,
+        "duration_months": 6,
+        "treatment_arms": [
+          {
+            "name": "Avapritinib",
+            "n": 44,
+            "dose": "200 mg",
+            "frequency": "daily",
+            "route": "oral"
+          },
+          {
+            "name": "Best available therapy",
+            "n": 22
+          }
+        ],
+        "control_type": "active_comparator",
+        "setting": "multi-centre",
+        "sites_total": 28,
+        "countries_total": 7
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age >= 18 years",
+          "category": "age"
+        },
+        {
+          "text": "Centrally confirmed AdvSM (ASM, SM-AHN, or MCL) per WHO 2022",
+          "category": "disease_definition"
+        },
+        {
+          "text": "KIT D816V mutation confirmed by central digital PCR (allele burden >= 0.1%)",
+          "category": "biomarker"
+        },
+        {
+          "text": "At least 1 evaluable C-finding",
+          "category": "disease_severity"
+        },
+        {
+          "text": "ECOG PS 0, 1, or 2",
+          "category": "functional_status"
+        },
+        {
+          "text": "Platelet count >= 50,000/mm3",
+          "category": "lab_value"
+        },
+        {
+          "text": "Adequate hepatic function: bilirubin <= 1.5x ULN, ALT/AST <= 3x ULN",
+          "category": "organ_function"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Indolent SM or smoldering SM without C-findings",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Prior selective KIT D816V inhibitor",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "Known additional actionable mutation",
+          "category": "biomarker"
+        },
+        {
+          "text": "Active bleeding or intracranial hemorrhage within 6 months",
+          "category": "medical_history"
+        },
+        {
+          "text": "Concurrent malignancy requiring systemic treatment",
+          "category": "other"
+        },
+        {
+          "text": "QTc > 480 ms",
+          "category": "cardiac"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "0.5 per 100,000",
+          "geography": "Spain"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 240 diagnosed patients",
+          "geography": "Spain"
+        },
+        {
+          "data_type": "incidence",
+          "value": "0.04 per 100,000 per year",
+          "geography": "Spain"
+        }
+      ],
+      "screening_flow": {
+        "screened": 102,
+        "screen_failures": 36,
+        "randomized": 66,
+        "treated": 64,
+        "completed": 54,
+        "discontinued": 12,
+        "screen_failure_rate": 35.3,
+        "screen_fail_reasons": [
+          {
+            "reason": "KIT D816V not confirmed by central digital PCR",
+            "count": 12,
+            "percentage": 33.3
+          },
+          {
+            "reason": "SM subtype reclassified to indolent SM",
+            "count": 8,
+            "percentage": 22.2
+          },
+          {
+            "reason": "Platelet count < 50,000/mm3",
+            "count": 6,
+            "percentage": 16.7
+          },
+          {
+            "reason": "ECOG PS > 2",
+            "count": 5,
+            "percentage": 13.9
+          },
+          {
+            "reason": "Other (QTc, concurrent malignancy)",
+            "count": 5,
+            "percentage": 13.9
+          }
+        ]
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "bone marrow biopsy",
+            "timing": ["screening", "Week 12", "Week 24"],
+            "purpose": "response_assessment",
+            "is_eligibility_requirement": true
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 14,
+          "frequency": "screening, baseline, Wk1,2,4,8,12,16,20,24,28,32,36,48"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "serum tryptase",
+          "CBC with differential",
+          "liver and renal function",
+          "coagulation",
+          "alkaline phosphatase"
+        ],
+        "hard_gates": [
+          "central KIT D816V confirmation",
+          "central pathology review",
+          "bone marrow biopsy"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Overall response rate by IWG-MRT-ECNM criteria",
+          "timepoint": "Week 24"
+        },
+        {
+          "type": "secondary",
+          "name": "Duration of response"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in serum tryptase"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in KIT D816V allele burden"
+        },
+        {
+          "type": "secondary",
+          "name": "AdvSM-SAF symptom response"
+        },
+        {
+          "type": "safety",
+          "name": "Intracranial hemorrhage, cognitive effects, edema, cytopenias"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 28,
+        "total_countries": 7,
+        "countries": [
+          "Spain",
+          "Germany",
+          "United States",
+          "France",
+          "Italy",
+          "United Kingdom",
+          "Sweden"
+        ],
+        "country_enrollment": [
+          {
+            "country": "Spain",
+            "n": 22,
+            "percentage": 33.3
+          },
+          {
+            "country": "Germany",
+            "n": 12,
+            "percentage": 18.2
+          },
+          {
+            "country": "United States",
+            "n": 10,
+            "percentage": 15.2
+          },
+          {
+            "country": "France",
+            "n": 8,
+            "percentage": 12.1
+          },
+          {
+            "country": "Italy",
+            "n": 6,
+            "percentage": 9.1
+          },
+          {
+            "country": "United Kingdom",
+            "n": 5,
+            "percentage": 7.6
+          },
+          {
+            "country": "Sweden",
+            "n": 3,
+            "percentage": 4.5
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "SEHH (Spanish Society of Hematology) AdvSM Guidelines",
+        "key_recommendations": [
+          "Cytoreductive therapy for C-findings",
+          "Midostaurin or avapritinib first-line",
+          "Bone marrow biopsy at diagnosis and every 6 months",
+          "KIT D816V digital PCR for diagnosis and monitoring"
+        ],
+        "impact_on_feasibility": "REMA network (world's largest, 5,200 patients, 14 centres) provides decisive advantage; centralized reference laboratory in Toledo"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 240,
+        "registry_name": "REMA (Red Española de Mastocitosis)",
+        "registry_size": 5200,
+        "advsm_in_registry": 420,
+        "active_c_findings": 120,
+        "estimated_eligible": 80,
+        "referral_centres": 14
+      }
+    },
+    {
+      "doc_id": "13_niemann_pick_c_netherlands.pdf",
+      "disease": "Niemann-Pick Disease Type C",
+      "country": "Netherlands",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 120,000",
+          "geography": "Netherlands"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1 in 150,000 live births",
+          "geography": "Netherlands"
+        },
+        {
+          "data_type": "prevalence",
+          "value": "1 in 100,000",
+          "geography": "Europe"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "30-40%",
+        "screening_to_randomization_ratio": "2.5:1 to 3.0:1"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "total_sites": 6,
+        "total_countries": 1,
+        "countries": [
+          "Netherlands"
+        ],
+        "investigator_count": 8,
+        "pi_experienced": 5,
+        "european_network_sites": 45,
+        "european_investigators": 68
+      },
+      "local_guidelines": {
+        "guideline_name": "Dutch Society for Inborn Errors of Metabolism / MetabERN NPC Guidelines 2024",
+        "key_recommendations": [
+          "Miglustat 200 mg TID for neurological NPC",
+          "Plasma oxysterols first-line screening",
+          "NPC1/NPC2 genetic testing for confirmation",
+          "NPC-CSS scoring every 6 months",
+          "Early treatment initiation recommended"
+        ],
+        "impact_on_feasibility": "6 metabolic centres ensuring < 150 km travel for any patient; Amsterdam UMC as national coordinating centre; international pooling essential due to ultra-rare nature"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 145,
+        "registry_name": "Dutch NPC Registry (Amsterdam UMC) / European NPC Registry (INPDA)",
+        "registry_size_dutch": 88,
+        "registry_size_european": 680,
+        "on_miglustat": 72,
+        "ambulatory_age_eligible": 45,
+        "estimated_eligible_trial": 30,
+        "diagnostic_delay_years": 5.6,
+        "referral_centres": 6,
+        "typical_contribution_per_trial": "8-12 patients"
+      }
+    },
+    {
+      "doc_id": "14_iga_nephropathy_china.pdf",
+      "disease": "IgA Nephropathy",
+      "country": "China",
+      "study_design": {
+        "phase": "3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "1:1",
+        "sample_size": null,
+        "actual_enrollment": 360,
+        "duration_months": 9,
+        "treatment_arms": [
+          {
+            "name": "Sparsentan",
+            "n": 180,
+            "dose": "400 mg",
+            "frequency": "daily",
+            "route": "oral"
+          },
+          {
+            "name": "Irbesartan",
+            "n": 180,
+            "dose": "300 mg",
+            "frequency": "daily",
+            "route": "oral"
+          }
+        ],
+        "control_type": "active_comparator",
+        "setting": "multi-centre",
+        "sites_total": 65,
+        "countries_total": 8
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 65 years",
+          "category": "age"
+        },
+        {
+          "text": "Biopsy-proven IgAN within 24 months",
+          "category": "disease_definition"
+        },
+        {
+          "text": "UPCR >= 1.0 g/g on two separate measurements despite maximally tolerated RAS inhibitor",
+          "category": "lab_value"
+        },
+        {
+          "text": "eGFR >= 30 mL/min/1.73m2",
+          "category": "lab_value"
+        },
+        {
+          "text": "Less than 50% glomeruli showing global sclerosis",
+          "category": "disease_definition"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Secondary IgAN (IgA vasculitis, lupus nephritis, liver cirrhosis)",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Rapidly progressive GN (> 50% crescentic glomeruli)",
+          "category": "disease_severity"
+        },
+        {
+          "text": "Current or planned pregnancy",
+          "category": "pregnancy"
+        },
+        {
+          "text": "Systemic corticosteroids or immunosuppressants within 3 months",
+          "category": "washout"
+        },
+        {
+          "text": "History of kidney transplant",
+          "category": "medical_history"
+        },
+        {
+          "text": "Uncontrolled hypertension (SBP > 150 or DBP > 95)",
+          "category": "vital_signs"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "3.5 per 1,000 adults",
+          "geography": "China"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 5 million",
+          "geography": "China"
+        }
+      ],
+      "screening_flow": {
+        "screened": 520,
+        "screen_failures": 160,
+        "randomized": 360,
+        "treated": 354,
+        "completed": 328,
+        "discontinued": 32,
+        "screen_failure_rate": 30.8,
+        "screen_fail_reasons": [
+          {
+            "reason": "UPCR below 1.0 g/g on repeat testing",
+            "count": 62,
+            "percentage": 38.8
+          },
+          {
+            "reason": "eGFR below 30",
+            "count": 28,
+            "percentage": 17.5
+          },
+          {
+            "reason": "Biopsy not within 24 months or >= 50% glomerulosclerosis",
+            "count": 24,
+            "percentage": 15.0
+          },
+          {
+            "reason": "Uncontrolled hypertension",
+            "count": 18,
+            "percentage": 11.3
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 16,
+            "percentage": 10.0
+          },
+          {
+            "reason": "Other reasons",
+            "count": 12,
+            "percentage": 7.5
+          }
+        ]
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "renal biopsy",
+            "timing": ["within 24 months of screening"],
+            "purpose": "diagnosis_confirmation",
+            "is_eligibility_requirement": true
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 11,
+          "frequency": "screening (2 visits), baseline, Wk2,4,8,12,18,24,36,40"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "UPCR",
+          "serum creatinine",
+          "eGFR",
+          "serum albumin",
+          "CBC",
+          "liver function",
+          "serum IgA"
+        ],
+        "hard_gates": [
+          "biopsy-proven IgAN within 24 months",
+          "UPCR threshold on repeat testing",
+          "stable RAS inhibitor"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Change in UPCR (log-transformed)",
+          "timepoint": "Week 36"
+        },
+        {
+          "type": "secondary",
+          "name": "Proportion achieving UPCR < 0.5 g/g",
+          "timepoint": "Week 36"
+        },
+        {
+          "type": "secondary",
+          "name": "Rate of eGFR decline (slope)"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in serum albumin"
+        },
+        {
+          "type": "safety",
+          "name": "Hepatic function, edema, fluid retention",
+          "timepoint": "36 weeks"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 65,
+        "total_countries": 8,
+        "countries": [
+          "China",
+          "Japan",
+          "South Korea",
+          "United States",
+          "Germany",
+          "France",
+          "United Kingdom",
+          "Australia"
+        ],
+        "investigator_requirements": "nephrologist with >= 3 years glomerulonephritis experience, renal biopsy capability, patient panel >= 50 IgAN",
+        "country_enrollment": [
+          {
+            "country": "China",
+            "n": 186,
+            "percentage": 51.7
+          },
+          {
+            "country": "Japan",
+            "n": 48,
+            "percentage": 13.3
+          },
+          {
+            "country": "South Korea",
+            "n": 36,
+            "percentage": 10.0
+          },
+          {
+            "country": "United States",
+            "n": 32,
+            "percentage": 8.9
+          },
+          {
+            "country": "Germany",
+            "n": 24,
+            "percentage": 6.7
+          },
+          {
+            "country": "France",
+            "n": 16,
+            "percentage": 4.4
+          },
+          {
+            "country": "United Kingdom",
+            "n": 12,
+            "percentage": 3.3
+          },
+          {
+            "country": "Australia",
+            "n": 6,
+            "percentage": 1.7
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Chinese Society of Nephrology IgAN Guidelines 2023",
+        "key_recommendations": [
+          "Maximal RAS inhibition first-line",
+          "Target UPCR < 0.5 g/g",
+          "Corticosteroids for persistent proteinuria > 1.0 g/day",
+          "MMF for proliferative lesions",
+          "Renal biopsy mandatory for diagnosis"
+        ],
+        "impact_on_feasibility": "World's largest IgAN registry (180,000 patients, 320 centres); China contributed >50% enrollment; IgAN accounts for 40-45% of all renal biopsies in China"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 5000000,
+        "registry_name": "Chinese IgA Nephropathy Registry",
+        "registry_size": 180000,
+        "upcr_above_1": 45000,
+        "estimated_eligible": 18000
+      }
+    },
+    {
+      "doc_id": "15_eb_argentina.pdf",
+      "disease": "Epidermolysis Bullosa",
+      "country": "Argentina",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 17,000",
+          "geography": "Argentina"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 2,700 diagnosed",
+          "geography": "Argentina"
+        },
+        {
+          "data_type": "incidence",
+          "value": "20 per million live births",
+          "geography": "Argentina"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "35-45%"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "investigator_count": 14,
+        "centres_with_experience": 8,
+        "pi_experienced": 4
+      },
+      "local_guidelines": {
+        "guideline_name": "Argentine Society of Dermatology EB Guidelines 2024",
+        "key_recommendations": [
+          "Non-adherent dressings (Mepitel) first-line wound care",
+          "Immunofluorescence mapping for subtype classification",
+          "Genetic confirmation via CENAGEM",
+          "Nutritional support 150% caloric intake for RDEB",
+          "SCC surveillance starting age 15 for RDEB"
+        ],
+        "impact_on_feasibility": "12 RAEB centres but 42% patients in Buenos Aires; 6.2 year diagnostic delay; IFM only at 3 centres; DEBRA transport subsidies for 4 trips/year"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 2700,
+        "registry_name": "RAEB (Registro Argentino de Epidermólisis Bullosa)",
+        "registry_size": 1400,
+        "dystrophic_eb": 530,
+        "rdeb_confirmed_col7a1": 200,
+        "estimated_eligible_rdeb_trial": 60,
+        "diagnostic_delay_years": 6.2,
+        "referral_centres": 12
+      }
+    },
+    {
+      "doc_id": "16_pku_turkey.pdf",
+      "disease": "Phenylketonuria",
+      "country": "Turkey",
+      "study_design": {
+        "phase": "2",
+        "design_type": "parallel",
+        "blinding": "open-label",
+        "randomization_ratio": "2:1",
+        "sample_size": null,
+        "actual_enrollment": 102,
+        "duration_months": 12,
+        "treatment_arms": [
+          {
+            "name": "Pegvaliase",
+            "n": 68,
+            "dose": "escalating to 20 mg daily",
+            "frequency": "daily",
+            "route": "subcutaneous"
+          },
+          {
+            "name": "Diet alone",
+            "n": 34
+          }
+        ],
+        "control_type": "no_treatment",
+        "setting": "multi-centre",
+        "sites_total": 24,
+        "countries_total": 5
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 55 years",
+          "category": "age"
+        },
+        {
+          "text": "Confirmed PKU: documented PAH gene mutations or newborn screening diagnosis with historical Phe > 1000 micromol/L",
+          "category": "disease_definition"
+        },
+        {
+          "text": "Blood Phe >= 600 micromol/L at screening (mean of 2 measurements)",
+          "category": "lab_value"
+        },
+        {
+          "text": "Willing to maintain current dietary regimen",
+          "category": "compliance"
+        },
+        {
+          "text": "Effective contraception for women of childbearing potential",
+          "category": "pregnancy"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Current pregnancy or breastfeeding or planned pregnancy",
+          "category": "pregnancy"
+        },
+        {
+          "text": "History of anaphylaxis to PEGylated therapies",
+          "category": "medical_history"
+        },
+        {
+          "text": "Known hypersensitivity to pegvaliase",
+          "category": "allergy"
+        },
+        {
+          "text": "Concurrent use of sapropterin (washout >= 14 days)",
+          "category": "washout"
+        },
+        {
+          "text": "Significant immunodeficiency or autoimmune disorder",
+          "category": "medical_history"
+        },
+        {
+          "text": "Unable to self-inject or commit to daily injection",
+          "category": "compliance"
+        },
+        {
+          "text": "ALT > 2x ULN",
+          "category": "organ_function"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 4,200",
+          "geography": "Turkey"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 20,000 diagnosed",
+          "geography": "Turkey"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1 in 4,500 live births",
+          "geography": "Turkey"
+        }
+      ],
+      "screening_flow": {
+        "screened": 156,
+        "screen_failures": 54,
+        "randomized": 102,
+        "treated": 98,
+        "completed": 82,
+        "discontinued": 20,
+        "screen_failure_rate": 34.6,
+        "screen_fail_reasons": [
+          {
+            "reason": "Blood Phe below 600 micromol/L",
+            "count": 22,
+            "percentage": 40.7
+          },
+          {
+            "reason": "History of anaphylaxis to PEGylated therapies",
+            "count": 8,
+            "percentage": 14.8
+          },
+          {
+            "reason": "Inability to self-inject or commit to schedule",
+            "count": 8,
+            "percentage": 14.8
+          },
+          {
+            "reason": "Pregnancy or planned pregnancy",
+            "count": 6,
+            "percentage": 11.1
+          },
+          {
+            "reason": "Abnormal immune function tests",
+            "count": 5,
+            "percentage": 9.3
+          }
+        ]
+      },
+      "operational_burden": {
+        "visit_schedule": {
+          "total_visits": 17,
+          "frequency": "screening, baseline, Wk1,2,4,6,8,10,12,16,20,24,32,40,48,52"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "blood Phe (tandem MS)",
+          "CBC",
+          "liver function",
+          "anti-pegvaliase antibodies (IgG,IgM,IgE)",
+          "complement levels",
+          "tryptase"
+        ],
+        "hard_gates": [
+          "blood Phe threshold",
+          "self-injection ability",
+          "epinephrine auto-injector carriage",
+          "anaphylaxis management plan"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Change in blood Phe concentration",
+          "timepoint": "Week 48"
+        },
+        {
+          "type": "secondary",
+          "name": "Proportion achieving Phe < 360 micromol/L",
+          "timepoint": "Week 48"
+        },
+        {
+          "type": "secondary",
+          "name": "ADHD-RS score change"
+        },
+        {
+          "type": "secondary",
+          "name": "PKU-QoL change"
+        },
+        {
+          "type": "safety",
+          "name": "Injection site reactions, anaphylaxis, arthralgia, anti-drug antibodies, liver function"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 24,
+        "total_countries": 5,
+        "countries": [
+          "Turkey",
+          "Germany",
+          "United States",
+          "United Kingdom",
+          "Italy"
+        ],
+        "country_enrollment": [
+          {
+            "country": "Turkey",
+            "n": 48,
+            "percentage": 47.1
+          },
+          {
+            "country": "Germany",
+            "n": 20,
+            "percentage": 19.6
+          },
+          {
+            "country": "United States",
+            "n": 16,
+            "percentage": 15.7
+          },
+          {
+            "country": "United Kingdom",
+            "n": 10,
+            "percentage": 9.8
+          },
+          {
+            "country": "Italy",
+            "n": 8,
+            "percentage": 7.8
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Turkish Ministry of Health National PKU Guidelines 2023",
+        "key_recommendations": [
+          "Lifelong dietary Phe restriction",
+          "Target Phe 120-360 micromol/L all ages",
+          "Sapropterin trial for all newly diagnosed",
+          "Monthly blood Phe monitoring (children), every 3 months (adults)",
+          "Neuropsychological assessment every 2 years"
+        ],
+        "impact_on_feasibility": "One of highest PKU prevalence globally (1:4,200) due to consanguinity; national NBS since 1993 with >99% coverage; 42 metabolic centres; 12,500 patients in registry"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 20000,
+        "registry_name": "Turkish PKU Registry",
+        "registry_size": 12500,
+        "adults_registered": 8200,
+        "phe_above_600": 5300,
+        "estimated_eligible": 3200,
+        "diagnostic_delay_years": null
+      }
+    },
+    {
+      "doc_id": "17_pompe_disease_india.pdf",
+      "disease": "Pompe Disease",
+      "country": "India",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 40,000",
+          "geography": "India"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 35,000 affected, only 1,200 diagnosed",
+          "geography": "India"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "40-50%"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "investigator_count": 18,
+        "centres": 12,
+        "pi_experienced": 8
+      },
+      "local_guidelines": {
+        "guideline_name": "Indian Academy of Medical Genetics Pompe Disease Guidelines 2024",
+        "key_recommendations": [
+          "Alglucosidase alfa 20 mg/kg IV every 2 weeks",
+          "ERT as early as possible for IOPD",
+          "Avalglucosidase alfa approved 2024",
+          "FVC monitoring every 3-6 months",
+          "Newborn screening expansion planned by 2028"
+        ],
+        "impact_on_feasibility": "Only 3.4% diagnostic rate; ERT access through Sanofi humanitarian program (180 patients); pilot NBS in 3 states covering 15% of births; CDSCO approval 3-6 months; mandatory post-trial access provisions"
+      },
+      "patient_population": {
+        "estimated_affected": 35000,
+        "estimated_diagnosed": 1200,
+        "registry_name": "Indian Pompe Disease Registry (NIRRCH)",
+        "registry_size": 680,
+        "on_ert": 180,
+        "symptomatic_untreated": 480,
+        "lopd_confirmed": 540,
+        "estimated_eligible_ert_switch": 80,
+        "estimated_eligible_naive": 120,
+        "diagnostic_delay_iopd_months": 3.2,
+        "diagnostic_delay_lopd_years": 8.6,
+        "referral_centres": 28
+      }
+    },
+    {
+      "doc_id": "18_pnh_sweden.pdf",
+      "disease": "Paroxysmal Nocturnal Hemoglobinuria",
+      "country": "Sweden",
+      "study_design": {
+        "phase": "3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "1:1",
+        "sample_size": null,
+        "actual_enrollment": 150,
+        "duration_months": 6,
+        "treatment_arms": [
+          {
+            "name": "Iptacopan + eculizumab",
+            "n": 75,
+            "dose": "200 mg twice daily",
+            "route": "oral"
+          },
+          {
+            "name": "Placebo + eculizumab",
+            "n": 75
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 48,
+        "countries_total": 10
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 75 years",
+          "category": "age"
+        },
+        {
+          "text": "PNH confirmed by flow cytometry: GPI-deficient granulocyte clone >= 10%",
+          "category": "biomarker"
+        },
+        {
+          "text": "Hemoglobin < 10 g/dL at screening",
+          "category": "lab_value"
+        },
+        {
+          "text": "Stable eculizumab for >= 6 months",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "LDH < 1.5x ULN",
+          "category": "lab_value"
+        },
+        {
+          "text": "Reticulocyte count > ULN",
+          "category": "lab_value"
+        },
+        {
+          "text": "Meningococcal vaccination current",
+          "category": "vaccination"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "Active or recent Neisseria meningitidis infection",
+          "category": "infection"
+        },
+        {
+          "text": "Active thrombosis or anticoagulation change within 3 months",
+          "category": "medical_history"
+        },
+        {
+          "text": "Bone marrow failure requiring >= 4 RBC transfusions in 12 weeks",
+          "category": "disease_severity"
+        },
+        {
+          "text": "Prior complement inhibitor other than eculizumab",
+          "category": "prior_therapy"
+        },
+        {
+          "text": "History of bone marrow transplantation",
+          "category": "medical_history"
+        },
+        {
+          "text": "eGFR < 30",
+          "category": "organ_function"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "13 per million",
+          "geography": "Sweden"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 135 diagnosed patients",
+          "geography": "Sweden"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1.3 per million per year",
+          "geography": "Sweden"
+        }
+      ],
+      "screening_flow": {
+        "screened": 218,
+        "screen_failures": 68,
+        "randomized": 150,
+        "treated": 148,
+        "completed": 138,
+        "discontinued": 12,
+        "screen_failure_rate": 31.2,
+        "screen_fail_reasons": [
+          {
+            "reason": "Hemoglobin >= 10 g/dL at screening",
+            "count": 28,
+            "percentage": 41.2
+          },
+          {
+            "reason": "GPI-deficient clone < 10%",
+            "count": 12,
+            "percentage": 17.6
+          },
+          {
+            "reason": "Eculizumab not stable for 6 months",
+            "count": 10,
+            "percentage": 14.7
+          },
+          {
+            "reason": "Active thrombosis or anticoagulation change",
+            "count": 8,
+            "percentage": 11.8
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 6,
+            "percentage": 8.8
+          },
+          {
+            "reason": "Other (renal impairment, infection)",
+            "count": 4,
+            "percentage": 5.9
+          }
+        ]
+      },
+      "operational_burden": {
+        "vaccination_requirements": [
+          {
+            "vaccine_type": "meningococcal",
+            "requirement_type": "required",
+            "timing": "current per local guidelines, booster every 3 years"
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 18,
+          "frequency": "eculizumab infusions every 2 weeks plus assessment visits"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "CBC with reticulocyte count",
+          "LDH",
+          "indirect bilirubin",
+          "haptoglobin",
+          "free hemoglobin",
+          "complement CH50",
+          "C3d on erythrocytes",
+          "liver function",
+          "iptacopan drug levels"
+        ],
+        "hard_gates": [
+          "GPI-deficient clone >= 10%",
+          "stable eculizumab",
+          "meningococcal vaccination",
+          "prophylactic antibiotics"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Change in hemoglobin",
+          "timepoint": "Week 24"
+        },
+        {
+          "type": "secondary",
+          "name": "Proportion achieving hemoglobin >= 12 g/dL",
+          "timepoint": "Week 24"
+        },
+        {
+          "type": "secondary",
+          "name": "Change in reticulocyte count"
+        },
+        {
+          "type": "secondary",
+          "name": "Transfusion avoidance rate"
+        },
+        {
+          "type": "secondary",
+          "name": "FACIT-Fatigue score change"
+        },
+        {
+          "type": "safety",
+          "name": "Breakthrough hemolysis, Neisseria surveillance, hepatic function"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 48,
+        "total_countries": 10,
+        "countries": [
+          "Sweden",
+          "Denmark",
+          "Norway",
+          "Finland",
+          "Germany",
+          "France",
+          "United Kingdom",
+          "United States",
+          "Japan",
+          "Australia"
+        ],
+        "investigator_requirements": "hematologist with >= 2 years PNH experience, eculizumab infusion capability, high-sensitivity flow cytometry access",
+        "country_enrollment": [
+          {
+            "country": "Sweden",
+            "n": 18,
+            "percentage": 12.0
+          },
+          {
+            "country": "Denmark",
+            "n": 12,
+            "percentage": 8.0
+          },
+          {
+            "country": "Norway",
+            "n": 8,
+            "percentage": 5.3
+          },
+          {
+            "country": "Finland",
+            "n": 6,
+            "percentage": 4.0
+          },
+          {
+            "country": "Germany",
+            "n": 28,
+            "percentage": 18.7
+          },
+          {
+            "country": "France",
+            "n": 22,
+            "percentage": 14.7
+          },
+          {
+            "country": "United Kingdom",
+            "n": 18,
+            "percentage": 12.0
+          },
+          {
+            "country": "United States",
+            "n": 24,
+            "percentage": 16.0
+          },
+          {
+            "country": "Japan",
+            "n": 10,
+            "percentage": 6.7
+          },
+          {
+            "country": "Australia",
+            "n": 4,
+            "percentage": 2.7
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Swedish Society of Hematology PNH Guidelines 2023",
+        "key_recommendations": [
+          "Complement inhibitor for symptomatic intravascular hemolysis",
+          "Meningococcal vaccination mandatory with 3-year booster",
+          "Blood monitoring every 4 weeks on eculizumab",
+          "High-sensitivity flow cytometry at diagnosis and annually"
+        ],
+        "impact_on_feasibility": "Centralized care in 7 university hospitals; Swedish PNH Registry (98 patients); Nordic countries collectively contributed 29.3% enrollment"
+      },
+      "patient_population": {
+        "estimated_diagnosed_patients": 135,
+        "registry_name": "Swedish PNH Registry",
+        "registry_size": 98,
+        "on_eculizumab": 82,
+        "hb_below_10": 48,
+        "estimated_eligible": 32,
+        "referral_centres": 7
+      }
+    },
+    {
+      "doc_id": "19_tsc_mexico.pdf",
+      "disease": "Tuberous Sclerosis Complex",
+      "country": "Mexico",
+      "study_design": null,
+      "eligibility_inclusion": [],
+      "eligibility_exclusion": [],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 15,000",
+          "geography": "Mexico"
+        },
+        {
+          "data_type": "population",
+          "value": "approximately 8,500 affected, 2,800 diagnosed",
+          "geography": "Mexico"
+        },
+        {
+          "data_type": "incidence",
+          "value": "1 in 6,000 to 1 in 10,000 live births",
+          "geography": "Mexico"
+        }
+      ],
+      "screening_flow": {
+        "screen_failure_rate_avg": "35-45%",
+        "screening_to_randomization_ratio": "3.0:1"
+      },
+      "operational_burden": null,
+      "endpoints": [],
+      "sites_and_investigators": {
+        "investigator_count": 16,
+        "centres": 10,
+        "pi_experienced": 3
+      },
+      "local_guidelines": {
+        "guideline_name": "Mexican Academy of Neurology TSC Guidelines 2024",
+        "key_recommendations": [
+          "Vigabatrin first-line for infantile spasms",
+          "Everolimus for SEGA >= 1 cm, AML >= 3 cm, refractory epilepsy",
+          "Brain MRI every 1-3 years until age 25",
+          "Renal MRI every 1-3 years lifelong",
+          "TAND screening annually"
+        ],
+        "impact_on_feasibility": "22 centres in registry but 32% patients in Mexico City; everolimus supply interruptions in 35% of centres; genetic testing at INMEGEN (6-12 weeks); COFEPRIS approval 4-6 months"
+      },
+      "patient_population": {
+        "estimated_affected": 8500,
+        "estimated_diagnosed": 2800,
+        "registry_name": "Mexican TSC Registry (Registro Mexicano de Esclerosis Tuberosa)",
+        "registry_size": 1600,
+        "with_epilepsy": 1200,
+        "with_aml_3cm": 640,
+        "on_everolimus": 600,
+        "estimated_eligible_epilepsy_trial": 200,
+        "estimated_eligible_mtor_trial": 250,
+        "referral_centres": 22
+      }
+    },
+    {
+      "doc_id": "20_attr_amyloidosis_portugal.pdf",
+      "disease": "Hereditary Transthyretin Amyloidosis",
+      "country": "Portugal",
+      "study_design": {
+        "phase": "3",
+        "design_type": "parallel",
+        "blinding": "double-blind",
+        "randomization_ratio": "2:1",
+        "sample_size": null,
+        "actual_enrollment": 192,
+        "duration_months": 18,
+        "treatment_arms": [
+          {
+            "name": "Acoramidis",
+            "n": 128,
+            "dose": "800 mg twice daily",
+            "route": "oral"
+          },
+          {
+            "name": "Placebo",
+            "n": 64
+          }
+        ],
+        "control_type": "placebo",
+        "setting": "multi-centre",
+        "sites_total": 38,
+        "countries_total": 9
+      },
+      "eligibility_inclusion": [
+        {
+          "text": "Age 18 to 80 years",
+          "category": "age"
+        },
+        {
+          "text": "Documented pathogenic TTR variant confirmed by central lab",
+          "category": "biomarker"
+        },
+        {
+          "text": "Amyloid deposition confirmed by tissue biopsy or Tc-99m pyrophosphate scintigraphy (Perugini >= 2)",
+          "category": "disease_definition"
+        },
+        {
+          "text": "PND score I, II, IIIa, or IIIb (FAP stage 1 or 2)",
+          "category": "disease_severity"
+        },
+        {
+          "text": "NIS >= 5 and <= 130",
+          "category": "disease_severity"
+        },
+        {
+          "text": "If on tafamidis, stable dose >= 6 months",
+          "category": "prior_therapy"
+        }
+      ],
+      "eligibility_exclusion": [
+        {
+          "text": "PND score IV (wheelchair-bound or bedridden, FAP stage 3)",
+          "category": "disease_severity"
+        },
+        {
+          "text": "Prior liver transplantation",
+          "category": "medical_history"
+        },
+        {
+          "text": "Current or prior gene silencing therapy within 6 months",
+          "category": "washout"
+        },
+        {
+          "text": "LVEF < 40%, NT-proBNP > 3000 pg/mL, NYHA class IV",
+          "category": "cardiac"
+        },
+        {
+          "text": "eGFR < 30",
+          "category": "organ_function"
+        },
+        {
+          "text": "Sensorimotor polyneuropathy from other causes",
+          "category": "disease_definition"
+        }
+      ],
+      "epidemiology": [
+        {
+          "data_type": "prevalence",
+          "value": "1 in 538 in endemic regions (Póvoa de Varzim/Vila do Conde)",
+          "geography": "Portugal (endemic)"
+        },
+        {
+          "data_type": "population",
+          "value": "3,200 symptomatic patients, 10,000 asymptomatic carriers",
+          "geography": "Portugal"
+        }
+      ],
+      "screening_flow": {
+        "screened": 280,
+        "screen_failures": 88,
+        "randomized": 192,
+        "treated": 188,
+        "completed": 172,
+        "discontinued": 20,
+        "screen_failure_rate": 31.4,
+        "screen_fail_reasons": [
+          {
+            "reason": "Polyneuropathy not attributable to ATTRv",
+            "count": 26,
+            "percentage": 29.5
+          },
+          {
+            "reason": "Polyneuropathy stage 3 (PND IV)",
+            "count": 18,
+            "percentage": 20.5
+          },
+          {
+            "reason": "TTR variant classified as VUS on central review",
+            "count": 14,
+            "percentage": 15.9
+          },
+          {
+            "reason": "LVEF < 40%",
+            "count": 12,
+            "percentage": 13.6
+          },
+          {
+            "reason": "Withdrawal of consent",
+            "count": 10,
+            "percentage": 11.4
+          },
+          {
+            "reason": "NIS outside range",
+            "count": 8,
+            "percentage": 9.1
+          }
+        ]
+      },
+      "operational_burden": {
+        "invasive_procedures": [
+          {
+            "name": "tissue biopsy or nuclear scintigraphy",
+            "timing": ["screening"],
+            "purpose": "diagnosis_confirmation",
+            "is_eligibility_requirement": true
+          }
+        ],
+        "visit_schedule": {
+          "total_visits": 14,
+          "frequency": "screening (2), baseline, Mo1,2,3,6,9,12,15,18,19"
+        },
+        "central_lab_required": true,
+        "central_lab_analytes": [
+          "TTR levels",
+          "prealbumin",
+          "NT-proBNP",
+          "troponin I",
+          "CBC",
+          "liver function",
+          "renal function",
+          "albumin",
+          "retinol-binding protein"
+        ],
+        "hard_gates": [
+          "pathogenic TTR variant confirmation",
+          "amyloid tissue confirmation",
+          "mNIS+7 certified assessors",
+          "nerve conduction studies"
+        ]
+      },
+      "endpoints": [
+        {
+          "type": "primary",
+          "name": "Change in mNIS+7",
+          "timepoint": "Month 18"
+        },
+        {
+          "type": "secondary",
+          "name": "Norfolk QoL-DN score change"
+        },
+        {
+          "type": "secondary",
+          "name": "10-meter walk test speed change"
+        },
+        {
+          "type": "secondary",
+          "name": "Grip strength change"
+        },
+        {
+          "type": "secondary",
+          "name": "Modified BMI (mBMI)"
+        },
+        {
+          "type": "secondary",
+          "name": "NT-proBNP change"
+        },
+        {
+          "type": "secondary",
+          "name": "Global longitudinal strain by echo"
+        },
+        {
+          "type": "safety",
+          "name": "Cardiac monitoring, hepatic function"
+        }
+      ],
+      "sites_and_investigators": {
+        "total_sites": 38,
+        "total_countries": 9,
+        "countries": [
+          "Portugal",
+          "France",
+          "Sweden",
+          "Japan",
+          "Brazil",
+          "United States",
+          "Italy",
+          "Spain",
+          "Germany"
+        ],
+        "investigator_requirements": "neurologist with neuromuscular experience, certified NCS capability, echocardiography with strain imaging, patient panel >= 10 ATTRv",
+        "country_enrollment": [
+          {
+            "country": "Portugal",
+            "n": 52,
+            "percentage": 27.1
+          },
+          {
+            "country": "France",
+            "n": 28,
+            "percentage": 14.6
+          },
+          {
+            "country": "Japan",
+            "n": 26,
+            "percentage": 13.5
+          },
+          {
+            "country": "Sweden",
+            "n": 22,
+            "percentage": 11.5
+          },
+          {
+            "country": "Brazil",
+            "n": 20,
+            "percentage": 10.4
+          },
+          {
+            "country": "United States",
+            "n": 18,
+            "percentage": 9.4
+          },
+          {
+            "country": "Italy",
+            "n": 12,
+            "percentage": 6.3
+          },
+          {
+            "country": "Spain",
+            "n": 8,
+            "percentage": 4.2
+          },
+          {
+            "country": "Germany",
+            "n": 6,
+            "percentage": 3.1
+          }
+        ]
+      },
+      "local_guidelines": {
+        "guideline_name": "Sociedade Portuguesa de Neurologia ATTRv Guidelines 2023",
+        "key_recommendations": [
+          "Genetic testing for all first-degree relatives starting age 18",
+          "Annual neurological, cardiac, and ophthalmologic monitoring for carriers",
+          "Treatment at symptom onset: tafamidis, patisiran, inotersen, vutrisiran",
+          "Liver transplant largely superseded by pharmacotherapy since 2012"
+        ],
+        "impact_on_feasibility": "World's oldest ATTRv registry (since 1939, 5,400 individuals); Unidade Corino de Andrade global reference centre; 80+ years clinical experience; highest global prevalence in endemic regions"
+      },
+      "patient_population": {
+        "estimated_symptomatic": 3200,
+        "asymptomatic_carriers": 10000,
+        "with_polyneuropathy": 2400,
+        "stage_1_2": 1600,
+        "estimated_eligible": 1100,
+        "registry_name": "Portuguese Familial Amyloidosis Registry (Unidade Corino de Andrade)",
+        "registry_size": 5400,
+        "referral_centres": null
+      }
+    }
+  ]
+}

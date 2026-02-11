@@ -1,0 +1,111 @@
+Clinical Practice Guidelines for the Diagnosis and Management of Niemann-Pick Disease Type C
+
+Issued by: Dutch Society for Inborn Errors of Metabolism (ESN), in collaboration with the European Reference Network for Hereditary Metabolic Disorders (MetabERN)
+Publication Date: February 2024
+Guideline Version: 2.0
+
+1. Introduction and Epidemiology
+
+Niemann-Pick disease type C (NPC) is a rare autosomal recessive lysosomal storage disorder caused by pathogenic variants in the NPC1 gene (95% of cases) or NPC2 gene (5%), resulting in impaired intracellular cholesterol trafficking and progressive neurological deterioration. The estimated prevalence of NPC in the Netherlands is 1 in 120,000, corresponding to approximately 145 diagnosed patients. The incidence is approximately 1 in 150,000 live births. European-wide estimates suggest a prevalence of 1 in 100,000.
+
+The Dutch NPC Registry, maintained by the Amsterdam UMC, enrolls 88 patients across 6 designated metabolic centres. The European NPC Registry (coordinated by the International Niemann-Pick Disease Alliance, INPDA) enrolls 680 patients across 28 countries, with the Netherlands contributing 88 patients. The average diagnostic delay in the Netherlands is 5.6 years from initial neurological symptom presentation, though this has improved from 8.3 years a decade ago due to increased use of oxysterol biomarker screening (plasma cholestane-3beta,5alpha,6beta-triol and 7-ketocholesterol).
+
+2. Clinical Presentation and Natural History
+
+2.1 Age-Dependent Phenotypes
+- Perinatal/infantile (< 2 years): Neonatal jaundice, hepatosplenomegaly, failure to thrive. Rapidly progressive. Median survival: 4-5 years.
+- Late infantile (2-6 years): Cognitive delay, ataxia, vertical supranuclear gaze palsy (VSGP). Median survival: 7-12 years.
+- Juvenile (6-15 years): Learning difficulties, clumsiness, VSGP, gelastic cataplexy. Median survival: 15-25 years.
+- Adolescent/adult (> 15 years): Psychiatric symptoms, cognitive decline, ataxia, dysphagia, dysarthria. Median survival: variable, 25-50 years.
+
+2.2 Disease Severity Scoring
+The NPC Clinical Severity Scale (NPC-CSS) should be used for standardized assessment. Domains: ambulation, manipulation, language, swallowing, eye movement, seizures, cognition, memory, hearing, behavior (9 domains, total score 0-45). Assessment recommended every 6 months.
+
+3. Diagnostic Pathway
+
+3.1 Clinical Suspicion
+NPC should be suspected in patients with:
+- Unexplained progressive neurological deterioration (ataxia, dystonia, cognitive decline)
+- Vertical supranuclear gaze palsy (present in > 80% of NPC patients)
+- Neonatal cholestatic jaundice with hepatosplenomegaly
+- Gelastic cataplexy
+- Psychiatric symptoms (psychosis, depression) in young adults with cognitive decline
+
+3.2 Biomarker Screening
+Plasma oxysterols (cholestane-3beta,5alpha,6beta-triol and 7-ketocholesterol) are the recommended first-line screening biomarkers. Elevated levels have sensitivity > 95% and specificity > 90% for NPC. Available at the Amsterdam UMC Laboratory for Genetic Metabolic Diseases and the Leiden University Medical Center.
+
+Alternative biomarker: Plasma lysosphingomyelin-509 (lyso-SM-509, also known as SPC) is an emerging biomarker with comparable sensitivity.
+
+3.3 Confirmatory Testing
+Diagnosis requires:
+- Filipin staining of skin fibroblasts showing characteristic perinuclear cholesterol accumulation (historically the gold standard, but sensitivity is 80-85%)
+- OR molecular genetic testing of NPC1 and NPC2 genes (preferred first-line confirmatory test)
+- Next-generation sequencing gene panels for lysosomal storage disorders are available at 4 Dutch genetic laboratories
+
+3.4 Specialist Referral
+All suspected NPC patients should be referred to one of 6 designated metabolic expert centres in the Netherlands: Amsterdam UMC (Amsterdam), Radboud UMC (Nijmegen), Erasmus MC (Rotterdam), UMC Utrecht (Utrecht), UMC Groningen (Groningen), and Maastricht UMC (Maastricht). Amsterdam UMC serves as the national NPC coordinating centre.
+
+4. Treatment Recommendations
+
+4.1 Miglustat (Disease-Modifying Therapy)
+Miglustat 200 mg three times daily is the only approved disease-modifying therapy for NPC. Miglustat inhibits glucosylceramide synthase, reducing glycosphingolipid synthesis. Recommended for all patients with neurological manifestations. Available through the Dutch health insurance system (zorgverzekering) with prior authorization from the treating metabolic physician.
+
+Treatment initiation criteria: diagnosis of NPC with neurological symptoms (any severity). Miglustat should be started as early as possible after neurological symptom onset. Pre-symptomatic treatment in confirmed NPC patients is recommended based on expert consensus.
+
+4.2 Investigational Therapies
+Arimoclomol (heat shock protein co-inducer) failed its pivotal phase 2/3 trial but generated important data on NPC natural history. Cyclodextrin (intrathecal 2-hydroxypropyl-beta-cyclodextrin) has shown promise in early-phase trials. N-acetyl-L-leucine is under investigation in a phase 3 trial.
+
+4.3 Supportive Care
+- Swallowing: Videofluoroscopic swallowing assessment annually. PEG tube placement for patients with recurrent aspiration or significant weight loss.
+- Seizures: Anti-epileptic drugs as per standard neurology guidelines. Sodium valproate or levetiracetam preferred.
+- Psychiatric: Antidepressants (SSRIs) and antipsychotics as indicated, with awareness of drug interactions with miglustat.
+- Physiotherapy and occupational therapy: Ongoing to maintain mobility and function.
+
+5. Monitoring Schedule
+
+Patients on miglustat require:
+- NPC-CSS scoring: every 6 months
+- Neurological examination: every 6 months
+- Swallowing assessment (videofluoroscopy or FEES): annually
+- Ophthalmologic assessment (VSGP quantification): every 6 months
+- Audiometric testing: annually
+- Hepatosplenomegaly assessment (ultrasound): annually
+- Height, weight, BMI: every 6 months
+- Blood tests: complete blood count, liver and renal function every 6 months
+- Plasma oxysterols: every 12 months (for treatment monitoring)
+
+6. Expert Centre Requirements
+
+6.1 Centre Infrastructure
+Designated NPC centres must have:
+- Clinical geneticist or metabolic physician with at least 3 years of NPC management experience
+- Access to oxysterol biomarker testing (turnaround < 14 days)
+- Molecular genetic testing capability for NPC1/NPC2
+- Neurology team experienced in movement disorders and swallowing assessment
+- Ability to perform standardized NPC-CSS assessments
+- Pharmacy with miglustat dispensing and monitoring protocols
+- Pediatric and adult transition care pathways
+
+6.2 Geographic Access
+The 6 Dutch metabolic centres are geographically distributed to ensure that no patient lives more than 150 km from an expert centre. For patients with severe mobility impairment, telemedicine follow-up is integrated, with in-person assessment required at least annually.
+
+7. Clinical Trial Feasibility
+
+7.1 Patient Pool
+Of the approximately 145 diagnosed NPC patients in the Netherlands, 88 are enrolled in the Dutch NPC Registry. Among registry patients, 72 are on miglustat therapy, 45 are aged 4-65 years and ambulatory, and approximately 30 would meet typical clinical trial eligibility criteria (adequate NPC-CSS score range, stable miglustat dose, no recent hospitalization).
+
+7.2 International Pooling
+Due to the ultra-rare nature of NPC, clinical trials require multi-country enrollment. The European NPC Registry (680 patients, 28 countries) and the INPDA network of 45 NPC expert centres provide the necessary scale. The Netherlands typically contributes 8-12 patients per international NPC trial.
+
+7.3 Screening Expectations
+The screen failure rate in NPC trials averages 30-40%. Common reasons include disease too advanced (NPC-CSS score above maximum for trial), disease too mild (NPC-CSS score below minimum), inability to perform efficacy assessments due to cognitive impairment, and caregiver unwillingness to travel for frequent visits. Screening-to-randomization ratio: approximately 2.5:1 to 3.0:1.
+
+7.4 Investigator Network
+The Dutch NPC Clinical Study Group includes 8 metabolic physicians across the 6 expert centres, with 5 having previous NPC clinical trial experience. The European NPC Investigator Network (EPINET) includes 68 investigators across 45 centres in 28 countries.
+
+7.5 Operational Challenges
+NPC trials face unique operational challenges: patients are often children with cognitive impairment requiring caregiver consent and age-appropriate assessments. Video recording of neurological assessments for central review adds complexity. Swallowing assessments require specialized equipment (videofluoroscopy) not available at all sites. Sample collection for biomarker research (plasma, CSF in some trials) requires pediatric sedation or general anesthesia for lumbar puncture.
+
+8. Registry and Data
+
+The Dutch NPC Registry captures demographics, genotype, phenotype, NPC-CSS scores, treatment, and outcomes longitudinally. Data access requires Amsterdam UMC research ethics board approval (4-6 weeks). The European NPC Registry (INPDA) provides cross-country data for feasibility modelling, with data access through the INPDA Scientific Advisory Board (6-8 weeks). Natural history data from the International NPC Registry is available through the NPC Natural History Consortium.

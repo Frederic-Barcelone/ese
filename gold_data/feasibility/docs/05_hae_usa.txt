@@ -1,0 +1,68 @@
+Efficacy and Safety of Donidalorsen for Prophylaxis of Hereditary Angioedema Attacks: Results from the OASIS Phase 3 Randomized Controlled Trial
+
+Authors: Jonathan Bernstein, Marc Riedl, William Lumry, et al.
+Journal: Journal of Allergy and Clinical Immunology, 2024
+
+Abstract
+
+Background: Hereditary angioedema (HAE) due to C1-inhibitor deficiency (HAE-C1-INH) affects approximately 1 in 50,000 individuals in the United States, with an estimated 6,600 diagnosed patients nationwide. Despite available prophylactic therapies, many patients continue to experience breakthrough attacks. This phase 3 trial evaluated subcutaneous donidalorsen, an antisense oligonucleotide targeting prekallikrein, for prophylaxis of HAE attacks.
+
+Methods: Patients aged 12-75 years with HAE type I or II confirmed by complement testing (low C4, low C1-INH functional activity) experiencing >= 3 attacks per month during the 3-month run-in period were enrolled across 42 sites in 6 countries. Patients were randomized 2:1 to donidalorsen 80 mg subcutaneously every 4 weeks or placebo for 6 months. The primary endpoint was the monthly rate of investigator-confirmed HAE attacks during the treatment period.
+
+Results: Of 267 patients screened, 180 were randomized (120 donidalorsen, 60 placebo). Screen failure rate was 32.6%. The most common screen failure reasons were fewer than 3 attacks per month during run-in (38 patients, 43.7% of failures), C1-INH functional activity within normal range (16 patients, 18.4%), unstable prophylactic therapy (14 patients, 16.1%), and withdrawal of consent (9 patients, 10.3%). Of 180 randomized patients, 176 received at least one dose and 165 completed the study.
+
+Introduction
+
+Hereditary angioedema (HAE) is a rare autosomal dominant disorder characterized by recurrent episodes of subcutaneous and submucosal swelling. HAE type I and type II, caused by deficiency or dysfunction of C1-esterase inhibitor (C1-INH), account for approximately 85% and 15% of cases, respectively. The estimated prevalence in the United States is 1 in 50,000, with approximately 6,600 diagnosed patients according to the US Hereditary Angioedema Association (HAEA) registry database.
+
+The US HAEA Patient Registry currently enrolls 4,800 patients across 180 participating clinical sites. Among registry participants, the mean time from first symptoms to diagnosis is 8.3 years, though this has decreased significantly from 12.5 years reported a decade ago. Geographic distribution analysis shows higher diagnosis rates in the Northeast and West Coast regions, with relative underdiagnosis in rural Southern and Midwestern states.
+
+Current US treatment guidelines from the American Academy of Allergy, Asthma and Immunology (AAAAI) and the World Allergy Organization (WAO) recommend long-term prophylaxis for patients experiencing 2 or more attacks per month, attacks causing significant functional disability, or those with history of laryngeal attacks. Approved prophylactic agents include subcutaneous C1-INH concentrate, lanadelumab, and berotralstat. The 2023 updated AAAAI HAE guidelines emphasize individualized prophylaxis with a target of zero attacks.
+
+Methods
+
+Study Design
+This was a phase 3, randomized, double-blind, placebo-controlled, parallel-group trial conducted at 42 sites across 6 countries (United States, Canada, Germany, France, United Kingdom, and Australia). The study included a 3-month prospective run-in period for attack documentation, a screening period of up to 28 days, a 6-month treatment period, and a 2-month safety follow-up.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 12 to 75 years
+2. Documented diagnosis of HAE type I or II confirmed by: low C4 level (below lower limit of normal), C1-INH functional activity below 50% of normal, on at least 2 separate blood draws
+3. At least 3 investigator-confirmed HAE attacks per month during the 3-month run-in period
+4. Stable prophylactic therapy or no prophylactic therapy for at least 3 months prior to screening
+5. Access to and ability to use acute rescue medication (icatibant or C1-INH concentrate)
+
+Exclusion criteria:
+1. HAE with normal C1-INH (formerly HAE type III)
+2. Acquired angioedema (AAE)
+3. Current use of long-term systemic corticosteroids (> 10 mg prednisone daily)
+4. Use of attenuated androgens (danazol, stanozolol) within 3 months of screening
+5. Severe hepatic impairment (ALT or AST > 3x upper limit of normal)
+6. History of thrombotic events within 12 months
+7. Pregnant or breastfeeding
+
+Endpoints
+The primary endpoint was the monthly rate of investigator-confirmed HAE attacks during the 6-month treatment period. Key secondary endpoints included the proportion of patients achieving zero attacks, time to first HAE attack, attack severity score, and Angioedema Quality of Life Questionnaire (AE-QoL) change from baseline. Safety endpoints included injection site reactions, liver function tests, coagulation parameters, and platelet counts.
+
+Operational Procedures
+Donidalorsen 80 mg or matching placebo was administered subcutaneously every 4 weeks at study sites for the first 3 doses, after which patients could self-administer at home with training. Total study visits numbered 12 over 6 months: visits at screening, Day 1 (randomization), Weeks 2, 4, 8, 12, 16, 20, 24 (end of treatment), and follow-up at Weeks 28 and 32. All laboratory assessments were performed by a central laboratory (Q2 Solutions). Analytes included C4 levels, C1-INH functional and antigenic levels, prekallikrein levels, activated partial thromboplastin time, liver function panel, complete blood count with platelets.
+
+Patients documented HAE attacks using an electronic diary (eDiary) that captured attack date, location (facial, abdominal, peripheral, laryngeal, genital), severity (mild, moderate, severe), duration, and rescue medication use. Attacks were confirmed by the investigator within 72 hours via the eDiary system.
+
+Sites were required to have at least 15 active HAE patients and an allergist/immunologist or specialist with HAE clinical trial experience.
+
+Results
+
+Patient Disposition
+Between April 2022 and June 2023, 267 patients were screened across 42 sites. Screen failure rate was 32.6% (87 patients). Screen failure reasons included: fewer than 3 attacks per month during the run-in period in 38 patients (43.7% of failures), C1-INH functional activity within normal range in 16 patients (18.4%), unstable prophylactic therapy in 14 patients (16.1%), withdrawal of consent in 9 patients (10.3%), and other reasons in 10 patients (11.5%). Screen failure reasons could overlap.
+
+Of 180 randomized patients, 176 received at least one dose of study drug. Fifteen patients discontinued during treatment (9 in the donidalorsen group, 6 in the placebo group). Discontinuation reasons included adverse events (5 patients), withdrawal of consent (4 patients), loss to follow-up (3 patients), and protocol violations (3 patients). A total of 165 patients completed the 6-month treatment period.
+
+The United States contributed the largest number of patients (108, representing 60% of enrollment), followed by Canada (27, 15%), Germany (18, 10%), France (13, 7.2%), United Kingdom (9, 5%), and Australia (5, 2.8%).
+
+Discussion
+
+This trial benefited from the extensive HAE clinical infrastructure in the United States, where the HAEA registry and 42 clinical sites provided a large pool of characterized patients. The screen failure rate of 32.6% was consistent with previous HAE prophylaxis trials. The primary driver of screen failures was the attack frequency threshold, highlighting the challenge of identifying patients with high attack rates in an era of increasingly effective prophylactic therapies.
+
+Of the estimated 6,600 diagnosed patients in the United States, registry data suggested approximately 2,400 patients had attack frequencies of >= 2 per month on current therapy, and approximately 1,800 would meet the >= 3 attacks per month threshold required for this trial. After applying age, laboratory, and comorbidity criteria, an estimated 1,100 patients were considered eligible for enrollment.

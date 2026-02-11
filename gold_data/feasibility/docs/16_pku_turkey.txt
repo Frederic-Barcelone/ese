@@ -1,0 +1,70 @@
+Pegvaliase Versus Diet Alone in Adults with Phenylketonuria and Uncontrolled Blood Phenylalanine: The PRISM-3 Phase 2 Randomized Controlled Trial
+
+Authors: Yilmaz Yildiz, Hatice Serap Sivri, Didem Bezen, et al.
+Journal: Molecular Genetics and Metabolism, 2024
+
+Abstract
+
+Background: Phenylketonuria (PKU) is the most common amino acid metabolism disorder, with a prevalence of 1 in 4,200 in Turkey, one of the highest rates worldwide. Despite newborn screening and early dietary intervention, many adult PKU patients have suboptimal phenylalanine (Phe) control. This phase 2 trial evaluated pegvaliase (PEGylated phenylalanine ammonia lyase) versus diet alone in Turkish and international adults with blood Phe >= 600 micromol/L.
+
+Methods: Adults aged 18-55 years with confirmed PKU (documented PAH gene mutations or newborn screening diagnosis) and blood Phe >= 600 micromol/L despite dietary management were enrolled across 24 sites in 5 countries. Patients were randomized 2:1 to pegvaliase (induction, titration, and maintenance dosing subcutaneously) or diet alone for 48 weeks. The primary endpoint was change from baseline in blood Phe concentration at Week 48.
+
+Results: Of 156 patients screened, 102 were randomized (68 pegvaliase, 34 diet alone). Screen failure rate was 34.6%. Screen failure reasons included: blood Phe below 600 micromol/L at screening (22 patients, 40.7% of failures), history of anaphylaxis to PEGylated therapies (8 patients, 14.8%), inability to self-inject or commit to injection schedule (8 patients, 14.8%), pregnancy or planned pregnancy (6 patients, 11.1%), and abnormal immune function tests (5 patients, 9.3%). Of 102 randomized patients, 98 received study drug and 82 completed the study.
+
+Introduction
+
+Phenylketonuria is an autosomal recessive disorder caused by deficiency of phenylalanine hydroxylase (PAH), leading to accumulation of phenylalanine in the blood and brain. Turkey has one of the highest PKU prevalence rates globally at 1 in 4,200, attributed to high rates of consanguineous marriage (approximately 22% nationally). This corresponds to approximately 20,000 diagnosed patients. The incidence is 1 in 4,500 live births.
+
+Turkey established national newborn screening for PKU in 1993. The program now achieves > 99% coverage, diagnosing approximately 200 new PKU cases annually. The Turkish PKU Registry, maintained by the Turkish Society of Pediatric Metabolism, enrolls 12,500 patients across 42 metabolic disease centres. Among adults (age >= 18), approximately 8,200 patients are registered, with 65% reporting suboptimal Phe control (blood Phe > 360 micromol/L on most recent measurement).
+
+Turkish National PKU Guidelines from the Ministry of Health (2023 update) recommend lifelong dietary Phe restriction with medical formula supplementation. Target blood Phe levels: 120-360 micromol/L for all ages. Sapropterin (BH4) trial is recommended for all newly diagnosed patients. Blood Phe monitoring is recommended monthly for children and every 3 months for adults. Neuropsychological assessment is recommended every 2 years.
+
+The Turkish PKU Patient Association (PKU Türkiye Derneği) provides dietary counselling, psychosocial support, and access to medical food through the Social Security Institution (SGK) reimbursement program.
+
+Methods
+
+Study Design
+This was a phase 2, randomized, open-label, controlled trial conducted at 24 sites in 5 countries (Turkey, Germany, United States, United Kingdom, and Italy). The study included a 28-day screening period, a 4-week induction period (pegvaliase 2.5 mg SC daily), an 8-week titration period (escalating to 20 mg daily), a 36-week maintenance period (20 mg daily), and a 4-week safety follow-up.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 55 years
+2. Confirmed PKU diagnosis: documented PAH gene mutations or newborn screening diagnosis with historical blood Phe > 1000 micromol/L
+3. Blood Phe >= 600 micromol/L at screening (mean of 2 measurements at least 48 hours apart)
+4. Willing and able to maintain current dietary regimen during the study
+5. For women of childbearing potential: effective contraception and negative pregnancy test
+
+Exclusion criteria:
+1. Current pregnancy or breastfeeding or planned pregnancy during study period
+2. History of anaphylaxis to PEGylated therapies
+3. Known hypersensitivity to pegvaliase or any excipient
+4. Concurrent use of sapropterin (BH4) — washout of at least 14 days required
+5. Significant immunodeficiency or autoimmune disorder
+6. Unable to perform self-injection or commit to daily subcutaneous injection schedule
+7. Alanine aminotransferase (ALT) > 2x upper limit of normal
+
+Endpoints
+The primary endpoint was change from baseline in blood Phe concentration at Week 48. Key secondary endpoints included proportion of patients achieving blood Phe < 360 micromol/L at Week 48, change in Attention Deficit Hyperactivity Disorder Rating Scale (ADHD-RS) score, change in PKU-Quality of Life (PKU-QoL) questionnaire, and dietary Phe tolerance. Safety endpoints included injection site reactions, anaphylaxis, arthralgia/arthritis (immune-mediated), anti-drug antibody formation, and liver function.
+
+Operational Procedures
+Pegvaliase was self-administered by subcutaneous injection daily. During the induction period (Weeks 1-4), patients received 2.5 mg daily and were observed for 60 minutes after each injection at study sites. During titration (Weeks 5-12), doses were escalated to 10 mg (Weeks 5-8), then 20 mg (Weeks 9-12) with in-clinic observation for the first dose of each escalation. Maintenance dosing (Weeks 13-48) was self-administered at home.
+
+All patients (both arms) were required to carry epinephrine auto-injectors and were trained in anaphylaxis recognition and self-administration of epinephrine. The anaphylaxis management plan was a key safety requirement and represented an operational hard gate.
+
+Blood Phe was measured at screening (2 samples), baseline, Weeks 1, 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, and Week 52 (follow-up). Total study visits: 17. All blood Phe measurements were performed by a central laboratory (ARUP Laboratories) using tandem mass spectrometry. Additional analytes included complete blood count, liver function panel, anti-pegvaliase antibodies (IgG, IgM, IgE), complement levels, and tryptase.
+
+Sites required a metabolic disease specialist with PKU experience, allergy/immunology consultation availability, and capacity for post-injection observation (60 minutes) with resuscitation equipment.
+
+Results
+
+Patient Disposition
+Between January 2022 and August 2023, 156 patients were screened at 24 sites. Screen failure rate was 34.6% (54 patients). Screen failure reasons included: blood Phe below 600 micromol/L at screening in 22 patients (40.7% of failures), history of anaphylaxis to PEGylated therapies in 8 patients (14.8%), inability to self-inject or commit to injection schedule in 8 patients (14.8%), pregnancy or planned pregnancy in 6 patients (11.1%), abnormal immune function tests in 5 patients (9.3%), and other reasons in 5 patients (9.3%).
+
+Of 102 randomized patients, 98 received study treatment. Twenty patients discontinued during the 48-week treatment period (16 pegvaliase, 4 diet alone). Discontinuation reasons in the pegvaliase arm included: injection site reactions (5), anaphylactic reactions (3), arthralgia (3), withdrawal of consent (3), and other adverse events (2). Eighty-two patients completed the study.
+
+Turkey contributed the largest number of patients (48, 47.1% of enrollment), followed by Germany (20, 19.6%), United States (16, 15.7%), United Kingdom (10, 9.8%), and Italy (8, 7.8%).
+
+Discussion
+
+Turkey's high PKU prevalence and large patient registry enabled strong enrollment, contributing nearly half of all randomized patients. The screen failure rate of 34.6% was driven primarily by blood Phe variability, as patients with nominally uncontrolled PKU may achieve lower Phe levels during periods of improved dietary compliance. Among the approximately 8,200 adult PKU patients in the Turkish registry, approximately 5,300 had blood Phe > 600 micromol/L, and approximately 3,200 were estimated eligible after full criteria application. The daily injection requirement and anaphylaxis risk were significant barriers to participation, with self-injection ability and willingness to carry epinephrine representing practical hard gates.

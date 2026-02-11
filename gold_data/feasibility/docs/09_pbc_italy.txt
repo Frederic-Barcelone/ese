@@ -1,0 +1,95 @@
+Clinical Practice Guidelines for Primary Biliary Cholangitis: Diagnosis, Risk Stratification, and Treatment
+
+Issued by: Italian Association for the Study of the Liver (AISF) and Italian Society of Gastroenterology (SIGE)
+Publication Date: September 2024
+Guideline Version: 3.0
+
+1. Introduction and Epidemiology
+
+Primary biliary cholangitis (PBC), formerly known as primary biliary cirrhosis, is a chronic autoimmune liver disease characterized by progressive destruction of intrahepatic bile ducts. In Italy, the estimated prevalence is 27.6 per 100,000 population, corresponding to approximately 16,300 diagnosed patients. The incidence is 3.4 per 100,000 person-years. PBC predominantly affects women, with a female-to-male ratio of 9:1 in Italy.
+
+The Italian PBC Registry (Registro Italiano della Colangite Biliare Primitiva), maintained by the AISF, enrolls 9,200 patients across 48 hepatology centres. Regional variation is notable: Northern Italy (Lombardy, Veneto, Piedmont) accounts for 45% of diagnosed patients, Central Italy 30%, and Southern Italy and islands 25%. The average diagnostic delay is 3.8 years from first abnormal liver function tests to confirmed diagnosis.
+
+Geographic clustering has been observed, with higher prevalence in northeastern Italy (Veneto: 34.2 per 100,000) and lower prevalence in southern regions (Sicily: 18.5 per 100,000), potentially reflecting environmental triggers and diagnostic access disparities.
+
+2. Diagnostic Pathway
+
+2.1 Serological Testing
+Diagnosis of PBC requires the presence of at least 2 of 3 criteria:
+- Elevated alkaline phosphatase (ALP) > 1.5x upper limit of normal for > 6 months
+- Positive anti-mitochondrial antibodies (AMA) at titer >= 1:40
+- Liver biopsy showing non-suppurative destructive cholangitis and destruction of interlobular bile ducts
+
+AMA are positive in approximately 95% of PBC patients. AMA-negative patients should be tested for PBC-specific antinuclear antibodies (anti-sp100, anti-gp210).
+
+2.2 Risk Stratification
+All PBC patients should be stratified for disease progression risk using the GLOBE score or UK-PBC score after 12 months of ursodeoxycholic acid (UDCA) therapy. Risk stratification categories:
+- Low risk: GLOBE score < 0.30, predicted 5-year transplant-free survival > 90%
+- Intermediate risk: GLOBE score 0.30-0.60
+- High risk: GLOBE score > 0.60, predicted 5-year transplant-free survival < 80%
+
+2.3 Liver Biopsy
+Liver biopsy is not mandatory for diagnosis when AMA is positive and ALP is elevated. Biopsy is recommended when:
+- AMA-negative PBC is suspected
+- Overlap with autoimmune hepatitis is considered
+- Staging of fibrosis is needed for prognostication
+- Clinical trial enrollment requires histological assessment
+
+2.4 Non-Invasive Fibrosis Assessment
+Transient elastography (FibroScan) or Enhanced Liver Fibrosis (ELF) test should be performed at diagnosis and annually. Liver stiffness measurement (LSM) > 9.6 kPa predicts significant fibrosis (>= F2), and LSM > 16.9 kPa predicts cirrhosis.
+
+3. Treatment Recommendations
+
+3.1 First-Line: Ursodeoxycholic Acid (UDCA)
+UDCA 13-15 mg/kg/day is recommended for all PBC patients, regardless of disease stage. Treatment response should be assessed at 12 months using biochemical response criteria (Paris II: ALP and AST <= 1.5x ULN with normal bilirubin; or Barcelona: ALP decrease > 40% or normalization).
+
+3.2 Second-Line: Obeticholic Acid (OCA)
+For patients with inadequate response to UDCA (non-responders), obeticholic acid 5 mg daily (titrated to 10 mg after 6 months) is recommended as add-on therapy. Contraindicated in decompensated cirrhosis (Child-Pugh B or C). Pruritus management is essential.
+
+3.3 Emerging Therapies
+Seladelpar (PPAR-delta agonist) and elafibranor (PPAR-alpha/delta dual agonist) have received conditional approval in Italy following positive phase 3 results. These agents are recommended for UDCA non-responders intolerant to or with contraindications for OCA.
+
+3.4 Symptom Management
+Pruritus: cholestyramine 4 g twice daily (first-line), rifampicin 150-300 mg daily (second-line), sertraline 75-100 mg daily (third-line). Fatigue: no approved pharmacotherapy; exercise programs and sleep hygiene recommended.
+
+4. Monitoring Schedule
+
+All PBC patients require:
+- Liver function tests (ALP, GGT, bilirubin, albumin, transaminases): every 3 months for the first year of treatment, then every 6 months
+- Immunoglobulin levels and AMA/ANA titers: annually
+- Transient elastography: annually
+- Thyroid function (TSH): annually (frequent autoimmune thyroid disease association)
+- DEXA bone density: every 2 years (osteoporosis risk)
+- Lipid profile: annually
+- Hepatocellular carcinoma surveillance (ultrasound): every 6 months for patients with cirrhosis
+
+5. Specialist Centre Requirements
+
+5.1 Centre Infrastructure
+Designated PBC expert centres in Italy must have:
+- A hepatologist with at least 3 years of autoimmune liver disease experience
+- Access to AMA and PBC-specific autoantibody testing (anti-sp100, anti-gp210)
+- Transient elastography (FibroScan) capability
+- Liver biopsy service with hepatopathologist review
+- Multidisciplinary team: hepatology, rheumatology (for overlap syndromes), dermatology (for pruritus), endocrinology (thyroid, bone)
+
+5.2 Geographic Network
+Forty-eight hepatology centres participate in the Italian PBC Registry. Major referral centres include: Fondazione IRCCS Ca' Granda Ospedale Maggiore Policlinico (Milan), Policlinico Universitario A. Gemelli (Rome), Azienda Ospedaliero-Universitaria di Padova (Padua), Università di Bologna Hospital (Bologna). Centres are distributed across 18 of 20 Italian regions.
+
+6. Clinical Trial Feasibility
+
+6.1 Patient Pool
+Of the estimated 16,300 diagnosed patients in Italy, approximately 9,200 are in the registry. Among registry patients, 6,800 are on UDCA therapy, and approximately 2,400 (35%) are classified as UDCA non-responders. An estimated 1,600 UDCA non-responders would meet typical clinical trial criteria (age 18-75, adequate hepatic function, non-cirrhotic or compensated cirrhosis).
+
+6.2 Screening History
+Italian experience in recent PBC trials shows an average screen failure rate of 25-30%. Common screen failure reasons include ALP not meeting trial threshold (often required > 1.67x ULN), total bilirubin above the upper limit of normal (suggesting advanced disease), cirrhosis on elastography (LSM > 16.9 kPa), and concomitant autoimmune hepatitis overlap.
+
+6.3 Investigator Network
+The AISF PBC Study Group includes 52 investigators across 35 centres with hepatology trial experience. Twenty-two investigators have previous PBC clinical trial experience as principal investigator or sub-investigator. Italy has been among the top 3 enrolling countries in recent global PBC phase 3 trials.
+
+6.4 Regulatory and Access
+AIFA (Agenzia Italiana del Farmaco) approval for clinical trials typically requires 3-4 months. Ethics committee approval through the unified CET system streamlines multi-site approvals. Italian sites have strong enrollment competitiveness due to the large PBC patient pool and established referral networks.
+
+7. Registry and Data
+
+The Italian PBC Registry collects longitudinal data on demographics, laboratory values, treatment, histology, elastography, and outcomes. Data access for feasibility requires AISF Data Access Committee approval (4-6 week process). The GLOBAL PBC Study Group, in which Italian centres are major contributors, provides international comparative data for site benchmarking and enrollment projections.

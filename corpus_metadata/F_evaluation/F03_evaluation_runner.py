@@ -92,6 +92,10 @@ BC5CDR_GOLD = BASE_PATH / "gold_data" / "bc5cdr_gold.json"
 # PubMed Authors paths (reuses gene corpus PDFs)
 PUBMED_AUTHOR_GOLD = BASE_PATH / "gold_data" / "pubmed_author_gold.json"
 
+# Feasibility paths
+FEASIBILITY_PATH = BASE_PATH / "gold_data" / "feasibility" / "pdfs"
+FEASIBILITY_GOLD = BASE_PATH / "gold_data" / "feasibility" / "feasibility_gold.json"
+
 # -----------------------------------------------------------------------------
 # EVALUATION SETTINGS - Change these to control what gets evaluated
 # -----------------------------------------------------------------------------
@@ -104,6 +108,7 @@ RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
 RUN_NCBI_DISEASE = False  # NCBI Disease corpus (PubMed abstracts, disease annotations)
 RUN_BC5CDR = False        # BC5CDR corpus (PubMed articles, disease + drug annotations)
 RUN_PUBMED_AUTHORS = False  # PubMed author/citation evaluation (reuses gene corpus PDFs)
+RUN_FEASIBILITY = False        # Feasibility extraction (synthetic rare disease docs)
 
 # Which entity types to evaluate
 EVAL_ABBREVIATIONS = True   # Abbreviation pairs
@@ -126,7 +131,7 @@ BC5CDR_SPLITS = ["test"]
 PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = 20  # All documents (set to small number for testing)
+MAX_DOCS = 100  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)
@@ -464,6 +469,40 @@ class DatasetResult:
     def f1(self, entity_type: str) -> float:
         p, r = self.precision(entity_type), self.recall(entity_type)
         return 2 * p * r / (p + r) if (p + r) > 0 else 1.0
+
+
+@dataclass
+class FeasibilityFieldScore:
+    """Score for a single feasibility field within a document."""
+    field_name: str
+    tp: int = 0
+    fp: int = 0
+    fn: int = 0
+    scalar_correct: int = 0
+    scalar_total: int = 0
+
+
+@dataclass
+class FeasibilityDocResult:
+    """Feasibility evaluation result for a single document."""
+    doc_id: str
+    disease: str = ""
+    country: str = ""
+    field_scores: dict[str, FeasibilityFieldScore] = field(default_factory=dict)
+    processing_time: float = 0.0
+    error: Optional[str] = None
+
+
+@dataclass
+class FeasibilityDatasetResult:
+    """Aggregate feasibility evaluation results."""
+    docs_total: int = 0
+    docs_processed: int = 0
+    docs_failed: int = 0
+    total_time: float = 0.0
+    doc_results: List[FeasibilityDocResult] = field(default_factory=list)
+    # Per-field aggregates: field_name → {tp, fp, fn, scalar_correct, scalar_total}
+    field_aggregates: dict[str, dict[str, int]] = field(default_factory=dict)
 
 
 # =============================================================================
@@ -817,6 +856,26 @@ def load_pubmed_author_gold(gold_path: Path, splits: Optional[List[str]] = None)
         result["citations"].setdefault(entry_c.doc_id, []).append(entry_c)
 
     return result
+
+
+def load_feasibility_gold(gold_path: Path) -> dict[str, dict]:
+    """Load feasibility gold standard from JSON file.
+
+    Returns dict mapping doc_id -> gold document annotations.
+    """
+    if not gold_path.exists():
+        print(f"  {_c(C.BRIGHT_YELLOW, '[WARN]')} Feasibility gold not found: {gold_path}")
+        return {}
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    gold: dict[str, dict] = {}
+    for doc in data.get("documents", []):
+        gold[doc["doc_id"]] = doc
+
+    print(f"  Loaded {len(gold)} feasibility gold documents from {gold_path.name}")
+    return gold
 
 
 # =============================================================================
@@ -1907,6 +1966,371 @@ def compare_citations(
 
 
 # =============================================================================
+# FEASIBILITY COMPARISON
+# =============================================================================
+
+
+def _find_latest_feasibility_json(pdf_path: Path) -> Optional[Path]:
+    """Find the most recently exported feasibility JSON for a PDF."""
+    out_dir = pdf_path.parent / pdf_path.stem
+    if not out_dir.exists():
+        return None
+    jsons = sorted(out_dir.glob(f"feasibility_{pdf_path.stem}_*.json"))
+    return jsons[-1] if jsons else None
+
+
+def _fuzzy_feasibility_match(text1: str, text2: str, threshold: float = 0.65) -> bool:
+    """Check if two feasibility texts are similar enough."""
+    t1 = " ".join(text1.strip().lower().split())
+    t2 = " ".join(text2.strip().lower().split())
+    if not t1 or not t2:
+        return False
+    if t1 == t2:
+        return True
+    if t1 in t2 or t2 in t1:
+        return True
+    return SequenceMatcher(None, t1, t2).ratio() >= threshold
+
+
+def _compare_feasibility_list(
+    extracted_texts: List[str],
+    gold_items: List[dict],
+    text_key: str = "text",
+    threshold: float = 0.65,
+) -> Tuple[int, int, int]:
+    """Compare extracted text list against gold items using fuzzy matching.
+
+    Returns (tp, fp, fn).
+    """
+    gold_texts = [item.get(text_key, "") for item in gold_items]
+    matched_gold: set[int] = set()
+    matched_ext: set[int] = set()
+
+    for i, ext in enumerate(extracted_texts):
+        for j, gold_t in enumerate(gold_texts):
+            if j not in matched_gold and _fuzzy_feasibility_match(ext, gold_t, threshold):
+                matched_gold.add(j)
+                matched_ext.add(i)
+                break
+
+    tp = len(matched_gold)
+    fp = len(extracted_texts) - len(matched_ext)
+    fn = len(gold_texts) - len(matched_gold)
+    return tp, fp, fn
+
+
+def compare_feasibility_doc(extracted: dict, gold: dict) -> FeasibilityDocResult:
+    """Compare extracted feasibility data against gold for one document."""
+    doc_result = FeasibilityDocResult(
+        doc_id=gold["doc_id"],
+        disease=gold.get("disease", ""),
+        country=gold.get("country", ""),
+    )
+
+    # 1. Eligibility inclusion
+    gold_incl = gold.get("eligibility_inclusion", [])
+    ext_incl = extracted.get("eligibility_inclusion", [])
+    ext_incl_texts = [e.get("text", "") for e in ext_incl]
+    if gold_incl:
+        tp, fp, fn = _compare_feasibility_list(ext_incl_texts, gold_incl)
+        doc_result.field_scores["eligibility_inclusion"] = FeasibilityFieldScore(
+            field_name="eligibility_inclusion", tp=tp, fp=fp, fn=fn)
+
+    # 2. Eligibility exclusion
+    gold_excl = gold.get("eligibility_exclusion", [])
+    ext_excl = extracted.get("eligibility_exclusion", [])
+    ext_excl_texts = [e.get("text", "") for e in ext_excl]
+    if gold_excl:
+        tp, fp, fn = _compare_feasibility_list(ext_excl_texts, gold_excl)
+        doc_result.field_scores["eligibility_exclusion"] = FeasibilityFieldScore(
+            field_name="eligibility_exclusion", tp=tp, fp=fp, fn=fn)
+
+    # 3. Epidemiology — match on compound key: data_type|value
+    gold_epi = gold.get("epidemiology", [])
+    ext_epi = extracted.get("epidemiology", [])
+    if gold_epi:
+        gold_epi_keys = [
+            f"{e.get('data_type', '')}|{e.get('value', '')}"
+            for e in gold_epi
+        ]
+        ext_epi_keys: list[str] = []
+        for e in ext_epi:
+            sd = e.get("structured_data") or {}
+            key = f"{sd.get('data_type', '')}|{sd.get('value', '')}"
+            ext_epi_keys.append(key)
+
+        # Also try matching on text content for epidemiology
+        ext_epi_texts = [e.get("text", "") for e in ext_epi]
+
+        matched_g: set[int] = set()
+        matched_e: set[int] = set()
+        for i, ek in enumerate(ext_epi_keys):
+            for j, gk in enumerate(gold_epi_keys):
+                if j not in matched_g and _fuzzy_feasibility_match(ek, gk, 0.7):
+                    matched_g.add(j)
+                    matched_e.add(i)
+                    break
+        # Second pass: try text matching for unmatched items
+        for i, et in enumerate(ext_epi_texts):
+            if i in matched_e:
+                continue
+            for j, ge in enumerate(gold_epi):
+                if j in matched_g:
+                    continue
+                gold_text = f"{ge.get('data_type', '')} {ge.get('value', '')} {ge.get('geography', '')}"
+                if _fuzzy_feasibility_match(et, gold_text, 0.6):
+                    matched_g.add(j)
+                    matched_e.add(i)
+                    break
+
+        tp = len(matched_g)
+        fp = len(ext_epi) - len(matched_e)
+        fn = len(gold_epi) - len(matched_g)
+        doc_result.field_scores["epidemiology"] = FeasibilityFieldScore(
+            field_name="epidemiology", tp=tp, fp=fp, fn=fn)
+
+    # 4. Endpoints — match on name text
+    gold_endpoints = gold.get("endpoints", [])
+    ext_endpoints = extracted.get("endpoints", [])
+    if gold_endpoints:
+        gold_ep_names = [e.get("name", "") for e in gold_endpoints]
+        ext_ep_texts = [e.get("text", "") for e in ext_endpoints]
+        # Also check structured_data.name
+        for i, e in enumerate(ext_endpoints):
+            sd = e.get("structured_data") or {}
+            if sd.get("name") and len(sd["name"]) > len(ext_ep_texts[i]):
+                ext_ep_texts[i] = sd["name"]
+
+        matched_g_ep: set[int] = set()
+        matched_e_ep: set[int] = set()
+        for i, et in enumerate(ext_ep_texts):
+            for j, gn in enumerate(gold_ep_names):
+                if j not in matched_g_ep and _fuzzy_feasibility_match(et, gn, 0.55):
+                    matched_g_ep.add(j)
+                    matched_e_ep.add(i)
+                    break
+
+        tp = len(matched_g_ep)
+        fp = len(ext_ep_texts) - len(matched_e_ep)
+        fn = len(gold_ep_names) - len(matched_g_ep)
+        doc_result.field_scores["endpoints"] = FeasibilityFieldScore(
+            field_name="endpoints", tp=tp, fp=fp, fn=fn)
+
+    # 5. Screening flow numerics
+    gold_sf = gold.get("screening_flow") or {}
+    ext_sf = extracted.get("screening_flow") or {}
+    sf_keys = ["screened", "randomized", "screen_failures", "completed", "treated", "discontinued"]
+    sf_score = FeasibilityFieldScore(field_name="screening_flow")
+    for key in sf_keys:
+        gold_val = gold_sf.get(key)
+        if gold_val is not None:
+            ext_val = ext_sf.get(key)
+            sf_score.scalar_total += 1
+            if ext_val is not None and ext_val == gold_val:
+                sf_score.scalar_correct += 1
+    if sf_score.scalar_total > 0:
+        doc_result.field_scores["screening_flow"] = sf_score
+
+    # 6. Study design scalars
+    gold_sd = gold.get("study_design") or {}
+    ext_sd = extracted.get("study_design") or {}
+    sd_score = FeasibilityFieldScore(field_name="study_design")
+    if gold_sd:
+        # Phase
+        if gold_sd.get("phase"):
+            sd_score.scalar_total += 1
+            if ext_sd.get("phase") and str(ext_sd["phase"]).strip() == str(gold_sd["phase"]).strip():
+                sd_score.scalar_correct += 1
+        # Sample size
+        if gold_sd.get("sample_size"):
+            sd_score.scalar_total += 1
+            if ext_sd.get("sample_size") == gold_sd["sample_size"]:
+                sd_score.scalar_correct += 1
+        # Design type
+        if gold_sd.get("design_type"):
+            sd_score.scalar_total += 1
+            if (ext_sd.get("design_type")
+                    and ext_sd["design_type"].lower().strip() == gold_sd["design_type"].lower().strip()):
+                sd_score.scalar_correct += 1
+        # Blinding
+        if gold_sd.get("blinding"):
+            sd_score.scalar_total += 1
+            if (ext_sd.get("blinding")
+                    and ext_sd["blinding"].lower().strip() == gold_sd["blinding"].lower().strip()):
+                sd_score.scalar_correct += 1
+    if sd_score.scalar_total > 0:
+        doc_result.field_scores["study_design"] = sd_score
+
+    # 7. Sites
+    gold_sites = gold.get("sites_and_investigators") or {}
+    sites_score = FeasibilityFieldScore(field_name="sites")
+    if gold_sites:
+        # Total sites — check study_design or sites entries
+        gold_total = gold_sites.get("total_sites")
+        if gold_total is not None:
+            sites_score.scalar_total += 1
+            ext_total = ext_sd.get("sites_total")
+            if ext_total == gold_total:
+                sites_score.scalar_correct += 1
+        # Total countries
+        gold_countries = gold_sites.get("total_countries")
+        if gold_countries is not None:
+            sites_score.scalar_total += 1
+            ext_countries = ext_sd.get("countries_total")
+            if ext_countries == gold_countries:
+                sites_score.scalar_correct += 1
+    if sites_score.scalar_total > 0:
+        doc_result.field_scores["sites"] = sites_score
+
+    return doc_result
+
+
+def evaluate_feasibility_dataset(
+    pdf_folder: Path,
+    gold: dict[str, dict],
+    orch: Any,
+    max_docs: Optional[int] = None,
+) -> FeasibilityDatasetResult:
+    """Evaluate feasibility extraction against gold standard."""
+    print(f"\n{_c(C.BOLD + C.BRIGHT_CYAN, '=' * 70)}")
+    print(f" {_c(C.BOLD + C.BRIGHT_WHITE, 'EVALUATING: FEASIBILITY')}")
+    print(f"{_c(C.BOLD + C.BRIGHT_CYAN, '=' * 70)}")
+
+    result = FeasibilityDatasetResult()
+
+    # Find PDFs with gold
+    pdf_files = sorted(pdf_folder.glob("*.pdf"))
+    pdf_with_gold = [p for p in pdf_files if p.name in gold]
+
+    if max_docs:
+        pdf_with_gold = pdf_with_gold[:max_docs]
+
+    result.docs_total = len(pdf_with_gold)
+    print(f"  PDFs in folder:   {len(pdf_files)}")
+    print(f"  PDFs with gold:   {len(pdf_with_gold)}")
+    print(f"  PDFs to process:  {len(pdf_with_gold)}")
+
+    for i, pdf_path in enumerate(pdf_with_gold, 1):
+        doc_gold = gold[pdf_path.name]
+        print(f"\n  [{_c(C.BRIGHT_CYAN, f'{i}/{len(pdf_with_gold)}')}] {pdf_path.name}")
+        print(f"      Disease: {doc_gold.get('disease', '?')} ({doc_gold.get('country', '?')})")
+
+        start_time = time.time()
+
+        try:
+            # Run pipeline
+            orch.process_pdf(str(pdf_path))
+            elapsed = time.time() - start_time
+
+            # Find exported feasibility JSON
+            feas_json = _find_latest_feasibility_json(pdf_path)
+            if feas_json is None:
+                print(f"      {_c(C.BRIGHT_YELLOW, '[WARN]')} No feasibility JSON exported")
+                result.docs_failed += 1
+                result.doc_results.append(FeasibilityDocResult(
+                    doc_id=pdf_path.name, error="No feasibility JSON exported"))
+                continue
+
+            # Load extracted data
+            with open(feas_json, "r", encoding="utf-8") as f:
+                extracted = json.load(f)
+
+            print(f"      Time: {elapsed:.1f}s")
+
+            # Count extracted items
+            n_incl = len(extracted.get("eligibility_inclusion", []))
+            n_excl = len(extracted.get("eligibility_exclusion", []))
+            n_epi = len(extracted.get("epidemiology", []))
+            n_ep = len(extracted.get("endpoints", []))
+            has_sf = extracted.get("screening_flow") is not None
+            has_sd = extracted.get("study_design") is not None
+            print(f"      Extracted: incl={n_incl} excl={n_excl} epi={n_epi} "
+                  f"endpoints={n_ep} screening={'yes' if has_sf else 'no'} "
+                  f"design={'yes' if has_sd else 'no'}")
+
+            # Compare
+            doc_result = compare_feasibility_doc(extracted, doc_gold)
+            doc_result.processing_time = elapsed
+
+            # Print per-field results
+            for field_name, score in doc_result.field_scores.items():
+                if score.tp + score.fp + score.fn > 0:
+                    p = score.tp / (score.tp + score.fp) if (score.tp + score.fp) > 0 else 0
+                    r = score.tp / (score.tp + score.fn) if (score.tp + score.fn) > 0 else 0
+                    f1 = 2 * p * r / (p + r) if (p + r) > 0 else 0
+                    print(f"      {field_name}: TP={score.tp} FP={score.fp} FN={score.fn} F1={f1:.1%}")
+                elif score.scalar_total > 0:
+                    acc = score.scalar_correct / score.scalar_total
+                    print(f"      {field_name}: {score.scalar_correct}/{score.scalar_total} ({acc:.0%})")
+
+            result.doc_results.append(doc_result)
+            result.docs_processed += 1
+            result.total_time += elapsed
+
+            # Aggregate field scores
+            for fn_name, score in doc_result.field_scores.items():
+                if fn_name not in result.field_aggregates:
+                    result.field_aggregates[fn_name] = {
+                        "tp": 0, "fp": 0, "fn": 0, "scalar_correct": 0, "scalar_total": 0,
+                    }
+                agg = result.field_aggregates[fn_name]
+                agg["tp"] += score.tp
+                agg["fp"] += score.fp
+                agg["fn"] += score.fn
+                agg["scalar_correct"] += score.scalar_correct
+                agg["scalar_total"] += score.scalar_total
+
+        except Exception as e:
+            import traceback
+            error_msg = f"{type(e).__name__}: {e}"
+            print(f"      {_c(C.BRIGHT_RED, '[ERROR]')} {error_msg}")
+            print(f"      {traceback.format_exc()}")
+            result.doc_results.append(FeasibilityDocResult(
+                doc_id=pdf_path.name, error=error_msg))
+            result.docs_failed += 1
+
+    return result
+
+
+def print_feasibility_summary(result: FeasibilityDatasetResult):
+    """Print feasibility evaluation summary."""
+    print(f"\n{_c(C.DIM, '-' * 70)}")
+    print(f" {_c(C.BOLD, 'FEASIBILITY SUMMARY')}")
+    print(f"{_c(C.DIM, '-' * 70)}")
+    print(f"  Documents: {result.docs_processed}/{result.docs_total} processed")
+    if result.docs_failed > 0:
+        print(f"  {_c(C.BRIGHT_RED, f'Failed: {result.docs_failed}')}")
+    print(f"  Time: {result.total_time:.1f}s")
+    print()
+
+    for field_name in ["eligibility_inclusion", "eligibility_exclusion", "epidemiology",
+                       "endpoints", "screening_flow", "study_design", "sites"]:
+        agg = result.field_aggregates.get(field_name)
+        if agg is None:
+            continue
+        tp, fp, fn = agg["tp"], agg["fp"], agg["fn"]
+        sc, st = agg["scalar_correct"], agg["scalar_total"]
+
+        if tp + fp + fn > 0:
+            p = tp / (tp + fp) if (tp + fp) > 0 else 0
+            r = tp / (tp + fn) if (tp + fn) > 0 else 0
+            f1 = 2 * p * r / (p + r) if (p + r) > 0 else 0
+            f1_color = C.BRIGHT_GREEN if f1 >= 0.7 else C.BRIGHT_YELLOW
+            print(f"  {field_name}:")
+            tp_s = _c(C.BRIGHT_GREEN, str(tp))
+            fp_s = _c(C.BRIGHT_RED if fp > 0 else C.BRIGHT_GREEN, str(fp))
+            fn_s = _c(C.BRIGHT_RED if fn > 0 else C.BRIGHT_GREEN, str(fn))
+            print(f"    TP={tp_s} FP={fp_s} FN={fn_s}")
+            print(f"    P={p:.1%} R={r:.1%} F1={_c(f1_color, f'{f1:.1%}')}")
+        elif st > 0:
+            acc = sc / st
+            acc_color = C.BRIGHT_GREEN if acc >= 0.7 else C.BRIGHT_YELLOW
+            print(f"  {field_name}: {_c(acc_color, f'{sc}/{st} correct ({acc:.0%})')}")
+
+    print()
+
+
+# =============================================================================
 # ORCHESTRATOR RUNNER
 # =============================================================================
 
@@ -1956,13 +2380,19 @@ DATASET_PRESETS: dict[str, dict[str, bool]] = {
         "feasibility": False, "pharma_companies": False, "authors": False,
         "citations": False, "document_metadata": False, "tables": False,
     },
+    # Feasibility: feasibility + abbreviations (abbreviations feed into other extractors)
+    "Feasibility": {
+        "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
+        "feasibility": True, "pharma_companies": False, "authors": False,
+        "citations": False, "document_metadata": False, "tables": False,
+    },
 }
 
 # Per-dataset disease_detection config overrides
 # BC5CDR/NCBI annotate symptoms and adverse events; NLP4RARE does not
 DATASET_DISEASE_CONFIG: dict[str, dict[str, bool]] = {
     "NLP4RARE": {"enable_symptoms": False},
-    "BC5CDR": {"enable_symptoms": True},
+    "BC5CDR": {"enable_symptoms": True, "filter_symptom_diseases": False},
     "NCBI-Disease": {"enable_symptoms": False},  # gold only annotates topic diseases
 }
 
@@ -2590,6 +3020,7 @@ def main():
     print(f"    NCBI Disease:   {'enabled' if RUN_NCBI_DISEASE else 'disabled'}")
     print(f"    BC5CDR:         {'enabled' if RUN_BC5CDR else 'disabled'}")
     print(f"    PubMed Authors: {'enabled' if RUN_PUBMED_AUTHORS else 'disabled'}")
+    print(f"    Feasibility:    {'enabled' if RUN_FEASIBILITY else 'disabled'}")
     print(f"    Max docs:       {MAX_DOCS if MAX_DOCS else 'all'}")
     if RUN_NLP4RARE:
         print(f"    NLP4RARE splits: {', '.join(NLP4RARE_SPLITS)}")
@@ -2770,6 +3201,19 @@ def main():
                 print_dataset_summary(result)
                 print_error_analysis(result)
                 results.append(result)
+
+    # Evaluate Feasibility (separate evaluation — structured data, not entity matching)
+    if RUN_FEASIBILITY and FEASIBILITY_PATH.exists():
+        feas_gold = load_feasibility_gold(FEASIBILITY_GOLD)
+        if feas_gold:
+            orch = get_orchestrator("Feasibility")
+            feas_result = evaluate_feasibility_dataset(
+                pdf_folder=FEASIBILITY_PATH,
+                gold=feas_gold,
+                orch=orch,
+                max_docs=MAX_DOCS,
+            )
+            print_feasibility_summary(feas_result)
 
     # Final summary
     if results:

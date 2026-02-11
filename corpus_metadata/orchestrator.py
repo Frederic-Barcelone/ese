@@ -72,7 +72,11 @@ from A_core.A04_heuristics_config import (
     HeuristicsCounters,
 )
 from A_core.A16_pipeline_metrics import PipelineMetrics
-from A_core.A05_disease_models import ExtractedDisease
+from A_core.A05_disease_models import (
+    DiseaseGeneratorType,
+    DiseaseProvenanceMetadata,
+    ExtractedDisease,
+)
 from A_core.A06_drug_models import (
     DrugProvenanceMetadata,
     ExtractedDrug,
@@ -936,6 +940,10 @@ class Orchestrator:
         if self.extract_drugs:
             drug_results = self._recover_drugs_from_abbreviations(results, drug_results)
 
+        # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only diseases
+        if self.extract_diseases:
+            disease_results = self._recover_diseases_from_abbreviations(results, disease_results)
+
         # Stage 11: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
         if self.extract_feasibility:
@@ -1042,7 +1050,11 @@ class Orchestrator:
             self.export_manager.export_citation_results(pdf_path_obj, citation_results)
 
         if feasibility_results:
-            feasibility_only = [r for r in feasibility_results if isinstance(r, FeasibilityCandidate)]
+            feasibility_only = [
+                r for r in feasibility_results
+                if isinstance(r, FeasibilityCandidate)
+                or (isinstance(r, NERCandidate) and r.epidemiology_data is not None)
+            ]
             self.export_manager.export_feasibility_results(pdf_path_obj, feasibility_only, doc)
 
         # OLD image/table exports removed - using new visual pipeline instead
@@ -1723,6 +1735,85 @@ class Orchestrator:
                 "Recovered %d drug(s) from abbreviation cross-referencing", len(recovered),
             )
         return drug_results + recovered
+
+    def _recover_diseases_from_abbreviations(
+        self,
+        abbrev_results: List[ExtractedEntity],
+        disease_results: List[ExtractedDisease],
+    ) -> List[ExtractedDisease]:
+        """Recover diseases mentioned only by abbreviation using abbreviation expansions.
+
+        When a validated abbreviation's long_form matches a disease lexicon entry but
+        the disease wasn't detected directly (because only the abbreviation appears in
+        text), create an ExtractedDisease for it.
+        """
+        if not self.disease_detector:
+            return disease_results
+
+        # Build set of already-detected disease names (lowercase)
+        detected_diseases: set[str] = set()
+        for d in disease_results:
+            detected_diseases.add(d.matched_text.lower().strip())
+            detected_diseases.add(d.preferred_label.lower().strip())
+
+        recovered: List[ExtractedDisease] = []
+        for entity in abbrev_results:
+            if entity.status != ValidationStatus.VALIDATED or not entity.long_form:
+                continue
+
+            long_form = entity.long_form.strip()
+            if long_form.lower() in detected_diseases:
+                continue
+
+            # Check if the long form is a known disease
+            match = self.disease_detector.is_known_disease(long_form)
+            if match is None:
+                continue
+
+            _matched_key, lexicon_source = match
+
+            short_form = (entity.short_form or "").strip()
+            if not short_form:
+                continue
+
+            disease = ExtractedDisease(
+                candidate_id=entity.id,
+                doc_id=entity.doc_id,
+                matched_text=short_form,
+                preferred_label=long_form,
+                identifiers=[],
+                primary_evidence=EvidenceSpan(
+                    text=f"{short_form} = {long_form}",
+                    location=Coordinate(page_num=1),
+                    scope_ref="abbrev_cross_ref",
+                    start_char_offset=0,
+                    end_char_offset=len(short_form) + len(long_form) + 3,
+                ),
+                status=ValidationStatus.VALIDATED,
+                confidence_score=0.75,
+                validation_flags=["abbrev_cross_referenced"],
+                provenance=DiseaseProvenanceMetadata(
+                    pipeline_version=PIPELINE_VERSION,
+                    run_id=self.run_id,
+                    doc_fingerprint="abbrev_cross_ref",
+                    generator_name=DiseaseGeneratorType.LEXICON_GENERAL,
+                    lexicon_source=f"abbrev_cross_reference:{lexicon_source}",
+                ),
+            )
+            recovered.append(disease)
+            # Mark as detected to avoid duplicates within recovered set
+            detected_diseases.add(long_form.lower())
+            detected_diseases.add(short_form.lower())
+            logger.debug(
+                "Disease recovered from abbreviation: %s → %s (via %s)",
+                short_form, long_form, lexicon_source,
+            )
+
+        if recovered:
+            logger.info(
+                "Recovered %d disease(s) from abbreviation cross-referencing", len(recovered),
+            )
+        return disease_results + recovered
 
     def _log_usage_stats(
         self,

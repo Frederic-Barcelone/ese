@@ -1,0 +1,70 @@
+Acoramidis Versus Placebo in Hereditary Transthyretin Amyloidosis with Polyneuropathy: The ATTRibute-CM Phase 3 Randomized Trial
+
+Authors: Teresa Coelho, Isabel Conceição, Márcio Cardoso, et al.
+Journal: The Lancet Neurology, 2024
+
+Abstract
+
+Background: Hereditary transthyretin amyloidosis (ATTRv, formerly familial amyloid polyneuropathy) is a rare autosomal dominant systemic disease caused by pathogenic variants in the TTR gene. Portugal has the highest prevalence of ATTRv worldwide at approximately 1 in 538 in endemic regions (Póvoa de Varzim/Vila do Conde), with an estimated 3,200 symptomatic patients nationally. This phase 3 trial evaluated acoramidis, a selective TTR stabilizer, versus placebo in patients with ATTRv polyneuropathy.
+
+Methods: Adults aged 18-80 years with confirmed ATTRv (documented pathogenic TTR variant and tissue biopsy or non-invasive confirmation of amyloid deposits) and polyneuropathy stage 1 or 2 were enrolled across 38 sites in 9 countries. Patients were randomized 2:1 to acoramidis 800 mg orally twice daily or placebo for 18 months. The primary endpoint was change from baseline in mNIS+7 (modified Neuropathy Impairment Score composite) at Month 18.
+
+Results: Of 280 patients screened, 192 were randomized (128 acoramidis, 64 placebo). Screen failure rate was 31.4%. Screen failure reasons included: polyneuropathy not attributable to ATTRv on neurological assessment (alternative diagnosis) in 26 patients (29.5% of failures), polyneuropathy stage 3 (wheelchair-bound or bedridden) in 18 patients (20.5%), TTR variant classified as variant of uncertain significance on central genetic review in 14 patients (15.9%), LVEF < 40% on echocardiography in 12 patients (13.6%), and withdrawal of consent in 10 patients (11.4%). Of 192 randomized patients, 188 received study drug and 172 completed the study.
+
+Introduction
+
+Hereditary transthyretin amyloidosis (ATTRv) is caused by misfolding and deposition of variant transthyretin protein in peripheral nerves, the heart, and other organs. Over 130 pathogenic TTR variants have been described, with Val30Met (p.Val50Met) being the most common worldwide. Portugal is the ancestral focus of ATTRv Val30Met, with the highest global prevalence. In the endemic regions of Póvoa de Varzim and Vila do Conde in northern Portugal, the prevalence reaches 1 in 538. Nationally, an estimated 3,200 symptomatic patients are diagnosed, with an additional 10,000 asymptomatic carriers of pathogenic TTR variants.
+
+The Portuguese Familial Amyloidosis Registry (Registo Nacional de Paramiloidose), maintained by the Centro Hospitalar Universitário do Porto (CHUP) — Unidade Corino de Andrade, has enrolled patients since 1939 and currently registers 5,400 individuals (symptomatic patients and at-risk carriers). It is the world's oldest and most comprehensive ATTRv database. The Unidade Corino de Andrade, named after the Portuguese neurologist who first described the disease in 1952, is the global reference centre for ATTRv.
+
+Portuguese guidelines from the Sociedade Portuguesa de Neurologia (2023 update) recommend genetic testing for all first-degree relatives of ATTRv patients starting at age 18. Pre-symptomatic carrier monitoring includes annual neurological assessment (NIS, nerve conduction studies, quantitative sensory testing), annual cardiac evaluation (echocardiography, NT-proBNP, ECG), and annual ophthalmologic examination. Treatment initiation is recommended at symptom onset. Approved therapies include tafamidis 20 mg daily (TTR stabilizer), patisiran (siRNA, IV every 3 weeks), inotersen (antisense oligonucleotide, SC weekly), and vutrisiran (siRNA, SC every 3 months).
+
+Liver transplantation was historically the standard of care (Portugal performed the world's first domino liver transplant for ATTRv in 1990) but has been largely superseded by pharmacotherapy since 2012.
+
+Methods
+
+Study Design
+This was a phase 3, randomized, double-blind, placebo-controlled, parallel-group trial conducted at 38 sites in 9 countries (Portugal, France, Sweden, Japan, Brazil, United States, Italy, Spain, and Germany). The study included a screening period of up to 42 days, an 18-month treatment period, and a 30-day safety follow-up with open-label extension.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 80 years
+2. Documented pathogenic TTR variant (confirmed by central genetic laboratory)
+3. Confirmed amyloid deposition by tissue biopsy (endomyocardial, salivary gland, abdominal fat pad, or nerve biopsy) positive for amyloid with TTR immunostaining, OR non-invasive confirmation by Tc-99m pyrophosphate scintigraphy (Perugini grade >= 2 with absence of monoclonal protein)
+4. Polyneuropathy Disability (PND) score I, II, IIIa, or IIIb (equivalent to FAP stage 1 or 2: ambulatory with or without assistance)
+5. NIS (Neuropathy Impairment Score) >= 5 and <= 130 at screening
+6. If on tafamidis, stable dose for >= 6 months (tafamidis continuation permitted as background therapy)
+
+Exclusion criteria:
+1. PND score IV (wheelchair-bound or bedridden, equivalent to FAP stage 3)
+2. Prior liver transplantation
+3. Current or prior treatment with gene silencing therapy (patisiran, inotersen, vutrisiran) within 6 months
+4. Severe cardiomyopathy: LVEF < 40%, NT-proBNP > 3000 pg/mL, NYHA class IV
+5. Severe renal impairment: eGFR < 30 mL/min/1.73m2
+6. Sensorimotor polyneuropathy from other causes (diabetes, B12 deficiency, CIDP)
+
+Endpoints
+The primary endpoint was change from baseline in modified Neuropathy Impairment Score + 7 tests (mNIS+7) at Month 18. The mNIS+7 composite includes NIS lower limb, NIS upper limb, nerve conduction studies (5 nerves), quantitative sensory testing (touch pressure, heat-pain), and heart rate response to deep breathing. Key secondary endpoints included change in Norfolk Quality of Life-Diabetic Neuropathy (Norfolk QoL-DN) score, change in 10-meter walk test speed, change in grip strength, modified BMI (mBMI = BMI x albumin), and composite autonomic severity score. Cardiac secondary endpoints: change in NT-proBNP, change in global longitudinal strain by echocardiography, change in 6MWD. Safety endpoints included adverse events, cardiac monitoring, and hepatic function.
+
+Operational Procedures
+Acoramidis 800 mg or placebo was administered orally twice daily with food. The mNIS+7 assessment was performed by certified neurophysiology technicians at screening, baseline, Months 6, 12, and 18. Nerve conduction studies (peroneal, tibial, ulnar motor; sural and ulnar sensory) were performed at the same timepoints and reviewed by a central neurophysiology laboratory (NeuroPACE Core Lab). All mNIS+7 examiners completed training and inter-rater reliability certification.
+
+Echocardiography was performed at screening, baseline, Months 6, 12, and 18 with central reading (Duke Cardiovascular Imaging Core Lab). Tc-99m pyrophosphate scintigraphy was performed at screening for non-biopsy-based diagnosis.
+
+Total study visits: 14 over 18 months — screening (2 visits), baseline, Months 1, 2, 3, 6, 9, 12, 15, 18 (end of treatment), and follow-up Month 19. All laboratory assessments by central laboratory (Covance). Analytes: TTR levels, prealbumin, NT-proBNP, troponin I, complete blood count, liver function, renal function, nutritional markers (albumin, prealbumin, retinol-binding protein).
+
+Sites required a neurologist with neuromuscular disease experience, certified nerve conduction study capability, echocardiography with strain imaging, and a patient panel of at least 10 ATTRv patients.
+
+Results
+
+Patient Disposition
+Between March 2022 and November 2023, 280 patients were screened at 38 sites. Screen failure rate was 31.4% (88 patients). Screen failure reasons included: polyneuropathy not attributable to ATTRv (alternative or co-existing diagnosis such as diabetic neuropathy) in 26 patients (29.5% of failures), polyneuropathy stage 3 (PND score IV, wheelchair-bound) in 18 patients (20.5%), TTR variant classified as variant of uncertain significance (VUS) on central genetic review in 14 patients (15.9%), LVEF < 40% on echocardiography in 12 patients (13.6%), withdrawal of consent in 10 patients (11.4%), and NIS outside range in 8 patients (9.1%).
+
+Of 192 randomized patients, 188 received study drug. Twenty patients discontinued during the 18-month treatment period: 13 in the acoramidis group and 7 in the placebo group. Discontinuation reasons: disease progression (cardiac or neurological, 6 patients), death (4 patients, all cardiac-related), adverse events (4 patients), withdrawal of consent (3 patients), and protocol violation (3 patients). A total of 172 patients completed the 18-month study.
+
+Portugal contributed the largest number of patients (52, 27.1% of enrollment), followed by France (28, 14.6%), Japan (26, 13.5%), Sweden (22, 11.5%), Brazil (20, 10.4%), United States (18, 9.4%), Italy (12, 6.3%), Spain (8, 4.2%), and Germany (6, 3.1%).
+
+Discussion
+
+Portugal's unique position as the ancestral focus of ATTRv Val30Met, combined with the world's most comprehensive ATTRv registry and over 80 years of clinical experience, enabled efficient enrollment. The Unidade Corino de Andrade alone contributed 38 patients. Among the approximately 3,200 symptomatic patients in Portugal, 2,400 have polyneuropathy, approximately 1,600 are in stage 1-2, and approximately 1,100 were estimated eligible after full criteria application. The mNIS+7 assessment requiring certified neurophysiology technicians was the primary operational burden, limiting site selection to centres with nerve conduction study capability and trained assessors. The exclusion of patients on gene silencing therapies within 6 months created a narrowing eligible pool as these treatments become standard of care. The requirement for tissue biopsy or nuclear scintigraphy at screening represented a diagnostic hard gate for patients without prior tissue confirmation.

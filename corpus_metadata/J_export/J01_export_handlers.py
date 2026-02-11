@@ -76,7 +76,7 @@ if TYPE_CHECKING:
     from A_core.A09_pharma_models import ExtractedPharma
     from A_core.A10_author_models import ExtractedAuthor
     from A_core.A11_citation_models import ExtractedCitation
-    from A_core.A07_feasibility_models import FeasibilityCandidate
+    from A_core.A07_feasibility_models import FeasibilityCandidate, NERCandidate
     from A_core.A08_document_metadata_models import DocumentMetadata
     from A_core.A17_care_pathway_models import CarePathway
     from A_core.A18_recommendation_models import RecommendationSet
@@ -476,7 +476,7 @@ class ExportManager:
         )
 
     def export_feasibility_results(
-        self, pdf_path: Path, results: List["FeasibilityCandidate"], doc: Optional["DocumentGraph"] = None
+        self, pdf_path: Path, results: List["FeasibilityCandidate | NERCandidate"], doc: Optional["DocumentGraph"] = None
     ) -> None:
         """Export feasibility extraction results to JSON file."""
         from C_generators.C00_strategy_identifiers import IdentifierExtractor, IdentifierType
@@ -484,6 +484,7 @@ class ExportManager:
             FeasibilityExportDocument,
             FeasibilityExportEntry,
             EvidenceExport,
+            NERCandidate,
             TrialIdentifier,
         )
 
@@ -554,21 +555,20 @@ class ExportManager:
 
         for r in results:
             # Handle NERCandidate objects - merge epidemiology into main export
-            if not hasattr(r, 'field_type') or r.field_type is None:
-                # Check if this is an NERCandidate with epidemiology data
-                if hasattr(r, 'epidemiology_data') and r.epidemiology_data is not None:
+            if isinstance(r, NERCandidate):
+                if r.epidemiology_data is not None:
                     epi_entry = FeasibilityExportEntry(
                         field_type="EPIDEMIOLOGY_NER",
-                        text=getattr(r, 'text', ''),
+                        text=r.text,
                         section="epidemiology",
                         page=None,
                         structured_data={
                             "data_type": r.epidemiology_data.data_type,
                             "value": r.epidemiology_data.value,
                             "population": r.epidemiology_data.population,
-                            "source": getattr(r, 'source', 'NER'),
+                            "source": r.source,
                         },
-                        confidence=getattr(r, 'confidence', 0.8),
+                        confidence=r.confidence,
                         evidence=[],
                     )
                     epidemiology.append(epi_entry)

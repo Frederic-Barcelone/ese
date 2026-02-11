@@ -1,0 +1,69 @@
+Zilucoplan Versus Placebo in Generalized Myasthenia Gravis: Results of the RAISE-3 Phase 3 Randomized Controlled Trial
+
+Authors: Ha Young Shin, Seung Woo Kim, Jin Myoung Seok, et al.
+Journal: Neurology, 2024
+
+Abstract
+
+Background: Generalized myasthenia gravis (gMG) is an autoimmune disorder affecting the neuromuscular junction, with a prevalence of 22.8 per 100,000 in South Korea. Complement activation plays a central role in anti-AChR antibody-positive gMG. This phase 3 trial evaluated zilucoplan, a subcutaneous complement C5 inhibitor, in patients with anti-acetylcholine receptor (AChR) antibody-positive gMG.
+
+Methods: Patients aged 18-80 years with confirmed gMG (MGFA class II-IV, anti-AChR antibody positive) and MG-ADL score >= 6 were enrolled across 52 sites in 9 countries. Patients were randomized 1:1 to zilucoplan 0.3 mg/kg subcutaneously daily or placebo for 12 weeks. The primary endpoint was change from baseline in MG-ADL score at Week 12.
+
+Results: Of 410 patients screened, 282 were randomized (141 per arm). Screen failure rate was 31.2%. Screen failure reasons included: MG-ADL score below threshold (48 patients, 37.5% of failures), anti-AChR antibody negative (28 patients, 21.9%), inadequate meningococcal vaccination status (22 patients, 17.2%), and unstable immunosuppressive therapy (16 patients, 12.5%). Of 282 randomized patients, 278 received at least one dose, and 256 completed the study.
+
+Introduction
+
+Myasthenia gravis (MG) is an autoimmune disorder mediated by pathogenic antibodies targeting proteins at the neuromuscular junction, most commonly the acetylcholine receptor (AChR). In South Korea, the National Health Insurance Service database indicates a prevalence of generalized myasthenia gravis of 22.8 per 100,000 population, corresponding to approximately 11,800 diagnosed patients. The annual incidence is 2.1 per 100,000 person-years. A Korean MG Registry maintained by the Korean Neurological Association enrolls 6,500 patients across 38 neuromuscular centres.
+
+Anti-AChR antibodies are present in approximately 80% of gMG patients in Korea (approximately 9,400 patients). The mean age at diagnosis is 48.2 years, and the female-to-male ratio is 1.4:1. The diagnostic delay averages 2.1 years in South Korea, shorter than the global average of 3.5 years, attributed to early referral to neurologists and the Korean National Health Screening Program.
+
+The Korean Neurological Association updated MG treatment guidelines in 2023, recommending acetylcholinesterase inhibitors (pyridostigmine) as first-line treatment, with corticosteroids and steroid-sparing immunosuppressants (azathioprine, mycophenolate mofetil, or tacrolimus) for patients with inadequate response. Rituximab is recommended for refractory gMG. Meningococcal vaccination is mandatory before initiating complement inhibitor therapy, per both Korean guidelines and the Korean Centers for Disease Control and Prevention (KCDC) recommendations.
+
+Methods
+
+Study Design
+This was a phase 3, randomized, double-blind, placebo-controlled, parallel-group trial conducted at 52 sites in 9 countries (South Korea, Japan, United States, Canada, Germany, France, United Kingdom, Italy, and Australia). The study included a screening period of up to 42 days (to allow for meningococcal vaccination if needed), a 12-week treatment period, and an 8-week safety follow-up with a long-term open-label extension option.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 80 years
+2. Confirmed diagnosis of generalized myasthenia gravis (MGFA class II, III, or IV)
+3. Positive anti-AChR antibody test (titer > 0.5 nmol/L)
+4. MG-Activities of Daily Living (MG-ADL) score >= 6, with at least 50% of score from non-ocular items
+5. Stable dose of MG treatment (acetylcholinesterase inhibitors, corticosteroids, and/or immunosuppressants) for at least 30 days prior to screening
+6. Meningococcal vaccination (tetravalent conjugate and serogroup B) at least 14 days before first dose, or willingness to receive vaccination during screening
+
+Exclusion criteria:
+1. MGFA class I (ocular only) or class V (intubated)
+2. Thymectomy within 12 months prior to screening
+3. Plasma exchange or IVIg within 4 weeks prior to screening
+4. Active infection at screening
+5. History of meningococcal infection
+6. Prior treatment with complement inhibitor therapy
+7. Severe renal impairment (eGFR < 30 mL/min/1.73m2)
+
+Endpoints
+The primary endpoint was change from baseline in MG-ADL score at Week 12. Key secondary endpoints included change in Quantitative Myasthenia Gravis (QMG) score at Week 12, change in MG-Composite score, proportion of patients achieving minimal symptom expression (MG-ADL score <= 1), and Myasthenia Gravis Quality of Life 15-item (MG-QoL15r) score change. Safety endpoints included adverse events, meningococcal monitoring, injection site reactions, and liver function.
+
+Operational Procedures
+Zilucoplan 0.3 mg/kg or placebo was self-administered subcutaneously daily after training at the first study visit. Meningococcal vaccination (MenACWY conjugate and MenB) was required at least 14 days before the first dose of study drug. Patients who had not been previously vaccinated required the full vaccination series during the screening period.
+
+Total study visits numbered 10: screening, baseline, Weeks 1, 2, 4, 6, 8, 10, 12 (end of treatment), and Week 20 (follow-up). MG-ADL and QMG assessments were performed by trained and certified evaluators at each visit. All laboratory samples were analyzed by a central laboratory (PPD Central Lab). Analytes included anti-AChR antibody titers, complement levels (CH50, C3, C4, sC5b-9), liver function panel, and complete blood count.
+
+Meningococcal vaccination represented a hard gate: patients who could not complete the required vaccination series by the end of the screening period were excluded.
+
+Investigators were required to be board-certified neurologists with neuromuscular junction disorder experience and demonstrated proficiency in QMG scoring (inter-rater reliability assessment required).
+
+Results
+
+Patient Disposition
+Between November 2022 and August 2023, 410 patients were screened across 52 sites. Screen failure rate was 31.2% (128 patients). Screen failure reasons included: MG-ADL score below the threshold of 6 in 48 patients (37.5% of failures), anti-AChR antibody negative in 28 patients (21.9%), inadequate meningococcal vaccination status in 22 patients (17.2%), unstable immunosuppressive therapy dose in 16 patients (12.5%), and other reasons in 14 patients (10.9%). Screen failure reasons could overlap.
+
+Of 282 randomized patients, 278 received at least one dose. Twenty-six patients discontinued during the treatment period: 14 in the zilucoplan group and 12 in the placebo group. Discontinuation reasons included adverse events (10 patients), withdrawal of consent (7 patients), myasthenic crisis requiring rescue therapy (5 patients), and protocol violations (4 patients). A total of 256 patients completed the 12-week treatment period.
+
+South Korea contributed 72 patients (25.5% of enrollment), followed by the United States (58, 20.6%), Japan (42, 14.9%), Germany (32, 11.3%), France (24, 8.5%), United Kingdom (20, 7.1%), Canada (16, 5.7%), Italy (12, 4.3%), and Australia (6, 2.1%).
+
+Discussion
+
+South Korea's large diagnosed gMG population and established neuromuscular disease infrastructure enabled strong recruitment. The Korean MG Registry provided efficient pre-screening, with registry-matched patients having a 40% higher randomization rate than non-registry patients. The meningococcal vaccination requirement was a notable operational challenge, contributing to 17.2% of screen failures and extending the screening period duration. Of the estimated 9,400 anti-AChR positive gMG patients in South Korea, approximately 4,200 had MG-ADL scores >= 6, and approximately 2,800 were estimated eligible after full criteria application.

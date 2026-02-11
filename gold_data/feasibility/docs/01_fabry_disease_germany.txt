@@ -1,0 +1,62 @@
+Efficacy and Safety of Pegunigalsidase Alfa Versus Agalsidase Beta in Adults with Fabry Disease: A Phase 3, Randomized, Active-Controlled, Multicenter Trial
+
+Authors: Klaus-Peter Müller, Annette Schmidt, Johannes Weber, et al.
+Journal: Molecular Genetics and Metabolism, 2024
+
+Abstract
+
+Background: Fabry disease is a rare X-linked lysosomal storage disorder caused by deficiency of alpha-galactosidase A (GLA), with an estimated prevalence of 1 in 40,000 in Germany. Enzyme replacement therapy (ERT) remains the standard of care, but newer formulations may offer improved pharmacokinetics. This phase 3 trial evaluated pegunigalsidase alfa versus agalsidase beta in adults with Fabry disease.
+
+Methods: This multicenter, randomized, double-blind, active-controlled trial enrolled patients aged 18-65 years with confirmed Fabry disease across 28 sites in 12 countries. Patients were randomized 1:1 to receive pegunigalsidase alfa 1 mg/kg or agalsidase beta 1 mg/kg intravenously every 2 weeks for 18 months. The primary endpoint was annualized rate of change in estimated glomerular filtration rate (eGFR). Key secondary endpoints included change in plasma lyso-Gb3 levels and safety.
+
+Results: Of 198 patients screened, 112 were randomized (56 per arm). Screen failure rate was 43.4%. The most common reasons for screen failure were eGFR below threshold (32 patients, 37.2%), withdrawal of consent (18 patients, 20.9%), and prior renal transplant (14 patients, 16.3%). Of 112 randomized patients, 110 received at least one dose, 101 completed the study, and 9 discontinued. The mean annualized change in eGFR was -1.0 mL/min/1.73m2/year in the pegunigalsidase alfa group versus -1.7 mL/min/1.73m2/year in the agalsidase beta group.
+
+Introduction
+
+Fabry disease (OMIM #301500) is a rare X-linked lysosomal storage disorder resulting from pathogenic variants in the GLA gene, leading to deficient activity of alpha-galactosidase A and progressive accumulation of globotriaosylceramide (Gb3) in multiple organ systems. The worldwide incidence is approximately 1 in 80,000 live births. In Germany, population-based screening studies have identified a prevalence of approximately 1 in 40,000, with higher rates in newborn screening programs suggesting significant underdiagnosis. According to the Fabry Registry (Sanofi Genzyme), approximately 4,800 patients are currently enrolled globally, with 1,200 confirmed diagnosed patients in Germany.
+
+The diagnostic delay for Fabry disease remains substantial, averaging 13.7 years from symptom onset to diagnosis. In Germany, 18 specialized referral centres provide comprehensive Fabry disease care, with patient populations concentrated in university hospitals in Berlin, Munich, Hamburg, and Cologne.
+
+The German Society for Nephrology published guidelines for Fabry Disease management in 2023, recommending ERT initiation when eGFR falls below 90 mL/min/1.73m2 or proteinuria exceeds 300 mg/day. Genetic confirmation is mandatory before ERT initiation, and monitoring every 6 months with annual cardiac MRI is recommended. These guideline-mandated diagnostic and monitoring protocols align closely with clinical trial requirements, supporting feasibility of trial conduct in Germany.
+
+Methods
+
+Study Design
+This was a phase 3, randomized, double-blind, active-controlled, parallel-group, multicenter trial conducted at 28 sites across 12 countries (Germany, France, United Kingdom, Italy, Spain, Netherlands, United States, Canada, Brazil, Japan, Australia, and South Korea). The study comprised a screening period of up to 30 days, an 18-month treatment period, and a 30-day safety follow-up.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age 18 to 65 years, inclusive
+2. Confirmed Fabry disease by alpha-galactosidase A enzyme assay or documented pathogenic GLA gene variant
+3. eGFR greater than or equal to 40 mL/min/1.73m2 by CKD-EPI equation
+4. Urine protein-to-creatinine ratio (UPCR) less than 1.0 g/g
+5. Stable dose of angiotensin-converting enzyme inhibitor (ACEi) or angiotensin receptor blocker (ARB) for at least 90 days prior to screening
+6. If currently on ERT, stable dose for at least 12 months
+
+Exclusion criteria:
+1. Dialysis or prior renal transplant
+2. History of severe anaphylactic reaction to ERT
+3. Uncontrolled hypertension (systolic BP > 160 mmHg or diastolic > 100 mmHg)
+4. Pregnancy or breastfeeding
+5. Participation in another interventional trial within 30 days
+6. Clinically significant cardiac arrhythmia requiring antiarrhythmic therapy
+
+Endpoints
+The primary endpoint was the annualized rate of change in eGFR (CKD-EPI) over 18 months. Key secondary endpoints included change from baseline in plasma lyso-Gb3 at Month 18, change in left ventricular mass index by cardiac MRI at Month 18, and patient-reported outcomes using the Fabry-specific Brief Pain Inventory. Safety endpoints included infusion-associated reactions, treatment-emergent adverse events, and anti-drug antibody formation.
+
+Operational Procedures
+All laboratory assessments were performed by a central laboratory (Covance Central Laboratory Services). Analytes included alpha-galactosidase A activity, plasma Gb3 and lyso-Gb3, eGFR, proteinuria (UPCR), and complete metabolic panel. Renal biopsy was required at screening for histological confirmation of Gb3 accumulation. Intravenous infusions were administered every 2 weeks at study sites. Total study visits numbered 22, with infusion visits every 2 weeks and comprehensive assessment visits every 3 months.
+
+Background therapy with ACEi or ARB was required at stable dose for at least 90 days prior to screening and maintained throughout the study.
+
+Investigators were required to be board-certified nephrologists or metabolic disease specialists with at least 3 years of clinical experience managing Fabry disease patients.
+
+Results
+
+Patient Disposition
+A total of 198 patients were screened between March 2022 and September 2023. Of these, 86 failed screening (screen failure rate 43.4%). Screen failure reasons included: eGFR below threshold in 32 patients (37.2% of failures), withdrawal of consent in 18 patients (20.9%), prior renal transplant in 14 patients (16.3%), unstable ACEi/ARB dose in 12 patients (14.0%), and other reasons in 10 patients (11.6%). Screen failure reasons could overlap. Of 112 randomized patients, 110 received study drug. Nine patients discontinued during the treatment period (4 in the pegunigalsidase alfa arm, 5 in the agalsidase beta arm), and 101 completed the 18-month treatment period.
+
+Discussion
+
+Recruitment and feasibility were challenging due to the rarity of Fabry disease and stringent eligibility criteria. The screen failure rate of 43.4% was higher than anticipated, driven primarily by the eGFR threshold requirement, which excluded patients with advanced renal disease who constitute a significant proportion of the diagnosed population. The renal biopsy requirement and mandatory genetic confirmation represented hard gates that further limited the eligible population. Among the estimated 1,200 diagnosed patients in Germany, approximately 340 were estimated to meet eligibility criteria after accounting for age, renal function, and treatment stability requirements.

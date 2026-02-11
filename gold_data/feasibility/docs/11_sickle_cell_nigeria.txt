@@ -1,0 +1,89 @@
+National Clinical Guidelines for the Management of Sickle Cell Disease in Nigeria
+
+Issued by: Federal Ministry of Health Nigeria, in collaboration with the Sickle Cell Support Society of Nigeria (SCSSN) and the Nigerian Society of Haematology and Blood Transfusion
+Publication Date: April 2024
+Guideline Version: 2.0
+
+1. Introduction and Epidemiology
+
+Sickle cell disease (SCD) is the most common inherited hemoglobin disorder globally, with the highest burden in sub-Saharan Africa. Nigeria has the largest SCD population worldwide. The prevalence of the HbSS genotype is estimated at 2-3% of the Nigerian population, corresponding to approximately 4 to 6 million affected individuals. The sickle cell trait (HbAS) carrier rate is approximately 25% of the population. An estimated 150,000 newborns with SCD are born in Nigeria annually, representing 75% of global SCD births.
+
+Despite the enormous burden, fewer than 500,000 individuals with SCD are estimated to be under active medical follow-up in Nigeria. The under-5 mortality rate for children with undiagnosed SCD exceeds 50% in rural areas. The National SCD Registry, established in 2021 under the National Sickle Cell Disease Control Programme, currently enrolls 85,000 patients across 52 participating centres, with plans to expand to 120 centres by 2026.
+
+Regional distribution of SCD centres: Southwest (Lagos, Ibadan, Ife) has 18 centres, Southeast (Enugu, Benin) 12 centres, North Central (Abuja, Jos) 10 centres, Northwest (Kano, Kaduna) 6 centres, Northeast (Maiduguri) 3 centres, and South-South (Port Harcourt, Calabar) 3 centres. The diagnostic delay from birth to confirmed diagnosis averages 4.6 years nationally, ranging from 1.8 years in Lagos to 8.2 years in the Northeast.
+
+2. Diagnostic Pathway
+
+2.1 Newborn Screening
+Universal newborn screening for SCD using high-performance liquid chromatography (HPLC) or isoelectric focusing (IEF) is recommended for all newborns. Currently, state-level newborn screening programs are operational in 12 of 36 states plus the Federal Capital Territory. The goal is nationwide coverage by 2028.
+
+2.2 Confirmatory Testing
+Positive newborn screening requires confirmatory hemoglobin electrophoresis at 6 months of age. For older children and adults, diagnosis requires:
+- Hemoglobin electrophoresis showing HbSS, HbSC, HbS/beta-thalassemia, or other compound heterozygous SCD genotypes
+- Complete blood count with reticulocyte count
+- Peripheral blood smear review
+
+2.3 Baseline Assessment
+All newly diagnosed SCD patients require:
+- Transcranial Doppler (TCD) ultrasonography annually from age 2-16 years (for stroke risk assessment)
+- Baseline renal function (creatinine, urinalysis for proteinuria)
+- Liver function tests and hepatitis B/C serology
+- Echocardiography for estimated pulmonary artery systolic pressure
+- Ophthalmologic examination for retinopathy starting at age 10
+
+3. Treatment Recommendations
+
+3.1 Hydroxyurea
+Hydroxyurea is recommended for all SCD patients aged >= 9 months with HbSS or HbS/beta-zero-thalassemia genotype. Recommended dose: start at 15 mg/kg/day, titrate to 25-35 mg/kg/day to maximum tolerated dose targeting MCV > 100 fL or absolute neutrophil count (ANC) 2,000-4,000/mm3.
+
+Currently, hydroxyurea availability in Nigeria is inconsistent. While listed on the National Essential Medicines List, supply chain disruptions result in out-of-stock periods of 2-4 weeks in 40% of pharmacies surveyed. The cost (approximately 2,000-4,000 Naira per month, equivalent to $2.50-5.00 USD) is within reach of most urban families but remains prohibitive for rural populations.
+
+3.2 Blood Transfusion
+Simple transfusion is indicated for acute anemia (Hb < 5 g/dL) and acute chest syndrome. Chronic exchange transfusion is recommended for primary and secondary stroke prevention in patients with abnormal TCD velocities (>= 200 cm/s) or prior stroke. Target HbS level: < 30%.
+
+3.3 Disease-Modifying Therapies
+Voxelotor (HbS polymerization inhibitor) and crizanlizumab (anti-P-selectin antibody) have received National Agency for Food and Drug Administration and Control (NAFDAC) approval. Access is currently limited to 8 tertiary centres through an expanded access program. Gene therapy (lovotibeglogene autotemcel) is not yet available in Nigeria.
+
+4. Centre of Expertise Requirements
+
+4.1 Designation Criteria
+SCD expert centres must have:
+- Hematologist with at least 2 years of SCD management experience
+- Laboratory with HPLC or hemoglobin electrophoresis capability
+- Access to safe blood transfusion services with extended red cell phenotyping
+- TCD ultrasonography capability (for pediatric centres)
+- Emergency care capacity for vaso-occlusive crisis management (24/7)
+- Hydroxyurea initiation and monitoring capability
+
+4.2 Infrastructure Challenges
+Key infrastructure gaps limiting trial feasibility in Nigeria include:
+- Unreliable electricity supply: 65% of centres report > 4 hours of power interruption daily, affecting cold chain for biological samples and laboratory equipment
+- Limited internet connectivity for electronic data capture: reliable connectivity available in only 60% of SCD centres
+- Central laboratory sample shipment: same-day or next-day courier service is available only within Lagos, Abuja, and Port Harcourt; sample shipment from other centres requires 2-5 business days
+- Good Clinical Practice (GCP) training: only 180 SCD investigators nationally hold current GCP certification
+
+5. Clinical Trial Feasibility Considerations
+
+5.1 Patient Population
+Of the estimated 4-6 million SCD patients in Nigeria, approximately 500,000 are under active medical follow-up. Among these, approximately 280,000 are aged 5-65 years with HbSS genotype. For a typical SCD interventional trial requiring stable hydroxyurea dose for >= 3 months, approximately 120,000 patients would meet this criterion. After applying typical additional criteria (adequate organ function, no recent transfusion, no pregnancy), an estimated 60,000 patients would be broadly eligible.
+
+5.2 Screening Expectations
+The screening-to-randomization ratio in Nigerian SCD trials is typically 3.5:1 to 5:1, significantly higher than in North American trials (2.0:1 to 2.5:1). Common screen failure reasons include: laboratory abnormalities detected on screening (hepatitis B surface antigen positive in 8-12% of screened patients, elevated creatinine), recent blood transfusion within washout window, pregnancy (in women of childbearing potential without reliable contraception access), inability to commit to regular follow-up visits due to distance, and active infection. The average screen failure rate is 45-55%.
+
+5.3 Investigator Network
+The SCD Clinical Research Consortium of Nigeria includes 32 investigators across 18 centres. Twelve investigators have previous industry-sponsored clinical trial experience. Key trial-experienced centres include Lagos University Teaching Hospital (LUTH), University College Hospital Ibadan, National Hospital Abuja, and Aminu Kano Teaching Hospital. International collaborative trial experience exists through partnerships with NIH-funded trials (e.g., REACH, SPRING) and the American Society of Hematology (ASH) Research Collaborative.
+
+5.4 Regulatory Framework
+NAFDAC provides clinical trial oversight. Typical approval timeline: 6-8 months (longer than most countries). Ethics approval through institutional Health Research Ethics Committees (HRECs) typically requires 2-4 months. Import permits for investigational products: 3-6 months. These extended timelines must be factored into trial planning.
+
+6. Screening and Surveillance
+
+6.1 Community Screening Programs
+Mobile screening units operated by the SCSSN conduct community-based hemoglobin electrophoresis testing in 22 states. These programs screen approximately 200,000 individuals annually, identifying approximately 6,000 new SCD diagnoses per year.
+
+6.2 School-Based Screening
+The Federal Ministry of Education mandates SCD screening at school entry (age 6) in pilot states (Lagos, Ogun, FCT, Kano). Compliance rates average 45%.
+
+7. Patient Registry and Data
+
+The National SCD Registry captures demographics, genotype, complications, treatments, and laboratory data. Data quality varies by centre, with complete data available for approximately 60% of enrolled patients. Access requires Federal Ministry of Health Data Governance Committee approval (8-12 week process). The African Research Collaborative for SCD (ARC-SCD) provides regional data for multi-country feasibility assessments across West Africa.

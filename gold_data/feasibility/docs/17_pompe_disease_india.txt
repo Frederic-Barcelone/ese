@@ -1,0 +1,116 @@
+National Guidelines for the Diagnosis and Management of Pompe Disease in India
+
+Issued by: Indian Academy of Medical Genetics (IAMG) and the Lysosomal Storage Disorders Society of India (LSDSI)
+Publication Date: November 2024
+Guideline Version: 1.0
+
+1. Introduction and Epidemiology
+
+Pompe disease (glycogen storage disease type II) is a rare autosomal recessive lysosomal storage disorder caused by deficiency of acid alpha-glucosidase (GAA), leading to progressive glycogen accumulation primarily in cardiac and skeletal muscle. In India, the estimated prevalence is 1 in 40,000 based on extrapolation from newborn screening pilot programs and tertiary centre surveys, corresponding to approximately 35,000 affected individuals nationwide. However, only approximately 1,200 patients have been diagnosed, reflecting massive underdiagnosis (estimated diagnostic rate: 3.4%).
+
+The infantile-onset form (IOPD) accounts for approximately 30% of diagnosed cases in India (360 patients), compared to 15-20% in Western populations, reflecting a diagnostic bias toward the most severe phenotype. Late-onset Pompe disease (LOPD, presenting after 12 months of age) accounts for 70% of diagnosed cases (840 patients) but likely represents a much larger fraction of the true population.
+
+The Indian Pompe Disease Registry, maintained by the LSDSI and hosted at the National Institute for Research in Reproductive and Child Health (NIRRCH) Mumbai, enrolls 680 patients across 28 participating centres. The average diagnostic delay for IOPD is 3.2 months in India (vs. 1.5 months in Europe), and for LOPD is 8.6 years (vs. 5.7 years in Europe).
+
+Regional distribution of diagnosed patients: Maharashtra 22%, Karnataka 15%, Tamil Nadu 14%, Delhi-NCR 12%, Gujarat 10%, Andhra Pradesh/Telangana 8%, West Bengal 7%, Kerala 6%, and other states 6%.
+
+2. Diagnostic Pathway
+
+2.1 Clinical Suspicion
+IOPD should be suspected in infants presenting with:
+- Hypertrophic cardiomyopathy (short PR interval on ECG)
+- Severe hypotonia and generalized muscle weakness
+- Respiratory distress
+- Failure to thrive, feeding difficulties
+
+LOPD should be suspected in children or adults presenting with:
+- Progressive proximal muscle weakness (limb-girdle pattern)
+- Respiratory insufficiency disproportionate to limb weakness
+- Elevated creatine kinase (2-10x normal)
+- Sleep-disordered breathing
+
+2.2 Enzyme Activity Testing
+GAA enzyme activity assay on dried blood spot (DBS) is the recommended first-line screening test. Available at:
+- NIRRCH Mumbai — national reference laboratory
+- CDFD (Centre for DNA Fingerprinting and Diagnostics) Hyderabad
+- AIIMS New Delhi (Department of Genetics)
+Cost: Free through LSDSI screening program or INR 500-1500 (USD 6-18) through private laboratories.
+Turnaround time: 7-14 days.
+
+2.3 Confirmatory Testing
+Low enzyme activity on DBS requires confirmation by:
+- GAA enzyme activity in lymphocytes or skin fibroblasts (available at NIRRCH and CDFD)
+- Molecular genetic testing of the GAA gene (Sanger sequencing or NGS panel)
+The most common GAA variants in Indian patients: c.-32-13T>G (IVS1 variant, 18% of LOPD alleles), p.Asp645Glu (12%), and p.Arg854Ter (8%).
+
+2.4 Specialist Referral
+Patients with confirmed Pompe disease should be referred to one of 28 designated Pompe disease centres. Key referral centres:
+- NIRRCH Mumbai (national coordinating centre)
+- AIIMS New Delhi
+- CMC Vellore
+- NIMHANS Bangalore
+- Nair Hospital Mumbai
+- SGPGIMS Lucknow
+
+3. Treatment Recommendations
+
+3.1 Enzyme Replacement Therapy (ERT)
+Alglucosidase alfa (Myozyme/Lumizyme) is the only approved ERT for Pompe disease in India. Infusion: 20 mg/kg IV every 2 weeks. ERT should be initiated as early as possible for IOPD (ideally within 6 months of life) and at diagnosis for symptomatic LOPD.
+
+Access: ERT for Pompe disease is provided through the Sanofi Genzyme Humanitarian Program at no cost for approximately 180 patients in India. Additional patients access ERT through state government programs (Maharashtra, Karnataka, Tamil Nadu) or private insurance. The annual cost of ERT (approximately INR 30-50 lakh, USD 36,000-60,000 per year) is prohibitive for most Indian families without assistance.
+
+3.2 Avalglucosidase Alfa
+Avalglucosidase alfa (Nexviazyme) received CDSCO (Central Drugs Standard Control Organisation) approval in 2024. Dose: 20 mg/kg IV every 2 weeks. Available through the Sanofi Genzyme charitable access program.
+
+3.3 Respiratory Management
+- Pulmonary function testing (FVC, MIP, MEP) every 3-6 months
+- Nocturnal polysomnography annually for LOPD
+- Non-invasive ventilation (BiPAP) for respiratory insufficiency (FVC < 50% or nocturnal desaturation)
+- Respiratory physiotherapy and secretion clearance techniques
+
+3.4 Cardiac Management (IOPD)
+- Echocardiography every 3-6 months
+- ECG monitoring (PR interval, Wolff-Parkinson-White surveillance)
+- Heart failure management as indicated
+
+4. Centre of Expertise Requirements
+
+4.1 Centre Designation
+Pompe disease centres must have:
+- Metabolic physician or neurologist with at least 2 years of Pompe disease experience
+- GAA enzyme assay capability (DBS) or partnership with reference laboratory
+- Infusion facility for ERT administration (requires 4-6 hour infusion with monitoring)
+- Pulmonary function testing capability (spirometry with MIP/MEP)
+- Access to echocardiography and ECG
+- Physiotherapy and rehabilitation services
+
+4.2 Infrastructure Challenges
+- ERT infusion: requires reliable cold chain storage (2-8°C), IV access expertise, and 4-6 hour infusion monitoring. Power interruptions are managed with generator backup at 85% of centres.
+- Diagnostic access: DBS enzyme testing available in only 3 cities (Mumbai, Hyderabad, Delhi). Sample transport by courier (2-5 days for remote states).
+- Genetic testing: NGS capability at 5 centres. Turnaround: 4-12 weeks.
+
+5. Clinical Trial Feasibility
+
+5.1 Patient Population
+Of the estimated 35,000 Pompe disease patients in India, only 1,200 are diagnosed and 680 are in the registry. Among diagnosed patients, 180 are on ERT, 480 are symptomatic but untreated (access barriers), and 540 have confirmed LOPD. For a typical LOPD ERT-switching trial, approximately 150 patients on stable ERT would meet broad criteria. For an untreated/ERT-naive trial, approximately 350 symptomatic untreated patients would be potentially eligible. After applying typical inclusion/exclusion criteria, an estimated 80-120 patients would be eligible per trial type.
+
+5.2 Screening Considerations
+The screen failure rate in Indian rare disease trials averages 40-50%. For Pompe-specific trials, anticipated barriers include: enzyme activity below threshold for ERT switch trials (confirming adequate ERT response), respiratory function too impaired (FVC < 30% predicted), cardiac involvement precluding study procedures, travel distance and financial barriers, and language/literacy challenges for informed consent and patient-reported outcomes (India has 22 official languages).
+
+5.3 Investigator Network
+The Indian Pompe Disease Research Network includes 18 investigators across 12 centres. Eight investigators have international clinical trial experience through collaborations with Sanofi Genzyme, Amicus Therapeutics, and Spark Therapeutics. Key trial-ready sites: NIRRCH Mumbai, AIIMS New Delhi, CMC Vellore, NIMHANS Bangalore.
+
+5.4 Regulatory Framework
+CDSCO clinical trial approval: 3-6 months. Ethics committee approval: 2-3 months. Import license for investigational product: 2-3 months. India requires mandatory post-trial access provisions for trial participants receiving benefit from the investigational product, which affects trial design and sponsor commitment.
+
+6. Newborn Screening
+
+6.1 Pilot Programs
+DBS-based GAA enzyme screening is operational in pilot newborn screening programs in Maharashtra (since 2019), Tamil Nadu (since 2021), and Karnataka (since 2022). Coverage: approximately 15% of national live births (4.2 million screened per year out of 26 million annual births). Positive rate: 1 in 38,000, consistent with expected prevalence.
+
+6.2 Expansion Plans
+The National Health Mission has approved nationwide expansion of LSD newborn screening (including Pompe, Gaucher, Fabry, and MPS-I) by 2028, which is expected to dramatically increase diagnosis rates and reduce diagnostic delay.
+
+7. Registry and Data
+
+The Indian Pompe Disease Registry captures demographics, genotype, phenotype (IOPD/LOPD), motor function (6MWT, timed function tests), respiratory function (FVC, MIP), cardiac data (LVMI, EF), ERT dosing history, and outcomes. Data access requires NIRRCH Research Ethics Committee approval (6-8 weeks) and LSDSI Data Governance agreement (4-6 weeks). The Pompe Registry (Sanofi Genzyme global) enrolls 120 Indian patients with international-standard data quality.

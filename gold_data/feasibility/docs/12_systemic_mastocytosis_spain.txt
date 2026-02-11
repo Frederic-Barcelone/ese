@@ -1,0 +1,71 @@
+Avapritinib Versus Best Available Therapy in Advanced Systemic Mastocytosis: Results of the PATHFINDER-2 Phase 2 Randomized Trial
+
+Authors: Iván Álvarez-Twose, Alberto Orfao, Luis Escribano, et al.
+Journal: Blood, 2024
+
+Abstract
+
+Background: Advanced systemic mastocytosis (AdvSM) is a rare clonal mast cell neoplasm with a prevalence of 0.5 per 100,000 in Spain, affecting approximately 240 patients. The KIT D816V mutation drives disease in over 90% of patients. This phase 2 trial evaluated avapritinib, a selective KIT D816V inhibitor, versus best available therapy (BAT) in AdvSM.
+
+Methods: Adults aged >= 18 years with centrally confirmed AdvSM (aggressive SM, SM with associated hematological neoplasm, or mast cell leukemia) and KIT D816V mutation were enrolled across 28 sites in 7 countries. Patients were randomized 2:1 to avapritinib 200 mg daily or BAT for 24 weeks, with crossover permitted after Week 24. The primary endpoint was overall response rate (ORR) by modified IWG-MRT-ECNM criteria.
+
+Results: Of 102 patients screened, 66 were randomized (44 avapritinib, 22 BAT). Screen failure rate was 35.3%. Screen failure reasons included: KIT D816V mutation not confirmed by central laboratory (high-sensitivity digital PCR) in 12 patients (33.3% of failures), SM subtype reclassified to indolent SM on central pathology review in 8 patients (22.2%), platelet count below 50,000/mm3 in 6 patients (16.7%), and ECOG performance status > 2 in 5 patients (13.9%). Of 66 randomized patients, 64 received study treatment and 54 completed the 24-week primary treatment period.
+
+Introduction
+
+Systemic mastocytosis (SM) is characterized by pathological accumulation of clonal mast cells in one or more extracutaneous organs. Advanced systemic mastocytosis (AdvSM) includes aggressive systemic mastocytosis (ASM), systemic mastocytosis with an associated hematological neoplasm (SM-AHN), and mast cell leukemia (MCL). In Spain, the estimated prevalence of AdvSM is 0.5 per 100,000 population, corresponding to approximately 240 diagnosed patients. The incidence is 0.04 per 100,000 per year.
+
+Spain has been a global leader in mastocytosis research, with the Spanish Network on Mastocytosis (REMA - Red Española de Mastocitosis) serving as the world's largest mastocytosis referral network since 1993. REMA, headquartered at the Instituto de Estudios de Mastocitosis de Castilla La Mancha in Toledo, has registered over 5,200 mastocytosis patients, including 420 with AdvSM. The REMA registry is coordinated across 14 specialist mastocytosis centres throughout Spain.
+
+The KIT D816V activating mutation is present in over 93% of AdvSM patients in the REMA registry. Advanced diagnostic capabilities, including high-sensitivity KIT D816V digital PCR and multiparameter flow cytometry for mast cell immunophenotyping, are available at all REMA-designated centres.
+
+Spanish national guidelines from the Spanish Society of Hematology (SEHH) recommend cytoreductive therapy for AdvSM based on C-findings (organ damage criteria). First-line options include midostaurin (approved by EMA) and avapritinib. Bone marrow biopsy with mast cell burden quantification is required at diagnosis and at 6-month intervals to assess treatment response.
+
+Methods
+
+Study Design
+This was a phase 2, randomized, open-label, controlled trial conducted at 28 sites in 7 countries (Spain, Germany, France, Italy, United States, United Kingdom, and Sweden). The study included a screening period of up to 28 days, a 24-week primary treatment period, and a long-term extension with optional crossover for BAT patients.
+
+Eligibility Criteria
+
+Inclusion criteria:
+1. Age >= 18 years
+2. Centrally confirmed diagnosis of AdvSM (ASM, SM-AHN, or MCL) per WHO 2022 classification
+3. KIT D816V mutation confirmed by central laboratory high-sensitivity digital PCR (allele burden >= 0.1%)
+4. At least 1 evaluable C-finding (organ damage criterion)
+5. ECOG performance status 0, 1, or 2
+6. Platelet count >= 50,000/mm3
+7. Adequate hepatic function: total bilirubin <= 1.5x ULN, ALT/AST <= 3x ULN (or <= 5x ULN if liver involvement by SM)
+
+Exclusion criteria:
+1. Indolent SM or smoldering SM without C-findings
+2. Prior treatment with a selective KIT D816V inhibitor
+3. Known additional actionable mutation requiring alternative targeted therapy
+4. Active bleeding or history of intracranial hemorrhage within 6 months
+5. Concurrent malignancy requiring systemic treatment
+6. QTc interval > 480 ms
+
+Endpoints
+The primary endpoint was overall response rate (ORR) per modified IWG-MRT-ECNM response criteria assessed by an independent review committee at Week 24. Key secondary endpoints included duration of response, change from baseline in serum tryptase, change in KIT D816V allele burden, change in bone marrow mast cell burden, symptom response per AdvSM Symptom Assessment Form (AdvSM-SAF), and overall survival. Safety endpoints included adverse events with focus on intracranial hemorrhage, cognitive effects, edema, and cytopenias.
+
+Operational Procedures
+Bone marrow biopsy was required at screening and at Weeks 12 and 24 for response assessment. Bone marrow samples were shipped to a central pathology laboratory (REMA reference laboratory in Toledo, Spain) for mast cell quantification, immunophenotyping, and molecular analysis.
+
+Serum tryptase and KIT D816V allele burden by digital PCR were measured at screening, baseline, and every 4 weeks during treatment. All laboratory assessments were performed by a central laboratory (Cerba Research). Analytes included serum tryptase, complete blood count with differential, liver and renal function panels, coagulation parameters, and alkaline phosphatase.
+
+Total study visits numbered 14 over 24 weeks: screening, baseline, Weeks 1, 2, 4, 8, 12, 16, 20, 24, and follow-up at Weeks 28, 32, 36, 48. Neurocognitive assessments (MoCA, Trail Making Test A and B) were performed at baseline and Weeks 12 and 24 to monitor for cognitive effects of KIT inhibition.
+
+Sites required a hematologist-oncologist with mast cell disease experience, bone marrow biopsy capability, and access to high-sensitivity KIT mutation testing.
+
+Results
+
+Patient Disposition
+Between June 2022 and April 2023, 102 patients were screened across 28 sites. Screen failure rate was 35.3% (36 patients). Screen failure reasons included: KIT D816V mutation not confirmed by central digital PCR in 12 patients (33.3% of failures), SM subtype reclassified to indolent/smoldering SM on central pathology review in 8 patients (22.2%), platelet count < 50,000/mm3 in 6 patients (16.7%), ECOG performance status > 2 in 5 patients (13.9%), and other reasons (QTc prolongation, concurrent malignancy) in 5 patients (13.9%).
+
+Of 66 randomized patients, 64 received study treatment. Twelve patients discontinued during the 24-week period (8 avapritinib, 4 BAT): death (4), disease progression (3), adverse events (3), and withdrawal of consent (2). A total of 54 patients completed the primary treatment period.
+
+Spain contributed the largest number of patients (22, 33.3% of enrollment), followed by Germany (12, 18.2%), United States (10, 15.2%), France (8, 12.1%), Italy (6, 9.1%), United Kingdom (5, 7.6%), and Sweden (3, 4.5%).
+
+Discussion
+
+Spain's REMA network provided a decisive advantage in trial feasibility, contributing one-third of enrolled patients. The centralized diagnostic infrastructure, including the reference laboratory in Toledo, enabled efficient central pathology confirmation. The screen failure rate of 35.3% was driven primarily by discordance between local and central diagnostic assessments, highlighting the importance of centralized testing in rare disease trials. Among the approximately 240 diagnosed AdvSM patients in Spain, 180 were registered in REMA, approximately 120 had active C-findings, and approximately 80 were estimated eligible after applying all trial criteria. The bone marrow biopsy requirement at three timepoints was the most significant operational burden, though Spanish centres reported high acceptance rates due to established biopsy protocols in routine AdvSM care.

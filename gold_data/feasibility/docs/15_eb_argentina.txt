@@ -1,0 +1,115 @@
+Clinical Practice Guidelines for the Diagnosis, Management, and Care of Epidermolysis Bullosa in Argentina
+
+Issued by: Argentine Society of Dermatology (SAD) and the Argentine EB Reference Network, in collaboration with the Latin American EB Foundation (DEBRA Latinoamérica)
+Publication Date: August 2024
+Guideline Version: 1.0
+
+1. Introduction and Epidemiology
+
+Epidermolysis bullosa (EB) comprises a group of rare inherited skin fragility disorders characterized by blistering and erosions of the skin and mucous membranes following minimal mechanical trauma. In Argentina, the estimated prevalence is 1 in 17,000, corresponding to approximately 2,700 diagnosed individuals. The incidence is approximately 20 per million live births. The Argentine EB Registry (Registro Argentino de Epidermólisis Bullosa, RAEB), established in 2015 and coordinated by Hospital Garrahan in Buenos Aires, enrolls 1,400 patients across 12 participating centres.
+
+Argentina is the second-largest EB population in Latin America after Brazil. Regional distribution shows concentration in Buenos Aires Province (42% of registered patients), followed by Córdoba (12%), Santa Fe (10%), Mendoza (7%), and Tucumán (6%). The remaining 23% are distributed across other provinces. The average diagnostic delay from symptom onset to molecular genetic confirmation is 6.2 years nationally, ranging from 3.1 years in Buenos Aires to 11.4 years in northern provinces (Salta, Jujuy, Formosa).
+
+EB subtypes in the Argentine registry: EB simplex 38%, junctional EB 8%, dystrophic EB (dominant) 22%, dystrophic EB (recessive) 28%, Kindler EB 4%.
+
+2. Diagnostic Pathway
+
+2.1 Clinical Assessment
+Initial clinical evaluation should include:
+- Full skin examination documenting blister distribution, scarring pattern, nail dystrophy, and mucosal involvement
+- EB Disease Activity and Scarring Index (EBDASI) scoring
+- Birmingham EB Severity Score (BEBS) for dystrophic EB
+- Quality of Life assessment using the Quality of Life in EB (QOLEB) questionnaire
+- Nutritional assessment (weight, height, albumin, iron studies, zinc)
+
+2.2 Skin Biopsy
+Immunofluorescence mapping (IFM) on a fresh induced blister biopsy is the gold standard for EB subtype classification. Biopsy should be taken from clinically uninvolved skin adjacent to a fresh blister. IFM is available at the following centres in Argentina:
+- Hospital Garrahan (Buenos Aires) — national EB reference laboratory
+- Hospital Italiano de Buenos Aires
+- Hospital de Clínicas, Universidad de Buenos Aires
+
+Transmission electron microscopy (TEM) is available at Hospital Garrahan for cases where IFM is inconclusive.
+
+2.3 Genetic Confirmation
+Molecular genetic testing (NGS gene panel covering COL7A1, KRT5, KRT14, LAMB3, LAMA3, COL17A1, ITGB4, FERMT1, and other EB genes) is recommended for all patients. Genetic testing is performed at:
+- CENAGEM (Centro Nacional de Genética Médica) — free of charge through public health system
+- Hospital Garrahan Molecular Genetics Laboratory
+Turnaround time: 3-6 months through public system, 4-8 weeks through private laboratories.
+
+3. Treatment and Wound Care
+
+3.1 Wound Management
+Daily wound care is the cornerstone of EB management:
+- Non-adherent dressings (Mepitel, Mepilex) are first-line. Access through the Argentine public health system (Programa Médico Obligatorio) covers basic wound care supplies.
+- Silicone-based foam dressings for chronic wounds
+- Antimicrobial dressings (silver-containing) for infected wounds
+- Debridement of necrotic tissue by trained wound care nurses
+
+3.2 Pain Management
+Pain assessment using the Wong-Baker FACES scale (children) or Visual Analog Scale (adults) at every clinical visit. First-line analgesia: paracetamol and NSAIDs. Gabapentin 300-1200 mg daily for neuropathic pain. Morphine for severe wound care pain.
+
+3.3 Nutritional Support
+Nutritional management is critical, especially in recessive dystrophic EB (RDEB):
+- High-calorie, high-protein diet (150% of age-appropriate caloric intake)
+- Iron supplementation for chronic anemia
+- Zinc supplementation (20-50 mg/day elemental zinc)
+- Vitamin D supplementation (1000-2000 IU daily)
+- Nasogastric or gastrostomy feeding for patients with severe oral/esophageal involvement
+
+3.4 Emerging Therapies
+Gene therapy: beremagene geperpavec (B-VEC, topical gene therapy for dystrophic EB) received ANMAT (Argentine regulatory authority) approval in 2024 through a special access pathway. Currently available at Hospital Garrahan and Hospital Italiano de Buenos Aires.
+
+Cell therapy: Allogeneic bone marrow transplantation for severe RDEB has been performed at Hospital Garrahan (4 patients) and FUNDALEU (2 patients) under compassionate use protocols.
+
+4. Centre of Expertise
+
+4.1 Designation Criteria
+EB expert centres in Argentina must provide:
+- Dermatologist with at least 3 years of EB management experience
+- Trained EB wound care nurses (at least 2 per centre)
+- Access to immunofluorescence mapping for diagnosis
+- Genetic counselling services
+- Multidisciplinary team: dermatology, pediatrics, nutrition, surgery, gastroenterology, ophthalmology, dentistry, psychology, physiotherapy, occupational therapy
+- Wound care clinic with dedicated EB consultation space
+
+4.2 Geographic Network
+Twelve centres participate in the RAEB:
+- Buenos Aires: Hospital Garrahan (national referral), Hospital Italiano, Hospital de Clínicas, Hospital Ramos Mejía
+- Córdoba: Hospital de Niños de Córdoba, Hospital Privado Universitario
+- Rosario: Hospital de Niños Víctor J. Vilela
+- Mendoza: Hospital Notti
+- Tucumán: Hospital del Niño Jesús
+- La Plata: Hospital de Niños Sor María Ludovica
+- Mar del Plata: Hospital Interzonal de Agudos
+- Neuquén: Hospital Provincial Neuquén
+
+4.3 Access Challenges
+Patients in northern provinces (Salta, Jujuy, Chaco, Formosa, Misiones) must travel 800-1,500 km to Buenos Aires for specialized care. The DEBRA Argentina patient advocacy organization provides transportation subsidies for up to 4 trips per year. Telemedicine wound care consultations have been implemented since 2020, with monthly virtual assessments for patients unable to travel.
+
+5. Clinical Trial Feasibility
+
+5.1 Patient Pool
+Of the estimated 2,700 diagnosed EB patients in Argentina, 1,400 are registered in RAEB. Among registry patients: 530 have dystrophic EB (310 recessive, 220 dominant), 532 have EB simplex, 112 have junctional EB, and 56 have Kindler EB. For a typical RDEB gene therapy or wound healing trial, approximately 200 patients have confirmed COL7A1 mutations, and approximately 120 would meet broad eligibility criteria (age, wound burden, and nutritional status adequate for trial participation). After applying specific inclusion/exclusion criteria, approximately 60-80 patients are estimated eligible.
+
+5.2 Screening Expectations
+EB trial experience in Argentina is limited. Based on international benchmarks and local expert estimates, the expected screen failure rate is 35-45%. Common barriers include: wound infection at screening (requiring treatment before enrollment), nutritional deficiency (albumin < 2.5 g/dL), anemia requiring transfusion, inability to travel to study sites, and caregiver concerns about biopsy procedures in children.
+
+5.3 Investigator Network
+The Argentine EB Research Group includes 14 investigators across 8 centres. Six investigators have clinical trial experience (4 as principal investigators in industry-sponsored dermatology trials, though not EB-specific). Hospital Garrahan and Hospital Italiano have Good Clinical Practice-certified research units with cold-chain sample storage and international sample shipment capability.
+
+5.4 Regulatory Framework
+ANMAT clinical trial approval timeline: 4-8 months. Ethics committee (Comité de Ética en Investigación) approval: 2-4 months. Investigational product import: 2-4 months. For gene therapy trials, ANMAT requires additional biosafety committee review (1-2 months).
+
+6. Patient Registry and Data
+
+The RAEB captures demographics, EB subtype, genotype, disease severity scores (EBDASI, BEBS), wound burden, nutritional status, surgical history, and quality of life (QOLEB). Data access requires Hospital Garrahan Research Ethics Committee approval (6-8 weeks). DEBRA International maintains a global EB research database that includes Argentine data for international feasibility assessments.
+
+7. Monitoring and Follow-up
+
+All EB patients require:
+- Dermatology assessment with EBDASI scoring: every 3 months (severe), every 6 months (mild)
+- Nutritional assessment (weight, albumin, prealbumin, iron, zinc, vitamin D): every 3-6 months
+- Dental examination: every 6 months
+- Ophthalmologic examination: annually
+- Echocardiography: annually for RDEB (dilated cardiomyopathy risk)
+- Surveillance for squamous cell carcinoma (SCC) in chronic wounds: annual full skin examination starting at age 15 for RDEB patients. SCC is the leading cause of death in RDEB patients over age 20.

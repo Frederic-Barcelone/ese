@@ -1,0 +1,112 @@
+Clinical Practice Guidelines for the Diagnosis and Management of Tuberous Sclerosis Complex in Mexico
+
+Issued by: Mexican Academy of Neurology (AMN) and the Mexican TSC Alliance (Alianza TSC México)
+Publication Date: May 2024
+Guideline Version: 2.0
+
+1. Introduction and Epidemiology
+
+Tuberous sclerosis complex (TSC) is a rare autosomal dominant genetic disorder caused by pathogenic variants in the TSC1 (hamartin) or TSC2 (tuberin) genes, leading to mTOR pathway hyperactivation and multisystem hamartoma formation. In Mexico, the estimated prevalence is 1 in 15,000, corresponding to approximately 8,500 affected individuals. However, due to significant underdiagnosis, only approximately 2,800 patients have been formally diagnosed. The incidence is approximately 1 in 6,000 to 1 in 10,000 live births.
+
+The Mexican TSC Registry (Registro Mexicano de Esclerosis Tuberosa), established in 2018 by the Mexican Society of Human Genetics and CONACYT, enrolls 1,600 patients across 22 participating centres. The average diagnostic delay in Mexico is 5.8 years from first clinical manifestation (typically seizures in infancy) to TSC diagnosis. Regional distribution: Mexico City metropolitan area (32% of registry patients), Guadalajara/Jalisco (14%), Monterrey/Nuevo León (12%), Puebla (8%), Mérida/Yucatán (6%), and remaining states (28%).
+
+TSC1 mutations are identified in 22% and TSC2 mutations in 58% of genetically tested Mexican patients. In 20% of cases, no mutation is identified by standard testing (potential mosaic or deep intronic variants).
+
+2. Diagnostic Criteria
+
+TSC diagnosis follows the 2021 updated international diagnostic criteria:
+- Definite diagnosis: 2 major features, or 1 major + 2 minor features, or identification of pathogenic TSC1/TSC2 variant
+- Possible diagnosis: 1 major feature, or 2+ minor features
+
+Major features: cortical tubers, subependymal nodules, subependymal giant cell astrocytoma (SEGA), cardiac rhabdomyomas, lymphangioleiomyomatosis (LAM), renal angiomyolipomas, facial angiofibromas (>= 3), ungual fibromas (>= 2), shagreen patch, retinal hamartomas, hypomelanotic macules (>= 3, >= 5mm).
+
+Minor features: confetti skin lesions, dental enamel pits, intraoral fibromas, retinal achromatic patch, multiple renal cysts, non-renal hamartomas.
+
+3. Diagnostic Pathway
+
+3.1 Initial Screening
+For patients with suspected TSC (especially infants with cardiac rhabdomyoma or infantile spasms):
+- Complete skin examination under Wood's lamp (hypomelanotic macules)
+- Brain MRI with contrast (cortical tubers, SENs, SEGA)
+- Echocardiography (cardiac rhabdomyomas)
+- Renal ultrasound (angiomyolipomas)
+- Ophthalmologic examination (retinal hamartomas)
+- EEG for seizure characterization
+
+3.2 Genetic Testing
+Molecular genetic testing (comprehensive TSC1/TSC2 sequencing plus deletion/duplication analysis) is recommended for all patients meeting clinical diagnostic criteria. Available at:
+- Instituto Nacional de Medicina Genómica (INMEGEN), Mexico City — national reference laboratory
+- Centro de Investigación y de Estudios Avanzados (CINVESTAV)
+- Hospital Infantil de México Federico Gómez
+Cost: Free through institutional programs or MXN 8,000-15,000 (USD 450-850) through private laboratories. Turnaround: 6-12 weeks.
+
+4. Treatment Recommendations
+
+4.1 Epilepsy Management
+Vigabatrin is the recommended first-line anti-seizure medication for infantile spasms in TSC (level of evidence: 1A). Dose: 50-150 mg/kg/day. For focal seizures, carbamazepine, levetiracetam, or lamotrigine are recommended. mTOR inhibitor therapy (everolimus) is recommended for TSC-associated epilepsy refractory to at least 2 anti-seizure medications.
+
+4.2 mTOR Inhibitor Therapy
+Everolimus is recommended for:
+- SEGA >= 1 cm or growing (dose: target trough 5-15 ng/mL)
+- Renal angiomyolipomas >= 3 cm (dose: target trough 5-15 ng/mL)
+- TSC-associated refractory epilepsy (adjunctive)
+- LAM (target trough 5-15 ng/mL)
+
+Everolimus is available through the IMSS (Instituto Mexicano del Seguro Social) high-cost medication program and INSABI (now IMSS-Bienestar) coverage for eligible patients. Availability is inconsistent, with reported supply interruptions of 2-6 weeks in 35% of centres surveyed.
+
+4.3 Monitoring Schedule
+TSC surveillance recommendations:
+- Brain MRI: every 1-3 years until age 25 (SEGA screening), then as clinically indicated
+- Renal MRI or ultrasound: every 1-3 years throughout life (angiomyolipoma surveillance)
+- Pulmonary CT (women): starting at age 18, every 5-10 years (LAM screening)
+- Echocardiography: at diagnosis, then as clinically indicated (rhabdomyomas typically regress)
+- EEG: at diagnosis, then as clinically indicated for seizure management
+- Neuropsychological assessment: at diagnosis, at school entry, at adolescence (TAND assessment)
+- Ophthalmologic examination: at diagnosis, annually until age 5, then every 3 years
+- Dental examination: every 6 months
+- Dermatologic assessment: annually
+
+5. Centre of Expertise
+
+5.1 Centre Requirements
+Designated TSC centres must provide:
+- Neurologist (pediatric or adult) with at least 3 years of TSC management experience
+- Access to brain MRI (ideally 3T) and renal MRI
+- EEG and video-EEG monitoring capability
+- Genetic counselling services
+- Everolimus prescribing and monitoring (including drug level monitoring)
+- Multidisciplinary team: neurology, nephrology, pulmonology, dermatology, cardiology, ophthalmology, genetics, neuropsychology, psychiatry
+
+5.2 Geographic Network
+Twenty-two centres participate in the Mexican TSC Registry:
+- Mexico City: Hospital Infantil de México, Instituto Nacional de Neurología (INNN), INMEGEN, Hospital General de México, Hospital 20 de Noviembre (ISSSTE)
+- Guadalajara: Hospital Civil de Guadalajara, CMNO IMSS
+- Monterrey: Hospital Universitario UANL, Hospital de Especialidades IMSS
+- Puebla: Hospital General de Puebla
+- Mérida: Hospital Regional de Alta Especialidad de la Península de Yucatán
+- Other cities: 11 additional centres across 9 states
+
+5.3 Access Challenges
+Patients in southern states (Oaxaca, Chiapas, Guerrero) and rural areas face travel distances of 400-1,200 km to the nearest TSC centre. The Alianza TSC México patient organization provides travel assistance for up to 3 visits per year. Indigenous-speaking patients (approximately 7% of registry) require interpreter services.
+
+6. Clinical Trial Feasibility
+
+6.1 Patient Pool
+Of the estimated 8,500 TSC patients in Mexico, approximately 2,800 are diagnosed and 1,600 are in the registry. Among registry patients: 1,200 have epilepsy, 640 have renal angiomyolipomas >= 3 cm, 180 have SEGA requiring treatment, and 85% are on at least one anti-seizure medication. For a typical mTOR inhibitor trial, approximately 600 patients on everolimus would meet broad criteria. For a refractory epilepsy add-on trial, approximately 480 patients with drug-resistant epilepsy would be potentially eligible. After typical criteria application, approximately 200-250 patients are estimated eligible per trial type.
+
+6.2 Screening Expectations
+Mexican experience in TSC trials is limited but growing. Based on international benchmarks and regional expert assessment, the expected screen failure rate is 35-45%. Anticipated screening barriers: seizure frequency not meeting threshold in observational period, everolimus trough levels outside target range, inability to perform MRI (young children without sedation services), and travel/financial constraints. Screening-to-randomization ratio: approximately 3.0:1.
+
+6.3 Investigator Network
+The Mexican TSC Clinical Research Group includes 16 investigators across 10 centres. Eight investigators have industry-sponsored clinical trial experience (mostly in oncology or neurology, with 3 having TSC-specific trial experience). Key trial-ready sites: INNN Mexico City, Hospital Infantil de México, Hospital Civil de Guadalajara.
+
+6.4 Regulatory Framework
+COFEPRIS (Comisión Federal para la Protección contra Riesgos Sanitarios) clinical trial approval: 4-6 months. Ethics committee (Comité de Ética en Investigación) approval: 2-4 months. Import permits for investigational products: 2-4 months. Mexico requires real-time safety reporting in Spanish.
+
+7. TAND Assessment (TSC-Associated Neuropsychiatric Disorders)
+
+All TSC patients should receive TAND screening at diagnosis and annually using the TAND Checklist (Spanish-validated version). TAND includes intellectual disability (50-60% of TSC patients), autism spectrum disorder (40-50%), ADHD (30-40%), anxiety (30-40%), and learning difficulties (30-50%). Access to neuropsychological services is limited in Mexico, with formal assessment available at approximately 60% of TSC centres.
+
+8. Registry and Data
+
+The Mexican TSC Registry captures demographics, genotype, clinical features, seizure history, imaging, treatment, and TAND assessments. Data access requires CONACYT Ethics Committee approval and institutional data sharing agreement (6-10 weeks). The TSC Natural History Database (TOSCA - TuberOus SClerosis registry to increase disease Awareness) includes 120 Mexican patients with international-standard data quality.
