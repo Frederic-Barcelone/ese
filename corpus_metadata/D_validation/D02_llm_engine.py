@@ -43,6 +43,7 @@ import yaml
 from pydantic import BaseModel, Field, ValidationError
 
 from Z_utils.Z13_llm_tracking import (
+    CallType,
     MODEL_PRICING,
     LLMUsageRecord,
     LLMUsageTracker,
@@ -192,6 +193,23 @@ class ClaudeClient:
         # Model tier routing (call_type -> model)
         self._model_tiers: Dict[str, str] = cfg.get("model_tiers", {})
 
+        # Validate model tier config
+        if not self._model_tiers:
+            logger.warning(
+                "ClaudeClient model_tiers is empty (config_path=%s). "
+                "All calls will fall back to default model '%s', "
+                "which may route Haiku-tier tasks to an expensive model.",
+                config_path, self.default_model,
+            )
+        else:
+            missing = CallType.ALL_CALL_TYPES - set(self._model_tiers.keys())
+            if missing:
+                logger.warning(
+                    "model_tiers config is missing entries for: %s. "
+                    "These call types will fall back to default model '%s'.",
+                    sorted(missing), self.default_model,
+                )
+
     @property
     def messages(self):
         """Provide access to the messages API for direct usage."""
@@ -284,6 +302,17 @@ class ClaudeClient:
         Call Claude Vision API with an image and return parsed JSON response.
         Automatically handles images exceeding the 5MB limit by compressing them.
         """
+        if call_type in CallType._DEFAULT_CALL_TYPES:
+            logger.warning(
+                "complete_vision_json call_type '%s' is a default placeholder — "
+                "caller should pass an explicit CallType constant.",
+                call_type,
+            )
+        elif call_type not in self._model_tiers and self._model_tiers:
+            logger.warning(
+                "call_type '%s' not in model_tiers config, falling back to default model '%s'.",
+                call_type, model or self.default_model,
+            )
         # Model tier routing: if call_type has a tier mapping, use that model
         use_model = self._model_tiers.get(call_type, model or self.default_model)
 
@@ -356,6 +385,18 @@ class ClaudeClient:
         call_type: str = "unknown",
     ) -> str:
         """Make Claude API call and return raw text response."""
+        if call_type in CallType._DEFAULT_CALL_TYPES:
+            logger.warning(
+                "call_type '%s' is a default placeholder — caller should pass "
+                "an explicit CallType constant. Falling back to default model '%s'.",
+                call_type, self.default_model,
+            )
+        elif call_type not in self._model_tiers and self._model_tiers:
+            logger.warning(
+                "call_type '%s' not in model_tiers config, falling back to default model '%s'. "
+                "This may route to an expensive model unintentionally.",
+                call_type, self.default_model,
+            )
         # Model tier routing: if call_type has a tier mapping, use that model
         use_model = self._model_tiers.get(call_type, model or self.default_model)
         use_max_tokens = max_tokens or self.default_max_tokens

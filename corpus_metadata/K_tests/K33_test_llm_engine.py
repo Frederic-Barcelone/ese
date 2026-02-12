@@ -7,15 +7,21 @@ Tests LLM engine, Claude client, and verification result handling.
 
 from __future__ import annotations
 
+import re
+from pathlib import Path
+
 import pytest
+import yaml
 from unittest.mock import MagicMock, patch
 
 from D_validation.D02_llm_engine import (
     ClaudeClient,
     LLMEngine,
     VerificationResult,
+    MODEL_PRICING,
 )
 from A_core.A01_domain_models import ValidationStatus
+from Z_utils.Z13_llm_tracking import CallType, resolve_model_tier
 
 
 class TestVerificationResult:
@@ -209,28 +215,9 @@ class TestClaudeClientInit:
 class TestModelTierRouting:
     """Tests for model tier routing — ensures Haiku call types use Haiku, not Sonnet."""
 
-    HAIKU_CALL_TYPES = [
-        "abbreviation_batch_validation",
-        "abbreviation_single_validation",
-        "fast_reject",
-        "document_classification",
-        "image_classification",
-        "sf_only_extraction",
-        "layout_analysis",
-        "vlm_visual_enrichment",
-        "description_extraction",
-        "ocr_text_fallback",
-    ]
-
-    SONNET_CALL_TYPES = [
-        "feasibility_extraction",
-        "recommendation_extraction",
-        "recommendation_vlm",
-        "vlm_table_extraction",
-        "flowchart_analysis",
-        "chart_analysis",
-        "vlm_detection",
-    ]
+    # Use CallType registry as single source of truth (stays in sync automatically)
+    HAIKU_CALL_TYPES = sorted(CallType.HAIKU_CALL_TYPES)
+    SONNET_CALL_TYPES = sorted(CallType.SONNET_CALL_TYPES)
 
     def test_no_config_path_means_empty_model_tiers(self):
         """ClaudeClient with config_path=None has no model tier routing."""
@@ -410,3 +397,188 @@ class TestModelTierRouting:
                 f"API call must not pass both temperature and top_p. "
                 f"Got temperature={has_temp}, top_p={has_top_p}"
             )
+
+    def test_all_call_types_in_config(self):
+        """Every CallType.ALL_CALL_TYPES member must have an entry in config.yaml model_tiers."""
+        config_path = Path(__file__).parent.parent / "G_config" / "config.yaml"
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+
+        model_tiers = config.get("api", {}).get("claude", {}).get("model_tiers", {})
+        missing = CallType.ALL_CALL_TYPES - set(model_tiers.keys())
+        assert not missing, (
+            f"config.yaml model_tiers is missing entries for: {sorted(missing)}"
+        )
+
+    def test_config_has_no_unknown_call_types(self):
+        """Every key in config.yaml model_tiers must be a known CallType (catches typos)."""
+        config_path = Path(__file__).parent.parent / "G_config" / "config.yaml"
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+
+        model_tiers = config.get("api", {}).get("claude", {}).get("model_tiers", {})
+        unknown = set(model_tiers.keys()) - CallType.ALL_CALL_TYPES
+        assert not unknown, (
+            f"config.yaml model_tiers has unknown call types (typo?): {sorted(unknown)}"
+        )
+
+    def test_all_code_call_types_are_registered(self):
+        """Scan all .py files for call_type=... patterns and verify each is in CallType."""
+        corpus_dir = Path(__file__).parent.parent
+        call_type_pattern = re.compile(r'call_type\s*=\s*["\']([a-z_]+)["\']')
+        unregistered = set()
+
+        for py_file in corpus_dir.rglob("*.py"):
+            if "K_tests" in str(py_file):
+                continue
+            text = py_file.read_text(encoding="utf-8", errors="ignore")
+            for match in call_type_pattern.finditer(text):
+                ct = match.group(1)
+                if ct not in CallType.ALL_CALL_TYPES and ct not in CallType._DEFAULT_CALL_TYPES:
+                    unregistered.add(ct)
+
+        assert not unregistered, (
+            f"call_type values found in code but not in CallType registry: {sorted(unregistered)}"
+        )
+
+    def test_default_call_types_trigger_warning(self):
+        """Calling _call_claude with a default call_type (e.g. 'json') should log a warning."""
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_messages = MagicMock()
+            mock_response = MagicMock()
+            mock_response.content = [MagicMock(text='{"result": "ok"}')]
+            mock_response.usage = MagicMock(
+                input_tokens=10, output_tokens=5,
+                cache_read_input_tokens=0, cache_creation_input_tokens=0,
+            )
+            mock_messages.create.return_value = mock_response
+            mock_anthropic.Anthropic.return_value = MagicMock(
+                messages=mock_messages
+            )
+
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+            with patch("D_validation.D02_llm_engine.logger") as mock_logger:
+                client._call_claude(
+                    "system", "user", None, None, None, 1.0,
+                    call_type="json",
+                )
+                mock_logger.warning.assert_called()
+                warning_msg = str(mock_logger.warning.call_args)
+                assert "json" in warning_msg and "default placeholder" in warning_msg
+
+    def test_empty_model_tiers_triggers_warning(self):
+        """ClaudeClient(config_path=None) should log a warning about empty tiers."""
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            with patch("D_validation.D02_llm_engine.logger") as mock_logger:
+                ClaudeClient(api_key="test-key", config_path=None)
+                mock_logger.warning.assert_called()
+                warning_msg = str(mock_logger.warning.call_args)
+                assert "empty" in warning_msg.lower()
+
+    def test_vision_call_uses_tier_model(self):
+        """complete_vision_json with call_type='vlm_visual_enrichment' should use Haiku."""
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_messages = MagicMock()
+            mock_response = MagicMock()
+            mock_response.content = [MagicMock(text='{"result": "ok"}')]
+            mock_response.usage = MagicMock(
+                input_tokens=10, output_tokens=5,
+                cache_read_input_tokens=0, cache_creation_input_tokens=0,
+            )
+            mock_messages.create.return_value = mock_response
+            mock_anthropic.Anthropic.return_value = MagicMock(
+                messages=mock_messages
+            )
+
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+            # Tiny valid PNG (1x1 pixel)
+            import base64
+            tiny_png = base64.b64encode(
+                b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01"
+                b"\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00"
+                b"\x00\x00\x0cIDATx\x9cc\xf8\x0f\x00\x00\x01\x01\x00"
+                b"\x05\x18\xd8N\x00\x00\x00\x00IEND\xaeB`\x82"
+            ).decode()
+            client.complete_vision_json(
+                image_base64=tiny_png,
+                prompt="test",
+                call_type="vlm_visual_enrichment",
+            )
+            call_args = mock_messages.create.call_args
+            actual_model = call_args.kwargs.get("model", "")
+            assert "haiku" in actual_model.lower(), (
+                f"Vision call for vlm_visual_enrichment should use Haiku, got '{actual_model}'"
+            )
+
+    def test_resolve_model_tier_standalone(self):
+        """Test Z13.resolve_model_tier() resolves correctly for known call types."""
+        import Z_utils.Z13_llm_tracking as z13
+        # Reset cache to force reload
+        z13._model_tier_cache = None
+
+        for ct in CallType.HAIKU_CALL_TYPES:
+            resolved = resolve_model_tier(ct)
+            assert "haiku" in resolved.lower(), (
+                f"resolve_model_tier('{ct}') should return Haiku model, got '{resolved}'"
+            )
+
+        for ct in CallType.SONNET_CALL_TYPES:
+            resolved = resolve_model_tier(ct)
+            assert "sonnet" in resolved.lower(), (
+                f"resolve_model_tier('{ct}') should return Sonnet model, got '{resolved}'"
+            )
+
+    def test_model_pricing_covers_all_configured_models(self):
+        """Every model ID in config.yaml model_tiers must have an entry in MODEL_PRICING."""
+        config_path = Path(__file__).parent.parent / "G_config" / "config.yaml"
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+
+        model_tiers = config.get("api", {}).get("claude", {}).get("model_tiers", {})
+        configured_models = set(model_tiers.values())
+        missing = configured_models - set(MODEL_PRICING.keys())
+        assert not missing, (
+            f"MODEL_PRICING is missing entries for configured models: {sorted(missing)}"
+        )
+
+    def test_author_extraction_routes_to_haiku(self):
+        """author_extraction must be in CallType.HAIKU_CALL_TYPES and route to Haiku."""
+        assert "author_extraction" in CallType.HAIKU_CALL_TYPES
+        config_path = str(
+            Path(__file__).parent.parent / "G_config" / "config.yaml"
+        )
+        with patch("D_validation.D02_llm_engine.anthropic") as mock_anthropic:
+            mock_anthropic.Anthropic.return_value = MagicMock()
+            client = ClaudeClient(api_key="test-key", config_path=config_path)
+            resolved = client.resolve_model("author_extraction")
+            assert "haiku" in resolved.lower(), (
+                f"author_extraction should route to Haiku, got '{resolved}'"
+            )
+
+    def test_haiku_tier_cost_lower_than_sonnet(self):
+        """All Haiku models in MODEL_PRICING must be cheaper than all Sonnet models."""
+        haiku_models = {m for m in MODEL_PRICING if "haiku" in m.lower()}
+        sonnet_models = {m for m in MODEL_PRICING if "sonnet" in m.lower()}
+        assert haiku_models, "No Haiku models found in MODEL_PRICING"
+        assert sonnet_models, "No Sonnet models found in MODEL_PRICING"
+
+        max_haiku_input = max(MODEL_PRICING[m][0] for m in haiku_models)
+        min_sonnet_input = min(MODEL_PRICING[m][0] for m in sonnet_models)
+        assert max_haiku_input < min_sonnet_input, (
+            f"Haiku input price ({max_haiku_input}) should be less than "
+            f"Sonnet input price ({min_sonnet_input})"
+        )
+
+        max_haiku_output = max(MODEL_PRICING[m][1] for m in haiku_models)
+        min_sonnet_output = min(MODEL_PRICING[m][1] for m in sonnet_models)
+        assert max_haiku_output < min_sonnet_output, (
+            f"Haiku output price ({max_haiku_output}) should be less than "
+            f"Sonnet output price ({min_sonnet_output})"
+        )

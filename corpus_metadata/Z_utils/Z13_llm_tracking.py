@@ -35,6 +35,67 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
+
+class CallType:
+    """Registry of all known LLM call types with expected model tier.
+
+    Every LLM call site must use one of these constants. Adding a new call site
+    requires adding the constant here AND a corresponding entry in config.yaml
+    model_tiers.
+    """
+
+    # Haiku tier — simple classification / extraction tasks
+    ABBREVIATION_BATCH_VALIDATION = "abbreviation_batch_validation"
+    ABBREVIATION_SINGLE_VALIDATION = "abbreviation_single_validation"
+    FAST_REJECT = "fast_reject"
+    DOCUMENT_CLASSIFICATION = "document_classification"
+    IMAGE_CLASSIFICATION = "image_classification"
+    SF_ONLY_EXTRACTION = "sf_only_extraction"
+    LAYOUT_ANALYSIS = "layout_analysis"
+    VLM_VISUAL_ENRICHMENT = "vlm_visual_enrichment"
+    DESCRIPTION_EXTRACTION = "description_extraction"
+    OCR_TEXT_FALLBACK = "ocr_text_fallback"
+    AUTHOR_EXTRACTION = "author_extraction"
+
+    # Sonnet tier — complex reasoning / extraction tasks
+    FEASIBILITY_EXTRACTION = "feasibility_extraction"
+    RECOMMENDATION_EXTRACTION = "recommendation_extraction"
+    RECOMMENDATION_VLM = "recommendation_vlm"
+    VLM_TABLE_EXTRACTION = "vlm_table_extraction"
+    FLOWCHART_ANALYSIS = "flowchart_analysis"
+    CHART_ANALYSIS = "chart_analysis"
+    VLM_DETECTION = "vlm_detection"
+
+    HAIKU_CALL_TYPES = {
+        ABBREVIATION_BATCH_VALIDATION,
+        ABBREVIATION_SINGLE_VALIDATION,
+        FAST_REJECT,
+        DOCUMENT_CLASSIFICATION,
+        IMAGE_CLASSIFICATION,
+        SF_ONLY_EXTRACTION,
+        LAYOUT_ANALYSIS,
+        VLM_VISUAL_ENRICHMENT,
+        DESCRIPTION_EXTRACTION,
+        OCR_TEXT_FALLBACK,
+        AUTHOR_EXTRACTION,
+    }
+
+    SONNET_CALL_TYPES = {
+        FEASIBILITY_EXTRACTION,
+        RECOMMENDATION_EXTRACTION,
+        RECOMMENDATION_VLM,
+        VLM_TABLE_EXTRACTION,
+        FLOWCHART_ANALYSIS,
+        CHART_ANALYSIS,
+        VLM_DETECTION,
+    }
+
+    ALL_CALL_TYPES = HAIKU_CALL_TYPES | SONNET_CALL_TYPES
+
+    # Default call_type values that indicate a caller forgot to pass a proper one
+    _DEFAULT_CALL_TYPES = {"json", "json_any", "vision", "unknown"}
+
+
 # Model pricing per million tokens (input_cost, output_cost)
 MODEL_PRICING: Dict[str, Tuple[float, float]] = {
     "claude-sonnet-4-20250514": (3.0, 15.0),
@@ -193,6 +254,27 @@ def resolve_model_tier(call_type: str, default_model: str = "claude-sonnet-4-202
         except (OSError, yaml.YAMLError, TypeError, KeyError) as e:
             logger.warning("Failed to load model_tiers from config: %s", e)
             _model_tier_cache = {}
+
+        if not _model_tier_cache:
+            logger.warning(
+                "model_tiers config is empty — all calls will use default model '%s'. "
+                "This may route Haiku-tier tasks to an expensive model.",
+                default_model,
+            )
+
+    if call_type in CallType._DEFAULT_CALL_TYPES:
+        logger.warning(
+            "resolve_model_tier called with default call_type '%s' — "
+            "caller should pass an explicit CallType constant.",
+            call_type,
+        )
+    elif call_type not in _model_tier_cache:
+        logger.warning(
+            "call_type '%s' not in model_tiers config, falling back to default model '%s'. "
+            "This may route to an expensive model unintentionally.",
+            call_type, default_model,
+        )
+
     return _model_tier_cache.get(call_type, default_model)
 
 
@@ -218,6 +300,7 @@ def record_api_usage(message, model: str, call_type: str) -> None:
 
 
 __all__ = [
+    "CallType",
     "MODEL_PRICING",
     "LLMUsageRecord",
     "LLMUsageTracker",
