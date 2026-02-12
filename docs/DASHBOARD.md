@@ -60,6 +60,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-12 | Replace 124 country YAML entries with pycountry package | No accuracy change. Gene FP filter: 250 country codes (was 40). Feasibility: 400+ country names (was 50). |
 | 2026-02-12 | API cost reduction: context 400->200, batch sizes 2x, sf_only 5->3 chunks + single call, rec caching, metadata merge | No regression. NLP4RARE: Disease 89.3% (+0.0), Abbrev 100% (+0.0). BC5CDR 20-doc: Disease 95.1% (+2.6), Drug 82.7% (+2.1). |
 | 2026-02-12 | Full benchmark run: filled TP/FP/FN for CADEC, NLM-Gene, RareDisGene, NLP4RARE | CADEC Drug F1 92.8%, Gene F1s stable, NLP4RARE combined 100-doc Disease 88.7% |
 | 2026-02-11 | Disease cross-ref FP filter, expanded drug/disease lexicons | Disease F1 86.7% stable, Drug F1 85.3% (LLM variance range 85.3-86.2%) |
