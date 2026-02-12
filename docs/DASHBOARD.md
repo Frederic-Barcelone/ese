@@ -29,6 +29,7 @@
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
+| 2026-02-12 | **$245.80** | $3.25 | — |
 | 2026-02-12 | **$249.05** | $0.35 | NLP4RARE 20-doc + BC5CDR 20-doc eval runs. |
 | 2026-02-12 | **$249.40** | — | Initial tracking. Cost reduction deployed. |
 
