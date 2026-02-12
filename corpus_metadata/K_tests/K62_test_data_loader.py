@@ -160,11 +160,13 @@ class TestNoiseFiltersYaml:
 
     def test_obvious_noise(self) -> None:
         from C_generators.C21_noise_filters import OBVIOUS_NOISE
-        assert "the" in OBVIOUS_NOISE
-        assert "a" in OBVIOUS_NOISE
-        # YAML boolean trap values must be strings
-        assert "no" in OBVIOUS_NOISE
-        assert "on" in OBVIOUS_NOISE
+        assert "the" in OBVIOUS_NOISE  # from spaCy stopwords
+        assert "a" in OBVIOUS_NOISE    # from single_letters()
+        assert "no" in OBVIOUS_NOISE   # from spaCy stopwords
+        assert "on" in OBVIOUS_NOISE   # from spaCy stopwords
+        # Domain-specific entries still present
+        assert "mmhg" in OBVIOUS_NOISE
+        assert "roche" in OBVIOUS_NOISE
 
     def test_wrong_expansion_blacklist(self) -> None:
         from C_generators.C21_noise_filters import WRONG_EXPANSION_BLACKLIST
@@ -353,8 +355,9 @@ class TestBiomedicalNerDataYaml:
     def test_garbage_tokens(self) -> None:
         from E_normalization.E10_biomedical_ner_all import GARBAGE_TOKENS
         assert isinstance(GARBAGE_TOKENS, set)
-        assert "the" in GARBAGE_TOKENS
-        assert "mg" in GARBAGE_TOKENS
+        assert "the" in GARBAGE_TOKENS   # from spaCy stopwords
+        assert "mg" in GARBAGE_TOKENS    # from domain YAML
+        assert "rate" in GARBAGE_TOKENS  # from domain YAML
 
 
 class TestAllYamlFilesLoad:

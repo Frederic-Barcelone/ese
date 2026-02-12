@@ -128,30 +128,7 @@ countries:
   - "za"
   - "eg"
 
-# Credentials and titles
-credentials:
-  - "md"
-  - "phd"
-  - "mph"
-  - "do"
-  - "rn"
-  - "np"
-  - "pa"
-  - "pharmd"
-  - "dds"
-  - "dmd"
-  - "dpt"
-  - "od"
-  - "dvm"
-  - "dc"
-  - "ms"
-  - "ma"
-  - "msc"
-  - "bsc"
-  - "ba"
-  - "mba"
-  - "jd"
-  - "llm"
+# NOTE: Credentials (md, phd, etc.) are now in Z_utils.Z15_lexicon_provider.CREDENTIALS
 
 # Drug-related terms that might look like genes
 drug_terms:

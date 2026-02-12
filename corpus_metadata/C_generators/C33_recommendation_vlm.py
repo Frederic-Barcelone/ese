@@ -325,14 +325,14 @@ class VLMExtractionMixin:
             if not text:
                 return set()
             # Common words to ignore in matching
-            stopwords = {
-                'the', 'a', 'an', 'in', 'of', 'for', 'with', 'and', 'or', 'to',
-                'is', 'are', 'be', 'we', 'recommend', 'should', 'may', 'can',
-                'patients', 'patient', 'treatment', 'disease', 'therapy',
-                'new', 'onset', 'relapsing', 'that', 'this', 'as', 'by', 'on'
+            from Z_utils.Z15_lexicon_provider import ENGLISH_STOPWORDS
+            # Domain-specific terms to also filter out for recommendation matching
+            domain_stopwords = {
+                'recommend', 'patients', 'patient', 'treatment', 'disease',
+                'therapy', 'onset', 'relapsing',
             }
             words = set(normalize_text(text).split())
-            return words - stopwords
+            return words - ENGLISH_STOPWORDS - domain_stopwords
 
         def text_similarity(text1: str, text2: str) -> float:
             """Calculate word overlap similarity using content words."""

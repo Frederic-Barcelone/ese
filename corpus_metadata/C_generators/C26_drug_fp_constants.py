@@ -39,11 +39,11 @@ from __future__ import annotations
 from typing import Dict, List, Set
 
 from Z_utils.Z12_data_loader import load_mapping, load_term_list, load_term_set
+from Z_utils.Z15_lexicon_provider import CREDENTIALS
 
 # Word lists (Set[str]) from drug_fp_terms.yaml
 BACTERIA_ORGANISMS: Set[str] = load_term_set("drug_fp_terms.yaml", "bacteria_organisms")
 VACCINE_TERMS: Set[str] = load_term_set("drug_fp_terms.yaml", "vaccine_terms")
-CREDENTIALS: Set[str] = load_term_set("drug_fp_terms.yaml", "credentials")
 BIOLOGICAL_ENTITIES: Set[str] = load_term_set("drug_fp_terms.yaml", "biological_entities")
 PHARMA_COMPANY_NAMES: Set[str] = load_term_set("drug_fp_terms.yaml", "pharma_company_names")
 COMMON_WORDS: Set[str] = load_term_set("drug_fp_terms.yaml", "common_words")

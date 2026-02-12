@@ -32,6 +32,7 @@ import re
 from typing import Dict, List, Optional, Set, Tuple
 
 from Z_utils.Z12_data_loader import load_pair_list, load_term_set
+from Z_utils.Z15_lexicon_provider import build_obvious_noise
 
 # =============================================================================
 # LIGHT NOISE FILTERING (High Recall - Let Validation Layer Judge)
@@ -39,7 +40,7 @@ from Z_utils.Z12_data_loader import load_pair_list, load_term_set
 # Philosophy: Generators should be EXHAUSTIVE. Only block OBVIOUS noise.
 # Claude (D_validation) will handle borderline cases with context awareness.
 
-OBVIOUS_NOISE: Set[str] = load_term_set("noise_filters.yaml", "obvious_noise")
+OBVIOUS_NOISE: Set[str] = set(build_obvious_noise())
 
 # Minimum length (allow 2-char if uppercase like CT, MR, IV)
 MIN_ABBREV_LENGTH = 2

@@ -72,25 +72,7 @@ vaccine_terms:
   - "serogroup"
   - "serotype"
 
-# Credentials and titles (not drugs)
-credentials:
-  - "md"
-  - "phd"
-  - "mph"
-  - "mbbs"
-  - "frcp"
-  - "do"
-  - "rn"
-  - "np"
-  - "pa"
-  - "pharmd"
-  - "dnp"
-  - "dpt"
-  - "ms"
-  - "ma"
-  - "msc"
-  - "bsc"
-  - "ba"
+# NOTE: Credentials (md, phd, etc.) are now in Z_utils.Z15_lexicon_provider.CREDENTIALS
 
 # Biological entities (proteins, complexes, pathways - not drugs)
 biological_entities:

@@ -38,7 +38,8 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from Z_utils.Z12_data_loader import load_list_mapping, load_term_set
+from Z_utils.Z12_data_loader import load_list_mapping
+from Z_utils.Z15_lexicon_provider import build_garbage_tokens
 
 logger = logging.getLogger(__name__)
 
@@ -58,8 +59,8 @@ for _category, _entities in ENTITY_CATEGORIES.items():
     for _entity in _entities:
         ENTITY_TO_CATEGORY[_entity] = _category
 
-# Stopwords/garbage tokens to filter out (loaded from YAML)
-GARBAGE_TOKENS = load_term_set("biomedical_ner_data.yaml", "garbage_tokens")
+# Stopwords/garbage tokens to filter out (library stopwords + domain YAML)
+GARBAGE_TOKENS = set(build_garbage_tokens())
 
 
 @dataclass

@@ -776,9 +776,9 @@ class FeasibilityDetector:
     def _normalize_endpoint_fingerprint(self, text: str) -> str:
         """Create normalized fingerprint for endpoint deduplication."""
         # Lowercase, remove stopwords and punctuation
-        stopwords = {"was", "is", "the", "a", "an", "were", "are", "to", "at", "of", "in"}
+        from Z_utils.Z15_lexicon_provider import ENGLISH_STOPWORDS
         words = re.sub(r'[^\w\s]', '', text.lower()).split()
-        return " ".join(w for w in words if w not in stopwords)[:50]
+        return " ".join(w for w in words if w not in ENGLISH_STOPWORDS)[:50]
 
     def _extract_endpoints(
         self,
