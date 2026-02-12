@@ -179,7 +179,7 @@ class VisualPipelineIntegration:
 
         # Get detection mode from visual_detection section
         detection_mode = visual_detection_cfg.get("mode", "vlm-only")
-        detection_model = visual_detection_cfg.get("model", "claude-sonnet-4-20250514")
+        detection_model = visual_detection_cfg.get("model", "claude-sonnet-4-5-20250929")
 
         logger.info(f"Visual detection mode: {detection_mode}")
 
@@ -191,7 +191,7 @@ class VisualPipelineIntegration:
             caption_zones=caption_zones,
             triage=triage,
             enable_vlm=vlm_cfg.get("enabled", True),
-            vlm_model=vlm_cfg.get("model", "claude-sonnet-4-20250514"),
+            vlm_model=vlm_cfg.get("model", ""),
             validate_tables=vlm_cfg.get("validate_tables", True),
             generate_vlm_descriptions=vlm_cfg.get("generate_descriptions", True),
             merge_multipage=resolution_cfg.get("merge_multipage", True),

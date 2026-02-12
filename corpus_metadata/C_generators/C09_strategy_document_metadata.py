@@ -455,7 +455,7 @@ class DocumentMetadataStrategy:
         self,
         document_types_path: Optional[str] = None,
         llm_client: Optional[Any] = None,
-        llm_model: str = "claude-sonnet-4-20250514",
+        llm_model: str = "claude-sonnet-4-5-20250929",
         run_id: Optional[str] = None,
         pipeline_version: Optional[str] = None,
     ):
@@ -985,7 +985,7 @@ def extract_document_metadata(
     doc_graph: Optional[DocumentGraph] = None,
     document_types_path: Optional[str] = None,
     llm_client: Optional[Any] = None,
-    llm_model: str = "claude-sonnet-4-20250514",
+    llm_model: str = "claude-sonnet-4-5-20250929",
 ) -> DocumentMetadata:
     """
     Convenience function to extract document metadata.

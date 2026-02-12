@@ -706,7 +706,7 @@ api:
 
     # Validation model - For final validation & enrichment (best quality)
     validation:
-      model: "claude-sonnet-4-20250514"
+      model: "claude-sonnet-4-5-20250929"
       max_tokens: 450
       temperature: 0
       top_p: 1.0
@@ -715,7 +715,7 @@ api:
     batch_delay_ms: 100
 
     # Legacy (backward compatibility)
-    model: "claude-sonnet-4-20250514"
+    model: "claude-sonnet-4-5-20250929"
     max_tokens: 1500
     temperature: 0
 
@@ -735,14 +735,14 @@ api:
       ocr_text_fallback: "claude-haiku-4-5-20251001"
       author_extraction: "claude-haiku-4-5-20251001"
 
-      # Complex tasks -> Sonnet 4 ($3/$15 per MTok) — best reasoning
-      feasibility_extraction: "claude-sonnet-4-20250514"
-      recommendation_extraction: "claude-sonnet-4-20250514"
-      recommendation_vlm: "claude-sonnet-4-20250514"
-      vlm_table_extraction: "claude-sonnet-4-20250514"
-      flowchart_analysis: "claude-sonnet-4-20250514"
-      chart_analysis: "claude-sonnet-4-20250514"
-      vlm_detection: "claude-sonnet-4-20250514"
+      # Complex tasks -> Sonnet 4.5 ($3/$15 per MTok) — best reasoning
+      feasibility_extraction: "claude-sonnet-4-5-20250929"
+      recommendation_extraction: "claude-sonnet-4-5-20250929"
+      recommendation_vlm: "claude-sonnet-4-5-20250929"
+      vlm_table_extraction: "claude-sonnet-4-5-20250929"
+      flowchart_analysis: "claude-sonnet-4-5-20250929"
+      chart_analysis: "claude-sonnet-4-5-20250929"
+      vlm_detection: "claude-sonnet-4-5-20250929"
 
 # ==============================================================================
 # NCT ENRICHER CONFIGURATION
@@ -957,7 +957,7 @@ extraction_pipeline:
     #   - "hybrid": VLM with heuristic fallback (best quality, highest cost)
     visual_detection:
       mode: "layout-aware"          # Detection method (layout-aware, vlm-only, hybrid, heuristic)
-      model: "claude-sonnet-4-20250514"  # VLM model for detection
+      model: "claude-sonnet-4-5-20250929"  # VLM model for detection
 
     # Detection settings (used when mode is "heuristic" or "hybrid")
     detection:
@@ -984,7 +984,7 @@ extraction_pipeline:
     # VLM enrichment
     vlm:
       enabled: true                 # Use VLM for classification/validation
-      model: "claude-sonnet-4-20250514"
+      model: "claude-sonnet-4-5-20250929"
       validate_tables: true         # Validate Docling table structure
 
     # Resolution settings

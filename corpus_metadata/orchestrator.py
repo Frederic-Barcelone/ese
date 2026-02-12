@@ -199,7 +199,7 @@ class Orchestrator:
         api_cfg = self.config.get("api", {}).get("claude", {})
         val_cfg = api_cfg.get("validation", {})
 
-        self.model = model or val_cfg.get("model", "claude-sonnet-4-20250514")
+        self.model = model or val_cfg.get("model", "claude-sonnet-4-5-20250929")
         self.batch_delay_ms = api_cfg.get("batch_delay_ms", 100)
 
         self.run_id = run_id or generate_run_id("RUN")

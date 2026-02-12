@@ -53,7 +53,7 @@ class TestBaseProvenanceMetadata:
     def test_base_provenance_with_llm_config(self):
         """Test that BaseProvenanceMetadata works with LLM config."""
         llm_config = LLMParameters(
-            model_name="claude-sonnet-4-20250514",
+            model_name="claude-sonnet-4-5-20250929",
             temperature=0.0,
             max_tokens=1024,
             top_p=1.0,
@@ -73,7 +73,7 @@ class TestBaseProvenanceMetadata:
         )
 
         assert prov.llm_config is not None
-        assert prov.llm_config.model_name == "claude-sonnet-4-20250514"
+        assert prov.llm_config.model_name == "claude-sonnet-4-5-20250929"
         assert prov.llm_config.temperature == 0.0
         assert prov.llm_config.max_tokens == 1024
         assert prov.llm_config.seed == 42

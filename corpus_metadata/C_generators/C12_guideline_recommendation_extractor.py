@@ -72,7 +72,7 @@ class GuidelineRecommendationExtractor(LLMExtractionMixin, VLMExtractionMixin):
     def __init__(
         self,
         llm_client: Any = None,
-        llm_model: str = "claude-sonnet-4-20250514",
+        llm_model: str = "claude-sonnet-4-5-20250929",
         pdf_path: Optional[str] = None,
     ):
         self.llm_client = llm_client

@@ -36,7 +36,7 @@ class TestDiseaseProvenanceHasBaseFields:
             prompt_bundle_hash="prompt_hash_123",
             context_hash="context_hash_456",
             llm_config=LLMParameters(
-                model_name="claude-sonnet-4-20250514",
+                model_name="claude-sonnet-4-5-20250929",
                 temperature=0.0,
                 max_tokens=1000,
                 top_p=1.0,
@@ -79,7 +79,7 @@ class TestDiseaseProvenanceHasBaseFields:
     def test_llm_config_exists(self, disease_provenance: DiseaseProvenanceMetadata):
         """Verify llm_config field exists."""
         assert disease_provenance.llm_config is not None
-        assert disease_provenance.llm_config.model_name == "claude-sonnet-4-20250514"
+        assert disease_provenance.llm_config.model_name == "claude-sonnet-4-5-20250929"
 
     def test_timestamp_auto_populated(self, disease_provenance: DiseaseProvenanceMetadata):
         """Verify timestamp is auto-populated."""

@@ -18,7 +18,7 @@ Example:
     >>> class MyExtractor(LLMExtractionMixin):
     ...     def __init__(self):
     ...         self.llm_client = anthropic.Anthropic()
-    ...         self.llm_model = "claude-sonnet-4-20250514"
+    ...         self.llm_model = "claude-sonnet-4-5-20250929"
     >>> extractor = MyExtractor()
     >>> recommendations = extractor._extract_with_llm(text, "guidelines")
 

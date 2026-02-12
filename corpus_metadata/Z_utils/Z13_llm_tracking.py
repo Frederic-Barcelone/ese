@@ -17,7 +17,7 @@ Key Components:
 Example:
     >>> from Z_utils.Z13_llm_tracking import get_usage_tracker, calc_record_cost
     >>> tracker = get_usage_tracker()
-    >>> tracker.record("claude-sonnet-4-20250514", 1000, 200, "validation")
+    >>> tracker.record("claude-sonnet-4-5-20250929", 1000, 200, "validation")
     >>> print(f"Cost: ${tracker.estimated_cost():.4f}")
 
 Dependencies:
@@ -234,7 +234,7 @@ def get_usage_tracker() -> LLMUsageTracker:
 _model_tier_cache: Optional[Dict[str, str]] = None
 
 
-def resolve_model_tier(call_type: str, default_model: str = "claude-sonnet-4-20250514") -> str:
+def resolve_model_tier(call_type: str, default_model: str = "claude-sonnet-4-5-20250929") -> str:
     """Resolve the model to use for a given call type from config.yaml tiers.
 
     Loads model_tiers from config once and caches. Falls back to default_model

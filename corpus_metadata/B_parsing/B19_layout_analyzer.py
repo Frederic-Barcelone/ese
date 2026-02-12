@@ -300,7 +300,7 @@ def _parse_visual_zone(item: dict) -> Optional[VisualZone]:
 def analyze_document_layouts(
     pdf_path: str,
     client: anthropic.Anthropic,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "claude-sonnet-4-5-20250929",
     pages: Optional[list[int]] = None,
 ) -> list[PageLayout]:
     """
@@ -1679,7 +1679,7 @@ def analyze_document_debug(
     pdf_path: str,
     output_dir: str,
     client: Optional[anthropic.Anthropic] = None,
-    model: str = "claude-sonnet-4-20250514",
+    model: str = "claude-sonnet-4-5-20250929",
     pages: Optional[List[int]] = None,
 ) -> List[dict]:
     """

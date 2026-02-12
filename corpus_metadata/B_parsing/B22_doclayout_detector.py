@@ -697,7 +697,7 @@ def detect_and_crop_all(
     crop_dpi: int = 300,
     confidence_threshold: float = 0.3,
     enable_vlm: bool = True,
-    vlm_model: str = "claude-sonnet-4-20250514",
+    vlm_model: str = "",
 ) -> Dict:
     """
     Detect all visuals and save high-resolution crops.

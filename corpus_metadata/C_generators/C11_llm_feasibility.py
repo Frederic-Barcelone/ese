@@ -18,7 +18,7 @@ Key Components:
 
 Example:
     >>> from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
-    >>> extractor = LLMFeasibilityExtractor(config={"model": "claude-sonnet-4-20250514"})
+    >>> extractor = LLMFeasibilityExtractor(config={"model": "claude-sonnet-4-5-20250929"})
     >>> candidates = extractor.extract(doc_graph, "doc_123", "fingerprint")
     >>> for c in candidates:
     ...     print(f"{c.field_type}: {c.value}")
@@ -76,7 +76,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
     def __init__(
         self,
         llm_client: Any,
-        llm_model: str = "claude-sonnet-4-20250514",
+        llm_model: str = "claude-sonnet-4-5-20250929",
         config: Optional[Dict[str, Any]] = None,
     ):
         self.llm_client = llm_client

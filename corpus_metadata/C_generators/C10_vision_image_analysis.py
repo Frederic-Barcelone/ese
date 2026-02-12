@@ -13,7 +13,7 @@ Key Components:
 
 Example:
     >>> from C_generators.C10_vision_image_analysis import VisionImageAnalyzer
-    >>> analyzer = VisionImageAnalyzer(config={"model": "claude-sonnet-4-20250514"})
+    >>> analyzer = VisionImageAnalyzer(config={"model": "claude-sonnet-4-5-20250929"})
     >>> flow_data = analyzer.analyze_flowchart(image_base64)
     >>> print(f"Screened: {flow_data.screened}, Randomized: {flow_data.randomized}")
     Screened: 500, Randomized: 350
@@ -312,7 +312,7 @@ class VisionImageAnalyzer:
     def __init__(
         self,
         llm_client: Any,
-        llm_model: str = "claude-sonnet-4-20250514",
+        llm_model: str = "claude-sonnet-4-5-20250929",
     ):
         self.llm_client = llm_client
         self.llm_model = llm_model

@@ -114,7 +114,7 @@ class ComponentFactory:
         # API settings
         api_cfg = config.get("api", {}).get("claude", {})
         self.val_cfg = api_cfg.get("validation", {})
-        self.default_model = self.val_cfg.get("model", "claude-sonnet-4-20250514")
+        self.default_model = self.val_cfg.get("model", "claude-sonnet-4-5-20250929")
 
         # Options from config
         pipeline_cfg = config.get("extraction_pipeline", {}).get("options", {})
@@ -284,7 +284,7 @@ class ComponentFactory:
         from C_generators.C15_vlm_table_extractor import VLMTableExtractor
         return VLMTableExtractor(
             llm_client=claude_client,
-            llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
+            llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-5-20250929"),
             config={"run_id": self.run_id},
         )
 
@@ -446,7 +446,7 @@ class ComponentFactory:
         from C_generators.C11_llm_feasibility import LLMFeasibilityExtractor
         return LLMFeasibilityExtractor(
             llm_client=claude_client,
-            llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-20250514"),
+            llm_model=self.config.get("llm", {}).get("model", "claude-sonnet-4-5-20250929"),
             config={"run_id": self.run_id},
         )
 

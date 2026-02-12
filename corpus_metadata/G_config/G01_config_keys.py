@@ -268,7 +268,7 @@ class LLMConfig(ConfigKeyBase):
     Used within the 'llm' section.
     """
 
-    MODEL = ("model", "claude-sonnet-4-20250514", "LLM model identifier")
+    MODEL = ("model", "claude-sonnet-4-5-20250929", "LLM model identifier")
     TEMPERATURE = ("temperature", 0.0, "LLM temperature")
     MAX_TOKENS = ("max_tokens", 4096, "Maximum output tokens")
 

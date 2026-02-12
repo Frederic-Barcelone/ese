@@ -15,7 +15,7 @@ Key Components:
 
 Example:
     >>> from C_generators.C15_vlm_table_extractor import VLMTableExtractor
-    >>> extractor = VLMTableExtractor(config={"model": "claude-sonnet-4-20250514"})
+    >>> extractor = VLMTableExtractor(config={"model": "claude-sonnet-4-5-20250929"})
     >>> table_data = extractor.extract(image_base64, table_context)
     >>> for row in table_data.rows:
     ...     print(row)
@@ -181,7 +181,7 @@ Return valid JSON only, no additional text."""
     def __init__(
         self,
         llm_client: Any,
-        llm_model: str = "claude-sonnet-4-20250514",
+        llm_model: str = "claude-sonnet-4-5-20250929",
         config: Optional[Dict[str, Any]] = None,
     ):
         """
@@ -332,7 +332,7 @@ Return valid JSON only, no additional text."""
 def extract_table_with_vlm(
     image_base64: str,
     llm_client: Any,
-    llm_model: str = "claude-sonnet-4-20250514",
+    llm_model: str = "claude-sonnet-4-5-20250929",
 ) -> Dict[str, Any]:
     """
     Extract table structure from image using VLM.

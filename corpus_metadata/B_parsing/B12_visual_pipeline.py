@@ -94,7 +94,7 @@ class PipelineConfig:
     # Detection mode: "doclayout" (recommended), "heuristic", or "hybrid"
     # "doclayout" uses DocLayout-YOLO for accurate detection without VLM
     detection_mode: str = "doclayout"
-    detection_model: str = "claude-sonnet-4-20250514"  # Only used for VLM enrichment
+    detection_model: str = "claude-sonnet-4-5-20250929"  # Only used for VLM enrichment
 
     # DocLayout-YOLO settings
     doclayout_detect_dpi: int = 144
@@ -114,7 +114,7 @@ class PipelineConfig:
 
     # VLM enrichment (separate from detection)
     enable_vlm: bool = True
-    vlm_model: str = "claude-sonnet-4-20250514"
+    vlm_model: str = ""
     validate_tables: bool = True
     generate_vlm_descriptions: bool = True  # Generate VLM title/description for visuals
 
@@ -179,7 +179,7 @@ class VisualExtractionPipeline:
 
                 vlm_config = VLMConfig(model=self.config.vlm_model)
                 self._vlm_client = VLMClient(vlm_config)
-                logger.info(f"VLM client initialized with model: {self.config.vlm_model}")
+                logger.info(f"VLM client initialized with model: {vlm_config.model}")
             except ImportError as e:
                 logger.warning(
                     f"VLM client not available: {e}. "

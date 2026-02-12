@@ -14,7 +14,7 @@ Key Components:
 
 Example:
     >>> from D_validation.D02_llm_engine import LLMEngine, ClaudeClient
-    >>> client = ClaudeClient(model="claude-sonnet-4-20250514")
+    >>> client = ClaudeClient(model="claude-sonnet-4-5-20250929")
     >>> engine = LLMEngine(client=client)
     >>> results = engine.verify_batch(candidates, doc_context)
     >>> for result in results:
@@ -178,7 +178,7 @@ class ClaudeClient:
             )
 
         # Resolve model params: param > config > defaults
-        self.default_model = model or cfg.get("model", "claude-sonnet-4-20250514")
+        self.default_model = model or cfg.get("model", "claude-sonnet-4-5-20250929")
         self.default_max_tokens = max_tokens or cfg.get("max_tokens", 1024)
         self.default_temperature = (
             temperature if temperature is not None else cfg.get("temperature", 0.0)
@@ -554,7 +554,7 @@ class LLMEngine:
         self,
         llm_client: LLMClient,
         *,
-        model: str = "claude-sonnet-4-20250514",
+        model: str = "claude-sonnet-4-5-20250929",
         prompt_version: str = "latest",
         temperature: float = 0.0,
         max_tokens: int = 450,
@@ -692,7 +692,7 @@ class LLMEngine:
     def fast_reject_batch(
         self,
         candidates: List[Candidate],
-        haiku_model: str = "claude-3-5-haiku-20241022",
+        haiku_model: str = "claude-haiku-4-5-20251001",
         batch_size: int = 20,
     ) -> Tuple[List[Candidate], List[ExtractedEntity]]:
         """Use Haiku to fast-reject obvious non-abbreviations."""

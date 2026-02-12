@@ -116,7 +116,7 @@ class AbbreviationPipeline:
         rare_disease_lookup: Optional[Dict[str, str]] = None,
         use_vlm_tables: bool = False,
         use_normalization: bool = True,
-        model: str = "claude-sonnet-4-20250514",
+        model: str = "claude-sonnet-4-5-20250929",
     ) -> None:
         """
         Initialize the abbreviation pipeline.

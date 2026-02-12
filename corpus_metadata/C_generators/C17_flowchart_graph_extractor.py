@@ -123,7 +123,7 @@ class FlowchartGraphExtractor:
     def __init__(
         self,
         llm_client: Any,
-        llm_model: str = "claude-sonnet-4-20250514",
+        llm_model: str = "claude-sonnet-4-5-20250929",
     ):
         self.llm_client = llm_client
         self.llm_model = llm_model
@@ -339,7 +339,7 @@ class FlowchartGraphExtractor:
 def extract_care_pathway_from_figure(
     image_base64: str,
     llm_client: Any,
-    llm_model: str = "claude-sonnet-4-20250514",
+    llm_model: str = "claude-sonnet-4-5-20250929",
     ocr_text: Optional[str] = None,
     caption: Optional[str] = None,
     figure_id: Optional[str] = None,
