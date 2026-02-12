@@ -524,6 +524,13 @@ class AuthorDetector:
             ):
                 continue
 
+            # Skip segments containing institution keywords or non-name punctuation
+            segment_words = set(segment.lower().split())
+            if segment_words & self.INSTITUTION_KEYWORDS:
+                continue
+            if re.search(r"[:@!]", segment):
+                continue
+
             # Try to parse as a name
             # Pattern: First [Middle...] Last
             # Where Middle can be initials (K S) or full names
@@ -630,6 +637,23 @@ class AuthorDetector:
         """Normalize name for deduplication."""
         return " ".join(name.lower().split())
 
+    # Institution / non-person keywords — if any word (case-insensitive) appears
+    # in a candidate name, it is almost certainly not a person.
+    INSTITUTION_KEYWORDS = {
+        "university", "hospital", "institute", "institutet", "infirmary",
+        "centre", "center", "college", "school", "faculty", "department",
+        "clinic", "laboratory", "programme", "program", "foundation",
+        "academy", "association", "society", "corporation", "company",
+        "region", "national", "international", "education", "research",
+        "medical", "sciences", "science", "medicine", "cardiology",
+        "rheumatology", "neurology", "oncology", "radiology", "pathology",
+        "sweden", "norway", "denmark", "finland", "germany", "france",
+        "spain", "italy", "netherlands", "belgium", "austria", "switzerland",
+        "england", "scotland", "ireland", "wales", "canada", "australia",
+        "nhs", "nih", "inserm", "cnrs",
+        "correspondence", "corresponding",
+    }
+
     def _is_valid_name(self, name: str) -> bool:
         """Check if name appears to be a valid person name."""
         parts = name.split()
@@ -651,6 +675,26 @@ class AuthorDetector:
         # Name should have reasonable length
         if len(name) < 5 or len(name) > 60:
             return False
+
+        # Reject institution / non-person names
+        name_lower = name.lower()
+        for keyword in self.INSTITUTION_KEYWORDS:
+            if keyword in name_lower.split():
+                return False
+
+        # Reject if contains non-name punctuation (colons, @, exclamation in middle)
+        if re.search(r"[:@!]", name):
+            return False
+
+        # Reject if more than 4 words (person names rarely exceed 4 tokens)
+        if len(parts) > 5:
+            return False
+
+        # Each part of a person name should be alpha (allow hyphens and periods)
+        for part in parts:
+            cleaned = part.replace("-", "").replace(".", "").replace("'", "")
+            if not cleaned.isalpha():
+                return False
 
         return True
 
