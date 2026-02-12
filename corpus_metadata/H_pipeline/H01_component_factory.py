@@ -364,6 +364,7 @@ class ComponentFactory:
                 "enable_rare_disease_acronyms": disease_cfg.get("enable_rare_disease_acronyms", True),
                 "enable_scispacy": disease_cfg.get("enable_scispacy", True),
                 "enable_symptoms": disease_cfg.get("enable_symptoms", True),
+                "filter_symptom_diseases": disease_cfg.get("filter_symptom_diseases", True),
                 "context_window": disease_cfg.get("context_window", 300),
             }
         )
@@ -407,14 +408,17 @@ class ComponentFactory:
             }
         )
 
-    def create_author_detector(self) -> "AuthorDetector":
+    def create_author_detector(
+        self, claude_client: Optional["ClaudeClient"] = None
+    ) -> "AuthorDetector":
         """Create author detection component."""
         from C_generators.C13_strategy_author import AuthorDetector
         return AuthorDetector(
             config={
                 "run_id": self.run_id,
                 "pipeline_version": self.pipeline_version,
-            }
+            },
+            llm_client=claude_client,
         )
 
     def create_citation_detector(self) -> "CitationDetector":
