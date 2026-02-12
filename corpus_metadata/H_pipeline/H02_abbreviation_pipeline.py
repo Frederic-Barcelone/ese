@@ -623,7 +623,7 @@ class AbbreviationPipeline:
             print(f"  Fast-reject pre-screening {len(lexicon_candidates)} lexicon candidates...")
             try:
                 needs_review, rejected = self.llm_engine.fast_reject_batch(
-                    lexicon_candidates, haiku_model=haiku_model, batch_size=20
+                    lexicon_candidates, haiku_model=haiku_model, batch_size=40
                 )
                 fast_rejected_count = len(rejected)
                 results.extend(rejected)
@@ -640,7 +640,7 @@ class AbbreviationPipeline:
             try:
                 val_start = time.time()
                 batch_results = self.llm_engine.verify_candidates_batch(
-                    explicit_candidates, batch_size=10, delay_ms=batch_delay_ms
+                    explicit_candidates, batch_size=15, delay_ms=batch_delay_ms
                 )
                 elapsed_ms = (time.time() - val_start) * 1000
 
@@ -669,7 +669,7 @@ class AbbreviationPipeline:
             try:
                 val_start = time.time()
                 batch_results = self.llm_engine.verify_candidates_batch(
-                    lexicon_candidates, batch_size=15, delay_ms=batch_delay_ms
+                    lexicon_candidates, batch_size=25, delay_ms=batch_delay_ms
                 )
                 elapsed_ms = (time.time() - val_start) * 1000
 
@@ -797,11 +797,11 @@ class AbbreviationPipeline:
             return []
         results = []
 
-        # Sample chunks
+        # Sample chunks (first 9KB covers abstract + intro + methods where most abbreviations are defined)
         chunk_size = 3000
         text_chunks = [
             full_text[i : i + chunk_size]
-            for i in range(0, min(len(full_text), 15000), chunk_size)
+            for i in range(0, min(len(full_text), 9000), chunk_size)
         ]
 
         sf_extraction_prompt = """You are an expert at identifying medical/scientific abbreviations and their definitions in text.
@@ -832,48 +832,49 @@ Return ONLY the JSON array, nothing else."""
         llm_sf_candidates: Dict[str, Optional[str]] = {}  # sf -> lf mapping
         llm_errors = 0
 
-        for i, chunk in enumerate(text_chunks):
-            if i > 0 and delay_ms > 0:
-                time.sleep(delay_ms / 1000)
-            try:
-                prompt = sf_extraction_prompt.format(
-                    already_found=", ".join(sorted(found_sfs)[:50]), text=chunk
-                )
-                response = self.claude_client.complete_json_any(
-                    system_prompt="You are an abbreviation extraction assistant. Return only valid JSON arrays of objects.",
-                    user_prompt=prompt,
-                    model=self.model,
-                    temperature=0.0,
-                    max_tokens=1000,
-                    top_p=1.0,
-                    call_type="sf_only_extraction",
-                )
-                if isinstance(response, list):
-                    for item in response:
-                        if isinstance(item, dict):
-                            sf = item.get("sf", "")
-                            lf = item.get("lf")
-                            if isinstance(sf, str) and sf.strip():
-                                sf_clean = sf.strip()
-                                # Keep the LF if we found one, or update if new one is better
-                                if sf_clean not in llm_sf_candidates or (
-                                    lf and not llm_sf_candidates.get(sf_clean)
-                                ):
-                                    llm_sf_candidates[sf_clean] = (
-                                        lf.strip()
-                                        if isinstance(lf, str) and lf
-                                        else None
-                                    )
-                        elif isinstance(item, str) and item.strip():
-                            # Backward compatibility: handle plain strings
-                            sf_clean = item.strip()
-                            if sf_clean not in llm_sf_candidates:
-                                llm_sf_candidates[sf_clean] = None
-            except Exception:
-                llm_errors += 1
+        # Concatenate all chunks into a single prompt with section markers
+        combined_text = "\n\n".join(
+            f"---SECTION {i+1}---\n{chunk}" for i, chunk in enumerate(text_chunks)
+        )
+        try:
+            prompt = sf_extraction_prompt.format(
+                already_found=", ".join(sorted(found_sfs)[:50]), text=combined_text
+            )
+            response = self.claude_client.complete_json_any(
+                system_prompt="You are an abbreviation extraction assistant. Return only valid JSON arrays of objects.",
+                user_prompt=prompt,
+                model=self.model,
+                temperature=0.0,
+                max_tokens=2000,
+                top_p=1.0,
+                call_type="sf_only_extraction",
+            )
+            if isinstance(response, list):
+                for item in response:
+                    if isinstance(item, dict):
+                        sf = item.get("sf", "")
+                        lf = item.get("lf")
+                        if isinstance(sf, str) and sf.strip():
+                            sf_clean = sf.strip()
+                            # Keep the LF if we found one, or update if new one is better
+                            if sf_clean not in llm_sf_candidates or (
+                                lf and not llm_sf_candidates.get(sf_clean)
+                            ):
+                                llm_sf_candidates[sf_clean] = (
+                                    lf.strip()
+                                    if isinstance(lf, str) and lf
+                                    else None
+                                )
+                    elif isinstance(item, str) and item.strip():
+                        # Backward compatibility: handle plain strings
+                        sf_clean = item.strip()
+                        if sf_clean not in llm_sf_candidates:
+                            llm_sf_candidates[sf_clean] = None
+        except Exception:
+            llm_errors += 1
 
         print(
-            f"    LLM chunks: {len(text_chunks)}, errors: {llm_errors}, candidates: {len(llm_sf_candidates)}"
+            f"    LLM sf_only: {len(text_chunks)} sections (1 call), errors: {llm_errors}, candidates: {len(llm_sf_candidates)}"
         )
 
         # Validate and add LLM-found SFs

@@ -874,7 +874,7 @@ class LLMEngine:
         for c in batch:
             cid = str(c.id)
             id_to_candidate[cid] = c
-            context = (c.context_text or "")[:400]
+            context = (c.context_text or "")[:200]
 
             source = "UNKNOWN"
             if c.generator_type:

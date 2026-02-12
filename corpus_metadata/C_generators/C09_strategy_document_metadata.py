@@ -38,7 +38,7 @@ import re
 import stat
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -523,15 +523,11 @@ class DocumentMetadataStrategy:
             file_meta=file_meta,
         )
 
-        # 5. Classify document (LLM)
+        # 5+6. Classify document and generate descriptions (single LLM call)
         classification = None
-        if self.llm_client and content_sample:
-            classification = self._classify_document(filename, content_sample)
-
-        # 6. Generate descriptions (LLM)
         description = None
         if self.llm_client and content_sample:
-            description = self._generate_descriptions(
+            classification, description = self._classify_and_describe(
                 filename=filename,
                 content=content_sample,
                 pdf_title=pdf_meta.title if pdf_meta else None,
@@ -769,6 +765,147 @@ class DocumentMetadataStrategy:
             result.primary_date = result.file_system_modified
 
         return result
+
+    def _classify_and_describe(
+        self,
+        filename: str,
+        content: str,
+        pdf_title: Optional[str] = None,
+    ) -> Tuple[Optional[DocumentClassification], Optional[DocumentDescription]]:
+        """Classify document and generate descriptions in a single LLM call."""
+        if not self.llm_client:
+            return None, None
+
+        types_list = self.type_registry.get_types_for_prompt()
+        title_hint = f"\nPDF title metadata: {pdf_title}" if pdf_title else ""
+
+        system_prompt = """You are a document analyst for clinical research documents.
+Perform TWO tasks:
+1. Classify the document into ONE of the provided document types
+2. Generate a title and descriptions
+
+Respond in JSON format:
+{
+    "classification": {
+        "primary_code": "PRO",
+        "primary_confidence": 0.85,
+        "reasoning": "Brief explanation",
+        "alternatives": [
+            {"code": "AME", "confidence": 0.3}
+        ]
+    },
+    "description": {
+        "title": "Concise document title",
+        "short_description": "1-2 sentence summary",
+        "long_description": "Detailed paragraph about the document content and purpose",
+        "key_topics": ["topic1", "topic2", "topic3"],
+        "language": "en"
+    }
+}
+
+Be specific and accurate. Extract the actual title if visible in the content."""
+
+        user_prompt = f"""Document types available:
+{types_list}
+
+---
+Filename: {filename}{title_hint}
+
+Content sample:
+{content[:4000]}
+
+---
+Classify this document and generate descriptions. Return JSON only."""
+
+        try:
+            if hasattr(self.llm_client, "complete_json_any"):
+                response = self.llm_client.complete_json_any(
+                    system_prompt=system_prompt,
+                    user_prompt=user_prompt,
+                    model=self.llm_model,
+                    temperature=0.0,
+                    max_tokens=1000,
+                    call_type="document_classification",
+                )
+            else:
+                response = self.llm_client.complete_json(
+                    system_prompt=system_prompt,
+                    user_prompt=user_prompt,
+                    model=self.llm_model,
+                    temperature=0.0,
+                    max_tokens=1000,
+                    call_type="document_classification",
+                )
+
+            if not response:
+                return None, None
+
+            if isinstance(response, list):
+                if len(response) > 0 and isinstance(response[0], dict):
+                    response = response[0]
+                else:
+                    return None, None
+
+            if not isinstance(response, dict):
+                return None, None
+
+            # Parse classification
+            classification = None
+            cls_data = response.get("classification", response)
+            primary_code = cls_data.get("primary_code") or cls_data.get("code", "")
+            primary_conf = float(cls_data.get("primary_confidence") or cls_data.get("confidence", 0.5))
+            reasoning = cls_data.get("reasoning", "")
+
+            type_info = self.type_registry.get_type_by_code(primary_code)
+            if type_info:
+                logger.info("Classification: %s - %s (conf: %.2f)", primary_code, type_info['name'], primary_conf)
+                primary_type = DocumentType(
+                    code=type_info["code"],
+                    name=type_info["name"],
+                    group=type_info.get("group", "Unknown"),
+                    description=type_info.get("desc"),
+                    confidence=primary_conf,
+                )
+                alternatives = []
+                for alt in cls_data.get("alternatives", [])[:3]:
+                    alt_code = alt.get("code", "")
+                    alt_info = self.type_registry.get_type_by_code(alt_code)
+                    if alt_info:
+                        alternatives.append(DocumentType(
+                            code=alt_info["code"],
+                            name=alt_info["name"],
+                            group=alt_info.get("group", "Unknown"),
+                            confidence=float(alt.get("confidence", 0.3)),
+                        ))
+                classification = DocumentClassification(
+                    primary_type=primary_type,
+                    alternative_types=alternatives,
+                    llm_reasoning=reasoning,
+                    classification_method="llm",
+                )
+
+            # Parse description
+            description = None
+            desc_data = response.get("description", response)
+            title = desc_data.get("title", filename)
+            title_source = "llm"
+            if pdf_title and title.lower() == pdf_title.lower():
+                title_source = "pdf_metadata"
+            if desc_data.get("short_description") or desc_data.get("long_description"):
+                description = DocumentDescription(
+                    title=title,
+                    title_source=title_source,
+                    short_description=desc_data.get("short_description", ""),
+                    long_description=desc_data.get("long_description", ""),
+                    key_topics=desc_data.get("key_topics", [])[:10],
+                    language=desc_data.get("language", "en"),
+                    llm_model=self.llm_model,
+                )
+
+            return classification, description
+        except Exception as e:
+            logger.warning("Document classification+description failed: %s", e)
+            return None, None
 
     def _classify_document(
         self,

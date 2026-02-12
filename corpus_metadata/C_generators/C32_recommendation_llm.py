@@ -73,13 +73,62 @@ class LLMExtractionMixin:
         _apply_vlm_codes_to_recommendations: Any
         extract_loe_sor_with_vlm: Any
 
+    # System prompt for recommendation extraction — expanded to >=1024 tokens
+    # so Anthropic prompt caching applies (system prompt reads at 10% input cost).
+    _RECOMMENDATION_SYSTEM_PROMPT = (
+        "You are a clinical guideline recommendation extraction specialist. "
+        "Your task is to extract structured clinical recommendations from guideline documents.\n\n"
+        + RECOMMENDATION_EXTRACTION_PROMPT
+        + "\n\n"
+        "ADDITIONAL FIELD DEFINITIONS:\n"
+        "- rec_number: The sequential number of the recommendation (1, 2, 3...)\n"
+        "- population: The patient population the recommendation applies to (e.g., 'patients with active AAV')\n"
+        "- condition: The specific disease context — 'new-onset', 'relapsing', 'refractory', or null\n"
+        "- severity: Disease severity — 'organ-threatening', 'life-threatening', 'severe', 'non-severe', or null\n"
+        "- action: The recommended clinical action or treatment\n"
+        "- preferred: The preferred treatment option if explicitly stated, otherwise null\n"
+        "- alternatives: Array of alternative treatments mentioned, empty array if none\n"
+        "- taper_target: Target dose reduction (e.g., '7.5 mg/day by 3 months'), null if not stated\n"
+        "- duration: Treatment duration if stated (e.g., '6-12 months'), null if not stated\n"
+        "- loe_code: Raw Level of Evidence code from the table (e.g., '1a', '2b', '5', 'na')\n"
+        "- sor_code: Raw Strength of Recommendation grade (e.g., 'A', 'B', 'C')\n"
+        "- evidence_level: Interpreted evidence level — 'high', 'moderate', 'low', 'very_low', 'expert_opinion'\n"
+        "- strength: Interpreted recommendation strength — 'strong', 'conditional', 'weak'\n"
+        "- source_text: The exact original text of the recommendation as it appears in the document\n"
+        "- dosing: Array of drug dosing information objects, each with:\n"
+        "  - drug_name (required): Name of the drug\n"
+        "  - dose_range: Dose range (e.g., '500-1000 mg')\n"
+        "  - starting_dose: Initial dose if specified\n"
+        "  - maintenance_dose: Ongoing dose if specified\n"
+        "  - max_dose: Maximum dose if specified\n"
+        "  - route: Administration route (e.g., 'IV', 'oral', 'subcutaneous')\n"
+        "  - frequency: Dosing frequency (e.g., 'twice weekly', 'every 6 months')\n\n"
+        "ORGANIZATION DETECTION:\n"
+        "Identify the publishing organization from these known bodies: "
+        "EULAR, ACR, NICE, BSR, KDIGO, FDA, EMA, AHA, ESC, WHO, ACCF.\n\n"
+        "EVIDENCE LEVEL MAPPING (Oxford Centre for Evidence-Based Medicine):\n"
+        "Level 1a: Systematic review of RCTs → high\n"
+        "Level 1b: Individual RCT → high\n"
+        "Level 2a: Systematic review of cohort studies → moderate\n"
+        "Level 2b: Individual cohort study → moderate\n"
+        "Level 3a: Systematic review of case-control studies → low\n"
+        "Level 3b: Individual case-control study → low\n"
+        "Level 4: Case series, poor-quality cohort → very_low\n"
+        "Level 5: Expert opinion without critical appraisal → expert_opinion\n\n"
+        "STRENGTH OF RECOMMENDATION MAPPING:\n"
+        "Grade A: Consistent level 1 studies → strong\n"
+        "Grade B: Consistent level 2/3 studies or extrapolations from level 1 → conditional\n"
+        "Grade C: Level 4 studies or extrapolations from level 2/3 → weak\n"
+        "Grade D: Level 5 evidence or troublingly inconsistent studies → weak\n"
+    )
+
     def _extract_with_llm(
         self,
         text: str,
         source: str,
         page_num: Optional[int],
     ) -> Optional[RecommendationSet]:
-        """Extract recommendations using LLM."""
+        """Extract recommendations using LLM via ClaudeClient (with prompt caching)."""
         if not self.llm_client:
             return None
 
@@ -87,48 +136,58 @@ class LLMExtractionMixin:
             # Build context that includes both header and table sections
             context_text = self._build_llm_context(text)
 
-            response = self.llm_client.messages.create(
-                model=self.llm_model,
-                max_tokens=8192,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": f"{RECOMMENDATION_EXTRACTION_PROMPT}\n\n---\nTEXT TO ANALYZE:\n---\n{context_text}",
-                    }
-                ],
-            )
+            user_prompt = f"TEXT TO ANALYZE:\n---\n{context_text}"
 
-            record_api_usage(response, self.llm_model, "recommendation_extraction")
-
-            if response.content and len(response.content) > 0:
-                import json
-                text_response = response.content[0].text.strip()
-
-                # Parse JSON - handle common issues
-                text_response = self._clean_json_response(text_response)
-
-                try:
-                    data = json.loads(text_response)
-                    result = self._parse_llm_response(data, source, page_num)
-                    # Apply VLM-extracted codes to recommendations missing evidence/strength
+            # Use ClaudeClient.complete_json() for model tier routing + prompt caching
+            if hasattr(self.llm_client, "complete_json"):
+                response = self.llm_client.complete_json(
+                    system_prompt=self._RECOMMENDATION_SYSTEM_PROMPT,
+                    user_prompt=user_prompt,
+                    max_tokens=8192,
+                    temperature=0.0,
+                    call_type="recommendation_extraction",
+                )
+                if response:
+                    result = self._parse_llm_response(response, source, page_num)
                     if result:
                         self._apply_vlm_codes_to_recommendations(result)
                     return result
-                except json.JSONDecodeError as je:
-                    # Try to fix common JSON issues
-                    fixed = self._attempt_json_fix(text_response)
-                    if fixed:
-                        data = json.loads(fixed)
+                return None
+            else:
+                # Fallback for non-ClaudeClient (e.g., test mocks)
+                response = self.llm_client.messages.create(
+                    model=self.llm_model,
+                    max_tokens=8192,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": f"{RECOMMENDATION_EXTRACTION_PROMPT}\n\n---\n{user_prompt}",
+                        }
+                    ],
+                )
+                record_api_usage(response, self.llm_model, "recommendation_extraction")
+
+                if response.content and len(response.content) > 0:
+                    import json
+                    text_response = response.content[0].text.strip()
+                    text_response = self._clean_json_response(text_response)
+                    try:
+                        data = json.loads(text_response)
                         result = self._parse_llm_response(data, source, page_num)
-                        # Apply VLM-extracted codes to recommendations missing evidence/strength
                         if result:
                             self._apply_vlm_codes_to_recommendations(result)
                         return result
-                    logger.warning("LLM returned invalid JSON: %s", je)
-                    return None
-
-            # No content in response
-            return None
+                    except json.JSONDecodeError as je:
+                        fixed = self._attempt_json_fix(text_response)
+                        if fixed:
+                            data = json.loads(fixed)
+                            result = self._parse_llm_response(data, source, page_num)
+                            if result:
+                                self._apply_vlm_codes_to_recommendations(result)
+                            return result
+                        logger.warning("LLM returned invalid JSON: %s", je)
+                        return None
+                return None
 
         except Exception as e:
             logger.warning("LLM recommendation extraction failed: %s", e)
