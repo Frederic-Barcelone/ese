@@ -33,6 +33,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from Z_utils.Z13_llm_tracking import calc_record_cost
+
 logger = logging.getLogger(__name__)
 
 
@@ -272,6 +274,11 @@ class UsageTracker:
         estimated_cost_usd: float = 0.0,
     ) -> None:
         """Log a single LLM API call's token usage."""
+        if estimated_cost_usd == 0.0 and (input_tokens or output_tokens):
+            estimated_cost_usd = calc_record_cost(
+                model, input_tokens, output_tokens,
+                cache_read_tokens, cache_creation_tokens,
+            )
         conn = self._get_connection()
         try:
             cursor = conn.cursor()
@@ -299,7 +306,9 @@ class UsageTracker:
             cursor = conn.cursor()
             rows = [
                 (document_id, r.model, r.call_type, r.input_tokens, r.output_tokens,
-                 r.cache_read_tokens, r.cache_creation_tokens, 0.0)
+                 r.cache_read_tokens, r.cache_creation_tokens,
+                 calc_record_cost(r.model, r.input_tokens, r.output_tokens,
+                                  r.cache_read_tokens, r.cache_creation_tokens))
                 for r in records
             ]
             cursor.executemany("""
