@@ -29,7 +29,8 @@
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
-| 2026-02-12 | **$249.40** | — | Initial tracking. Cost reduction deployed (context truncation, batch sizes, sf_only batching, rec caching, metadata merge). |
+| 2026-02-12 | **$249.05** | $0.35 | NLP4RARE 20-doc + BC5CDR 20-doc eval runs. |
+| 2026-02-12 | **$249.40** | — | Initial tracking. Cost reduction deployed. |
 
 ## API Consumption
 
