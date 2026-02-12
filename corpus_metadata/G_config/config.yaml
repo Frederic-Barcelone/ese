@@ -29,7 +29,7 @@ paths:
   cache: "cache"
 
   # Abbreviation extraction paths
-  pdf_input: "gold_data/PAPERS"
+  pdf_input: "Pdfs"
   gold_data: "gold_data"
   papers_folder: "gold_data/PAPERS"
   gold_json: "gold_data/papers_gold_v2.json"
@@ -915,29 +915,29 @@ deduplication:
 extraction_pipeline:
   # Use a preset (overrides individual flags below if set)
   # Set to null or remove to use individual flags
-  preset: null  # Options: drugs_only, diseases_only, genes_only, abbreviations_only,
+  preset: all  # Options: drugs_only, diseases_only, genes_only, abbreviations_only,
                 # feasibility_only, entities_only, clinical_entities, metadata_only,
                 # images_only, tables_only, standard, all, minimal
 
   # Individual extractor flags (used when preset is null)
   extractors:
-    drugs: false
-    diseases: false
-    genes: false
-    abbreviations: false
-    feasibility: false
-    pharma_companies: false
+    drugs: true
+    diseases: true
+    genes: true
+    abbreviations: true
+    feasibility: true
+    pharma_companies: true
     authors: true
     citations: true
-    document_metadata: false
-    tables: false
-    figures: false                   # Figure extraction (charts, flowcharts, diagrams)
+    document_metadata: true
+    tables: true
+    figures: true                   # Figure extraction (charts, flowcharts, diagrams)
 
   # Processing options
   options:
-    use_llm_validation: false     # LLM validation for abbreviations
-    use_llm_feasibility: false    # LLM-based feasibility extraction (vs pattern-based)
-    use_vlm_tables: false         # Vision model for table extraction
+    use_llm_validation: true      # LLM validation for abbreviations
+    use_llm_feasibility: true     # LLM-based feasibility extraction (vs pattern-based)
+    use_vlm_tables: true          # Vision model for table extraction
     use_normalization: true       # Entity normalization/enrichment (RxNorm, MONDO, etc.)
     use_epi_enricher: true        # EpiExtract4GARD-v2 for epidemiology NER (LOC, EPI, STAT)
     use_zeroshot_bioner: true     # ZeroShotBioNER for ADE, dosage, frequency, route extraction
