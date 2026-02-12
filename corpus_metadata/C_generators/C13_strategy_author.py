@@ -132,8 +132,13 @@ class AuthorDetector:
         r"Writing\s+(?:group|committee)",
     ]
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(
+        self,
+        config: Optional[Dict[str, Any]] = None,
+        llm_client: Optional[Any] = None,
+    ):
         self.config = config or {}
+        self.llm_client = llm_client
         self.run_id = str(self.config.get("run_id") or generate_run_id("AUTHOR"))
         self.pipeline_version = (
             self.config.get("pipeline_version") or get_git_revision_hash()
@@ -172,11 +177,19 @@ class AuthorDetector:
         if not full_text:
             return candidates
 
-        # First, try to detect author byline in the first part of document
-        # Journal articles typically have authors listed near the title
-        candidates.extend(
-            self._detect_author_byline(full_text, doc_id, doc_fingerprint, seen_names)
-        )
+        # LLM-based extraction (replaces broken regex byline detection)
+        if self.llm_client:
+            llm_authors = self._extract_authors_llm(full_text, doc_id, doc_fingerprint)
+            for c in llm_authors:
+                normalized = self._normalize_name(c.full_name)
+                if normalized not in seen_names:
+                    seen_names.add(normalized)
+                    candidates.append(c)
+        else:
+            # Fallback: regex byline detection (no LLM available)
+            candidates.extend(
+                self._detect_author_byline(full_text, doc_id, doc_fingerprint, seen_names)
+            )
 
         # Detect role-prefixed names (higher confidence)
         for pattern, role in self.ROLE_PATTERNS:
@@ -274,6 +287,88 @@ class AuthorDetector:
 
         return candidates
 
+    def _extract_authors_llm(
+        self,
+        full_text: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[AuthorCandidate]:
+        """
+        Extract authors using LLM from the first ~2000 chars of text.
+
+        Sends the beginning of the document to Claude Haiku to extract
+        person names that are document authors/investigators.
+        """
+        candidates: List[AuthorCandidate] = []
+        if not self.llm_client:
+            return candidates
+
+        # Use first ~2000 chars where authors typically appear
+        snippet = full_text[:2000]
+
+        system_prompt = (
+            "You are an expert at extracting author names from biomedical documents. "
+            "Extract ONLY real person names that are authors or investigators of this document. "
+            "Do NOT extract institution names, department names, addresses, or place names. "
+            "Return a JSON array of objects with keys: \"full_name\" (string) and \"role\" (string). "
+            "Role should be one of: author, principal_investigator, corresponding_author, co_investigator, unknown. "
+            "If no authors are found, return an empty array []."
+        )
+        user_prompt = f"Extract authors from this document excerpt:\n\n{snippet}"
+
+        try:
+            response = self.llm_client.complete_json_any(
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                temperature=0.0,
+                max_tokens=1000,
+                call_type="author_extraction",
+            )
+
+            if not isinstance(response, list):
+                response = [response] if isinstance(response, dict) else []
+
+            for item in response:
+                if not isinstance(item, dict):
+                    continue
+                name = (item.get("full_name") or "").strip()
+                if not name or not self._is_valid_name(name):
+                    continue
+
+                role_str = (item.get("role") or "author").lower().strip()
+                role_map = {
+                    "principal_investigator": AuthorRoleType.PRINCIPAL_INVESTIGATOR,
+                    "corresponding_author": AuthorRoleType.CORRESPONDING_AUTHOR,
+                    "co_investigator": AuthorRoleType.CO_INVESTIGATOR,
+                    "study_chair": AuthorRoleType.STUDY_CHAIR,
+                    "steering_committee": AuthorRoleType.STEERING_COMMITTEE,
+                }
+                role = role_map.get(role_str, AuthorRoleType.AUTHOR)
+
+                provenance = AuthorProvenanceMetadata(
+                    pipeline_version=self.pipeline_version,
+                    run_id=self.run_id,
+                    doc_fingerprint=doc_fingerprint,
+                    generator_name=AuthorGeneratorType.HEADER_PATTERN,
+                )
+
+                candidate = AuthorCandidate(
+                    doc_id=doc_id,
+                    full_name=name,
+                    role=role,
+                    generator_type=AuthorGeneratorType.HEADER_PATTERN,
+                    context_text=snippet[:200],
+                    context_location=Coordinate(page_num=1, block_id="llm_extraction"),
+                    initial_confidence=0.90,
+                    provenance=provenance,
+                )
+                candidates.append(candidate)
+
+        except Exception as e:
+            logger.warning("LLM author extraction failed: %s", e)
+
+        return candidates
+
     def _detect_author_byline(
         self,
         full_text: str,
@@ -364,7 +459,7 @@ class AuthorDetector:
         # Parse names from the author block
         # Remove common suffixes/markers
         author_block = re.sub(r"\d+,?", "", author_block)  # Remove affiliation numbers
-        author_block = re.sub(r"\†|\‡|§|¶|#", "", author_block)  # Remove symbols
+        author_block = re.sub(r"[\†\‡§¶#''\u2019\u2018\"\"?\u201C\u201D]+", "", author_block)  # Remove symbols and superscript artifacts
         author_block = re.sub(r"\(.*?\)", "", author_block)  # Remove parentheticals
 
         # Handle cases where title and authors are joined without line breaks
@@ -386,6 +481,9 @@ class AuthorDetector:
                         author_block = part_stripped
                         break
 
+        # Split "and" between last two authors (e.g., "Capuano and Antigny")
+        author_block = re.sub(r"\band\b", ",", author_block)
+
         # Find names by splitting on commas or semicolons and parsing each segment
         # This handles complex names with multiple middle initials like "Edwin K S Wong"
         # Also handles journal-style semicolon separation like "Name1, PhD; Name2, MD"
@@ -402,6 +500,9 @@ class AuthorDetector:
 
             # Remove ORCID symbols (® or similar icons that appear after names)
             segment = re.sub(r"[®©™\u00AE\u00A9\u2122\uFFFD]", "", segment).strip()
+
+            # Strip trailing OCR artifacts (superscript markers misread as punctuation)
+            segment = segment.rstrip("''\u2019\u2018\"\"?\u201C\u201D.!").strip()
 
             # Remove trailing credentials (MM, PhD, MD, etc.) from segment
             # This handles "Lihua Guan, PhD" -> "Lihua Guan"
