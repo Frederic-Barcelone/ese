@@ -44,6 +44,10 @@ SECTION_TARGETS: Dict[str, List[str]] = {
     "sites": ["methods", "abstract", "results"],
     "operational_burden": ["patient_journey", "methods", "eligibility"],
     "screening_flow": ["results", "patient_journey", "abstract"],
+    "epidemiology": ["abstract", "introduction", "methods", "results"],
+    "patient_population": ["introduction", "methods", "results", "discussion"],
+    "local_guidelines": ["introduction", "discussion", "epidemiology", "methods", "guidelines", "recommendations", "abstract", "patient_journey", "results"],
+    "patient_journey": ["patient_journey", "methods", "eligibility", "results", "abstract"],
 }
 
 # Maximum chars per section to include
@@ -344,6 +348,189 @@ IMPORTANT:
 Return JSON only."""
 
 
+EPIDEMIOLOGY_PROMPT = """Extract ALL epidemiology and disease burden data from this document.
+
+Look for:
+- Prevalence rates (e.g., "1 in 40,000", "25 per million", "0.5%")
+- Incidence rates (e.g., "1.2 per 100,000 person-years")
+- Mortality data (e.g., "5-year survival 65%", "mortality rate 2.3%")
+- Demographics (age at onset, sex ratio, ethnic distribution)
+- Geographic variation in disease frequency
+- Disease burden statistics (hospitalizations, DALYs)
+
+Return:
+{
+    "epidemiology": [
+        {
+            "data_type": "prevalence" | "incidence" | "mortality" | "demographics" | "burden",
+            "value": "1 in 40,000" (the exact value as stated in the document),
+            "normalized_per_million": 25.0 (normalize to per-million if possible, else null),
+            "geography": "Germany" | "worldwide" | "Europe" | null,
+            "population": "general population" | "children" | "adults" | "males" | null,
+            "time_period": "2023" | "2015-2020" | null,
+            "source": "Fabry Registry" | "population screening" | "WHO" | null,
+            "exact_quote": "REQUIRED: verbatim text from the document",
+            "page": integer (from nearest [PAGE X] marker)
+        }
+    ]
+}
+
+IMPORTANT:
+- Extract ALL epidemiology data mentioned, including from introduction, methods, and discussion sections
+- Include both disease-specific and population-level statistics
+- For prevalence/incidence, always try to compute normalized_per_million:
+  * "1 in 40,000" → 25.0 per million
+  * "3 per 100,000" → 30.0 per million
+  * "0.001%" → 10.0 per million
+- Geography is critical - always extract the country or region if mentioned
+- The exact_quote MUST be verbatim text from the document
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
+Return JSON only."""
+
+
+PATIENT_POPULATION_PROMPT = """Extract patient population and recruitment feasibility data from this document.
+
+Look for:
+- Estimated number of diagnosed patients (in country/region)
+- Estimated number of trial-eligible patients (subset of diagnosed)
+- Patient registry information (name, size, geographic coverage)
+- Diagnostic delay (time from symptom onset to confirmed diagnosis)
+- Referral centres / centres of expertise (count, names, locations)
+- Geographic distribution of patient population
+- Recruitment projections or historical recruitment rates from similar trials
+
+Return:
+{
+    "patient_population": {
+        "estimated_diagnosed_patients": integer or null,
+        "estimated_eligible_patients": integer or null,
+        "eligibility_funnel_ratio": float or null (eligible / diagnosed, e.g., 0.28),
+        "registry_name": "Fabry Registry (Sanofi Genzyme)" or null,
+        "registry_size": integer or null (total patients in registry),
+        "diagnostic_delay_years": float or null (e.g., 13.7),
+        "referral_centres": integer or null (count of specialist centres),
+        "referral_centre_names": ["name1", "name2"] or [],
+        "geographic_distribution": "descriptive text about where patients are located" or null,
+        "recruitment_rate_per_site_month": float or null (patients per site per month),
+        "evidence": [
+            {"page": integer, "quote": "exact text supporting this extraction"}
+        ]
+    }
+}
+
+IMPORTANT:
+- Diagnostic delay is the time between first symptoms and confirmed diagnosis - look for phrases like "average delay of X years", "time to diagnosis"
+- Registry information may include disease registries, national databases, or patient organizations
+- Referral centres are specialist hospitals or clinics with expertise in the disease
+- Geographic distribution describes where patients are concentrated (e.g., "urban centres", "university hospitals")
+- Recruitment rates help predict enrollment feasibility
+- The exact_quote in evidence MUST be verbatim text from the document
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
+Return JSON only."""
+
+
+LOCAL_GUIDELINES_PROMPT = """Extract local or national clinical guideline references and their impact on trial feasibility.
+
+Look for:
+- Named clinical practice guidelines (e.g., "NICE guidelines", "German Society for Nephrology Guidelines 2023")
+- Treatment recommendations from professional societies or government bodies
+- Standard-of-care protocols referenced in the document
+- Guideline-mandated testing or monitoring that overlaps with trial procedures
+- Impact of guidelines on trial feasibility (e.g., "guideline requires genetic testing, aligning with eligibility criteria")
+
+Return:
+{
+    "local_guidelines": [
+        {
+            "guideline_name": "Full name of the guideline",
+            "issuing_body": "Organization or society name" or null,
+            "year": integer or null,
+            "country": "Country where guideline applies" or null,
+            "key_recommendations": [
+                "First key recommendation relevant to feasibility",
+                "Second key recommendation"
+            ],
+            "standard_of_care": "Description of the standard treatment pathway" or null,
+            "impact_on_feasibility": "How this guideline affects trial feasibility" or null,
+            "exact_quote": "REQUIRED: verbatim text from the document referencing this guideline",
+            "page": integer (from nearest [PAGE X] marker)
+        }
+    ]
+}
+
+IMPORTANT:
+- Extract ALL guidelines referenced in the document, not just the primary one
+- Include treatment algorithms, diagnostic pathways, and monitoring recommendations
+- The impact_on_feasibility field is critical: explain whether the guideline HELPS (e.g., pre-existing testing infrastructure) or HINDERS (e.g., guideline prohibits randomization to placebo) trial feasibility
+- The exact_quote MUST be verbatim text from the document
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
+Return JSON only."""
+
+
+PATIENT_JOURNEY_PROMPT = """Extract the complete patient journey from this clinical trial document.
+
+This includes geographic context (country/region), the diagnostic pathway (how patients are diagnosed),
+treatment pathway (current standard of care), trial participation phases (screening, treatment, follow-up),
+and barriers to participation.
+
+GEOGRAPHIC CONTEXT IS CRITICAL: Always identify the country and region where this study/treatment takes place.
+Patient journeys vary significantly by country (local guidelines, specialist availability, healthcare system).
+
+Return:
+{
+    "country": "Germany" or "United Kingdom" etc or null (country where the study/care takes place),
+    "region": "Europe" or "Asia-Pacific" or "North America" etc or null,
+    "diagnostic_pathway": {
+        "diagnostic_delay_years": float or null (average time from symptoms to diagnosis),
+        "diagnostic_tests_required": ["test1", "test2"] (tests needed for confirmed diagnosis),
+        "specialist_type": "nephrologist" or "metabolic disease specialist" etc or null
+    },
+    "treatment_pathway": {
+        "current_standard_of_care": "Description of current standard treatment" or null,
+        "treatment_lines": [
+            {"line": 1, "therapy": "First-line treatment description"},
+            {"line": 2, "therapy": "Second-line treatment description"}
+        ]
+    },
+    "trial_phases": [
+        {
+            "phase": "screening" | "run_in" | "treatment" | "follow_up" | "extension",
+            "duration": "4 weeks" or "18 months" etc,
+            "visits": integer or null (number of visits in this phase),
+            "visit_frequency": "every 2 weeks" or "monthly" etc or null,
+            "procedures": ["blood draw", "ECG", "renal biopsy"] (key procedures in this phase)
+        }
+    ],
+    "participation_barriers": [
+        "renal biopsy requirement",
+        "biweekly IV infusion schedule",
+        "travel to specialist centre"
+    ],
+    "evidence": [
+        {"page": integer, "quote": "exact text supporting this extraction"}
+    ]
+}
+
+IMPORTANT:
+- COUNTRY/REGION: Always extract the geographic context. Look for country names in author affiliations, study sites,
+  guideline references, and institution names. For multinational studies, identify the primary country.
+  Use full country names (e.g., "United Kingdom" not "UK", "United States" not "US").
+- Diagnostic delay: Look for "average delay of X years", "time to diagnosis", "diagnostic odyssey"
+- Standard of care: Look for "current treatment", "standard therapy", "first-line treatment"
+- Treatment lines: Extract all lines of therapy mentioned (1st line, 2nd line, etc.)
+- Trial phases: Extract screening period, run-in, treatment period, follow-up — with visit counts and procedures
+- Participation barriers: Identify factors that make trial participation difficult:
+  * Invasive procedures (biopsies, IV infusions)
+  * Frequent visits or travel burden
+  * Washout requirements from current therapy
+  * Rare disease logistics (few specialist centres)
+  * Restrictive eligibility criteria
+  * Country-specific barriers (healthcare system, insurance, regulatory)
+- The exact_quote in evidence MUST be verbatim text from the document
+""" + ANTI_HALLUCINATION_INSTRUCTIONS + """
+Return JSON only."""
+
+
 __all__ = [
     "SECTION_TARGETS",
     "MAX_SECTION_CHARS",
@@ -355,4 +542,8 @@ __all__ = [
     "SITES_PROMPT",
     "OPERATIONAL_BURDEN_PROMPT",
     "SCREENING_FLOW_PROMPT",
+    "EPIDEMIOLOGY_PROMPT",
+    "PATIENT_POPULATION_PROMPT",
+    "LOCAL_GUIDELINES_PROMPT",
+    "PATIENT_JOURNEY_PROMPT",
 ]

@@ -85,6 +85,9 @@ class FeasibilityFieldType(str, Enum):
     INVASIVE_PROCEDURE = "INVASIVE_PROCEDURE"
     BACKGROUND_THERAPY = "BACKGROUND_THERAPY"
     LAB_CRITERION = "LAB_CRITERION"
+    PATIENT_POPULATION = "PATIENT_POPULATION"
+    LOCAL_GUIDELINES = "LOCAL_GUIDELINES"
+    PATIENT_JOURNEY = "PATIENT_JOURNEY"
 
 
 class FeasibilityGeneratorType(str, Enum):
@@ -625,6 +628,149 @@ class FeasibilityProvenanceMetadata(BaseModel):
 
 
 # -------------------------
+# Patient Population (Feasibility)
+# -------------------------
+
+
+class PatientPopulation(BaseModel):
+    """Patient population data for feasibility assessment."""
+
+    estimated_diagnosed_patients: Optional[int] = None
+    estimated_eligible_patients: Optional[int] = None
+    eligibility_funnel_ratio: Optional[float] = None  # eligible/diagnosed
+    registry_name: Optional[str] = None
+    registry_size: Optional[int] = None
+    diagnostic_delay_years: Optional[float] = None
+    referral_centres: Optional[int] = None
+    referral_centre_names: List[str] = Field(default_factory=list)
+    geographic_distribution: Optional[str] = None
+    recruitment_rate_per_site_month: Optional[float] = None
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Local Guidelines (Feasibility)
+# -------------------------
+
+
+class LocalGuideline(BaseModel):
+    """Local/national clinical guideline reference for feasibility context."""
+
+    guideline_name: str
+    issuing_body: Optional[str] = None
+    year: Optional[int] = None
+    country: Optional[str] = None
+    key_recommendations: List[str] = Field(default_factory=list)
+    standard_of_care: Optional[str] = None
+    impact_on_feasibility: Optional[str] = None
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Patient Journey (Comprehensive)
+# -------------------------
+
+
+class DiagnosticPathway(BaseModel):
+    """Diagnostic pathway for a disease."""
+
+    diagnostic_delay_years: Optional[float] = None
+    diagnostic_tests_required: List[str] = Field(default_factory=list)
+    specialist_type: Optional[str] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class TreatmentLine(BaseModel):
+    """A line of therapy in the treatment pathway."""
+
+    line: int
+    therapy: str
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class TreatmentPathway(BaseModel):
+    """Treatment pathway for a disease."""
+
+    current_standard_of_care: Optional[str] = None
+    treatment_lines: List[TreatmentLine] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class TrialPhase(BaseModel):
+    """A phase in the clinical trial journey."""
+
+    phase: str  # "screening", "treatment", "follow_up"
+    duration: Optional[str] = None
+    visits: Optional[int] = None
+    visit_frequency: Optional[str] = None
+    procedures: List[str] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class PatientJourney(BaseModel):
+    """Comprehensive patient journey through diagnosis, treatment, and trial participation."""
+
+    country: Optional[str] = None  # Country context (e.g., "Germany", "Japan")
+    region: Optional[str] = None  # Region context (e.g., "Europe", "Asia-Pacific")
+    diagnostic_pathway: Optional[DiagnosticPathway] = None
+    treatment_pathway: Optional[TreatmentPathway] = None
+    trial_phases: List[TrialPhase] = Field(default_factory=list)
+    participation_barriers: List[str] = Field(default_factory=list)
+    evidence: List[EvidenceSpan] = Field(default_factory=list)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
+# Patient Funnel (Computed)
+# -------------------------
+
+
+class PatientFunnel(BaseModel):
+    """Complete patient funnel from population to completion (computed post-extraction)."""
+
+    # Population level (from epidemiology)
+    disease_prevalence: Optional[str] = None
+    prevalence_per_million: Optional[float] = None
+
+    # Diagnosed level (from patient_population)
+    estimated_diagnosed: Optional[int] = None
+    diagnostic_delay_years: Optional[float] = None
+
+    # Eligible level (from patient_population + eligibility)
+    estimated_eligible: Optional[int] = None
+    eligibility_funnel_ratio: Optional[float] = None
+    key_eligibility_gates: List[str] = Field(default_factory=list)
+
+    # Screening level (from screening_flow)
+    screened: Optional[int] = None
+    screen_failure_rate: Optional[float] = None
+    top_screen_failure_reasons: List[str] = Field(default_factory=list)
+
+    # Enrollment level
+    randomized: Optional[int] = None
+    enrollment_rate_per_site_month: Optional[float] = None
+
+    # Completion level
+    completed: Optional[int] = None
+    discontinuation_rate: Optional[float] = None
+
+    # Computed metrics
+    overall_yield: Optional[float] = None  # completed/screened
+    funnel_completeness: float = 0.0  # fraction of stages populated (0-1)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# -------------------------
 # FeasibilityCandidate (main extraction unit)
 # -------------------------
 
@@ -677,6 +823,9 @@ class FeasibilityCandidate(BaseModel):
     lab_criterion: Optional[LabCriterion] = None
     background_therapy: Optional[BackgroundTherapy] = None
     invasive_procedure: Optional[InvasiveProcedure] = None
+    patient_population: Optional[PatientPopulation] = None
+    local_guideline: Optional[LocalGuideline] = None
+    patient_journey: Optional[PatientJourney] = None
 
     # Confidence
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
@@ -766,6 +915,14 @@ class FeasibilityExportDocument(BaseModel):
     # Operational feasibility data (single structured objects)
     operational_burden: Optional[Dict[str, Any]] = None
     screening_flow: Optional[Dict[str, Any]] = None
+
+    # Patient population, journey, and guidelines
+    patient_population: Optional[Dict[str, Any]] = None
+    patient_journey_data: Optional[Dict[str, Any]] = None
+    local_guidelines: List[Dict[str, Any]] = Field(default_factory=list)
+
+    # Patient funnel (computed from other fields)
+    patient_funnel: Optional[Dict[str, Any]] = None
 
     # Metadata
     extraction_timestamp: datetime = Field(default_factory=datetime.utcnow)

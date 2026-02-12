@@ -469,7 +469,7 @@ class Orchestrator:
         self.drug_detector = self.factory.create_drug_detector()
         self.gene_detector = self.factory.create_gene_detector()
         self.pharma_detector = self.factory.create_pharma_detector()
-        self.author_detector = self.factory.create_author_detector()
+        self.author_detector = self.factory.create_author_detector(self.claude_client)
         self.citation_detector = self.factory.create_citation_detector()
 
         # Create feasibility components
@@ -1044,7 +1044,9 @@ class Orchestrator:
             self.export_manager.export_pharma_results(pdf_path_obj, pharma_results)
 
         if author_results:
-            self.export_manager.export_author_results(pdf_path_obj, author_results)
+            self.export_manager.export_author_results(
+                pdf_path_obj, author_results, disease_results=disease_results
+            )
 
         if citation_results:
             self.export_manager.export_citation_results(pdf_path_obj, citation_results)
@@ -1691,7 +1693,13 @@ class Orchestrator:
             if match is None:
                 continue
 
-            _matched_name, gen_type = match
+            matched_name, gen_type = match
+
+            # Also check if the lexicon keyword is already detected
+            # (e.g., long_form "5fluorouracil" matched lexicon key "fluorouracil"
+            #  and "Fluorouracil" is already in detected_drugs)
+            if matched_name.lower() in detected_drugs:
+                continue
 
             short_form = (entity.short_form or "").strip()
             if not short_form:

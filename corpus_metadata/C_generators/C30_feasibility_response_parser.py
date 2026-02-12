@@ -36,15 +36,20 @@ from A_core.A07_feasibility_models import (
     BackgroundTherapy,
     CentralLabRequirement,
     CriterionType,
+    DiagnosticPathway,
     EligibilityCriterion,
     EndpointType,
+    EpidemiologyData,
     EvidenceSpan,
     ExtractionMethod,
     FeasibilityCandidate,
     FeasibilityFieldType,
     FeasibilityGeneratorType,
     InvasiveProcedure,
+    LocalGuideline,
     OperationalBurden,
+    PatientJourney,
+    PatientPopulation,
     ScheduledVisit,
     ScreenFailReason,
     ScreeningFlow,
@@ -53,6 +58,9 @@ from A_core.A07_feasibility_models import (
     StudyPeriod,
     StudySite,
     TreatmentArm,
+    TreatmentLine,
+    TreatmentPathway,
+    TrialPhase,
     VaccinationRequirement,
     VisitSchedule,
 )
@@ -60,7 +68,11 @@ from A_core.A07_feasibility_models import (
 from .C29_feasibility_prompts import (
     ELIGIBILITY_PROMPT,
     ENDPOINTS_PROMPT,
+    EPIDEMIOLOGY_PROMPT,
+    LOCAL_GUIDELINES_PROMPT,
     OPERATIONAL_BURDEN_PROMPT,
+    PATIENT_JOURNEY_PROMPT,
+    PATIENT_POPULATION_PROMPT,
     SCREENING_FLOW_PROMPT,
     SITES_PROMPT,
     STUDY_DESIGN_PROMPT,
@@ -818,6 +830,387 @@ class FeasibilityResponseParserMixin:
             extraction_method=ExtractionMethod.LLM,
             confidence=confidence,
             screening_flow=flow,
+            provenance=self._make_provenance(doc_fingerprint),
+        )]
+
+
+    # =========================================================================
+    # EPIDEMIOLOGY EXTRACTION
+    # =========================================================================
+
+    def _extract_epidemiology(
+        self,
+        content: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[FeasibilityCandidate]:
+        """Extract epidemiology data using LLM."""
+        response = self._call_llm(EPIDEMIOLOGY_PROMPT, content)
+        if not response:
+            return []
+
+        candidates = []
+        epi_list = response.get("epidemiology") or []
+
+        for epi_data in epi_list:
+            if not isinstance(epi_data, dict):
+                continue
+
+            data_type = epi_data.get("data_type")
+            value = epi_data.get("value")
+            if not data_type or not value:
+                self._verification_stats["missing_fields"] += 1
+                continue
+
+            epidemiology = EpidemiologyData(
+                data_type=data_type,
+                value=str(value),
+                normalized_value=epi_data.get("normalized_per_million"),
+                geography=epi_data.get("geography"),
+                population=epi_data.get("population"),
+                time_period=epi_data.get("time_period"),
+                source=epi_data.get("source"),
+            )
+
+            # Map data_type to field_type
+            field_type_map = {
+                "prevalence": FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE,
+                "incidence": FeasibilityFieldType.EPIDEMIOLOGY_INCIDENCE,
+                "demographics": FeasibilityFieldType.EPIDEMIOLOGY_DEMOGRAPHICS,
+            }
+            field_type = field_type_map.get(
+                data_type.lower(), FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE
+            )
+
+            # Apply verification
+            exact_quote = epi_data.get("exact_quote")
+            page_num = epi_data.get("page")
+            confidence = self._apply_verification_penalty(
+                base_confidence=0.85,
+                quote=exact_quote,
+                context=content,
+            )
+
+            # Build evidence
+            evidence = []
+            if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
+                evidence.append(EvidenceSpan(
+                    quote=exact_quote.strip(),
+                    source_doc_id=doc_id,
+                    page=page_num if isinstance(page_num, int) else None,
+                ))
+
+            summary = f"{data_type}: {value}"
+            if epidemiology.geography:
+                summary += f" ({epidemiology.geography})"
+
+            candidates.append(FeasibilityCandidate(
+                doc_id=doc_id,
+                field_type=field_type,
+                generator_type=FeasibilityGeneratorType.LLM_EXTRACTION,
+                matched_text=summary,
+                context_text="",
+                section_name="epidemiology",
+                confidence=confidence,
+                epidemiology_data=epidemiology,
+                evidence=evidence,
+                provenance=self._make_provenance(doc_fingerprint),
+            ))
+
+            self._extraction_stats["epidemiology"] = (
+                self._extraction_stats.get("epidemiology", 0) + 1
+            )
+
+        return candidates
+
+    # =========================================================================
+    # PATIENT POPULATION EXTRACTION
+    # =========================================================================
+
+    def _extract_patient_population(
+        self,
+        content: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[FeasibilityCandidate]:
+        """Extract patient population and recruitment feasibility data using LLM."""
+        response = self._call_llm(PATIENT_POPULATION_PROMPT, content)
+        if not response:
+            return []
+
+        pop_data = response.get("patient_population") or response
+        if not isinstance(pop_data, dict):
+            return []
+
+        # Parse evidence
+        evidence = []
+        for ev_data in (pop_data.get("evidence") or []):
+            if isinstance(ev_data, dict) and ev_data.get("quote"):
+                evidence.append(EvidenceSpan(
+                    page=ev_data.get("page"),
+                    quote=ev_data["quote"],
+                    source_doc_id=doc_id,
+                ))
+
+        population = PatientPopulation(
+            estimated_diagnosed_patients=pop_data.get("estimated_diagnosed_patients"),
+            estimated_eligible_patients=pop_data.get("estimated_eligible_patients"),
+            eligibility_funnel_ratio=pop_data.get("eligibility_funnel_ratio"),
+            registry_name=pop_data.get("registry_name"),
+            registry_size=pop_data.get("registry_size"),
+            diagnostic_delay_years=pop_data.get("diagnostic_delay_years"),
+            referral_centres=pop_data.get("referral_centres"),
+            referral_centre_names=self._get_list(pop_data, "referral_centre_names"),
+            geographic_distribution=pop_data.get("geographic_distribution"),
+            recruitment_rate_per_site_month=pop_data.get("recruitment_rate_per_site_month"),
+            evidence=evidence,
+        )
+
+        # Only return if we have meaningful data
+        has_data = any([
+            population.estimated_diagnosed_patients,
+            population.estimated_eligible_patients,
+            population.registry_name,
+            population.diagnostic_delay_years,
+            population.referral_centres,
+        ])
+        if not has_data:
+            return []
+
+        self._extraction_stats["patient_population"] = 1
+
+        # Build summary text
+        summary_parts = []
+        if population.estimated_diagnosed_patients:
+            summary_parts.append(f"{population.estimated_diagnosed_patients} diagnosed")
+        if population.estimated_eligible_patients:
+            summary_parts.append(f"{population.estimated_eligible_patients} eligible")
+        if population.registry_name:
+            summary_parts.append(f"registry: {population.registry_name}")
+        if population.diagnostic_delay_years:
+            summary_parts.append(f"delay: {population.diagnostic_delay_years}y")
+
+        # Apply verification
+        first_quote = evidence[0].quote if evidence else None
+        numerical_values: dict[str, int | float] = {}
+        if population.estimated_diagnosed_patients:
+            numerical_values["diagnosed"] = population.estimated_diagnosed_patients
+        if population.registry_size:
+            numerical_values["registry_size"] = population.registry_size
+
+        confidence = self._apply_verification_penalty(
+            base_confidence=0.85,
+            quote=first_quote,
+            context=content,
+            numerical_values=numerical_values,
+        )
+
+        return [FeasibilityCandidate(
+            doc_id=doc_id,
+            field_type=FeasibilityFieldType.PATIENT_POPULATION,
+            generator_type=FeasibilityGeneratorType.LLM_EXTRACTION,
+            matched_text=", ".join(summary_parts) or "Patient population extracted",
+            context_text="",
+            section_name="patient_population",
+            confidence=confidence,
+            patient_population=population,
+            provenance=self._make_provenance(doc_fingerprint),
+        )]
+
+    # =========================================================================
+    # LOCAL GUIDELINES EXTRACTION
+    # =========================================================================
+
+    def _extract_local_guidelines(
+        self,
+        content: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[FeasibilityCandidate]:
+        """Extract local/national clinical guideline references using LLM."""
+        response = self._call_llm(LOCAL_GUIDELINES_PROMPT, content)
+        if not response:
+            return []
+
+        candidates = []
+        guidelines_list = response.get("local_guidelines") or []
+
+        for gl_data in guidelines_list:
+            if not isinstance(gl_data, dict):
+                continue
+
+            guideline_name = gl_data.get("guideline_name")
+            if not guideline_name or not isinstance(guideline_name, str) or len(guideline_name.strip()) < 5:
+                self._verification_stats["missing_fields"] += 1
+                continue
+
+            guideline_name = guideline_name.strip()
+
+            # Build evidence
+            exact_quote = gl_data.get("exact_quote")
+            page_num = gl_data.get("page")
+            evidence = []
+            if exact_quote and isinstance(exact_quote, str) and exact_quote.strip():
+                evidence.append(EvidenceSpan(
+                    quote=exact_quote.strip(),
+                    source_doc_id=doc_id,
+                    page=page_num if isinstance(page_num, int) else None,
+                ))
+
+            guideline = LocalGuideline(
+                guideline_name=guideline_name,
+                issuing_body=gl_data.get("issuing_body"),
+                year=gl_data.get("year"),
+                country=gl_data.get("country"),
+                key_recommendations=self._get_list(gl_data, "key_recommendations"),
+                standard_of_care=gl_data.get("standard_of_care"),
+                impact_on_feasibility=gl_data.get("impact_on_feasibility"),
+                evidence=evidence,
+            )
+
+            # Apply verification
+            confidence = self._apply_verification_penalty(
+                base_confidence=0.85,
+                quote=exact_quote,
+                context=content,
+            )
+
+            candidates.append(FeasibilityCandidate(
+                doc_id=doc_id,
+                field_type=FeasibilityFieldType.LOCAL_GUIDELINES,
+                generator_type=FeasibilityGeneratorType.LLM_EXTRACTION,
+                matched_text=guideline_name,
+                context_text="",
+                section_name="local_guidelines",
+                confidence=confidence,
+                local_guideline=guideline,
+                evidence=evidence,
+                provenance=self._make_provenance(doc_fingerprint),
+            ))
+
+            self._extraction_stats["local_guidelines"] = (
+                self._extraction_stats.get("local_guidelines", 0) + 1
+            )
+
+        return candidates
+
+    # =========================================================================
+    # PATIENT JOURNEY EXTRACTION
+    # =========================================================================
+
+    def _extract_patient_journey(
+        self,
+        content: str,
+        doc_id: str,
+        doc_fingerprint: str,
+    ) -> List[FeasibilityCandidate]:
+        """Extract comprehensive patient journey using LLM."""
+        response = self._call_llm(PATIENT_JOURNEY_PROMPT, content)
+        if not response:
+            return []
+
+        # Parse diagnostic pathway
+        diag_data = response.get("diagnostic_pathway") or {}
+        diagnostic_pathway = None
+        if isinstance(diag_data, dict) and any(diag_data.values()):
+            diagnostic_pathway = DiagnosticPathway(
+                diagnostic_delay_years=diag_data.get("diagnostic_delay_years"),
+                diagnostic_tests_required=self._get_list(diag_data, "diagnostic_tests_required"),
+                specialist_type=diag_data.get("specialist_type"),
+            )
+
+        # Parse treatment pathway
+        treat_data = response.get("treatment_pathway") or {}
+        treatment_pathway = None
+        if isinstance(treat_data, dict) and any(treat_data.values()):
+            treatment_lines = []
+            for tl_data in (treat_data.get("treatment_lines") or []):
+                if isinstance(tl_data, dict) and tl_data.get("therapy"):
+                    treatment_lines.append(TreatmentLine(
+                        line=tl_data.get("line", 1),
+                        therapy=tl_data["therapy"],
+                    ))
+            treatment_pathway = TreatmentPathway(
+                current_standard_of_care=treat_data.get("current_standard_of_care"),
+                treatment_lines=treatment_lines,
+            )
+
+        # Parse trial phases
+        trial_phases = []
+        for tp_data in (response.get("trial_phases") or []):
+            if isinstance(tp_data, dict) and tp_data.get("phase"):
+                trial_phases.append(TrialPhase(
+                    phase=tp_data["phase"],
+                    duration=tp_data.get("duration"),
+                    visits=tp_data.get("visits"),
+                    visit_frequency=tp_data.get("visit_frequency"),
+                    procedures=self._get_list(tp_data, "procedures"),
+                ))
+
+        # Parse participation barriers
+        barriers = [
+            b for b in (response.get("participation_barriers") or [])
+            if isinstance(b, str) and b.strip()
+        ]
+
+        # Parse evidence
+        evidence = []
+        for ev_data in (response.get("evidence") or []):
+            if isinstance(ev_data, dict) and ev_data.get("quote"):
+                evidence.append(EvidenceSpan(
+                    page=ev_data.get("page"),
+                    quote=ev_data["quote"],
+                    source_doc_id=doc_id,
+                ))
+
+        journey = PatientJourney(
+            country=response.get("country"),
+            region=response.get("region"),
+            diagnostic_pathway=diagnostic_pathway,
+            treatment_pathway=treatment_pathway,
+            trial_phases=trial_phases,
+            participation_barriers=barriers,
+            evidence=evidence,
+        )
+
+        # Only return if we have meaningful data
+        has_data = (
+            diagnostic_pathway or treatment_pathway or
+            trial_phases or barriers
+        )
+        if not has_data:
+            return []
+
+        self._extraction_stats["patient_journey"] = 1
+
+        # Build summary
+        summary_parts = []
+        if diagnostic_pathway:
+            summary_parts.append("diagnostic pathway")
+        if treatment_pathway:
+            summary_parts.append("treatment pathway")
+        if trial_phases:
+            summary_parts.append(f"{len(trial_phases)} trial phases")
+        if barriers:
+            summary_parts.append(f"{len(barriers)} barriers")
+
+        # Apply verification
+        first_quote = evidence[0].quote if evidence else None
+        confidence = self._apply_verification_penalty(
+            base_confidence=0.85,
+            quote=first_quote,
+            context=content,
+        )
+
+        return [FeasibilityCandidate(
+            doc_id=doc_id,
+            field_type=FeasibilityFieldType.PATIENT_JOURNEY,
+            generator_type=FeasibilityGeneratorType.LLM_EXTRACTION,
+            matched_text=", ".join(summary_parts) or "Patient journey extracted",
+            context_text="",
+            section_name="patient_journey",
+            confidence=confidence,
+            patient_journey=journey,
             provenance=self._make_provenance(doc_fingerprint),
         )]
 

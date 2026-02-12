@@ -142,6 +142,8 @@ common_english_fp_terms:
   - "mrd"
   - "rns"
   - "gtn"
+  - "dba"
+  - "apd"
   # Generic clinical process terms (not diseases)
   - "immunosuppression"
   - "analgesia"

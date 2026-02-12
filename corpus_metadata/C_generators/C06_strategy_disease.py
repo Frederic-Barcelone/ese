@@ -867,6 +867,13 @@ class DiseaseDetector:
             if self._should_exclude(context, entry.exclude_contexts):
                 continue
 
+            # Hard filter catastrophic FPs (e.g., "pH" matching PAH lexicon "PH")
+            should_filter, _reason = self.fp_filter.should_filter(
+                matched_text, context, is_abbreviation=False
+            )
+            if should_filter:
+                continue
+
             # Dedup
             dedup_key = (matched_text.lower(), entry.preferred_label.lower())
             if dedup_key in seen:

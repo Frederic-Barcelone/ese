@@ -35,7 +35,7 @@ from __future__ import annotations
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import List, TYPE_CHECKING
+from typing import List, Optional, TYPE_CHECKING
 
 logger = logging.getLogger(__name__)
 
@@ -353,6 +353,7 @@ def export_author_results(
     results: List["ExtractedAuthor"],
     run_id: str,
     pipeline_version: str,
+    disease_results: Optional[List["ExtractedDisease"]] = None,
 ) -> None:
     """Export author detection results to separate JSON file."""
     from A_core.A01_domain_models import ValidationStatus
@@ -379,6 +380,17 @@ def export_author_results(
         )
         author_entries.append(entry)
 
+    # Compute primary disease from most frequent validated disease
+    primary_disease: Optional[str] = None
+    if disease_results:
+        from collections import Counter
+        disease_counts: Counter[str] = Counter()
+        for d in disease_results:
+            if d.status == ValidationStatus.VALIDATED and d.preferred_label:
+                disease_counts[d.preferred_label] += 1
+        if disease_counts:
+            primary_disease = disease_counts.most_common(1)[0][0]
+
     # Build export document
     export_doc = AuthorExportDocument(
         run_id=run_id,
@@ -388,6 +400,7 @@ def export_author_results(
         pipeline_version=pipeline_version,
         total_detected=len(results),
         unique_authors=len(unique_names),
+        primary_disease=primary_disease,
         authors=author_entries,
     )
 

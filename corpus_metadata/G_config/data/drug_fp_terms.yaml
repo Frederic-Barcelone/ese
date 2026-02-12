@@ -245,6 +245,9 @@ biological_entities:
   - "crf"
   - "angiotensin converting enzyme"
   - "angiotensin-converting enzyme"
+  # Enzymes (biological markers, not drugs)
+  - "creatine phosphokinase"
+  - "creatine kinase"
 
 # Pharmaceutical company names (not drugs)
 pharma_company_names:

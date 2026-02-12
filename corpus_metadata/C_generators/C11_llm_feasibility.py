@@ -70,7 +70,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
     LLM-based feasibility information extractor.
 
     Uses Claude to extract structured feasibility data with high precision.
-    Runs all 6 extraction types in parallel for efficiency.
+    Runs all 9 extraction types in parallel for efficiency.
     """
 
     def __init__(
@@ -118,7 +118,7 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
         """
         Extract feasibility information using LLM with section-targeted extraction.
 
-        Runs all 6 extraction types in parallel for ~6x speedup.
+        Runs all 9 extraction types in parallel for efficiency.
 
         Args:
             doc_graph: Document graph for section-aware extraction
@@ -141,10 +141,14 @@ class LLMFeasibilityExtractor(FeasibilityResponseParserMixin):
             (self._extract_sites, "sites"),
             (self._extract_operational_burden, "operational_burden"),
             (self._extract_screening_flow, "screening_flow"),
+            (self._extract_epidemiology, "epidemiology"),
+            (self._extract_patient_population, "patient_population"),
+            (self._extract_local_guidelines, "local_guidelines"),
+            (self._extract_patient_journey, "patient_journey"),
         ]
 
         # Run all extractions in parallel
-        with ThreadPoolExecutor(max_workers=6) as executor:
+        with ThreadPoolExecutor(max_workers=10) as executor:
             futures = {}
             for method, extraction_type in extraction_tasks:
                 content = self._get_targeted_content(extraction_type, section_map, full_text)

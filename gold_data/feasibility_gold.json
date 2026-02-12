@@ -142,13 +142,17 @@
         "invasive_procedures": [
           {
             "name": "renal biopsy",
-            "timing": ["screening"],
+            "timing": [
+              "screening"
+            ],
             "purpose": "diagnosis_confirmation",
             "is_eligibility_requirement": true
           },
           {
             "name": "IV infusion",
-            "timing": ["every 2 weeks"],
+            "timing": [
+              "every 2 weeks"
+            ],
             "purpose": "treatment_administration"
           }
         ],
@@ -236,6 +240,54 @@
         "diagnostic_delay_years": 13.7,
         "referral_centres": 18,
         "geographic_distribution": "Concentrated in university hospitals in Berlin, Munich, Hamburg, Cologne"
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 13.7,
+          "diagnostic_tests_required": [
+            "alpha-galactosidase A enzyme assay",
+            "GLA gene sequencing"
+          ],
+          "specialist_type": "metabolic disease specialist or nephrologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Enzyme replacement therapy (ERT) with agalsidase beta or alfa",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "ERT (agalsidase beta 1 mg/kg IV every 2 weeks)"
+            },
+            {
+              "line": 2,
+              "therapy": "Oral chaperone therapy (migalastat) for amenable mutations"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "blood draw",
+              "ECG",
+              "renal biopsy"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "18 months",
+            "visits": 22,
+            "visit_frequency": "every 2 weeks"
+          }
+        ],
+        "participation_barriers": [
+          "renal biopsy requirement",
+          "biweekly IV infusion schedule",
+          "travel to specialist centre"
+        ],
+        "country": "Germany",
+        "region": "Europe"
       }
     },
     {
@@ -276,7 +328,9 @@
         "invasive_procedures": [
           {
             "name": "lumbar puncture",
-            "timing": ["as per protocol"],
+            "timing": [
+              "as per protocol"
+            ],
             "purpose": "biomarker_collection",
             "note": "trials requiring lumbar puncture report 20-25% dropout"
           }
@@ -314,6 +368,36 @@
         "diagnostic_delay_years": 3.2,
         "referral_centres": 16,
         "geographic_distribution": "England 10, Scotland 3, Wales 2, Northern Ireland 1"
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 5.0,
+          "diagnostic_tests_required": [
+            "genetic testing for HTT CAG repeat expansion",
+            "neurological examination"
+          ],
+          "specialist_type": "neurologist or clinical geneticist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Symptomatic management (tetrabenazine for chorea, SSRIs for depression)",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Tetrabenazine for chorea"
+            },
+            {
+              "line": 2,
+              "therapy": "Deutetrabenazine or valbenazine"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "progressive cognitive decline limits consent capacity",
+          "limited specialist centres",
+          "genetic testing reluctance"
+        ],
+        "country": "United Kingdom",
+        "region": "Europe"
       }
     },
     {
@@ -451,7 +535,10 @@
         "invasive_procedures": [
           {
             "name": "right heart catheterization",
-            "timing": ["screening", "Week 24"],
+            "timing": [
+              "screening",
+              "Week 24"
+            ],
             "purpose": "diagnosis_confirmation and efficacy_assessment",
             "is_eligibility_requirement": true
           }
@@ -544,6 +631,54 @@
         "registry_name": "French National PAH Registry (Hôpital Bicêtre)",
         "registry_size": 2500,
         "referral_centres": 26
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 2.5,
+          "diagnostic_tests_required": [
+            "right heart catheterization",
+            "echocardiography",
+            "6-minute walk test"
+          ],
+          "specialist_type": "pulmonologist or cardiologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Endothelin receptor antagonists + PDE5 inhibitors (dual combination)",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "ERA + PDE5i dual combination"
+            },
+            {
+              "line": 2,
+              "therapy": "Addition of prostacyclin pathway agent"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "RHC",
+              "6MWT",
+              "blood draw"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "16 weeks",
+            "visits": 8,
+            "visit_frequency": "every 2 weeks"
+          }
+        ],
+        "participation_barriers": [
+          "right heart catheterization requirement",
+          "multiple background therapies required stable"
+        ],
+        "country": "France",
+        "region": "Europe"
       }
     },
     {
@@ -601,6 +736,38 @@
         "estimated_eligible_patients": 480,
         "diagnostic_delay_years": 4.8,
         "referral_centres": 23
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 3.0,
+          "diagnostic_tests_required": [
+            "serum ceruloplasmin",
+            "24-hour urine copper",
+            "slit-lamp examination",
+            "ATP7B gene sequencing"
+          ],
+          "specialist_type": "hepatologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Chelation therapy with D-penicillamine or trientine",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "D-penicillamine"
+            },
+            {
+              "line": 2,
+              "therapy": "Trientine or zinc acetate"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "rare disease with limited patient pool",
+          "liver biopsy may be required",
+          "copper monitoring complexity"
+        ],
+        "country": "Japan",
+        "region": "Asia-Pacific"
       }
     },
     {
@@ -837,6 +1004,57 @@
         "attack_freq_3plus": 1800,
         "estimated_eligible_patients": 1100,
         "diagnostic_delay_years": 8.3
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 8.3,
+          "diagnostic_tests_required": [
+            "C4 level",
+            "C1-INH level and function",
+            "genetic testing for SERPING1"
+          ],
+          "specialist_type": "allergist/immunologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Long-term prophylaxis with C1-INH replacement or lanadelumab",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Subcutaneous C1-INH or lanadelumab prophylaxis"
+            },
+            {
+              "line": 2,
+              "therapy": "Berotralstat oral prophylaxis"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "2 weeks",
+            "visits": 2
+          },
+          {
+            "phase": "run_in",
+            "duration": "4 weeks",
+            "visits": 4,
+            "procedures": [
+              "attack diary recording"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "26 weeks",
+            "visits": 13,
+            "visit_frequency": "every 2 weeks"
+          }
+        ],
+        "participation_barriers": [
+          "run-in period with attack monitoring",
+          "attack rate threshold for eligibility"
+        ],
+        "country": "United States",
+        "region": "North America"
       }
     },
     {
@@ -889,6 +1107,37 @@
         "estimated_eligible_trial": 340,
         "diagnostic_delay_years": 7.4,
         "referral_centres": 32
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 10.0,
+          "diagnostic_tests_required": [
+            "glucocerebrosidase enzyme assay",
+            "GBA gene sequencing",
+            "bone marrow biopsy"
+          ],
+          "specialist_type": "hematologist or metabolic specialist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "ERT with imiglucerase or velaglucerase alfa",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "ERT (imiglucerase IV every 2 weeks)"
+            },
+            {
+              "line": 2,
+              "therapy": "Substrate reduction therapy (eliglustat)"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "limited access to ERT in rural areas",
+          "diagnostic delay due to low disease awareness",
+          "travel to referral centres"
+        ],
+        "country": "Brazil",
+        "region": "South America"
       }
     },
     {
@@ -1109,6 +1358,55 @@
         "estimated_eligible_patients": 680,
         "registry_name": "Canadian Cystic Fibrosis Registry",
         "registry_size": 4300
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 0.5,
+          "diagnostic_tests_required": [
+            "sweat chloride test",
+            "CFTR genotyping",
+            "newborn screening"
+          ],
+          "specialist_type": "pulmonologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "CFTR modulator therapy (elexacaftor/tezacaftor/ivacaftor)",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Elexacaftor/tezacaftor/ivacaftor (Trikafta)"
+            },
+            {
+              "line": 2,
+              "therapy": "Lumacaftor/ivacaftor for specific mutations"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "sweat chloride",
+              "spirometry",
+              "sputum culture"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "24 weeks",
+            "visits": 6,
+            "visit_frequency": "monthly"
+          }
+        ],
+        "participation_barriers": [
+          "CFTR genotype eligibility restriction",
+          "infection control requirements",
+          "stable baseline FEV1 requirement"
+        ],
+        "country": "Canada",
+        "region": "North America"
       }
     },
     {
@@ -1381,6 +1679,50 @@
         "registry_size": 6500,
         "diagnostic_delay_years": 2.1,
         "referral_centres": 38
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 2.0,
+          "diagnostic_tests_required": [
+            "anti-AChR antibody test",
+            "electromyography",
+            "CT of thymus"
+          ],
+          "specialist_type": "neurologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Acetylcholinesterase inhibitors + corticosteroids + immunosuppression",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Pyridostigmine + prednisone"
+            },
+            {
+              "line": 2,
+              "therapy": "Azathioprine or mycophenolate mofetil"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3
+          },
+          {
+            "phase": "treatment",
+            "duration": "26 weeks",
+            "visits": 7,
+            "visit_frequency": "every 4 weeks"
+          }
+        ],
+        "participation_barriers": [
+          "QMG score threshold for eligibility",
+          "stable immunosuppression requirement",
+          "thymectomy status"
+        ],
+        "country": "South Korea",
+        "region": "Asia-Pacific"
       }
     },
     {
@@ -1442,6 +1784,37 @@
         "estimated_eligible_patients": 1600,
         "diagnostic_delay_years": 3.8,
         "referral_centres": 48
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 4.0,
+          "diagnostic_tests_required": [
+            "anti-mitochondrial antibody (AMA)",
+            "liver function tests",
+            "liver biopsy"
+          ],
+          "specialist_type": "hepatologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Ursodeoxycholic acid (UDCA) as first-line",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "UDCA 13-15 mg/kg/day"
+            },
+            {
+              "line": 2,
+              "therapy": "Obeticholic acid for UDCA non-responders"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "UDCA response assessment period",
+          "liver biopsy for staging",
+          "predominantly female patient population"
+        ],
+        "country": "Italy",
+        "region": "Europe"
       }
     },
     {
@@ -1577,7 +1950,10 @@
         "invasive_procedures": [
           {
             "name": "muscle biopsy (biceps brachii)",
-            "timing": ["baseline", "Week 48"],
+            "timing": [
+              "baseline",
+              "Week 48"
+            ],
             "purpose": "efficacy_assessment",
             "is_eligibility_requirement": false
           }
@@ -1686,6 +2062,55 @@
         "ambulatory_age_eligible": 50,
         "registry_name": "TREAT-NMD / Australian National Neuromuscular Disease Registry",
         "referral_centres": 8
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 4.5,
+          "diagnostic_tests_required": [
+            "creatine kinase level",
+            "dystrophin gene testing",
+            "muscle biopsy"
+          ],
+          "specialist_type": "pediatric neurologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Corticosteroids (deflazacort or prednisone)",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Deflazacort 0.9 mg/kg/day"
+            },
+            {
+              "line": 2,
+              "therapy": "Exon-skipping therapies for amenable mutations"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "genetic confirmation",
+              "6MWT",
+              "timed function tests"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "48 weeks",
+            "visits": 12,
+            "visit_frequency": "monthly"
+          }
+        ],
+        "participation_barriers": [
+          "ambulatory status requirement",
+          "age restriction (pediatric)",
+          "specific exon mutation eligibility"
+        ],
+        "country": "Australia",
+        "region": "Asia-Pacific"
       }
     },
     {
@@ -1743,6 +2168,37 @@
         "registry_size": 85000,
         "diagnostic_delay_years": 4.6,
         "referral_centres": 52
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 2.0,
+          "diagnostic_tests_required": [
+            "hemoglobin electrophoresis",
+            "HbSS confirmation",
+            "complete blood count"
+          ],
+          "specialist_type": "hematologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Hydroxyurea + folic acid supplementation",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Hydroxyurea"
+            },
+            {
+              "line": 2,
+              "therapy": "L-glutamine or crizanlizumab"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "limited rural healthcare access",
+          "hydroxyurea availability",
+          "high baseline transfusion dependence"
+        ],
+        "country": "Nigeria",
+        "region": "Unknown"
       }
     },
     {
@@ -1888,7 +2344,11 @@
         "invasive_procedures": [
           {
             "name": "bone marrow biopsy",
-            "timing": ["screening", "Week 12", "Week 24"],
+            "timing": [
+              "screening",
+              "Week 12",
+              "Week 24"
+            ],
             "purpose": "response_assessment",
             "is_eligibility_requirement": true
           }
@@ -2006,6 +2466,55 @@
         "active_c_findings": 120,
         "estimated_eligible": 80,
         "referral_centres": 14
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 6.0,
+          "diagnostic_tests_required": [
+            "bone marrow biopsy",
+            "KIT D816V mutation analysis",
+            "serum tryptase"
+          ],
+          "specialist_type": "hematologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Midostaurin for advanced SM",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Midostaurin"
+            },
+            {
+              "line": 2,
+              "therapy": "Avapritinib for advanced SM"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "bone marrow biopsy",
+              "CT imaging",
+              "blood draw"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "24 weeks",
+            "visits": 6,
+            "visit_frequency": "monthly"
+          }
+        ],
+        "participation_barriers": [
+          "bone marrow biopsy gate",
+          "KIT mutation confirmation requirement",
+          "rare disease with very limited patient pool"
+        ],
+        "country": "Spain",
+        "region": "Europe"
       }
     },
     {
@@ -2071,6 +2580,37 @@
         "diagnostic_delay_years": 5.6,
         "referral_centres": 6,
         "typical_contribution_per_trial": "8-12 patients"
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 8.0,
+          "diagnostic_tests_required": [
+            "filipin staining",
+            "NPC1/NPC2 gene sequencing",
+            "plasma oxysterol levels"
+          ],
+          "specialist_type": "metabolic disease specialist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Miglustat (substrate reduction therapy)",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Miglustat 200 mg three times daily"
+            },
+            {
+              "line": 2,
+              "therapy": "Arimoclomol (investigational)"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "ultra-rare disease with extremely limited patient pool",
+          "complex diagnostic workup",
+          "expert centres concentrated in Amsterdam"
+        ],
+        "country": "Netherlands",
+        "region": "Europe"
       }
     },
     {
@@ -2211,7 +2751,9 @@
         "invasive_procedures": [
           {
             "name": "renal biopsy",
-            "timing": ["within 24 months of screening"],
+            "timing": [
+              "within 24 months of screening"
+            ],
             "purpose": "diagnosis_confirmation",
             "is_eligibility_requirement": true
           }
@@ -2335,6 +2877,60 @@
         "registry_size": 180000,
         "upcr_above_1": 45000,
         "estimated_eligible": 18000
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 1.5,
+          "diagnostic_tests_required": [
+            "renal biopsy",
+            "urinalysis",
+            "serum IgA levels"
+          ],
+          "specialist_type": "nephrologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "ACE inhibitor/ARB + corticosteroids for proteinuria > 1 g/day",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "ACEi/ARB optimization"
+            },
+            {
+              "line": 2,
+              "therapy": "Corticosteroid pulse therapy"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "8 weeks",
+            "visits": 4,
+            "procedures": [
+              "renal biopsy confirmation",
+              "24-hour urine collection",
+              "blood draw"
+            ]
+          },
+          {
+            "phase": "run_in",
+            "duration": "4 weeks",
+            "visits": 2
+          },
+          {
+            "phase": "treatment",
+            "duration": "36 weeks",
+            "visits": 9,
+            "visit_frequency": "monthly"
+          }
+        ],
+        "participation_barriers": [
+          "renal biopsy requirement",
+          "UPCR threshold for eligibility",
+          "stable ACEi/ARB dose requirement"
+        ],
+        "country": "China",
+        "region": "Unknown"
       }
     },
     {
@@ -2391,6 +2987,36 @@
         "estimated_eligible_rdeb_trial": 60,
         "diagnostic_delay_years": 6.2,
         "referral_centres": 12
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 1.0,
+          "diagnostic_tests_required": [
+            "skin biopsy with immunofluorescence mapping",
+            "genetic testing for COL7A1/LAMB3/etc"
+          ],
+          "specialist_type": "dermatologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Wound care management + pain control",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Advanced wound care dressings"
+            },
+            {
+              "line": 2,
+              "therapy": "Gene therapy (investigational) or bone marrow transplant"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "specialized wound care assessment",
+          "genetic confirmation of EB subtype",
+          "limited dermatology specialist centres"
+        ],
+        "country": "Argentina",
+        "region": "South America"
       }
     },
     {
@@ -2630,6 +3256,54 @@
         "phe_above_600": 5300,
         "estimated_eligible": 3200,
         "diagnostic_delay_years": null
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 0.1,
+          "diagnostic_tests_required": [
+            "newborn screening (Guthrie test)",
+            "plasma phenylalanine levels",
+            "PAH gene sequencing"
+          ],
+          "specialist_type": "metabolic disease specialist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Phenylalanine-restricted diet",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Low-phenylalanine diet + amino acid supplements"
+            },
+            {
+              "line": 2,
+              "therapy": "Sapropterin (BH4) for responsive patients"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "2 weeks",
+            "visits": 2,
+            "procedures": [
+              "Phe level monitoring",
+              "dietary assessment"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "24 weeks",
+            "visits": 6,
+            "visit_frequency": "monthly"
+          }
+        ],
+        "participation_barriers": [
+          "dietary compliance requirement",
+          "Phe level threshold for eligibility",
+          "PAH genotype restriction"
+        ],
+        "country": "Turkey",
+        "region": "Middle East"
       }
     },
     {
@@ -2685,6 +3359,37 @@
         "diagnostic_delay_iopd_months": 3.2,
         "diagnostic_delay_lopd_years": 8.6,
         "referral_centres": 28
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 7.5,
+          "diagnostic_tests_required": [
+            "GAA enzyme assay",
+            "GAA gene sequencing",
+            "muscle biopsy"
+          ],
+          "specialist_type": "neurologist or metabolic specialist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "ERT with alglucosidase alfa",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Alglucosidase alfa IV every 2 weeks"
+            },
+            {
+              "line": 2,
+              "therapy": "Avalglucosidase alfa (next-gen ERT)"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "ERT access limitations in rural India",
+          "diagnostic delay due to low awareness",
+          "newborn screening not universal"
+        ],
+        "country": "India",
+        "region": "Asia-Pacific"
       }
     },
     {
@@ -2976,6 +3681,55 @@
         "hb_below_10": 48,
         "estimated_eligible": 32,
         "referral_centres": 7
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 2.5,
+          "diagnostic_tests_required": [
+            "flow cytometry for GPI-anchored proteins",
+            "LDH levels",
+            "reticulocyte count"
+          ],
+          "specialist_type": "hematologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "Complement C5 inhibition with eculizumab",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Eculizumab IV every 2 weeks"
+            },
+            {
+              "line": 2,
+              "therapy": "Ravulizumab (long-acting C5 inhibitor)"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "flow cytometry",
+              "LDH",
+              "blood draw"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "26 weeks",
+            "visits": 14,
+            "visit_frequency": "every 2 weeks"
+          }
+        ],
+        "participation_barriers": [
+          "meningococcal vaccination requirement",
+          "LDH threshold for eligibility",
+          "complement inhibitor washout period"
+        ],
+        "country": "Sweden",
+        "region": "Europe"
       }
     },
     {
@@ -3035,6 +3789,37 @@
         "estimated_eligible_epilepsy_trial": 200,
         "estimated_eligible_mtor_trial": 250,
         "referral_centres": 22
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 3.0,
+          "diagnostic_tests_required": [
+            "clinical criteria (Tuberous Sclerosis Diagnostic Criteria)",
+            "MRI brain",
+            "genetic testing for TSC1/TSC2"
+          ],
+          "specialist_type": "neurologist or geneticist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "mTOR inhibitor (everolimus) for SEGA and renal angiomyolipomas",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Everolimus for SEGA/renal AML"
+            },
+            {
+              "line": 2,
+              "therapy": "Vigabatrin for infantile spasms"
+            }
+          ]
+        },
+        "participation_barriers": [
+          "multi-organ involvement complicates eligibility",
+          "epilepsy monitoring requirements",
+          "limited mTOR inhibitor access"
+        ],
+        "country": "Mexico",
+        "region": "North America"
       }
     },
     {
@@ -3175,7 +3960,9 @@
         "invasive_procedures": [
           {
             "name": "tissue biopsy or nuclear scintigraphy",
-            "timing": ["screening"],
+            "timing": [
+              "screening"
+            ],
             "purpose": "diagnosis_confirmation",
             "is_eligibility_requirement": true
           }
@@ -3320,6 +4107,55 @@
         "registry_name": "Portuguese Familial Amyloidosis Registry (Unidade Corino de Andrade)",
         "registry_size": 5400,
         "referral_centres": null
+      },
+      "patient_journey": {
+        "diagnostic_pathway": {
+          "diagnostic_delay_years": 4.0,
+          "diagnostic_tests_required": [
+            "TTR gene sequencing",
+            "tissue biopsy with Congo red staining",
+            "nerve conduction studies"
+          ],
+          "specialist_type": "neurologist or cardiologist"
+        },
+        "treatment_pathway": {
+          "current_standard_of_care": "TTR stabilizer (tafamidis) or gene silencing (patisiran/inotersen)",
+          "treatment_lines": [
+            {
+              "line": 1,
+              "therapy": "Tafamidis 80 mg daily"
+            },
+            {
+              "line": 2,
+              "therapy": "Patisiran IV every 3 weeks or inotersen SC weekly"
+            }
+          ]
+        },
+        "trial_phases": [
+          {
+            "phase": "screening",
+            "duration": "4 weeks",
+            "visits": 3,
+            "procedures": [
+              "nerve conduction study",
+              "cardiac assessment",
+              "blood draw"
+            ]
+          },
+          {
+            "phase": "treatment",
+            "duration": "18 months",
+            "visits": 9,
+            "visit_frequency": "every 2 months"
+          }
+        ],
+        "participation_barriers": [
+          "neuropathy staging requirement",
+          "cardiac involvement assessment",
+          "TTR mutation confirmation"
+        ],
+        "country": "Portugal",
+        "region": "Unknown"
       }
     }
   ]

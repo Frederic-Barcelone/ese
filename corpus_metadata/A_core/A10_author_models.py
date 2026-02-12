@@ -198,6 +198,9 @@ class AuthorExportDocument(BaseModel):
     total_detected: int
     unique_authors: int
 
+    # Disease association
+    primary_disease: Optional[str] = None
+
     # Results
     authors: List[AuthorExportEntry]
 

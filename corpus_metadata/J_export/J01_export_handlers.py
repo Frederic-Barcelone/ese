@@ -458,12 +458,16 @@ class ExportManager:
         )
 
     def export_author_results(
-        self, pdf_path: Path, results: List["ExtractedAuthor"]
+        self,
+        pdf_path: Path,
+        results: List["ExtractedAuthor"],
+        disease_results: Optional[List["ExtractedDisease"]] = None,
     ) -> None:
         """Export author detection results to separate JSON file."""
         out_dir = self.get_output_dir(pdf_path)
         _export_author_results(
-            out_dir, pdf_path, results, self.run_id, self.pipeline_version
+            out_dir, pdf_path, results, self.run_id, self.pipeline_version,
+            disease_results=disease_results,
         )
 
     def export_citation_results(
@@ -534,6 +538,9 @@ class ExportManager:
         study_design_data = None
         operational_burden_data = None
         screening_flow_data = None
+        patient_population_data = None
+        patient_journey_data = None
+        local_guidelines_data: List[Dict[str, Any]] = []
         eligibility_inclusion = []
         eligibility_exclusion = []
         epidemiology = []
@@ -587,6 +594,21 @@ class ExportManager:
             # Handle screening flow (single object)
             if r.field_type.value == "SCREENING_FLOW" and r.screening_flow:
                 screening_flow_data = r.screening_flow.model_dump()
+                continue
+
+            # Handle patient population (single object)
+            if r.field_type.value == "PATIENT_POPULATION" and r.patient_population:
+                patient_population_data = r.patient_population.model_dump()
+                continue
+
+            # Handle local guidelines (list of objects)
+            if r.field_type.value == "LOCAL_GUIDELINES" and r.local_guideline:
+                local_guidelines_data.append(r.local_guideline.model_dump())
+                continue
+
+            # Handle patient journey (single structured object)
+            if r.field_type.value == "PATIENT_JOURNEY" and r.patient_journey:
+                patient_journey_data = r.patient_journey.model_dump()
                 continue
 
             # Convert evidence from the candidate
@@ -659,6 +681,12 @@ class ExportManager:
             elif "SITE" in r.field_type.value:
                 sites.append(entry)
 
+        # Build patient funnel from extracted data
+        patient_funnel_data = self._compute_patient_funnel(
+            epidemiology, patient_population_data, screening_flow_data,
+            operational_burden_data, eligibility_inclusion,
+        )
+
         # Build export document
         export_doc = FeasibilityExportDocument(
             doc_id=pdf_path.stem,
@@ -673,6 +701,10 @@ class ExportManager:
             sites=sites,
             operational_burden=operational_burden_data,
             screening_flow=screening_flow_data,
+            patient_population=patient_population_data,
+            patient_journey_data=patient_journey_data,
+            local_guidelines=local_guidelines_data,
+            patient_funnel=patient_funnel_data,
         )
 
         # Write to file
@@ -681,6 +713,83 @@ class ExportManager:
             f.write(export_doc.model_dump_json(indent=2))
 
         print(f"  Feasibility export: {out_file.name}")
+
+    @staticmethod
+    def _compute_patient_funnel(
+        epidemiology: list,
+        patient_population_data: Optional[Dict[str, Any]],
+        screening_flow_data: Optional[Dict[str, Any]],
+        operational_burden_data: Optional[Dict[str, Any]],
+        eligibility_inclusion: list,
+    ) -> Optional[Dict[str, Any]]:
+        """Compute patient funnel from extracted feasibility data."""
+        from A_core.A07_feasibility_models import PatientFunnel
+
+        funnel = PatientFunnel()
+        stages_populated = 0
+        total_stages = 6  # prevalence, diagnosed, eligible, screened, randomized, completed
+
+        # Population level (from epidemiology)
+        for epi_entry in epidemiology:
+            sd = getattr(epi_entry, "structured_data", None) or {}
+            if sd.get("data_type") == "prevalence":
+                funnel.disease_prevalence = sd.get("value")
+                stages_populated += 1
+                break
+
+        # Diagnosed + eligible level (from patient_population)
+        if patient_population_data:
+            if patient_population_data.get("estimated_diagnosed_patients"):
+                funnel.estimated_diagnosed = patient_population_data["estimated_diagnosed_patients"]
+                stages_populated += 1
+            if patient_population_data.get("diagnostic_delay_years"):
+                funnel.diagnostic_delay_years = patient_population_data["diagnostic_delay_years"]
+            if patient_population_data.get("estimated_eligible_patients"):
+                funnel.estimated_eligible = patient_population_data["estimated_eligible_patients"]
+                stages_populated += 1
+            if patient_population_data.get("eligibility_funnel_ratio"):
+                funnel.eligibility_funnel_ratio = patient_population_data["eligibility_funnel_ratio"]
+            if patient_population_data.get("recruitment_rate_per_site_month"):
+                funnel.enrollment_rate_per_site_month = patient_population_data["recruitment_rate_per_site_month"]
+
+        # Key eligibility gates (from operational burden)
+        if operational_burden_data and operational_burden_data.get("hard_gates"):
+            funnel.key_eligibility_gates = operational_burden_data["hard_gates"]
+
+        # Screening + enrollment + completion (from screening_flow)
+        if screening_flow_data:
+            if screening_flow_data.get("screened"):
+                funnel.screened = screening_flow_data["screened"]
+                stages_populated += 1
+            if screening_flow_data.get("screen_failure_rate_computed"):
+                funnel.screen_failure_rate = screening_flow_data["screen_failure_rate_computed"]
+            elif screening_flow_data.get("screen_failure_rate"):
+                funnel.screen_failure_rate = screening_flow_data["screen_failure_rate"]
+            # Top screen failure reasons
+            for sfr in (screening_flow_data.get("screen_fail_reasons") or [])[:3]:
+                if isinstance(sfr, dict) and sfr.get("reason"):
+                    funnel.top_screen_failure_reasons.append(sfr["reason"])
+            if screening_flow_data.get("randomized"):
+                funnel.randomized = screening_flow_data["randomized"]
+                stages_populated += 1
+            if screening_flow_data.get("completed"):
+                funnel.completed = screening_flow_data["completed"]
+                stages_populated += 1
+            if screening_flow_data.get("dropout_rate"):
+                funnel.discontinuation_rate = screening_flow_data["dropout_rate"]
+
+        # Compute overall yield
+        if funnel.completed and funnel.screened and funnel.screened > 0:
+            funnel.overall_yield = round(funnel.completed / funnel.screened, 4)
+
+        # Compute funnel completeness
+        funnel.funnel_completeness = round(stages_populated / total_stages, 2)
+
+        # Only return if we have at least 2 stages populated
+        if stages_populated < 2:
+            return None
+
+        return funnel.model_dump()
 
     def export_images(
         self, pdf_path: Path, doc: "DocumentGraph"
