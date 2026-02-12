@@ -23,6 +23,14 @@
 > **Delta** = F1 change since last evaluation run.
 > Rows with — need a fresh evaluation run to fill in.
 
+## API Credit Balance
+
+> Last updated: 2026-02-12
+
+| Date | Balance | Spend Since Last | Notes |
+|------|---------|-----------------|-------|
+| 2026-02-12 | **$249.40** | — | Initial tracking. Cost reduction deployed (context truncation, batch sizes, sf_only batching, rec caching, metadata merge). |
+
 ## API Consumption
 
 > Last updated: 2026-02-12 — Total: **$246.60** across 81,622 calls
@@ -50,6 +58,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-12 | API cost reduction: context 400->200, batch sizes 2x, sf_only 5->3 chunks + single call, rec caching, metadata merge | Est. ~35-40% cost reduction. Pending eval confirmation. |
 | 2026-02-12 | Full benchmark run: filled TP/FP/FN for CADEC, NLM-Gene, RareDisGene, NLP4RARE | CADEC Drug F1 92.8%, Gene F1s stable, NLP4RARE combined 100-doc Disease 88.7% |
 | 2026-02-11 | Disease cross-ref FP filter, expanded drug/disease lexicons | Disease F1 86.7% stable, Drug F1 85.3% (LLM variance range 85.3-86.2%) |
 | 2026-02-11 | Drug FP filter: compound ID, bio entities, author "et al" only | Drug P 87.5%->93.8%, F1 81.5%->86.2% |
