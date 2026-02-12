@@ -23,6 +23,29 @@
 > **Delta** = F1 change since last evaluation run.
 > Rows with — need a fresh evaluation run to fill in.
 
+## API Consumption
+
+> Last updated: 2026-02-12 — Total: **$246.60** across 81,622 calls
+
+![API Consumption Dashboard](api_consumption_dashboard.png)
+
+| Call Type | Model | Calls | Cost |
+|-----------|-------|-------|------|
+| abbreviation_batch_validation | Haiku | 16,260 | $60.29 |
+| recommendation_extraction | Sonnet | 11,270 | $52.94 |
+| feasibility_extraction | Sonnet | 9,336 | $44.52 |
+| fast_reject | Haiku | 11,101 | $40.00 |
+| sf_only_extraction | Haiku | 18,633 | $28.45 |
+| document_classification | Haiku | 1,416 | $9.40 |
+| description_extraction | Haiku | 1,416 | $7.66 |
+| vlm_visual_enrichment | Haiku | 325 | $2.69 |
+| Other (4 types) | Mixed | 63 | $0.65 |
+
+| Model | Calls | Cost | % |
+|-------|-------|------|---|
+| Sonnet 4 | 35,597 | $161.35 | 65.4% |
+| Haiku 4.5 | 46,025 | $85.25 | 34.6% |
+
 ## Changelog
 
 | Date | Change | Impact |
