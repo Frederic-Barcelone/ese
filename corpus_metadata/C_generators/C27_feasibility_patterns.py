@@ -36,7 +36,8 @@ from A_core.A07_feasibility_models import (
     FeasibilityFieldType,
     PatientJourneyPhaseType,
 )
-from Z_utils.Z12_data_loader import load_mapping, load_term_list, load_term_set
+from Z_utils.Z12_data_loader import load_term_list, load_term_set
+from Z_utils.Z15_lexicon_provider import build_country_code_mapping, build_country_names
 
 
 # =============================================================================
@@ -384,11 +385,11 @@ AMBIGUOUS_COUNTRIES = load_term_set("feasibility_data.yaml", "ambiguous_countrie
 # Context cues that indicate site/country discussion (loaded from YAML)
 COUNTRY_CONTEXT_CUES = load_term_set("feasibility_data.yaml", "country_context_cues")
 
-# Countries for site/country identification (loaded from YAML)
-COUNTRIES = load_term_set("feasibility_data.yaml", "countries")
+# Countries for site/country identification (from pycountry)
+COUNTRIES = build_country_names()
 
-# ISO country codes for validation (loaded from YAML)
-COUNTRY_CODES = load_mapping("feasibility_data.yaml", "country_codes")
+# ISO country codes for validation (from pycountry)
+COUNTRY_CODES = build_country_code_mapping()
 
 
 # =============================================================================

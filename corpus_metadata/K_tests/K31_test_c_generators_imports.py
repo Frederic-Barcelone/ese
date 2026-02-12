@@ -134,7 +134,7 @@ class TestSpecificModuleExports:
         )
         assert isinstance(EPIDEMIOLOGY_ANCHORS, list)
         assert isinstance(INCLUSION_MARKERS, list)
-        assert isinstance(COUNTRIES, set)
+        assert isinstance(COUNTRIES, (set, frozenset))
 
     def test_gene_fp_filter_exports(self):
         """Test C34_gene_fp_filter exports."""

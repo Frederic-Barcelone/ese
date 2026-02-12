@@ -9,6 +9,9 @@ Validates:
     - CREDENTIALS contains all entries from both old drug + gene lists
     - month_names() covers all 12 months
     - single_letters() covers a-z
+    - build_country_names() covers pycountry + aliases
+    - build_country_code_mapping() maps names to ISO alpha-2
+    - build_country_alpha2_codes() covers all 249 codes + eu
 """
 
 from __future__ import annotations
@@ -216,3 +219,164 @@ class TestCredentials:
         from C_generators.C34_gene_fp_filter import GeneFalsePositiveFilter
         from Z_utils.Z15_lexicon_provider import CREDENTIALS
         assert GeneFalsePositiveFilter.CREDENTIALS == set(CREDENTIALS)
+
+
+class TestBuildCountryNames:
+    """Tests for build_country_names()."""
+
+    def test_returns_frozenset(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_names
+        result = build_country_names()
+        assert isinstance(result, frozenset)
+
+    def test_has_many_entries(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_names
+        result = build_country_names()
+        # pycountry has 249 countries, plus common_name/official_name variants + aliases
+        assert len(result) > 250
+
+    def test_contains_common_countries(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_names
+        result = build_country_names()
+        for name in ["france", "germany", "japan", "brazil", "india", "australia"]:
+            assert name in result, f"Expected '{name}' in country names"
+
+    def test_contains_aliases(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_names
+        result = build_country_names()
+        for alias in ["usa", "us", "uk", "korea", "hong kong"]:
+            assert alias in result, f"Expected alias '{alias}' in country names"
+
+    def test_all_old_yaml_countries_present(self) -> None:
+        """All 50 countries from old feasibility_data.yaml are still covered."""
+        from Z_utils.Z15_lexicon_provider import build_country_names
+        result = build_country_names()
+        old_countries = [
+            "united states", "usa", "us", "germany", "france", "uk",
+            "united kingdom", "italy", "spain", "canada", "australia",
+            "japan", "china", "brazil", "netherlands", "belgium",
+            "switzerland", "austria", "sweden", "norway", "denmark",
+            "finland", "poland", "czech republic", "hungary", "israel",
+            "south korea", "korea", "taiwan", "india", "russia",
+            "mexico", "argentina", "turkey", "greece", "portugal",
+            "ireland", "new zealand", "singapore", "hong kong",
+            "thailand", "malaysia", "south africa", "egypt", "chile",
+            "colombia", "peru", "ukraine", "romania", "bulgaria",
+        ]
+        for country in old_countries:
+            assert country in result, f"Old YAML country '{country}' missing"
+
+    def test_all_lowercase(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_names
+        result = build_country_names()
+        for name in result:
+            assert name == name.lower(), f"Country name '{name}' is not lowercase"
+
+
+class TestBuildCountryCodeMapping:
+    """Tests for build_country_code_mapping()."""
+
+    def test_returns_dict(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_code_mapping
+        result = build_country_code_mapping()
+        assert isinstance(result, dict)
+
+    def test_has_many_entries(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_code_mapping
+        result = build_country_code_mapping()
+        assert len(result) > 250
+
+    def test_common_mappings(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_code_mapping
+        result = build_country_code_mapping()
+        assert result["france"] == "FR"
+        assert result["germany"] == "DE"
+        assert result["japan"] == "JP"
+        assert result["norway"] == "NO"
+
+    def test_alias_mappings(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_code_mapping
+        result = build_country_code_mapping()
+        assert result["usa"] == "US"
+        assert result["us"] == "US"
+        assert result["uk"] == "GB"
+        assert result["korea"] == "KR"
+
+    def test_all_old_yaml_mappings_present(self) -> None:
+        """All 34 mappings from old feasibility_data.yaml country_codes are covered."""
+        from Z_utils.Z15_lexicon_provider import build_country_code_mapping
+        result = build_country_code_mapping()
+        old_mappings = {
+            "united states": "US", "usa": "US", "us": "US",
+            "germany": "DE", "france": "FR", "uk": "GB",
+            "united kingdom": "GB", "italy": "IT", "spain": "ES",
+            "canada": "CA", "australia": "AU", "japan": "JP",
+            "china": "CN", "brazil": "BR", "netherlands": "NL",
+            "belgium": "BE", "switzerland": "CH", "austria": "AT",
+            "sweden": "SE", "norway": "NO", "denmark": "DK",
+            "finland": "FI", "poland": "PL", "czech republic": "CZ",
+            "hungary": "HU", "israel": "IL", "south korea": "KR",
+            "korea": "KR", "taiwan": "TW", "india": "IN",
+            "russia": "RU", "mexico": "MX", "argentina": "AR",
+            "turkey": "TR",
+        }
+        for name, code in old_mappings.items():
+            assert result[name] == code, f"Old mapping '{name}' → '{code}' missing or wrong"
+
+    def test_values_are_uppercase_alpha2(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_code_mapping
+        result = build_country_code_mapping()
+        for name, code in result.items():
+            assert code == code.upper(), f"Code '{code}' for '{name}' not uppercase"
+            assert len(code) == 2, f"Code '{code}' for '{name}' not 2 chars"
+
+
+class TestBuildCountryAlpha2Codes:
+    """Tests for build_country_alpha2_codes()."""
+
+    def test_returns_frozenset(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_alpha2_codes
+        result = build_country_alpha2_codes()
+        assert isinstance(result, frozenset)
+
+    def test_has_250_entries(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_alpha2_codes
+        result = build_country_alpha2_codes()
+        # 249 ISO codes + "eu"
+        assert len(result) == 250
+
+    def test_contains_common_codes(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_alpha2_codes
+        result = build_country_alpha2_codes()
+        for code in ["us", "gb", "de", "fr", "jp", "cn", "in", "br", "au"]:
+            assert code in result, f"Expected '{code}' in alpha-2 codes"
+
+    def test_contains_eu(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_alpha2_codes
+        result = build_country_alpha2_codes()
+        assert "eu" in result
+
+    def test_all_old_yaml_codes_present(self) -> None:
+        """All valid ISO codes from old gene_fp_terms.yaml countries are covered.
+
+        Note: "uk" was in the old YAML but is not a valid ISO 3166-1 alpha-2 code
+        (the correct code is "gb"). pycountry correctly uses "gb" instead.
+        """
+        from Z_utils.Z15_lexicon_provider import build_country_alpha2_codes
+        result = build_country_alpha2_codes()
+        old_codes = [
+            "us", "eu", "ca", "au", "de", "fr", "jp", "cn", "in",
+            "it", "es", "nl", "be", "ch", "at", "se", "no", "dk", "fi",
+            "pl", "cz", "hu", "ro", "bg", "gr", "pt", "ie", "nz", "sg",
+            "hk", "tw", "kr", "mx", "br", "ar", "cl", "co", "za", "eg",
+        ]
+        for code in old_codes:
+            assert code in result, f"Old YAML code '{code}' missing"
+        # "uk" replaced by correct ISO code "gb"
+        assert "gb" in result
+
+    def test_all_lowercase(self) -> None:
+        from Z_utils.Z15_lexicon_provider import build_country_alpha2_codes
+        result = build_country_alpha2_codes()
+        for code in result:
+            assert code == code.lower(), f"Code '{code}' is not lowercase"

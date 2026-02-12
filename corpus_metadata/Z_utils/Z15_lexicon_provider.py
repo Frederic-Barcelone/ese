@@ -29,7 +29,9 @@ from __future__ import annotations
 import calendar
 import string
 from functools import lru_cache
-from typing import FrozenSet
+from typing import Dict, FrozenSet
+
+import pycountry
 
 from Z_utils.Z12_data_loader import load_term_set
 
@@ -184,10 +186,87 @@ CREDENTIALS: FrozenSet[str] = frozenset({
 })
 
 
+# =============================================================================
+# COUNTRY DATA (from pycountry)
+# =============================================================================
+
+# Common aliases not covered by pycountry's name/common_name/official_name fields.
+_COUNTRY_ALIASES: Dict[str, str] = {
+    "usa": "US",
+    "us": "US",
+    "uk": "GB",
+    "korea": "KR",
+    "hong kong": "HK",
+    "russia": "RU",
+    "taiwan": "TW",
+    "iran": "IR",
+    "syria": "SY",
+    "bolivia": "BO",
+    "venezuela": "VE",
+    "tanzania": "TZ",
+    "vietnam": "VN",
+    "laos": "LA",
+    "turkey": "TR",
+    "czech republic": "CZ",
+    "eu": "EU",
+}
+
+
+@lru_cache(maxsize=1)
+def build_country_names() -> FrozenSet[str]:
+    """Return all country names (lowercased) from pycountry + common aliases.
+
+    Includes: name, common_name, official_name from pycountry, plus
+    common short forms (usa, us, uk, korea, hong kong, etc.).
+    """
+    names: set[str] = set()
+    for country in pycountry.countries:
+        names.add(country.name.lower())
+        if hasattr(country, "common_name"):
+            names.add(country.common_name.lower())
+        if hasattr(country, "official_name"):
+            names.add(country.official_name.lower())
+    names.update(_COUNTRY_ALIASES.keys())
+    return frozenset(names)
+
+
+@lru_cache(maxsize=1)
+def build_country_code_mapping() -> Dict[str, str]:
+    """Return country name → ISO alpha-2 code mapping.
+
+    Keys are lowercased country names (name, common_name, official_name,
+    plus common aliases). Values are uppercase alpha-2 codes.
+    """
+    mapping: Dict[str, str] = {}
+    for country in pycountry.countries:
+        mapping[country.name.lower()] = country.alpha_2
+        if hasattr(country, "common_name"):
+            mapping[country.common_name.lower()] = country.alpha_2
+        if hasattr(country, "official_name"):
+            mapping[country.official_name.lower()] = country.alpha_2
+    mapping.update(_COUNTRY_ALIASES)
+    return mapping
+
+
+@lru_cache(maxsize=1)
+def build_country_alpha2_codes() -> FrozenSet[str]:
+    """Return all ISO 3166-1 alpha-2 codes (lowercased) + 'eu'.
+
+    249 official codes from pycountry plus 'eu' for European Union.
+    Used by gene FP filter to filter country code matches.
+    """
+    codes: set[str] = {c.alpha_2.lower() for c in pycountry.countries}
+    codes.add("eu")
+    return frozenset(codes)
+
+
 __all__ = [
     "ABBREVIATION_EXCLUSIONS",
     "CREDENTIALS",
     "ENGLISH_STOPWORDS",
+    "build_country_alpha2_codes",
+    "build_country_code_mapping",
+    "build_country_names",
     "build_garbage_tokens",
     "build_obvious_noise",
     "month_names",

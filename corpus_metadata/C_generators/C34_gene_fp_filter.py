@@ -35,7 +35,7 @@ from typing import Any, Dict, Optional, Set, Tuple
 
 from A_core.A19_gene_models import GeneGeneratorType
 from Z_utils.Z12_data_loader import load_term_set
-from Z_utils.Z15_lexicon_provider import CREDENTIALS as _CREDENTIALS
+from Z_utils.Z15_lexicon_provider import CREDENTIALS as _CREDENTIALS, build_country_alpha2_codes
 
 
 class GeneFalsePositiveFilter:
@@ -52,7 +52,7 @@ class GeneFalsePositiveFilter:
     STATISTICAL_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "statistical_terms")
     UNITS: Set[str] = load_term_set("gene_fp_terms.yaml", "units")
     CLINICAL_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "clinical_terms")
-    COUNTRIES: Set[str] = load_term_set("gene_fp_terms.yaml", "countries")
+    COUNTRIES: Set[str] = set(build_country_alpha2_codes())
     CREDENTIALS: Set[str] = set(_CREDENTIALS)
     DRUG_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "drug_terms")
     STUDY_TERMS: Set[str] = load_term_set("gene_fp_terms.yaml", "study_terms")

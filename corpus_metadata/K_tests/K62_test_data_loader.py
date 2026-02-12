@@ -193,10 +193,12 @@ class TestGeneFpTermsYaml:
         assert "hr" in GeneFalsePositiveFilter.STATISTICAL_TERMS
         assert "or" in GeneFalsePositiveFilter.STATISTICAL_TERMS
 
-    def test_countries_boolean_trap(self) -> None:
+    def test_countries_from_pycountry(self) -> None:
         from C_generators.C34_gene_fp_filter import GeneFalsePositiveFilter
         # "no" (Norway code) must be string, not boolean
         assert "no" in GeneFalsePositiveFilter.COUNTRIES
+        # pycountry provides 249 alpha-2 codes + "eu" vs old 40
+        assert len(GeneFalsePositiveFilter.COUNTRIES) > 200
 
     def test_common_english_words_boolean_trap(self) -> None:
         from C_generators.C34_gene_fp_filter import GeneFalsePositiveFilter
@@ -305,18 +307,22 @@ class TestFeasibilityDataYaml:
         assert "covid-19" in VACCINE_TYPES
         assert "bcg" in VACCINE_TYPES
 
-    def test_countries(self) -> None:
+    def test_countries_from_pycountry(self) -> None:
         from C_generators.C27_feasibility_patterns import COUNTRIES
-        assert isinstance(COUNTRIES, set)
-        assert "united states" in COUNTRIES
+        assert isinstance(COUNTRIES, frozenset)
+        assert "united states" in COUNTRIES  # pycountry common_name
         assert "japan" in COUNTRIES
+        # pycountry provides many more countries than the old 50-entry YAML
+        assert len(COUNTRIES) > 200
 
-    def test_country_codes_no_boolean(self) -> None:
-        """Verify 'NO' for Norway is a string, not a boolean."""
+    def test_country_codes_from_pycountry(self) -> None:
+        """Verify country code mapping from pycountry."""
         from C_generators.C27_feasibility_patterns import COUNTRY_CODES
         assert isinstance(COUNTRY_CODES, dict)
         assert COUNTRY_CODES["norway"] == "NO"
         assert isinstance(COUNTRY_CODES["norway"], str)
+        assert COUNTRY_CODES["usa"] == "US"
+        assert COUNTRY_CODES["uk"] == "GB"
 
     def test_ambiguous_countries(self) -> None:
         from C_generators.C27_feasibility_patterns import AMBIGUOUS_COUNTRIES

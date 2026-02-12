@@ -30,6 +30,9 @@ torch>=2.0.0
 # pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_lg-0.5.4.tar.gz
 # pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz
 
+# Country/region data
+pycountry>=22.0
+
 # Additional dependencies
 requests>=2.25.0
 Pillow>=9.0.0

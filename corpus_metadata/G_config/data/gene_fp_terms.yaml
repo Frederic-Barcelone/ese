@@ -85,49 +85,7 @@ clinical_terms:
   - "ptt"   # Partial thromboplastin time
   - "pt"    # Prothrombin time / Physical therapy
 
-# Countries and regions
-countries:
-  - "us"
-  - "uk"
-  - "eu"
-  - "ca"
-  - "au"
-  - "de"
-  - "fr"
-  - "jp"
-  - "cn"
-  - "in"
-  - "it"
-  - "es"
-  - "nl"
-  - "be"
-  - "ch"
-  - "at"
-  - "se"
-  - "no"
-  - "dk"
-  - "fi"
-  - "pl"
-  - "cz"
-  - "hu"
-  - "ro"
-  - "bg"
-  - "gr"
-  - "pt"
-  - "ie"
-  - "nz"
-  - "sg"
-  - "hk"
-  - "tw"
-  - "kr"
-  - "mx"
-  - "br"
-  - "ar"
-  - "cl"
-  - "co"
-  - "za"
-  - "eg"
-
+# NOTE: Countries moved to Z_utils.Z15_lexicon_provider (pycountry)
 # NOTE: Credentials (md, phd, etc.) are now in Z_utils.Z15_lexicon_provider.CREDENTIALS
 
 # Drug-related terms that might look like genes

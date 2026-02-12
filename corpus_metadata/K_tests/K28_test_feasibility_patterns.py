@@ -252,7 +252,7 @@ class TestCountries:
             assert country in COUNTRIES
 
     def test_is_set(self):
-        assert isinstance(COUNTRIES, set)
+        assert isinstance(COUNTRIES, (set, frozenset))
 
 
 class TestCountryCodes:
