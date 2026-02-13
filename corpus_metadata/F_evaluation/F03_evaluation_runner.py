@@ -108,7 +108,7 @@ RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
 RUN_NCBI_DISEASE = False  # NCBI Disease corpus (PubMed abstracts, disease annotations)
 RUN_BC5CDR = False        # BC5CDR corpus (PubMed articles, disease + drug annotations)
-RUN_PUBMED_AUTHORS = True  # PubMed author/citation evaluation (reuses gene corpus PDFs)
+RUN_PUBMED_AUTHORS = False  # PubMed author/citation evaluation (reuses gene corpus PDFs)
 RUN_FEASIBILITY = False      # Feasibility extraction (synthetic rare disease docs)
 
 # Which entity types to evaluate
