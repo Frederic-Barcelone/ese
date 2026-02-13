@@ -1,0 +1,94 @@
+# Environment variables
+.env
+.env.*
+.gitignore
+.claude
+CLAUDE.MD
+FDA
+FDA_guidance
+
+
+
+# Python cache and virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Cache folder
+cache/
+*.cache
+
+# Logs and temp files
+*.log
+*.tmp
+
+# IDE and OS specific
+.DS_Store
+.vscode/
+.idea/
+
+# other Folders not needed
+EU_ERN/
+ctis/
+EU_guidelines/
+EU_guidance/
+FDA_DATA/
+FDA_TH/
+FDA_TH_in/
+syncher_keys.py
+ASV/
+corpus_db/
+corpus_dictionaries/
+corpus_logs/
+logs/
+corpus_metadata/logs/
+corpus_orphanet/
+corpus_sas/
+documents*/
+ESE-Admin/
+pubmed/
+Read.K
+ctis-out/
+EU_ERN_DATA/
+EU_ERN_DATA_in/
+EU_guidelines_library/
+FDA_guidance_library/
+Pdfs/
+ouput_datasources/
+corpus_log/
+
+backup_2026_01_05
+
+input_datasources/
+test_venv/
+
+# BioCreative II GM evaluation data (downloaded corpus + generated PDFs)
+gold_data/bc2gm/corpus/
+gold_data/bc2gm/pdfs/
+
+# CADEC evaluation data (downloaded corpus + generated gold)
+gold_data/CADEC/raw/
+gold_data/CADEC/cadec_gold.json
+
+# BC5CDR evaluation data (downloaded corpus + generated gold)
+gold_data/bc5cdr/corpus/
+gold_data/bc5cdr_gold.json
+
+# NCBI Disease evaluation data (downloaded corpus + generated gold)
+gold_data/ncbi_disease/corpus/
+gold_data/ncbi_disease_gold.json
+
+# NLP4RARE pipeline run outputs (extraction artifacts per document)
+gold_data/NLP4RARE/dev/*/
+gold_data/NLP4RARE/test/*/
+gold_data/NLP4RARE/train/*/
+
+# PubMed Authors evaluation data
+gold_data/pubmed_author_gold.json
+gold_data/pubmed_authors/metadata_cache.json
+gold_data/pubmed_authors/evaluate_authors.py
+
+# Plans (working drafts)
+plans/
