@@ -108,7 +108,7 @@ RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
 RUN_NCBI_DISEASE = False  # NCBI Disease corpus (PubMed abstracts, disease annotations)
 RUN_BC5CDR = False        # BC5CDR corpus (PubMed articles, disease + drug annotations)
-RUN_PUBMED_AUTHORS = False  # PubMed author/citation evaluation (reuses gene corpus PDFs)
+RUN_PUBMED_AUTHORS = True  # PubMed author/citation evaluation (reuses gene corpus PDFs)
 RUN_FEASIBILITY = False      # Feasibility extraction (synthetic rare disease docs)
 
 # Which entity types to evaluate
@@ -297,6 +297,9 @@ class ExtractedGene:
     name: Optional[str] = None
     matched_text: Optional[str] = None
     confidence: float = 0.0
+    entrez_id: Optional[str] = None
+    pubtator_aliases: Optional[List[str]] = None
+    alias_of: Optional[str] = None
 
     @property
     def symbol_normalized(self) -> str:
@@ -1620,6 +1623,9 @@ def gene_matches(ext: ExtractedGene, gold: GoldGene) -> bool:
     3. Dehyphenated match (IL-6 == IL6, MMP-9 == MMP9)
     4. Substring match (handles "BRCA1 gene" vs "BRCA1")
     5. Name-based match if available
+    6. PubTator alias match (extracted aliases contain gold symbol)
+    7. Entrez ID match (both have matching NCBI gene IDs)
+    8. alias_of match (extracted gene is alias of gold symbol)
     """
     ext_sym = ext.symbol_normalized
     gold_sym = gold.symbol_normalized
@@ -1653,6 +1659,27 @@ def gene_matches(ext: ExtractedGene, gold: GoldGene) -> bool:
     if ext.name and gold.symbol:
         ext_name = ext.name.strip().upper()
         if ext_name == gold_sym or gold_sym in ext_name or ext_name in gold_sym:
+            return True
+
+    # 6. PubTator alias match
+    if ext.pubtator_aliases:
+        for alias in ext.pubtator_aliases:
+            alias_norm = alias.strip().upper()
+            if alias_norm == gold_sym:
+                return True
+            # Dehyphenated alias match
+            if alias_norm.replace("-", "") == gold_dehyph:
+                return True
+
+    # 7. Entrez ID match
+    if ext.entrez_id and gold.ncbi_gene_id:
+        if ext.entrez_id.strip() == gold.ncbi_gene_id.strip():
+            return True
+
+    # 8. alias_of match (extracted gene's canonical symbol matches gold)
+    if ext.alias_of:
+        alias_of_norm = ext.alias_of.strip().upper()
+        if alias_of_norm == gold_sym:
             return True
 
     return False
@@ -2553,6 +2580,9 @@ def run_extraction(orch, pdf_path: Path) -> dict:
                 name=getattr(gene, 'full_name', None) or getattr(gene, 'name', None),
                 matched_text=getattr(gene, 'matched_text', None),
                 confidence=getattr(gene, 'confidence_score', 0.0),
+                entrez_id=getattr(gene, 'entrez_id', None),
+                pubtator_aliases=getattr(gene, 'pubtator_aliases', None),
+                alias_of=getattr(gene, 'alias_of', None),
             ))
 
     # Extract drugs
