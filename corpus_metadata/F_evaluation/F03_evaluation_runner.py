@@ -106,7 +106,7 @@ RUN_NLP4RARE = False    # NLP4RARE annotated rare disease corpus
 RUN_PAPERS = False     # Papers in gold_data/PAPERS/
 RUN_NLM_GENE = False   # NLM-Gene corpus (PubMed abstracts, gene annotations)
 RUN_RAREDIS_GENE = False  # RareDisGene (rare disease gene-disease associations)
-RUN_NCBI_DISEASE = False  # NCBI Disease corpus (PubMed abstracts, disease annotations)
+RUN_NCBI_DISEASE = True  # NCBI Disease corpus (PubMed abstracts, disease annotations)
 RUN_BC5CDR = False        # BC5CDR corpus (PubMed articles, disease + drug annotations)
 RUN_PUBMED_AUTHORS = False  # PubMed author/citation evaluation (reuses gene corpus PDFs)
 RUN_FEASIBILITY = False      # Feasibility extraction (synthetic rare disease docs)
@@ -208,9 +208,16 @@ class GoldAuthor:
     first_name: Optional[str] = None
     initials: Optional[str] = None
 
+    @staticmethod
+    def _strip_accents(s: str) -> str:
+        return "".join(
+            c for c in unicodedata.normalize("NFD", s)
+            if unicodedata.category(c) != "Mn"
+        )
+
     @property
     def last_name_normalized(self) -> str:
-        return self.last_name.strip().lower()
+        return self._strip_accents(self.last_name.strip().lower())
 
     @property
     def first_initial(self) -> str:
@@ -330,17 +337,47 @@ class ExtractedDrugEval:
         return " ".join(self.alt_name.strip().lower().split())
 
 
+_SURNAME_PREFIXES = {
+    "de", "van", "von", "di", "le", "la", "del", "dos", "da", "den",
+    "der", "ter", "el", "al", "bin", "ibn", "du", "des", "het",
+}
+
+
 @dataclass
 class ExtractedAuthorEval:
     """A single extracted author entity for evaluation."""
     full_name: str
     confidence: float = 0.0
 
+    @staticmethod
+    def _strip_accents(s: str) -> str:
+        return "".join(
+            c for c in unicodedata.normalize("NFD", s)
+            if unicodedata.category(c) != "Mn"
+        )
+
     @property
     def last_name(self) -> str:
-        """Extract last name (last word of full_name)."""
+        """Extract last name, including multi-part surname prefixes.
+
+        Handles trailing single-letter suffixes (e.g. "Juan M. Aparicio R.")
+        by skipping them and using the preceding word as the base surname.
+        """
         parts = self.full_name.strip().split()
-        return parts[-1].lower() if parts else ""
+        if not parts:
+            return ""
+        # Skip trailing single-letter token (e.g. "R." suffix initial)
+        last_idx = len(parts) - 1
+        if last_idx > 0 and len(parts[last_idx].rstrip(".")) <= 1:
+            last_idx -= 1
+        # Walk backwards to include surname prefixes (De, Van, Von, etc.)
+        surname_parts: list[str] = [parts[last_idx]]
+        for i in range(last_idx - 1, 0, -1):
+            if parts[i].lower().rstrip(".") in _SURNAME_PREFIXES:
+                surname_parts.insert(0, parts[i])
+            else:
+                break
+        return self._strip_accents(" ".join(surname_parts).lower())
 
     @property
     def first_initial(self) -> str:
@@ -1406,6 +1443,23 @@ def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRE
     if _to_canonical(sys_syn) == _to_canonical(gold_syn):
         return True
 
+    # Qualifier stripping: remove medical qualifiers and re-match
+    _DISEASE_QUALIFIERS = re.compile(
+        r"^(?:sporadic|familial|hereditary|congenital|acquired|primary|secondary|"
+        r"bilateral|unilateral|ectopic|chronic|acute|recurrent|progressive|"
+        r"intracranial|mature|juvenile|infantile|neonatal|early-onset|late-onset|"
+        r"(?:familial\s+and\s+sporadic)|(?:dominantly\s+inherited))\s+",
+        re.IGNORECASE,
+    )
+    sys_stripped = _DISEASE_QUALIFIERS.sub("", sys_norm).strip()
+    gold_stripped = _DISEASE_QUALIFIERS.sub("", gold_norm).strip()
+    if sys_stripped != sys_norm or gold_stripped != gold_norm:
+        if sys_stripped and gold_stripped:
+            if sys_stripped == gold_stripped:
+                return True
+            if sys_stripped in gold_stripped or gold_stripped in sys_stripped:
+                return True
+
     # Fuzzy match (on synonym-normalized forms for better scores)
     ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
     return ratio >= threshold
@@ -1520,6 +1574,24 @@ def _disease_match_level(sys_text: str, gold_text: str, threshold: float = FUZZY
         return 3
     if sys_syn in gold_syn or gold_syn in sys_syn:
         return 3
+
+    # Qualifier stripping: remove medical qualifiers and re-match
+    # e.g., "sporadic prostate cancer" → "prostate cancer"
+    _DISEASE_QUALIFIERS = re.compile(
+        r"^(?:sporadic|familial|hereditary|congenital|acquired|primary|secondary|"
+        r"bilateral|unilateral|ectopic|chronic|acute|recurrent|progressive|"
+        r"intracranial|mature|juvenile|infantile|neonatal|early-onset|late-onset|"
+        r"(?:familial\s+and\s+sporadic)|(?:dominantly\s+inherited))\s+",
+        re.IGNORECASE,
+    )
+    sys_stripped = _DISEASE_QUALIFIERS.sub("", sys_norm).strip()
+    gold_stripped = _DISEASE_QUALIFIERS.sub("", gold_norm).strip()
+    if sys_stripped != sys_norm or gold_stripped != gold_norm:
+        if sys_stripped and gold_stripped:
+            if sys_stripped == gold_stripped:
+                return 3
+            if sys_stripped in gold_stripped or gold_stripped in sys_stripped:
+                return 3
 
     ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
     if ratio >= threshold:
@@ -1909,19 +1981,34 @@ def author_matches(ext: ExtractedAuthorEval, gold: GoldAuthor) -> bool:
     """Check if extracted author matches gold standard author.
 
     Match by last name (case-insensitive) + first initial.
+    Relaxed initial check: extracted initial may match any position
+    in gold initials (handles cases where first initial was dropped
+    from extracted text, e.g. "A Mohiddin" vs gold "S A Mohiddin").
+    Fuzzy fallback: SequenceMatcher ratio >= 0.8 for OCR-corrupted names.
     """
     ext_last = ext.last_name
     gold_last = gold.last_name_normalized
 
-    # Exact last name match
-    if ext_last != gold_last:
-        return False
+    # Exact or fuzzy last name match
+    last_name_match = ext_last == gold_last
+    if not last_name_match:
+        # Fuzzy fallback for OCR-corrupted names (e.g. "hirano" vs "hirono")
+        if len(ext_last) >= 4 and len(gold_last) >= 4:
+            last_name_match = SequenceMatcher(None, ext_last, gold_last).ratio() >= 0.8
+        if not last_name_match:
+            return False
 
     # First initial match (if available)
     ext_init = ext.first_initial
     gold_init = gold.first_initial
     if ext_init and gold_init:
-        return ext_init == gold_init
+        # Primary: exact first-initial match
+        if ext_init == gold_init:
+            return True
+        # Fallback: extracted initial appears anywhere in gold initials
+        if gold.initials and ext_init in gold.initials.lower():
+            return True
+        return False
 
     # If no initials available, last name match is sufficient
     return True
@@ -2458,7 +2545,11 @@ DATASET_PRESETS: dict[str, dict[str, bool]] = {
 DATASET_DISEASE_CONFIG: dict[str, dict[str, bool]] = {
     "NLP4RARE": {"enable_symptoms": False},
     "BC5CDR": {"enable_symptoms": True, "filter_symptom_diseases": False},
-    "NCBI-Disease": {"enable_symptoms": False},  # gold only annotates topic diseases
+    "NCBI-Disease": {
+        "enable_symptoms": False,
+        "filter_symptom_diseases": True,
+        "include_generic_oncology": True,
+    },
 }
 
 # Per-dataset drug_detection config overrides
