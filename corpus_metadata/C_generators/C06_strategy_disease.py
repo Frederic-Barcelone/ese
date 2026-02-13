@@ -295,6 +295,7 @@ class DiseaseDetector:
         self._enable_acronyms = bool(self.config.get("enable_rare_disease_acronyms", True))
         self._enable_scispacy = bool(self.config.get("enable_scispacy", True))
         self._enable_symptoms = bool(self.config.get("enable_symptoms", True))
+        self._include_generic_oncology = bool(self.config.get("include_generic_oncology", False))
 
         # Stats: (name, count, filename)
         self._lexicon_stats: List[Tuple[str, int, str]] = []
@@ -311,6 +312,8 @@ class DiseaseDetector:
             self._load_rare_disease_acronyms()
         if self._enable_symptoms:
             self._load_symptom_lexicon()
+        if self._include_generic_oncology:
+            self._load_generic_oncology_terms()
 
         # Initialize scispacy
         self.scispacy_nlp = None
@@ -701,6 +704,42 @@ class DiseaseDetector:
             ("Symptoms/adverse events", loaded, self.symptoms_path.name)
         )
 
+    def _load_generic_oncology_terms(self) -> None:
+        """Load generic oncology/disease terms into general keyword processor.
+
+        These terms (tumor, cancer, malignancy, etc.) are too generic for rare
+        disease pipelines but are valid gold entries in benchmarks like NCBI
+        Disease that annotate ALL disease mentions. Gated by config flag
+        include_generic_oncology.
+        """
+        generic_terms = [
+            "tumor", "tumour", "tumors", "tumours",
+            "cancer", "cancers",
+            "malignancy", "malignancies",
+            "neoplasm", "neoplasms",
+            "carcinoma", "carcinomas",
+            "sarcoma", "sarcomas",
+            "lymphoma", "lymphomas",
+            "leukemia", "leukaemia",
+            "melanoma", "melanomas",
+        ]
+        loaded = 0
+        for term in generic_terms:
+            key = f"generic_oncology_{loaded}"
+            entry = DiseaseEntry(
+                key=key,
+                preferred_label=term.title(),
+                identifiers={},
+                is_rare_disease=False,
+                source="generic_oncology",
+            )
+            self.general_entries[key] = entry
+            self.general_kp.add_keyword(term, key)
+            loaded += 1
+        self._lexicon_stats.append(
+            ("Generic oncology terms", loaded, "config:include_generic_oncology")
+        )
+
     @staticmethod
     def _generate_plural(label: str) -> Optional[str]:
         """Generate plural form of a disease label for FlashText matching.
@@ -939,14 +978,26 @@ class DiseaseDetector:
                 matched_text, context, is_abbreviation=False
             )
             if should_filter:
-                continue
+                # Allow generic oncology entries through the domain profile
+                # "generic_term_no_context" filter when explicitly enabled
+                if not (
+                    self._include_generic_oncology
+                    and entry.source == "generic_oncology"
+                    and reason == "generic_term_no_context"
+                ):
+                    continue
 
             # Also hard-filter by preferred_label for catastrophic FPs
-            should_filter_label, _ = self.fp_filter.should_filter(
+            should_filter_label, label_reason = self.fp_filter.should_filter(
                 entry.preferred_label, context, is_abbreviation=False
             )
             if should_filter_label:
-                continue
+                if not (
+                    self._include_generic_oncology
+                    and entry.source == "generic_oncology"
+                    and label_reason == "generic_term_no_context"
+                ):
+                    continue
 
             # Calculate confidence adjustment (replaces most filtering)
             adjustment, _ = self.fp_filter.score_adjustment(

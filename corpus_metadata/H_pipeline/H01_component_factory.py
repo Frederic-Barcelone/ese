@@ -365,6 +365,7 @@ class ComponentFactory:
                 "enable_scispacy": disease_cfg.get("enable_scispacy", True),
                 "enable_symptoms": disease_cfg.get("enable_symptoms", True),
                 "filter_symptom_diseases": disease_cfg.get("filter_symptom_diseases", True),
+                "include_generic_oncology": disease_cfg.get("include_generic_oncology", False),
                 "context_window": disease_cfg.get("context_window", 300),
             }
         )

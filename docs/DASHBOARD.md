@@ -15,7 +15,9 @@
 | Citation | PubMed Authors | — | — | — | — | — | — | — | — | — |
 | Disease | NLP4RARE dev | 20 | 79 | 9 | 10 | 89.8% | 88.8% | 89.3% | +0.0 | 10/20 |
 | Abbreviation | NLP4RARE dev | 20 | 5 | 0 | 0 | 100.0% | 100.0% | 100.0% | +0.0 | 10/20 |
-| Disease | NCBI Disease | 73 | — | — | — | — | — | 54.4% | — | 13/73 |
+| Disease | NCBI Disease | 20 | 56 | 2 | 29 | 96.6% | 65.9% | 78.3% | +23.9 | — |
+| Disease | NCBI Disease | 50 | 157 | 7 | 66 | 95.7% | 70.4% | 81.1% | +24.9 | 20/50 |
+| Disease | NCBI Disease | 73 | 315 | 23 | 165 | 93.2% | 65.6% | 77.0% | +22.6 | 27/73 |
 | Feasibility (epi) | Synthetic | 20 | 39 | 32 | 11 | 54.9% | 78.0% | 64.5% | — | — |
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
 | Feasibility (design) | Synthetic | 20 | — | — | — | — | — | — | — | 97% |
@@ -61,6 +63,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-13 | NCBI Disease gold fix (include all annotation types) + generic oncology terms + config propagation fix | NCBI Disease F1 54.4%->77.0% (P=93.2%, R=65.6%). No regression: NLP4RARE 89.3%, BC5CDR 95.1%/82.7%. |
 | 2026-02-13 | Enrich RareDisGene gold standard with 91 confirmed gene mentions (HGNC-verified) | RareDisGene F1 65.5%->97.6% (P=100%, R=95.3%). NLM-Gene unchanged at 78.4%. |
 | 2026-02-12 | Replace 124 country YAML entries with pycountry package | No accuracy change. Gene FP filter: 250 country codes (was 40). Feasibility: 400+ country names (was 50). |
 | 2026-02-12 | API cost reduction: context 400->200, batch sizes 2x, sf_only 5->3 chunks + single call, rec caching, metadata merge | No regression. NLP4RARE: Disease 89.3% (+0.0), Abbrev 100% (+0.0). BC5CDR 20-doc: Disease 95.1% (+2.6), Drug 82.7% (+2.1). |

@@ -113,9 +113,9 @@ def parse_pubtator(file_path: Path, split: str) -> tuple[list[dict], list[dict]]
                     entity_type = fields[4].strip()
                     concept_id = fields[5].strip() if len(fields) > 5 else ""
 
-                    # Only include Disease and Modifier types
-                    # (the corpus uses "Disease" and sometimes "Modifier" for disease-related mentions)
-                    if entity_type not in ("Disease", "Modifier"):
+                    # Include all disease annotation types from NCBI Disease Corpus:
+                    # SpecificDisease, DiseaseClass, Modifier, CompositeMention
+                    if entity_type not in ("SpecificDisease", "DiseaseClass", "Modifier", "CompositeMention"):
                         continue
 
                     # Deduplicate by mention text (case-insensitive) per document
