@@ -1,7 +1,7 @@
 # corpus_metadata/K_tests/K01_base_provenance.py
 """Tests for BaseProvenanceMetadata generic class."""
 
-from datetime import datetime, timezone
+from datetime import datetime
 from enum import Enum
 
 import pytest

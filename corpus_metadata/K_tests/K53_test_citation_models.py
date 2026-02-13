@@ -228,6 +228,7 @@ class TestCitationExportEntry:
                 resolved_url="https://pubmed.ncbi.nlm.nih.gov/12345678/",
             ),
         )
+        assert entry.validation is not None
         assert entry.validation.is_valid is True
         assert entry.validation.resolved_url == "https://pubmed.ncbi.nlm.nih.gov/12345678/"
 
