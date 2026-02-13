@@ -4,7 +4,7 @@
   "source": "https://figshare.com/articles/dataset/Gene-RD-Provenance_V2/7718537",
   "license": "CC0",
   "genes": {
-    "total": 4117,
+    "total": 4208,
     "annotations": [
       {
         "doc_id": "21835308.pdf",
@@ -20589,6 +20589,461 @@
       {
         "doc_id": "24026985.pdf",
         "symbol": "BBIP1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10025409.pdf",
+        "symbol": "KCNQ1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10077649.pdf",
+        "symbol": "THPO",
+        "split": "test"
+      },
+      {
+        "doc_id": "10094194.pdf",
+        "symbol": "TGM1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10094550.pdf",
+        "symbol": "RP9",
+        "split": "test"
+      },
+      {
+        "doc_id": "10094550.pdf",
+        "symbol": "CFC1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10205266.pdf",
+        "symbol": "GJA8",
+        "split": "test"
+      },
+      {
+        "doc_id": "10359588.pdf",
+        "symbol": "EBP",
+        "split": "test"
+      },
+      {
+        "doc_id": "10359588.pdf",
+        "symbol": "GLB1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10369262.pdf",
+        "symbol": "MEFV",
+        "split": "test"
+      },
+      {
+        "doc_id": "10412980.pdf",
+        "symbol": "FAS",
+        "split": "test"
+      },
+      {
+        "doc_id": "10412980.pdf",
+        "symbol": "FASLG",
+        "split": "test"
+      },
+      {
+        "doc_id": "10615133.pdf",
+        "symbol": "ERG",
+        "split": "test"
+      },
+      {
+        "doc_id": "10615133.pdf",
+        "symbol": "GUCY2D",
+        "split": "test"
+      },
+      {
+        "doc_id": "10615133.pdf",
+        "symbol": "RPE65",
+        "split": "test"
+      },
+      {
+        "doc_id": "10615133.pdf",
+        "symbol": "CRX",
+        "split": "test"
+      },
+      {
+        "doc_id": "10615133.pdf",
+        "symbol": "TPR",
+        "split": "test"
+      },
+      {
+        "doc_id": "10655055.pdf",
+        "symbol": "ATP6AP1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10655068.pdf",
+        "symbol": "ABCD1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10788335.pdf",
+        "symbol": "NT5E",
+        "split": "test"
+      },
+      {
+        "doc_id": "10788335.pdf",
+        "symbol": "SBDS",
+        "split": "test"
+      },
+      {
+        "doc_id": "10802647.pdf",
+        "symbol": "DSP",
+        "split": "test"
+      },
+      {
+        "doc_id": "10802654.pdf",
+        "symbol": "TFAP2A",
+        "split": "test"
+      },
+      {
+        "doc_id": "10839543.pdf",
+        "symbol": "NFKB1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10839543.pdf",
+        "symbol": "COX8A",
+        "split": "test"
+      },
+      {
+        "doc_id": "10932186.pdf",
+        "symbol": "RORA",
+        "split": "test"
+      },
+      {
+        "doc_id": "10973252.pdf",
+        "symbol": "ATP6V1B1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10973252.pdf",
+        "symbol": "ATP6V0A1",
+        "split": "test"
+      },
+      {
+        "doc_id": "10973254.pdf",
+        "symbol": "GOPC",
+        "split": "test"
+      },
+      {
+        "doc_id": "11047757.pdf",
+        "symbol": "HAND2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11062477.pdf",
+        "symbol": "HBD",
+        "split": "test"
+      },
+      {
+        "doc_id": "11062477.pdf",
+        "symbol": "PHEX",
+        "split": "test"
+      },
+      {
+        "doc_id": "11067869.pdf",
+        "symbol": "PTH",
+        "split": "test"
+      },
+      {
+        "doc_id": "11067869.pdf",
+        "symbol": "CHAMP1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11101850.pdf",
+        "symbol": "NT5C3A",
+        "split": "test"
+      },
+      {
+        "doc_id": "11145714.pdf",
+        "symbol": "IL7",
+        "split": "test"
+      },
+      {
+        "doc_id": "11207361.pdf",
+        "symbol": "ABCC1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11220736.pdf",
+        "symbol": "MAPT",
+        "split": "test"
+      },
+      {
+        "doc_id": "11220736.pdf",
+        "symbol": "DLD",
+        "split": "test"
+      },
+      {
+        "doc_id": "11228257.pdf",
+        "symbol": "RYR1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11228257.pdf",
+        "symbol": "MAP3K14",
+        "split": "test"
+      },
+      {
+        "doc_id": "11230184.pdf",
+        "symbol": "SNRPN",
+        "split": "test"
+      },
+      {
+        "doc_id": "11230184.pdf",
+        "symbol": "MAGEL2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11230184.pdf",
+        "symbol": "FGFR1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11230184.pdf",
+        "symbol": "CCDC6",
+        "split": "test"
+      },
+      {
+        "doc_id": "11239453.pdf",
+        "symbol": "BRCA2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11279515.pdf",
+        "symbol": "EDNRB",
+        "split": "test"
+      },
+      {
+        "doc_id": "11279527.pdf",
+        "symbol": "MAP3K14",
+        "split": "test"
+      },
+      {
+        "doc_id": "11302742.pdf",
+        "symbol": "XDH",
+        "split": "test"
+      },
+      {
+        "doc_id": "11302742.pdf",
+        "symbol": "SORD",
+        "split": "test"
+      },
+      {
+        "doc_id": "11302742.pdf",
+        "symbol": "TECR",
+        "split": "test"
+      },
+      {
+        "doc_id": "11379879.pdf",
+        "symbol": "MT-ATP6",
+        "split": "test"
+      },
+      {
+        "doc_id": "11381256.pdf",
+        "symbol": "ABL1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11381270.pdf",
+        "symbol": "BBS1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11381270.pdf",
+        "symbol": "BBS2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11381270.pdf",
+        "symbol": "BBS5",
+        "split": "test"
+      },
+      {
+        "doc_id": "11381270.pdf",
+        "symbol": "MKKS",
+        "split": "test"
+      },
+      {
+        "doc_id": "11381270.pdf",
+        "symbol": "ARL6",
+        "split": "test"
+      },
+      {
+        "doc_id": "11455388.pdf",
+        "symbol": "HPS1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11455388.pdf",
+        "symbol": "AP3B1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11468273.pdf",
+        "symbol": "MT-ATP6",
+        "split": "test"
+      },
+      {
+        "doc_id": "11479539.pdf",
+        "symbol": "AGPAT2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11479539.pdf",
+        "symbol": "INS",
+        "split": "test"
+      },
+      {
+        "doc_id": "11528394.pdf",
+        "symbol": "GCH1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11528394.pdf",
+        "symbol": "TOR1A",
+        "split": "test"
+      },
+      {
+        "doc_id": "11528394.pdf",
+        "symbol": "PAFAH1B1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11528394.pdf",
+        "symbol": "KIDINS220",
+        "split": "test"
+      },
+      {
+        "doc_id": "11528394.pdf",
+        "symbol": "TH",
+        "split": "test"
+      },
+      {
+        "doc_id": "11545739.pdf",
+        "symbol": "MT-ATP6",
+        "split": "test"
+      },
+      {
+        "doc_id": "11567216.pdf",
+        "symbol": "CFC1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11574891.pdf",
+        "symbol": "DKC1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11574891.pdf",
+        "symbol": "ARMC9",
+        "split": "test"
+      },
+      {
+        "doc_id": "11586297.pdf",
+        "symbol": "IGFALS",
+        "split": "test"
+      },
+      {
+        "doc_id": "11586297.pdf",
+        "symbol": "CTSC",
+        "split": "test"
+      },
+      {
+        "doc_id": "11668635.pdf",
+        "symbol": "INS",
+        "split": "test"
+      },
+      {
+        "doc_id": "11668635.pdf",
+        "symbol": "RHO",
+        "split": "test"
+      },
+      {
+        "doc_id": "11687798.pdf",
+        "symbol": "DDX41",
+        "split": "test"
+      },
+      {
+        "doc_id": "11687801.pdf",
+        "symbol": "DGKE",
+        "split": "test"
+      },
+      {
+        "doc_id": "11687801.pdf",
+        "symbol": "DGUOK",
+        "split": "test"
+      },
+      {
+        "doc_id": "11741829.pdf",
+        "symbol": "NF2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11741829.pdf",
+        "symbol": "FBN1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11741829.pdf",
+        "symbol": "CYP19A1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11772997.pdf",
+        "symbol": "CDKN2B",
+        "split": "test"
+      },
+      {
+        "doc_id": "11799392.pdf",
+        "symbol": "SMARCA2",
+        "split": "test"
+      },
+      {
+        "doc_id": "11799477.pdf",
+        "symbol": "AR",
+        "split": "test"
+      },
+      {
+        "doc_id": "11799477.pdf",
+        "symbol": "KIF1B",
+        "split": "test"
+      },
+      {
+        "doc_id": "11810107.pdf",
+        "symbol": "GOPC",
+        "split": "test"
+      },
+      {
+        "doc_id": "11818965.pdf",
+        "symbol": "APC",
+        "split": "test"
+      },
+      {
+        "doc_id": "11818965.pdf",
+        "symbol": "OGG1",
+        "split": "test"
+      },
+      {
+        "doc_id": "11818965.pdf",
+        "symbol": "SLC25A15",
+        "split": "test"
+      },
+      {
+        "doc_id": "11857109.pdf",
+        "symbol": "COG4",
+        "split": "test"
+      },
+      {
+        "doc_id": "11857109.pdf",
+        "symbol": "ATP6AP1",
         "split": "test"
       }
     ]

@@ -1,14 +1,14 @@
 # ESE Pipeline Accuracy Dashboard
 
-> Last updated: 2026-02-12
+> Last updated: 2026-02-13
 
 | Entity | Benchmark | Docs | TP | FP | FN | Precision | Recall | F1 | Delta | Perfect |
 |--------|-----------|------|----|----|----|-----------|--------|----|-------|---------|
 | Disease | BC5CDR | 20 | 97 | 3 | 7 | 97.0% | 93.3% | 95.1% | +2.6 | 4/20 |
 | Drug | BC5CDR | 20 | 55 | 6 | 17 | 90.2% | 76.4% | 82.7% | +2.1 | 4/20 |
 | Drug | CADEC | 311 | 272 | 20 | 22 | 93.2% | 92.5% | 92.8% | -0.2 | 282/311 |
-| Gene | NLM-Gene | 46 | 198 | 84 | 26 | 70.2% | 88.4% | 78.4% | +0.1 | 6/46 |
-| Gene | RareDisGene | 100 | 93 | 90 | 8 | 50.8% | 92.1% | 65.5% | +0.0 | 44/100 |
+| Gene | NLM-Gene | 46 | 198 | 83 | 26 | 70.5% | 88.4% | 78.4% | +0.0 | 6/46 |
+| Gene | RareDisGene | 100 | 183 | 0 | 9 | 100.0% | 95.3% | 97.6% | +32.1 | 91/100 |
 | Disease | NLP4RARE | 100 | 280 | 29 | 42 | 90.6% | 87.0% | 88.7% | -0.2 | 52/100 |
 | Abbreviation | NLP4RARE | 100 | 16 | 3 | 8 | 84.2% | 66.7% | 74.4% | — | 52/100 |
 | Author | PubMed Authors | — | — | — | — | — | — | — | — | — |
@@ -61,6 +61,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-13 | Enrich RareDisGene gold standard with 91 confirmed gene mentions (HGNC-verified) | RareDisGene F1 65.5%->97.6% (P=100%, R=95.3%). NLM-Gene unchanged at 78.4%. |
 | 2026-02-12 | Replace 124 country YAML entries with pycountry package | No accuracy change. Gene FP filter: 250 country codes (was 40). Feasibility: 400+ country names (was 50). |
 | 2026-02-12 | API cost reduction: context 400->200, batch sizes 2x, sf_only 5->3 chunks + single call, rec caching, metadata merge | No regression. NLP4RARE: Disease 89.3% (+0.0), Abbrev 100% (+0.0). BC5CDR 20-doc: Disease 95.1% (+2.6), Drug 82.7% (+2.1). |
 | 2026-02-12 | Full benchmark run: filled TP/FP/FN for CADEC, NLM-Gene, RareDisGene, NLP4RARE | CADEC Drug F1 92.8%, Gene F1s stable, NLP4RARE combined 100-doc Disease 88.7% |
