@@ -27,11 +27,11 @@ class TestStopwordsBase:
         from Z_utils.Z15_lexicon_provider import stopwords_base
         result = stopwords_base()
         assert isinstance(result, frozenset)
+        assert "the" in result
 
     def test_has_many_entries(self) -> None:
         from Z_utils.Z15_lexicon_provider import stopwords_base
         result = stopwords_base()
-        # spaCy English has 300+ stopwords
         assert len(result) > 300
 
     def test_common_stopwords_present(self) -> None:
@@ -54,6 +54,7 @@ class TestSingleLetters:
         from Z_utils.Z15_lexicon_provider import single_letters
         result = single_letters()
         assert isinstance(result, frozenset)
+        assert "a" in result
 
     def test_covers_all_26_letters(self) -> None:
         from Z_utils.Z15_lexicon_provider import single_letters
@@ -70,6 +71,7 @@ class TestMonthNames:
         from Z_utils.Z15_lexicon_provider import month_names
         result = month_names()
         assert isinstance(result, frozenset)
+        assert "january" in result
 
     def test_covers_all_12_full_months(self) -> None:
         from Z_utils.Z15_lexicon_provider import month_names

@@ -72,6 +72,7 @@ class TestGetBasePath:
 
             # Should auto-detect since empty string is falsy
             assert isinstance(path, Path)
+            assert path.exists()
 
     def test_env_var_overrides_config(self):
         """Test that env var takes precedence over config."""

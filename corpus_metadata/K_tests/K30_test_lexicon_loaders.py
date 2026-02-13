@@ -66,17 +66,18 @@ class TestLexiconLoaderMixin:
     def test_load_disease_nonexistent(self, loader):
         """Test loading nonexistent disease lexicon."""
         loader._load_disease_lexicon(Path("/nonexistent/path.json"))
-        # Should not raise, just log warning
+        # No terms added since file doesn't exist
+        assert loader.entity_kp.add_keyword.call_count == 0
 
     def test_load_orphanet_nonexistent(self, loader):
         """Test loading nonexistent Orphanet lexicon."""
         loader._load_orphanet_lexicon(Path("/nonexistent/path.json"))
-        # Should not raise
+        assert loader.entity_kp.add_keyword.call_count == 0
 
     def test_print_lexicon_summary_empty(self, loader):
         """Test printing summary with no lexicons."""
         loader._print_lexicon_summary()
-        # Should not raise
+        assert len(loader._lexicon_stats) == 0
 
     def test_print_lexicon_summary_with_stats(self, loader):
         """Test printing summary with some lexicons."""
@@ -85,7 +86,7 @@ class TestLexiconLoaderMixin:
             ("Another Lexicon", 200, "another.json"),
         ]
         loader._print_lexicon_summary()
-        # Should not raise
+        assert len(loader._lexicon_stats) == 2
 
 
 class TestExtractIdentifiers:

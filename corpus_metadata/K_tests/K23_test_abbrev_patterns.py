@@ -88,7 +88,8 @@ class TestDehyphenateLongForm:
         # Note: The current implementation dehyphenates all hyphens followed by lowercase
         # This is aggressive but handles line-break artifacts
         result = _dehyphenate_long_form("anti-inflammatory")
-        assert result is not None  # Just ensure it doesn't crash
+        assert isinstance(result, str)
+        assert len(result) > 0
         # Test that line-break patterns are fixed
         assert _dehyphenate_long_form("gastroin- testinal") == "gastrointestinal"
 

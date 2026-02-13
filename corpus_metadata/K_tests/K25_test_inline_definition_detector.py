@@ -37,35 +37,34 @@ class TestExtractInlineDefinitions:
     def test_standard_pattern_lowercase(self, detector):
         """Test 'long form (ABBREV)' pattern with lowercase."""
         text = "level of agreement (LoA) was calculated"
-        detector._extract_inline_definitions(text)
-        # May or may not match depending on validation
-        # Pattern 1b should catch this
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_reversed_pattern(self, detector):
         """Test 'ABBREV (long form)' reversed pattern."""
         text = "LoE (level of evidence) was used"
         results = detector._extract_inline_definitions(text)
-        # Pattern 3 should catch reversed definitions
-        any(sf == "LoE" for sf, lf, s, e in results)
-        # This tests the pattern exists, actual match depends on validation
+        assert isinstance(results, list)
+        if results:
+            assert any(sf == "LoE" for sf, lf, s, e in results)
 
     def test_comma_separator_pattern(self, detector):
         """Test 'ABBREV, the long form' pattern."""
         text = "GPA, or granulomatosis with polyangiitis, is a disease"
-        detector._extract_inline_definitions(text)
-        # Pattern 2 should catch this
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_equals_separator_pattern(self, detector):
         """Test 'ABBREV = long form' pattern."""
         text = "TNF = tumor necrosis factor in this study"
-        detector._extract_inline_definitions(text)
-        # Pattern 4 should catch this
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_hyphenated_long_form(self, detector):
         """Test long forms with hyphens."""
         text = "Five-Factor Score (FFS) was measured"
-        detector._extract_inline_definitions(text)
-        # Should handle hyphenated words
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_no_definitions(self, detector):
         """Test text with no definitions."""
@@ -111,14 +110,16 @@ class TestLeadInRemoval:
     def test_removes_known_as(self, detector):
         """Test removal of 'known as' prefix."""
         text = "known as level of evidence (LoE)"
-        detector._extract_inline_definitions(text)
-        # Should not include "known as" in long form
+        results = detector._extract_inline_definitions(text)
+        for sf, lf, s, e in results:
+            assert "known as" not in lf.lower()
 
     def test_removes_including(self, detector):
         """Test removal of 'including' prefix."""
         text = "including tumor necrosis factor (TNF)"
-        detector._extract_inline_definitions(text)
-        # Should not include "including" in long form
+        results = detector._extract_inline_definitions(text)
+        for sf, lf, s, e in results:
+            assert "including" not in lf.lower()
 
 
 class TestEdgeCases:
@@ -133,23 +134,23 @@ class TestEdgeCases:
     def test_nested_parentheses(self, detector):
         """Test handling of nested parentheses."""
         text = "enzyme activity (EA) (measured in U/L)"
-        detector._extract_inline_definitions(text)
-        # Should handle gracefully
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_unicode_text(self, detector):
         """Test handling of unicode characters."""
         text = "α-synuclein (αSyn) aggregates"
-        detector._extract_inline_definitions(text)
-        # Should handle unicode
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_numbers_in_abbreviation(self, detector):
         """Test abbreviations with numbers."""
         text = "Interleukin 6 (IL6) concentration"
-        detector._extract_inline_definitions(text)
-        # IL6 should be detected
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)
 
     def test_long_form_truncation(self, detector):
         """Test that very long forms are properly truncated."""
         text = "a very long phrase that goes on and on with many words (ABBREV)"
-        detector._extract_inline_definitions(text)
-        # Should truncate or reject very long forms
+        results = detector._extract_inline_definitions(text)
+        assert isinstance(results, list)

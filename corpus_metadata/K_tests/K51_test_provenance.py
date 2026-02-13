@@ -205,6 +205,7 @@ class TestGetGitRevisionHash:
     def test_returns_string(self):
         result = get_git_revision_hash()
         assert isinstance(result, str)
+        assert len(result) > 0
 
     def test_returns_commit_or_unknown(self):
         result = get_git_revision_hash()
@@ -217,3 +218,4 @@ class TestGetGitRevisionHash:
         # Very short timeout should still return something
         result = get_git_revision_hash(timeout_sec=0.001)
         assert isinstance(result, str)
+        assert len(result) > 0

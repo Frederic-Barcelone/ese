@@ -50,16 +50,18 @@ class TestBacteriaFiltering:
 
     def test_bacteria_names_filtered(self, filter):
         """Test that bacteria names are filtered."""
-        # Bacteria should be filtered
-        filter.is_false_positive(
+        result = filter.is_false_positive(
             "escherichia", "e. coli bacteria", DrugGeneratorType.SCISPACY_NER
         )
-        # May or may not filter depending on exact bacteria list
+        assert isinstance(result, bool)
 
     def test_partial_bacteria_match(self, filter):
         """Test partial bacteria name matching."""
-        # Words containing bacteria names should be filtered
-        pass  # Implementation depends on bacteria list content
+        result = filter.is_false_positive(
+            "staphylococcus", "staphylococcus aureus infection",
+            DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
 
 class TestVaccineFiltering:
@@ -67,9 +69,11 @@ class TestVaccineFiltering:
 
     def test_vaccine_terms_filtered(self, filter):
         """Test that vaccine terms are filtered."""
-        # Vaccine-related terms should be filtered as they're not drugs
-        # This tests the presence of the filter, not specific terms
-        pass
+        result = filter.is_false_positive(
+            "influenza vaccine", "administered influenza vaccine",
+            DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
 
 class TestBiologicalEntities:
@@ -77,8 +81,9 @@ class TestBiologicalEntities:
 
     def test_biological_suffixes_ner(self, filter):
         """Test biological suffix filtering for NER results."""
-        # Biological suffixes like -ase, -osis should be filtered for NER
-        pass  # Implementation depends on suffix list
+        assert filter.is_false_positive(
+            "tyrosine kinase", "", DrugGeneratorType.SCISPACY_NER
+        )
 
 
 class TestPharmaCompanies:
@@ -86,8 +91,11 @@ class TestPharmaCompanies:
 
     def test_company_names_filtered(self, filter):
         """Test that pharma company names are filtered."""
-        # Company names should not be detected as drugs
-        pass  # Implementation depends on company list
+        result = filter.is_false_positive(
+            "Pfizer", "manufactured by Pfizer",
+            DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
 
 class TestOrganizations:
@@ -95,8 +103,10 @@ class TestOrganizations:
 
     def test_organization_names_filtered(self, filter):
         """Test that organization names are filtered."""
-        # Organizations like FDA, EMA should not be detected as drugs
-        pass
+        result = filter.is_false_positive(
+            "FDA", "FDA approved", DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
 
 class TestTrialStatusTerms:
@@ -104,9 +114,11 @@ class TestTrialStatusTerms:
 
     def test_trial_status_filtered(self, filter):
         """Test that trial status terms are filtered."""
-        # Terms like "enrolled", "randomized" should be filtered
-        # These appear in trial status contexts
-        pass
+        result = filter.is_false_positive(
+            "enrolled", "patients enrolled in the study",
+            DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
 
 class TestGeneratorTypeSpecific:
@@ -114,13 +126,17 @@ class TestGeneratorTypeSpecific:
 
     def test_scispacy_ner_biological_suffixes(self, filter):
         """Test that scispacy NER results get biological suffix filtering."""
-        # NER results ending in biological suffixes should be filtered
-        pass
+        assert filter.is_false_positive(
+            "complement receptor", "", DrugGeneratorType.SCISPACY_NER
+        )
 
     def test_lexicon_common_words(self, filter):
         """Test common word filtering for lexicon sources."""
-        # Common words should be filtered except from specialized lexicons
-        pass
+        result = filter.is_false_positive(
+            "gold", "gold standard treatment",
+            DrugGeneratorType.LEXICON_RXNORM
+        )
+        assert result  # "gold" is a common word, should be filtered
 
 
 class TestAuthorDetection:
@@ -166,13 +182,21 @@ class TestEdgeCases:
 
     def test_case_insensitive(self, filter):
         """Test case insensitivity."""
-        # Filtering should be case-insensitive
-        pass
+        lower_result = filter.is_false_positive(
+            "metformin", "", DrugGeneratorType.LEXICON_RXNORM
+        )
+        upper_result = filter.is_false_positive(
+            "METFORMIN", "", DrugGeneratorType.LEXICON_RXNORM
+        )
+        assert lower_result == upper_result
 
     def test_parentheses_handling(self, filter):
         """Test handling of text with parentheses."""
-        # Terms with trial status in parentheses should be filtered
-        pass
+        result = filter.is_false_positive(
+            "(ongoing)", "trial status (ongoing)",
+            DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
 
 class TestAlwaysFilter:
@@ -180,13 +204,16 @@ class TestAlwaysFilter:
 
     def test_placeholder_terms_filtered(self, filter):
         """Test that placeholder terms are filtered."""
-        # Generic placeholder terms should always be filtered
-        pass
+        assert filter.is_false_positive(
+            "ab", "", DrugGeneratorType.LEXICON_RXNORM
+        )
 
     def test_trial_status_always_filtered(self, filter):
         """Test that trial status terms are always filtered."""
-        # Trial status terms should always be filtered
-        pass
+        result = filter.is_false_positive(
+            "NCT12345678", "", DrugGeneratorType.LEXICON_RXNORM
+        )
+        assert result
 
 
 class TestIntegration:
@@ -201,13 +228,19 @@ class TestIntegration:
 
     def test_real_bacteria_name(self, filter):
         """Test with real bacteria-like name."""
-        # Test that organism names are properly filtered
-        pass
+        result = filter.is_false_positive(
+            "escherichia coli", "e. coli infection",
+            DrugGeneratorType.SCISPACY_NER
+        )
+        assert isinstance(result, bool)
 
     def test_context_matters(self, filter):
         """Test that context affects filtering decisions."""
-        # Same text may be filtered differently based on context
-        pass
+        # Valid drug should not be filtered regardless of context
+        assert not filter.is_false_positive(
+            "aspirin", "aspirin 100mg daily",
+            DrugGeneratorType.LEXICON_RXNORM
+        )
 
 
 class TestMAFFiltering:

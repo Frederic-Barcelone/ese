@@ -116,9 +116,8 @@ class TestExportManagerRenderFigure:
             page_num=1,
             bbox=(0, 0, 100, 100),
         )
-        # Either returns None (fitz unavailable) or base64 string
-        # Test just checks it doesn't crash
-        assert result is None or isinstance(result, str)
+        # fitz (PyMuPDF) not available in test env + file doesn't exist
+        assert result is None
 
 
 class TestExportManagerAttributes:

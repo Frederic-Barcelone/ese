@@ -297,6 +297,7 @@ class TestUnifiedConfidenceCalculator:
         assert len(result) == 2
         score, features = result
         assert isinstance(score, float)
+        assert 0.0 <= score <= 1.0
         assert isinstance(features, tuple)
 
     def test_confidence_bounds(self, sample_raw_extraction: RawExtraction):

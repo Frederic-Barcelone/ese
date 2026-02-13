@@ -195,7 +195,7 @@ class TestNormalizeLongForm:
         # If truncation results in too-short text, should fall back
         result = normalize_long_form("A. is more text")
         # Should return something meaningful
-        assert len(result) >= 1
+        assert result == "A. is more text"
 
     def test_period_before_clause(self):
         result = normalize_long_form("tumor necrosis factor. The cytokine")

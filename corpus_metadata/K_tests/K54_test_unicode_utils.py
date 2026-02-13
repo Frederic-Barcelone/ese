@@ -157,8 +157,8 @@ class TestCleanLongForm:
         # "gastrointestin" is long enough, so it might not trigger
         # Let's test a shorter example
         result = clean_long_form("vasculit")
-        # This depends on implementation - may or may not detect
         assert isinstance(result, str)
+        assert result == "" or result == "vasculit"
 
     def test_hyphen_normalization(self):
         # Various Unicode hyphens to standard

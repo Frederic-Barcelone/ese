@@ -124,8 +124,8 @@ class TestComponentFactoryParserCreation:
 
         # This may return None or the extractor depending on environment
         result = factory.create_table_extractor()
-        # Just verify it doesn't raise
-        assert result is None or result is not None
+        if result is not None:
+            assert hasattr(result, "extract_tables")
 
 
 class TestComponentFactoryGeneratorCreation:
@@ -143,6 +143,8 @@ class TestComponentFactoryGeneratorCreation:
 
         assert isinstance(generators, list)
         assert len(generators) > 0
+        class_names = {g.__class__.__name__ for g in generators}
+        assert "AbbrevSyntaxCandidateGenerator" in class_names
 
     def test_generators_include_syntax(self, minimal_config, temp_log_dir):
         factory = ComponentFactory(

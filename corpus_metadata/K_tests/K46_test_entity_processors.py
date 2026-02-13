@@ -179,7 +179,7 @@ class TestCreateEntityFromSearch:
         )
 
         # candidate_id should be a valid UUID
-        assert entity.candidate_id is not None
+        assert len(str(entity.candidate_id)) == 36
 
 
 class TestProcessDiseases:

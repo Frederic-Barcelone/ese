@@ -253,6 +253,7 @@ class TestCountries:
 
     def test_is_set(self):
         assert isinstance(COUNTRIES, (set, frozenset))
+        assert len(COUNTRIES) > 200
 
 
 class TestCountryCodes:
@@ -279,6 +280,7 @@ class TestAmbiguousCountries:
 
     def test_is_set(self):
         assert isinstance(AMBIGUOUS_COUNTRIES, set)
+        assert len(AMBIGUOUS_COUNTRIES) >= 4
 
 
 class TestExpectedSections:

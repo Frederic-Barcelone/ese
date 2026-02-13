@@ -319,10 +319,14 @@ class TestScorerCorpus:
             make_gold("IL6", "Interleukin 6", doc_id="doc2.pdf"),
         ]
 
-        scorer.evaluate_corpus(system, gold)
+        report = scorer.evaluate_corpus(system, gold)
 
         # Micro: 1 TP, 1 FP, 1 FN -> P=0.5, R=0.5
-        # Macro: avg of per-doc (doc1: P=1, R=1; doc2: P=0, R=0) -> depends on scored status
+        assert report.micro.true_positives == 1
+        assert report.micro.false_positives == 1
+        assert report.micro.false_negatives == 1
+        assert report.micro.precision == pytest.approx(0.5, rel=0.01)
+        assert report.micro.recall == pytest.approx(0.5, rel=0.01)
 
 
 class TestScorerMetrics:

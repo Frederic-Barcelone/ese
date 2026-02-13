@@ -8,6 +8,8 @@ Ensures all modules can be imported and have proper exports.
 from __future__ import annotations
 
 import importlib
+from enum import Enum
+
 import pytest
 
 
@@ -65,8 +67,8 @@ class TestDValidationImports:
             module = importlib.import_module(f"D_validation.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestENormalizationImports:
@@ -86,8 +88,8 @@ class TestENormalizationImports:
             module = importlib.import_module(f"E_normalization.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestFEvaluationImports:
@@ -107,8 +109,8 @@ class TestFEvaluationImports:
             module = importlib.import_module(f"F_evaluation.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestDValidationExports:
@@ -120,9 +122,9 @@ class TestDValidationExports:
             PromptBundle,
             PromptRegistry,
         )
-        assert PromptTask is not None
-        assert PromptBundle is not None
-        assert hasattr(PromptRegistry, "get_bundle")
+        assert issubclass(PromptTask, Enum)
+        assert hasattr(PromptBundle, "model_fields")
+        assert callable(PromptRegistry.get_bundle)
 
     def test_llm_engine_exports(self):
         from D_validation.D02_llm_engine import (
@@ -130,8 +132,8 @@ class TestDValidationExports:
             LLMEngine,
             VerificationResult,
         )
-        assert ClaudeClient is not None
-        assert LLMEngine is not None
+        assert hasattr(ClaudeClient, "complete_json")
+        assert hasattr(LLMEngine, "verify_candidate")
         # VerificationResult has status as a Pydantic field
         assert "status" in VerificationResult.model_fields
 

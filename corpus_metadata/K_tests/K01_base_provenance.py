@@ -1,7 +1,7 @@
 # corpus_metadata/K_tests/K01_base_provenance.py
 """Tests for BaseProvenanceMetadata generic class."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 
 import pytest
@@ -110,8 +110,8 @@ class TestBaseProvenanceMetadata:
             generator_name=CustomGeneratorType.CUSTOM_STRATEGY,
         )
 
-        assert prov.timestamp is not None
         assert isinstance(prov.timestamp, datetime)
+        assert (datetime.utcnow() - prov.timestamp).total_seconds() < 5
 
     def test_base_provenance_extra_forbid(self):
         """Test that extra fields are not allowed."""

@@ -8,6 +8,8 @@ Ensures all modules can be imported and have proper exports.
 from __future__ import annotations
 
 import importlib
+from enum import Enum
+
 import pytest
 
 
@@ -56,8 +58,8 @@ class TestGConfigImports:
             module = importlib.import_module(f"G_config.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestHPipelineImports:
@@ -77,8 +79,8 @@ class TestHPipelineImports:
             module = importlib.import_module(f"H_pipeline.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestIExtractionImports:
@@ -98,8 +100,8 @@ class TestIExtractionImports:
             module = importlib.import_module(f"I_extraction.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestJExportImports:
@@ -119,8 +121,8 @@ class TestJExportImports:
             module = importlib.import_module(f"J_export.{module_name}")
             if hasattr(module, "__all__"):
                 assert isinstance(module.__all__, (list, tuple))
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        except ImportError as e:
+            pytest.fail(f"Module {module_name} not importable: {e}")
 
 
 class TestGConfigExports:
@@ -132,7 +134,7 @@ class TestGConfigExports:
             get_config,
             get_nested_config,
         )
-        assert ConfigKey is not None
+        assert issubclass(ConfigKey, Enum)
         assert callable(get_config)
         assert callable(get_nested_config)
 
@@ -151,8 +153,8 @@ class TestHPipelineExports:
             MergeResolver,
             get_merge_resolver,
         )
-        assert MergeConfig is not None
-        assert MergeResolver is not None
+        assert hasattr(MergeConfig, "dedupe_key_fields")
+        assert hasattr(MergeResolver, "merge")
         assert callable(get_merge_resolver)
 
     def test_visual_integration_exports(self):
@@ -160,7 +162,7 @@ class TestHPipelineExports:
             VisualPipelineIntegration,
             create_visual_integration,
         )
-        assert VisualPipelineIntegration is not None
+        assert hasattr(VisualPipelineIntegration, "extract")
         assert callable(create_visual_integration)
 
 

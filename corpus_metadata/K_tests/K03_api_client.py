@@ -85,9 +85,9 @@ class TestDiskCache:
         """Test that cache creates directory if needed."""
         with tempfile.TemporaryDirectory() as tmpdir:
             cache_dir = Path(tmpdir) / "nested" / "cache"
-            _cache = DiskCache(cache_dir=cache_dir)
+            cache = DiskCache(cache_dir=cache_dir)
             assert cache_dir.exists()
-            assert _cache is not None  # Verify cache was created
+            assert cache.enabled is True
 
 
 class TestRateLimiter:
@@ -254,7 +254,7 @@ class TestBaseAPIClient:
             config={"base_url": "https://api.example.com"},
             service_name="test",
         ) as client:
-            assert client is not None
+            assert client.base_url == "https://api.example.com"
 
         # Session should be closed after exiting context
-        assert client._session is not None  # Object still exists
+        assert client.base_url == "https://api.example.com"

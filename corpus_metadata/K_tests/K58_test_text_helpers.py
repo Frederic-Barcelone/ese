@@ -204,8 +204,7 @@ class TestScoreLfQuality:
         full_text = "TEST"
 
         score = score_lf_quality(mock_candidate, full_text)
-        # Should be penalized for being too long
-        assert isinstance(score, int)
+        assert score < 0  # Long forms should be penalized
 
     def test_stopword_penalty(self, mock_candidate):
         mock_candidate.short_form = "TEST"
@@ -213,7 +212,7 @@ class TestScoreLfQuality:
         full_text = "TEST"
 
         score = score_lf_quality(mock_candidate, full_text)
-        assert isinstance(score, int)
+        assert score < 50  # Stopword-heavy LF should score low
 
     def test_partial_extraction_penalty(self, mock_candidate):
         mock_candidate.short_form = "TEST"
@@ -221,7 +220,7 @@ class TestScoreLfQuality:
         full_text = "TEST"
 
         score = score_lf_quality(mock_candidate, full_text)
-        assert isinstance(score, int)
+        assert score < 50  # Starting with connector should be penalized
 
     def test_umls_boost(self, mock_candidate):
         mock_candidate.short_form = "TNF"
@@ -229,9 +228,10 @@ class TestScoreLfQuality:
         mock_candidate.provenance.lexicon_source = "umls-metathesaurus"
         full_text = "TNF"
 
-        score = score_lf_quality(mock_candidate, full_text)
-        # Should get boost for UMLS source
-        assert isinstance(score, int)
+        score_with_umls = score_lf_quality(mock_candidate, full_text)
+        mock_candidate.provenance.lexicon_source = None
+        score_without = score_lf_quality(mock_candidate, full_text)
+        assert score_with_umls >= score_without  # UMLS source should boost or equal
 
     def test_cached_lowercase(self, mock_candidate):
         """Test that cached lowercase text is used correctly."""

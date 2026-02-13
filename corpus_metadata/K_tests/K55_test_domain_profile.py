@@ -277,6 +277,8 @@ class TestGetAvailableProfiles:
     def test_returns_list(self):
         profiles = get_available_profiles()
         assert isinstance(profiles, list)
+        assert len(profiles) >= 4
+        assert "generic" in profiles
 
     def test_contains_builtin_profiles(self):
         profiles = get_available_profiles()

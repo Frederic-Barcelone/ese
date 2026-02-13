@@ -27,8 +27,7 @@ class TestChromosomePatterns:
             should_filter, reason = filter.should_filter(
                 pattern, "chromosome 22q11.2 deletion"
             )
-            assert should_filter or "chromosome" in reason.lower() or True
-            # Note: Hard filter only happens with chromosome context
+            assert should_filter or "chromosome" in reason.lower()
 
     def test_karyotype_notation(self, filter):
         """Test karyotype notation patterns."""
@@ -38,21 +37,24 @@ class TestChromosomePatterns:
             should_filter, reason = filter.should_filter(
                 k, "karyotype was 46,XY"
             )
-            # May or may not hard filter depending on context strength
+            assert isinstance(should_filter, bool)
+            assert isinstance(reason, str)
 
     def test_translocation_patterns(self, filter):
         """Test translocation notation."""
         translocations = ["t(9;22)", "t(4;14)", "del(7q)", "inv(16)"]
         for t in translocations:
-            should_filter, _ = filter.should_filter(t, "cytogenetic translocation")
-            # Should be filtered in cytogenetic context
+            should_filter, reason = filter.should_filter(t, "cytogenetic translocation")
+            assert isinstance(should_filter, bool)
+            assert isinstance(reason, str)
 
     def test_trisomy_monosomy(self, filter):
         """Test trisomy/monosomy notation."""
         notations = ["+21", "+13", "-7", "-5"]
         for n in notations:
-            should_filter, _ = filter.should_filter(n, "trisomy 21 chromosome")
-            # Should be filtered in chromosome context
+            should_filter, reason = filter.should_filter(n, "trisomy 21 chromosome")
+            assert isinstance(should_filter, bool)
+            assert isinstance(reason, str)
 
 
 class TestScoreAdjustment:
@@ -99,7 +101,8 @@ class TestShouldFilter:
         # Need strong gene context (3+ keywords)
         context = "BRCA1 gene mutation variant expression protein pathway"
         should_filter, reason = filter.should_filter("BRCA1", context)
-        # May or may not hard filter depending on score
+        assert isinstance(should_filter, bool)
+        assert isinstance(reason, str)
 
     def test_disease_name_not_filtered(self, filter):
         """Test that disease names are not filtered."""
@@ -114,7 +117,7 @@ class TestShouldFilter:
             "PAH", "pulmonary arterial hypertension diagnosis",
             is_abbreviation=True
         )
-        # Abbreviations may have different treatment
+        assert isinstance(should_filter, bool)
 
 
 class TestContextDetection:
@@ -165,13 +168,15 @@ class TestEdgeCases:
 
     def test_empty_matched_text(self, filter):
         """Test handling of empty matched text."""
-        should_filter, _ = filter.should_filter("", "some context")
-        # Should handle gracefully
+        should_filter, reason = filter.should_filter("", "some context")
+        assert isinstance(should_filter, bool)
+        assert isinstance(reason, str)
 
     def test_empty_context(self, filter):
         """Test handling of empty context."""
-        should_filter, _ = filter.should_filter("22q11", "")
-        # Should handle gracefully without crashing
+        should_filter, reason = filter.should_filter("22q11", "")
+        assert isinstance(should_filter, bool)
+        assert isinstance(reason, str)
 
     def test_short_match_threshold(self, filter):
         """Test short match threshold handling."""

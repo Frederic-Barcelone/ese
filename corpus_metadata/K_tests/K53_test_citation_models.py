@@ -140,8 +140,8 @@ class TestCitationCandidate:
             context_location=sample_coordinate,
             provenance=sample_provenance,
         )
-        assert candidate.pmid is not None
-        assert candidate.doi is not None
+        assert candidate.pmid == "12345678"
+        assert candidate.doi == "10.1056/NEJMoa2024816"
         assert len(candidate.identifier_types) == 2
 
     def test_default_confidence(self, sample_provenance, sample_coordinate):
@@ -228,8 +228,8 @@ class TestCitationExportEntry:
                 resolved_url="https://pubmed.ncbi.nlm.nih.gov/12345678/",
             ),
         )
-        assert entry.validation is not None
         assert entry.validation.is_valid is True
+        assert entry.validation.resolved_url == "https://pubmed.ncbi.nlm.nih.gov/12345678/"
 
 
 class TestCitationValidationSummary:

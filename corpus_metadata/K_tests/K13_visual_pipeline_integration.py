@@ -34,16 +34,11 @@ class TestDoclayoutIntegration:
 
     def test_convenience_function_sets_mode(self):
         """extract_visuals_doclayout sets correct mode."""
-        # We can't actually run the function without a PDF,
-        # but we can verify it creates the right config
         with patch.object(VisualExtractionPipeline, 'extract') as mock_extract:
             mock_extract.return_value = Mock(visuals=[])
-
-            # This would fail without a real PDF, but the config is created first
-            try:
-                extract_visuals_doclayout("/fake/path.pdf")
-            except Exception:
-                pass
+            result = extract_visuals_doclayout("/fake/path.pdf")
+            mock_extract.assert_called_once()
+            assert result.visuals == []
 
     def test_layout_metadata_propagation(self):
         """Layout metadata (layout_code, position_code) is propagated."""

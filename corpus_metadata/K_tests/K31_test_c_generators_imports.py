@@ -70,14 +70,9 @@ class TestModuleExports:
     @pytest.mark.parametrize("module_name", C_GENERATOR_MODULES)
     def test_module_has_all(self, module_name):
         """Test that each module has __all__ defined."""
-        try:
-            module = importlib.import_module(f"C_generators.{module_name}")
-            if hasattr(module, "__all__"):
-                assert isinstance(module.__all__, (list, tuple))
-                # __all__ should not be empty for utility modules
-                # Strategy modules may not need __all__
-        except ImportError:
-            pytest.skip(f"Module {module_name} not importable")
+        module = importlib.import_module(f"C_generators.{module_name}")
+        if hasattr(module, "__all__"):
+            assert isinstance(module.__all__, (list, tuple))
 
 
 class TestSpecificModuleExports:
@@ -148,43 +143,28 @@ class TestStrategyClasses:
 
     def test_abbrev_strategy_import(self):
         """Test abbreviation strategy can be imported."""
-        try:
-            from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
-            assert hasattr(AbbrevSyntaxCandidateGenerator, "extract")
-        except ImportError:
-            pytest.skip("AbbrevSyntaxCandidateGenerator not available")
+        from C_generators.C01_strategy_abbrev import AbbrevSyntaxCandidateGenerator
+        assert hasattr(AbbrevSyntaxCandidateGenerator, "extract")
 
     def test_disease_strategy_import(self):
         """Test disease strategy can be imported."""
-        try:
-            from C_generators.C06_strategy_disease import DiseaseDetector
-            assert hasattr(DiseaseDetector, "extract")
-        except ImportError:
-            pytest.skip("DiseaseDetector not available")
+        from C_generators.C06_strategy_disease import DiseaseDetector
+        assert hasattr(DiseaseDetector, "extract")
 
     def test_drug_strategy_import(self):
         """Test drug strategy can be imported."""
-        try:
-            from C_generators.C07_strategy_drug import DrugDetector
-            assert hasattr(DrugDetector, "detect")
-        except ImportError:
-            pytest.skip("DrugDetector not available")
+        from C_generators.C07_strategy_drug import DrugDetector
+        assert hasattr(DrugDetector, "detect")
 
     def test_gene_strategy_import(self):
         """Test gene strategy can be imported."""
-        try:
-            from C_generators.C16_strategy_gene import GeneDetector
-            assert hasattr(GeneDetector, "detect")
-        except ImportError:
-            pytest.skip("GeneDetector not available")
+        from C_generators.C16_strategy_gene import GeneDetector
+        assert hasattr(GeneDetector, "detect")
 
     def test_feasibility_strategy_import(self):
         """Test feasibility strategy can be imported."""
-        try:
-            from C_generators.C08_strategy_feasibility import FeasibilityDetector
-            assert FeasibilityDetector is not None
-        except ImportError:
-            pytest.skip("FeasibilityDetector not available")
+        from C_generators.C08_strategy_feasibility import FeasibilityDetector
+        assert hasattr(FeasibilityDetector, "extract")
 
 
 class TestHelperModules:
@@ -212,10 +192,7 @@ class TestHelperModules:
 
     def test_recommendation_patterns_import(self):
         """Test C31_recommendation_patterns can be imported."""
-        try:
-            from C_generators.C31_recommendation_patterns import (
-                ORGANIZATION_PATTERNS,
-            )
-            assert ORGANIZATION_PATTERNS is not None
-        except ImportError:
-            pytest.skip("Recommendation patterns not available")
+        from C_generators.C31_recommendation_patterns import (
+            ORGANIZATION_PATTERNS,
+        )
+        assert isinstance(ORGANIZATION_PATTERNS, dict)

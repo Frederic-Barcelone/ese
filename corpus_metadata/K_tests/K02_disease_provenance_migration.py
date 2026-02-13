@@ -83,8 +83,8 @@ class TestDiseaseProvenanceHasBaseFields:
 
     def test_timestamp_auto_populated(self, disease_provenance: DiseaseProvenanceMetadata):
         """Verify timestamp is auto-populated."""
-        assert disease_provenance.timestamp is not None
         assert isinstance(disease_provenance.timestamp, datetime)
+        assert (datetime.utcnow() - disease_provenance.timestamp).total_seconds() < 5
 
 
 class TestDiseaseProvenanceWithLexiconIds:

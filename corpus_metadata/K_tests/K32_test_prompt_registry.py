@@ -68,7 +68,6 @@ class TestPromptRegistry:
 
     def test_get_bundle_latest(self):
         bundle = PromptRegistry.get_bundle(PromptTask.VERIFY_BATCH, version="latest")
-        assert bundle is not None
         assert bundle.task == PromptTask.VERIFY_BATCH
         assert bundle.version == "v2.0"  # Latest version
 

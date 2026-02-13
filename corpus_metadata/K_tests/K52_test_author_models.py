@@ -144,6 +144,7 @@ class TestAuthorCandidate:
             provenance=sample_provenance,
         )
         assert isinstance(candidate.id, uuid.UUID)
+        assert len(str(candidate.id)) == 36
 
     def test_confidence_bounds(self, sample_provenance, sample_coordinate):
         with pytest.raises(ValidationError):

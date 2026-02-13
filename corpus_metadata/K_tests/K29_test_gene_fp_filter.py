@@ -105,6 +105,8 @@ class TestCommonEnglishWords:
     def test_common_words_set(self, filter):
         """Test that COMMON_ENGLISH_WORDS set is defined."""
         assert len(filter.common_english_lower) > 50
+        assert "of" in filter.common_english_lower
+        assert "was" in filter.common_english_lower
 
 
 class TestValidGenes:
@@ -145,7 +147,7 @@ class TestShortGeneContext:
             "AR", "AR gene mutation variant expression protein pathway",
             GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
         )
-        # With sufficient gene context, should not be filtered
+        assert not is_fp
 
     def test_short_genes_set(self, filter):
         """Test that SHORT_GENES_NEED_CONTEXT is defined."""
@@ -170,7 +172,7 @@ class TestEgfrDisambiguation:
             "EGFR", "EGFR gene mutation expression receptor tyrosine kinase",
             GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
         )
-        # In gene context, should not be filtered
+        assert not is_fp
 
 
 class TestContextScoring:
@@ -276,7 +278,8 @@ class TestEdgeCases:
         is_fp, reason = filter.is_false_positive(
             "BRCA1", "", GeneGeneratorType.LEXICON_ORPHADATA, is_from_lexicon=True
         )
-        # Should handle gracefully
+        assert isinstance(is_fp, bool)
+        assert isinstance(reason, str)
 
     def test_alias_handling(self, filter):
         """Test that aliases are treated differently."""
@@ -288,7 +291,8 @@ class TestEdgeCases:
             "p53", "context", GeneGeneratorType.LEXICON_HGNC_ALIAS,
             is_from_lexicon=True, is_alias=True
         )
-        # Aliases may be treated more strictly
+        assert isinstance(is_fp1, bool)
+        assert isinstance(is_fp2, bool)
 
 
 class TestAdditionalCommonWords:

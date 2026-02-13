@@ -28,18 +28,21 @@ class TestDataLoaderFunctions:
         result = load_term_set("drug_fp_terms.yaml", "bacteria_organisms")
         assert isinstance(result, set)
         assert len(result) > 0
+        assert "escherichia coli" in result
 
     def test_load_term_list_returns_list(self) -> None:
         from Z_utils.Z12_data_loader import load_term_list
         result = load_term_list("drug_fp_terms.yaml", "biological_suffixes")
         assert isinstance(result, list)
         assert len(result) > 0
+        assert " protein" in result
 
     def test_load_mapping_returns_dict(self) -> None:
         from Z_utils.Z12_data_loader import load_mapping
         result = load_mapping("drug_mappings.yaml", "drug_abbreviations")
         assert isinstance(result, dict)
         assert len(result) > 0
+        assert "5-fu" in result
 
     def test_load_pair_list_returns_set_of_tuples(self) -> None:
         from Z_utils.Z12_data_loader import load_pair_list
