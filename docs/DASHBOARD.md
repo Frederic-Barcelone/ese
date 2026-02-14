@@ -32,6 +32,7 @@
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
+| 2026-02-14 | **$217.05** | $5.45 | SOTA improvement evals: BC5CDR 100-doc ×2, NCBI 73-doc ×2, NLP4RARE 100-doc ×2, NLM-Gene 46-doc, RareDisGene 100-doc, 20-doc quick checks. |
 | 2026-02-14 | **$222.50** | $20.11 | NCBI Disease 73-doc eval + NLP4RARE/BC5CDR regression checks + prior runs. |
 | 2026-02-13 | **$242.61** | $3.19 | Gene eval matching improvements + NLM-Gene/RareDisGene 146-doc eval runs. |
 | 2026-02-12 | **$245.80** | $3.25 | — |
