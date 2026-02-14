@@ -294,7 +294,7 @@ class AuthorDetector:
         doc_fingerprint: str,
     ) -> List[AuthorCandidate]:
         """
-        Extract authors using LLM from the first ~2000 chars of text.
+        Extract authors using LLM from the first ~4000 chars of text.
 
         Sends the beginning of the document to Claude Haiku to extract
         person names that are document authors/investigators.
@@ -303,13 +303,16 @@ class AuthorDetector:
         if not self.llm_client:
             return candidates
 
-        # Use first ~2000 chars where authors typically appear
-        snippet = full_text[:2000]
+        # Use first ~4000 chars where authors typically appear (first page is 3K-5K)
+        snippet = full_text[:4000]
 
         system_prompt = (
             "You are an expert at extracting author names from biomedical documents. "
             "Extract ONLY real person names that are authors or investigators of this document. "
             "Do NOT extract institution names, department names, addresses, or place names. "
+            "Do NOT extract names preceded by 'Communicated by' or 'Edited by' — these are editors, not authors. "
+            "Include ALL authors, even those with very short names (e.g. 'L Xu') or multi-part "
+            "surnames with particles (e.g. 'van den Hurk', 'van de Pol', 'von der Heyde'). "
             "Return a JSON array of objects with keys: \"full_name\" (string) and \"role\" (string). "
             "Role should be one of: author, principal_investigator, corresponding_author, co_investigator, unknown. "
             "If no authors are found, return an empty array []."

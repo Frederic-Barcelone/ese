@@ -902,7 +902,7 @@ class DrugDetector:
                     continue
 
                 # Require minimum confidence
-                if entity.score < 0.7:
+                if entity.score < 0.8:
                     continue
 
                 # Skip fragments with special characters (BERT tokenization artifacts)

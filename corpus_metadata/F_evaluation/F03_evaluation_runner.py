@@ -132,7 +132,7 @@ BC5CDR_SPLITS = ["test"]
 PUBMED_AUTHOR_SPLITS = ["test"]
 
 # Max documents per dataset (None = all documents)
-MAX_DOCS = 20  # All documents (set to small number for testing)
+MAX_DOCS = 10  # All documents (set to small number for testing)
 
 # Matching settings
 FUZZY_THRESHOLD = 0.8  # Long form matching threshold (0.8 = 80% similarity)

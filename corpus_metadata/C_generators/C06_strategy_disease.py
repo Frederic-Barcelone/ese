@@ -1249,13 +1249,13 @@ class DiseaseDetector:
                     continue
 
                 # Require higher confidence for NER-only entities
-                if entity.score < 0.7:
+                if entity.score < 0.8:
                     continue
 
-                # Require lexicon verification — full-term or substring match
+                # Require full-term lexicon verification only (no substring —
+                # substring matching causes too many FPs from entities that
+                # happen to contain a disease name as a sub-phrase)
                 match = self.is_known_disease(ent_text)
-                if match is None:
-                    match = self.is_known_disease_substring(ent_text)
                 if match is None:
                     continue
 
