@@ -42,7 +42,10 @@ import json
 import logging
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Set, Tuple
+
+if TYPE_CHECKING:
+    from E_normalization.E10_biomedical_ner_all import BiomedicalNERResult
 
 from flashtext import KeywordProcessor
 
@@ -483,9 +486,17 @@ class DrugDetector:
             else:
                 logger.debug("    • %-26s %8s  %s", name, "enabled", filename)
 
-    def detect(self, doc_graph: DocumentGraph) -> List[DrugCandidate]:
+    def detect(
+        self,
+        doc_graph: DocumentGraph,
+        biomedical_ner_result: Optional["BiomedicalNERResult"] = None,
+    ) -> List[DrugCandidate]:
         """
         Detect drug mentions in document.
+
+        Args:
+            doc_graph: Parsed document graph
+            biomedical_ner_result: Optional BiomedicalNERResult from E10
 
         Returns list of DrugCandidate objects.
         """
@@ -593,6 +604,14 @@ class DrugDetector:
         if self.nlp:
             candidates.extend(
                 self._detect_with_ner(full_text, doc_graph, doc_fingerprint)
+            )
+
+        # Layer 9: BiomedNER-All (document-level gap-filler, lowest priority)
+        if biomedical_ner_result is not None:
+            candidates.extend(
+                self._detect_biomedical_ner(
+                    biomedical_ner_result, doc_graph, doc_fingerprint
+                )
             )
 
         # Deduplicate
@@ -855,6 +874,82 @@ class DrugDetector:
 
         return candidates
 
+    def _detect_biomedical_ner(
+        self,
+        ner_result: "BiomedicalNERResult",
+        doc_graph: DocumentGraph,
+        doc_fingerprint: str,
+    ) -> List[DrugCandidate]:
+        """Detect drugs from BiomedNER-All (d4data) Medication entities.
+
+        Lexicon-verified gap-filler: only accepts BiomedNER entities that
+        also match a drug lexicon as a full-term match. This prevents
+        subword/fragment FPs from the BERT tokenizer while recovering drugs
+        that were missed by the block-level lexicon scan.
+        """
+        candidates: list[DrugCandidate] = []
+
+        try:
+            medication_entities = ner_result.get_by_type("Medication")
+            if not medication_entities:
+                return candidates
+
+            for entity in medication_entities:
+                matched_text = entity.text.strip()
+
+                # Skip very short or very long
+                if len(matched_text) < 4 or len(matched_text) > 100:
+                    continue
+
+                # Require minimum confidence
+                if entity.score < 0.7:
+                    continue
+
+                # Skip fragments with special characters (BERT tokenization artifacts)
+                if re.search(r"[)\[\]{}<>]", matched_text):
+                    continue
+
+                # Require lexicon verification — only accept if the entity
+                # matches a known drug in our lexicons
+                match = self.is_known_drug(matched_text)
+                if match is None:
+                    continue
+
+                lexicon_name, lexicon_gen_type = match
+
+                context = matched_text
+
+                # FP filter
+                if self.fp_filter.is_false_positive(
+                    matched_text, context, DrugGeneratorType.BIOMEDICAL_NER
+                ):
+                    continue
+
+                candidate = DrugCandidate(
+                    doc_id=doc_graph.doc_id,
+                    matched_text=matched_text,
+                    preferred_name=lexicon_name,
+                    field_type=DrugFieldType.NER_DETECTION,
+                    generator_type=DrugGeneratorType.BIOMEDICAL_NER,
+                    identifiers=[],
+                    context_text=context,
+                    context_location=Coordinate(page_num=1),
+                    initial_confidence=entity.score,
+                    provenance=DrugProvenanceMetadata(
+                        pipeline_version=self.pipeline_version,
+                        run_id=self.run_id,
+                        doc_fingerprint=doc_fingerprint,
+                        generator_name=DrugGeneratorType.BIOMEDICAL_NER,
+                        lexicon_source="ner:biomedical_ner_all",
+                    ),
+                )
+                candidates.append(candidate)
+
+        except Exception as e:
+            logger.warning("BiomedNER drug detection error: %s", e)
+
+        return candidates
+
     def _extract_context(self, text: str, start: int, end: int) -> str:
         """Extract context around a match."""
         ctx_start = max(0, start - self.context_window // 2)
@@ -915,6 +1010,28 @@ class DrugDetector:
                     return (keyword, gen_type)
         return None
 
+    def is_known_drug_substring(self, term: str) -> Optional[Tuple[str, DrugGeneratorType]]:
+        """Check if a term contains a known drug as a substring match.
+
+        Returns the longest (matched_name, generator_type) found within the term,
+        or None. Requires the matched key to be at least 6 characters.
+        """
+        term_lower = term.lower().strip()
+        if not term_lower or len(term_lower) < 6:
+            return None
+        best: Optional[Tuple[str, DrugGeneratorType, int]] = None
+        for processor, gen_type in self._get_lexicon_processors():
+            matches = processor.extract_keywords(term_lower, span_info=True)
+            for keyword, _start, _end in matches:
+                kw_len = len(keyword)
+                if kw_len < 6:
+                    continue
+                if best is None or kw_len > best[2]:
+                    best = (keyword, gen_type, kw_len)
+        if best is not None:
+            return (best[0], best[1])
+        return None
+
     def _deduplicate(self, candidates: List[DrugCandidate]) -> List[DrugCandidate]:
         """
         Deduplicate candidates, preferring specialized sources.
@@ -931,6 +1048,7 @@ class DrugDetector:
             DrugGeneratorType.LEXICON_FDA: 3,
             DrugGeneratorType.LEXICON_RXNORM: 4,
             DrugGeneratorType.SCISPACY_NER: 5,
+            DrugGeneratorType.BIOMEDICAL_NER: 6,
         }
 
         # Sort all candidates by priority first

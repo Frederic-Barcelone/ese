@@ -74,6 +74,7 @@ class DiseaseGeneratorType(str, Enum):
     LEXICON_GENERAL = "gen:disease_lexicon_general"  # General disease lexicon
     LEXICON_ORPHANET = "gen:disease_lexicon_orphanet"  # Orphanet rare diseases
     SCISPACY_NER = "gen:disease_scispacy_ner"  # scispacy entity recognition
+    BIOMEDICAL_NER = "gen:disease_biomedical_ner"  # d4data/biomedical-ner-all
 
 
 # -------------------------

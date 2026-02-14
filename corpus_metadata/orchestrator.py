@@ -30,6 +30,7 @@ from orchestrator_utils import StageTimer, activate_tee, deactivate_tee, setup_w
 setup_warning_suppression()
 # =============================================================================
 
+import re
 import sys
 import time
 from typing import Any, Dict, List, Optional
@@ -860,11 +861,26 @@ class Orchestrator:
             printer.skip("Abbreviation detection", "disabled in config")
 
         # Stage 5-10: Entity extraction
+
+        # Run BiomedNER-All once per document (shared by disease + drug detection)
+        biomed_ner_result = None
+        if self.biomedical_ner and (self.extract_diseases or self.extract_drugs):
+            try:
+                plain_text = "\n\n".join(
+                    block.text for block in doc.iter_linear_blocks(skip_header_footer=True)
+                    if block.text
+                )
+                biomed_ner_result = self.biomedical_ner.extract(plain_text)
+            except Exception as e:
+                logger.warning("BiomedNER extraction failed: %s", e)
+
         disease_results: List[ExtractedDisease] = []
         if self.extract_diseases:
             printer.step("Disease detection...", step_num=5)
             timer.start("5. Disease Detection")
-            disease_results = self.entity_processor.process_diseases(doc, pdf_path_obj)
+            disease_results = self.entity_processor.process_diseases(
+                doc, pdf_path_obj, biomedical_ner_result=biomed_ner_result
+            )
             disease_time = timer.stop("5. Disease Detection")
             printer.result("Diseases found", len(disease_results))
             printer.time(disease_time)
@@ -886,7 +902,9 @@ class Orchestrator:
         if self.extract_drugs:
             printer.step("Drug detection...", step_num=7)
             timer.start("7. Drug Detection")
-            drug_results = self.entity_processor.process_drugs(doc, pdf_path_obj)
+            drug_results = self.entity_processor.process_drugs(
+                doc, pdf_path_obj, biomedical_ner_result=biomed_ner_result
+            )
             drug_time = timer.stop("7. Drug Detection")
             printer.result("Drugs found", len(drug_results))
             printer.time(drug_time)
@@ -942,7 +960,9 @@ class Orchestrator:
 
         # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only diseases
         if self.extract_diseases:
-            disease_results = self._recover_diseases_from_abbreviations(results, disease_results)
+            disease_results = self._recover_diseases_from_abbreviations(
+                results, disease_results, gene_results,
+            )
 
         # Stage 11: Feasibility extraction
         feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
@@ -1669,6 +1689,11 @@ class Orchestrator:
         When a validated abbreviation's long_form matches a drug lexicon entry but
         the drug wasn't detected directly (because only the abbreviation appears in
         text), create an ExtractedDrug for it.
+
+        Uses two matching strategies:
+        1. Full-term match (exact lexicon entry)
+        2. Substring match (long_form contains a known drug, e.g.,
+           "amphotericin B-sodium deoxycholate" contains "amphotericin B")
         """
         if not self.drug_detector:
             return drug_results
@@ -1688,16 +1713,18 @@ class Orchestrator:
             if long_form.lower() in detected_drugs:
                 continue
 
-            # Check if the long form is a known drug
+            # Strategy 1: Full-term match
             match = self.drug_detector.is_known_drug(long_form)
+            # Strategy 2: Substring match (fallback)
+            if match is None:
+                match = self.drug_detector.is_known_drug_substring(long_form)
+
             if match is None:
                 continue
 
             matched_name, gen_type = match
 
             # Also check if the lexicon keyword is already detected
-            # (e.g., long_form "5fluorouracil" matched lexicon key "fluorouracil"
-            #  and "Fluorouracil" is already in detected_drugs)
             if matched_name.lower() in detected_drugs:
                 continue
 
@@ -1744,6 +1771,7 @@ class Orchestrator:
             # Mark as detected to avoid duplicates within recovered set
             detected_drugs.add(long_form.lower())
             detected_drugs.add(short_form.lower())
+            detected_drugs.add(matched_name.lower())
             logger.debug(
                 "Drug recovered from abbreviation: %s → %s (via %s)",
                 short_form, long_form, gen_type.value,
@@ -1759,12 +1787,18 @@ class Orchestrator:
         self,
         abbrev_results: List[ExtractedEntity],
         disease_results: List[ExtractedDisease],
+        gene_results: List | None = None,
     ) -> List[ExtractedDisease]:
         """Recover diseases mentioned only by abbreviation using abbreviation expansions.
 
         When a validated abbreviation's long_form matches a disease lexicon entry but
         the disease wasn't detected directly (because only the abbreviation appears in
         text), create an ExtractedDisease for it.
+
+        Uses two matching strategies:
+        1. Full-term match (exact lexicon entry)
+        2. Substring match (long_form contains a known disease, e.g.,
+           "X-linked cone-rod dystrophy" contains "cone-rod dystrophy")
         """
         if not self.disease_detector:
             return disease_results
@@ -1775,6 +1809,11 @@ class Orchestrator:
             detected_diseases.add(d.matched_text.lower().strip())
             detected_diseases.add(d.preferred_label.lower().strip())
 
+        # Pre-compute known gene symbols for substring match guard
+        known_genes: set[str] = set()
+        if gene_results:
+            known_genes = {g.matched_text.upper() for g in gene_results if g.matched_text}
+
         recovered: List[ExtractedDisease] = []
         for entity in abbrev_results:
             if entity.status != ValidationStatus.VALIDATED or not entity.long_form:
@@ -1784,16 +1823,49 @@ class Orchestrator:
             if long_form.lower() in detected_diseases:
                 continue
 
-            # Check if the long form is a known disease
+            # Strategy 1: Full-term match
             match = self.disease_detector.is_known_disease(long_form)
+            used_substring = False
+            # Strategy 2: Substring match (fallback)
+            if match is None:
+                match = self.disease_detector.is_known_disease_substring(long_form)
+                used_substring = match is not None
+
             if match is None:
                 continue
 
             matched_key, lexicon_source = match
 
+            # Guard substring matches against gene abbreviations:
+            # e.g. BRCA1 = "breast cancer 1 gene" → substring matches "breast cancer"
+            # but the abbreviation is actually a gene, not a disease.
+            if used_substring:
+                short_form_raw = (entity.short_form or "").strip()
+                lf_lower = long_form.lower()
+                # Skip if long_form contains gene-related keywords
+                if re.search(r"\b(gene|protein|kinase|receptor subunit)\b", lf_lower):
+                    logger.debug(
+                        "Disease abbrev cross-ref skipped (gene long_form): %s → %s",
+                        short_form_raw, long_form,
+                    )
+                    continue
+                # Skip if short_form matches an already-extracted gene symbol
+                if short_form_raw.upper() in known_genes:
+                    logger.debug(
+                        "Disease abbrev cross-ref skipped (known gene): %s → %s",
+                        short_form_raw, long_form,
+                    )
+                    continue
+                # Skip if long_form ends with a number (gene naming convention:
+                # "retinoblastoma 1", "complement component 4")
+                if re.search(r"\b\d+\s*$", long_form):
+                    logger.debug(
+                        "Disease abbrev cross-ref skipped (gene-like numbered): %s → %s",
+                        short_form_raw, long_form,
+                    )
+                    continue
+
             # Also check if the lexicon keyword is already detected
-            # (e.g., "HIV infection" detected directly but long_form is
-            # "Human Immunodeficiency Virus" — different string, same disease)
             if matched_key.lower() in detected_diseases:
                 continue
 
@@ -1841,6 +1913,7 @@ class Orchestrator:
             # Mark as detected to avoid duplicates within recovered set
             detected_diseases.add(long_form.lower())
             detected_diseases.add(short_form.lower())
+            detected_diseases.add(matched_key.lower())
             logger.debug(
                 "Disease recovered from abbreviation: %s → %s (via %s)",
                 short_form, long_form, lexicon_source,

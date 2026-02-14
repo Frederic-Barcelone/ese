@@ -68,6 +68,7 @@ if TYPE_CHECKING:
     from E_normalization.E04_pubtator_enricher import DiseaseEnricher
     from E_normalization.E05_drug_enricher import DrugEnricher
     from E_normalization.E18_gene_enricher import GeneEnricher
+    from E_normalization.E10_biomedical_ner_all import BiomedicalNERResult
 
 from A_core.A01_domain_models import ValidationStatus
 from A_core.A03_provenance import hash_string
@@ -177,7 +178,12 @@ class EntityProcessor:
     # DISEASE PROCESSING
     # =========================================================================
 
-    def process_diseases(self, doc: "DocumentGraph", pdf_path: Path) -> List["ExtractedDisease"]:
+    def process_diseases(
+        self,
+        doc: "DocumentGraph",
+        pdf_path: Path,
+        biomedical_ner_result: Optional["BiomedicalNERResult"] = None,
+    ) -> List["ExtractedDisease"]:
         """
         Process document for disease mentions.
 
@@ -189,7 +195,9 @@ class EntityProcessor:
         start = time.time()
 
         # Generate disease candidates
-        candidates = self.disease_detector.extract(doc)
+        candidates = self.disease_detector.extract(
+            doc, biomedical_ner_result=biomedical_ner_result
+        )
         print(f"  Disease candidates: {len(candidates)}")
 
         if not candidates:
@@ -421,7 +429,12 @@ class EntityProcessor:
     # DRUG PROCESSING
     # =========================================================================
 
-    def process_drugs(self, doc: "DocumentGraph", pdf_path: Path) -> List["ExtractedDrug"]:
+    def process_drugs(
+        self,
+        doc: "DocumentGraph",
+        pdf_path: Path,
+        biomedical_ner_result: Optional["BiomedicalNERResult"] = None,
+    ) -> List["ExtractedDrug"]:
         """
         Process document for drug mentions.
 
@@ -433,7 +446,9 @@ class EntityProcessor:
         start = time.time()
 
         # Run drug detection
-        candidates = self.drug_detector.detect(doc)
+        candidates = self.drug_detector.detect(
+            doc, biomedical_ner_result=biomedical_ner_result
+        )
         print(f"  Drug candidates: {len(candidates)}")
 
         # Convert candidates to ExtractedDrug (auto-validated for lexicon matches)

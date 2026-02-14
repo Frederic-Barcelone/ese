@@ -1460,6 +1460,22 @@ def disease_matches(sys_text: str, gold_text: str, threshold: float = FUZZY_THRE
             if sys_stripped in gold_stripped or gold_stripped in sys_stripped:
                 return True
 
+    # Conjunctive expansion — "breast and ovarian cancer" matches "breast cancer" or "ovarian cancer"
+    conj_match = re.match(
+        r"^(.+?)\s+and\s+(.+?)\s+(cancer|tumou?rs?|disease|syndrome|disorder|ataxia|neuropathy)s?$",
+        gold_norm, re.IGNORECASE,
+    )
+    if conj_match:
+        prefix, middle, suffix = conj_match.group(1), conj_match.group(2), conj_match.group(3)
+        expanded_a = f"{prefix} {suffix}"
+        expanded_b = f"{middle} {suffix}"
+        if sys_norm == expanded_a or sys_norm == expanded_b:
+            return True
+        if sys_norm in expanded_a or expanded_a in sys_norm:
+            return True
+        if sys_norm in expanded_b or expanded_b in sys_norm:
+            return True
+
     # Fuzzy match (on synonym-normalized forms for better scores)
     ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
     return ratio >= threshold
@@ -1592,6 +1608,22 @@ def _disease_match_level(sys_text: str, gold_text: str, threshold: float = FUZZY
                 return 3
             if sys_stripped in gold_stripped or gold_stripped in sys_stripped:
                 return 3
+
+    # Conjunctive expansion — "breast and ovarian cancer" matches "breast cancer" or "ovarian cancer"
+    conj_match = re.match(
+        r"^(.+?)\s+and\s+(.+?)\s+(cancer|tumou?rs?|disease|syndrome|disorder|ataxia|neuropathy)s?$",
+        gold_norm, re.IGNORECASE,
+    )
+    if conj_match:
+        prefix, middle, suffix = conj_match.group(1), conj_match.group(2), conj_match.group(3)
+        expanded_a = f"{prefix} {suffix}"
+        expanded_b = f"{middle} {suffix}"
+        if sys_norm == expanded_a or sys_norm == expanded_b:
+            return 3
+        if sys_norm in expanded_a or expanded_a in sys_norm:
+            return 3
+        if sys_norm in expanded_b or expanded_b in sys_norm:
+            return 3
 
     ratio = SequenceMatcher(None, sys_syn, gold_syn).ratio()
     if ratio >= threshold:

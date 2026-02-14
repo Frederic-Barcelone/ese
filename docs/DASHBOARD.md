@@ -27,10 +27,11 @@
 
 ## API Credit Balance
 
-> Last updated: 2026-02-13
+> Last updated: 2026-02-14
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
+| 2026-02-14 | **$222.50** | $20.11 | NCBI Disease 73-doc eval + NLP4RARE/BC5CDR regression checks + prior runs. |
 | 2026-02-13 | **$242.61** | $3.19 | Gene eval matching improvements + NLM-Gene/RareDisGene 146-doc eval runs. |
 | 2026-02-12 | **$245.80** | $3.25 | — |
 | 2026-02-12 | **$249.05** | $0.35 | NLP4RARE 20-doc + BC5CDR 20-doc eval runs. |

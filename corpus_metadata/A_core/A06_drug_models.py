@@ -73,6 +73,7 @@ class DrugGeneratorType(str, Enum):
     LEXICON_RXNORM = "gen:drug_lexicon_rxnorm"  # RxNorm general terms
     PATTERN_COMPOUND_ID = "gen:drug_pattern_compound"  # Compound ID regex
     SCISPACY_NER = "gen:drug_scispacy_ner"  # scispacy CHEMICAL detection
+    BIOMEDICAL_NER = "gen:drug_biomedical_ner"  # d4data/biomedical-ner-all
 
 
 class DevelopmentPhase(str, Enum):

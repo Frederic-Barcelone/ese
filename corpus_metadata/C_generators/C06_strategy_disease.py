@@ -43,7 +43,10 @@ import re
 import unicodedata
 import warnings
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import TYPE_CHECKING, Dict, List, Optional, Set, Tuple
+
+if TYPE_CHECKING:
+    from E_normalization.E10_biomedical_ner_all import BiomedicalNERResult
 
 from flashtext import KeywordProcessor
 
@@ -844,12 +847,17 @@ class DiseaseDetector:
             display_name = name.replace("Specialized ", "")
             logger.debug("    • %-26s %8d  %s", display_name, count, filename)
 
-    def extract(self, doc_structure: DocumentGraph) -> List[DiseaseCandidate]:
+    def extract(
+        self,
+        doc_structure: DocumentGraph,
+        biomedical_ner_result: Optional["BiomedicalNERResult"] = None,
+    ) -> List[DiseaseCandidate]:
         """
         Extract disease mentions from document.
 
         Args:
             doc_structure: Parsed document graph
+            biomedical_ner_result: Optional BiomedicalNERResult from E10
 
         Returns:
             List of DiseaseCandidate objects
@@ -877,6 +885,12 @@ class DiseaseDetector:
             # 4. scispacy NER (for unknown diseases)
             if self.scispacy_nlp is not None:
                 candidates.extend(self._extract_scispacy(text, block, doc, seen))
+
+        # 5. BiomedNER-All (document-level gap-filler, lowest priority)
+        if biomedical_ner_result is not None:
+            candidates.extend(
+                self._extract_biomedical_ner(biomedical_ner_result, doc, seen)
+            )
 
         # Final deduplication by preferred_name to avoid duplicates like "Sarcoma" x3
         return self._deduplicate_by_name(candidates)
@@ -1201,6 +1215,101 @@ class DiseaseDetector:
 
         return candidates
 
+    def _extract_biomedical_ner(
+        self,
+        ner_result: "BiomedicalNERResult",
+        doc: DocumentGraph,
+        seen: Set[Tuple[str, str]],
+    ) -> List[DiseaseCandidate]:
+        """Extract diseases from BiomedNER-All (d4data) Disease_disorder entities.
+
+        Lexicon-verified gap-filler: only accepts BiomedNER entities that also
+        match a disease lexicon (full-term or substring). This prevents
+        subword/fragment FPs while recovering diseases missed by block-level scans.
+        """
+        candidates: list[DiseaseCandidate] = []
+
+        try:
+            # Get Disease_disorder entities from the result
+            disease_entities = ner_result.get_by_type("Disease_disorder")
+            if not disease_entities:
+                return candidates
+
+            # Use first block as location placeholder (document-level extraction)
+            blocks = list(doc.iter_linear_blocks(skip_header_footer=True))
+            default_block = blocks[0] if blocks else None
+            if default_block is None:
+                return candidates
+
+            for entity in disease_entities:
+                ent_text = entity.text.strip()
+
+                # Skip very short or very long
+                if len(ent_text) < 4 or len(ent_text) > 100:
+                    continue
+
+                # Require higher confidence for NER-only entities
+                if entity.score < 0.7:
+                    continue
+
+                # Require lexicon verification — full-term or substring match
+                match = self.is_known_disease(ent_text)
+                if match is None:
+                    match = self.is_known_disease_substring(ent_text)
+                if match is None:
+                    continue
+
+                matched_key, lexicon_source = match
+                preferred_label = matched_key  # Use lexicon's canonical name
+                context = ent_text
+
+                # Hard FP filter
+                should_filter, _ = self.fp_filter.should_filter(
+                    ent_text, context, is_abbreviation=False
+                )
+                if should_filter:
+                    continue
+
+                # Confidence adjustment
+                adjustment, _ = self.fp_filter.score_adjustment(
+                    ent_text, context, is_abbreviation=False
+                )
+                if adjustment < -0.5:
+                    continue
+
+                # Dedup against already-found entities
+                dedup_key = (ent_text.lower(), preferred_label.lower())
+                if dedup_key in seen:
+                    continue
+                seen.add(dedup_key)
+
+                entry = DiseaseEntry(
+                    key=f"biomedner_{ent_text.lower()}",
+                    preferred_label=preferred_label,
+                    identifiers={},
+                    source=f"biomedical_ner_all:{lexicon_source}",
+                )
+
+                adjusted_score = max(0.1, min(1.0, entity.score + adjustment))
+
+                candidates.append(
+                    self._make_candidate(
+                        doc=doc,
+                        block=default_block,
+                        matched_text=ent_text,
+                        entry=entry,
+                        context=context,
+                        generator_type=DiseaseGeneratorType.BIOMEDICAL_NER,
+                        field_type=DiseaseFieldType.NER_DETECTION,
+                        initial_confidence=adjusted_score,
+                    )
+                )
+
+        except Exception as e:
+            logger.warning("BiomedNER disease extraction error: %s", e)
+
+        return candidates
+
     def _make_candidate(
         self,
         doc: DocumentGraph,
@@ -1318,6 +1427,32 @@ class DiseaseDetector:
             for keyword, start, end in matches:
                 if start == 0 and end == term_len:
                     return (keyword, source)
+        return None
+
+    def is_known_disease_substring(self, term: str) -> Optional[Tuple[str, str]]:
+        """Check if a term contains a known disease as a substring match.
+
+        Returns the longest (matched_key, lexicon_source) found within the term,
+        or None. Requires the matched key to be at least 8 characters to avoid
+        short spurious matches.
+        """
+        term_lower = term.lower().strip()
+        if not term_lower or len(term_lower) < 8:
+            return None
+        best: Optional[Tuple[str, str, int]] = None  # (key, source, length)
+        for kp, source in [
+            (self.specialized_kp, "specialized"),
+            (self.general_kp, "general"),
+        ]:
+            matches = kp.extract_keywords(term_lower, span_info=True)
+            for keyword, _start, _end in matches:
+                kw_len = len(keyword)
+                if kw_len < 8:
+                    continue
+                if best is None or kw_len > best[2]:
+                    best = (keyword, source, kw_len)
+        if best is not None:
+            return (best[0], best[1])
         return None
 
     def _deduplicate_by_name(
