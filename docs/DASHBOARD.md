@@ -1,23 +1,24 @@
 # ESE Pipeline Accuracy Dashboard
 
-> Last updated: 2026-02-13
+> Last updated: 2026-02-14
 
 | Entity | Benchmark | Docs | TP | FP | FN | Precision | Recall | F1 | Delta | Perfect |
 |--------|-----------|------|----|----|----|-----------|--------|----|-------|---------|
-| Disease | BC5CDR | 20 | 97 | 3 | 7 | 97.0% | 93.3% | 95.1% | +2.6 | 4/20 |
-| Drug | BC5CDR | 20 | 55 | 6 | 17 | 90.2% | 76.4% | 82.7% | +2.1 | 4/20 |
+| Disease | BC5CDR | 20 | 98 | 7 | 6 | 93.3% | 94.2% | 93.8% | -1.3 | 4/20 |
+| Disease | BC5CDR | 100 | 402 | 46 | 80 | 89.7% | 83.4% | 86.5% | -0.2 | 17/100 |
+| Drug | BC5CDR | 20 | 56 | 6 | 16 | 90.3% | 77.8% | 83.6% | +0.9 | 4/20 |
+| Drug | BC5CDR | 100 | 274 | 23 | 67 | 92.3% | 80.4% | 85.9% | -0.3 | 17/100 |
 | Drug | CADEC | 311 | 272 | 20 | 22 | 93.2% | 92.5% | 92.8% | -0.2 | 282/311 |
 | Gene | NLM-Gene | 46 | 198 | 83 | 26 | 70.5% | 88.4% | 78.4% | +0.0 | 6/46 |
-| Gene | RareDisGene | 100 | 183 | 0 | 9 | 100.0% | 95.3% | 97.6% | +32.1 | 91/100 |
-| Disease | NLP4RARE | 100 | 280 | 29 | 42 | 90.6% | 87.0% | 88.7% | -0.2 | 52/100 |
-| Abbreviation | NLP4RARE | 100 | 16 | 3 | 8 | 84.2% | 66.7% | 74.4% | — | 52/100 |
-| Author | PubMed Authors | 19 | 135 | 1 | 4 | 99.3% | 97.1% | 98.2% | new | 16/19 |
+| Gene | RareDisGene | 100 | 183 | 0 | 9 | 100.0% | 95.3% | 97.6% | +0.0 | 91/100 |
+| Disease | NLP4RARE | 100 | 282 | 42 | 40 | 87.0% | 87.6% | 87.3% | -1.4 | 49/100 |
+| Abbreviation | NLP4RARE | 100 | 23 | 6 | 1 | 79.3% | 95.8% | 86.8% | +12.4 | 49/100 |
+| Author | PubMed Authors | 19 | 135 | 1 | 4 | 99.3% | 97.1% | 98.2% | +0.0 | 16/19 |
 | Citation | PubMed Authors | — | — | — | — | — | — | — | — | — |
 | Disease | NLP4RARE dev | 20 | 79 | 9 | 10 | 89.8% | 88.8% | 89.3% | +0.0 | 10/20 |
 | Abbreviation | NLP4RARE dev | 20 | 5 | 0 | 0 | 100.0% | 100.0% | 100.0% | +0.0 | 10/20 |
-| Disease | NCBI Disease | 20 | 56 | 2 | 29 | 96.6% | 65.9% | 78.3% | +23.9 | — |
-| Disease | NCBI Disease | 50 | 157 | 7 | 66 | 95.7% | 70.4% | 81.1% | +24.9 | 20/50 |
-| Disease | NCBI Disease | 73 | 315 | 23 | 165 | 93.2% | 65.6% | 77.0% | +22.6 | 27/73 |
+| Disease | NCBI Disease | 20 | 59 | 7 | 26 | 89.4% | 69.4% | 78.1% | -0.2 | 8/20 |
+| Disease | NCBI Disease | 73 | 244 | 28 | 101 | 89.7% | 70.7% | 79.1% | +2.1 | 22/73 |
 | Feasibility (epi) | Synthetic | 20 | 39 | 32 | 11 | 54.9% | 78.0% | 64.5% | — | — |
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
 | Feasibility (design) | Synthetic | 20 | — | — | — | — | — | — | — | 97% |
@@ -64,6 +65,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-14 | BiomedNER-All (E10) as disease/drug gap-filler, abbreviation cross-ref substring matching with gene guards, conjunctive disease matching in evaluator | NCBI Disease F1 77.0%→79.1% (+2.1pp). BC5CDR Disease R +3.9pp (F1 flat ~86.5%). NLP4RARE Abbrev F1 74.4%→86.8%. Gene benchmarks unchanged. NLP4RARE Disease -1.4pp (LLM variance). |
 | 2026-02-14 | Author extraction eval: gold validation (90% PDF-metadata alignment), surname prefix matching, accent normalization, fuzzy matching, improved LLM prompt | Author F1 98.2% (P=99.3%, R=97.1%). 16/19 perfect docs. Gold: 45 validated test docs, 300 authors. |
 | 2026-02-13 | NCBI Disease gold fix (include all annotation types) + generic oncology terms + config propagation fix | NCBI Disease F1 54.4%->77.0% (P=93.2%, R=65.6%). No regression: NLP4RARE 89.3%, BC5CDR 95.1%/82.7%. |
 | 2026-02-13 | Enrich RareDisGene gold standard with 91 confirmed gene mentions (HGNC-verified) | RareDisGene F1 65.5%->97.6% (P=100%, R=95.3%). NLM-Gene unchanged at 78.4%. |
