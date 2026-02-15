@@ -2646,8 +2646,8 @@ DATASET_DISEASE_CONFIG: dict[str, dict[str, bool]] = {
     "NLP4RARE": {"enable_symptoms": False},
     "BC5CDR": {"enable_symptoms": True, "filter_symptom_diseases": False},
     "NCBI-Disease": {
-        "enable_symptoms": False,
-        "filter_symptom_diseases": True,
+        "enable_symptoms": True,
+        "filter_symptom_diseases": False,
         "include_generic_oncology": True,
     },
 }

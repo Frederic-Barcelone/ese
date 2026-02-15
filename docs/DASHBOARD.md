@@ -11,7 +11,7 @@
 | Gene | RareDisGene | 100 | 182 | 0 | 10 | 100.0% | 94.8% | 97.3% | -0.3 | 90/100 |
 | Disease | NLP4RARE dev | 100 | 292 | 49 | 30 | 85.6% | 90.7% | 88.1% | +0.3 | 49/100 |
 | Abbreviation | NLP4RARE | 100 | 23 | 7 | 1 | 76.7% | 95.8% | 85.2% | -1.6 | 49/100 |
-| Disease | NCBI Disease | 100 | 341 | 52 | 139 | 86.8% | 71.0% | 78.1% | -1.0 | 28/100 |
+| Disease | NCBI Disease | 73 | 263 | 34 | 82 | 88.6% | 76.2% | 81.9% | +3.8 | 24/73 |
 | Author | PubMed Authors | 19 | 135 | 1 | 4 | 99.3% | 97.1% | 98.2% | +0.0 | 16/19 |
 | Feasibility (epi) | Synthetic | 20 | 39 | 32 | 11 | 54.9% | 78.0% | 64.5% | — | — |
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
@@ -62,6 +62,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-15 | NCBI Disease recall: enable symptoms lexicon, disable symptom FP filter, move deafness/hypertelorism/contractures from hard to gated filter, add common English word FPs (ion/bind/ten/mono/bac/bleeding/hypertrophy/leukocytosis) | NCBI Disease F1 78.1%→81.9% (+3.8pp, R+5.2pp). NLP4RARE dev unchanged (90.2%). BC5CDR unchanged. |
 | 2026-02-15 | LLM gap-fill (C35) with lexicon verification, static abbreviation lookup (200 entries), FP filter expansion (common English words: she/air/face/gave/card/soft/pad/rich/rare/cold, symptoms: shock/fever/anoxia), gene eval matching (name+protein), drug deduplication in evaluator | BC5CDR Disease 86.7%→87.7% (+1.0pp, R+6.6pp). NLP4RARE Disease 87.3%→88.1% (+0.8pp). Gene/Drug benchmarks stable. Gap-fill adds recall but requires strict lexicon+FP filter to avoid FPs. |
 | 2026-02-14 | BiomedNER-All (E10) as disease/drug gap-filler, abbreviation cross-ref substring matching with gene guards, conjunctive disease matching in evaluator | NCBI Disease F1 77.0%→79.1% (+2.1pp). BC5CDR Disease R +3.9pp (F1 flat ~86.5%). NLP4RARE Abbrev F1 74.4%→86.8%. Gene benchmarks unchanged. NLP4RARE Disease -1.4pp (LLM variance). |
 | 2026-02-14 | Author extraction eval: gold validation (90% PDF-metadata alignment), surname prefix matching, accent normalization, fuzzy matching, improved LLM prompt | Author F1 98.2% (P=99.3%, R=97.1%). 16/19 perfect docs. Gold: 45 validated test docs, 300 authors. |
