@@ -30,11 +30,14 @@ Dependencies:
 
 from __future__ import annotations
 
+import logging
 import warnings
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from flashtext import KeywordProcessor
+
+logger = logging.getLogger(__name__)
 
 # scispacy for biomedical NER (identifies entities like C3G, eGFR, KDIGO)
 try:
@@ -67,6 +70,7 @@ from A_core.A01_domain_models import (
 from A_core.A02_interfaces import BaseCandidateGenerator
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
 from A_core.A23_doc_graph_models import DocumentGraph
+from Z_utils.Z02_text_helpers import extract_context_snippet
 
 # Import noise filters and constants from modularized file
 from C_generators.C21_noise_filters import (
@@ -500,8 +504,8 @@ class RegexLexiconGenerator(
                                 lf_lower = candidate_lf.lower() if candidate_lf else ""
                                 if (sf_lower, lf_lower) not in WRONG_EXPANSION_BLACKLIST and lf_lower not in BAD_LONG_FORMS:
                                     lf_from_umls = candidate_lf
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            logger.debug("UMLS KB lookup failed for CUI %s: %s", umls_cui, e)
 
                 lf_from_lexicon = lf_from_umls
                 if not lf_from_lexicon:
@@ -545,8 +549,8 @@ class RegexLexiconGenerator(
                         lexicon_source=source, lexicon_ids=lex_ids,
                     )
                 )
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning("scispacy NER processing failed, skipping NER candidates: %s", e)
 
     def _process_inline_definitions(
         self,
@@ -572,7 +576,7 @@ class RegexLexiconGenerator(
                 continue
             seen.add(key)
 
-            block = None  # type: ignore[assignment]
+            block = None
             block_text = None
             block_start = 0
             for b, text, s, e in blocks_data:
@@ -614,7 +618,7 @@ class RegexLexiconGenerator(
         lexicon_ids: Optional[List[LexiconIdentifier]] = None,
         generator_type: Optional[GeneratorType] = None,
     ) -> Candidate:
-        ctx = self._make_context(text, start, end)
+        ctx = extract_context_snippet(text, start, end, self.context_window).replace("\n", " ").strip()
 
         loc = Coordinate(
             page_num=int(block.page_num),
@@ -646,11 +650,6 @@ class RegexLexiconGenerator(
             initial_confidence=0.95,
             provenance=prov,
         )
-
-    def _make_context(self, text: str, start: int, end: int) -> str:
-        left = max(0, start - self.context_window)
-        right = min(len(text), end + self.context_window)
-        return text[left:right].replace("\n", " ").strip()
 
     def _is_valid_match(self, term: str) -> bool:
         """

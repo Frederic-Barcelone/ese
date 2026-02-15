@@ -476,7 +476,6 @@ class Orchestrator:
 
     def _init_components(self, api_key: Optional[str]) -> None:
         """Initialize all pipeline components using the factory."""
-        # Create component factory
         self.factory = ComponentFactory(
             config=self.config,
             run_id=self.run_id,
@@ -485,25 +484,31 @@ class Orchestrator:
             api_key=api_key,
         )
 
-        # Create core components
+        self._init_parsing_components()
+        self._init_entity_components()
+        self._init_abbreviation_components()
+        self._init_supplementary_components()
+
+        # Print unified lexicon summary
+        self._print_unified_lexicon_summary()
+
+    def _init_parsing_components(self) -> None:
+        """Initialize PDF parsing, table extraction, generators, Claude client, and normalization."""
         self.parser = self.factory.create_parser()
         self.table_extractor = self.factory.create_table_extractor()
         self.generators = self.factory.create_generators()
 
-        # Create Claude client and LLM engine
         self.claude_client = self.factory.create_claude_client(self.model)
         self.llm_engine = self.factory.create_llm_engine(self.claude_client, self.model)
         self.vlm_table_extractor = self.factory.create_vlm_table_extractor(self.claude_client)
-
-        # Create validation logger
         self.logger = self.factory.create_validation_logger()
 
-        # Create normalization components
         self.term_mapper = self.factory.create_term_mapper()
         self.disambiguator = self.factory.create_disambiguator()
         self.deduplicator = self.factory.create_deduplicator()
 
-        # Create entity detectors
+    def _init_entity_components(self) -> None:
+        """Initialize entity detectors, enrichers, and processors."""
         self.disease_detector = self.factory.create_disease_detector()
         self.disease_normalizer = self.factory.create_disease_normalizer()
         self.drug_detector = self.factory.create_drug_detector()
@@ -512,13 +517,11 @@ class Orchestrator:
         self.author_detector = self.factory.create_author_detector(self.claude_client)
         self.citation_detector = self.factory.create_citation_detector()
 
-        # Create feasibility components
         self.feasibility_detector = self.factory.create_feasibility_detector()
         self.llm_feasibility_extractor = self.factory.create_llm_feasibility_extractor(
             self.claude_client
         )
 
-        # Create enrichers
         self.epi_enricher = self.factory.create_epi_enricher()
         self.zeroshot_bioner = self.factory.create_zeroshot_bioner()
         self.biomedical_ner = self.factory.create_biomedical_ner()
@@ -526,23 +529,16 @@ class Orchestrator:
         self.registry_enricher = self.factory.create_registry_enricher()
         self.genetic_enricher = self.factory.create_genetic_enricher()
 
-        # Create PubTator enrichers (disease, drug, gene)
         self.disease_enricher = self.factory.create_disease_enricher()
         self.drug_enricher = self.factory.create_drug_enricher()
         self.gene_enricher = self.factory.create_gene_enricher()
 
-        # Create document metadata strategy
         self.doc_metadata_strategy = self.factory.create_doc_metadata_strategy(
             self.claude_client, self.model
         )
-
-        # Create NCT enricher
         self.nct_enricher = self.factory.create_nct_enricher()
-
-        # Load rare disease lookup
         self.rare_disease_lookup = self.factory.load_rare_disease_lookup()
 
-        # Create clinical intelligence extractors
         self.flowchart_extractor = FlowchartGraphExtractor(
             llm_client=self.claude_client,
             llm_model=self.model,
@@ -553,7 +549,35 @@ class Orchestrator:
             llm_model=self.model,
         ) if self.claude_client else None
 
-        # Create abbreviation pipeline
+        self.entity_processor = EntityProcessor(
+            run_id=self.run_id,
+            pipeline_version=PIPELINE_VERSION,
+            disease_detector=self.disease_detector,
+            disease_normalizer=self.disease_normalizer,
+            drug_detector=self.drug_detector,
+            gene_detector=self.gene_detector,
+            pharma_detector=self.pharma_detector,
+            author_detector=self.author_detector,
+            citation_detector=self.citation_detector,
+        )
+        self.entity_processor.disease_enricher = self.disease_enricher
+        self.entity_processor.drug_enricher = self.drug_enricher
+        self.entity_processor.gene_enricher = self.gene_enricher
+
+        self.feasibility_processor = FeasibilityProcessor(
+            run_id=self.run_id,
+            feasibility_detector=self.feasibility_detector,
+            llm_feasibility_extractor=self.llm_feasibility_extractor,
+            epi_enricher=self.epi_enricher,
+            zeroshot_bioner=self.zeroshot_bioner,
+            biomedical_ner=self.biomedical_ner,
+            patient_journey_enricher=self.patient_journey_enricher,
+            registry_enricher=self.registry_enricher,
+            genetic_enricher=self.genetic_enricher,
+        )
+
+    def _init_abbreviation_components(self) -> None:
+        """Initialize abbreviation pipeline."""
         self.abbreviation_pipeline = AbbreviationPipeline(
             run_id=self.run_id,
             pipeline_version=PIPELINE_VERSION,
@@ -575,38 +599,8 @@ class Orchestrator:
             model=self.model,
         )
 
-        # Create entity processor
-        self.entity_processor = EntityProcessor(
-            run_id=self.run_id,
-            pipeline_version=PIPELINE_VERSION,
-            disease_detector=self.disease_detector,
-            disease_normalizer=self.disease_normalizer,
-            drug_detector=self.drug_detector,
-            gene_detector=self.gene_detector,
-            pharma_detector=self.pharma_detector,
-            author_detector=self.author_detector,
-            citation_detector=self.citation_detector,
-        )
-
-        # Set PubTator enrichers on entity processor
-        self.entity_processor.disease_enricher = self.disease_enricher
-        self.entity_processor.drug_enricher = self.drug_enricher
-        self.entity_processor.gene_enricher = self.gene_enricher
-
-        # Create feasibility processor
-        self.feasibility_processor = FeasibilityProcessor(
-            run_id=self.run_id,
-            feasibility_detector=self.feasibility_detector,
-            llm_feasibility_extractor=self.llm_feasibility_extractor,
-            epi_enricher=self.epi_enricher,
-            zeroshot_bioner=self.zeroshot_bioner,
-            biomedical_ner=self.biomedical_ner,
-            patient_journey_enricher=self.patient_journey_enricher,
-            registry_enricher=self.registry_enricher,
-            genetic_enricher=self.genetic_enricher,
-        )
-
-        # Create export manager
+    def _init_supplementary_components(self) -> None:
+        """Initialize export manager and visual pipeline integration."""
         self.export_manager = ExportManager(
             run_id=self.run_id,
             pipeline_version=PIPELINE_VERSION,
@@ -614,12 +608,7 @@ class Orchestrator:
             gold_json=self.gold_json,
             claude_client=self.claude_client,
         )
-
-        # Create visual pipeline integration
         self.visual_integration = VisualPipelineIntegration(self.config)
-
-        # Print unified lexicon summary
-        self._print_unified_lexicon_summary()
 
     def _print_unified_lexicon_summary(self) -> None:
         """Print unified summary of all loaded lexicons across all detectors."""
@@ -734,23 +723,27 @@ class Orchestrator:
             printer=printer,
         )
 
-        # Stage 1: Parse PDF
-        self._parse_and_extract_text(state)
+        try:
+            # Stage 1: Parse PDF
+            self._parse_and_extract_text(state)
 
-        # Stages 2-4: Abbreviation extraction, filtering, validation, normalization
-        self._run_abbreviation_pipeline(state)
+            # Stages 2-4: Abbreviation extraction, filtering, validation, normalization
+            self._run_abbreviation_pipeline(state)
 
-        # Stages 5-10: Entity extraction + cross-entity filtering
-        self._run_entity_extraction(state)
+            # Stages 5-10: Entity extraction + cross-entity filtering
+            self._run_entity_extraction(state)
 
-        # Stages 11-15: Feasibility, care pathways, recommendations, visuals, metadata
-        self._run_supplementary_extraction(state)
+            # Stages 11-15: Feasibility, care pathways, recommendations, visuals, metadata
+            self._run_supplementary_extraction(state)
 
-        # Stage 16: Export, metrics, summary
-        result = self._finalize_and_export(state)
-
-        self.usage_tracker.finish_document(doc_id, status="completed")
-        timer.print_summary()
+            # Stage 16: Export, metrics, summary
+            result = self._finalize_and_export(state)
+        except Exception:
+            self.usage_tracker.finish_document(doc_id, status="failed")
+            raise
+        else:
+            self.usage_tracker.finish_document(doc_id, status="completed")
+            timer.print_summary()
 
         return result
 
@@ -825,49 +818,12 @@ class Orchestrator:
             needs_validation, s.counters
         )
 
-        # Update heuristics metrics from counters
-        auto_approved = len([e for _, e in auto_results if e.status == ValidationStatus.VALIDATED])
-        auto_rejected_total = (
-            s.counters.blacklisted_fp_count +
-            s.counters.context_rejected +
-            s.counters.trial_id_excluded +
-            s.counters.common_word_rejected +
-            s.counters.form_filter_rejected
-        )
-        s.metrics.heuristics.total_processed = len(needs_validation) + sf_form_rejected
-        s.metrics.heuristics.auto_approved = auto_approved
-        s.metrics.heuristics.auto_rejected = auto_rejected_total
-        s.metrics.heuristics.sent_to_llm = len(llm_candidates)
-        s.metrics.heuristics.approved_by_stats_whitelist = s.counters.recovered_by_stats_whitelist
-        s.metrics.heuristics.approved_by_country_code = s.counters.recovered_by_country_code
-        s.metrics.heuristics.rejected_by_blacklist = s.counters.blacklisted_fp_count
-        s.metrics.heuristics.rejected_by_context = s.counters.context_rejected
-        s.metrics.heuristics.rejected_by_trial_id = s.counters.trial_id_excluded
-        s.metrics.heuristics.rejected_by_common_word = s.counters.common_word_rejected
-
+        self._update_heuristics_metrics(s, needs_validation, auto_results, llm_candidates, sf_form_rejected)
         s.timer.stop("2b. Filtering & Heuristics")
 
-        # Print stats
-        from A_core.A01_domain_models import GeneratorType
-        frequent_sfs = sum(
-            1
-            for c in s.unique_candidates
-            if c.generator_type == GeneratorType.LEXICON_MATCH
-            and c.short_form.upper() not in corroborated_sfs
-            and word_counts.get(c.short_form.upper(), 0) >= 2  # Threshold: SF appears 2+ times in doc
+        self._print_validation_stats(
+            s, corroborated_sfs, word_counts, filtered_count, llm_candidates,
         )
-
-        s.printer.step("Validating abbreviations with Claude...", step_num=3)
-        s.printer.detail_highlight("Corroborated SFs", str(len(corroborated_sfs)))
-        s.printer.detail_highlight("Frequent SFs (2+)", str(frequent_sfs))
-        s.printer.detail_highlight("Filtered (lexicon-only, rare)", str(filtered_count))
-        s.printer.detail_highlight("Auto-approved stats", str(s.counters.recovered_by_stats_whitelist))
-        s.printer.detail_highlight("Auto-approved country", str(s.counters.recovered_by_country_code))
-        s.printer.detail_highlight("Auto-rejected blacklist", str(s.counters.blacklisted_fp_count))
-        s.printer.detail_highlight("Auto-rejected context", str(s.counters.context_rejected))
-        s.printer.detail_highlight("Auto-rejected trial IDs", str(s.counters.trial_id_excluded))
-        s.printer.detail_highlight("Auto-rejected common words", str(s.counters.common_word_rejected))
-        s.printer.detail_highlight("Candidates for LLM", str(len(llm_candidates)))
 
         s.timer.start("3. LLM Validation")
 
@@ -890,7 +846,68 @@ class Orchestrator:
         val_time = s.timer.stop("3. LLM Validation")
         s.printer.time(val_time)
 
-        # SF-only extraction for missing abbreviations
+        self._run_sf_only_extraction(s)
+
+    def _update_heuristics_metrics(
+        self,
+        s: _PipelineState,
+        needs_validation: list,
+        auto_results: list,
+        llm_candidates: list,
+        sf_form_rejected: int,
+    ) -> None:
+        """Update heuristics metrics from counters after filtering and heuristic application."""
+        auto_approved = len([e for _, e in auto_results if e.status == ValidationStatus.VALIDATED])
+        auto_rejected_total = (
+            s.counters.blacklisted_fp_count +
+            s.counters.context_rejected +
+            s.counters.trial_id_excluded +
+            s.counters.common_word_rejected +
+            s.counters.form_filter_rejected
+        )
+        s.metrics.heuristics.total_processed = len(needs_validation) + sf_form_rejected
+        s.metrics.heuristics.auto_approved = auto_approved
+        s.metrics.heuristics.auto_rejected = auto_rejected_total
+        s.metrics.heuristics.sent_to_llm = len(llm_candidates)
+        s.metrics.heuristics.approved_by_stats_whitelist = s.counters.recovered_by_stats_whitelist
+        s.metrics.heuristics.approved_by_country_code = s.counters.recovered_by_country_code
+        s.metrics.heuristics.rejected_by_blacklist = s.counters.blacklisted_fp_count
+        s.metrics.heuristics.rejected_by_context = s.counters.context_rejected
+        s.metrics.heuristics.rejected_by_trial_id = s.counters.trial_id_excluded
+        s.metrics.heuristics.rejected_by_common_word = s.counters.common_word_rejected
+
+    def _print_validation_stats(
+        self,
+        s: _PipelineState,
+        corroborated_sfs: set,
+        word_counts: dict,
+        filtered_count: int,
+        llm_candidates: list,
+    ) -> None:
+        """Print abbreviation validation statistics."""
+        from A_core.A01_domain_models import GeneratorType
+        frequent_sfs = sum(
+            1
+            for c in s.unique_candidates
+            if c.generator_type == GeneratorType.LEXICON_MATCH
+            and c.short_form.upper() not in corroborated_sfs
+            and word_counts.get(c.short_form.upper(), 0) >= 2
+        )
+
+        s.printer.step("Validating abbreviations with Claude...", step_num=3)
+        s.printer.detail_highlight("Corroborated SFs", str(len(corroborated_sfs)))
+        s.printer.detail_highlight("Frequent SFs (2+)", str(frequent_sfs))
+        s.printer.detail_highlight("Filtered (lexicon-only, rare)", str(filtered_count))
+        s.printer.detail_highlight("Auto-approved stats", str(s.counters.recovered_by_stats_whitelist))
+        s.printer.detail_highlight("Auto-approved country", str(s.counters.recovered_by_country_code))
+        s.printer.detail_highlight("Auto-rejected blacklist", str(s.counters.blacklisted_fp_count))
+        s.printer.detail_highlight("Auto-rejected context", str(s.counters.context_rejected))
+        s.printer.detail_highlight("Auto-rejected trial IDs", str(s.counters.trial_id_excluded))
+        s.printer.detail_highlight("Auto-rejected common words", str(s.counters.common_word_rejected))
+        s.printer.detail_highlight("Candidates for LLM", str(len(llm_candidates)))
+
+    def _run_sf_only_extraction(self, s: _PipelineState) -> None:
+        """Stage 3b: SF-only extraction for missing abbreviations."""
         s.timer.start("3b. SF-Only Extraction")
         found_sfs = {
             r.short_form.upper()
@@ -914,17 +931,7 @@ class Orchestrator:
 
     def _run_entity_extraction(self, s: _PipelineState) -> None:
         """Stages 5-10: Disease, gene, drug, pharma, author, citation detection + cross-entity filtering."""
-        # Run BiomedNER-All once per document (shared by disease + drug detection)
-        biomed_ner_result = None
-        if self.biomedical_ner and (self.extract_diseases or self.extract_drugs):
-            try:
-                plain_text = "\n\n".join(
-                    block.text for block in s.doc.iter_linear_blocks(skip_header_footer=True)
-                    if block.text
-                )
-                biomed_ner_result = self.biomedical_ner.extract(plain_text)
-            except Exception as e:
-                logger.warning("BiomedNER extraction failed: %s", e)
+        biomed_ner_result = self._run_biomedical_ner(s)
 
         if self.extract_diseases:
             s.printer.step("Disease detection...", step_num=5)
@@ -990,37 +997,48 @@ class Orchestrator:
         else:
             s.printer.skip("Citation detection", "disabled in config")
 
-        # Cross-entity filtering: use abbreviation + author context to remove FPs
+        self._apply_cross_entity_operations(s)
+
+    def _run_biomedical_ner(self, s: _PipelineState):
+        """Run BiomedNER-All once per document (shared by disease + drug detection)."""
+        if self.biomedical_ner and (self.extract_diseases or self.extract_drugs):
+            try:
+                plain_text = "\n\n".join(
+                    block.text for block in s.doc.iter_linear_blocks(skip_header_footer=True)
+                    if block.text
+                )
+                return self.biomedical_ner.extract(plain_text)
+            except Exception as e:
+                logger.warning("BiomedNER extraction failed: %s", e, exc_info=True)
+        return None
+
+    def _apply_cross_entity_operations(self, s: _PipelineState) -> None:
+        """Apply cross-entity filtering, correction, recovery, and gap-fill."""
         s.disease_results, s.drug_results, s.gene_results = self._cross_entity_filter(
             s.disease_results, s.drug_results, s.gene_results,
             s.abbreviation_results,
             s.author_results,
         )
 
-        # Cross-entity correction: use disease abbreviations to fix abbreviation long forms
         s.abbreviation_results = self._correct_abbrev_from_diseases(
             s.abbreviation_results, s.disease_results
         )
 
-        # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only drugs
         if self.extract_drugs:
             s.drug_results = self._recover_drugs_from_abbreviations(
                 s.abbreviation_results, s.drug_results
             )
 
-        # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only diseases
         if self.extract_diseases:
             s.disease_results = self._recover_diseases_from_abbreviations(
                 s.abbreviation_results, s.disease_results, s.gene_results,
             )
 
-        # Static abbreviation lookup: recover entities from common medical abbreviations
         if self.extract_diseases or self.extract_drugs:
             s.disease_results, s.drug_results = self._recover_entities_from_static_abbreviations(
                 s.full_text, s.disease_results, s.drug_results, s.abbreviation_results,
             )
 
-        # LLM gap-fill: use Haiku to find entities missed by lexicon/NER
         if (self.extract_diseases or self.extract_drugs) and self.claude_client:
             s.disease_results, s.drug_results = self._llm_gap_fill(
                 s.full_text, s.disease_results, s.drug_results,
@@ -1071,6 +1089,7 @@ class Orchestrator:
                     s.printer.result("Visuals extracted", len(s.visual_result.visuals))
                     s.printer.detail(f"Tables: {s.visual_result.tables_detected}, Figures: {s.visual_result.figures_detected}", indent=4)
             except Exception as e:
+                logger.error("Visual extraction failed for %s: %s", s.pdf_path.name, e, exc_info=True)
                 s.printer.warning(f"Visual extraction failed: {e}")
             visual_time = s.timer.stop("14. Visual Extraction")
             s.printer.time(visual_time)
@@ -1249,6 +1268,7 @@ class Orchestrator:
             )
             return metadata
         except Exception as e:
+            logger.error("Document metadata extraction failed for %s: %s", pdf_path.name, e, exc_info=True)
             printer.warning(f"Document metadata extraction failed: {e}")
             return None
 
@@ -1345,6 +1365,7 @@ class Orchestrator:
                     print(f"    + Page {img.page_num}: {len(pathway.nodes)} nodes, {len(pathway.edges)} edges")
 
             except Exception as e:
+                logger.error("Care pathway extraction failed for page %s: %s", img.page_num, e, exc_info=True)
                 print(f"    [WARN] Care pathway extraction failed for page {img.page_num}: {e}")
 
         return pathways
@@ -1374,6 +1395,7 @@ class Orchestrator:
                 recommendation_sets.append(text_recs)
                 print(f"    + Text extraction: {len(text_recs.recommendations)} recommendations")
         except Exception as e:
+            logger.error("Text recommendation extraction failed: %s", e, exc_info=True)
             print(f"    [WARN] Text recommendation extraction failed: {e}")
 
         # Extract from tables (pattern-based extraction)
@@ -1412,6 +1434,7 @@ class Orchestrator:
                     print(f"    + Table page {table.page_num}: {len(table_recs.recommendations)} recommendations")
 
             except Exception as e:
+                logger.error("Table recommendation extraction failed for page %s: %s", table.page_num, e, exc_info=True)
                 print(f"    [WARN] Table recommendation extraction failed for page {table.page_num}: {e}")
 
         return recommendation_sets
