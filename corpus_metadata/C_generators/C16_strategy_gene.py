@@ -56,6 +56,7 @@ from A_core.A19_gene_models import (
 )
 from B_parsing.B01_pdf_to_docgraph import DocumentGraph
 from B_parsing.B06_confidence import ConfidenceCalculator
+from Z_utils.Z02_text_helpers import extract_context_window
 
 from .C34_gene_fp_filter import GeneFalsePositiveFilter
 
@@ -411,6 +412,13 @@ class GeneDetector:
             else:
                 logger.debug("    • %-26s %8s  %s", name, "enabled", filename)
 
+    def extract(self, doc_graph: DocumentGraph) -> List[GeneCandidate]:
+        """Extract gene mentions from the document.
+
+        Delegates to detect() for backward compatibility.
+        """
+        return self.detect(doc_graph)
+
     def detect(self, doc_graph: DocumentGraph) -> List[GeneCandidate]:
         """
         Detect gene mentions in document.
@@ -737,9 +745,7 @@ class GeneDetector:
 
     def _extract_context(self, text: str, start: int, end: int) -> str:
         """Extract context window around match."""
-        ctx_start = max(0, start - self.context_window // 2)
-        ctx_end = min(len(text), end + self.context_window // 2)
-        return text[ctx_start:ctx_end]
+        return extract_context_window(text, start, end, self.context_window)
 
     def _build_identifiers(self, gene_info: Dict) -> List[GeneIdentifier]:
         """Build list of gene identifiers from metadata."""

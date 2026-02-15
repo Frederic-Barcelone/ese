@@ -41,6 +41,7 @@ import re
 from typing import Any, Dict, List, Optional, Set
 
 from A_core.A03_provenance import generate_run_id, get_git_revision_hash
+from Z_utils.Z02_text_helpers import extract_context_window
 
 logger = logging.getLogger(__name__)
 from A_core.A07_feasibility_models import (
@@ -1344,9 +1345,7 @@ class FeasibilityDetector:
 
     def _get_context(self, text: str, start: int, end: int) -> str:
         """Extract context window around a match."""
-        ctx_start = max(0, start - self.context_window // 2)
-        ctx_end = min(len(text), end + self.context_window // 2)
-        return text[ctx_start:ctx_end]
+        return extract_context_window(text, start, end, self.context_window)
 
     def _update_stats(self, candidates: List[FeasibilityCandidate]) -> None:
         """Update extraction statistics."""

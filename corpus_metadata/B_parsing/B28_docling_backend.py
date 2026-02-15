@@ -56,12 +56,12 @@ except ImportError:
     logger.warning(
         "Docling with SuryaOCR not installed. Install with: pip install docling docling-surya"
     )
-    DocumentConverter = None  # type: ignore
-    PdfFormatOption = None  # type: ignore
-    InputFormat = None  # type: ignore
-    PdfPipelineOptions = None  # type: ignore
-    TableFormerMode = None  # type: ignore
-    TableItem = None  # type: ignore
+    DocumentConverter = None  # type: ignore[assignment]
+    PdfFormatOption = None  # type: ignore[assignment]
+    InputFormat = None  # type: ignore[assignment]
+    PdfPipelineOptions = None  # type: ignore[assignment]
+    TableFormerMode = None  # type: ignore[assignment]
+    TableItem = None  # type: ignore[assignment]
     SuryaOcrOptions = None
 
 

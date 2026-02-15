@@ -70,7 +70,7 @@ class ExecutionContext:
     plan_id: str
     doc_id: str
     doc_fingerprint: str
-    outputs_by_step: Dict[str, List["RawExtraction"]] = None  # type: ignore[assignment]
+    outputs_by_step: Optional[Dict[str, List["RawExtraction"]]] = None
 
     def __post_init__(self) -> None:
         if self.outputs_by_step is None:

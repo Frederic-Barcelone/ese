@@ -325,9 +325,8 @@ class PDFToDocGraphParser(BaseParser):
     # -----------------------
 
     def parse(self, file_path: str, image_output_dir: Optional[str] = None) -> DocumentGraph:
+        """Parse a PDF file into a structured DocumentGraph."""
         page_dims = self._get_page_dimensions(file_path)
-
-        # Store image output directory for partition_pdf
         self._image_output_dir = image_output_dir
 
         # Select extraction method
@@ -335,19 +334,51 @@ class PDFToDocGraphParser(BaseParser):
         if self.extraction_method == "pymupdf":
             use_pymupdf = True
         elif self.extraction_method == "auto":
-            # Auto-detect: use PyMuPDF for native PDFs, Unstructured for scanned
             use_pymupdf = not self._is_scanned_pdf(file_path)
 
-        # Extract elements using selected method
-        if use_pymupdf:
-            elements = self._extract_with_pymupdf(file_path)
-        else:
-            elements = self._call_partition_pdf(file_path)
+        elements = (
+            self._extract_with_pymupdf(file_path)
+            if use_pymupdf
+            else self._call_partition_pdf(file_path)
+        )
 
-        # Pass 1: raw blocks + repetition stats + images
+        # Pass 1: Extract raw blocks, images, and repetition stats
+        raw_pages, raw_images, raw_captions, repeated_headers, repeated_footers = (
+            self._extract_raw_elements(elements, page_dims, use_pymupdf)
+        )
+
+        # Pass 2: Build DocumentGraph with ordered blocks and role assignment
+        graph = self._build_document_graph(
+            file_path, page_dims, raw_pages, raw_images, raw_captions,
+            repeated_headers, repeated_footers,
+        )
+
+        # Post-processing: Native figure extraction
+        if self.use_native_figure_extraction:
+            graph, self._resolution_stats = apply_native_figure_extraction(
+                graph, file_path, raw_images,
+                min_figure_area_ratio=self.min_figure_area_ratio,
+                filter_noise=self.filter_noise_figures,
+            )
+
+        return graph
+
+    def _extract_raw_elements(
+        self,
+        elements: Any,
+        page_dims: Dict[Optional[int], Tuple[float, float]],
+        use_pymupdf: bool,
+    ) -> Tuple[
+        Dict[int, List[Dict[str, Any]]],
+        Dict[int, List[Dict[str, Any]]],
+        Dict[int, List[Dict[str, Any]]],
+        set,
+        set,
+    ]:
+        """Pass 1: Extract raw blocks, images, captions, and compute repetition stats."""
         raw_pages: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
-        raw_images: Dict[int, List[Dict[str, Any]]] = defaultdict(list)  # Images per page
-        raw_captions: Dict[int, List[Dict[str, Any]]] = defaultdict(list)  # Figure captions
+        raw_images: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
+        raw_captions: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
 
         norm_count: Counter[str] = Counter()
         norm_pages: Dict[str, set] = defaultdict(set)
@@ -355,9 +386,7 @@ class PDFToDocGraphParser(BaseParser):
         norm_sample_text: Dict[str, str] = {}
 
         for el in elements:
-            # Handle both Unstructured elements and PyMuPDF dicts
             if use_pymupdf:
-                # PyMuPDF returns dicts
                 cat_norm = (el.get("category") or "").strip().lower()
                 page_num_raw = el.get("page_num")
                 page_num: Optional[int] = int(page_num_raw) if page_num_raw is not None else None
@@ -366,7 +395,6 @@ class PDFToDocGraphParser(BaseParser):
                 page_w, page_h = page_dims.get(page_num, (0.0, 0.0)) if page_num is not None else (0.0, 0.0)
                 bbox = BoundingBox(coords=bbox_tuple, page_width=page_w, page_height=page_h)
             else:
-                # Unstructured returns element objects
                 cat = getattr(el, "category", None)
                 cat_norm = (cat or "").strip().lower() if isinstance(cat, str) else ""
                 cls_norm = el.__class__.__name__.strip().lower()
@@ -391,7 +419,6 @@ class PDFToDocGraphParser(BaseParser):
             if not use_pymupdf:
                 cls_name = el.__class__.__name__
                 if cls_name == "Image":
-                    # Extract image with base64 data
                     el_metadata = getattr(el, "metadata", None)
                     image_base64 = getattr(el_metadata, "image_base64", None) if el_metadata else None
                     raw_images[page_num].append({
@@ -400,30 +427,25 @@ class PDFToDocGraphParser(BaseParser):
                         "ocr_text": text_raw.strip() if text_raw else None,
                         "y0": float(bbox.coords[1]),
                     })
-                    continue  # Don't add to text blocks
+                    continue
                 elif cls_name == "FigureCaption":
                     raw_captions[page_num].append({
                         "text": text_raw.strip(),
                         "bbox": bbox,
                         "y0": float(bbox.coords[1]),
                     })
-                    # Also add to text blocks for context
 
             text = self._clean_text(text_raw)
             if not text:
                 continue
 
             zone = self._zone_from_bbox(bbox, page_h=page_h)
-
-            # For PyMuPDF, pass category directly; for Unstructured, pass element
             is_section_header = self._is_section_header(
                 el if not use_pymupdf else None,
-                zone,
-                text,
-                category=cat_norm if use_pymupdf else None
+                zone, text,
+                category=cat_norm if use_pymupdf else None,
             )
 
-            # Include category for B04 spanning detection hints
             rb = {
                 "text": text,
                 "bbox": bbox,
@@ -431,7 +453,7 @@ class PDFToDocGraphParser(BaseParser):
                 "y0": float(bbox.coords[1]),
                 "zone": zone,
                 "is_section_header": is_section_header,
-                "category": cat_norm,  # For B04 hints
+                "category": cat_norm,
             }
             raw_pages[page_num].append(rb)
 
@@ -453,29 +475,34 @@ class PDFToDocGraphParser(BaseParser):
             repeat_zone_majority=self.repeat_zone_majority,
         )
 
-        # Pass 2: build DocumentGraph
+        return raw_pages, raw_images, raw_captions, repeated_headers, repeated_footers
+
+    def _build_document_graph(
+        self,
+        file_path: str,
+        page_dims: Dict[Optional[int], Tuple[float, float]],
+        raw_pages: Dict[int, List[Dict[str, Any]]],
+        raw_images: Dict[int, List[Dict[str, Any]]],
+        raw_captions: Dict[int, List[Dict[str, Any]]],
+        repeated_headers: set,
+        repeated_footers: set,
+    ) -> DocumentGraph:
+        """Pass 2: Build DocumentGraph with ordered blocks, role assignment, and images."""
         graph = DocumentGraph(doc_id=str(file_path))
-        self._page_layouts = {}  # Reset layout info
+        self._page_layouts = {}
 
         for page_num in sorted(raw_pages.keys()):
             page_w, page_h = page_dims.get(page_num, (0.0, 0.0))
             page_obj = Page(number=page_num, width=page_w, height=page_h)
 
-            # =============================================
-            # SOTA Column Ordering (B04) - INTEGRATION
-            # =============================================
             if self.use_sota_layout:
-                # Get layout info for debugging/export
                 self._page_layouts[page_num] = get_layout_info(
                     raw_pages[page_num], page_w, page_h, self.layout_config
                 )
-
-                # Apply SOTA ordering
                 ordered = order_page_blocks(
                     raw_pages[page_num], page_w, page_h, self.layout_config, page_num
                 )
             else:
-                # Fallback to legacy ordering
                 ordered = order_blocks_deterministically(
                     raw_pages[page_num],
                     page_w=page_w,
@@ -491,14 +518,10 @@ class PDFToDocGraphParser(BaseParser):
 
                 role = ContentRole.BODY_TEXT
                 norm = normalize_repeated_text(txt)
-
-                # Check if this looks like a numbered reference (preserve as body text)
                 is_reference = bool(NUMBERED_REFERENCE_RE.match(txt))
 
-                # Hard override: known footer noise (but not references)
                 if looks_like_known_footer(txt) and not is_reference:
                     role = ContentRole.PAGE_FOOTER
-                # Running header pattern: "Author et al" or "Author et al."
                 elif is_running_header(txt, rb.get("zone")):
                     role = ContentRole.PAGE_HEADER
                 elif rb.get("zone") == "HEADER" and norm in repeated_headers:
@@ -509,7 +532,6 @@ class PDFToDocGraphParser(BaseParser):
                     and not is_reference
                 ):
                     role = ContentRole.PAGE_FOOTER
-                # fallback repetition even if zone couldn't be trusted
                 elif (
                     norm in repeated_footers
                     and is_short_repeated_noise(txt)
@@ -521,101 +543,85 @@ class PDFToDocGraphParser(BaseParser):
 
                 blocks.append(
                     TextBlock(
-                        text=txt,
-                        page_num=page_num,
-                        reading_order_index=idx,
-                        role=role,
-                        bbox=rb["bbox"],
+                        text=txt, page_num=page_num,
+                        reading_order_index=idx, role=role, bbox=rb["bbox"],
                     )
                 )
 
             page_obj.blocks = blocks
-
-            # Add images to page (match captions by proximity)
-            page_images: List[ImageBlock] = []
-            page_caps = raw_captions.get(page_num, [])
-
-            for img_idx, img_data in enumerate(raw_images.get(page_num, [])):
-                # Find closest caption below the image (captions usually below figures)
-                img_y = img_data["y0"]
-                caption = None
-                best_dist = float("inf")
-
-                for cap in page_caps:
-                    cap_y = cap["y0"]
-                    # Caption should be below the image (larger Y in PDF coords)
-                    # Allow large tolerance since captions can be far below in multi-column
-                    if cap_y >= img_y:
-                        dist = cap_y - img_y
-                        if dist < best_dist and dist < 1500:  # Within 1500 units (generous)
-                            best_dist = dist
-                            caption = cap["text"]
-
-                # If no caption found on same page, check if OCR text mentions "Figure X"
-                if not caption and img_data.get("ocr_text"):
-                    # Try to extract figure number from OCR text
-                    import re
-                    fig_match = re.search(r"Figure\s*(\d+)", img_data["ocr_text"], re.IGNORECASE)
-                    if fig_match:
-                        caption = f"Figure {fig_match.group(1)}"
-
-                # Determine image type from caption or OCR text
-                img_type = ImageType.UNKNOWN
-                check_text = (caption or "") + " " + (img_data.get("ocr_text") or "")
-                check_lower = check_text.lower()
-
-                # Flowchart: CONSORT diagrams, patient flow, screening
-                if any(kw in check_lower for kw in [
-                    "screened", "randomized", "enrolled", "consort", "flow",
-                    "excluded", "discontinued", "completed", "allocation"
-                ]):
-                    img_type = ImageType.FLOWCHART
-                # Chart: various clinical trial result charts (including pie charts)
-                # Also detect by percentage patterns in OCR text
-                has_percentages = bool(PERCENTAGE_PATTERN.search(check_text))
-                if has_percentages or any(kw in check_lower for kw in [
-                    "kaplan", "survival", "curve", "plot", "bar", "proportion",
-                    "percentage", "reduction", "change", "effect", "endpoint",
-                    "month", "week", "baseline", "placebo", "treatment",
-                    "pie", "distribution", "frequency", "symptoms", "serology",
-                    "fig.", "figure", "organ", "involvement"
-                ]):
-                    img_type = ImageType.CHART
-                # Diagram: mechanism, pathway diagrams
-                elif any(kw in check_lower for kw in [
-                    "diagram", "schematic", "mechanism", "pathway", "cascade"
-                ]):
-                    img_type = ImageType.DIAGRAM
-                # Logo: small images on first page
-                elif page_num == 1 and len(img_data.get("image_base64") or "") < 10000:
-                    img_type = ImageType.LOGO
-
-                page_images.append(ImageBlock(
-                    page_num=page_num,
-                    reading_order_index=len(blocks) + img_idx,  # After text blocks
-                    image_base64=img_data.get("image_base64"),
-                    ocr_text=img_data.get("ocr_text"),
-                    caption=caption,
-                    image_type=img_type,
-                    bbox=img_data["bbox"],
-                ))
-
-            page_obj.images = page_images
+            page_obj.images = self._build_page_images(
+                page_num, blocks, raw_images, raw_captions,
+            )
             graph.pages[page_num] = page_obj
 
-        # =============================================
-        # PDF Native Figure Extraction (B09-B11)
-        # =============================================
-        if self.use_native_figure_extraction:
-            graph, self._resolution_stats = apply_native_figure_extraction(
-                graph,
-                file_path,
-                raw_images,
-                min_figure_area_ratio=self.min_figure_area_ratio,
-                filter_noise=self.filter_noise_figures,
-            )
-
         return graph
+
+    def _build_page_images(
+        self,
+        page_num: int,
+        blocks: List[TextBlock],
+        raw_images: Dict[int, List[Dict[str, Any]]],
+        raw_captions: Dict[int, List[Dict[str, Any]]],
+    ) -> List[ImageBlock]:
+        """Build ImageBlock list for a page by matching images with captions."""
+        page_images: List[ImageBlock] = []
+        page_caps = raw_captions.get(page_num, [])
+
+        for img_idx, img_data in enumerate(raw_images.get(page_num, [])):
+            img_y = img_data["y0"]
+            caption = None
+            best_dist = float("inf")
+
+            for cap in page_caps:
+                cap_y = cap["y0"]
+                if cap_y >= img_y:
+                    dist = cap_y - img_y
+                    if dist < best_dist and dist < 1500:
+                        best_dist = dist
+                        caption = cap["text"]
+
+            if not caption and img_data.get("ocr_text"):
+                import re
+                fig_match = re.search(r"Figure\s*(\d+)", img_data["ocr_text"], re.IGNORECASE)
+                if fig_match:
+                    caption = f"Figure {fig_match.group(1)}"
+
+            img_type = ImageType.UNKNOWN
+            check_text = (caption or "") + " " + (img_data.get("ocr_text") or "")
+            check_lower = check_text.lower()
+
+            if any(kw in check_lower for kw in [
+                "screened", "randomized", "enrolled", "consort", "flow",
+                "excluded", "discontinued", "completed", "allocation"
+            ]):
+                img_type = ImageType.FLOWCHART
+            has_percentages = bool(PERCENTAGE_PATTERN.search(check_text))
+            if has_percentages or any(kw in check_lower for kw in [
+                "kaplan", "survival", "curve", "plot", "bar", "proportion",
+                "percentage", "reduction", "change", "effect", "endpoint",
+                "month", "week", "baseline", "placebo", "treatment",
+                "pie", "distribution", "frequency", "symptoms", "serology",
+                "fig.", "figure", "organ", "involvement"
+            ]):
+                img_type = ImageType.CHART
+            elif any(kw in check_lower for kw in [
+                "diagram", "schematic", "mechanism", "pathway", "cascade"
+            ]):
+                img_type = ImageType.DIAGRAM
+            elif page_num == 1 and len(img_data.get("image_base64") or "") < 10000:
+                img_type = ImageType.LOGO
+
+            page_images.append(ImageBlock(
+                page_num=page_num,
+                reading_order_index=len(blocks) + img_idx,
+                image_base64=img_data.get("image_base64"),
+                ocr_text=img_data.get("ocr_text"),
+                caption=caption,
+                image_type=img_type,
+                bbox=img_data["bbox"],
+            ))
+
+        return page_images
 
     def get_page_layout_info(self, page_num: int) -> Optional[Dict[str, Any]]:
         """Get detected layout info for a specific page (after parsing)."""

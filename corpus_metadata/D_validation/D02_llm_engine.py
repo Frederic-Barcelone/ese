@@ -87,12 +87,12 @@ try:
     from anthropic import APITimeoutError as AnthropicTimeoutError
     from anthropic import RateLimitError as AnthropicRateLimitError
 except ImportError:
-    anthropic = None  # type: ignore
-    AnthropicAPIError = Exception  # type: ignore
-    AnthropicConnectionError = Exception  # type: ignore
-    AnthropicTimeoutError = Exception  # type: ignore
-    AnthropicRateLimitError = Exception  # type: ignore
-    AnthropicStatusError = Exception  # type: ignore
+    anthropic = None  # type: ignore[assignment]
+    AnthropicAPIError = Exception  # type: ignore[assignment, misc]
+    AnthropicConnectionError = Exception  # type: ignore[assignment, misc]
+    AnthropicTimeoutError = Exception  # type: ignore[assignment, misc]
+    AnthropicRateLimitError = Exception  # type: ignore[assignment, misc]
+    AnthropicStatusError = Exception  # type: ignore[assignment, misc]
 
 
 # =============================================================================

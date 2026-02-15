@@ -106,3 +106,32 @@ def load_list_mapping(filename: str, key: str) -> Dict[str, List[str]]:
             )
         _check_strings(v, filename, f"{key}.{k}")
     return dict(mapping)
+
+
+def load_nested_list_mapping(
+    filename: str, key: str
+) -> Dict[str, Dict[str, List[str]]]:
+    """Load a Dict[str, Dict[str, List[str]]] from a YAML file."""
+    data = _load_yaml(filename)
+    outer = data[key]
+    for outer_k, inner_map in outer.items():
+        if not isinstance(outer_k, str):
+            raise TypeError(
+                f"{filename}:{key} contains non-string key {outer_k!r} — "
+                f"quote it in YAML"
+            )
+        if not isinstance(inner_map, dict):
+            raise TypeError(
+                f"{filename}:{key}:{outer_k} value is not a dict: {type(inner_map).__name__}"
+            )
+        for inner_k, v in inner_map.items():
+            if not isinstance(inner_k, str):
+                raise TypeError(
+                    f"{filename}:{key}:{outer_k} contains non-string key {inner_k!r}"
+                )
+            if not isinstance(v, list):
+                raise TypeError(
+                    f"{filename}:{key}:{outer_k}:{inner_k} value is not a list: {type(v).__name__}"
+                )
+            _check_strings(v, filename, f"{key}.{outer_k}.{inner_k}")
+    return dict(outer)

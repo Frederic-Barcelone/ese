@@ -74,6 +74,7 @@ from C_generators.C26_drug_fp_constants import (
     CONSUMER_DRUG_PATTERNS,
     CONSUMER_DRUG_VARIANTS,
 )
+from Z_utils.Z02_text_helpers import extract_context_window
 from Z_utils.Z12_data_loader import load_term_set
 
 # Optional scispacy import
@@ -486,19 +487,39 @@ class DrugDetector:
             else:
                 logger.debug("    • %-26s %8s  %s", name, "enabled", filename)
 
+    def extract(
+        self,
+        doc_graph: DocumentGraph,
+        biomedical_ner_result: Optional["BiomedicalNERResult"] = None,
+    ) -> List[DrugCandidate]:
+        """Extract drug mentions from the document.
+
+        Delegates to detect() for backward compatibility.
+        """
+        return self.detect(doc_graph, biomedical_ner_result)
+
     def detect(
         self,
         doc_graph: DocumentGraph,
         biomedical_ner_result: Optional["BiomedicalNERResult"] = None,
     ) -> List[DrugCandidate]:
-        """
-        Detect drug mentions in document.
+        """Detect drug mentions in document using nine prioritized detection layers.
+
+        Concatenates all document blocks into full text, then runs layers in order:
+        (1) Alexion specialized drugs, (2) compound ID regex patterns, (3) investigational
+        drugs, (4) FDA approved drugs, (5) RxNorm general terms, (6) consumer drug
+        variants/misspellings, (7) bioactive compounds (when enabled), (8) scispacy
+        NER with UMLS CHEMICAL semantic types, and (9) BiomedNER-All gap-filler with
+        lexicon verification. Each layer applies FP filtering. Results are deduplicated
+        with higher-priority sources preferred.
 
         Args:
-            doc_graph: Parsed document graph
-            biomedical_ner_result: Optional BiomedicalNERResult from E10
+            doc_graph: Parsed document graph.
+            biomedical_ner_result: Optional pre-computed BiomedicalNERResult from E10
+                for document-level gap-filling.
 
-        Returns list of DrugCandidate objects.
+        Returns:
+            Deduplicated list of DrugCandidate objects.
         """
         candidates: List[DrugCandidate] = []
         doc_fingerprint = getattr(
@@ -952,9 +973,7 @@ class DrugDetector:
 
     def _extract_context(self, text: str, start: int, end: int) -> str:
         """Extract context around a match."""
-        ctx_start = max(0, start - self.context_window // 2)
-        ctx_end = min(len(text), end + self.context_window // 2)
-        return text[ctx_start:ctx_end]
+        return extract_context_window(text, start, end, self.context_window)
 
     def _build_identifiers(self, drug_info: Dict) -> List[DrugIdentifier]:
         """Build identifier list from drug info."""

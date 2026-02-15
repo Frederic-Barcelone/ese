@@ -120,6 +120,40 @@ class ExtractionResult:
     citations: List[ExtractedCitation] = field(default_factory=list)
 
 
+@dataclass
+class _PipelineState:
+    """Mutable state passed between pipeline stages within process_pdf()."""
+
+    pdf_path: Path
+    doc_id: str
+    delay: float
+    metrics: PipelineMetrics
+    timer: StageTimer
+    printer: Any
+    # Populated by _parse_and_extract_text
+    doc: Any = None
+    output_dir: Optional[Path] = None
+    full_text: str = ""
+    full_text_with_pages: str = ""
+    # Populated by _run_abbreviation_pipeline
+    abbreviation_results: List[ExtractedEntity] = field(default_factory=list)
+    unique_candidates: List[Candidate] = field(default_factory=list)
+    counters: HeuristicsCounters = field(default_factory=HeuristicsCounters)
+    # Populated by _run_entity_extraction
+    disease_results: List[ExtractedDisease] = field(default_factory=list)
+    gene_results: List[ExtractedGene] = field(default_factory=list)
+    drug_results: List[ExtractedDrug] = field(default_factory=list)
+    pharma_results: List[ExtractedPharma] = field(default_factory=list)
+    author_results: List[ExtractedAuthor] = field(default_factory=list)
+    citation_results: List[ExtractedCitation] = field(default_factory=list)
+    # Populated by _run_supplementary_extraction
+    feasibility_results: List[Any] = field(default_factory=list)
+    care_pathway_results: List[CarePathway] = field(default_factory=list)
+    recommendation_results: List[RecommendationSet] = field(default_factory=list)
+    visual_result: Any = None
+    doc_metadata: Optional[DocumentMetadata] = None
+
+
 class Orchestrator:
     """
     Main pipeline orchestrator for clinical document metadata extraction.
@@ -664,50 +698,76 @@ class Orchestrator:
     def process_pdf(
         self, pdf_path: str | Path, batch_delay_ms: Optional[float] = None
     ) -> ExtractionResult:
-        """Process a single PDF through the full pipeline.
+        """Process a single PDF through the full 16-stage extraction pipeline.
 
-        Returns:
-            ExtractionResult with all extracted entities (abbreviations, diseases, genes, etc.)
+        Stages: parse -> abbreviations -> entities -> supplementary -> export.
         """
         delay: float = (
             batch_delay_ms
             if batch_delay_ms is not None
-            else (self.batch_delay_ms or 100.0)
+            else (self.batch_delay_ms or 100.0)  # Default 100ms inter-document delay to avoid API rate limiting
         )
 
         pdf_path_obj = Path(pdf_path)
         if not pdf_path_obj.exists():
             raise FileNotFoundError(f"PDF not found: {pdf_path}")
 
-        # Create metrics for this document (single source of truth)
         doc_id = str(pdf_path_obj.stem)
-        metrics = PipelineMetrics(run_id=self.run_id, doc_id=doc_id)
-
-        # Start usage tracking for this document
         self.usage_tracker.start_document(doc_id, pdf_path_obj.name)
 
-        # Initialize stage timer and printer
         timer = StageTimer()
         timer.start("total")
-        reset_printer()  # Reset step counter for new document
+        reset_printer()
         printer = get_printer(total_steps=16)
-
         printer.header(f"Processing: {pdf_path_obj.name}")
 
-        # Stage 1: Parse PDF
-        timer.start("1. PDF Parsing")
-        output_dir = self._get_output_dir(pdf_path_obj)
-        doc = self.abbreviation_pipeline.parse_pdf(pdf_path_obj, output_dir)
-        parse_time = timer.stop("1. PDF Parsing")
-        printer.time(parse_time)
+        state = _PipelineState(
+            pdf_path=pdf_path_obj,
+            doc_id=doc_id,
+            delay=delay,
+            metrics=PipelineMetrics(run_id=self.run_id, doc_id=doc_id),
+            timer=timer,
+            printer=printer,
+        )
 
-        # Export extracted text
-        self.export_manager.export_extracted_text(pdf_path_obj, doc)
+        # Stage 1: Parse PDF
+        self._parse_and_extract_text(state)
+
+        # Stages 2-4: Abbreviation extraction, filtering, validation, normalization
+        self._run_abbreviation_pipeline(state)
+
+        # Stages 5-10: Entity extraction + cross-entity filtering
+        self._run_entity_extraction(state)
+
+        # Stages 11-15: Feasibility, care pathways, recommendations, visuals, metadata
+        self._run_supplementary_extraction(state)
+
+        # Stage 16: Export, metrics, summary
+        result = self._finalize_and_export(state)
+
+        self.usage_tracker.finish_document(doc_id, status="completed")
+        timer.print_summary()
+
+        return result
+
+    # ------------------------------------------------------------------
+    # Pipeline stage methods (called by process_pdf)
+    # ------------------------------------------------------------------
+
+    def _parse_and_extract_text(self, s: _PipelineState) -> None:
+        """Stage 1: Parse PDF and build full text."""
+        s.timer.start("1. PDF Parsing")
+        s.output_dir = self._get_output_dir(s.pdf_path)
+        s.doc = self.abbreviation_pipeline.parse_pdf(s.pdf_path, s.output_dir)
+        parse_time = s.timer.stop("1. PDF Parsing")
+        s.printer.time(parse_time)
+
+        self.export_manager.export_extracted_text(s.pdf_path, s.doc)
 
         # Build full_text with page markers (needed for VLM page detection in recommendations)
-        text_lines = []
+        text_lines: List[str] = []
         current_page = None
-        for block in doc.iter_linear_blocks():
+        for block in s.doc.iter_linear_blocks():
             if block.page_num != current_page:
                 if current_page is not None:
                     text_lines.append("")
@@ -717,450 +777,345 @@ class Orchestrator:
             text = (block.text or "").strip()
             if text:
                 text_lines.append(text)
-        full_text_with_pages = "\n".join(text_lines)
-        full_text = full_text_with_pages  # Will be overwritten by abbreviation pipeline if enabled
+        s.full_text_with_pages = "\n".join(text_lines)
+        s.full_text = s.full_text_with_pages
 
-        # Stage 2-4: Abbreviation extraction
-        results: List[ExtractedEntity] = []
-        unique_candidates: List[Candidate] = []
-        counters = HeuristicsCounters()
+    def _run_abbreviation_pipeline(self, s: _PipelineState) -> None:
+        """Stages 2-4: Candidate generation, heuristic filtering, LLM validation, normalization."""
+        if not self.extract_abbreviations:
+            s.printer.skip("Abbreviation detection", "disabled in config")
+            return
 
-        if self.extract_abbreviations:
-            timer.start("2. Candidate Generation")
-            unique_candidates, full_text = self.abbreviation_pipeline.generate_candidates(doc)
-            # Abbreviation pipeline returns text without page markers, but we keep full_text_with_pages
-            gen_time = timer.stop("2. Candidate Generation")
-            printer.time(gen_time)
+        s.timer.start("2. Candidate Generation")
+        s.unique_candidates, s.full_text = self.abbreviation_pipeline.generate_candidates(s.doc)
+        gen_time = s.timer.stop("2. Candidate Generation")
+        s.printer.time(gen_time)
 
-            # Update generation metrics
-            metrics.generation.generated_candidates = len(unique_candidates)
-            metrics.generation.unique_short_forms = len({c.short_form.upper() for c in unique_candidates})
+        s.metrics.generation.generated_candidates = len(s.unique_candidates)
+        s.metrics.generation.unique_short_forms = len({c.short_form.upper() for c in s.unique_candidates})
 
-            if not self.use_llm_validation:
-                printer.skip("Abbreviation validation", "disabled")
-            else:
-                timer.start("2b. Filtering & Heuristics")
-
-                # Filter candidates
-                needs_validation, corroborated_sfs, word_counts, filtered_count, sf_form_rejected = (
-                    self.abbreviation_pipeline.filter_candidates(unique_candidates, full_text)
-                )
-
-                # Update generation metrics with filtered count
-                metrics.generation.filtered_lexicon_only = filtered_count
-
-                # Include sf_form_rejected from filter_candidates in counters
-                # These are candidates filtered by is_valid_sf_form() before apply_heuristics
-                counters.form_filter_rejected += sf_form_rejected
-
-                # Apply heuristics
-                auto_results, llm_candidates = self.abbreviation_pipeline.apply_heuristics(
-                    needs_validation, counters
-                )
-
-                # Update heuristics metrics from counters
-                auto_approved = len([e for _, e in auto_results if e.status == ValidationStatus.VALIDATED])
-                auto_rejected_total = (
-                    counters.blacklisted_fp_count +
-                    counters.context_rejected +
-                    counters.trial_id_excluded +
-                    counters.common_word_rejected +
-                    counters.form_filter_rejected
-                )
-                # total_processed includes sf_form_rejected since they were processed (filtered)
-                metrics.heuristics.total_processed = len(needs_validation) + sf_form_rejected
-                metrics.heuristics.auto_approved = auto_approved
-                metrics.heuristics.auto_rejected = auto_rejected_total
-                metrics.heuristics.sent_to_llm = len(llm_candidates)
-                metrics.heuristics.approved_by_stats_whitelist = counters.recovered_by_stats_whitelist
-                metrics.heuristics.approved_by_country_code = counters.recovered_by_country_code
-                metrics.heuristics.rejected_by_blacklist = counters.blacklisted_fp_count
-                metrics.heuristics.rejected_by_context = counters.context_rejected
-                metrics.heuristics.rejected_by_trial_id = counters.trial_id_excluded
-                metrics.heuristics.rejected_by_common_word = counters.common_word_rejected
-
-                timer.stop("2b. Filtering & Heuristics")
-
-                # Print stats
-                from A_core.A01_domain_models import GeneratorType
-                frequent_sfs = sum(
-                    1
-                    for c in unique_candidates
-                    if c.generator_type == GeneratorType.LEXICON_MATCH
-                    and c.short_form.upper() not in corroborated_sfs
-                    and word_counts.get(c.short_form.upper(), 0) >= 2
-                )
-
-                printer.step("Validating abbreviations with Claude...", step_num=3)
-                printer.detail_highlight("Corroborated SFs", str(len(corroborated_sfs)))
-                printer.detail_highlight("Frequent SFs (2+)", str(frequent_sfs))
-                printer.detail_highlight("Filtered (lexicon-only, rare)", str(filtered_count))
-                printer.detail_highlight("Auto-approved stats", str(counters.recovered_by_stats_whitelist))
-                printer.detail_highlight("Auto-approved country", str(counters.recovered_by_country_code))
-                printer.detail_highlight("Auto-rejected blacklist", str(counters.blacklisted_fp_count))
-                printer.detail_highlight("Auto-rejected context", str(counters.context_rejected))
-                printer.detail_highlight("Auto-rejected trial IDs", str(counters.trial_id_excluded))
-                printer.detail_highlight("Auto-rejected common words", str(counters.common_word_rejected))
-                printer.detail_highlight("Candidates for LLM", str(len(llm_candidates)))
-
-                timer.start("3. LLM Validation")
-
-                # Log auto results
-                for candidate, entity in auto_results:
-                    self.logger.log_validation(candidate, entity, entity.raw_llm_response, 0)
-                    results.append(entity)
-
-                # LLM validation
-                llm_results = self.abbreviation_pipeline.validate_with_llm(llm_candidates, delay)
-                results.extend(llm_results)
-
-                # Update validation metrics
-                llm_approved = sum(1 for r in llm_results if r.status == ValidationStatus.VALIDATED)
-                llm_rejected = sum(1 for r in llm_results if r.status == ValidationStatus.REJECTED)
-                llm_ambiguous = sum(1 for r in llm_results if r.status == ValidationStatus.AMBIGUOUS)
-                metrics.validation.total_validated = len(llm_results)
-                metrics.validation.llm_approved = llm_approved
-                metrics.validation.llm_rejected = llm_rejected
-                metrics.validation.llm_ambiguous = llm_ambiguous
-                metrics.validation.llm_calls = len(llm_candidates)
-
-                val_time = timer.stop("3. LLM Validation")
-                printer.time(val_time)
-
-                timer.start("3b. SF-Only Extraction")
-
-                # Search for missing abbreviations
-                found_sfs = {
-                    r.short_form.upper()
-                    for r in results
-                    if r.status == ValidationStatus.VALIDATED
-                }
-
-                search_results = self.abbreviation_pipeline.search_missing_abbreviations(
-                    doc_id, full_text, found_sfs, counters
-                )
-                results.extend(search_results)
-
-                # LLM SF-only extraction
-                sf_only_results = self.abbreviation_pipeline.extract_sf_only_with_llm(
-                    doc_id, full_text, found_sfs, counters, delay_ms=delay
-                )
-                results.extend(sf_only_results)
-
-                # Update SF-only metrics
-                metrics.validation.sf_only_extracted = len(search_results)
-                metrics.validation.sf_only_from_llm = len(sf_only_results)
-
-                timer.stop("3b. SF-Only Extraction")
-
-            # Normalize
-            timer.start("4. Normalization")
-            results = self.abbreviation_pipeline.normalize_results(results, full_text)
-            norm_time = timer.stop("4. Normalization")
-            printer.time(norm_time)
+        if not self.use_llm_validation:
+            s.printer.skip("Abbreviation validation", "disabled")
         else:
-            printer.skip("Abbreviation detection", "disabled in config")
+            self._run_abbreviation_validation(s)
 
-        # Stage 5-10: Entity extraction
+        # Normalize
+        s.timer.start("4. Normalization")
+        s.abbreviation_results = self.abbreviation_pipeline.normalize_results(
+            s.abbreviation_results, s.full_text
+        )
+        norm_time = s.timer.stop("4. Normalization")
+        s.printer.time(norm_time)
 
+    def _run_abbreviation_validation(self, s: _PipelineState) -> None:
+        """Stages 2b-3b: Filter, apply heuristics, LLM validate, SF-only extraction."""
+        s.timer.start("2b. Filtering & Heuristics")
+
+        needs_validation, corroborated_sfs, word_counts, filtered_count, sf_form_rejected = (
+            self.abbreviation_pipeline.filter_candidates(s.unique_candidates, s.full_text)
+        )
+        s.metrics.generation.filtered_lexicon_only = filtered_count
+        s.counters.form_filter_rejected += sf_form_rejected
+
+        auto_results, llm_candidates = self.abbreviation_pipeline.apply_heuristics(
+            needs_validation, s.counters
+        )
+
+        # Update heuristics metrics from counters
+        auto_approved = len([e for _, e in auto_results if e.status == ValidationStatus.VALIDATED])
+        auto_rejected_total = (
+            s.counters.blacklisted_fp_count +
+            s.counters.context_rejected +
+            s.counters.trial_id_excluded +
+            s.counters.common_word_rejected +
+            s.counters.form_filter_rejected
+        )
+        s.metrics.heuristics.total_processed = len(needs_validation) + sf_form_rejected
+        s.metrics.heuristics.auto_approved = auto_approved
+        s.metrics.heuristics.auto_rejected = auto_rejected_total
+        s.metrics.heuristics.sent_to_llm = len(llm_candidates)
+        s.metrics.heuristics.approved_by_stats_whitelist = s.counters.recovered_by_stats_whitelist
+        s.metrics.heuristics.approved_by_country_code = s.counters.recovered_by_country_code
+        s.metrics.heuristics.rejected_by_blacklist = s.counters.blacklisted_fp_count
+        s.metrics.heuristics.rejected_by_context = s.counters.context_rejected
+        s.metrics.heuristics.rejected_by_trial_id = s.counters.trial_id_excluded
+        s.metrics.heuristics.rejected_by_common_word = s.counters.common_word_rejected
+
+        s.timer.stop("2b. Filtering & Heuristics")
+
+        # Print stats
+        from A_core.A01_domain_models import GeneratorType
+        frequent_sfs = sum(
+            1
+            for c in s.unique_candidates
+            if c.generator_type == GeneratorType.LEXICON_MATCH
+            and c.short_form.upper() not in corroborated_sfs
+            and word_counts.get(c.short_form.upper(), 0) >= 2  # Threshold: SF appears 2+ times in doc
+        )
+
+        s.printer.step("Validating abbreviations with Claude...", step_num=3)
+        s.printer.detail_highlight("Corroborated SFs", str(len(corroborated_sfs)))
+        s.printer.detail_highlight("Frequent SFs (2+)", str(frequent_sfs))
+        s.printer.detail_highlight("Filtered (lexicon-only, rare)", str(filtered_count))
+        s.printer.detail_highlight("Auto-approved stats", str(s.counters.recovered_by_stats_whitelist))
+        s.printer.detail_highlight("Auto-approved country", str(s.counters.recovered_by_country_code))
+        s.printer.detail_highlight("Auto-rejected blacklist", str(s.counters.blacklisted_fp_count))
+        s.printer.detail_highlight("Auto-rejected context", str(s.counters.context_rejected))
+        s.printer.detail_highlight("Auto-rejected trial IDs", str(s.counters.trial_id_excluded))
+        s.printer.detail_highlight("Auto-rejected common words", str(s.counters.common_word_rejected))
+        s.printer.detail_highlight("Candidates for LLM", str(len(llm_candidates)))
+
+        s.timer.start("3. LLM Validation")
+
+        for candidate, entity in auto_results:
+            self.logger.log_validation(candidate, entity, entity.raw_llm_response, 0)
+            s.abbreviation_results.append(entity)
+
+        llm_results = self.abbreviation_pipeline.validate_with_llm(llm_candidates, s.delay)
+        s.abbreviation_results.extend(llm_results)
+
+        llm_approved = sum(1 for r in llm_results if r.status == ValidationStatus.VALIDATED)
+        llm_rejected = sum(1 for r in llm_results if r.status == ValidationStatus.REJECTED)
+        llm_ambiguous = sum(1 for r in llm_results if r.status == ValidationStatus.AMBIGUOUS)
+        s.metrics.validation.total_validated = len(llm_results)
+        s.metrics.validation.llm_approved = llm_approved
+        s.metrics.validation.llm_rejected = llm_rejected
+        s.metrics.validation.llm_ambiguous = llm_ambiguous
+        s.metrics.validation.llm_calls = len(llm_candidates)
+
+        val_time = s.timer.stop("3. LLM Validation")
+        s.printer.time(val_time)
+
+        # SF-only extraction for missing abbreviations
+        s.timer.start("3b. SF-Only Extraction")
+        found_sfs = {
+            r.short_form.upper()
+            for r in s.abbreviation_results
+            if r.status == ValidationStatus.VALIDATED
+        }
+
+        search_results = self.abbreviation_pipeline.search_missing_abbreviations(
+            s.doc_id, s.full_text, found_sfs, s.counters
+        )
+        s.abbreviation_results.extend(search_results)
+
+        sf_only_results = self.abbreviation_pipeline.extract_sf_only_with_llm(
+            s.doc_id, s.full_text, found_sfs, s.counters, delay_ms=s.delay
+        )
+        s.abbreviation_results.extend(sf_only_results)
+
+        s.metrics.validation.sf_only_extracted = len(search_results)
+        s.metrics.validation.sf_only_from_llm = len(sf_only_results)
+        s.timer.stop("3b. SF-Only Extraction")
+
+    def _run_entity_extraction(self, s: _PipelineState) -> None:
+        """Stages 5-10: Disease, gene, drug, pharma, author, citation detection + cross-entity filtering."""
         # Run BiomedNER-All once per document (shared by disease + drug detection)
         biomed_ner_result = None
         if self.biomedical_ner and (self.extract_diseases or self.extract_drugs):
             try:
                 plain_text = "\n\n".join(
-                    block.text for block in doc.iter_linear_blocks(skip_header_footer=True)
+                    block.text for block in s.doc.iter_linear_blocks(skip_header_footer=True)
                     if block.text
                 )
                 biomed_ner_result = self.biomedical_ner.extract(plain_text)
             except Exception as e:
                 logger.warning("BiomedNER extraction failed: %s", e)
 
-        disease_results: List[ExtractedDisease] = []
         if self.extract_diseases:
-            printer.step("Disease detection...", step_num=5)
-            timer.start("5. Disease Detection")
-            disease_results = self.entity_processor.process_diseases(
-                doc, pdf_path_obj, biomedical_ner_result=biomed_ner_result
+            s.printer.step("Disease detection...", step_num=5)
+            s.timer.start("5. Disease Detection")
+            s.disease_results = self.entity_processor.process_diseases(
+                s.doc, s.pdf_path, biomedical_ner_result=biomed_ner_result
             )
-            disease_time = timer.stop("5. Disease Detection")
-            printer.result("Diseases found", len(disease_results))
-            printer.time(disease_time)
+            disease_time = s.timer.stop("5. Disease Detection")
+            s.printer.result("Diseases found", len(s.disease_results))
+            s.printer.time(disease_time)
         else:
-            printer.skip("Disease detection", "disabled in config")
+            s.printer.skip("Disease detection", "disabled in config")
 
-        gene_results: List[ExtractedGene] = []
         if self.extract_genes:
-            printer.step("Gene detection...", step_num=6)
-            timer.start("6. Gene Detection")
-            gene_results = self.entity_processor.process_genes(doc, pdf_path_obj)
-            gene_time = timer.stop("6. Gene Detection")
-            printer.result("Genes found", len(gene_results))
-            printer.time(gene_time)
+            s.printer.step("Gene detection...", step_num=6)
+            s.timer.start("6. Gene Detection")
+            s.gene_results = self.entity_processor.process_genes(s.doc, s.pdf_path)
+            gene_time = s.timer.stop("6. Gene Detection")
+            s.printer.result("Genes found", len(s.gene_results))
+            s.printer.time(gene_time)
         else:
-            printer.skip("Gene detection", "disabled in config")
+            s.printer.skip("Gene detection", "disabled in config")
 
-        drug_results: List[ExtractedDrug] = []
         if self.extract_drugs:
-            printer.step("Drug detection...", step_num=7)
-            timer.start("7. Drug Detection")
-            drug_results = self.entity_processor.process_drugs(
-                doc, pdf_path_obj, biomedical_ner_result=biomed_ner_result
+            s.printer.step("Drug detection...", step_num=7)
+            s.timer.start("7. Drug Detection")
+            s.drug_results = self.entity_processor.process_drugs(
+                s.doc, s.pdf_path, biomedical_ner_result=biomed_ner_result
             )
-            drug_time = timer.stop("7. Drug Detection")
-            printer.result("Drugs found", len(drug_results))
-            printer.time(drug_time)
+            drug_time = s.timer.stop("7. Drug Detection")
+            s.printer.result("Drugs found", len(s.drug_results))
+            s.printer.time(drug_time)
         else:
-            printer.skip("Drug detection", "disabled in config")
+            s.printer.skip("Drug detection", "disabled in config")
 
-        pharma_results: List[ExtractedPharma] = []
         if self.extract_pharma:
-            printer.step("Pharma company detection...", step_num=8)
-            timer.start("8. Pharma Detection")
-            pharma_results = self.entity_processor.process_pharma(doc, pdf_path_obj)
-            pharma_time = timer.stop("8. Pharma Detection")
-            printer.result("Pharma companies found", len(pharma_results))
-            printer.time(pharma_time)
+            s.printer.step("Pharma company detection...", step_num=8)
+            s.timer.start("8. Pharma Detection")
+            s.pharma_results = self.entity_processor.process_pharma(s.doc, s.pdf_path)
+            pharma_time = s.timer.stop("8. Pharma Detection")
+            s.printer.result("Pharma companies found", len(s.pharma_results))
+            s.printer.time(pharma_time)
         else:
-            printer.skip("Pharma detection", "disabled in config")
+            s.printer.skip("Pharma detection", "disabled in config")
 
-        author_results: List[ExtractedAuthor] = []
         if self.extract_authors:
-            printer.step("Author detection...", step_num=9)
-            timer.start("9. Author Detection")
-            author_results = self.entity_processor.process_authors(doc, pdf_path_obj, full_text)
-            author_time = timer.stop("9. Author Detection")
-            printer.result("Authors found", len(author_results))
-            printer.time(author_time)
+            s.printer.step("Author detection...", step_num=9)
+            s.timer.start("9. Author Detection")
+            s.author_results = self.entity_processor.process_authors(s.doc, s.pdf_path, s.full_text)
+            author_time = s.timer.stop("9. Author Detection")
+            s.printer.result("Authors found", len(s.author_results))
+            s.printer.time(author_time)
         else:
-            printer.skip("Author detection", "disabled in config")
+            s.printer.skip("Author detection", "disabled in config")
 
-        citation_results: List[ExtractedCitation] = []
         if self.extract_citations:
-            printer.step("Citation detection...", step_num=10)
-            timer.start("10. Citation Detection")
-            citation_results = self.entity_processor.process_citations(doc, pdf_path_obj, full_text)
-            citation_time = timer.stop("10. Citation Detection")
-            printer.result("Citations found", len(citation_results))
-            printer.time(citation_time)
+            s.printer.step("Citation detection...", step_num=10)
+            s.timer.start("10. Citation Detection")
+            s.citation_results = self.entity_processor.process_citations(s.doc, s.pdf_path, s.full_text)
+            citation_time = s.timer.stop("10. Citation Detection")
+            s.printer.result("Citations found", len(s.citation_results))
+            s.printer.time(citation_time)
         else:
-            printer.skip("Citation detection", "disabled in config")
+            s.printer.skip("Citation detection", "disabled in config")
 
         # Cross-entity filtering: use abbreviation + author context to remove FPs
-        disease_results, drug_results, gene_results = self._cross_entity_filter(
-            disease_results, drug_results, gene_results,
-            results,  # abbreviation results
-            author_results,
+        s.disease_results, s.drug_results, s.gene_results = self._cross_entity_filter(
+            s.disease_results, s.drug_results, s.gene_results,
+            s.abbreviation_results,
+            s.author_results,
         )
 
         # Cross-entity correction: use disease abbreviations to fix abbreviation long forms
-        results = self._correct_abbrev_from_diseases(results, disease_results)
+        s.abbreviation_results = self._correct_abbrev_from_diseases(
+            s.abbreviation_results, s.disease_results
+        )
 
         # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only drugs
         if self.extract_drugs:
-            drug_results = self._recover_drugs_from_abbreviations(results, drug_results)
+            s.drug_results = self._recover_drugs_from_abbreviations(
+                s.abbreviation_results, s.drug_results
+            )
 
         # Cross-entity recovery: use abbreviation expansions to recover abbreviation-only diseases
         if self.extract_diseases:
-            disease_results = self._recover_diseases_from_abbreviations(
-                results, disease_results, gene_results,
+            s.disease_results = self._recover_diseases_from_abbreviations(
+                s.abbreviation_results, s.disease_results, s.gene_results,
             )
 
         # Static abbreviation lookup: recover entities from common medical abbreviations
         if self.extract_diseases or self.extract_drugs:
-            disease_results, drug_results = self._recover_entities_from_static_abbreviations(
-                full_text, disease_results, drug_results, results,
+            s.disease_results, s.drug_results = self._recover_entities_from_static_abbreviations(
+                s.full_text, s.disease_results, s.drug_results, s.abbreviation_results,
             )
 
         # LLM gap-fill: use Haiku to find entities missed by lexicon/NER
         if (self.extract_diseases or self.extract_drugs) and self.claude_client:
-            disease_results, drug_results = self._llm_gap_fill(
-                full_text, disease_results, drug_results,
+            s.disease_results, s.drug_results = self._llm_gap_fill(
+                s.full_text, s.disease_results, s.drug_results,
             )
 
-        # Stage 11: Feasibility extraction
-        feasibility_results: List[FeasibilityCandidate | NERCandidate] = []
+    def _run_supplementary_extraction(self, s: _PipelineState) -> None:
+        """Stages 11-15: Feasibility, care pathways, recommendations, visuals, metadata."""
         if self.extract_feasibility:
-            printer.step("Feasibility extraction...", step_num=11)
-            timer.start("11. Feasibility")
-            feasibility_results = self.feasibility_processor.process(doc, pdf_path_obj, full_text)
-            feas_time = timer.stop("11. Feasibility")
-            printer.result("Feasibility items", len(feasibility_results))
-            printer.time(feas_time)
+            s.printer.step("Feasibility extraction...", step_num=11)
+            s.timer.start("11. Feasibility")
+            s.feasibility_results = self.feasibility_processor.process(s.doc, s.pdf_path, s.full_text)
+            feas_time = s.timer.stop("11. Feasibility")
+            s.printer.result("Feasibility items", len(s.feasibility_results))
+            s.printer.time(feas_time)
         else:
-            printer.skip("Feasibility extraction", "disabled in config")
+            s.printer.skip("Feasibility extraction", "disabled in config")
 
-        # Stage 12: Care pathway extraction from flowchart figures
-        care_pathway_results: List[CarePathway] = []
         if self.extract_care_pathways and self.flowchart_extractor:
-            printer.step("Care pathway extraction...", step_num=12)
-            timer.start("12. Care Pathways")
-            care_pathway_results = self._extract_care_pathways(doc, pdf_path_obj)
-            pathway_time = timer.stop("12. Care Pathways")
-            printer.result("Care pathways", len(care_pathway_results))
-            printer.time(pathway_time)
+            s.printer.step("Care pathway extraction...", step_num=12)
+            s.timer.start("12. Care Pathways")
+            s.care_pathway_results = self._extract_care_pathways(s.doc, s.pdf_path)
+            pathway_time = s.timer.stop("12. Care Pathways")
+            s.printer.result("Care pathways", len(s.care_pathway_results))
+            s.printer.time(pathway_time)
         else:
-            printer.skip("Care pathway extraction", "disabled in config")
+            s.printer.skip("Care pathway extraction", "disabled in config")
 
-        # Stage 13: Guideline recommendation extraction
-        recommendation_results: List[RecommendationSet] = []
         if self.extract_recommendations and self.recommendation_extractor:
-            printer.step("Recommendation extraction...", step_num=13)
-            timer.start("13. Recommendations")
-            # Use full_text_with_pages for VLM page detection
-            recommendation_results = self._extract_recommendations(doc, pdf_path_obj, full_text_with_pages)
-            rec_time = timer.stop("13. Recommendations")
-            total_recs = sum(len(rs.recommendations) for rs in recommendation_results)
-            printer.result("Recommendation sets", len(recommendation_results))
-            printer.detail(f"Total recommendations: {total_recs}", indent=4)
-            printer.time(rec_time)
+            s.printer.step("Recommendation extraction...", step_num=13)
+            s.timer.start("13. Recommendations")
+            s.recommendation_results = self._extract_recommendations(s.doc, s.pdf_path, s.full_text_with_pages)
+            rec_time = s.timer.stop("13. Recommendations")
+            total_recs = sum(len(rs.recommendations) for rs in s.recommendation_results)
+            s.printer.result("Recommendation sets", len(s.recommendation_results))
+            s.printer.detail(f"Total recommendations: {total_recs}", indent=4)
+            s.printer.time(rec_time)
         else:
-            printer.skip("Recommendation extraction", "disabled in config")
+            s.printer.skip("Recommendation extraction", "disabled in config")
 
-        # Stage 14: Visual extraction (tables and figures as images)
-        visual_result = None
-        self._last_visual_result = None  # Store for summary printing
+        self._last_visual_result = None
         if (self.extract_tables or self.extract_figures) and self.visual_integration.enabled:
-            printer.step("Visual extraction (tables & figures)...", step_num=14)
-            timer.start("14. Visual Extraction")
+            s.printer.step("Visual extraction (tables & figures)...", step_num=14)
+            s.timer.start("14. Visual Extraction")
             try:
-                visual_result = self.visual_integration.extract(str(pdf_path_obj))
-                if visual_result:
-                    self._last_visual_result = visual_result
-                    printer.result("Visuals extracted", len(visual_result.visuals))
-                    printer.detail(f"Tables: {visual_result.tables_detected}, Figures: {visual_result.figures_detected}", indent=4)
+                s.visual_result = self.visual_integration.extract(str(s.pdf_path))
+                if s.visual_result:
+                    self._last_visual_result = s.visual_result
+                    s.printer.result("Visuals extracted", len(s.visual_result.visuals))
+                    s.printer.detail(f"Tables: {s.visual_result.tables_detected}, Figures: {s.visual_result.figures_detected}", indent=4)
             except Exception as e:
-                printer.warning(f"Visual extraction failed: {e}")
-            visual_time = timer.stop("14. Visual Extraction")
-            printer.time(visual_time)
+                s.printer.warning(f"Visual extraction failed: {e}")
+            visual_time = s.timer.stop("14. Visual Extraction")
+            s.printer.time(visual_time)
         else:
-            printer.skip("Visual extraction", "disabled in config")
+            s.printer.skip("Visual extraction", "disabled in config")
 
-        # Stage 15: Document metadata extraction
-        doc_metadata: Optional[DocumentMetadata] = None
         if self.extract_doc_metadata:
-            printer.step("Document metadata extraction...", step_num=15)
-            timer.start("15. Doc Metadata")
-            doc_metadata = self._process_document_metadata(
-                doc, pdf_path_obj, full_text[:5000]
+            s.printer.step("Document metadata extraction...", step_num=15)
+            s.timer.start("15. Doc Metadata")
+            s.doc_metadata = self._process_document_metadata(
+                s.doc, s.pdf_path, s.full_text[:5000]
             )
-            meta_time = timer.stop("15. Doc Metadata")
-            printer.time(meta_time)
+            meta_time = s.timer.stop("15. Doc Metadata")
+            s.printer.time(meta_time)
         else:
-            printer.skip("Document metadata", "disabled in config")
+            s.printer.skip("Document metadata", "disabled in config")
 
-        # Stage 16: Summary & Export
-        printer.step("Export & summary...", step_num=16)
-        timer.start("16. Export")
+    def _finalize_and_export(self, s: _PipelineState) -> ExtractionResult:
+        """Stage 16: Export all results, compute metrics, print summary."""
+        s.printer.step("Export & summary...", step_num=16)
+        s.timer.start("16. Export")
         self.logger.write_summary()
         self.logger.print_summary()
-        counters.log_summary()
+        s.counters.log_summary()
 
-        # Export abbreviation results (only if extraction was enabled)
-        if self.extract_abbreviations:
-            self.export_manager.export_results(
-                pdf_path_obj, results, unique_candidates, counters,
-                disease_results=disease_results if disease_results else None,
-                drug_results=drug_results if drug_results else None,
-                pharma_results=pharma_results if pharma_results else None,
-            )
-
-        if disease_results:
-            self.export_manager.export_disease_results(pdf_path_obj, disease_results)
-
-        if self.extract_genes:
-            self.export_manager.export_gene_results(pdf_path_obj, gene_results)
-
-        if drug_results:
-            self.export_manager.export_drug_results(pdf_path_obj, drug_results)
-
-        if pharma_results:
-            self.export_manager.export_pharma_results(pdf_path_obj, pharma_results)
-
-        if author_results:
-            self.export_manager.export_author_results(
-                pdf_path_obj, author_results, disease_results=disease_results
-            )
-
-        if citation_results:
-            self.export_manager.export_citation_results(pdf_path_obj, citation_results)
-
-        if feasibility_results:
-            feasibility_only = [
-                r for r in feasibility_results
-                if isinstance(r, FeasibilityCandidate)
-                or (isinstance(r, NERCandidate) and r.epidemiology_data is not None)
-            ]
-            self.export_manager.export_feasibility_results(pdf_path_obj, feasibility_only, doc)
-
-        # OLD image/table exports removed - using new visual pipeline instead
-
-        if doc_metadata:
-            top_entities = self._compute_top_entities(
-                disease_results, drug_results, gene_results
-            )
-            self.export_manager.export_document_metadata(
-                pdf_path_obj, doc_metadata, top_entities=top_entities
-            )
-
-        if care_pathway_results:
-            self.export_manager.export_care_pathways(pdf_path_obj, care_pathway_results)
-
-        if recommendation_results:
-            self.export_manager.export_recommendations(pdf_path_obj, recommendation_results)
-
-        if visual_result:
-            exported_paths = self.visual_integration.export(
-                visual_result,
-                output_dir,
-                doc_name=pdf_path_obj.stem,
-                save_images_as_files=True,
-            )
-            print(f"  Visual exports: {len(exported_paths)} files")
-
-        # Update export metrics
-        validated_count = sum(1 for r in results if r.status == ValidationStatus.VALIDATED)
-        rejected_count = sum(1 for r in results if r.status == ValidationStatus.REJECTED)
-        ambiguous_count = sum(1 for r in results if r.status == ValidationStatus.AMBIGUOUS)
-        metrics.export.validated = validated_count
-        metrics.export.rejected = rejected_count
-        metrics.export.ambiguous = ambiguous_count
-
-        # Entity type breakdown for export metrics
-        if disease_results:
-            metrics.export.by_entity_type["disease"] = sum(
-                1 for d in disease_results if d.status == ValidationStatus.VALIDATED
-            )
-        if gene_results:
-            metrics.export.by_entity_type["gene"] = sum(
-                1 for g in gene_results if g.status == ValidationStatus.VALIDATED
-            )
-        if drug_results:
-            metrics.export.by_entity_type["drug"] = sum(
-                1 for d in drug_results if d.status == ValidationStatus.VALIDATED
-            )
+        self._export_all_results(s)
+        self._update_export_metrics(s)
 
         # Validate metrics invariants
-        invariant_errors = metrics.validate_invariants()
+        invariant_errors = s.metrics.validate_invariants()
         if invariant_errors:
             self._logger.warning(f"Metrics invariant violations: {invariant_errors}")
             for err in invariant_errors:
                 print(f"  [WARN] Metrics: {err}")
 
         # Print metrics summary
-        print(f"\nPIPELINE METRICS ({doc_id}):")
-        print(f"  Generated:      {metrics.generation.generated_candidates}")
-        print(f"  Auto-approved:  {metrics.heuristics.auto_approved}")
-        print(f"  Auto-rejected:  {metrics.heuristics.auto_rejected}")
-        print(f"  Sent to LLM:    {metrics.heuristics.sent_to_llm}")
-        print(f"  LLM approved:   {metrics.validation.llm_approved}")
-        print(f"  LLM rejected:   {metrics.validation.llm_rejected}")
-        print(f"  Exported:       {metrics.export.validated} validated / {metrics.export.rejected} rejected")
+        print(f"\nPIPELINE METRICS ({s.doc_id}):")
+        print(f"  Generated:      {s.metrics.generation.generated_candidates}")
+        print(f"  Auto-approved:  {s.metrics.heuristics.auto_approved}")
+        print(f"  Auto-rejected:  {s.metrics.heuristics.auto_rejected}")
+        print(f"  Sent to LLM:    {s.metrics.heuristics.sent_to_llm}")
+        print(f"  LLM approved:   {s.metrics.validation.llm_approved}")
+        print(f"  LLM rejected:   {s.metrics.validation.llm_rejected}")
+        print(f"  Exported:       {s.metrics.export.validated} validated / {s.metrics.export.rejected} rejected")
 
-        # Print validated results summary (only for enabled extractors)
         self._print_validated_summary(
-            results, disease_results, gene_results, drug_results,
-            pharma_results, feasibility_results, doc_metadata,
-            care_pathway_results, recommendation_results,
+            s.abbreviation_results, s.disease_results, s.gene_results, s.drug_results,
+            s.pharma_results, s.feasibility_results, s.doc_metadata,
+            s.care_pathway_results, s.recommendation_results,
             extract_diseases=self.extract_diseases,
             extract_genes=self.extract_genes,
             extract_drugs=self.extract_drugs,
@@ -1170,33 +1125,108 @@ class Orchestrator:
             extract_recommendations=self.extract_recommendations,
         )
 
-        # Stop export timer and total timer
-        timer.stop("16. Export")
-        timer.stop("total")
+        s.timer.stop("16. Export")
+        s.timer.stop("total")
 
-        # Log usage statistics for this document
         self._log_usage_stats(
-            doc_id, results, disease_results, gene_results, drug_results,
-            pharma_results, author_results, citation_results, feasibility_results
+            s.doc_id, s.abbreviation_results, s.disease_results, s.gene_results,
+            s.drug_results, s.pharma_results, s.author_results, s.citation_results,
+            s.feasibility_results,
         )
-
-        # Log LLM token usage for this document
-        self._log_llm_usage(doc_id)
-
-        self.usage_tracker.finish_document(doc_id, status="completed")
-
-        # Print timing summary
-        timer.print_summary()
+        self._log_llm_usage(s.doc_id)
 
         return ExtractionResult(
-            abbreviations=results,
-            diseases=disease_results or [],
-            genes=gene_results or [],
-            drugs=drug_results or [],
-            pharma=pharma_results or [],
-            authors=author_results or [],
-            citations=citation_results or [],
+            abbreviations=s.abbreviation_results,
+            diseases=s.disease_results or [],
+            genes=s.gene_results or [],
+            drugs=s.drug_results or [],
+            pharma=s.pharma_results or [],
+            authors=s.author_results or [],
+            citations=s.citation_results or [],
         )
+
+    def _export_all_results(self, s: _PipelineState) -> None:
+        """Export all extraction results to JSON files."""
+        if self.extract_abbreviations:
+            self.export_manager.export_results(
+                s.pdf_path, s.abbreviation_results, s.unique_candidates, s.counters,
+                disease_results=s.disease_results if s.disease_results else None,
+                drug_results=s.drug_results if s.drug_results else None,
+                pharma_results=s.pharma_results if s.pharma_results else None,
+            )
+
+        if s.disease_results:
+            self.export_manager.export_disease_results(s.pdf_path, s.disease_results)
+
+        if self.extract_genes:
+            self.export_manager.export_gene_results(s.pdf_path, s.gene_results)
+
+        if s.drug_results:
+            self.export_manager.export_drug_results(s.pdf_path, s.drug_results)
+
+        if s.pharma_results:
+            self.export_manager.export_pharma_results(s.pdf_path, s.pharma_results)
+
+        if s.author_results:
+            self.export_manager.export_author_results(
+                s.pdf_path, s.author_results, disease_results=s.disease_results
+            )
+
+        if s.citation_results:
+            self.export_manager.export_citation_results(s.pdf_path, s.citation_results)
+
+        if s.feasibility_results:
+            feasibility_only = [
+                r for r in s.feasibility_results
+                if isinstance(r, FeasibilityCandidate)
+                or (isinstance(r, NERCandidate) and r.epidemiology_data is not None)
+            ]
+            self.export_manager.export_feasibility_results(s.pdf_path, feasibility_only, s.doc)
+
+        if s.doc_metadata:
+            top_entities = self._compute_top_entities(
+                s.disease_results, s.drug_results, s.gene_results
+            )
+            self.export_manager.export_document_metadata(
+                s.pdf_path, s.doc_metadata, top_entities=top_entities
+            )
+
+        if s.care_pathway_results:
+            self.export_manager.export_care_pathways(s.pdf_path, s.care_pathway_results)
+
+        if s.recommendation_results:
+            self.export_manager.export_recommendations(s.pdf_path, s.recommendation_results)
+
+        if s.visual_result:
+            exported_paths = self.visual_integration.export(
+                s.visual_result,
+                s.output_dir,
+                doc_name=s.pdf_path.stem,
+                save_images_as_files=True,
+            )
+            print(f"  Visual exports: {len(exported_paths)} files")
+
+    def _update_export_metrics(self, s: _PipelineState) -> None:
+        """Update metrics with export counts."""
+        validated_count = sum(1 for r in s.abbreviation_results if r.status == ValidationStatus.VALIDATED)
+        rejected_count = sum(1 for r in s.abbreviation_results if r.status == ValidationStatus.REJECTED)
+        ambiguous_count = sum(1 for r in s.abbreviation_results if r.status == ValidationStatus.AMBIGUOUS)
+        s.metrics.export.validated = validated_count
+        s.metrics.export.rejected = rejected_count
+        s.metrics.export.ambiguous = ambiguous_count
+
+        if s.disease_results:
+            s.metrics.export.by_entity_type["disease"] = sum(
+                1 for d in s.disease_results if d.status == ValidationStatus.VALIDATED
+            )
+        if s.gene_results:
+            s.metrics.export.by_entity_type["gene"] = sum(
+                1 for g in s.gene_results if g.status == ValidationStatus.VALIDATED
+            )
+        if s.drug_results:
+            s.metrics.export.by_entity_type["drug"] = sum(
+                1 for d in s.drug_results if d.status == ValidationStatus.VALIDATED
+            )
 
     def _process_document_metadata(
         self, doc, pdf_path: Path, content_sample: str
@@ -2384,7 +2414,20 @@ class Orchestrator:
     def process_folder(
         self, folder_path: Optional[str] = None, batch_delay_ms: float = 100
     ) -> Dict[str, ExtractionResult]:
-        """Process all PDFs in a folder."""
+        """Process all PDFs in a folder through the extraction pipeline.
+
+        Iterates over every ``*.pdf`` in the target folder, calling
+        ``process_pdf`` for each. Failed documents are logged and returned
+        as empty ``ExtractionResult`` instances so the batch always completes.
+
+        Args:
+            folder_path: Directory containing PDFs. Falls back to the
+                configured ``self.pdf_dir`` when *None*.
+            batch_delay_ms: Inter-document API rate-limit delay in milliseconds.
+
+        Returns:
+            Mapping of PDF filename to its ``ExtractionResult``.
+        """
         folder = Path(folder_path or self.pdf_dir)
         if not folder.exists():
             raise FileNotFoundError(f"Folder not found: {folder}")

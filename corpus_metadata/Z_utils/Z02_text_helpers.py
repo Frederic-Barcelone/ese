@@ -273,8 +273,26 @@ def score_lf_quality(
     return score
 
 
+def extract_context_window(text: str, start: int, end: int, window: int = 300) -> str:
+    """Extract a symmetric text window centered on [start:end].
+
+    Args:
+        text: Full document text
+        start: Start character index of the match
+        end: End character index of the match
+        window: Total window size (half applied to each side)
+
+    Returns:
+        Substring of text around the match
+    """
+    ctx_start = max(0, start - window // 2)
+    ctx_end = min(len(text), end + window // 2)
+    return text[ctx_start:ctx_end]
+
+
 __all__ = [
     "extract_context_snippet",
+    "extract_context_window",
     "normalize_lf_for_dedup",
     "has_numeric_evidence",
     "is_valid_sf_form",

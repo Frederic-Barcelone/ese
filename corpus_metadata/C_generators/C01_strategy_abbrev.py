@@ -164,9 +164,17 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
     @property
     def generator_type(self) -> GeneratorType:
+        """Return the generator type identifier for syntax-based abbreviation extraction."""
         return GeneratorType.SYNTAX_PATTERN
 
     def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
+        """Extract abbreviation candidates from the document using multiple strategies.
+
+        Iterates over document blocks applying five extraction strategies in order:
+        parenthetical (A/B), implicit phrasing (C), inline definitions (D), and
+        comma-separated definitions (E). Carries over trailing text between blocks
+        to detect abbreviations that span block boundaries. Also scans image captions.
+        """
         doc = doc_structure
         out: List[Candidate] = []
         seen: Set[Tuple[str, str, str]] = set()
@@ -174,7 +182,6 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
         prev_tail = ""
 
         for block in doc.iter_linear_blocks(skip_header_footer=True):
-            # Avoid extracting inside section headers; keep those for context elsewhere
             if block.role == ContentRole.SECTION_HEADER:
                 prev_tail = _clean_ws(block.text)[-self.carryover_chars :]
                 continue
@@ -188,299 +195,243 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                 (prev_tail + " " + text_block).strip() if prev_tail else text_block
             )
 
-            added_this_block = 0
+            budget = self.max_candidates_per_block
+            budget -= self._extract_parenthetical(doc, block, combined, seen, out, budget)
+            budget -= self._extract_implicit_phrasing(doc, block, text_block, seen, out, budget)
+            budget -= self._extract_inline_definitions(doc, block, text_block, seen, out, budget)
+            self._extract_comma_definitions(doc, block, text_block, seen, out, budget)
 
-            # -------------------------
-            # Strategy A/B: Parentheses explicit
-            # -------------------------
-            for m in self.parens_any.finditer(combined):
-                if added_this_block >= self.max_candidates_per_block:
+            prev_tail = (
+                combined[-self.carryover_chars :] if self.carryover_chars > 0 else ""
+            )
+
+        self._extract_from_captions(doc, seen, out)
+        return out
+
+    # ------------------------------------------------------------------
+    # Extraction strategy methods (called by extract)
+    # ------------------------------------------------------------------
+
+    def _extract_parenthetical(
+        self, doc: DocumentGraph, block: Any, combined: str,
+        seen: Set[Tuple[str, str, str]], out: List[Candidate], budget: int,
+    ) -> int:
+        """Strategy A/B: Extract from parenthetical patterns like 'LF (SF)' and 'SF (LF)'."""
+        added = 0
+        for m in self.parens_any.finditer(combined):
+            if added >= budget:
+                break
+
+            inside = _clean_ws(m.group(1))
+            if not inside:
+                continue
+
+            if _looks_like_short_form(inside, self.min_sf_length, self.max_sf_length):
+                sf = inside
+                preceding = combined[: m.start()]
+
+                if _is_likely_author_initial(sf, combined):
+                    continue
+
+                lf = _schwartz_hearst_extract(sf, preceding)
+                if not lf and " " in sf:
+                    lf = _space_sf_extract(sf, preceding)
+                if not lf:
+                    lf = _extract_preceding_name(sf, preceding)
+                if not lf:
+                    continue
+
+                key = (doc.doc_id, sf.upper(), lf.lower())
+                if key in seen:
+                    continue
+                seen.add(key)
+
+                method = "explicit_lf_sf" if " " not in sf else "explicit_space_sf"
+                out.append(
+                    self._make_candidate(
+                        doc, block, sf, lf, combined,
+                        m.start(), m.end(),
+                        method=method,
+                        confidence=0.95 if " " in sf else 0.98,
+                    )
+                )
+                added += 1
+                continue
+
+            # Reversed: inside parens is LF, preceding token is SF
+            lf_candidate = inside
+            preceding = combined[: m.start()].rstrip()
+            prev_token_match = re.search(
+                r"([A-Za-z0-9\-\+/().]{2,15})\s*$", preceding
+            )
+            if not prev_token_match:
+                continue
+            sf_candidate = prev_token_match.group(1)
+
+            if not _looks_like_short_form(sf_candidate, self.min_sf_length, self.max_sf_length):
+                continue
+            if _is_likely_author_initial(sf_candidate, combined):
+                continue
+
+            lf_clean = _truncate_at_breaks(lf_candidate)
+            if not lf_clean:
+                continue
+            if not _validate_sf_in_lf(sf_candidate, lf_clean):
+                continue
+
+            key = (doc.doc_id, sf_candidate.upper(), lf_clean.lower())
+            if key in seen:
+                continue
+            seen.add(key)
+
+            out.append(
+                self._make_candidate(
+                    doc, block, sf_candidate, lf_clean, combined,
+                    m.start(), m.end(),
+                    method="explicit_sf_lf", confidence=0.96,
+                )
+            )
+            added += 1
+        return added
+
+    def _extract_implicit_phrasing(
+        self, doc: DocumentGraph, block: Any, text_block: str,
+        seen: Set[Tuple[str, str, str]], out: List[Candidate], budget: int,
+    ) -> int:
+        """Strategy C: Extract from implicit phrasing like 'also known as', 'defined as'."""
+        added = 0
+        for pat in self.implicit_patterns:
+            if added >= budget:
+                break
+            for m in pat.finditer(text_block):
+                if added >= budget:
                     break
 
-                inside = _clean_ws(m.group(1))
-                if not inside:
+                sf = _clean_ws(m.group(1))
+                raw_lf = _clean_ws(m.group(2))
+
+                if not _looks_like_short_form(sf, self.min_sf_length, self.max_sf_length):
+                    continue
+                if _is_likely_author_initial(sf, text_block):
                     continue
 
-                # Prefer the content inside parens as SF if it looks like SF
-                if _looks_like_short_form(
-                    inside, self.min_sf_length, self.max_sf_length
-                ):
-                    sf = inside
-                    preceding = combined[: m.start()]
-
-                    # Skip author initials (e.g., "BH", "JM" in author lists)
-                    if _is_likely_author_initial(sf, combined):
-                        continue
-
-                    # Try Schwartz-Hearst first (works for single-token SFs)
-                    lf = _schwartz_hearst_extract(sf, preceding)
-
-                    # Fallback for space-separated SFs like "CC BY"
-                    if not lf and " " in sf:
-                        lf = _space_sf_extract(sf, preceding)
-
-                    # HIGH PRIORITY FIX: Handle compound IDs like "iptacopan (LNP023)"
-                    # where the code doesn't spell out the drug name
-                    if not lf:
-                        lf = _extract_preceding_name(sf, preceding)
-
-                    if not lf:
-                        continue
-
-                    key = (doc.doc_id, sf.upper(), lf.lower())
-                    if key in seen:
-                        continue
-                    seen.add(key)
-
-                    method = "explicit_lf_sf" if " " not in sf else "explicit_space_sf"
-                    out.append(
-                        self._make_candidate(
-                            doc,
-                            block,
-                            sf,
-                            lf,
-                            combined,
-                            m.start(),
-                            m.end(),
-                            method=method,
-                            confidence=0.95 if " " in sf else 0.98,
-                        )
-                    )
-                    added_this_block += 1
+                lf = _truncate_at_breaks(raw_lf)
+                if not lf:
+                    continue
+                if not _validate_sf_in_lf(sf, lf):
                     continue
 
-                # Otherwise, treat as possible LF and look for a preceding SF token
-                lf_candidate = inside
-                preceding = combined[: m.start()].rstrip()
-
-                # Grab last token before "(" as SF
-                prev_token_match = re.search(
-                    r"([A-Za-z0-9\-\+/().]{2,15})\s*$", preceding
-                )
-                if not prev_token_match:
-                    continue
-                sf_candidate = prev_token_match.group(1)
-
-                if not _looks_like_short_form(
-                    sf_candidate, self.min_sf_length, self.max_sf_length
-                ):
-                    continue
-
-                # Skip author initials (e.g., "BH", "JM" in author lists)
-                if _is_likely_author_initial(sf_candidate, combined):
-                    continue
-
-                lf_clean = _truncate_at_breaks(lf_candidate)
-                if not lf_clean:
-                    continue
-
-                if not _validate_sf_in_lf(sf_candidate, lf_clean):
-                    continue
-
-                key = (doc.doc_id, sf_candidate.upper(), lf_clean.lower())
+                key = (doc.doc_id, sf.upper(), lf.lower())
                 if key in seen:
                     continue
                 seen.add(key)
 
                 out.append(
                     self._make_candidate(
-                        doc,
-                        block,
-                        sf_candidate,
-                        lf_clean,
-                        combined,
-                        m.start(),
-                        m.end(),
-                        method="explicit_sf_lf",
-                        confidence=0.96,
+                        doc, block, sf, lf, text_block,
+                        m.start(), m.end(),
+                        method="implicit_phrasing", confidence=0.90,
                     )
                 )
-                added_this_block += 1
+                added += 1
+        return added
 
-            # -------------------------
-            # Strategy C: Implicit phrasing
-            # -------------------------
-            for pat in self.implicit_patterns:
-                if added_this_block >= self.max_candidates_per_block:
+    def _extract_inline_definitions(
+        self, doc: DocumentGraph, block: Any, text_block: str,
+        seen: Set[Tuple[str, str, str]], out: List[Candidate], budget: int,
+    ) -> int:
+        """Strategy D: Extract from inline definitions like 'SF=LF' or 'SF: LF'."""
+        added = 0
+        noise_patterns = [
+            "sponsored by", "workshop", "scientific", "facts",
+            "uncertainties", "study", "trial", "published",
+        ]
+        for pat in self.inline_definition_patterns:
+            if added >= budget:
+                break
+            for m in pat.finditer(text_block):
+                if added >= budget:
                     break
 
-                for m in pat.finditer(
-                    text_block
-                ):  # use block text for implicit; avoids cross-block weirdness
-                    if added_this_block >= self.max_candidates_per_block:
-                        break
+                sf = _clean_ws(m.group(1))
+                lf = _clean_ws(m.group(2))
 
-                    sf = _clean_ws(m.group(1))
-                    raw_lf = _clean_ws(m.group(2))
+                if not _looks_like_short_form(sf, self.min_sf_length, self.max_sf_length):
+                    continue
+                if _is_likely_author_initial(sf, text_block):
+                    continue
+                if not lf or len(lf) < 4:
+                    continue
+                if lf.isupper():
+                    continue
 
-                    if not _looks_like_short_form(
-                        sf, self.min_sf_length, self.max_sf_length
-                    ):
-                        continue
+                lf_lower = lf.lower()
+                if any(noise in lf_lower for noise in noise_patterns):
+                    continue
+                if len(lf) > 40:
+                    continue
 
-                    # Skip author initials (e.g., "BH", "JM" in author lists)
-                    if _is_likely_author_initial(sf, text_block):
-                        continue
+                key = (doc.doc_id, sf.upper(), lf.lower())
+                if key in seen:
+                    continue
+                seen.add(key)
 
-                    lf = _truncate_at_breaks(raw_lf)
-                    if not lf:
-                        continue
-
-                    # validate implicit LF (prevents greedy junk)
-                    if not _validate_sf_in_lf(sf, lf):
-                        continue
-
-                    key = (doc.doc_id, sf.upper(), lf.lower())
-                    if key in seen:
-                        continue
-                    seen.add(key)
-
-                    out.append(
-                        self._make_candidate(
-                            doc,
-                            block,
-                            sf,
-                            lf,
-                            text_block,
-                            m.start(),
-                            m.end(),
-                            method="implicit_phrasing",
-                            confidence=0.90,
-                        )
+                out.append(
+                    self._make_candidate(
+                        doc, block, sf, lf, text_block,
+                        m.start(), m.end(),
+                        method="inline_definition", confidence=0.97,
                     )
-                    added_this_block += 1
+                )
+                added += 1
+        return added
 
-            # -------------------------
-            # Strategy D: Inline definitions (SF=LF or SF: LF)
-            # HIGH PRIORITY: Catches "RR=relative reduction" patterns
-            # -------------------------
-            for pat in self.inline_definition_patterns:
-                if added_this_block >= self.max_candidates_per_block:
+    def _extract_comma_definitions(
+        self, doc: DocumentGraph, block: Any, text_block: str,
+        seen: Set[Tuple[str, str, str]], out: List[Candidate], budget: int,
+    ) -> int:
+        """Strategy E: Extract from comma-separated definitions like 'SF, Long Form'."""
+        added = 0
+        for pat in self.comma_definition_patterns:
+            if added >= budget:
+                break
+            for m in pat.finditer(text_block):
+                if added >= budget:
                     break
 
-                for m in pat.finditer(text_block):
-                    if added_this_block >= self.max_candidates_per_block:
-                        break
+                sf = _clean_ws(m.group(1))
+                lf = _clean_ws(m.group(2))
 
-                    sf = _clean_ws(m.group(1))
-                    lf = _clean_ws(m.group(2))
+                if not _looks_like_short_form(sf, self.min_sf_length, self.max_sf_length):
+                    continue
+                if _is_likely_author_initial(sf, text_block):
+                    continue
+                if not lf or len(lf) < 4:
+                    continue
+                if lf.isupper():
+                    continue
+                if len(lf) > 50:
+                    continue
 
-                    if not _looks_like_short_form(
-                        sf, self.min_sf_length, self.max_sf_length
-                    ):
-                        continue
+                key = (doc.doc_id, sf.upper(), lf.lower())
+                if key in seen:
+                    continue
+                seen.add(key)
 
-                    # Skip author initials (e.g., "BH", "JM" in author lists)
-                    if _is_likely_author_initial(sf, text_block):
-                        continue
-
-                    # LF should be lowercase phrase (not another abbreviation)
-                    if not lf or len(lf) < 4:
-                        continue
-
-                    # Skip if LF is all uppercase (likely another abbreviation)
-                    if lf.isupper():
-                        continue
-
-                    # Skip if LF contains common noise patterns
-                    noise_patterns = [
-                        "sponsored by", "workshop", "scientific", "facts",
-                        "uncertainties", "study", "trial", "published",
-                    ]
-                    lf_lower = lf.lower()
-                    if any(noise in lf_lower for noise in noise_patterns):
-                        continue
-
-                    # Skip if LF is too long (likely noise)
-                    if len(lf) > 40:
-                        continue
-
-                    key = (doc.doc_id, sf.upper(), lf.lower())
-                    if key in seen:
-                        continue
-                    seen.add(key)
-
-                    out.append(
-                        self._make_candidate(
-                            doc,
-                            block,
-                            sf,
-                            lf,
-                            text_block,
-                            m.start(),
-                            m.end(),
-                            method="inline_definition",
-                            confidence=0.97,  # High confidence - explicit definition
-                        )
+                out.append(
+                    self._make_candidate(
+                        doc, block, sf, lf, text_block,
+                        m.start(), m.end(),
+                        method="comma_definition", confidence=0.92,
                     )
-                    added_this_block += 1
+                )
+                added += 1
+        return added
 
-            # -------------------------
-            # Strategy E: Comma-separated definitions (SF, Long Form)
-            # HIGH PRIORITY: Catches "LOA, Level of Agreement" patterns in tables/legends
-            # -------------------------
-            for pat in self.comma_definition_patterns:
-                if added_this_block >= self.max_candidates_per_block:
-                    break
-
-                for m in pat.finditer(text_block):
-                    if added_this_block >= self.max_candidates_per_block:
-                        break
-
-                    sf = _clean_ws(m.group(1))
-                    lf = _clean_ws(m.group(2))
-
-                    if not _looks_like_short_form(
-                        sf, self.min_sf_length, self.max_sf_length
-                    ):
-                        continue
-
-                    # Skip author initials
-                    if _is_likely_author_initial(sf, text_block):
-                        continue
-
-                    # LF should be a proper phrase (not another abbreviation)
-                    if not lf or len(lf) < 4:
-                        continue
-
-                    # Skip if LF is all uppercase (likely another abbreviation)
-                    if lf.isupper():
-                        continue
-
-                    # Skip if LF is too long (likely noise)
-                    if len(lf) > 50:
-                        continue
-
-                    key = (doc.doc_id, sf.upper(), lf.lower())
-                    if key in seen:
-                        continue
-                    seen.add(key)
-
-                    out.append(
-                        self._make_candidate(
-                            doc,
-                            block,
-                            sf,
-                            lf,
-                            text_block,
-                            m.start(),
-                            m.end(),
-                            method="comma_definition",
-                            confidence=0.92,  # Slightly lower - comma patterns can be ambiguous
-                        )
-                    )
-                    added_this_block += 1
-
-            # update tail for cross-block continuity
-            prev_tail = (
-                combined[-self.carryover_chars :] if self.carryover_chars > 0 else ""
-            )
-
-        # -------------------------
-        # Strategy F: Image/Figure Captions
-        # Process captions from ImageBlocks which are NOT included in iter_linear_blocks
-        # This catches patterns like "RR = relative reduction" in figure captions
-        # -------------------------
+    def _extract_from_captions(
+        self, doc: DocumentGraph, seen: Set[Tuple[str, str, str]], out: List[Candidate],
+    ) -> None:
+        """Strategy F: Extract from image/figure captions."""
         for img in doc.iter_images():
             caption = img.caption
             if not caption:
@@ -490,21 +441,13 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
             if not caption_text or len(caption_text) < 10:
                 continue
 
-            # Apply inline definition patterns (SF=LF, SF: LF) to captions
-            # These are common in figure/table legends
             for pat in self.inline_definition_patterns:
                 for m in pat.finditer(caption_text):
                     sf = m.group(1).strip()
                     lf = m.group(2).strip()
-
-                    if not sf or not lf:
+                    if not sf or not lf or len(lf) > 60:
                         continue
 
-                    # Skip if LF is too long
-                    if len(lf) > 60:
-                        continue
-
-                    # Clean long form
                     lf = _normalize_long_form(lf)
                     if not lf or len(lf) < 3:
                         continue
@@ -516,28 +459,17 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
                     out.append(
                         self._make_candidate_from_image(
-                            doc,
-                            img,
-                            sf,
-                            lf,
-                            caption_text,
-                            m.start(),
-                            m.end(),
-                            method="caption_inline_definition",
-                            confidence=0.95,  # High confidence - explicit definition in caption
+                            doc, img, sf, lf, caption_text,
+                            m.start(), m.end(),
+                            method="caption_inline_definition", confidence=0.95,
                         )
                     )
 
-            # Also apply comma definition patterns to captions
             for pat in self.comma_definition_patterns:
                 for m in pat.finditer(caption_text):
                     sf = m.group(1).strip()
                     lf = m.group(2).strip()
-
-                    if not sf or not lf:
-                        continue
-
-                    if len(lf) > 60:
+                    if not sf or not lf or len(lf) > 60:
                         continue
 
                     lf = _normalize_long_form(lf)
@@ -551,19 +483,11 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
 
                     out.append(
                         self._make_candidate_from_image(
-                            doc,
-                            img,
-                            sf,
-                            lf,
-                            caption_text,
-                            m.start(),
-                            m.end(),
-                            method="caption_comma_definition",
-                            confidence=0.92,
+                            doc, img, sf, lf, caption_text,
+                            m.start(), m.end(),
+                            method="caption_comma_definition", confidence=0.92,
                         )
                     )
-
-        return out
 
     def _make_candidate(
         self,

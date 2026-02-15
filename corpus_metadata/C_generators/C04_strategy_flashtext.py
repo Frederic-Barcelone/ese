@@ -283,9 +283,18 @@ class RegexLexiconGenerator(
 
     @property
     def generator_type(self) -> GeneratorType:
+        """Return the generator type identifier for lexicon-based matching."""
         return GeneratorType.LEXICON_MATCH
 
     def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
+        """Extract abbreviation and entity candidates using lexicon and NER matching.
+
+        Runs four extraction passes per document: (1) regex-based abbreviation
+        matching against loaded lexicons, (2) FlashText exact matching for disease
+        and entity terms, (3) batch scispacy NER with UMLS linking, and
+        (4) regex-based inline definition detection. Deduplicates across all passes
+        by (SF_upper, LF_lower) key.
+        """
         doc = doc_structure  # Alias for readability
         out: List[Candidate] = []
         seen: Set[Tuple[str, str]] = set()  # (SF_upper, LF_lower) dedup
@@ -401,169 +410,42 @@ class RegexLexiconGenerator(
                 )
 
         # 3) BATCH scispacy NER + abbreviation detection + UMLS linking
-        # Process entire document at once instead of per-block (5-10x faster)
-        if self.scispacy_nlp is not None and blocks_data:
-            try:
-                # Concatenate all text with separators
-                full_text = "\n\n".join(full_text_parts)
-
-                # Run scispacy ONCE on full document
-                spacy_doc = self.scispacy_nlp(full_text)
-
-                # Helper to find which block contains a character offset
-                def find_block_for_offset(char_offset: int):
-                    for block, text, start, end in blocks_data:
-                        if start <= char_offset < end:
-                            return block, text, start
-                    return None, None, 0
-
-                # Extract abbreviations found by Schwartz-Hearst detector
-                for abrv in spacy_doc._.abbreviations:
-                    sf = abrv.text
-                    lf = str(abrv._.long_form) if abrv._.long_form else None
-
-                    if not sf or not lf:
-                        continue
-                    if not self._is_valid_match(sf):
-                        continue
-
-                    key = (sf.upper(), lf.lower())
-                    if key in seen:
-                        continue
-                    seen.add(key)
-
-                    # Find the block this abbreviation belongs to
-                    block, block_text, block_start = find_block_for_offset(
-                        abrv.start_char
-                    )
-                    if block is None or block_text is None:
-                        continue
-
-                    # Adjust offsets to be relative to block
-                    local_start = abrv.start_char - block_start
-                    local_end = abrv.end_char - block_start
-
-                    out.append(
-                        self._make_candidate(
-                            doc=doc,
-                            block=block,
-                            short_form=sf,
-                            long_form=lf,
-                            start=local_start,
-                            end=local_end,
-                            text=block_text,
-                            rule_version="scispacy_abbrev::v1",
-                            lexicon_source="scispacy",
-                            lexicon_ids=None,
-                        )
-                    )
-
-                # Extract NER entities with UMLS linking
-                # For large documents, only do UMLS lookup for first N blocks to avoid O(n^2) scaling
-                umls_char_limit = blocks_data[min(self.umls_max_blocks, len(blocks_data)) - 1][3] if blocks_data else 0
-                for ent in spacy_doc.ents:
-                    ent_text = ent.text.strip()
-
-                    # Only consider short, uppercase-containing tokens as abbreviations
-                    if len(ent_text) < 2 or len(ent_text) > 12:
-                        continue
-                    if " " in ent_text:  # Skip multi-word entities
-                        continue
-                    if not any(c.isupper() for c in ent_text):
-                        continue
-                    if not self._is_valid_match(ent_text):
-                        continue
-
-                    # Try UMLS linker first for expansion (only for first N blocks in large docs)
-                    lf_from_umls = None
-                    umls_cui = None
-                    if ent.start_char < umls_char_limit and hasattr(ent._, "kb_ents") and ent._.kb_ents:
-                        # kb_ents is [(CUI, score), ...] - take top match
-                        top_match = ent._.kb_ents[0]
-                        umls_cui = top_match[0]
-                        # Get canonical name from linker's knowledge base
-                        if self.umls_linker and hasattr(self.umls_linker, "kb"):
-                            try:
-                                kb_entry = self.umls_linker.kb.cui_to_entity.get(
-                                    umls_cui
-                                )
-                                if kb_entry:
-                                    candidate_lf = kb_entry.canonical_name
-                                    # Filter out known wrong expansions from UMLS
-                                    sf_lower = ent_text.lower()
-                                    lf_lower = candidate_lf.lower() if candidate_lf else ""
-                                    if (sf_lower, lf_lower) not in WRONG_EXPANSION_BLACKLIST and lf_lower not in BAD_LONG_FORMS:
-                                        lf_from_umls = candidate_lf
-                            except Exception:
-                                pass
-
-                    # Fall back to our lexicons if UMLS didn't provide expansion
-                    lf_from_lexicon = lf_from_umls
-                    if not lf_from_lexicon:
-                        lf_from_lexicon = self.entity_canonical.get(
-                            ent_text
-                        ) or self.entity_canonical.get(ent_text.upper())
-                    if not lf_from_lexicon:
-                        # Try to find in abbrev_entries
-                        for entry in self.abbrev_entries:
-                            if entry.sf.upper() == ent_text.upper():
-                                lf_from_lexicon = entry.lf
-                                break
-
-                    if not lf_from_lexicon:
-                        continue  # Only report if we have a known expansion
-                    assert lf_from_lexicon is not None  # Type narrowing for pyright
-
-                    key = (ent_text.upper(), lf_from_lexicon.lower())
-                    if key in seen:
-                        continue
-                    seen.add(key)
-
-                    # Find the block this entity belongs to
-                    block, block_text, block_start = find_block_for_offset(
-                        ent.start_char
-                    )
-                    if block is None or block_text is None:
-                        continue
-
-                    # Adjust offsets to be relative to block
-                    local_start = ent.start_char - block_start
-                    local_end = ent.end_char - block_start
-
-                    # Build lexicon IDs from UMLS CUI if available
-                    lex_ids = None
-                    if umls_cui:
-                        lex_ids = [LexiconIdentifier(source="UMLS", id=umls_cui)]
-
-                    source = "scispacy+umls" if lf_from_umls else "scispacy+lexicon"
-                    out.append(
-                        self._make_candidate(
-                            doc=doc,
-                            block=block,
-                            short_form=ent_text,
-                            long_form=lf_from_lexicon,
-                            start=local_start,
-                            end=local_end,
-                            text=block_text,
-                            rule_version="scispacy_ner::v1",
-                            lexicon_source=source,
-                            lexicon_ids=lex_ids,
-                        )
-                    )
-            except Exception:
-                # Don't fail entire extraction if scispacy has issues
-                pass
+        self._process_scispacy_batch(doc, blocks_data, full_text_parts, seen, out)
 
         # 4) Regex-based inline definition detector
-        # Catches patterns scispacy's Schwartz-Hearst might miss:
-        # - Mixed-case abbreviations like "LoE", "LoA"
-        # - Reversed patterns "ABBREV (long form)"
-        # - Comma-separated definitions "ABBREV, the long form"
-        if blocks_data:
-            full_text = "\n\n".join(full_text_parts)
-            inline_matches = self._extract_inline_definitions(full_text)
+        self._process_inline_definitions(doc, blocks_data, full_text_parts, seen, out)
 
-            for sf, lf, start, end in inline_matches:
+        return out
+
+    def _process_scispacy_batch(
+        self,
+        doc: DocumentGraph,
+        blocks_data: List[Tuple[Any, str, int, int]],
+        full_text_parts: List[str],
+        seen: Set[Tuple[str, str]],
+        out: List[Candidate],
+    ) -> None:
+        """Process entire document with scispacy NER + abbreviation detection + UMLS linking."""
+        if self.scispacy_nlp is None or not blocks_data:
+            return
+
+        try:
+            full_text = "\n\n".join(full_text_parts)
+            spacy_doc = self.scispacy_nlp(full_text)
+
+            def find_block_for_offset(char_offset: int):
+                for block, text, start, end in blocks_data:
+                    if start <= char_offset < end:
+                        return block, text, start
+                return None, None, 0
+
+            # Extract abbreviations found by Schwartz-Hearst detector
+            for abrv in spacy_doc._.abbreviations:
+                sf = abrv.text
+                lf = str(abrv._.long_form) if abrv._.long_form else None
+
+                if not sf or not lf:
+                    continue
                 if not self._is_valid_match(sf):
                     continue
 
@@ -572,41 +454,153 @@ class RegexLexiconGenerator(
                     continue
                 seen.add(key)
 
-                # Find the block this definition belongs to
-                block = None  # type: ignore[assignment]
-                block_text = None
-                block_start = 0
-                for b, text, s, e in blocks_data:
-                    if s <= start < e:
-                        block = b
-                        block_text = text
-                        block_start = s
-                        break
-
+                block, block_text, block_start = find_block_for_offset(abrv.start_char)
                 if block is None or block_text is None:
                     continue
 
-                # Adjust offsets to be relative to block
-                local_start = start - block_start
-                local_end = end - block_start
+                local_start = abrv.start_char - block_start
+                local_end = abrv.end_char - block_start
 
                 out.append(
                     self._make_candidate(
-                        doc=doc,
-                        block=block,
-                        short_form=sf,
-                        long_form=lf,
-                        start=local_start,
-                        end=local_end,
+                        doc=doc, block=block,
+                        short_form=sf, long_form=lf,
+                        start=local_start, end=local_end,
                         text=block_text,
-                        rule_version="inline_regex::v1",
-                        lexicon_source="inline_definition",
-                        lexicon_ids=None,
-                        generator_type=GeneratorType.INLINE_DEFINITION,
+                        rule_version="scispacy_abbrev::v1",
+                        lexicon_source="scispacy", lexicon_ids=None,
                     )
                 )
 
-        return out
+            # Extract NER entities with UMLS linking
+            umls_char_limit = blocks_data[min(self.umls_max_blocks, len(blocks_data)) - 1][3] if blocks_data else 0
+            for ent in spacy_doc.ents:
+                ent_text = ent.text.strip()
+
+                if len(ent_text) < 2 or len(ent_text) > 12:
+                    continue
+                if " " in ent_text:
+                    continue
+                if not any(c.isupper() for c in ent_text):
+                    continue
+                if not self._is_valid_match(ent_text):
+                    continue
+
+                lf_from_umls = None
+                umls_cui = None
+                if ent.start_char < umls_char_limit and hasattr(ent._, "kb_ents") and ent._.kb_ents:
+                    top_match = ent._.kb_ents[0]
+                    umls_cui = top_match[0]
+                    if self.umls_linker and hasattr(self.umls_linker, "kb"):
+                        try:
+                            kb_entry = self.umls_linker.kb.cui_to_entity.get(umls_cui)
+                            if kb_entry:
+                                candidate_lf = kb_entry.canonical_name
+                                sf_lower = ent_text.lower()
+                                lf_lower = candidate_lf.lower() if candidate_lf else ""
+                                if (sf_lower, lf_lower) not in WRONG_EXPANSION_BLACKLIST and lf_lower not in BAD_LONG_FORMS:
+                                    lf_from_umls = candidate_lf
+                        except Exception:
+                            pass
+
+                lf_from_lexicon = lf_from_umls
+                if not lf_from_lexicon:
+                    lf_from_lexicon = self.entity_canonical.get(
+                        ent_text
+                    ) or self.entity_canonical.get(ent_text.upper())
+                if not lf_from_lexicon:
+                    for entry in self.abbrev_entries:
+                        if entry.sf.upper() == ent_text.upper():
+                            lf_from_lexicon = entry.lf
+                            break
+
+                if not lf_from_lexicon:
+                    continue
+                assert lf_from_lexicon is not None  # Type narrowing for pyright
+
+                key = (ent_text.upper(), lf_from_lexicon.lower())
+                if key in seen:
+                    continue
+                seen.add(key)
+
+                block, block_text, block_start = find_block_for_offset(ent.start_char)
+                if block is None or block_text is None:
+                    continue
+
+                local_start = ent.start_char - block_start
+                local_end = ent.end_char - block_start
+
+                lex_ids = None
+                if umls_cui:
+                    lex_ids = [LexiconIdentifier(source="UMLS", id=umls_cui)]
+
+                source = "scispacy+umls" if lf_from_umls else "scispacy+lexicon"
+                out.append(
+                    self._make_candidate(
+                        doc=doc, block=block,
+                        short_form=ent_text, long_form=lf_from_lexicon,
+                        start=local_start, end=local_end,
+                        text=block_text,
+                        rule_version="scispacy_ner::v1",
+                        lexicon_source=source, lexicon_ids=lex_ids,
+                    )
+                )
+        except Exception:
+            pass
+
+    def _process_inline_definitions(
+        self,
+        doc: DocumentGraph,
+        blocks_data: List[Tuple[Any, str, int, int]],
+        full_text_parts: List[str],
+        seen: Set[Tuple[str, str]],
+        out: List[Candidate],
+    ) -> None:
+        """Extract inline definitions (SF=LF, SF: LF) from the full document text."""
+        if not blocks_data:
+            return
+
+        full_text = "\n\n".join(full_text_parts)
+        inline_matches = self._extract_inline_definitions(full_text)
+
+        for sf, lf, start, end in inline_matches:
+            if not self._is_valid_match(sf):
+                continue
+
+            key = (sf.upper(), lf.lower())
+            if key in seen:
+                continue
+            seen.add(key)
+
+            block = None  # type: ignore[assignment]
+            block_text = None
+            block_start = 0
+            for b, text, s, e in blocks_data:
+                if s <= start < e:
+                    block = b
+                    block_text = text
+                    block_start = s
+                    break
+
+            if block is None or block_text is None:
+                continue
+
+            local_start = start - block_start
+            local_end = end - block_start
+
+            out.append(
+                self._make_candidate(
+                    doc=doc, block=block,
+                    short_form=sf, long_form=lf,
+                    start=local_start, end=local_end,
+                    text=block_text,
+                    rule_version="inline_regex::v1",
+                    lexicon_source="inline_definition", lexicon_ids=None,
+                    generator_type=GeneratorType.INLINE_DEFINITION,
+                )
+            )
+
+        return
 
     def _make_candidate(
         self,

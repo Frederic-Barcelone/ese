@@ -144,6 +144,19 @@ class AuthorDetector:
             self.config.get("pipeline_version") or get_git_revision_hash()
         )
 
+    def extract(
+        self,
+        doc_graph: DocumentGraph,
+        doc_id: str,
+        doc_fingerprint: str,
+        full_text: Optional[str] = None,
+    ) -> List[AuthorCandidate]:
+        """Extract author mentions from the document.
+
+        Delegates to detect() for backward compatibility.
+        """
+        return self.detect(doc_graph, doc_id, doc_fingerprint, full_text)
+
     def detect(
         self,
         doc_graph: DocumentGraph,
