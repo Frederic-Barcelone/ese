@@ -1137,12 +1137,12 @@ class Orchestrator:
 
         return ExtractionResult(
             abbreviations=s.abbreviation_results,
-            diseases=s.disease_results or [],
-            genes=s.gene_results or [],
-            drugs=s.drug_results or [],
-            pharma=s.pharma_results or [],
-            authors=s.author_results or [],
-            citations=s.citation_results or [],
+            diseases=s.disease_results,
+            genes=s.gene_results,
+            drugs=s.drug_results,
+            pharma=s.pharma_results,
+            authors=s.author_results,
+            citations=s.citation_results,
         )
 
     def _export_all_results(self, s: _PipelineState) -> None:

@@ -600,8 +600,6 @@ class RegexLexiconGenerator(
                 )
             )
 
-        return
-
     def _make_candidate(
         self,
         doc: DocumentGraph,

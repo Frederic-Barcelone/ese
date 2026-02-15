@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import warnings
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Optional, Tuple
@@ -581,7 +582,6 @@ class PDFToDocGraphParser(BaseParser):
                         caption = cap["text"]
 
             if not caption and img_data.get("ocr_text"):
-                import re
                 fig_match = re.search(r"Figure\s*(\d+)", img_data["ocr_text"], re.IGNORECASE)
                 if fig_match:
                     caption = f"Figure {fig_match.group(1)}"

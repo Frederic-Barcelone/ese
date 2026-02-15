@@ -81,6 +81,11 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
     Strategy E (Comma):     SF, Long Form (common in tables/legends)
     """
 
+    _INLINE_NOISE_PATTERNS = [
+        "sponsored by", "workshop", "scientific", "facts",
+        "uncertainties", "study", "trial", "published",
+    ]
+
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
 
@@ -342,10 +347,6 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
     ) -> int:
         """Strategy D: Extract from inline definitions like 'SF=LF' or 'SF: LF'."""
         added = 0
-        noise_patterns = [
-            "sponsored by", "workshop", "scientific", "facts",
-            "uncertainties", "study", "trial", "published",
-        ]
         for pat in self.inline_definition_patterns:
             if added >= budget:
                 break
@@ -366,7 +367,7 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
                     continue
 
                 lf_lower = lf.lower()
-                if any(noise in lf_lower for noise in noise_patterns):
+                if any(noise in lf_lower for noise in self._INLINE_NOISE_PATTERNS):
                     continue
                 if len(lf) > 40:
                     continue
