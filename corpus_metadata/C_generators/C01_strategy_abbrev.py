@@ -175,10 +175,12 @@ class AbbrevSyntaxCandidateGenerator(BaseCandidateGenerator):
     def extract(self, doc_structure: DocumentGraph) -> List[Candidate]:
         """Extract abbreviation candidates from the document using multiple strategies.
 
-        Iterates over document blocks applying five extraction strategies in order:
-        parenthetical (A/B), implicit phrasing (C), inline definitions (D), and
-        comma-separated definitions (E). Carries over trailing text between blocks
-        to detect abbreviations that span block boundaries. Also scans image captions.
+        Iterates over document blocks applying five per-block strategies with a
+        shared budget: (A/B) parenthetical, (C) implicit phrasing, (D) inline
+        definitions (e.g. 'RR=relative reduction'), (E) comma-separated definitions
+        (e.g. 'LOA, Level of Agreement'). Carries over trailing text between blocks
+        to detect abbreviations that span block boundaries. After block iteration,
+        strategy (F) scans image/figure captions.
         """
         doc = doc_structure
         out: List[Candidate] = []

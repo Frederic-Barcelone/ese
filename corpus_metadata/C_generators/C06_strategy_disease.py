@@ -854,12 +854,13 @@ class DiseaseDetector:
     ) -> List[DiseaseCandidate]:
         """Extract disease mentions from document using layered lexicon and NER strategies.
 
-        Runs five detection layers per block in priority order: (1) specialized
+        Runs four per-block detection layers in priority order: (1) specialized
         lexicons (PAH, ANCA, IgAN), (2) general/Orphanet/MONDO FlashText matching
         with confidence-based FP filtering, (3) regex patterns from specialized
-        lexicons, (4) scispacy NER with UMLS disease semantic types, and
-        (5) BiomedNER-All gap-filler with lexicon verification. Deduplicates
-        final results by matched_text, keeping highest-confidence candidate.
+        lexicons, (4) scispacy NER with UMLS disease semantic types. After block
+        iteration, a fifth document-level layer applies BiomedNER-All gap-filling
+        with lexicon verification. Deduplicates final results by matched_text,
+        keeping highest-confidence candidate.
 
         Args:
             doc_structure: Parsed document graph.

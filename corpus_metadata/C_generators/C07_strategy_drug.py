@@ -494,7 +494,7 @@ class DrugDetector:
     ) -> List[DrugCandidate]:
         """Extract drug mentions from the document.
 
-        Delegates to detect() for backward compatibility.
+        Alias for detect(), provided for interface consistency with BaseExtractor.
         """
         return self.detect(doc_graph, biomedical_ner_result)
 

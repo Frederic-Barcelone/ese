@@ -415,7 +415,7 @@ class GeneDetector:
     def extract(self, doc_graph: DocumentGraph) -> List[GeneCandidate]:
         """Extract gene mentions from the document.
 
-        Delegates to detect() for backward compatibility.
+        Alias for detect(), provided for interface consistency with BaseExtractor.
         """
         return self.detect(doc_graph)
 

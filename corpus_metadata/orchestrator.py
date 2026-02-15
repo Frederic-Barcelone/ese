@@ -122,7 +122,11 @@ class ExtractionResult:
 
 @dataclass
 class _PipelineState:
-    """Mutable state passed between pipeline stages within process_pdf()."""
+    """Mutable state passed between pipeline stages within process_pdf().
+
+    Fields are populated incrementally by each stage method, avoiding long
+    parameter lists and multi-value returns between stages.
+    """
 
     pdf_path: Path
     doc_id: str

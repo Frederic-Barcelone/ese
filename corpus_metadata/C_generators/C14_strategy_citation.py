@@ -182,7 +182,7 @@ class CitationDetector:
     ) -> List[CitationCandidate]:
         """Extract citation mentions from the document.
 
-        Delegates to detect() for backward compatibility.
+        Alias for detect(), provided for interface consistency with BaseExtractor.
         """
         return self.detect(doc_graph, doc_id, doc_fingerprint, full_text)
 
