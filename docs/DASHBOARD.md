@@ -22,11 +22,11 @@
 
 ## API Credit Balance
 
-> Last updated: 2026-02-14
+> Last updated: 2026-02-15
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
-| 2026-02-15 | **$161.40** | $45.39 | Push-to-95% plan: LLM gap-fill, static abbrev lookup, FP filter expansion, gene eval matching. Full eval: BC5CDR 100×2, NLP4RARE 100, NCBI 100, NLM-Gene 46, RareDisGene 100, multiple 20-doc quick checks. |
+| 2026-02-15 | **$193.54** | $13.25 | Push-to-95% plan (LLM gap-fill, static abbrev lookup, FP filter expansion, gene eval matching) + full eval suite + 3-doc pipeline run. |
 | 2026-02-14 | **$206.79** | $10.26 | Full regression suite: BC5CDR 100-doc, NLP4RARE 100-doc, NCBI 73-doc, NLM-Gene 46-doc, RareDisGene 100-doc. |
 | 2026-02-14 | **$217.05** | $5.45 | SOTA improvement evals: BC5CDR 100-doc ×2, NCBI 73-doc ×2, NLP4RARE 100-doc ×2, NLM-Gene 46-doc, RareDisGene 100-doc, 20-doc quick checks. |
 | 2026-02-14 | **$222.50** | $20.11 | NCBI Disease 73-doc eval + NLP4RARE/BC5CDR regression checks + prior runs. |
