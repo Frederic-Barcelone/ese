@@ -8,31 +8,31 @@ class TestLayoutPatternEnum:
 
     def test_full_pattern_value(self):
         """Test FULL pattern has correct value."""
-        from B_parsing.B18_layout_models import LayoutPattern
+        from A_core.A24_layout_models import LayoutPattern
 
         assert LayoutPattern.FULL.value == "full"
 
     def test_two_col_pattern_value(self):
         """Test TWO_COL pattern has correct value."""
-        from B_parsing.B18_layout_models import LayoutPattern
+        from A_core.A24_layout_models import LayoutPattern
 
         assert LayoutPattern.TWO_COL.value == "2col"
 
     def test_two_col_fullbot_pattern_value(self):
         """Test TWO_COL_FULLBOT pattern has correct value."""
-        from B_parsing.B18_layout_models import LayoutPattern
+        from A_core.A24_layout_models import LayoutPattern
 
         assert LayoutPattern.TWO_COL_FULLBOT.value == "2col-fullbot"
 
     def test_fulltop_two_col_pattern_value(self):
         """Test FULLTOP_TWO_COL pattern has correct value."""
-        from B_parsing.B18_layout_models import LayoutPattern
+        from A_core.A24_layout_models import LayoutPattern
 
         assert LayoutPattern.FULLTOP_TWO_COL.value == "fulltop-2col"
 
     def test_all_patterns_are_strings(self):
         """Test all patterns inherit from str."""
-        from B_parsing.B18_layout_models import LayoutPattern
+        from A_core.A24_layout_models import LayoutPattern
 
         for pattern in LayoutPattern:
             assert isinstance(pattern.value, str)
@@ -44,25 +44,25 @@ class TestVisualPositionEnum:
 
     def test_left_position_value(self):
         """Test LEFT position has correct code."""
-        from B_parsing.B18_layout_models import VisualPosition
+        from A_core.A24_layout_models import VisualPosition
 
         assert VisualPosition.LEFT.value == "L"
 
     def test_right_position_value(self):
         """Test RIGHT position has correct code."""
-        from B_parsing.B18_layout_models import VisualPosition
+        from A_core.A24_layout_models import VisualPosition
 
         assert VisualPosition.RIGHT.value == "R"
 
     def test_full_position_value(self):
         """Test FULL position has correct code."""
-        from B_parsing.B18_layout_models import VisualPosition
+        from A_core.A24_layout_models import VisualPosition
 
         assert VisualPosition.FULL.value == "F"
 
     def test_positions_are_single_char(self):
         """Test all positions are single character codes."""
-        from B_parsing.B18_layout_models import VisualPosition
+        from A_core.A24_layout_models import VisualPosition
 
         for pos in VisualPosition:
             assert len(pos.value) == 1
@@ -73,7 +73,7 @@ class TestVisualZoneDataclass:
 
     def test_create_minimal_zone(self):
         """Test creating a zone with required fields only."""
-        from B_parsing.B18_layout_models import VisualPosition, VisualZone
+        from A_core.A24_layout_models import VisualPosition, VisualZone
 
         zone = VisualZone(
             visual_type="table",
@@ -93,7 +93,7 @@ class TestVisualZoneDataclass:
 
     def test_create_full_zone(self):
         """Test creating a zone with all fields specified."""
-        from B_parsing.B18_layout_models import VisualPosition, VisualZone
+        from A_core.A24_layout_models import VisualPosition, VisualZone
 
         zone = VisualZone(
             visual_type="figure",
@@ -117,7 +117,7 @@ class TestVisualZoneDataclass:
 
     def test_zone_accepts_table_type(self):
         """Test zone accepts 'table' as visual_type."""
-        from B_parsing.B18_layout_models import VisualPosition, VisualZone
+        from A_core.A24_layout_models import VisualPosition, VisualZone
 
         zone = VisualZone(
             visual_type="table",
@@ -128,7 +128,7 @@ class TestVisualZoneDataclass:
 
     def test_zone_accepts_figure_type(self):
         """Test zone accepts 'figure' as visual_type."""
-        from B_parsing.B18_layout_models import VisualPosition, VisualZone
+        from A_core.A24_layout_models import VisualPosition, VisualZone
 
         zone = VisualZone(
             visual_type="figure",
@@ -139,7 +139,7 @@ class TestVisualZoneDataclass:
 
     def test_zone_vertical_zone_named_regions(self):
         """Test zone accepts named vertical regions."""
-        from B_parsing.B18_layout_models import VisualPosition, VisualZone
+        from A_core.A24_layout_models import VisualPosition, VisualZone
 
         for region in ["top", "middle", "bottom"]:
             zone = VisualZone(
@@ -151,7 +151,7 @@ class TestVisualZoneDataclass:
 
     def test_zone_vertical_zone_numeric_format(self):
         """Test zone accepts numeric range format for vertical_zone."""
-        from B_parsing.B18_layout_models import VisualPosition, VisualZone
+        from A_core.A24_layout_models import VisualPosition, VisualZone
 
         zone = VisualZone(
             visual_type="table",
@@ -166,7 +166,7 @@ class TestPageLayoutDataclass:
 
     def test_create_minimal_page_layout(self):
         """Test creating page layout with required fields only."""
-        from B_parsing.B18_layout_models import LayoutPattern, PageLayout
+        from A_core.A24_layout_models import LayoutPattern, PageLayout
 
         layout = PageLayout(
             page_num=1,
@@ -184,7 +184,7 @@ class TestPageLayoutDataclass:
 
     def test_create_two_column_layout(self):
         """Test creating a two-column page layout."""
-        from B_parsing.B18_layout_models import LayoutPattern, PageLayout
+        from A_core.A24_layout_models import LayoutPattern, PageLayout
 
         layout = PageLayout(
             page_num=3,
@@ -198,7 +198,7 @@ class TestPageLayoutDataclass:
 
     def test_create_layout_with_visuals(self):
         """Test creating page layout with visual zones."""
-        from B_parsing.B18_layout_models import (
+        from A_core.A24_layout_models import (
             LayoutPattern,
             PageLayout,
             VisualPosition,
@@ -231,7 +231,7 @@ class TestPageLayoutDataclass:
 
     def test_create_layout_with_custom_margins(self):
         """Test creating page layout with custom margins."""
-        from B_parsing.B18_layout_models import LayoutPattern, PageLayout
+        from A_core.A24_layout_models import LayoutPattern, PageLayout
 
         layout = PageLayout(
             page_num=1,
@@ -245,7 +245,7 @@ class TestPageLayoutDataclass:
 
     def test_create_layout_with_raw_vlm_response(self):
         """Test creating page layout with raw VLM response stored."""
-        from B_parsing.B18_layout_models import LayoutPattern, PageLayout
+        from A_core.A24_layout_models import LayoutPattern, PageLayout
 
         raw_response = '{"pattern": "full", "visuals": []}'
         layout = PageLayout(
@@ -258,7 +258,7 @@ class TestPageLayoutDataclass:
 
     def test_visuals_list_is_mutable(self):
         """Test that visuals list can be modified after creation."""
-        from B_parsing.B18_layout_models import (
+        from A_core.A24_layout_models import (
             LayoutPattern,
             PageLayout,
             VisualPosition,
@@ -283,7 +283,7 @@ class TestPageLayoutDataclass:
 
     def test_default_visuals_list_not_shared(self):
         """Test that default empty visuals list is not shared between instances."""
-        from B_parsing.B18_layout_models import (
+        from A_core.A24_layout_models import (
             LayoutPattern,
             PageLayout,
             VisualPosition,
@@ -310,7 +310,7 @@ class TestLayoutModelsIntegration:
 
     def test_full_page_layout_scenario(self):
         """Test a realistic page layout with multiple visuals."""
-        from B_parsing.B18_layout_models import (
+        from A_core.A24_layout_models import (
             LayoutPattern,
             PageLayout,
             VisualPosition,
@@ -353,7 +353,7 @@ class TestLayoutModelsIntegration:
 
     def test_continuation_table_scenario(self):
         """Test a table that spans multiple pages."""
-        from B_parsing.B18_layout_models import (
+        from A_core.A24_layout_models import (
             LayoutPattern,
             PageLayout,
             VisualPosition,

@@ -18,7 +18,6 @@ D_VALIDATION_MODULES = [
     "D01_prompt_registry",
     "D02_llm_engine",
     "D03_validation_logger",
-    "D04_quote_verifier",
 ]
 
 # E_normalization modules
@@ -143,7 +142,7 @@ class TestDValidationExports:
         assert hasattr(ValidationLogger, "log_error")
 
     def test_quote_verifier_exports(self):
-        from D_validation.D04_quote_verifier import (
+        from Z_utils.Z14_quote_verifier import (
             verify_quote,
             verify_number,
         )
@@ -235,7 +234,7 @@ class TestQuoteVerifierBehavioral:
     """Behavioral tests for QuoteVerifier and NumericalVerifier."""
 
     def test_verify_quote_exact_match_in_clinical_text(self):
-        from D_validation.D04_quote_verifier import verify_quote
+        from Z_utils.Z14_quote_verifier import verify_quote
 
         source_text = (
             "Patients with pulmonary arterial hypertension (PAH) "
@@ -244,7 +243,7 @@ class TestQuoteVerifierBehavioral:
         assert verify_quote("pulmonary arterial hypertension", source_text) is True
 
     def test_verify_quote_missing_substring_returns_false(self):
-        from D_validation.D04_quote_verifier import verify_quote
+        from Z_utils.Z14_quote_verifier import verify_quote
 
         source_text = (
             "The study enrolled 350 patients with confirmed "
@@ -253,7 +252,7 @@ class TestQuoteVerifierBehavioral:
         assert verify_quote("Becker muscular dystrophy", source_text) is False
 
     def test_verify_number_present_in_text(self):
-        from D_validation.D04_quote_verifier import verify_number
+        from Z_utils.Z14_quote_verifier import verify_number
 
         source_text = (
             "The primary endpoint was met with a response rate of 42.5% "
@@ -262,7 +261,7 @@ class TestQuoteVerifierBehavioral:
         assert verify_number(42.5, source_text) is True
 
     def test_verify_number_absent_from_text(self):
-        from D_validation.D04_quote_verifier import verify_number
+        from Z_utils.Z14_quote_verifier import verify_number
 
         source_text = (
             "The primary endpoint was met with a response rate of 42.5% "
@@ -271,7 +270,7 @@ class TestQuoteVerifierBehavioral:
         assert verify_number(99.9, source_text) is False
 
     def test_quote_verifier_class_provides_match_details(self):
-        from D_validation.D04_quote_verifier import QuoteVerifier
+        from Z_utils.Z14_quote_verifier import QuoteVerifier
 
         verifier = QuoteVerifier(fuzzy_threshold=0.90)
         source_text = (

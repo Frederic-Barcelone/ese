@@ -16,7 +16,7 @@ Key Components:
 
 Example:
     >>> from B_parsing.B20_zone_expander import expand_zones_to_bboxes
-    >>> from B_parsing.B18_layout_models import PageLayout
+    >>> from A_core.A24_layout_models import PageLayout
     >>> expanded = expand_zones_to_bboxes(layout, text_blocks, page_width, page_height)
     >>> for ev in expanded:
     ...     print(f"{ev.zone.visual_type}: {ev.bbox_pts}")

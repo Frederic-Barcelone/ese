@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pytest
 
-from D_validation.D04_quote_verifier import (
+from Z_utils.Z14_quote_verifier import (
     QuoteVerificationResult,
     NumericalVerificationResult,
     FieldVerificationResult,

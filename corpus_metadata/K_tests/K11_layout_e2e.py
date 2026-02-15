@@ -1,6 +1,6 @@
 # corpus_metadata/K_tests/K11_layout_e2e.py
 """End-to-end tests for layout-aware visual extraction."""
-from B_parsing.B18_layout_models import (
+from A_core.A24_layout_models import (
     LayoutPattern,
     PageLayout,
     VisualPosition,

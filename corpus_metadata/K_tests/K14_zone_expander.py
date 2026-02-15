@@ -3,7 +3,7 @@
 from typing import Any
 
 import pytest
-from B_parsing.B18_layout_models import (
+from A_core.A24_layout_models import (
     LayoutPattern,
     PageLayout,
     VisualPosition,

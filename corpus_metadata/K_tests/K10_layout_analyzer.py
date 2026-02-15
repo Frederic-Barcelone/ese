@@ -1,6 +1,6 @@
 # corpus_metadata/K_tests/K10_layout_analyzer.py
 """Tests for VLM layout analyzer."""
-from B_parsing.B18_layout_models import LayoutPattern, VisualPosition
+from A_core.A24_layout_models import LayoutPattern, VisualPosition
 from B_parsing.B19_layout_analyzer import (
     parse_layout_response,
     VLM_LAYOUT_PROMPT,

@@ -7,7 +7,7 @@ from B_parsing.B12_visual_pipeline import (
     VisualExtractionPipeline,
     extract_visuals_doclayout,
 )
-from B_parsing.B18_layout_models import (
+from A_core.A24_layout_models import (
     VisualPosition,
     VisualZone,
 )
