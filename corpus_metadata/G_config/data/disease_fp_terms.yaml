@@ -147,10 +147,37 @@ common_english_fp_terms:
   # Generic clinical process terms (not diseases)
   - "immunosuppression"
   - "analgesia"
+  - "shock"
+  - "fever"
+  - "anoxia"
   # Adjectival/modifier terms (not standalone diseases)
   - "drug-induced"
   - "ischemic"
   - "sterile"
+  # Common English words that collide with MONDO/Orphanet disease entries
+  - "she"
+  - "air"
+  - "face"
+  - "gave"
+  - "card"
+  - "soft"
+  - "pad"
+  - "rich"
+  - "rare"
+  - "cold"
+  - "arm"
+  - "fit"
+  - "cap"
+  - "dip"
+  - "hip"
+  - "lap"
+  - "nap"
+  - "pit"
+  - "rim"
+  - "rod"
+  - "sac"
+  - "tan"
+  - "tip"
 
 # Multi-word generic terms that are not specific diseases (always filtered)
 generic_multiword_fp_terms:

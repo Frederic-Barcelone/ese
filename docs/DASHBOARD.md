@@ -17,7 +17,7 @@
 | Citation | PubMed Authors | — | — | — | — | — | — | — | — | — |
 | Disease | NLP4RARE dev | 20 | 83 | 12 | 6 | 87.4% | 93.3% | 90.2% | +1.4 | 8/20 |
 | Abbreviation | NLP4RARE dev | 20 | 5 | 0 | 0 | 100.0% | 100.0% | 100.0% | +9.1 | 8/20 |
-| Disease | NCBI Disease | 20 | 59 | 7 | 26 | 89.4% | 69.4% | 78.1% | -0.2 | 8/20 |
+| Disease | NCBI Disease | 20 | 61 | 6 | 24 | 91.0% | 71.8% | 80.3% | +2.2 | 8/20 |
 | Disease | NCBI Disease | 73 | 252 | 31 | 93 | 89.0% | 73.0% | 80.3% | +1.2 | 26/73 |
 | Feasibility (epi) | Synthetic | 20 | 39 | 32 | 11 | 54.9% | 78.0% | 64.5% | — | — |
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
