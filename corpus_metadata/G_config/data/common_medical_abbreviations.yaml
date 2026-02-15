@@ -1,0 +1,193 @@
+# Common medical abbreviations mapped to entity type and canonical name.
+# Used for static abbreviation-to-entity resolution when the pipeline's
+# abbreviation extraction doesn't capture the expansion (e.g., in abstracts
+# where only the abbreviation appears without definition).
+#
+# Format:
+#   short_form:
+#     type: disease | drug
+#     name: canonical entity name
+#
+# Only high-frequency, unambiguous abbreviations should be included here.
+# Ambiguous abbreviations (e.g., ALS = amyotrophic lateral sclerosis OR
+# antiphospholipid syndrome) should NOT be added.
+
+disease_abbreviations:
+  # Cardiovascular
+  "MI": "myocardial infarction"
+  "AF": "atrial fibrillation"
+  "CHF": "congestive heart failure"
+  "HF": "heart failure"
+  "CAD": "coronary artery disease"
+  "PAH": "pulmonary arterial hypertension"
+  "PH": "pulmonary hypertension"
+  "VT": "ventricular tachycardia"
+  "SVT": "supraventricular tachycardia"
+  "DVT": "deep vein thrombosis"
+  "PE": "pulmonary embolism"
+  "AAA": "abdominal aortic aneurysm"
+  "AS": "aortic stenosis"
+  "MVP": "mitral valve prolapse"
+  "TdP": "torsades de pointes"
+  "DCM": "dilated cardiomyopathy"
+  "HCM": "hypertrophic cardiomyopathy"
+
+  # Neurological
+  "PD": "Parkinson disease"
+  "AD": "Alzheimer disease"
+  "ALS": "amyotrophic lateral sclerosis"
+  "MS": "multiple sclerosis"
+  "TBI": "traumatic brain injury"
+  "SAH": "subarachnoid hemorrhage"
+  "ICH": "intracerebral hemorrhage"
+  "SLE": "systemic lupus erythematosus"
+
+  # Respiratory
+  "COPD": "chronic obstructive pulmonary disease"
+  "CF": "cystic fibrosis"
+  "IPF": "idiopathic pulmonary fibrosis"
+  "ARDS": "acute respiratory distress syndrome"
+  "OSA": "obstructive sleep apnea"
+  "ILD": "interstitial lung disease"
+
+  # Metabolic / Endocrine
+  "DM": "diabetes mellitus"
+  "T1DM": "type 1 diabetes mellitus"
+  "T2DM": "type 2 diabetes mellitus"
+  "DKA": "diabetic ketoacidosis"
+  "CKD": "chronic kidney disease"
+  "ESRD": "end-stage renal disease"
+  "AKI": "acute kidney injury"
+  "NAFLD": "non-alcoholic fatty liver disease"
+  "NASH": "non-alcoholic steatohepatitis"
+  "HCC": "hepatocellular carcinoma"
+  "PCOS": "polycystic ovary syndrome"
+
+  # Hematologic / Oncologic
+  "AML": "acute myeloid leukemia"
+  "ALL": "acute lymphoblastic leukemia"
+  "CML": "chronic myeloid leukemia"
+  "CLL": "chronic lymphocytic leukemia"
+  "NHL": "non-Hodgkin lymphoma"
+  "MDS": "myelodysplastic syndrome"
+  "MM": "multiple myeloma"
+  "DIC": "disseminated intravascular coagulation"
+  "ITP": "immune thrombocytopenic purpura"
+  "TTP": "thrombotic thrombocytopenic purpura"
+  "HUS": "hemolytic uremic syndrome"
+  "aHUS": "atypical hemolytic uremic syndrome"
+  "PNH": "paroxysmal nocturnal hemoglobinuria"
+  "SCD": "sickle cell disease"
+  "NSCLC": "non-small cell lung cancer"
+  "SCLC": "small cell lung cancer"
+  "RCC": "renal cell carcinoma"
+  "GIST": "gastrointestinal stromal tumor"
+  "CRC": "colorectal cancer"
+  "DLBCL": "diffuse large B-cell lymphoma"
+
+  # Autoimmune / Rheumatologic
+  "RA": "rheumatoid arthritis"
+  "OA": "osteoarthritis"
+  "AS": "ankylosing spondylitis"
+  "JIA": "juvenile idiopathic arthritis"
+  "SSc": "systemic sclerosis"
+  "IBD": "inflammatory bowel disease"
+  "CD": "Crohn disease"
+  "UC": "ulcerative colitis"
+  "IgAN": "IgA nephropathy"
+  "MG": "myasthenia gravis"
+  "GBS": "Guillain-Barre syndrome"
+  "CIDP": "chronic inflammatory demyelinating polyneuropathy"
+  "PMR": "polymyalgia rheumatica"
+  "GPA": "granulomatosis with polyangiitis"
+
+  # Infectious
+  "HIV": "human immunodeficiency virus"
+  "HBV": "hepatitis B virus"
+  "HCV": "hepatitis C virus"
+  "TB": "tuberculosis"
+  "MRSA": "methicillin-resistant Staphylococcus aureus"
+  "UTI": "urinary tract infection"
+  "HAP": "hospital-acquired pneumonia"
+  "VAP": "ventilator-associated pneumonia"
+  "CDI": "Clostridioides difficile infection"
+
+  # Rare diseases (common abbreviations)
+  "PKU": "phenylketonuria"
+  "GD": "Gaucher disease"
+  "FD": "Fabry disease"
+  "MPS": "mucopolysaccharidosis"
+  "SMA": "spinal muscular atrophy"
+  "DMD": "Duchenne muscular dystrophy"
+  "BMD": "Becker muscular dystrophy"
+  "CMT": "Charcot-Marie-Tooth disease"
+  "TSC": "tuberous sclerosis complex"
+  "NF1": "neurofibromatosis type 1"
+  "NF2": "neurofibromatosis type 2"
+  "HAE": "hereditary angioedema"
+  "ATTR": "transthyretin amyloidosis"
+  "FMF": "familial Mediterranean fever"
+
+  # Dermatologic
+  "AD": "atopic dermatitis"
+  "PSO": "psoriasis"
+
+  # Ophthalmologic
+  "AMD": "age-related macular degeneration"
+  "DR": "diabetic retinopathy"
+  "DME": "diabetic macular edema"
+
+drug_abbreviations:
+  # Chemotherapy abbreviations
+  "PTU": "propylthiouracil"
+  "CY": "cyclophosphamide"
+  "DFX": "deferasirox"
+  "GEM": "gemcitabine"
+  "VNR": "vinorelbine"
+  "VDS": "vindesine"
+  "VCR": "vincristine"
+  "VBL": "vinblastine"
+  "MTX": "methotrexate"
+  "AZA": "azathioprine"
+  "MMF": "mycophenolate mofetil"
+  "CSA": "cyclosporine"
+  "RTX": "rituximab"
+  "TAC": "tacrolimus"
+  "SRL": "sirolimus"
+  "EVE": "everolimus"
+  "DOX": "doxorubicin"
+  "CIS": "cisplatin"
+  "CARBO": "carboplatin"
+  "5-FU": "fluorouracil"
+  "ARA-C": "cytarabine"
+  "DEX": "dexamethasone"
+  "PRED": "prednisolone"
+  "MPD": "methylprednisolone"
+  "IFX": "infliximab"
+  "ADA": "adalimumab"
+  "ETN": "etanercept"
+  "TCZ": "tocilizumab"
+  "UST": "ustekinumab"
+  "VDZ": "vedolizumab"
+  "OFA": "ofatumumab"
+  "OCR": "ocrelizumab"
+  "IVIg": "intravenous immunoglobulin"
+  "EPO": "erythropoietin"
+  "G-CSF": "granulocyte colony-stimulating factor"
+  "HCQ": "hydroxychloroquine"
+  "SSZ": "sulfasalazine"
+  "LEF": "leflunomide"
+  "D-AmB": "amphotericin B"
+  "AmB": "amphotericin B"
+  "INH": "isoniazid"
+  "RIF": "rifampicin"
+  "PZA": "pyrazinamide"
+  "EMB": "ethambutol"
+  "TMP-SMX": "trimethoprim-sulfamethoxazole"
+  "PAN": "puromycin aminonucleoside"
+  "PDN": "prednisolone"
+  "DCF": "diclofenac"
+  "NTG": "nitroglycerin"
+  "ASA": "aspirin"
+  "ABX": "antibiotics"
+  "ATG": "antithymocyte globulin"

@@ -1786,6 +1786,27 @@ def gene_matches(ext: ExtractedGene, gold: GoldGene) -> bool:
         if alias_of_norm == gold_sym:
             return True
 
+    # 9. Gold gene name match — gold has a name field, check if it matches
+    #    extracted symbol or name (handles "p53 protein" vs "TP53")
+    if gold.name:
+        gold_name_upper = gold.name.strip().upper()
+        if ext_sym == gold_name_upper or ext_mt == gold_name_upper:
+            return True
+        # Check if gold name contains extracted symbol (e.g., "p53" in "tumor protein p53")
+        if len(ext_sym) >= 3 and ext_sym in gold_name_upper:
+            return True
+
+    # 10. Extracted name vs gold name (fuzzy protein name matching)
+    if ext.name and gold.name:
+        ext_name_upper = ext.name.strip().upper()
+        gold_name_upper = gold.name.strip().upper()
+        if ext_name_upper == gold_name_upper:
+            return True
+        # Substring match on names
+        if len(ext_name_upper) >= 5 and len(gold_name_upper) >= 5:
+            if ext_name_upper in gold_name_upper or gold_name_upper in ext_name_upper:
+                return True
+
     return False
 
 
@@ -1936,6 +1957,50 @@ def _drug_name_exact(sys_name: str, gold_name: str) -> bool:
     return " ".join(sys_name.strip().lower().split()) == " ".join(gold_name.strip().lower().split())
 
 
+def _deduplicate_extracted_drugs(extracted: List[ExtractedDrugEval]) -> List[ExtractedDrugEval]:
+    """Deduplicate extracted drugs using synonym groups.
+
+    When both "5-FU" and "fluorouracil" are extracted, keep only the one
+    with the longer name (more informative) to avoid counting duplicate FPs.
+    """
+    seen_canonical: dict[str, int] = {}  # canonical name -> index in deduped list
+    deduped: list[ExtractedDrugEval] = []
+
+    for ext in extracted:
+        ext_norm = ext.name_normalized
+        ext_alt_norm = ext.alt_name_normalized
+
+        # Check if this drug or any of its synonyms was already seen
+        synonyms = _drug_synonym_map.get(ext_norm, set())
+        alt_synonyms = _drug_synonym_map.get(ext_alt_norm, set()) if ext_alt_norm else set()
+        all_names = {ext_norm} | synonyms
+        if ext_alt_norm:
+            all_names.add(ext_alt_norm)
+            all_names |= alt_synonyms
+
+        found_idx = None
+        for name in all_names:
+            if name in seen_canonical:
+                found_idx = seen_canonical[name]
+                break
+
+        if found_idx is not None:
+            # Keep the one with the longer name (more specific)
+            existing = deduped[found_idx]
+            if len(ext_norm) > len(existing.name_normalized):
+                deduped[found_idx] = ext
+                # Update canonical mappings
+                for name in all_names:
+                    seen_canonical[name] = found_idx
+        else:
+            idx = len(deduped)
+            deduped.append(ext)
+            for name in all_names:
+                seen_canonical[name] = idx
+
+    return deduped
+
+
 def compare_drugs(
     extracted: List[ExtractedDrugEval],
     gold: List[GoldDrug],
@@ -1948,6 +2013,9 @@ def compare_drugs(
             when gold "phenol" is available).
     Pass 2: Fuzzy/substring matches on remaining unmatched.
     """
+    # Deduplicate extracted drugs by synonym group
+    extracted = _deduplicate_extracted_drugs(extracted)
+
     result = EntityResult(
         entity_type="drugs",
         doc_id=doc_id,

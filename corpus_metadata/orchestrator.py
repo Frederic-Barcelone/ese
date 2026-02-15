@@ -33,6 +33,7 @@ setup_warning_suppression()
 import re
 import sys
 import time
+import uuid
 from typing import Any, Dict, List, Optional
 
 import yaml
@@ -962,6 +963,18 @@ class Orchestrator:
         if self.extract_diseases:
             disease_results = self._recover_diseases_from_abbreviations(
                 results, disease_results, gene_results,
+            )
+
+        # Static abbreviation lookup: recover entities from common medical abbreviations
+        if self.extract_diseases or self.extract_drugs:
+            disease_results, drug_results = self._recover_entities_from_static_abbreviations(
+                full_text, disease_results, drug_results, results,
+            )
+
+        # LLM gap-fill: use Haiku to find entities missed by lexicon/NER
+        if (self.extract_diseases or self.extract_drugs) and self.claude_client:
+            disease_results, drug_results = self._llm_gap_fill(
+                full_text, disease_results, drug_results,
             )
 
         # Stage 11: Feasibility extraction
@@ -1924,6 +1937,301 @@ class Orchestrator:
                 "Recovered %d disease(s) from abbreviation cross-referencing", len(recovered),
             )
         return disease_results + recovered
+
+    def _recover_entities_from_static_abbreviations(
+        self,
+        full_text: str,
+        disease_results: List[ExtractedDisease],
+        drug_results: List[ExtractedDrug],
+        abbrev_results: List[ExtractedEntity],
+    ) -> tuple[List[ExtractedDisease], List[ExtractedDrug]]:
+        """Recover entities from a static lookup of common medical abbreviations.
+
+        Scans document text for known medical abbreviations that weren't captured
+        by the abbreviation pipeline or cross-referencing. Only creates entities
+        for abbreviations that appear as standalone tokens in text and weren't
+        already detected.
+        """
+        from Z_utils.Z12_data_loader import _load_yaml
+
+        try:
+            data = _load_yaml("common_medical_abbreviations.yaml")
+        except Exception:
+            return disease_results, drug_results
+
+        disease_abbrevs: dict[str, str] = data.get("disease_abbreviations", {})
+        drug_abbrevs: dict[str, str] = data.get("drug_abbreviations", {})
+
+        # Build sets of already-detected entity names (lowercase)
+        detected_diseases: set[str] = set()
+        for dis in disease_results:
+            detected_diseases.add(dis.matched_text.lower().strip())
+            detected_diseases.add(dis.preferred_label.lower().strip())
+
+        detected_drugs: set[str] = set()
+        for drg in drug_results:
+            detected_drugs.add(drg.matched_text.lower().strip())
+            detected_drugs.add(drg.preferred_name.lower().strip())
+
+        # Build set of abbreviation short_forms already captured
+        captured_abbrevs: set[str] = set()
+        for entity in abbrev_results:
+            if entity.status == ValidationStatus.VALIDATED and entity.short_form:
+                captured_abbrevs.add(entity.short_form.strip().upper())
+
+        recovered_diseases: List[ExtractedDisease] = []
+        recovered_drugs: List[ExtractedDrug] = []
+
+        # Scan for disease abbreviations
+        for sf, long_form in disease_abbrevs.items():
+            sf_upper = sf.strip().upper()
+            lf_lower = long_form.strip().lower()
+
+            # Skip if already detected or abbreviation already captured
+            if lf_lower in detected_diseases or sf.lower() in detected_diseases:
+                continue
+            if sf_upper in captured_abbrevs:
+                continue
+
+            # Check if abbreviation appears as standalone token in text
+            pattern = re.compile(rf"\b{re.escape(sf)}\b")
+            if not pattern.search(full_text):
+                continue
+
+            # Apply FP filter if disease detector available
+            if self.disease_detector:
+                should_filter, _ = self.disease_detector.fp_filter.should_filter(
+                    sf, f"{sf} = {long_form}", is_abbreviation=True,
+                )
+                if should_filter:
+                    continue
+
+            disease = ExtractedDisease(
+                candidate_id=uuid.uuid4(),
+                doc_id="",
+                matched_text=sf,
+                preferred_label=long_form,
+                identifiers=[],
+                primary_evidence=EvidenceSpan(
+                    text=f"{sf} = {long_form}",
+                    location=Coordinate(page_num=1),
+                    scope_ref="static_abbrev_lookup",
+                    start_char_offset=0,
+                    end_char_offset=len(sf) + len(long_form) + 3,
+                ),
+                status=ValidationStatus.VALIDATED,
+                confidence_score=0.70,
+                validation_flags=["static_abbrev_lookup"],
+                provenance=DiseaseProvenanceMetadata(
+                    pipeline_version=PIPELINE_VERSION,
+                    run_id=self.run_id,
+                    doc_fingerprint="static_abbrev_lookup",
+                    generator_name=DiseaseGeneratorType.LEXICON_GENERAL,
+                    lexicon_source="static_abbreviation_lookup",
+                ),
+            )
+            recovered_diseases.append(disease)
+            detected_diseases.add(lf_lower)
+            detected_diseases.add(sf.lower())
+
+        # Scan for drug abbreviations
+        for sf, long_form in drug_abbrevs.items():
+            sf_upper = sf.strip().upper()
+            lf_lower = long_form.strip().lower()
+
+            # Skip if already detected or abbreviation already captured
+            if lf_lower in detected_drugs or sf.lower() in detected_drugs:
+                continue
+            if sf_upper in captured_abbrevs:
+                continue
+
+            # Check if abbreviation appears as standalone token in text
+            pattern = re.compile(rf"\b{re.escape(sf)}\b")
+            if not pattern.search(full_text):
+                continue
+
+            # Apply FP filter if drug detector available
+            if self.drug_detector and hasattr(self.drug_detector, 'fp_filter'):
+                from A_core.A06_drug_models import DrugGeneratorType as DGT
+                if self.drug_detector.fp_filter.is_false_positive(
+                    long_form, "", DGT.LEXICON_RXNORM,
+                ):
+                    continue
+
+            from A_core.A06_drug_models import DrugGeneratorType as DGT
+            drug = ExtractedDrug(
+                candidate_id=uuid.uuid4(),
+                doc_id="",
+                matched_text=sf,
+                preferred_name=long_form,
+                identifiers=[],
+                primary_evidence=EvidenceSpan(
+                    text=f"{sf} = {long_form}",
+                    location=Coordinate(page_num=1),
+                    scope_ref="static_abbrev_lookup",
+                    start_char_offset=0,
+                    end_char_offset=len(sf) + len(long_form) + 3,
+                ),
+                status=ValidationStatus.VALIDATED,
+                confidence_score=0.70,
+                validation_flags=["static_abbrev_lookup"],
+                provenance=DrugProvenanceMetadata(
+                    pipeline_version=PIPELINE_VERSION,
+                    run_id=self.run_id,
+                    doc_fingerprint="static_abbrev_lookup",
+                    generator_name=DGT.LEXICON_RXNORM,
+                    lexicon_source="static_abbreviation_lookup",
+                ),
+            )
+            recovered_drugs.append(drug)
+            detected_drugs.add(lf_lower)
+            detected_drugs.add(sf.lower())
+
+        if recovered_diseases or recovered_drugs:
+            logger.info(
+                "Static abbreviation lookup recovered %d disease(s), %d drug(s)",
+                len(recovered_diseases), len(recovered_drugs),
+            )
+
+        return disease_results + recovered_diseases, drug_results + recovered_drugs
+
+    def _llm_gap_fill(
+        self,
+        full_text: str,
+        disease_results: List[ExtractedDisease],
+        drug_results: List[ExtractedDrug],
+    ) -> tuple[List[ExtractedDisease], List[ExtractedDrug]]:
+        """Use LLM to find entities missed by lexicon/NER detection layers."""
+        from C_generators.C35_llm_entity_extraction import LLMEntityGapFiller
+
+        assert self.claude_client is not None  # guarded by caller
+        gap_filler = LLMEntityGapFiller(self.claude_client)
+
+        recovered_diseases: List[ExtractedDisease] = []
+        recovered_drugs: List[ExtractedDrug] = []
+
+        # Build known entity lists
+        known_diseases = list({d.matched_text.lower().strip() for d in disease_results} |
+                             {d.preferred_label.lower().strip() for d in disease_results})
+        known_drugs = list({d.matched_text.lower().strip() for d in drug_results} |
+                          {d.preferred_name.lower().strip() for d in drug_results})
+
+        # Find missing diseases
+        if self.extract_diseases:
+            disease_suggestions = gap_filler.find_missing_diseases(full_text, known_diseases)
+            for item in disease_suggestions:
+                name = item["name"]
+                name_lower = name.lower().strip()
+
+                # Skip if already detected
+                if name_lower in {d.lower() for d in known_diseases}:
+                    continue
+
+                # Verify against disease lexicons (full-term or substring match)
+                if self.disease_detector:
+                    lexicon_hit = self.disease_detector.is_known_disease(name)
+                    if lexicon_hit is None:
+                        lexicon_hit = self.disease_detector.is_known_disease_substring(name)
+                    if lexicon_hit is None:
+                        continue  # Not in any lexicon — skip
+
+                # Apply FP filter
+                if self.disease_detector:
+                    should_filter, _ = self.disease_detector.fp_filter.should_filter(
+                        name, "", is_abbreviation=False,
+                    )
+                    if should_filter:
+                        continue
+
+                disease = ExtractedDisease(
+                    candidate_id=uuid.uuid4(),
+                    doc_id="",
+                    matched_text=name,
+                    preferred_label=name,
+                    identifiers=[],
+                    primary_evidence=EvidenceSpan(
+                        text=name,
+                        location=Coordinate(page_num=1),
+                        scope_ref="llm_gap_fill",
+                        start_char_offset=0,
+                        end_char_offset=len(name),
+                    ),
+                    status=ValidationStatus.VALIDATED,
+                    confidence_score=0.65,
+                    validation_flags=["llm_gap_fill"],
+                    provenance=DiseaseProvenanceMetadata(
+                        pipeline_version=PIPELINE_VERSION,
+                        run_id=self.run_id,
+                        doc_fingerprint="llm_gap_fill",
+                        generator_name=DiseaseGeneratorType.LEXICON_GENERAL,
+                        lexicon_source="llm_gap_fill",
+                    ),
+                )
+                recovered_diseases.append(disease)
+                known_diseases.append(name_lower)
+
+        # Find missing drugs
+        if self.extract_drugs:
+            drug_suggestions = gap_filler.find_missing_drugs(full_text, known_drugs)
+            for item in drug_suggestions:
+                name = item["name"]
+                name_lower = name.lower().strip()
+
+                # Skip if already detected
+                if name_lower in {d.lower() for d in known_drugs}:
+                    continue
+
+                # Verify against drug lexicons (full-term or substring match)
+                if self.drug_detector:
+                    lexicon_hit = self.drug_detector.is_known_drug(name)
+                    if lexicon_hit is None:
+                        lexicon_hit = self.drug_detector.is_known_drug_substring(name)
+                    if lexicon_hit is None:
+                        continue  # Not in any drug lexicon — skip
+
+                # Apply FP filter
+                if self.drug_detector and hasattr(self.drug_detector, 'fp_filter'):
+                    from A_core.A06_drug_models import DrugGeneratorType as DGT
+                    if self.drug_detector.fp_filter.is_false_positive(
+                        name, "", DGT.LEXICON_RXNORM,
+                    ):
+                        continue
+
+                from A_core.A06_drug_models import DrugGeneratorType as DGT
+                drug = ExtractedDrug(
+                    candidate_id=uuid.uuid4(),
+                    doc_id="",
+                    matched_text=name,
+                    preferred_name=name,
+                    identifiers=[],
+                    primary_evidence=EvidenceSpan(
+                        text=name,
+                        location=Coordinate(page_num=1),
+                        scope_ref="llm_gap_fill",
+                        start_char_offset=0,
+                        end_char_offset=len(name),
+                    ),
+                    status=ValidationStatus.VALIDATED,
+                    confidence_score=0.65,
+                    validation_flags=["llm_gap_fill"],
+                    provenance=DrugProvenanceMetadata(
+                        pipeline_version=PIPELINE_VERSION,
+                        run_id=self.run_id,
+                        doc_fingerprint="llm_gap_fill",
+                        generator_name=DGT.LEXICON_RXNORM,
+                        lexicon_source="llm_gap_fill",
+                    ),
+                )
+                recovered_drugs.append(drug)
+                known_drugs.append(name_lower)
+
+        if recovered_diseases or recovered_drugs:
+            logger.info(
+                "LLM gap-fill recovered %d disease(s), %d drug(s)",
+                len(recovered_diseases), len(recovered_drugs),
+            )
+
+        return disease_results + recovered_diseases, drug_results + recovered_drugs
 
     def _log_usage_stats(
         self,

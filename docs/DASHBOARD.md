@@ -5,20 +5,20 @@
 | Entity | Benchmark | Docs | TP | FP | FN | Precision | Recall | F1 | Delta | Perfect |
 |--------|-----------|------|----|----|----|-----------|--------|----|-------|---------|
 | Disease | BC5CDR | 20 | 98 | 6 | 6 | 94.2% | 94.2% | 94.2% | +0.4 | 4/20 |
-| Disease | BC5CDR | 100 | 402 | 46 | 80 | 89.7% | 83.4% | 86.5% | -0.2 | 17/100 |
+| Disease | BC5CDR | 100 | 402 | 46 | 80 | 89.7% | 83.4% | 86.5% | +0.0 | 18/100 |
 | Drug | BC5CDR | 20 | 56 | 6 | 16 | 90.3% | 77.8% | 83.6% | +0.9 | 4/20 |
-| Drug | BC5CDR | 100 | 274 | 23 | 67 | 92.3% | 80.4% | 85.9% | -0.3 | 17/100 |
+| Drug | BC5CDR | 100 | 274 | 22 | 67 | 92.6% | 80.4% | 86.0% | +0.1 | 18/100 |
 | Drug | CADEC | 311 | 272 | 20 | 22 | 93.2% | 92.5% | 92.8% | -0.2 | 282/311 |
-| Gene | NLM-Gene | 46 | 198 | 83 | 26 | 70.5% | 88.4% | 78.4% | +0.0 | 6/46 |
-| Gene | RareDisGene | 100 | 183 | 0 | 9 | 100.0% | 95.3% | 97.6% | +0.0 | 91/100 |
-| Disease | NLP4RARE | 100 | 282 | 42 | 40 | 87.0% | 87.6% | 87.3% | -1.4 | 49/100 |
-| Abbreviation | NLP4RARE | 100 | 23 | 6 | 1 | 79.3% | 95.8% | 86.8% | +12.4 | 49/100 |
+| Gene | NLM-Gene | 46 | 198 | 82 | 26 | 70.7% | 88.4% | 78.6% | +0.2 | 6/46 |
+| Gene | RareDisGene | 100 | 182 | 0 | 10 | 100.0% | 94.8% | 97.3% | -0.3 | 90/100 |
+| Disease | NLP4RARE | 100 | 291 | 50 | 31 | 85.3% | 90.4% | 87.8% | +0.5 | 49/100 |
+| Abbreviation | NLP4RARE | 100 | 23 | 6 | 1 | 79.3% | 95.8% | 86.8% | +0.0 | 49/100 |
 | Author | PubMed Authors | 19 | 135 | 1 | 4 | 99.3% | 97.1% | 98.2% | +0.0 | 16/19 |
 | Citation | PubMed Authors | — | — | — | — | — | — | — | — | — |
 | Disease | NLP4RARE dev | 20 | 79 | 10 | 10 | 88.8% | 88.8% | 88.8% | -0.5 | 8/20 |
 | Abbreviation | NLP4RARE dev | 20 | 5 | 1 | 0 | 83.3% | 100.0% | 90.9% | -9.1 | 8/20 |
 | Disease | NCBI Disease | 20 | 59 | 7 | 26 | 89.4% | 69.4% | 78.1% | -0.2 | 8/20 |
-| Disease | NCBI Disease | 73 | 244 | 28 | 101 | 89.7% | 70.7% | 79.1% | +2.1 | 22/73 |
+| Disease | NCBI Disease | 73 | 252 | 31 | 93 | 89.0% | 73.0% | 80.3% | +1.2 | 26/73 |
 | Feasibility (epi) | Synthetic | 20 | 39 | 32 | 11 | 54.9% | 78.0% | 64.5% | — | — |
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
 | Feasibility (design) | Synthetic | 20 | — | — | — | — | — | — | — | 97% |
@@ -32,6 +32,7 @@
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
+| 2026-02-14 | **$206.79** | $10.26 | Full regression suite: BC5CDR 100-doc, NLP4RARE 100-doc, NCBI 73-doc, NLM-Gene 46-doc, RareDisGene 100-doc. |
 | 2026-02-14 | **$217.05** | $5.45 | SOTA improvement evals: BC5CDR 100-doc ×2, NCBI 73-doc ×2, NLP4RARE 100-doc ×2, NLM-Gene 46-doc, RareDisGene 100-doc, 20-doc quick checks. |
 | 2026-02-14 | **$222.50** | $20.11 | NCBI Disease 73-doc eval + NLP4RARE/BC5CDR regression checks + prior runs. |
 | 2026-02-13 | **$242.61** | $3.19 | Gene eval matching improvements + NLM-Gene/RareDisGene 146-doc eval runs. |

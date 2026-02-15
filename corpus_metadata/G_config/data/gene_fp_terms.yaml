@@ -100,6 +100,10 @@ drug_terms:
   - "h2"    # H2 blockers
   - "bb"    # Beta blockers
   - "ccb"   # Calcium channel blockers
+  - "asa"   # Aspirin
+  - "epo"   # Erythropoietin
+  - "hcq"   # Hydroxychloroquine
+  - "ivig"  # Intravenous immunoglobulin
 
 # Trial and study terms
 study_terms:
@@ -251,6 +255,48 @@ common_english_words:
   - "tag"
   - "tan"
   - "dim"
+  # Ambiguous gene symbols that are common words/terms
+  - "camp"    # CAMP gene, but usually cyclic AMP
+  - "impact"
+  - "ache"    # ACHE gene, but common word
+  - "charge"
+  - "nodal"
+  - "clock"
+  - "patch"
+  - "cope"
+  - "cast"
+  - "trap"
+  - "slit"
+  - "disc"
+  - "toll"
+  - "trio"
+  - "sparc"
+  - "mica"
+  - "apex"
+  - "peak"
+  - "snap"
+  - "grip"
+  - "pore"
+  - "core"
+  - "pole"
+  - "bend"
+  - "fold"
+  - "wrap"
+  - "star"
+  - "wave"
+  - "cell"
+  - "hand"
+  - "face"
+  - "head"
+  - "tail"
+  - "stem"
+  - "root"
+  - "base"
+  - "bond"
+  - "herd"
+  - "mild"
+  - "rare"
+  - "vita"
   # Section headers and document structure
   - "methods"
   - "results"

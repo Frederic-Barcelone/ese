@@ -725,6 +725,16 @@ always_filter:
   - "sedative"
   - "anesthetic"
   - "anesthetics"
+  # Scientific measurement / assay terms (not drugs)
+  - "action potential duration"
+  - "respiratory control ratio"
+  - "blood-brain barrier"
+  - "blood brain barrier"
+  - "membrane potential"
+  - "resting potential"
+  - "action potential"
+  - "oxidative stress"
+  - "oxidative phosphorylation"
 
 # NER-specific false positives (commonly returned by scispacy UMLS)
 ner_false_positives:

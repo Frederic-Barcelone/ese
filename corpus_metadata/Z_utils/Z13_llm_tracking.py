@@ -56,6 +56,7 @@ class CallType:
     DESCRIPTION_EXTRACTION = "description_extraction"
     OCR_TEXT_FALLBACK = "ocr_text_fallback"
     AUTHOR_EXTRACTION = "author_extraction"
+    ENTITY_GAP_FILL = "entity_gap_fill"
 
     # Sonnet tier — complex reasoning / extraction tasks
     FEASIBILITY_EXTRACTION = "feasibility_extraction"
@@ -78,6 +79,7 @@ class CallType:
         DESCRIPTION_EXTRACTION,
         OCR_TEXT_FALLBACK,
         AUTHOR_EXTRACTION,
+        ENTITY_GAP_FILL,
     }
 
     SONNET_CALL_TYPES = {
