@@ -31,6 +31,7 @@ from __future__ import annotations
 import re
 from typing import Optional
 
+from Z_utils.Z02_text_helpers import extract_context_snippet
 from Z_utils.Z03_text_normalization import (
     clean_whitespace as _clean_ws,
     dehyphenate_long_form as _dehyphenate_long_form,
@@ -256,9 +257,7 @@ def _context_window(text: str, start: int, end: int, window: int = 240) -> str:
     """
     if not text:
         return ""
-    s = max(0, start - window)
-    e = min(len(text), end + window)
-    return _clean_ws(text[s:e])
+    return _clean_ws(extract_context_snippet(text, start, end, window))
 
 
 def _looks_like_measurement(text: str) -> bool:

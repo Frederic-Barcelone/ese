@@ -67,6 +67,8 @@ from B_parsing.B05_section_detector import SectionDetector
 from B_parsing.B06_confidence import ConfidenceCalculator
 from B_parsing.B07_negation import NegationDetector
 
+from Z_utils.Z02_text_helpers import extract_context_snippet
+
 from .C24_disease_fp_filter import DiseaseFalsePositiveFilter
 
 # scispacy for biomedical NER
@@ -924,7 +926,7 @@ class DiseaseDetector:
             entry = self.specialized_entries[key]
 
             # Check exclude contexts
-            context = self._make_context(text, start, end)
+            context = extract_context_snippet(text, start, end, self.context_window).replace("\n", " ").strip()
             if self._should_exclude(context, entry.exclude_contexts):
                 continue
 
@@ -993,7 +995,7 @@ class DiseaseDetector:
             # Get actual matched text from original text using span positions
             matched_text = text[start:end]
             entry = self.general_entries[key]
-            context = self._make_context(text, start, end)
+            context = extract_context_snippet(text, start, end, self.context_window).replace("\n", " ").strip()
 
             # Hard filter only catastrophic FPs (chromosomes, strong gene context)
             should_filter, reason = self.fp_filter.should_filter(
@@ -1075,7 +1077,7 @@ class DiseaseDetector:
             for match in pattern.finditer(text):
                 matched_text = match.group(0)
                 start, end = match.start(), match.end()
-                context = self._make_context(text, start, end)
+                context = extract_context_snippet(text, start, end, self.context_window).replace("\n", " ").strip()
 
                 # Check exclude contexts
                 if self._should_exclude(context, entry.exclude_contexts):
@@ -1163,7 +1165,7 @@ class DiseaseDetector:
                     continue
 
                 preferred_label = kb_entry.canonical_name or ent_text
-                context = self._make_context(text, ent.start_char, ent.end_char)
+                context = extract_context_snippet(text, ent.start_char, ent.end_char, self.context_window).replace("\n", " ").strip()
 
                 # Hard filter only catastrophic FPs
                 should_filter, _ = self.fp_filter.should_filter(
@@ -1404,12 +1406,6 @@ class DiseaseDetector:
             identifiers.append(DiseaseIdentifier(system=system, code=code))
 
         return identifiers
-
-    def _make_context(self, text: str, start: int, end: int) -> str:
-        """Create context snippet around match."""
-        left = max(0, start - self.context_window)
-        right = min(len(text), end + self.context_window)
-        return text[left:right].replace("\n", " ").strip()
 
     def _should_exclude(self, context: str, exclude_contexts: List[str]) -> bool:
         """Check if context contains any exclude keywords."""

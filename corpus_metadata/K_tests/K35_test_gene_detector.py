@@ -286,27 +286,33 @@ class TestBuildIdentifiers:
 
 
 class TestExtractContext:
-    """Tests for _extract_context() method."""
+    """Tests for context extraction via canonical extract_context_window."""
 
     def test_normal_context(self, detector):
         """Context extracted with window around match."""
+        from Z_utils.Z02_text_helpers import extract_context_window
+
         text = "A" * 500 + "BRCA1" + "B" * 500
-        ctx = detector._extract_context(text, 500, 505)
+        ctx = extract_context_window(text, 500, 505, detector.context_window)
         assert "BRCA1" in ctx
         assert len(ctx) <= detector.context_window + 5  # match text
 
     def test_match_at_start(self, detector):
         """Match at start of text → no left overflow."""
+        from Z_utils.Z02_text_helpers import extract_context_window
+
         text = "BRCA1 is a tumor suppressor gene involved in DNA repair"
-        ctx = detector._extract_context(text, 0, 5)
+        ctx = extract_context_window(text, 0, 5, detector.context_window)
         assert ctx.startswith("BRCA1")
 
     def test_match_at_end(self, detector):
         """Match at end of text → no right overflow."""
+        from Z_utils.Z02_text_helpers import extract_context_window
+
         text = "mutations were found in BRCA1"
         start = text.index("BRCA1")
         end = start + 5
-        ctx = detector._extract_context(text, start, end)
+        ctx = extract_context_window(text, start, end, detector.context_window)
         assert ctx.endswith("BRCA1")
 
 

@@ -523,7 +523,7 @@ class GeneDetector:
                 continue
 
             matched_text = text[start:end]
-            context = self._extract_context(text, start, end)
+            context = extract_context_window(text, start, end, self.context_window)
 
             # Apply false positive filter
             # Aliases need stricter filtering than primary genes
@@ -608,7 +608,7 @@ class GeneDetector:
             if matched_text.lower() in self.alias_genes:
                 continue
 
-            context = self._extract_context(text, start, end)
+            context = extract_context_window(text, start, end, self.context_window)
 
             # Apply strict false positive filter for patterns
             is_fp, reason = self.fp_filter.is_false_positive(
@@ -692,7 +692,7 @@ class GeneDetector:
                 if matched_text.lower() in self.alias_genes:
                     continue
 
-                context = self._extract_context(text, start, end)
+                context = extract_context_window(text, start, end, self.context_window)
 
                 # Apply false positive filter
                 is_fp, reason = self.fp_filter.is_false_positive(
@@ -742,10 +742,6 @@ class GeneDetector:
             prefix, digits, suffix = m.groups()
             return f"{prefix}-{digits}{suffix}"
         return None
-
-    def _extract_context(self, text: str, start: int, end: int) -> str:
-        """Extract context window around match."""
-        return extract_context_window(text, start, end, self.context_window)
 
     def _build_identifiers(self, gene_info: Dict) -> List[GeneIdentifier]:
         """Build list of gene identifiers from metadata."""

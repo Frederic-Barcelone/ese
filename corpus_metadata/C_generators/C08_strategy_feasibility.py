@@ -472,7 +472,7 @@ class FeasibilityDetector:
                     doc_id=doc_id,
                     doc_fingerprint=doc_fingerprint,
                     matched_text=match.group(0),
-                    context_text=self._get_context(text, match.start(), match.end()),
+                    context_text=extract_context_window(text, match.start(), match.end(), self.context_window),
                     field_type=FeasibilityFieldType.EPIDEMIOLOGY_PREVALENCE,
                     page_num=page_num,
                     section=section,
@@ -522,7 +522,7 @@ class FeasibilityDetector:
                     doc_id=doc_id,
                     doc_fingerprint=doc_fingerprint,
                     matched_text=match.group(0),
-                    context_text=self._get_context(text, match.start(), match.end()),
+                    context_text=extract_context_window(text, match.start(), match.end(), self.context_window),
                     field_type=FeasibilityFieldType.EPIDEMIOLOGY_INCIDENCE,
                     page_num=page_num,
                     section=section,
@@ -555,7 +555,7 @@ class FeasibilityDetector:
                     doc_id=doc_id,
                     doc_fingerprint=doc_fingerprint,
                     matched_text=match.group(0),
-                    context_text=self._get_context(text, match.start(), match.end()),
+                    context_text=extract_context_window(text, match.start(), match.end(), self.context_window),
                     field_type=FeasibilityFieldType.EPIDEMIOLOGY_DEMOGRAPHICS,
                     page_num=page_num,
                     section=section,
@@ -1342,10 +1342,6 @@ class FeasibilityDetector:
             confidence_features=confidence_features,
             provenance=provenance,
         )
-
-    def _get_context(self, text: str, start: int, end: int) -> str:
-        """Extract context window around a match."""
-        return extract_context_window(text, start, end, self.context_window)
 
     def _update_stats(self, candidates: List[FeasibilityCandidate]) -> None:
         """Update extraction statistics."""

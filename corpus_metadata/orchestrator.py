@@ -107,6 +107,22 @@ from dataclasses import dataclass, field
 
 PIPELINE_VERSION = "0.8"
 
+_EXTRACTION_PRESETS: Dict[str, Dict[str, bool]] = {
+    "drugs_only": {"drugs": True, "diseases": False, "genes": False, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "diseases_only": {"drugs": False, "diseases": True, "genes": False, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "genes_only": {"drugs": False, "diseases": False, "genes": True, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "abbreviations_only": {"drugs": False, "diseases": False, "genes": False, "abbreviations": True, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "feasibility_only": {"drugs": False, "diseases": False, "genes": False, "abbreviations": False, "feasibility": True, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "entities_only": {"drugs": True, "diseases": True, "genes": True, "abbreviations": True, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "clinical_entities": {"drugs": True, "diseases": True, "genes": False, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "metadata_only": {"drugs": False, "diseases": False, "genes": False, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": True, "citations": True, "document_metadata": True, "tables": False},
+    "standard": {"drugs": True, "diseases": True, "genes": True, "abbreviations": True, "feasibility": True, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": True, "care_pathways": True, "recommendations": True, "figures": True},
+    "all": {"drugs": True, "diseases": True, "genes": True, "abbreviations": True, "feasibility": True, "pharma_companies": True, "authors": True, "citations": True, "document_metadata": True, "tables": True, "care_pathways": True, "recommendations": True, "figures": True},
+    "minimal": {"drugs": False, "diseases": False, "genes": False, "abbreviations": True, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": False},
+    "images_only": {"drugs": False, "diseases": False, "genes": False, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": True, "care_pathways": False, "recommendations": False, "figures": True},
+    "tables_only": {"drugs": False, "diseases": False, "genes": False, "abbreviations": False, "feasibility": False, "pharma_companies": False, "authors": False, "citations": False, "document_metadata": False, "tables": True, "care_pathways": False, "recommendations": False, "figures": False},
+}
+
 
 @dataclass
 class ExtractionResult:
@@ -285,87 +301,17 @@ class Orchestrator:
     def _load_extraction_settings(self) -> None:
         """Load extraction pipeline settings from config.yaml."""
         pipeline = self.config.get("extraction_pipeline", {})
+        self._apply_entity_toggles(pipeline)
+        self._load_processing_options(pipeline.get("options", {}))
+
+    def _apply_entity_toggles(self, pipeline: Dict[str, Any]) -> None:
+        """Apply preset or individual extractor flags from pipeline config."""
         preset = pipeline.get("preset")
         extractors = pipeline.get("extractors", {})
-        options = pipeline.get("options", {})
 
-        # Define presets (override individual flags if preset is set)
-        PRESETS = {
-            "drugs_only": {
-                "drugs": True, "diseases": False, "genes": False, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "diseases_only": {
-                "drugs": False, "diseases": True, "genes": False, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "genes_only": {
-                "drugs": False, "diseases": False, "genes": True, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "abbreviations_only": {
-                "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "feasibility_only": {
-                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
-                "feasibility": True, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "entities_only": {
-                "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "clinical_entities": {
-                "drugs": True, "diseases": True, "genes": False, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "metadata_only": {
-                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": True,
-                "citations": True, "document_metadata": True, "tables": False,
-            },
-            "standard": {
-                "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
-                "feasibility": True, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": True, "recommendations": True, "figures": True,
-            },
-            "all": {
-                "drugs": True, "diseases": True, "genes": True, "abbreviations": True,
-                "feasibility": True, "pharma_companies": True, "authors": True,
-                "citations": True, "document_metadata": True, "tables": True,
-                "care_pathways": True, "recommendations": True, "figures": True,
-            },
-            "minimal": {
-                "drugs": False, "diseases": False, "genes": False, "abbreviations": True,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": False,
-            },
-            "images_only": {
-                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": False, "recommendations": False, "figures": True,
-            },
-            "tables_only": {
-                "drugs": False, "diseases": False, "genes": False, "abbreviations": False,
-                "feasibility": False, "pharma_companies": False, "authors": False,
-                "citations": False, "document_metadata": False, "tables": True,
-                "care_pathways": False, "recommendations": False, "figures": False,
-            },
-        }
-
-        # Apply preset if set, otherwise use individual flags
         self.active_preset = preset
-        if preset and preset in PRESETS:
-            preset_config = PRESETS[preset]
+        if preset and preset in _EXTRACTION_PRESETS:
+            preset_config = _EXTRACTION_PRESETS[preset]
             self.extract_drugs = preset_config.get("drugs", True)
             self.extract_diseases = preset_config.get("diseases", True)
             self.extract_genes = preset_config.get("genes", True)
@@ -380,7 +326,6 @@ class Orchestrator:
             self.extract_recommendations = preset_config.get("recommendations", False)
             self.extract_figures = preset_config.get("figures", False)
         else:
-            # Use individual extractor flags
             self.active_preset = None
             self.extract_drugs = extractors.get("drugs", True)
             self.extract_diseases = extractors.get("diseases", True)
@@ -396,7 +341,8 @@ class Orchestrator:
             self.extract_recommendations = extractors.get("recommendations", True)
             self.extract_figures = extractors.get("figures", True)
 
-        # Processing options (always read from options, not affected by preset)
+    def _load_processing_options(self, options: Dict[str, Any]) -> None:
+        """Load processing options (always read, not affected by preset)."""
         self.use_llm_validation = options.get("use_llm_validation", True)
         self.use_llm_feasibility = options.get("use_llm_feasibility", True)
         self.use_vlm_tables = options.get("use_vlm_tables", False)

@@ -664,7 +664,7 @@ class DrugDetector:
             matched_text = text[start:end]
 
             # Apply false positive filter
-            context = self._extract_context(text, start, end)
+            context = extract_context_window(text, start, end, self.context_window)
             if self.fp_filter.is_false_positive(matched_text, context, generator_type):
                 continue
 
@@ -737,7 +737,7 @@ class DrugDetector:
                 seen_positions.add((start, end))
 
                 matched_text = match.group(0)
-                context = self._extract_context(text, start, end)
+                context = extract_context_window(text, start, end, self.context_window)
 
                 # Check if this matches a known investigational drug
                 drug_info = self.investigational_drugs.get(matched_text.lower(), {})
@@ -834,7 +834,7 @@ class DrugDetector:
                     continue
 
                 matched_text = ent.text
-                context = self._extract_context(text, ent.start_char, ent.end_char)
+                context = extract_context_window(text, ent.start_char, ent.end_char, self.context_window)
 
                 # Skip if too short or common word
                 if self.fp_filter.is_false_positive(
@@ -970,10 +970,6 @@ class DrugDetector:
             logger.warning("BiomedNER drug detection error: %s", e)
 
         return candidates
-
-    def _extract_context(self, text: str, start: int, end: int) -> str:
-        """Extract context around a match."""
-        return extract_context_window(text, start, end, self.context_window)
 
     def _build_identifiers(self, drug_info: Dict) -> List[DrugIdentifier]:
         """Build identifier list from drug info."""
