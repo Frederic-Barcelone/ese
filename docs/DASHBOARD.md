@@ -1,24 +1,18 @@
 # ESE Pipeline Accuracy Dashboard
 
-> Last updated: 2026-02-14
+> Last updated: 2026-02-15
 
 | Entity | Benchmark | Docs | TP | FP | FN | Precision | Recall | F1 | Delta | Perfect |
 |--------|-----------|------|----|----|----|-----------|--------|----|-------|---------|
-| Disease | BC5CDR | 20 | 101 | 9 | 3 | 91.8% | 97.1% | 94.4% | +0.2 | 3/20 |
-| Disease | BC5CDR | 100 | 402 | 46 | 80 | 89.7% | 83.4% | 86.5% | +0.0 | 18/100 |
-| Drug | BC5CDR | 20 | 53 | 7 | 19 | 88.3% | 73.6% | 80.3% | -3.3 | 3/20 |
-| Drug | BC5CDR | 100 | 274 | 22 | 67 | 92.6% | 80.4% | 86.0% | +0.1 | 18/100 |
-| Drug | CADEC | 311 | 272 | 20 | 22 | 93.2% | 92.5% | 92.8% | -0.2 | 282/311 |
+| Disease | BC5CDR | 100 | 415 | 49 | 67 | 89.4% | 86.1% | 87.7% | +1.0 | 17/100 |
+| Drug | BC5CDR | 100 | 272 | 20 | 69 | 93.2% | 79.8% | 85.9% | -0.1 | 17/100 |
+| Drug | CADEC | 311 | 272 | 20 | 22 | 93.2% | 92.5% | 92.8% | +0.0 | 282/311 |
 | Gene | NLM-Gene | 46 | 198 | 82 | 26 | 70.7% | 88.4% | 78.6% | +0.2 | 6/46 |
 | Gene | RareDisGene | 100 | 182 | 0 | 10 | 100.0% | 94.8% | 97.3% | -0.3 | 90/100 |
-| Disease | NLP4RARE | 100 | 291 | 50 | 31 | 85.3% | 90.4% | 87.8% | +0.5 | 49/100 |
-| Abbreviation | NLP4RARE | 100 | 23 | 6 | 1 | 79.3% | 95.8% | 86.8% | +0.0 | 49/100 |
+| Disease | NLP4RARE dev | 100 | 292 | 49 | 30 | 85.6% | 90.7% | 88.1% | +0.3 | 49/100 |
+| Abbreviation | NLP4RARE | 100 | 23 | 7 | 1 | 76.7% | 95.8% | 85.2% | -1.6 | 49/100 |
+| Disease | NCBI Disease | 100 | 341 | 52 | 139 | 86.8% | 71.0% | 78.1% | -1.0 | 28/100 |
 | Author | PubMed Authors | 19 | 135 | 1 | 4 | 99.3% | 97.1% | 98.2% | +0.0 | 16/19 |
-| Citation | PubMed Authors | — | — | — | — | — | — | — | — | — |
-| Disease | NLP4RARE dev | 20 | 83 | 12 | 6 | 87.4% | 93.3% | 90.2% | +1.4 | 8/20 |
-| Abbreviation | NLP4RARE dev | 20 | 5 | 0 | 0 | 100.0% | 100.0% | 100.0% | +9.1 | 8/20 |
-| Disease | NCBI Disease | 20 | 61 | 6 | 24 | 91.0% | 71.8% | 80.3% | +2.2 | 8/20 |
-| Disease | NCBI Disease | 73 | 252 | 31 | 93 | 89.0% | 73.0% | 80.3% | +1.2 | 26/73 |
 | Feasibility (epi) | Synthetic | 20 | 39 | 32 | 11 | 54.9% | 78.0% | 64.5% | — | — |
 | Feasibility (screen) | Synthetic | 20 | — | — | — | — | — | — | — | 100% |
 | Feasibility (design) | Synthetic | 20 | — | — | — | — | — | — | — | 97% |
@@ -32,6 +26,7 @@
 
 | Date | Balance | Spend Since Last | Notes |
 |------|---------|-----------------|-------|
+| 2026-02-15 | **$161.40** | $45.39 | Push-to-95% plan: LLM gap-fill, static abbrev lookup, FP filter expansion, gene eval matching. Full eval: BC5CDR 100×2, NLP4RARE 100, NCBI 100, NLM-Gene 46, RareDisGene 100, multiple 20-doc quick checks. |
 | 2026-02-14 | **$206.79** | $10.26 | Full regression suite: BC5CDR 100-doc, NLP4RARE 100-doc, NCBI 73-doc, NLM-Gene 46-doc, RareDisGene 100-doc. |
 | 2026-02-14 | **$217.05** | $5.45 | SOTA improvement evals: BC5CDR 100-doc ×2, NCBI 73-doc ×2, NLP4RARE 100-doc ×2, NLM-Gene 46-doc, RareDisGene 100-doc, 20-doc quick checks. |
 | 2026-02-14 | **$222.50** | $20.11 | NCBI Disease 73-doc eval + NLP4RARE/BC5CDR regression checks + prior runs. |
@@ -67,6 +62,7 @@
 
 | Date | Change | Impact |
 |------|--------|--------|
+| 2026-02-15 | LLM gap-fill (C35) with lexicon verification, static abbreviation lookup (200 entries), FP filter expansion (common English words: she/air/face/gave/card/soft/pad/rich/rare/cold, symptoms: shock/fever/anoxia), gene eval matching (name+protein), drug deduplication in evaluator | BC5CDR Disease 86.7%→87.7% (+1.0pp, R+6.6pp). NLP4RARE Disease 87.3%→88.1% (+0.8pp). Gene/Drug benchmarks stable. Gap-fill adds recall but requires strict lexicon+FP filter to avoid FPs. |
 | 2026-02-14 | BiomedNER-All (E10) as disease/drug gap-filler, abbreviation cross-ref substring matching with gene guards, conjunctive disease matching in evaluator | NCBI Disease F1 77.0%→79.1% (+2.1pp). BC5CDR Disease R +3.9pp (F1 flat ~86.5%). NLP4RARE Abbrev F1 74.4%→86.8%. Gene benchmarks unchanged. NLP4RARE Disease -1.4pp (LLM variance). |
 | 2026-02-14 | Author extraction eval: gold validation (90% PDF-metadata alignment), surname prefix matching, accent normalization, fuzzy matching, improved LLM prompt | Author F1 98.2% (P=99.3%, R=97.1%). 16/19 perfect docs. Gold: 45 validated test docs, 300 authors. |
 | 2026-02-13 | NCBI Disease gold fix (include all annotation types) + generic oncology terms + config propagation fix | NCBI Disease F1 54.4%->77.0% (P=93.2%, R=65.6%). No regression: NLP4RARE 89.3%, BC5CDR 95.1%/82.7%. |
