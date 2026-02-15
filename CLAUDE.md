@@ -233,6 +233,13 @@ class BaseCandidateGenerator(ABC):
 - PASO C: Hyphenated abbreviations (auto-enriched from ClinicalTrials.gov)
 - PASO D: LLM SF-only extraction for missing abbreviations
 
+### Context Extraction
+Always use canonical functions from `Z_utils.Z02_text_helpers` — never create private context wrappers:
+- `extract_context_snippet(text, start, end, window)` — window extends full distance each side
+- `extract_context_window(text, start, end, window)` — window is total size, split half each side
+
+If you need newline cleanup, chain it: `extract_context_snippet(...).replace("\n", " ").strip()`
+
 ## External Dependencies
 
 - **Claude API** — Validation and Vision LLM (17 call sites, 2 model tiers)
